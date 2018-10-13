@@ -1,6 +1,7 @@
-function sendAjaxRequest(search,  obj, callback){
-	var data = JSON.stringify(obj);
-	var xhr = new XMLHttpRequest();
+function sendAjaxRequest(search,  obj, callback = function (){}){
+	return new Promise ((resolve, reject) => {
+		let data = JSON.stringify(obj);
+		let xhr = new XMLHttpRequest();
 		xhr.open("POST", search, true);
 		xhr.setRequestHeader("Content-Type", "text/plain");
 		xhr.send(data);
@@ -8,10 +9,12 @@ function sendAjaxRequest(search,  obj, callback){
 		xhr.onreadystatechange = function(){
 			if (xhr.readyState !=4) return;
 			if(xhr.status == 200) {
+				resolve(xhr.responseText)
 				return callback(xhr.responseText);
 			}
 		};
-	};
+	})
+};
 //проверяет ответ сервера на предмет ошибки	
 function handlerErrorResponse(response, callback){
 	let result;

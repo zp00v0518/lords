@@ -4,7 +4,7 @@ const httpServer = require('http');
 const wsServer = require('ws');
 const path = require('path')
 
-const {config, getMethod} = require('./backEnd/tube.js');
+const {config, getMethod, postMethod} = require('./backEnd/tube.js');
 const watchFs = require('./backEnd/liveReload/watchFs.js')
 
 const template = require('template_func');
@@ -22,9 +22,10 @@ http.on('request',(req, res) => {
 	if (method === 'GET') {
 		getMethod(req,res, __dirname);
 		return;
+	} else if (method === "POST") {
+		postMethod(req, res, __dirname)
 	}
 })
-
 
 let ws = new wsServer.Server({ 
 	port: config.port.ws

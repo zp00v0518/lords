@@ -39,12 +39,10 @@ function checkForm(event){
 	var targetFormId = target.dataset.id;
 	var form = document.forms[targetFormId];
 	var data = {
-		status: targetFormId,
-		userServer: "server_1",
+		form: targetFormId,
 		data: {
 			platform:navigator.platform
 		}
-
 	}
 	for (var i=0; i<form.length-1; i++){
 		var nameInput = form[i].name;
