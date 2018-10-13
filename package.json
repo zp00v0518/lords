@@ -4,13 +4,15 @@
   "description": "mmo rts ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "supervisor --watch backEnd index.js"
   },
   "author": "Dmitriy",
   "license": "ISC",
   "dependencies": {
     "cookies": "^0.7.2",
     "mongodb": "^3.1.8",
-    "template_func": "^1.0.4"
+    "template_func": "^1.0.8",
+    "ws": "^6.1.0"
   }
 }
