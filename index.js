@@ -13,6 +13,7 @@ const log = new template.Log(__filename);
 
 const http = httpServer.createServer();
 http.listen(config.port.http, () => {
+	log.log(new Date().toLocaleString())
 	log.log(`**************HTTP-сервер запущен на порту: ${config.port.http} **************`)
 })
 
