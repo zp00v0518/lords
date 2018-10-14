@@ -1,3 +1,6 @@
+const config = require('../config/config.js');
+const time = config.time;
+
 const gameVariables = {
 	numSectionGlobalMap : 20, 					//количество ячеек на ГЛОБАЛЬНОЙ карте, по одной оси
 																			//при изменении кол-ва ячеек, нужно поменять кол-во отображаемых ячеек на 1-й оси
@@ -11,9 +14,9 @@ const gameVariables = {
 																			// в данный момент 1 сутки
 	serverList:["server_1"],
 	timer:{
-		controlState: 1000*60,
-		saveDataDB:1000*60, 							//1 минута - интервал считывания данных и записи их в БД
-		perTime: 1000*60*60, 					//час - время в миллисекундах, которое используется при расчете прироста игровых ресоурсов
+		controlState: time.minute,
+		saveDataDB:time.minute, 							//1 минута - интервал считывания данных и записи их в БД
+		perTime: time.hour, 					//час - время в миллисекундах, которое используется при расчете прироста игровых ресоурсов
 	}
 };
 

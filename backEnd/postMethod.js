@@ -18,7 +18,6 @@ function postMethod(req, res, startPath){
 				switch (pathName) {
 					case '/login':
 						login(req, res, requestData, cookies)
-						sendResponse(res, data);
 						break;
 
 					case '/dev':

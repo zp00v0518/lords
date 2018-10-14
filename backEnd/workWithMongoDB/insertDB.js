@@ -9,8 +9,7 @@ function insertDB(){
 	//doc = Object;
 	this.one = function(options, callback = function (){}){
 		return new Promise((resolve, reject) => {
-			var collection = mongo.open(options.collectionName);
-
+			let collection = mongo.open(options.collectionName);
 			collection.insertOne(options.doc, (err, result)=>{
 				if (err) {
 					reject(err);

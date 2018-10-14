@@ -16,6 +16,15 @@ module.exports.mimeType = mimeType;
 module.exports.sendResponse = sendResponse;
 module.exports.reqOn = reqOn;
 
+const {setCookieUser, sessionCreate, userSessionUpdate} = require('./cookies_session');
+module.exports.userSessionUpdate = userSessionUpdate;
+module.exports.setCookieUser = setCookieUser;
+module.exports.sessionCreate = sessionCreate;
+
+
+const {userCreate} = require('./user');
+module.exports.userCreate = userCreate;
+
 const login = require('./login/login.js');
 module.exports.login = login;
 

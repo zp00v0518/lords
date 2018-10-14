@@ -73,7 +73,7 @@ function checkForm(event){
 			alert (result.answer);
 			return;
 		}else if (result.status == "registerOk" || result.status == "loginOk"){
-			location = result.answer;
+			location = result.nextStep;
 			return;
 		}
 	})

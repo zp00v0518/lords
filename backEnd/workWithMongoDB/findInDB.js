@@ -54,7 +54,7 @@ function findInDB(){
 		return new Promise((resolve, reject) => {
 			let collection = mongo.open(options.collectionName);
 			let query = options.query || null;
-			collection.count(query,(err, count) =>{
+			collection.countDocuments(query,(err, count) =>{
 				if (err) {
 					reject(err);
 					throw err;

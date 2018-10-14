@@ -28,6 +28,7 @@ function getMethod(req,res, startPath){
 		return;
 	} 
 	// если userCookies, то переходим на страницу авторизации
+	log.log(userCookies)
 	if (!userCookies){
 		pathName = "login.html";
 		var pathJoin = path.join(startPath, config.basePathToFiles, pathName);
@@ -38,8 +39,14 @@ function getMethod(req,res, startPath){
 			});
 	//если userCookies есть, ищем совпадение в БД
 	} else if(userCookies){
-			log.log('userCookies')
-			res.end("hello")		
+			pathName = "user.html";
+			const pathJoin = path.join(startPath, config.basePathToFiles, pathName);
+			log.log(pathJoin)
+			const ext = path.parse(pathName).ext;
+			fileReader(pathJoin,(err, data)=>{
+				sendResponse(res, data, mimeType[ext])
+				 return;
+			});
 	}
 }
 
