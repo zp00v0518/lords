@@ -19,5 +19,12 @@ module.exports = {
 		day: 1000*60*60*24,
 		week: 1000*60*60*24*7,
 		month: 1000*60*60*24*31,
-	}
+	},
+	listFile: {
+		html: {
+			login: 'login',
+			user: 'user',
+			err: '404'
+		},
+	},
 };

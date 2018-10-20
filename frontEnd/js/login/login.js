@@ -9,7 +9,6 @@ function loginJs(event){
 		check_btn[i].addEventListener("click", checkForm);
 	}
 }
-
 function selectForm(event){
 	var target = event.target;
 	var className = "show";
@@ -31,9 +30,7 @@ function selectForm(event){
 		toggleClass(target, childArray, className);
 		toggleClass(targetForm, childForm, className);
 	}
-
 }
-
 function checkForm(event){
 	var target = event.target;
 	var targetFormId = target.dataset.id;
@@ -48,18 +45,16 @@ function checkForm(event){
 		var nameInput = form[i].name;
 		data.data[nameInput] = form[i].value;
 	}
-	if (targetFormId == "registrationForm"){
+	if (targetFormId === "registrForm"){
 		if (data.data.pass != data.data.pass_two){
 			alert("Пароли не совпадают");
 			return;
 		}
 	}
-
 	if (data.data.email == "" || data.data.pass == ""){
 		alert("Поля заполнены не полностью");
 		return;
 	}
-
 	sendAjaxRequest("login", data, function(res){
 		var result;
 		try {
@@ -68,11 +63,10 @@ function checkForm(event){
 			console.log(res);
 			return;
 		}
-		console.log(result)
-		if (result.status == "registerErr" || result.status == "loginErr"){
+		if (result.status === "registrErr" || result.status === "authErr"){
 			alert (result.answer);
 			return;
-		}else if (result.status == "registerOk" || result.status == "loginOk"){
+		}else if (result.status === "registrOk" || result.status === "authOk"){
 			location = result.nextStep;
 			return;
 		}

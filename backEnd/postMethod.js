@@ -1,5 +1,5 @@
 const url = require("url");  
-const {reqOn, sendResponse, getVariable, login} = require("./tube.js");
+const { reqOn, sendResponse, getVariable, login } = require("./tube.js");
 const Cookies = require("cookies");
 const template = require('template_func');
 const log = new template.Log(__filename);
@@ -15,22 +15,18 @@ function postMethod(req, res, startPath){
 		.then((data) => {
 			let requestData = template.tryJsonParse(data);
 			if (requestData) {
-				switch (pathName) {
-					case '/login':
+				if (pathName === '/login') {
 						login(req, res, requestData, cookies)
-						break;
-
-					case '/dev':
-						const target = getVariable(JSON.parse(data));
-						if (target) {
-							const	result = template.stringCircular(target)
-							sendResponse(res, result);
-						} else {
-							sendResponse(res, "По такому ключу ничего не найдено");
-						}
-						break;
 				}
-
+				else if (pathName === '/dev') {//получает значение любой глобальной переменной. Сделано в целях разработки
+					const target = getVariable(JSON.parse(data));
+					if (target) {
+						const	result = template.stringCircular(target)
+						sendResponse(res, result);
+					} else {
+						sendResponse(res, "По такому ключу ничего не найдено");
+					}
+				}
 			} else {
 				log.log("Информацию полученную от клиента распарсить не удалось")
 				requestData = {
