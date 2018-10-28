@@ -1,5 +1,5 @@
 const url = require("url");  
-const { reqOn, sendResponse, getVariable, login } = require("./tube.js");
+const { reqOn, sendResponse, getVariable, login, getInfoForUserPage} = require("./tube.js");
 const Cookies = require("cookies");
 const template = require('template_func');
 const log = new template.Log(__filename);
@@ -13,6 +13,7 @@ function postMethod(req, res, startPath){
 	log.log(pathName)
 	reqOn(req)
 		.then((data) => {
+			console.log(data)
 			let requestData = template.tryJsonParse(data);
 			if (requestData) {
 				if (pathName === '/login') {
@@ -27,6 +28,16 @@ function postMethod(req, res, startPath){
 						sendResponse(res, "По такому ключу ничего не найдено");
 					}
 				}
+				else if (pathName === '/userPage') {
+					requestData = {
+						status:"ok", 
+						message:"asd",
+						data: data,
+					}
+					getInfoForUserPage();
+					sendResponse(res, JSON.stringify(requestData));
+
+				}
 			} else {
 				log.log("Информацию полученную от клиента распарсить не удалось")
 				requestData = {
@@ -40,45 +51,6 @@ function postMethod(req, res, startPath){
 		.catch((err) =>{
 			log.log(err)
 		}) 
-
-	// reqOn(req, (data)=>{
-	// 	console.log("pathName:  "+pathName);
-		
-	// 	let requestData = getParseData(data);
-	// 	if (!requestData){
-	// 		requestData = {status:"err", message:"Информацию полученную от клиента распарсить не удалось"};
-	// 		sendResponse(res, JSON.stringify(requestData));
-	// 		return;
-	// 	}
-
-
-
-	// 	if (pathName == "/login"){ 
-	// 		login(req, res, requestData);
-	// 		return;
-	// 	};
-
-	// 	const userServer = getUserServer(userCookies);
-	// 	// console.log(userServer)
-	// 	if(userServer.status == "err"){
-	// 		sendResponse(res, JSON.stringify(userServer));
-	// 		return;
-	// 	}
-
-	// 	let user = {};
-	// 	Object.assign(user,UserOnline[userServer][userCookies]);
-	// 	delete user.ws; //удаляю поле, т.к. оно не дает возможности сереализации;
-	// 	user.userServer = userServer;
-
-	// 	if (!user){
-	// 		let errRequest = {
-	// 			status:"err",
-	// 		}
-	// 		let stringRes = JSON.stringify(errRequest);
-	// 		sendResponse(res, stringRes);
-	// 		return;
-	// 	};
-	// });
 }
 
 module.exports = postMethod;

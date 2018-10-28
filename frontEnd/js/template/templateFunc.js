@@ -16,7 +16,7 @@ function sendAjaxRequest(search,  obj, callback = function (){}){
 	})
 };
 //проверяет ответ сервера на предмет ошибки	
-function handlerErrorResponse(response, callback){
+function handlerErrorResponse(response, callback = function(){}){
 	let result;
 	try {
 		result = JSON.parse(response)

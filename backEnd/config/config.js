@@ -8,6 +8,7 @@ module.exports = {
 		collections:{
 			users: 'users',
 			session: 'session',
+			servers: ['server_1', 'server_2']
 		},
 	},
 	cookieSize: 10,

@@ -8,7 +8,13 @@ function handlerDevInput(event) {
 	if (key !== 'Enter') return;
 	const value = event.target.value
 	sendAjaxRequest("/dev", value).then((res) => {
-		console.log(JSON.parse(res))
+		let result;
+		try {
+			result = JSON.parse(response)
+			console.log(result)
+		} catch (err){
+			console.log(res);
+		}
 	})
 }
 

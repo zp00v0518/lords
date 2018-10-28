@@ -22,8 +22,9 @@ module.exports.setCookieUser = setCookieUser;
 module.exports.sessionCreate = sessionCreate;
 
 
-const {userCreate} = require('./user');
+const {userCreate, getInfoForUserPage} = require('./user');
 module.exports.userCreate = userCreate;
+module.exports.getInfoForUserPage = getInfoForUserPage;
 
 const login = require('./login/login.js');
 module.exports.login = login;

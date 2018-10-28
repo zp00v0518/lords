@@ -1,4 +1,5 @@
 const mongoClient =  require("mongodb").MongoClient;
+const {config} = require('../tube.js')
 
 function Mongo () {
 	this.open =  function (collectionName){
@@ -23,6 +24,24 @@ function Mongo () {
 				resolve();
 				return callback();
 			});
+		})
+	}
+	this.getCollections = function (callback = function(){}) {
+		return new Promise((resolve,reject) => {
+			this.db.collections().then((result) => {
+				const arr = [] 
+				const serverList  = config.db.collections.servers;
+				result.forEach((item) => {
+					if (serverList.includes(item.s.name)) {
+						arr.push(item.s.name)
+					}
+				})
+				callback(arr)
+				return resolve(arr)
+			}).catch((err) => {
+				callback(err)
+				return reject(err)
+			})
 		})
 	}
 }

@@ -65,6 +65,7 @@ function findInDB(){
 		})
 
 	}
+
 	this.close = function(){
 		mongo.close();
 	}

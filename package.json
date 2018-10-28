@@ -13,6 +13,8 @@
     "cookies": "^0.7.2",
     "mongodb": "^3.1.8",
     "template_func": "^1.0.8",
+    "vue": "^2.5.17",
+    "vue-server-renderer": "^2.5.17",
     "ws": "^6.1.0"
   }
 }

@@ -4,9 +4,6 @@ const findInDB = require("./findInDB.js");
 const find = new findInDB();
 
 
-
-
-
 function testing() {
   const options = {
     collectionName: 'test'
