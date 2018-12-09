@@ -1,0 +1,8 @@
+@import '@/assets/variable.scss';
+@import '@/assets/mixins.scss';
+
+#app{
+  @include center;
+  height: 100%;
+  width: 100%;
+}

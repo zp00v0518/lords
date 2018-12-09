@@ -1,12 +1,32 @@
 <template>
-  <div>dsfsdf</div>
+  <main class="main">
+    <chat></chat>
+  </main>
 </template>
 
 <script>
+import Chat from "../Chat/Chat";
+import Chatsmall from "../Chat/ChatSmall";
 export default {
-  name: 'Main'
+  name: "Main",
+  components: {
+    Chat,
+    Chatsmall
+  },
+  watch: {
+    "$store.state.chat.is": function() {
+      const isChat = this.$store.state.chat.is;
+      console.log(isChat);
+      if (isChat) {
+        this.$el.style.marginRight = "20%";
+      } else {
+        this.$el.style.marginRight = "0";
+      }
+    }
+  }
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
+@import "main.scss";
 </style>

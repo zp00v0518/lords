@@ -1,0 +1,11 @@
+@import '@/assets/variable.scss';
+@import '@/assets/mixins.scss';
+
+.main{
+  position: relative;
+  width: 60%;
+  height: 80%;
+  margin-right: 20%;
+  @include border(blue);
+  background-color: blue;
+}
