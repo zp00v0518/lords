@@ -7,6 +7,7 @@ function watchFs(pathWatch, callback){
 		watcher.close();
 		// console.log(`Тип события: ${eventType}`);
 	  if (filename) {
+	  	// console.log(filename)
 	  } else {
 	    log.log('Имя файла отсутствует');
 	  } 

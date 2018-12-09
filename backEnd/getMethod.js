@@ -38,7 +38,7 @@ function getMethod(req,res, startPath){
 			});
 	//если userCookies есть, ищем совпадение в БД
 	} else if(userCookies){
-			pathName = config.listFile.html.user + '.html';
+			pathName = config.listFile.html.game + '.html';
 			const pathJoin = path.join(startPath, config.basePathToFiles, pathName);
 			const ext = path.parse(pathName).ext;
 			fileReader(pathJoin,(err, data)=>{

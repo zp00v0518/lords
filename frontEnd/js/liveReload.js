@@ -3,8 +3,8 @@ ws.addEventListener("message", handlerMessage);
 
 
 function handlerMessage(event){ 
-	let message = event.data;
-	if (message == "change"){
+	let message = JSON.parse(event.data);
+	if (message.type === "change"){
 		location.reload();
 	}
 }

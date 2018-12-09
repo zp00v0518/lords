@@ -1,9 +1,13 @@
-module.exports = {
+const path = require ('path')
+module.exports = { 
 	port: {
 		http: 3001,
 		ws: 3002,
 	},
+	// watchFolder: __dirname,
+	watchFolder: path.resolve(__dirname,'../../frontEnd'),
 	db:{
+		check: false,
 		name: 'lords',
 		collections:{
 			users: 'users',
@@ -25,7 +29,8 @@ module.exports = {
 		html: {
 			login: 'login',
 			user: 'user',
-			err: '404'
+			err: '404',
+			game: 'game'
 		},
 	},
 };

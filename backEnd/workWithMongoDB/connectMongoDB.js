@@ -1,5 +1,6 @@
 const mongoClient =  require("mongodb").MongoClient;
-const {config} = require('../tube.js')
+const config = require('../config/config.js')
+// const {config} = require('../tube.js')
 
 function Mongo () {
 	this.open =  function (collectionName){
@@ -17,10 +18,15 @@ function Mongo () {
 			let dbName = options.dbName || "test";
 			this.url = options.url || "mongodb://localhost:27017";
 			mongoClient.connect(this.url,{ useNewUrlParser: true },(err, client)=>{
-				if (err) throw err;
+				if (err) {
+					config.db.check = false
+					reject(err)
+					throw err
+				};
 				console.log("Подключение к Монго прошло успешно");
 				this.db = client.db(dbName);
 				this.client = client;
+				config.db.check = true
 				resolve();
 				return callback();
 			});
