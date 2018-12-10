@@ -48,6 +48,9 @@ export default {
       ]
     };
   },
+  created () {
+    // this.$store.dispatch('getData')
+  },
   methods: {
     closeChat() {
       this.showChat = !this.showChat;

@@ -1,5 +1,5 @@
-const ws  = new WebSocket("ws://localhost:3002");
-ws.addEventListener("message", handlerMessage);
+const livereload  = new WebSocket("ws://localhost:3002");
+livereload.addEventListener("message", handlerMessage);
 
 
 function handlerMessage(event){ 
