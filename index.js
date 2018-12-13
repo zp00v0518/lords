@@ -65,6 +65,14 @@ wsServer.on('connection', (ws, res) => {
     ws.on('close', function() {
         delete userOnline[id];
         userOnline.count--
+    });
+    ws.on('message',(message) => {
+        console.log(message)
+        for (let key in userOnline) {
+            if(key !== 'count'){
+                userOnline[key].send(message)
+            }
+        }
     })
 })
 

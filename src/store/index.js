@@ -10,6 +10,7 @@ const store = new Vuex.Store({
   state: {
     chat: {
       is: true,
+      messages: [],
     }
   },
   mutations: {
@@ -23,9 +24,5 @@ const store = new Vuex.Store({
     }
   }
 })
-const ws = new WS().init(`ws://localhost:${config.port.ws}`, store);
 
-export default  {
-  store, 
-  ws
-}
+export default store

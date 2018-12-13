@@ -12,7 +12,7 @@
           <option value="1">Торговый</option>
         </select>
       </div>
-      <textarea class="chat__form__message"></textarea>
+      <textarea class="chat__form__message" @keyup.prevent.enter="sendMessage" v-model="messageForSend.text"></textarea>
     </form>
     <div class="chat__messages">
       <div class="chat__messages__item" :key="key" v-for="(message, key) in messages">
@@ -32,6 +32,11 @@ export default {
     return {
       showChat: true,
       showSmallChat: false,
+      messageForSend:{
+        text: "",
+        chanel:"",
+        privat:"",
+      },
       messages: [
         {
           type: 0,
@@ -58,6 +63,11 @@ export default {
     },
     changeChatWindow(event) {
       this.showSmallChat = !this.showSmallChat;
+    },
+    sendMessage(event) {
+      console.log(this.$ws);
+      this.$ws.sendMessage(this.messageForSend);
+      this.messageForSend.text = ""
     }
   }
 };

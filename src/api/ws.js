@@ -4,6 +4,9 @@ class WS {
     this.store = store || null
 		this.incoming = {
 			chatMessage:  (eventData) => this.chatMessage(eventData)
+		};
+		this.outgoing = {
+
 		}
 	}
 	connectionToWs (wsAddr) {
@@ -19,7 +22,11 @@ class WS {
   }
   chatMessage(eventData) {
    console.log(eventData) 
-  }
+	}
+	sendMessage(message) {
+		console.log(message)
+		this.wsInstance.send(JSON.stringify(message))
+	}
   
 }
 export default WS;

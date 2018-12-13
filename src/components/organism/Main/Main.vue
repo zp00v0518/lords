@@ -16,7 +16,6 @@ export default {
   watch: {
     "$store.state.chat.is": function() {
       const isChat = this.$store.state.chat.is;
-      console.log(isChat);
       if (isChat) {
         this.$el.style.marginRight = "20%";
       } else {
