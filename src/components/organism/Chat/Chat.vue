@@ -16,7 +16,7 @@
     </form>
     <div class="chat__messages">
       <div class="chat__messages__item" :key="key" v-for="(message, key) in messages">
-        <div class="chat__messages__item__time">{{message.time}} </div>
+        <div class="chat__messages__item__time">{{timeFormatic(message.time)}} </div>
         <div class="chat__messages__item__author">{{message.author}} </div>
         <div class="chat__messages__item__text">{{message.text}} </div>
       </div>
@@ -37,26 +37,26 @@ export default {
         chanel:"",
         privat:"",
       },
-      messages: [
-        {
-          type: 0,
-          time: "10:20",
-          text: "jsdj kas kh ALSK DHKLJHKHSADFH JLL  DLFKJ VDF  dfvi",
-          author: "Admin"
-        },
-        {
-          type: 0,
-          time: "10:21",
-          text: "Lorem dgf f asjjsd   a adc",
-          author: "Admin"
-        }
-      ]
     };
   },
   created () {
-    // this.$store.dispatch('getData')
+  },
+  computed: {
+    messages() {
+      return this.$store.state.chat.messages;
+    }
   },
   methods: {
+    timeFormatic(time) {
+      const date = new Date(time);
+	    let minutes = date.getMinutes();
+	    let hours = date.getHours();
+      let seconds = date.getSeconds();
+      minutes = (minutes <= 9) ? "0" + minutes : minutes;
+      hours = (hours <= 9) ? "0" + hours : hours;
+      seconds = (seconds <= 9) ? "0" + seconds : seconds;
+      return hours+":"+minutes;
+    },
     closeChat() {
       this.showChat = !this.showChat;
       this.$store.commit("closeChat");

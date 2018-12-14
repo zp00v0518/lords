@@ -15,7 +15,7 @@ Vue.prototype.$ws.init(`ws://localhost:${config.port.ws}`, store);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  store: store.store,
+  store: store,
   router,
   components: { App },
   template: '<App/>'

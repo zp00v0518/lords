@@ -3,7 +3,8 @@ class WS {
     this.connectionToWs(wsAddr)
     this.store = store || null
 		this.incoming = {
-			chatMessage:  (eventData) => this.chatMessage(eventData)
+			chatMessage:  (eventData) => this.chatMessage(eventData),
+			startMessages: (eventData) => this.startMessages(eventData),
 		};
 		this.outgoing = {
 
@@ -13,15 +14,18 @@ class WS {
 		this.wsInstance = new WebSocket(wsAddr);
 		this.wsInstance.onopen = () => {
       console.log(`WebSocket open in ${wsAddr}`)
-      this.store.dispatch('getData')
+      // this.store.dispatch('getData')
     }
 		this.wsInstance.onmessage = (event) => {
 			const data = JSON.parse(event.data)
 			this.incoming[data.type](data)
 		}
-  }
+	};
+	startMessages(eventData) {
+		this.store.commit('START_MESSAGES', eventData)
+	}
   chatMessage(eventData) {
-   console.log(eventData) 
+   this.store.commit('PUSH_MESSAGE', eventData)
 	}
 	sendMessage(message) {
 		console.log(message)
