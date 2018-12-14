@@ -17,8 +17,10 @@ const store = new Vuex.Store({
     closeChat(state){
       state.chat.is = !state.chat.is;
     },
-    PUSH_MESSAGE(state, payload) {
-      state.chat.messages.push(payload)
+    UNSHIFT_MESSAGE(state, payload) {
+      const chat = state.chat.messages;
+      if (chat.length > 30) chat.pop(); 
+      chat.unshift(payload)
     },
     START_MESSAGES(state, payload) {
       state.chat.messages = payload.chat;

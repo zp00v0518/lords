@@ -38,8 +38,10 @@ wsServer.on("connection", (ws, res) => {
   ws.on("message", message => {
     const mess = JSON.parse(message);
     mess.type = "chatMessage";
+    mess.author = "Admin";
     mess.time = new Date();
-    chat.push(mess)
+    if (chat.length > 30)  chat.pop();
+    chat.unshift(mess)
 
     for (let key in userOnline) {
       if (key !== "count") {

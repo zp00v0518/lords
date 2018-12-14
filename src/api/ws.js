@@ -25,7 +25,7 @@ class WS {
 		this.store.commit('START_MESSAGES', eventData)
 	}
   chatMessage(eventData) {
-   this.store.commit('PUSH_MESSAGE', eventData)
+   this.store.commit('UNSHIFT_MESSAGE', eventData)
 	}
 	sendMessage(message) {
 		console.log(message)

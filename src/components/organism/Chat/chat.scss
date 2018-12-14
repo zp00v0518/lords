@@ -63,28 +63,32 @@
   }
   &__messages{
     border: 1px solid green;
-    flex-grow: 5;
-    display: flex;
-    flex-direction: column;
+    max-height: 80%;
+    overflow-y: auto;
 
     &__item{
       display: flex;
       flex-wrap: wrap;
       margin-bottom: 5px;
       padding: 0 5px;
-      
+
       &__time {
         width: 10%;
         min-width: 30px;
         font-weight: 600;
       }
       &__author {
+        margin-left: 5PX;
+        width:50%;
         font-weight: 600;
       }
 
       &__text {
-        width: 100%;
+        min-width: calc(100% - 20px);
+        max-width: 100%;
         margin-top: 1px;
+        flex-grow: 5;
+        box-sizing: border-box;
       }
     }
   }
