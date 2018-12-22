@@ -11,13 +11,12 @@ const numSectionGlobalMap = gameVariable.numSectionGlobalMap;
 const numSectionRegionMap = gameVariable.numSectionRegionMap;
 let countRegion = 0;
 let count = 0;
-const GlobalMap = [];
+const globalMap = [];
 const coordsMine = [];//возможные координаты шахт на regionMap
+const serverData = {};
 
 function toDb(){
 	for (let i=0; i<numSectionGlobalMap; i++){
-		let row = [];
-		GlobalMap.push(row)
 		for (let h=0; h<numSectionGlobalMap; h++){
 			let sector = {};
 			sector.id = countRegion++;
@@ -35,15 +34,20 @@ function toDb(){
 			if (persent <= 10){
 				sector.type = 2;
 			}
-
-			GlobalMap[i][h] = sector;
-			insertDB.one({collectionName:"server_1", doc:GlobalMap[i][h]}, (result)=>{
-				console.log(result.ops);
-				insertDB.close();
-			});
+			globalMap.push(sector)
+			console.log(sector)
+			// insertDB.one({collectionName:"server_1", doc:globalMap[i][h]}, (result)=>{
+			// 	console.log(result.ops);
+			// 	insertDB.close();
+			// });
 		}
 	}
-}
+	serverData.globalMap = globalMap;
+	insertDB.one({collectionName:"server_1", doc:serverData}, (result)=>{
+		console.log(result.ops);
+		insertDB.close();
+	});
+};
 
 setTimeout(toDb,5000);
 
