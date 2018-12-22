@@ -27,9 +27,9 @@ wsServer.on("connection", (ws, res) => {
   userOnline.count++;
   const start = {
     type: "startMessages",
-    chat,
-  }
-  ws.send(JSON.stringify(start))
+    chat
+  };
+  ws.send(JSON.stringify(start));
 
   ws.on("close", function() {
     delete userOnline[id];
@@ -40,8 +40,8 @@ wsServer.on("connection", (ws, res) => {
     mess.type = "chatMessage";
     mess.author = "Admin";
     mess.time = new Date();
-    if (chat.length > 30)  chat.pop();
-    chat.unshift(mess)
+    if (chat.length > 30) chat.pop();
+    chat.unshift(mess);
 
     for (let key in userOnline) {
       if (key !== "count") {

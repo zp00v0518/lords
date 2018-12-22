@@ -1,9 +1,9 @@
-const gameVariables = require('./game_variables');
+const gameVariables = require("./game_variables");
 const UserOnline = {};
 const appStatistic = {
-	request: {
-		count: 0,
-	}
+  request: {
+    count: 0
+  }
 };
 
 global.gameVariables = gameVariables;
