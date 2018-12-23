@@ -14,12 +14,12 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    closeChat(state){
+    CHANGE_CHAT(state){
       state.chat.is = !state.chat.is;
     },
     UNSHIFT_MESSAGE(state, payload) {
       const chat = state.chat.messages;
-      if (chat.length > 30) chat.pop(); 
+      if (chat.length === 99) chat.pop(); 
       chat.unshift(payload)
     },
     START_MESSAGES(state, payload) {
