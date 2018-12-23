@@ -8,14 +8,13 @@
 export default {
   name: "Chat",
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
-    showChat(){
-      console.log(123)
-       this.$store.commit('changeChat')
-       this.$store.commit('closeChat')
+    showChat() {
+      console.log(123);
+      this.$store.commit("changeChat");
+      this.$store.commit("closeChat");
     }
   }
 };

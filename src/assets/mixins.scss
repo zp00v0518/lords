@@ -1,4 +1,4 @@
-@mixin border ($color: black, $width: 1px) {
+@mixin border($color: black, $width: 1px) {
   border: $width solid $color;
 }
 

@@ -12,13 +12,17 @@
           <option value="1">Торговый</option>
         </select>
       </div>
-      <textarea class="chat__form__message" @keyup.prevent.enter="sendMessage" v-model="messageForSend.text"></textarea>
+      <textarea
+        class="chat__form__message"
+        @keyup.prevent.enter="sendMessage"
+        v-model="messageForSend.text"
+      ></textarea>
     </form>
     <div class="chat__messages">
       <div class="chat__messages__item" :key="key" v-for="(message, key) in messages">
-        <div class="chat__messages__item__time">{{timeFormatic(message.time)}} </div>
-        <div class="chat__messages__item__author">{{message.author}} </div>
-        <div class="chat__messages__item__text">{{message.text}} </div>
+        <div class="chat__messages__item__time">{{timeFormatic(message.time)}}</div>
+        <div class="chat__messages__item__author">{{message.author}}</div>
+        <div class="chat__messages__item__text">{{message.text}}</div>
       </div>
     </div>
     <div v-if="showSmallChat" @click="closeChat" class="chat__show">Y</div>
@@ -32,15 +36,14 @@ export default {
     return {
       showChat: true,
       showSmallChat: false,
-      messageForSend:{
+      messageForSend: {
         text: "",
-        chanel:"",
-        privat:"",
-      },
+        chanel: "",
+        privat: ""
+      }
     };
   },
-  created () {
-  },
+  created() {},
   computed: {
     messages() {
       return this.$store.state.chat.messages;
@@ -49,13 +52,13 @@ export default {
   methods: {
     timeFormatic(time) {
       const date = new Date(time);
-	    let minutes = date.getMinutes();
-	    let hours = date.getHours();
-      let seconds = date.getSeconds();
-      minutes = (minutes <= 9) ? "0" + minutes : minutes;
-      hours = (hours <= 9) ? "0" + hours : hours;
-      seconds = (seconds <= 9) ? "0" + seconds : seconds;
-      return hours+":"+minutes;
+      let minutes = date.getMinutes();
+      let hours = date.getHours();
+      // let seconds = date.getSeconds();
+      minutes = minutes <= 9 ? "0" + minutes : minutes;
+      hours = hours <= 9 ? "0" + hours : hours;
+      // seconds = seconds <= 9 ? "0" + seconds : seconds;
+      return hours + ":" + minutes;
     },
     closeChat() {
       this.showChat = !this.showChat;
@@ -67,7 +70,7 @@ export default {
     sendMessage(event) {
       console.log(this.$ws);
       this.$ws.sendMessage(this.messageForSend);
-      this.messageForSend.text = ""
+      this.messageForSend.text = "";
     }
   }
 };

@@ -1,5 +1,5 @@
-@import '@/assets/variable.scss';
-@import '@/assets/mixins.scss';
+@import "@/assets/variable.scss";
+@import "@/assets/mixins.scss";
 
 .chat {
   @include border(green);
@@ -13,7 +13,7 @@
   flex-direction: column;
   font-size: 12px;
 
-  &__close{
+  &__close {
     cursor: pointer;
   }
   &__closed {
@@ -21,38 +21,38 @@
     transform: translateX(-100%);
     z-index: 0;
   }
-  &__show{
+  &__show {
     position: absolute;
     right: 0;
     transform: translateX(110%);
     cursor: pointer;
   }
-  &__header{
+  &__header {
     display: flex;
     justify-content: flex-end;
     height: 5%;
-    @include border()
+    @include border();
   }
-  &__form{
+  &__form {
     display: flex;
     flex-direction: column;
     border: 1px solid red;
     height: 15%;
     font-size: inherit;
 
-    &__channel-wrap{
+    &__channel-wrap {
       display: flex;
       justify-content: space-between;
     }
-    &__input{
+    &__input {
       width: 45%;
       font-size: inherit;
     }
-    &__select{
+    &__select {
       width: 45%;
       font-size: inherit;
     }
-    &__message{
+    &__message {
       margin-top: 10px;
       margin-bottom: 10px;
       font-size: inherit;
@@ -61,12 +61,12 @@
       flex-direction: column;
     }
   }
-  &__messages{
+  &__messages {
     border: 1px solid green;
     max-height: 80%;
     overflow-y: auto;
 
-    &__item{
+    &__item {
       display: flex;
       flex-wrap: wrap;
       margin-bottom: 5px;
@@ -78,8 +78,8 @@
         font-weight: 600;
       }
       &__author {
-        margin-left: 5PX;
-        width:50%;
+        margin-left: 5px;
+        width: 50%;
         font-weight: 600;
       }
 
