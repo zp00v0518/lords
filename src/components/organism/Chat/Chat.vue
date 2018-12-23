@@ -1,37 +1,47 @@
 <template>
-  <div class="chat" :class="{chat__closed: !showChat}" @transitionend="changeChatWindow">
-    <div class="chat__header">
-      <div @click="closeChat" class="chat__close">X</div>
-    </div>
-    <form class="chat__form">
-      <div class="chat__form__channel-wrap">
-        <input type="text" class="chat__form__input">
-        <select name id class="chat__form__select">
-          <option value="1">Общий</option>
-          <option value="1">Приватный</option>
-          <option value="1">Торговый</option>
-        </select>
+  <section class="chat__wrap">
+    <div
+      v-show="showChat"
+      class="chat"
+      :class="{chat__closed: !showChat}"
+    >
+      <div class="chat__header">
+        <div @click="closeChat" class="chat__close">x</div>
       </div>
-      <textarea
-        class="chat__form__message"
-        @keyup.prevent.enter="sendMessage"
-        v-model="messageForSend.text"
-      ></textarea>
-    </form>
-    <div class="chat__messages">
-      <div class="chat__messages__item" :key="key" v-for="(message, key) in messages">
-        <div class="chat__messages__item__time">{{timeFormatic(message.time)}}</div>
-        <div class="chat__messages__item__author">{{message.author}}</div>
-        <div class="chat__messages__item__text">{{message.text}}</div>
+      <form class="chat__form">
+        <div class="chat__form__channel-wrap">
+          <input type="text" class="chat__form__input">
+          <select name id class="chat__form__select">
+            <option value="1">Общий</option>
+            <option value="1">Приватный</option>
+            <option value="1">Торговый</option>
+          </select>
+        </div>
+        <textarea
+          class="chat__form__message"
+          @keyup.prevent.enter="sendMessage"
+          v-model="messageForSend.text"
+        ></textarea>
+      </form>
+      <div class="chat__messages">
+        <div class="chat__messages__item" :key="key" v-for="(message, key) in messages">
+          <div class="chat__messages__item__time">{{timeFormatic(message.time)}}</div>
+          <div class="chat__messages__item__author">{{message.author}}</div>
+          <div class="chat__messages__item__text">{{message.text}}</div>
+        </div>
       </div>
     </div>
-    <div v-if="showSmallChat" @click="closeChat" class="chat__show">Y</div>
-  </div>
+    <ChatSmall v-if="!showChat"> </ChatSmall>
+  </section>
 </template>
 
 <script>
+import ChatSmall from './ChatSmall'
 export default {
   name: "Chat",
+  components: {
+    ChatSmall,
+  },
   data() {
     return {
       showChat: true,
@@ -49,6 +59,11 @@ export default {
       return this.$store.state.chat.messages;
     }
   },
+    watch: {
+    "$store.state.chat.is": function() {
+      this.showChat = !this.showChat;
+    }
+  },
   methods: {
     timeFormatic(time) {
       const date = new Date(time);
@@ -61,8 +76,7 @@ export default {
       return hours + ":" + minutes;
     },
     closeChat() {
-      this.showChat = !this.showChat;
-      this.$store.commit("closeChat");
+      this.$store.commit("CHANGE_CHAT");
     },
     changeChatWindow(event) {
       this.showSmallChat = !this.showSmallChat;

@@ -1,20 +1,23 @@
 <template>
-  <div class="chat__small">
-    <div @click="showChat">Y</div>
+  <div class="small" @click="showChat">
+    <div>{{messages.length}}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Chat",
+  name: "ChatSmall",
   data() {
     return {};
   },
+  computed: {
+    messages() {
+      return this.$store.state.chat.messages;
+    }
+  },
   methods: {
     showChat() {
-      console.log(123);
-      this.$store.commit("changeChat");
-      this.$store.commit("closeChat");
+      this.$store.commit("CHANGE_CHAT");
     }
   }
 };
