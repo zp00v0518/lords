@@ -47,3 +47,6 @@ module.exports.getMethod = getMethod;
 
 const postMethod = require("./postMethod.js");
 module.exports.postMethod = postMethod;
+
+const returnGlobalMap = require('./globalMap/constractGlobalMap.js');
+module.exports.returnGlobalMap = returnGlobalMap;

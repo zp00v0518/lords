@@ -10,10 +10,12 @@ function constractGlobalMap() {
   serverList.forEach(serverName => {
     GlobalMap[serverName] = [];
     const findOptions = {
-      collectionName: serverName
+      collectionName: config.db.collections.map,
+      query: {server: serverName},
     };
     find.all(findOptions).then(result => {
       GlobalMap[serverName] = result.result;
+      console.log(`Построение глобальной карты для ${serverName} завершено`)
     });
   });
 }
@@ -27,7 +29,9 @@ function startConstractMap() {
   if (flag) {
     constractGlobalMap();
   } else {
-    setTimeout(startConstractMap);
+    setTimeout(startConstractMap, 500);
   }
 }
+startConstractMap();
+
 module.exports = returnGlobalMap();

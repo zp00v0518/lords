@@ -9,43 +9,43 @@ const insertDB = new insert();
 
 const numSectionGlobalMap = gameVariable.numSectionGlobalMap;
 const numSectionRegionMap = gameVariable.numSectionRegionMap;
-let countRegion = 0;
-let count = 0;
-const globalMap = [];
+const GlobalMap = [];
 const coordsMine = []; //возможные координаты шахт на regionMap
-const serverData = {};
 
 function toDb() {
-  for (let i = 0; i < numSectionGlobalMap; i++) {
-    for (let h = 0; h < numSectionGlobalMap; h++) {
-      let sector = {};
-      sector.id = countRegion++;
-      sector.type = 0;
-      sector.x = i;
-      sector.y = h;
-      sector.region = createRegion();
-      sector.listUpgrade = {
-        castle: {},
-        region: {
-          mine: []
+  serverList.forEach(serverName => {
+  let countRegion = 0;
+    for (let i = 0; i < numSectionGlobalMap; i++) {
+      let row = [];
+      GlobalMap.push(row);
+      for (let h = 0; h < numSectionGlobalMap; h++) {
+        let sector = {};
+        sector.server = serverName;
+        sector.id = countRegion++;
+        sector.type = 0;
+        sector.x = i;
+        sector.y = h;
+        sector.region = createRegion();
+        sector.listUpgrade = {
+          castle: {},
+          region: {
+            mine: []
+          }
+        };
+        let persent = getRandomNumber(100);
+        if (persent <= 10) {
+          sector.type = 2;
         }
-      };
-      let persent = getRandomNumber(100);
-      if (persent <= 10) {
-        sector.type = 2;
+        GlobalMap[i][h] = sector;
+        insertDB.one(
+          { collectionName: config.db.collections.map, doc: GlobalMap[i][h] },
+          result => {
+            console.log(result.ops);
+            insertDB.close();
+          }
+        );
       }
-      globalMap.push(sector);
-      console.log(sector);
-      // insertDB.one({collectionName:"server_1", doc:globalMap[i][h]}, (result)=>{
-      // 	console.log(result.ops);
-      // 	insertDB.close();
-      // });
     }
-  }
-  serverData.globalMap = globalMap;
-  insertDB.one({ collectionName: "server_1", doc: serverData }, result => {
-    console.log(result.ops);
-    insertDB.close();
   });
 }
 
