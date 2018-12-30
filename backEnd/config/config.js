@@ -11,7 +11,9 @@ module.exports = {
     collections: {
       users: "users",
       session: "session",
-      servers: ["server_1", "server_2"]
+      servers: ["server_1", "server_2"],
+      map: 'globalMap',
+      chat: 'chat'
     }
   },
   cookieSize: 10,

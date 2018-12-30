@@ -1,0 +1,9 @@
+@import "@/assets/variable.scss";
+@import "@/assets/mixins.scss";
+
+.header {
+  width: 100%;
+  height: 10%;
+  min-height: 50px;
+  @include border(black)
+}
