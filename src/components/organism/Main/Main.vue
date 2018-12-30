@@ -1,17 +1,21 @@
 <template>
   <main class="main">
+    <Vheader></Vheader>
+    
     <chat></chat>
   </main>
 </template>
 
 <script>
 import Chat from "../Chat/Chat";
-import Chatsmall from "../Chat/ChatSmall";
+import Vheader from '../Header/Header'
+import Sidebar from '../Sidebar/Sidebar'
 export default {
   name: "Main",
   components: {
     Chat,
-    Chatsmall
+    Vheader,
+    Sidebar,
   },
   watch: {
     "$store.state.chat.is": function() {
