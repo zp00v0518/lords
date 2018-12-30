@@ -1,20 +1,21 @@
 <template>
-    <section class="sidebar">
-      Sidebar
+    <section class="scene">
+      Scene
     </section>
 </template>
 
 <script>
 export default {
-  name: "Sidebar",
+  name: "Scene",
   data() {
     return {};
   },
+  
   computed: {},
   methods: {}
 };
 </script>
 
 <style lang='scss' scoped>
-@import "sidebar.scss";
+@import "scene.scss";
 </style>
