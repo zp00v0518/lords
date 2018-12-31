@@ -35,9 +35,16 @@ module.exports.userSessionUpdate = userSessionUpdate;
 module.exports.setCookieUser = setCookieUser;
 module.exports.sessionCreate = sessionCreate;
 
-const { userCreate, getInfoForUserPage } = require("./user");
+const {
+  userCreate,
+  getInfoForUserPage,
+  findUserInGlobalMap,
+  findUserInDB
+} = require("./user");
 module.exports.userCreate = userCreate;
 module.exports.getInfoForUserPage = getInfoForUserPage;
+module.exports.findUserInGlobalMap = findUserInGlobalMap;
+module.exports.findUserInDB = findUserInDB;
 
 const login = require("./login/login.js");
 module.exports.login = login;
@@ -48,5 +55,5 @@ module.exports.getMethod = getMethod;
 const postMethod = require("./postMethod.js");
 module.exports.postMethod = postMethod;
 
-const returnGlobalMap = require('./globalMap/constractGlobalMap.js');
+const returnGlobalMap = require("./globalMap/constractGlobalMap.js");
 module.exports.returnGlobalMap = returnGlobalMap;

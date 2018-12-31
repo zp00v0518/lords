@@ -16,10 +16,9 @@ function postMethod(req, res, startPath) {
   let pathName = urlParse.path;
   let cookies = new Cookies(req, res);
   let userCookies = cookies.get("user");
-  log.log(pathName);
+  // log.log(pathName);
   reqOn(req)
     .then(data => {
-      console.log(data);
       let requestData = template.tryJsonParse(data);
       if (requestData) {
         if (pathName === "/login") {
@@ -41,6 +40,8 @@ function postMethod(req, res, startPath) {
           };
           getInfoForUserPage();
           sendResponse(res, JSON.stringify(requestData));
+        } else if (pathName === '/choiseServer') {
+          console.log(data)
         }
       } else {
         log.log("Информацию полученную от клиента распарсить не удалось");

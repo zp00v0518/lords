@@ -1,12 +1,9 @@
 require("../variables/global_variables.js");
-const { config } = require("../tube.js");
+const { config, findUserInDB } = require("../tube.js");
 const WS = require("ws");
 const watcher = require("../liveReload/watchFs.js");
+const Cookies = require("cookies");
 const chat = [];
-
-const userOnline = {
-  count: 0
-};
 
 class WsServer {
   init(port) {
@@ -21,10 +18,15 @@ class WsServer {
 
 const wsServer = new WsServer();
 wsServer.init(config.port.ws);
-wsServer.on("connection", (ws, res) => {
-  const id = Math.random();
-  userOnline[id] = ws;
-  userOnline.count++;
+wsServer.on("connection", (ws, req) => {
+  const cookies = new Cookies(req);
+  const userCookies = cookies.get("user");
+  findUserInDB(userCookies).then(user => {
+    // console.log(user)
+  })
+  UserOnline[userCookies] =  {};
+  UserOnline[userCookies].ws =  ws;
+  UserOnline.count++;
   const start = {
     type: "startMessages",
     chat
@@ -32,8 +34,8 @@ wsServer.on("connection", (ws, res) => {
   ws.send(JSON.stringify(start));
 
   ws.on("close", function() {
-    delete userOnline[id];
-    userOnline.count--;
+    delete UserOnline[userCookies];
+    UserOnline.count--;
   });
   ws.on("message", message => {
     const mess = JSON.parse(message);
@@ -43,9 +45,9 @@ wsServer.on("connection", (ws, res) => {
     if (chat.length > 30) chat.pop();
     chat.unshift(mess);
 
-    for (let key in userOnline) {
+    for (let key in UserOnline) {
       if (key !== "count") {
-        userOnline[key].send(JSON.stringify(mess));
+        UserOnline[key].ws.send(JSON.stringify(mess));
       }
     }
   });
@@ -53,13 +55,13 @@ wsServer.on("connection", (ws, res) => {
 
 function callbackForWatcher() {
   watcher(config.watchFolder, callbackForWatcher);
-  if (userOnline.count > 0) {
+  if (UserOnline.count > 0) {
     const message = {
       type: "change"
     };
-    for (let user in userOnline) {
+    for (let user in UserOnline) {
       if (user !== "count") {
-        userOnline[user].send(JSON.stringify(message));
+        UserOnline[user].ws.send(JSON.stringify(message));
       }
     }
   }

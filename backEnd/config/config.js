@@ -13,7 +13,7 @@ module.exports = {
       session: "session",
       servers: ["server_1", "server_2"],
       map: 'globalMap',
-      chat: 'chat'
+      chat: 'chat',
     }
   },
   cookieSize: 10,
@@ -29,7 +29,7 @@ module.exports = {
   listFile: {
     html: {
       login: "login",
-      user: "user",
+      cabinet: "user",
       err: "404",
       game: "game"
     }
