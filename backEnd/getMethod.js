@@ -2,7 +2,14 @@ const url = require("url");
 const path = require("path");
 const Cookies = require("cookies");
 const template = require("template_func");
-const { fileReader, mimeType, sendResponse, config } = require("./tube.js");
+const {
+  fileReader,
+  mimeType,
+  sendResponse,
+  config,
+  findUserInDB,
+  findUserInGlobalMap
+} = require("./tube.js");
 const log = new template.Log(__filename);
 
 function getMethod(req, res, startPath) {
@@ -18,8 +25,9 @@ function getMethod(req, res, startPath) {
   let regPath = /.*js.*|.*img.*|.*style.*|.*ico.*/gi;
   let check = regPath.test(pathName);
   if (check) {
-    var ext = path.parse(pathName).ext;
-    var pathJoin = path.join(startPath, config.basePathToFiles, pathName);
+    const ext = path.parse(pathName).ext;
+    const pathJoin = path.join(startPath, config.basePathToFiles, pathName);
+    console.log(pathJoin)
     fileReader(pathJoin, (err, data) => {
       sendResponse(res, data, mimeType[ext]);
       return;
@@ -37,7 +45,7 @@ function getMethod(req, res, startPath) {
     });
     //если userCookies есть, ищем совпадение в БД
   } else if (userCookies) {
-    pathName = config.listFile.html.game + ".html";
+    pathName = config.listFile.html.cabinet + ".html";
     const pathJoin = path.join(startPath, config.basePathToFiles, pathName);
     const ext = path.parse(pathName).ext;
     fileReader(pathJoin, (err, data) => {

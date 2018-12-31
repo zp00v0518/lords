@@ -1,5 +1,7 @@
 const gameVariables = require("./game_variables");
-const UserOnline = {};
+const UserOnline = {
+  count: 0,
+};
 const appStatistic = {
   request: {
     count: 0
