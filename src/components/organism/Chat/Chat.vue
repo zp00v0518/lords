@@ -53,7 +53,9 @@ export default {
       }
     };
   },
-  created() {},
+  created() {
+    console.log(this.$store)
+  },
   computed: {
     messages() {
       return this.$store.state.chat.messages;

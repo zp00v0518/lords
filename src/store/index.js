@@ -1,36 +1,11 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-// import WS from '../api/ws'
-// import config from '../../backEnd/config/config'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import modules from './modules';
 
 Vue.use(Vuex);
 
-
 const store = new Vuex.Store({
-  state: {
-    chat: {
-      is: true,
-      messages: [],
-    }
-  },
-  mutations: {
-    CHANGE_CHAT(state){
-      state.chat.is = !state.chat.is;
-    },
-    UNSHIFT_MESSAGE(state, payload) {
-      const chat = state.chat.messages;
-      if (chat.length === 99) chat.pop(); 
-      chat.unshift(payload)
-    },
-    START_MESSAGES(state, payload) {
-      state.chat.messages = payload.chat;
-    },
-  },
-  actions: {
-    getData({}) {
-      console.log('getData in Store')
-    }
-  }
-})
+  modules,
+});
 
-export default store
+export default store;

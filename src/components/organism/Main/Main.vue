@@ -1,19 +1,19 @@
 <template>
   <main class="main">
     <Vheader></Vheader>
-     <div class="main__content">
-       <Scene></Scene>
+    <div class="main__content">
+      <Scene></Scene>
       <Sidebar></Sidebar>
-   </div>
+    </div>
     <chat></chat>
   </main>
 </template>
 
 <script>
 import Chat from "../Chat";
-import Vheader from '../Header'
-import Sidebar from '../Sidebar'
-import Scene from '../Scene'
+import Vheader from "../Header";
+import Sidebar from "../Sidebar";
+import Scene from "../Scene";
 
 export default {
   name: "Main",

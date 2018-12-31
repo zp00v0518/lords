@@ -1,7 +1,5 @@
 <template>
-    <section class="scene">
-      Scene
-    </section>
+  <section class="scene">Scene</section>
 </template>
 
 <script>
@@ -10,9 +8,13 @@ export default {
   data() {
     return {};
   },
-  
+  created() {
+    console.log(this);
+  },
   computed: {},
-  methods: {}
+  methods: {
+    getData() {}
+  }
 };
 </script>
 
