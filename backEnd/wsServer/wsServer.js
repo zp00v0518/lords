@@ -25,6 +25,7 @@ class WsServer {
 const wsServer = new WsServer();
 wsServer.init(config.port.ws);
 wsServer.on("connection", (ws, req) => {
+  
   const server = req.url.split("/")[1];
   const cookies = new Cookies(req);
   const userCookies = cookies.get("user");
@@ -48,7 +49,8 @@ wsServer.on("connection", (ws, req) => {
       UserOnline[server][User._id].user.map.centerMap.y = infoForStartGame[0].y;
       getGlobalMapSector(UserOnline[server][User._id].user, server, viewMapArr => {
           start.viewMapArr = viewMapArr;
-          ws.send(JSON.stringify(start));
+          start.towns = infoForStartGame;
+          ws.send(JSON.stringify(start)); 
         }
       );
     });

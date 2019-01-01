@@ -2,11 +2,11 @@ const { findInDB, config } = require("../tube.js");
 
 const find = new findInDB();
 
-function findUserInGlobalMap(userId, callback = function() {}) {
+function findUserInGlobalMap(userId, server=null, callback = function() {}) {
   return new Promise((resolve, reject) => {
     const options = {
       collectionName: config.db.collections.map,
-      query: { userId: userId }
+      query: { userId: userId, server: server }
     };
     find
       .all(options)
