@@ -1,5 +1,5 @@
 require("../variables/global_variables.js");
-const { config, findUserInDB } = require("../tube.js");
+const { config, findUserInDB, getInfoForStartGame } = require("../tube.js");
 const WS = require("ws");
 const watcher = require("../liveReload/watchFs.js");
 const Cookies = require("cookies");
@@ -19,23 +19,28 @@ class WsServer {
 const wsServer = new WsServer();
 wsServer.init(config.port.ws);
 wsServer.on("connection", (ws, req) => {
+  const server = req.url.split("/")[1];
   const cookies = new Cookies(req);
   const userCookies = cookies.get("user");
-  findUserInDB(userCookies).then(user => {
-    // console.log(user)
-  })
-  UserOnline[userCookies] =  {};
-  UserOnline[userCookies].ws =  ws;
-  UserOnline.count++;
+  let User;
   const start = {
     type: "startMessages",
     chat
   };
-  ws.send(JSON.stringify(start));
+  findUserInDB(userCookies).then(user => {
+    User = user;
+    UserOnline[server][User._id] = {};
+    UserOnline[server][User._id].ws = ws;
+    UserOnline[server].count++;
+    getInfoForStartGame(user, server).then(result => {
+      console.log(result)
+    });
+    ws.send(JSON.stringify(start));
+  });
 
   ws.on("close", function() {
-    delete UserOnline[userCookies];
-    UserOnline.count--;
+    delete UserOnline[server][User._id];
+    UserOnline[server].count--;
   });
   ws.on("message", message => {
     const mess = JSON.parse(message);
@@ -45,9 +50,9 @@ wsServer.on("connection", (ws, req) => {
     if (chat.length > 30) chat.pop();
     chat.unshift(mess);
 
-    for (let key in UserOnline) {
+    for (let key in UserOnline[server]) {
       if (key !== "count") {
-        UserOnline[key].ws.send(JSON.stringify(mess));
+        UserOnline[server][key].ws.send(JSON.stringify(mess));
       }
     }
   });
@@ -55,13 +60,13 @@ wsServer.on("connection", (ws, req) => {
 
 function callbackForWatcher() {
   watcher(config.watchFolder, callbackForWatcher);
-  if (UserOnline.count > 0) {
+  if (UserOnline[server].count > 0) {
     const message = {
       type: "change"
     };
-    for (let user in UserOnline) {
+    for (let user in UserOnline[server]) {
       if (user !== "count") {
-        UserOnline[user].ws.send(JSON.stringify(message));
+        UserOnline[server][user].ws.send(JSON.stringify(message));
       }
     }
   }

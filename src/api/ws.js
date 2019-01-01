@@ -4,7 +4,8 @@ class WS {
     this.store = store || null;
     this.incoming = {
       chatMessage: eventData => this.chatMessage(eventData),
-      startMessages: eventData => this.startMessages(eventData)
+      startMessages: eventData => this.startMessages(eventData),
+      change: eventData => this.change(eventData)
     };
     this.outgoing = {};
   }
@@ -29,6 +30,9 @@ class WS {
   sendMessage(message) {
     console.log(message);
     this.wsInstance.send(JSON.stringify(message));
+  }
+  change(){
+    location.reload();
   }
 }
 export default WS;

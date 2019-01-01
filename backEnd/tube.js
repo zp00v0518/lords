@@ -1,5 +1,7 @@
 const config = require("./config/config.js");
 module.exports.config = config;
+const templateFunc = require('template_func');
+module.exports.templateFunc = templateFunc;
 
 const getVariable = require("./developScript/getVariable.js");
 module.exports.getVariable = getVariable;
@@ -35,16 +37,36 @@ module.exports.userSessionUpdate = userSessionUpdate;
 module.exports.setCookieUser = setCookieUser;
 module.exports.sessionCreate = sessionCreate;
 
+
+const {returnGlobalMap, getGlobalMapSector} = require("./globalMap");
+module.exports.GlobalMap = returnGlobalMap;
+module.exports.getGlobalMapSector = getGlobalMapSector;
+
 const {
   userCreate,
   getInfoForUserPage,
   findUserInGlobalMap,
-  findUserInDB
+  findUserInDB,
+  getInfoForStartGame,
+  addNewUserToGlobalMap
 } = require("./user");
 module.exports.userCreate = userCreate;
 module.exports.getInfoForUserPage = getInfoForUserPage;
 module.exports.findUserInGlobalMap = findUserInGlobalMap;
 module.exports.findUserInDB = findUserInDB;
+module.exports.getInfoForStartGame = getInfoForStartGame;
+module.exports.addNewUserToGlobalMap = addNewUserToGlobalMap;
+
+const {createTown} = require('./town');
+module.exports.createTown = createTown;
+
+const {createStorage, upgradeSection} = require('./town/buildings');
+module.exports.createStorage = createStorage;
+module.exports.upgradeSection = upgradeSection;
+
+const {Mine, createMine} = require('./region/mine');
+module.exports.Mine = Mine;
+module.exports.createMine = createMine;
 
 const login = require("./login/login.js");
 module.exports.login = login;
@@ -55,5 +77,4 @@ module.exports.getMethod = getMethod;
 const postMethod = require("./postMethod.js");
 module.exports.postMethod = postMethod;
 
-const returnGlobalMap = require("./globalMap/constractGlobalMap.js");
-module.exports.returnGlobalMap = returnGlobalMap;
+
