@@ -8,7 +8,7 @@ const mineTypeList = [
   "mercury",
   "gem"
 ];
-const UpgradeSection = require("../../town/buildings/UpgradeSection.js"); //такой способ пожключения выбран из-за того, что модуль "createMine"
+const UpgradeSection = require("../../town/buildings/upgradeSection.js"); //такой способ пожключения выбран из-за того, что модуль "createMine"
 //используется при запуске файлов в "prepareToStart"
 
 function Mine(type, lvl = 0) {

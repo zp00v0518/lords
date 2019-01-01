@@ -1,4 +1,5 @@
 const config = require('../config/config.js');
+const Mine = require('../region/mine/Mine.js');
 const time = config.time;
 
 const gameVariables = {
@@ -6,7 +7,7 @@ const gameVariables = {
 																			//при изменении кол-ва ячеек, нужно поменять кол-во отображаемых ячеек на 1-й оси
 																			//как здесь, так и на клиенте
 	getMaxIndexMap: function(){
-		return gameVariable.numSectionGlobalMap - 1
+		return gameVariables.numSectionGlobalMap - 1
 	},																	// максимальный индекс для массива карты
 	numSectionRegionMap: 5,							//количество ячеек на карте РЕГИОНА, по одной оси
 	viewSectionGlobalMapNow:11, 				//количество ячеек на Глобальной карте, по одной оси
@@ -17,7 +18,9 @@ const gameVariables = {
 		controlState: time.minute,
 		saveDataDB:time.minute, 							//1 минута - интервал считывания данных и записи их в БД
 		perTime: time.hour, 					//час - время в миллисекундах, которое используется при расчете прироста игровых ресоурсов
-	}
+	},
+	mineTypeList: Mine.mineTypeList,
+	valueUpgrade: Mine.valueUpgrade,
 };
 
 module.exports = gameVariables;

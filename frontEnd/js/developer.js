@@ -10,10 +10,12 @@ function handlerDevInput(event) {
 	sendAjaxRequest("/dev", value).then((res) => {
 		let result;
 		try {
-			result = JSON.parse(response)
+			result = JSON.parse(res)
 			console.log(result)
 		} catch (err){
+			console.log(err)
 			console.log(res);
+			
 		}
 	})
 }

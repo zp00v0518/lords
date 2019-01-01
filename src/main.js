@@ -10,7 +10,7 @@ import config from '../backEnd/config/config'
 
 Vue.config.productionTip = false;
 Vue.prototype.$ws = new ws();
-Vue.prototype.$ws.init(`ws://localhost:${config.port.ws}`, store);
+Vue.prototype.$ws.init(`ws://localhost:${config.port.ws}${location.pathname}`, store);
 
 /* eslint-disable no-new */
 new Vue({
