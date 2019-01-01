@@ -1,5 +1,11 @@
 require("../variables/global_variables.js");
-const { config, findUserInDB, getInfoForStartGame } = require("../tube.js");
+const {
+  config,
+  findUserInDB,
+  getInfoForStartGame,
+  getGlobalMapSector
+} = require("../tube.js");
+const tube = require("../tube.js");
 const WS = require("ws");
 const watcher = require("../liveReload/watchFs.js");
 const Cookies = require("cookies");
@@ -24,6 +30,7 @@ wsServer.on("connection", (ws, req) => {
   const userCookies = cookies.get("user");
   let User;
   const start = {
+    status: 'success',
     type: "startMessages",
     chat
   };
@@ -32,10 +39,19 @@ wsServer.on("connection", (ws, req) => {
     UserOnline[server][User._id] = {};
     UserOnline[server][User._id].ws = ws;
     UserOnline[server].count++;
-    getInfoForStartGame(user, server).then(result => {
-      console.log(result)
+    UserOnline[server][User._id].user = User;
+    getInfoForStartGame(user, server).then(infoForStartGame => {
+      UserOnline[server][User._id].user.map = {};
+      UserOnline[server][User._id].user.map.zoom = 1;
+      UserOnline[server][User._id].user.map.centerMap = {};
+      UserOnline[server][User._id].user.map.centerMap.x = infoForStartGame[0].x;
+      UserOnline[server][User._id].user.map.centerMap.y = infoForStartGame[0].y;
+      getGlobalMapSector(UserOnline[server][User._id].user, server, viewMapArr => {
+          start.viewMapArr = viewMapArr;
+          ws.send(JSON.stringify(start));
+        }
+      );
     });
-    ws.send(JSON.stringify(start));
   });
 
   ws.on("close", function() {
@@ -46,6 +62,7 @@ wsServer.on("connection", (ws, req) => {
     const mess = JSON.parse(message);
     mess.type = "chatMessage";
     mess.author = "Admin";
+    mess.status = 'success',
     mess.time = new Date();
     if (chat.length > 30) chat.pop();
     chat.unshift(mess);
@@ -60,15 +77,19 @@ wsServer.on("connection", (ws, req) => {
 
 function callbackForWatcher() {
   watcher(config.watchFolder, callbackForWatcher);
-  if (UserOnline[server].count > 0) {
-    const message = {
-      type: "change"
-    };
-    for (let user in UserOnline[server]) {
-      if (user !== "count") {
-        UserOnline[server][user].ws.send(JSON.stringify(message));
+  Object.keys(UserOnline).forEach(server => {
+    if (UserOnline[server].count > 0) {
+      const message = {
+        status: 'success',
+        type: "change"
+      };
+      for (let user in UserOnline[server]) {
+        if (user !== "count") {
+          UserOnline[server][user].ws.send(JSON.stringify(message));
+        }
       }
     }
-  }
+  })
+  
 }
 watcher(config.watchFolder, callbackForWatcher);

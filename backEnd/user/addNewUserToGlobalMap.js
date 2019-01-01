@@ -1,24 +1,53 @@
 const { getRandomNumber } = require("template_func");
 const tube = require("../tube.js");
-const {GlobalMap} = tube;
+const { GlobalMap, config, updateDB } = tube;
+const update = new updateDB();
 
 //добавляю нового Игрока на глобальную карту
-function addNewUserToGlobalMap(user, server, callback) {
-  const {createTown} = tube;
+function addNewUserToGlobalMap(user, server, callback=function() {}) {
+  const { createTown } = tube;
   console.log("********** addNewUserToGlobalMap Work ************");
   return new Promise((resolve, reject) => {
     checkUserPosition(server, (x, y) => {
+      const newTown = createTown({ status: "new", townName: "Some name" });
       const ops = {
-        town: createTown({status: 'new', townName: "Some name"}),
+        town: createTown({ status: "new", townName: "Some name" }),
         x,
-        y,
+        y
       };
+      const optionsForUpdateBD = {
+        collectionName: config.db.collections.map,
+        filtr: {
+          x,
+          y,
+          server
+        },
+        updateDoc: {
+          $set: {
+            region: newTown.regionMap,
+            userId: user._id,
+            type: 1,
+            nickName: user.nickName,
+            town: {
+              name: newTown.townName,
+              storage: newTown.storage
+            }
+          }
+        }
+      };
+      console.log(ops)
+      update.one(optionsForUpdateBD).then(result => {
+        GlobalMap[server][x][y].region = newTown.regionMap;
+        GlobalMap[server][x][y].userId = user._id;
+        GlobalMap[server][x][y].type = 1;
+        GlobalMap[server][x][y].town = {
+          name: newTown.townName,
+          storage: newTown.storage
+        };
+      resolve(GlobalMap[server][x][y]);
+      return callback(null, GlobalMap[server][x][y]);
 
-      resolve(ops);
-      return callback(null, ops)
-      // addNewCastleToGlobalMap(ops, () => {
-      //   return callback();
-      // });
+      });
     });
   });
 }
@@ -34,6 +63,4 @@ function checkUserPosition(server, callback) {
     return callback(x, y);
   }
 }
-// setTimeout(addNewUserToMap,5000);
-
 module.exports = addNewUserToGlobalMap;
