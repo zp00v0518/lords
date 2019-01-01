@@ -1,17 +1,18 @@
-const {GlobalMap} = require("../tube.js");
+const tube = require("../tube.js");
 
 //возвращает участок глобальной карты, который будет отображен на экране Пользователя
-function getGlobalMapSector(user, callback){
+function getGlobalMapSector(user, server, callback=function() {}){
+	console.log(GlobalMap)
 	let resultArr = [];
 	let rangeArr = [];
-	let length = GlobalMap.length;
-	let zoom = user.globalMap.zoom;
+	let length = GlobalMap[server].length;
+	let zoom = user.map.zoom;
 	let rangeSize = gameVariables.viewSectionGlobalMapNow*zoom;//10*zoom;
 	let halfSize = Math.floor(rangeSize/2);
 	let twoHalfSize = rangeSize - halfSize;
 	// console.log (`centerX:${user.globalMap.centerMap.x} centerY:${user.globalMap.centerMap.y}`);
-	let minX = user.globalMap.centerMap.x-halfSize;
-	let minY = user.globalMap.centerMap.y-halfSize;
+	let minX = user.map.centerMap.x-halfSize;
+	let minY = user.map.centerMap.y-halfSize;
 	let startX = minX;
 	let startY = minY;
 	let endX = minX + rangeSize;
@@ -24,18 +25,18 @@ function getGlobalMapSector(user, callback){
 		endX = length;
 		startY = length - Math.abs(minY);
 		endY = length;
-		formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
+		formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
 			startY = 0;
 			endY = rangeSize - Math.abs(minY);
-			formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr_2)=>{
+			formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr_2)=>{
 				startX = 0;
 				endX = rangeSize - Math.abs(minX);
 				startY = length  - Math.abs(minY);
 				endY = length;
-				formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr_3)=>{
+				formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr_3)=>{
 					startY = 0;
 					endY = rangeSize - Math.abs(minY);
-					formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr_4)=>{
+					formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr_4)=>{
 						resultArr = preSort(rangeArr, rangeSize, length - Math.abs(minX));
 					})
 				})
@@ -48,23 +49,23 @@ function getGlobalMapSector(user, callback){
 		endX = length;
 		startY = length - Math.abs(minY);
 		endY = length;
-		formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
+		formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
 			startX = 0;
 			endX = p - length;
 			let d = [];
-			formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr_2)=>{
+			formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr_2)=>{
 				startX = minX;
 				endX = length;
 				startY = 0;
 				endY = rangeSize - Math.abs(minY)
 				let g = [];
-				formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr_3)=>{
+				formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr_3)=>{
 					startX = 0;
 					endX = p - length;
 					startY = 0;
 					endY = rangeSize - Math.abs(minY)
 					let k = [];
-					formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr_4)=>{
+					formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr_4)=>{
 						resultArr = preSort(rangeArr, rangeSize, rangeSize - Math.abs(minY));
 					})
 				
@@ -79,21 +80,21 @@ function getGlobalMapSector(user, callback){
 		endX = length;
 		startY = minY;
 		endY = length;
-		formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
+		formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
 			startX = 0;
 			endX = pX - length;
 			let d = [];
-			formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr_2)=>{
+			formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr_2)=>{
 				startX = minX;
 				endX = length;
 				startY = 0;
 				endY = pY - length;
 				let g = [];
-				formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr_3)=>{
+				formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr_3)=>{
 					startX = 0;
 					endX = pX - length;
 					let k = [];
-					formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr_4)=>{
+					formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr_4)=>{
 						resultArr = preSort(rangeArr, rangeSize, pY - length);
 					})
 				})
@@ -107,19 +108,19 @@ function getGlobalMapSector(user, callback){
 		endX = length;
 		startY = minY;
 		endY = length;
-		formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
+		formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
 			startY = 0;
 			endY = pY - length;
 			let d = [];
-			formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr_2)=>{
+			formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr_2)=>{
 				startX = 0;
 				endX = rangeSize - Math.abs(minX);
 				let k = [];
-				formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr_3)=>{
+				formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr_3)=>{
 					startY = minY;
 					endY = length;
 					let t = [];
-					formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr_4)=>{
+					formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr_4)=>{
 						preSort(rangeArr, rangeSize, pY - (length-1));
 					})
 
@@ -131,10 +132,10 @@ function getGlobalMapSector(user, callback){
 	else if (minX<0){
 		endX = length;
 		startX = length - Math.abs(minX);
-		formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
+		formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
 			endX = rangeSize - Math.abs(minX);
 			startX = 0;
-			formIntermediateArr(startX, startY, endX, endY, intermediteArr, (intermediteArr_2)=>{
+			formIntermediateArr(server,startX, startY, endX, endY, intermediteArr, (intermediteArr_2)=>{
 				 resultArr = formResultArr(intermediteArr_2, rangeSize);
 			});
 		});
@@ -142,10 +143,10 @@ function getGlobalMapSector(user, callback){
 	else if (minX+rangeSize > length){
 		let p = minX+rangeSize;
 		endX = length;
-		formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
+		formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
 			startX = 0;
 			endX = p - length;
-			formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr_2)=>{
+			formIntermediateArr(server, startX, startY, endX, endY, rangeArr, (intermediteArr_2)=>{
 				 resultArr = formResultArr(intermediteArr_2, rangeSize)
 			})
 		});
@@ -153,12 +154,12 @@ function getGlobalMapSector(user, callback){
 	else if (minY < 0){
 		startY = length - Math.abs(minY);
 		endY = length;
-		formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
+		formIntermediateArr(server, startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
 			let resultArr_1 = formResultArr_Y(intermediteArr, rangeSize, endY - startY )
 			startY = 0;
 			endY = rangeSize - Math.abs(minY);
 			let d = []
-			formIntermediateArr(startX, startY, endX, endY, d, (intermediteArr_2)=>{
+			formIntermediateArr(server, startX, startY, endX, endY, d, (intermediteArr_2)=>{
 				resultArr = mergerTwoArr(resultArr_1, intermediteArr_2);
 			});
 		});
@@ -166,25 +167,25 @@ function getGlobalMapSector(user, callback){
 	else if (minY+rangeSize > length){
 		let p = minY+rangeSize;
 		endY = length;
-		formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
+		formIntermediateArr(server, startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
 			let resultArr_1 = formResultArr_Y(intermediteArr, rangeSize, endY - minY);
 			startY = 0;
 			endY = p - length;
 			let d = [];
-			formIntermediateArr(startX, startY, endX, endY, d, (intermediteArr_2)=>{
+			formIntermediateArr(server, startX, startY, endX, endY, d, (intermediteArr_2)=>{
 				resultArr = mergerTwoArr(resultArr_1, intermediteArr_2);
 			});
 		});
 	} 
 	else {
-		formIntermediateArr(startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
+		formIntermediateArr(server, startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
 			 resultArr = formResultArr(intermediteArr, rangeSize)
 		})
 	}
 	let center = (resultArr.length-1) - halfSize;
 	let centerSection = resultArr[center][center];
-	user.globalMap.centerMap.x = centerSection.x;
-	user.globalMap.centerMap.y = centerSection.y;
+	user.map.centerMap.x = centerSection.x;
+	user.map.centerMap.y = centerSection.y;
 
 	return callback(resultArr)
 }
@@ -192,10 +193,10 @@ function getGlobalMapSector(user, callback){
 // setTimeout(getMapSector,5000, options);
 
 //формирует массив со списком тайлов
-function formIntermediateArr(startX, startY, endX, endY, intermediteArr, callback){
+function formIntermediateArr(server, startX, startY, endX, endY, intermediteArr, callback){
 	for (let i=startX; i<endX; i++){
 		for (let h=startY; h<endY; h++){
-			intermediteArr.push(GlobalMap[i][h]);
+			intermediteArr.push(GlobalMap[server][i][h]);
 		}
 	}
 	return callback(intermediteArr)

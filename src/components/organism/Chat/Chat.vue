@@ -54,7 +54,6 @@ export default {
     };
   },
   created() {
-    console.log(this.$store)
   },
   computed: {
     messages() {
@@ -84,7 +83,6 @@ export default {
       this.showSmallChat = !this.showSmallChat;
     },
     sendMessage(event) {
-      console.log(this.$ws);
       this.$ws.sendMessage(this.messageForSend);
       this.messageForSend.text = "";
     }

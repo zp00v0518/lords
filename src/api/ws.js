@@ -18,20 +18,28 @@ class WS {
     };
     this.wsInstance.onmessage = event => {
       const data = JSON.parse(event.data);
-      this.incoming[data.type](data);
+      if (data.status === "success") {
+        this.incoming[data.type](data);
+      } else {
+        if (data.redirectUrl) {
+          location = data.redirectUrl
+        } else {
+          console.log(data)
+        }
+      }
     };
   }
   startMessages(eventData) {
+    console.log(eventData);
     this.store.commit("START_MESSAGES", eventData);
   }
   chatMessage(eventData) {
     this.store.commit("UNSHIFT_MESSAGE", eventData);
   }
   sendMessage(message) {
-    console.log(message);
     this.wsInstance.send(JSON.stringify(message));
   }
-  change(){
+  change() {
     location.reload();
   }
 }
