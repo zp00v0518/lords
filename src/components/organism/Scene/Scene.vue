@@ -1,37 +1,46 @@
 <template>
   <section class="scene">
-    <GlobalMap v-if="scenes.globalMap"></GlobalMap>
+    <GlobalMap v-if="scenes.globalMap" :widthScene="widthScene" :heightScene="heightScene"></GlobalMap>
     <RegionMap v-if="scenes.region"></RegionMap>
     <div class="scene__buttons" @click="changeScene">
-      <button type="button" class="scene__buttons__item" data-flag='region'>Регион</button>
-      <button type="button" class="scene__buttons__item" data-flag='town'>Город</button>
-      <button type="button" class="scene__buttons__item" data-flag='globalMap'>Карта</button>
+      <button type="button" class="scene__buttons__item" data-flag="region">Регион</button>
+      <button type="button" class="scene__buttons__item" data-flag="town">Город</button>
+      <button type="button" class="scene__buttons__item" data-flag="globalMap">Карта</button>
     </div>
   </section>
 </template>
 
 <script>
-import {GlobalMap, RegionMap} from '../../moleculs/Scenes'
+import { GlobalMap, RegionMap } from "../../moleculs/Scenes";
 
 export default {
   name: "Scene",
   components: {
     GlobalMap,
-    RegionMap,
+    RegionMap
   },
   data() {
     return {
       scenes: {
-        globalMap: true,
+        globalMap: false,
         region: false,
         town: false
-      },
+      }
     };
   },
   created() {
     // console.log(this);
   },
-  computed: {},
+  computed: {
+    widthScene() {
+      const styles = this.$el.getBoundingClientRect();
+      return styles.width + 'px';
+    },
+    heightScene() {
+      const styles = this.$el.getBoundingClientRect();
+      return styles.height + 'px';
+    },
+  },
   methods: {
     changeScene(event) {
       const target = event.target;
@@ -40,6 +49,9 @@ export default {
         this.scenes[key] = key === flag;
       });
     }
+  },
+  mounted() {
+    this.scenes.globalMap = true;
   }
 };
 </script>
