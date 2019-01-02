@@ -47,8 +47,8 @@ wsServer.on("connection", (ws, req) => {
       UserOnline[server][User._id].user.map.centerMap = {};
       UserOnline[server][User._id].user.map.centerMap.x = infoForStartGame[0].x;
       UserOnline[server][User._id].user.map.centerMap.y = infoForStartGame[0].y;
-      getGlobalMapSector(UserOnline[server][User._id].user, server, viewMapArr => {
-          start.viewMapArr = viewMapArr;
+      getGlobalMapSector(UserOnline[server][User._id].user, server, currentMap => {
+          start.currentMap = currentMap;
           start.towns = infoForStartGame;
           ws.send(JSON.stringify(start)); 
         }

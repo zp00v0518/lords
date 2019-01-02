@@ -30,8 +30,8 @@ class WS {
     };
   }
   startMessages(eventData) {
-    console.log(eventData);
     this.store.commit("START_MESSAGES", eventData);
+    this.store.commit("SET_CURRENTMAP", eventData);
   }
   chatMessage(eventData) {
     this.store.commit("UNSHIFT_MESSAGE", eventData);
