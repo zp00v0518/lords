@@ -1,4 +1,17 @@
-.scene{
+.scene {
   flex-grow: 5;
   border: 1px solid black;
+  position: relative;
+
+  &__buttons {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &__item {
+      cursor: pointer;
+    }
+  }
 }

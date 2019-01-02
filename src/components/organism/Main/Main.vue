@@ -21,7 +21,7 @@ export default {
     Chat,
     Vheader,
     Sidebar,
-    Scene
+    Scene,
   },
   watch: {
     "$store.state.chat.is": function() {
