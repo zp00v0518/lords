@@ -5,9 +5,10 @@
   position: relative;
   width: 60%;
   height: 80%;
-  min-height: 300px;
+  min-height: 400px;
   min-width: 500px;
   margin-right: 20%;
+  margin-left: 50px;
   @include border(blue);
   display: flex;
   flex-direction: column;

@@ -17,7 +17,7 @@ export default {
   body {
     height: 100vh;
     width: 100vw;
-    overflow-y: hidden;
+    // overflow-y: hidden;
   }
   *{
     box-sizing: border-box;
