@@ -1,9 +1,9 @@
 const chat = require('./chat.js');
 
 function handlerChatMessage(message, info) {
-  const { server } = info;
-  message.author = "Admin";
-  message.status = "success";
+  const { server, player } = info;
+  message.author = player.user.nickName;
+  message.status = true;
   message.time = new Date();
   if (chat.length > 30) chat.pop();
   chat.unshift(message);

@@ -5,11 +5,10 @@ class WS {
     this.incoming = {
       chatMessage: eventData => this.chatMessage(eventData),
       startMessages: eventData => this.startMessages(eventData),
-      change: eventData => this.change(eventData)
+      change: eventData => this.change(eventData),
+      moveGlobalMap: eventData => this.moveGlobalMap(eventData),
     };
-    this.outgoing = {
-      
-    };
+    this.outgoing = {};
   }
   connectionToWs(wsAddr) {
     this.wsInstance = new WebSocket(wsAddr);
@@ -20,16 +19,20 @@ class WS {
     };
     this.wsInstance.onmessage = event => {
       const data = JSON.parse(event.data);
-      if (data.status === "success") {
+      if (data.status === true) {
         this.incoming[data.type](data);
       } else {
         if (data.redirectUrl) {
-          location = data.redirectUrl
+          location = data.redirectUrl;
         } else {
-          console.log(data)
+          console.log(data);
         }
       }
     };
+  }
+  moveGlobalMap(eventData) {
+    console.log(eventData)
+    this.store.commit("SET_CURRENTMAP", eventData);
   }
   startMessages(eventData) {
     this.store.commit("START_MESSAGES", eventData);
@@ -42,7 +45,7 @@ class WS {
     this.wsInstance.send(JSON.stringify(message));
   }
   sendChatMessage(message) {
-    message.type = 'chatMessage';
+    message.type = "chatMessage";
     this.sendMessage(message);
   }
 

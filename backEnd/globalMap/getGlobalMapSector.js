@@ -5,13 +5,13 @@ function getGlobalMapSector(user, server, callback=function() {}){
 	let resultArr = [];
 	let rangeArr = [];
 	let length = GlobalMap[server].length;
-	let zoom = user.map.zoom;
+	let zoom = user.globalMap.zoom;
 	let rangeSize = gameVariables.viewSectionGlobalMapNow*zoom;//10*zoom;
 	let halfSize = Math.floor(rangeSize/2);
 	let twoHalfSize = rangeSize - halfSize;
 	// console.log (`centerX:${user.globalMap.centerMap.x} centerY:${user.globalMap.centerMap.y}`);
-	let minX = user.map.centerMap.x-halfSize;
-	let minY = user.map.centerMap.y-halfSize;
+	let minX = user.globalMap.centerMap.x-halfSize;
+	let minY = user.globalMap.centerMap.y-halfSize;
 	let startX = minX;
 	let startY = minY;
 	let endX = minX + rangeSize;
@@ -183,8 +183,8 @@ function getGlobalMapSector(user, server, callback=function() {}){
 	}
 	let center = (resultArr.length-1) - halfSize;
 	let centerSection = resultArr[center][center];
-	user.map.centerMap.x = centerSection.x;
-	user.map.centerMap.y = centerSection.y;
+	user.globalMap.centerMap.x = centerSection.x;
+	user.globalMap.centerMap.y = centerSection.y;
 
 	return callback(resultArr)
 }

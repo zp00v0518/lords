@@ -31,7 +31,7 @@ wsServer.on("connection", (ws, req) => {
   const userCookies = cookies.get("user");
   let User;
   const start = {
-    status: "success",
+    status: true,
     type: "startMessages",
     chat
   };
@@ -42,11 +42,11 @@ wsServer.on("connection", (ws, req) => {
     UserOnline[server].count++;
     UserOnline[server][User._id].user = User;
     getInfoForStartGame(user, server).then(infoForStartGame => {
-      UserOnline[server][User._id].user.map = {};
-      UserOnline[server][User._id].user.map.zoom = 1;
-      UserOnline[server][User._id].user.map.centerMap = {};
-      UserOnline[server][User._id].user.map.centerMap.x = infoForStartGame[0].x;
-      UserOnline[server][User._id].user.map.centerMap.y = infoForStartGame[0].y;
+      UserOnline[server][User._id].user.globalMap = {};
+      UserOnline[server][User._id].user.globalMap.zoom = 1;
+      UserOnline[server][User._id].user.globalMap.centerMap = {};
+      UserOnline[server][User._id].user.globalMap.centerMap.x = infoForStartGame[0].x;
+      UserOnline[server][User._id].user.globalMap.centerMap.y = infoForStartGame[0].y;
       getGlobalMapSector(
         UserOnline[server][User._id].user,
         server,
@@ -66,12 +66,18 @@ wsServer.on("connection", (ws, req) => {
   ws.on("message", message => {
     const mess = JSON.parse(message);
     const baseInfo = {
-      user: User,
+      player:  UserOnline[server][User._id],
       server,
       userCookies
     };
     if (allHandler[mess.type]) {
       allHandler[mess.type](JSON.parse(message), baseInfo);
+    } else {
+      const message = {
+        status: true,
+        type: "change"
+      }
+      ws.send(JSON.stringify(message))
     }
   });
 });
@@ -81,7 +87,7 @@ function callbackForWatcher() {
   Object.keys(UserOnline).forEach(server => {
     if (UserOnline[server].count > 0) {
       const message = {
-        status: "success",
+        status: true,
         type: "change"
       };
       for (let user in UserOnline[server]) {
