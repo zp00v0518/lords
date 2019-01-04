@@ -1,4 +1,6 @@
 require("../variables/global_variables.js");
+const allHandler = require('./allHandler.js');
+const chat = require('../chat/chat.js');
 const {
   config,
   findUserInDB,
@@ -9,7 +11,6 @@ const tube = require("../tube.js");
 const WS = require("ws");
 const watcher = require("../liveReload/watchFs.js");
 const Cookies = require("cookies");
-const chat = [];
 
 class WsServer {
   init(port) {
@@ -25,7 +26,6 @@ class WsServer {
 const wsServer = new WsServer();
 wsServer.init(config.port.ws);
 wsServer.on("connection", (ws, req) => {
-  
   const server = req.url.split("/")[1];
   const cookies = new Cookies(req);
   const userCookies = cookies.get("user");
@@ -33,7 +33,7 @@ wsServer.on("connection", (ws, req) => {
   const start = {
     status: 'success',
     type: "startMessages",
-    chat
+    chat,
   };
   findUserInDB(userCookies).then(user => {
     User = user;
@@ -62,18 +62,12 @@ wsServer.on("connection", (ws, req) => {
   });
   ws.on("message", message => {
     const mess = JSON.parse(message);
-    mess.type = "chatMessage";
-    mess.author = "Admin";
-    mess.status = 'success',
-    mess.time = new Date();
-    if (chat.length > 30) chat.pop();
-    chat.unshift(mess);
-
-    for (let key in UserOnline[server]) {
-      if (key !== "count") {
-        UserOnline[server][key].ws.send(JSON.stringify(mess));
-      }
+    const baseInfo = {
+      user: User,
+      server,
+      userCookies,
     }
+    allHandler[mess.type](JSON.parse(message), baseInfo);
   });
 });
 

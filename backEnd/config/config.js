@@ -1,8 +1,8 @@
 const path = require("path");
 module.exports = {
   port: {
-    http: 3001,
-    ws: 3002
+    http: 4000,
+    ws: 4001
   },
   watchFolder: path.resolve(__dirname, "../../frontEnd"),
   db: {

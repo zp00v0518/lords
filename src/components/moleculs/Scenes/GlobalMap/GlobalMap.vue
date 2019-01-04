@@ -30,10 +30,12 @@ export default {
     tileWidth() {
       const intermediate =
         parseInt(this.widthScene) / 2 / (this.currentMap.length / 2);
-      return intermediate / (this.currentMap.length / 2) + intermediate;
+      return intermediate * 1.3
+      // return intermediate / (this.currentMap.length / 2) + intermediate;
     },
     isoCoords() {
-      const x = -(this.tileWidth / 2);
+      const d = (this.tileWidth*this.currentMap.length)/2 //общая ширина всех ячеек /2
+      const x = (parseInt(this.widthScene)/2) - d; //от середины карты вычитываем половину длины всех ячеек
       const y = parseInt(this.heightScene) / 2;
       return { x, y };
     }
@@ -46,8 +48,12 @@ export default {
     },
     moveOnMap() {
       const target = event.target;
-      const id = target.id;
-      console.log(id)
+      const way = target.id;
+      const message = {
+        type: 'moveGlobalMap',
+        way,
+      }
+      this.$ws.sendMessage(message)
     }
   },
   mounted() {

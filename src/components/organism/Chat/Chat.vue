@@ -83,7 +83,7 @@ export default {
       this.showSmallChat = !this.showSmallChat;
     },
     sendMessage(event) {
-      this.$ws.sendMessage(this.messageForSend);
+      this.$ws.sendChatMessage(this.messageForSend);
       this.messageForSend.text = "";
     }
   }

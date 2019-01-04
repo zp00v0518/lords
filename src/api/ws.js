@@ -7,7 +7,9 @@ class WS {
       startMessages: eventData => this.startMessages(eventData),
       change: eventData => this.change(eventData)
     };
-    this.outgoing = {};
+    this.outgoing = {
+      
+    };
   }
   connectionToWs(wsAddr) {
     this.wsInstance = new WebSocket(wsAddr);
@@ -39,6 +41,11 @@ class WS {
   sendMessage(message) {
     this.wsInstance.send(JSON.stringify(message));
   }
+  sendChatMessage(message) {
+    message.type = 'chatMessage';
+    this.sendMessage(message);
+  }
+
   change() {
     location.reload();
   }
