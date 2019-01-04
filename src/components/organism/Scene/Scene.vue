@@ -1,7 +1,7 @@
 <template>
   <section class="scene">
-    <GlobalMap v-if="scenes.globalMap" :widthScene="widthScene" :heightScene="heightScene"></GlobalMap>
-    <RegionMap v-if="scenes.region"></RegionMap>
+    <GlobalMap v-if="scenes.globalMap" :widthScene="widthScene" :heightScene="heightScene" key='globalMap'></GlobalMap>
+    <RegionMap v-if="scenes.region" :widthScene="widthScene" :heightScene="heightScene" key='regionMap'></RegionMap>
     <div class="scene__buttons" @click="changeScene">
       <button type="button" class="scene__buttons__item" data-flag="region">Регион</button>
       <button type="button" class="scene__buttons__item" data-flag="town">Город</button>

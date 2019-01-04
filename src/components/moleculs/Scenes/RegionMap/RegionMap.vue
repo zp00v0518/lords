@@ -9,7 +9,6 @@ export default {
     return {};
   },
   created() {
-    console.log(this);
   },
   computed: {},
   methods: {

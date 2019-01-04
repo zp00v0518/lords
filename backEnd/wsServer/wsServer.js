@@ -1,6 +1,6 @@
 require("../variables/global_variables.js");
-const allHandler = require('./allHandler.js');
-const chat = require('../chat/chat.js');
+const allHandler = require("./allHandler.js");
+const chat = require("../chat/chat.js");
 const {
   config,
   findUserInDB,
@@ -31,9 +31,9 @@ wsServer.on("connection", (ws, req) => {
   const userCookies = cookies.get("user");
   let User;
   const start = {
-    status: 'success',
+    status: "success",
     type: "startMessages",
-    chat,
+    chat
   };
   findUserInDB(userCookies).then(user => {
     User = user;
@@ -47,10 +47,13 @@ wsServer.on("connection", (ws, req) => {
       UserOnline[server][User._id].user.map.centerMap = {};
       UserOnline[server][User._id].user.map.centerMap.x = infoForStartGame[0].x;
       UserOnline[server][User._id].user.map.centerMap.y = infoForStartGame[0].y;
-      getGlobalMapSector(UserOnline[server][User._id].user, server, currentMap => {
+      getGlobalMapSector(
+        UserOnline[server][User._id].user,
+        server,
+        currentMap => {
           start.currentMap = currentMap;
           start.towns = infoForStartGame;
-          ws.send(JSON.stringify(start)); 
+          ws.send(JSON.stringify(start));
         }
       );
     });
@@ -65,9 +68,11 @@ wsServer.on("connection", (ws, req) => {
     const baseInfo = {
       user: User,
       server,
-      userCookies,
+      userCookies
+    };
+    if (allHandler[mess.type]) {
+      allHandler[mess.type](JSON.parse(message), baseInfo);
     }
-    allHandler[mess.type](JSON.parse(message), baseInfo);
   });
 });
 
@@ -76,7 +81,7 @@ function callbackForWatcher() {
   Object.keys(UserOnline).forEach(server => {
     if (UserOnline[server].count > 0) {
       const message = {
-        status: 'success',
+        status: "success",
         type: "change"
       };
       for (let user in UserOnline[server]) {
@@ -85,7 +90,6 @@ function callbackForWatcher() {
         }
       }
     }
-  })
-  
+  });
 }
 watcher(config.watchFolder, callbackForWatcher);

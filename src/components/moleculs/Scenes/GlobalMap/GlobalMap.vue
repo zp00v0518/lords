@@ -19,17 +19,19 @@ export default {
       currentMap: []
     };
   },
-  created() {},
+  created() {
+     this.currentMap = this.$store.state.globalMap.currentMap;
+  },
   watch: {
     "$store.state.globalMap.currentMap": function() {
       this.currentMap = this.$store.state.globalMap.currentMap;
       this.drawMap();
-    }
+    },
   },
   computed: {
     tileWidth() {
-      const intermediate =
-        parseInt(this.widthScene) / 2 / (this.currentMap.length / 2);
+      const widthParse = parseInt(this.widthScene) / 2;
+      const intermediate = widthParse  / (this.currentMap.length / 2);
       return intermediate * 1.3
       // return intermediate / (this.currentMap.length / 2) + intermediate;
     },
@@ -58,6 +60,7 @@ export default {
   },
   mounted() {
     this.ctx = this.$refs.scene.getContext("2d");
+    this.drawMap();
   }
 };
 </script>
