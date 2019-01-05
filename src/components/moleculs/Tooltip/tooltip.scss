@@ -1,0 +1,23 @@
+.tooltip {
+  position: absolute;
+  width: 80px;
+  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  font-size: 11px;
+  padding: 5px;
+
+  &__coords {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__town {
+    margin-bottom: 5px;
+  }
+
+  &__player {
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+}
