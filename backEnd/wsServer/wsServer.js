@@ -35,7 +35,7 @@ wsServer.on("connection", (ws, req) => {
     type: "startMessages",
     chat
   };
-  console.log(userCookies)
+  // console.log(userCookies)
   findUserInDB(userCookies).then(user => {
     if (user) {
       User = user;

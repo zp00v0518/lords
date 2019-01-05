@@ -66,6 +66,7 @@ function getGlobalMapSector(user, server, callback=function() {}){
 					let k = [];
 					formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr_4)=>{
 						resultArr = preSort(rangeArr, rangeSize, rangeSize - Math.abs(minY));
+						console.log(`rangeSize - Math.abs(minY): ${rangeSize - Math.abs(minY)}`)
 					})
 				
 				})
@@ -101,32 +102,39 @@ function getGlobalMapSector(user, server, callback=function() {}){
 		})
 	}
 	else if (minY+rangeSize >(length) && minX < 0 ) {
-		console.log("here");
+		// console.log("here");
 		let pY = minY+rangeSize;
 		startX = length - Math.abs(minX);;
 		endX = length;
 		startY = minY;
 		endY = length;
+		// console.log(`startX:${startX} endX:${endX} startY:${startY} endY:${endY} pY:${pY}`)
 		formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr)=>{
 			startY = 0;
 			endY = pY - length;
 			let d = [];
+			// console.log(`startX:${startX} endX:${endX} startY:${startY} endY:${endY} pY:${pY}`)
 			formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr_2)=>{
 				startX = 0;
 				endX = rangeSize - Math.abs(minX);
 				let k = [];
+				// console.log(`startX:${startX} endX:${endX} startY:${startY} endY:${endY} pY:${pY}`)
 				formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr_3)=>{
 					startY = minY;
 					endY = length;
 					let t = [];
+					// console.log(`startX:${startX} endX:${endX} startY:${startY} endY:${endY} pY:${pY}`)
 					formIntermediateArr(server,startX, startY, endX, endY, rangeArr, (intermediteArr_4)=>{
-						preSort(rangeArr, rangeSize, pY - (length-1));
+						// resultArr = preSort(rangeArr, rangeSize, pY - (length-1)); // предыдущая реализация
+						resultArr = preSort(rangeArr, rangeSize, rangeSize - Math.abs(minX));
+						// console.log(resultArr);
 					})
 
 				})
 			})
 
 		})
+		
 	}
 	else if (minX<0){
 		endX = length;
@@ -248,6 +256,7 @@ function mergerTwoArr(doubleArr, arr){
 
 //сортирует массив по Х - от меньшего к большему
 function preSort(arr, size, minX){
+	// console.log(minX)
 	let sorted = arr.sort((a,b)=>{
 		if (a.x - b.x != 0){
 			return a.x - b.x;
