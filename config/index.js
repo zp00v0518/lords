@@ -9,6 +9,7 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
+    // assetsSubDirectory: '../dist', // подключить при билде
     assetsPublicPath: '/',
     proxyTable: {},
 
@@ -38,7 +39,7 @@ module.exports = {
     // If you have problems debugging vue-files in devtools,
     // set this to false - it *may* help
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
-    cacheBusting: true,
+    cacheBusting: false,
 
     cssSourceMap: false
   },
@@ -46,9 +47,11 @@ module.exports = {
   build: {
     // Template for index.html
     index: path.resolve(__dirname, '../frontEnd/dist/index.html'),
+    // index: path.resolve(__dirname, '../frontEnd/game.html'), // подключить при билде
 
     // Paths
     assetsRoot: path.resolve(__dirname, '../frontEnd/dist'),
+    // assetsRoot: path.resolve(__dirname, '../frontEnd'), // подключить при билде
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
 

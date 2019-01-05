@@ -21,12 +21,14 @@ function getMethod(req, res, startPath) {
   let pathName = urlParse.path;
   let ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
   //блок проверяющий статические файлы
-  let regPath = /.*js.*|.*img.*|.*style.*|.*ico.*/gi;
+  let regPath = /.*js.*|.*img.*|.*style.*|.*ico.*|.*css.*/gi;
   let check = regPath.test(pathName);
   if (check) {
     const ext = path.parse(pathName).ext;
     const pathJoin = path.join(startPath, config.basePathToFiles, pathName);
     fileReader(pathJoin, (err, data) => {
+      console.log(pathJoin)
+      console.log(ext)
       sendResponse(res, data, mimeType[ext]);
       return;
     });

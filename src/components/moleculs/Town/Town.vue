@@ -2,8 +2,8 @@
     <div class="castle_item_wrap">
       <div class="castle_interface">
         <div class="castle_icon"></div>
-        <div class="castle_other">
-          <div class="castle_name">{{name}}</div>
+        <div class="castle_other"> 
+          <div class="castle_name">111</div>
           <div class="resource_wrap">
             <div class="resource_item_wrap">
               <div class="resource_item gold">
