@@ -40,7 +40,8 @@ import {
   drawMap,
   getCursorPositionOnScene,
   checkMouseCoordsOnMap,
-  getTileCoordsOnMap
+  getTileCoordsOnMap,
+  drawHoverLine
 } from "../modules";
 import Tooltip from "../../Tooltip";
 
@@ -94,20 +95,24 @@ export default {
     getCursorPositionOnScene,
     checkMouseCoordsOnMap,
     getTileCoordsOnMap,
+    drawHoverLine,
     handlerMousemoveOnGlobalMap(event) {
       this.mouseCoords = this.getCursorPositionOnScene(event);
       if (this.checkMouseCoordsOnMap()) {
         const rombIndex = this.getTileCoordsOnMap();
-        // if (this.currentTile !== this.currentMap[rombIndex.x][rombIndex.y]) {
+        if (this.currentTile !== this.currentMap[rombIndex.x][rombIndex.y]) {
+          this.drawMap();
+          this.drawHoverLine(rombIndex)
           this.currentTile = this.currentMap[rombIndex.x][rombIndex.y];
           this.showTooltip = true;
-        // }
+        }
       } else {
         this.hideTooltip();
       }
     },
     hideTooltip() {
       this.showTooltip = false;
+      this.drawMap();
     },
     setBorderIsoMap() {
       const currentLength = this.currentMap.length;

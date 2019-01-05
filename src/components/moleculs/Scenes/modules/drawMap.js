@@ -16,6 +16,7 @@ function drawMap() {
     for (let h = 0; h < mapArr[i].length; h++) {
       let centerX = startCenterX + 2 * halfHeight * (i + h);
       let centerY = startCenterY - halfHeight * (i - h);
+      this.currentMap[i][h].centerX = centerX;
       // console.log(`tileWidth:${tileWidth} tileHeight:${tileHeight} halfHeight:${halfHeight}`)
       this.currentMap[i][h].centerY = centerY;
       drawRectAroundCenter(centerX, centerY, mapArr[i][h].type);

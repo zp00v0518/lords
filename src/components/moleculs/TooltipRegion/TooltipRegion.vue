@@ -32,17 +32,16 @@ export default {
     };
   },
   created () {
-    console.log(this.$dictionary)
   },
   computed: {
     type() {
       if (!this.tile.mine) return;
-      console.log(this.tile.mine.type)
       return this.tile.mine.type
     }
   },
   watch: {
     tile: function() {
+      // console.log(this.tile)
       const size = this.$el ? this.$el.getBoundingClientRect() : { height: 0 };
       const left = this.mouseCoords.x + "px";
       const top = this.mouseCoords.y - size.height - 70 + "px";
