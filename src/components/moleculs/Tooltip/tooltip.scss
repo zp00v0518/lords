@@ -1,23 +1,31 @@
 .tooltip {
   position: absolute;
-  width: 80px;
+  min-width: 80px;
   border: 1px solid;
   display: flex;
   flex-direction: column;
-  font-size: 11px;
+  font-size: 14px;
   padding: 5px;
+  background-color: white;
 
   &__coords {
     display: flex;
     justify-content: space-around;
   }
-
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 5px;
+    text-align: center;
+    font-weight: 600;
+  }
   &__town {
     margin-bottom: 5px;
+    font-weight: normal;
   }
 
   &__player {
     margin-bottom: 5px;
-    font-weight: 600;
   }
 }

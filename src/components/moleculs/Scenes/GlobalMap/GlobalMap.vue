@@ -1,11 +1,12 @@
 <template>
   <div class="globalmap">
-    <Tooltip></Tooltip>
+    <Tooltip v-show="showTooltip" :mouseCoords="mouseCoords" :tile="currentTile"></Tooltip>
     <canvas
       ref="scene"
       :width="widthScene"
       :height="heightScene"
       @mousemove="handlerMousemoveOnGlobalMap"
+      @mouseleave="hideTooltip"
     ></canvas>
     <button
       id="left"
@@ -35,7 +36,12 @@
 </template>
 
 <script>
-import { drawMap } from "../modules";
+import {
+  drawMap,
+  getCursorPositionOnScene,
+  checkMouseCoordsOnMap,
+  getTileCoordsOnMap
+} from "../modules";
 import Tooltip from "../../Tooltip";
 
 export default {
@@ -46,8 +52,10 @@ export default {
   props: ["widthScene", "heightScene"],
   data() {
     return {
+      showTooltip: false,
       ctx: null,
       currentMap: [],
+      currentTile: {},
       borderIsoMap: {
         left: { x: 0, y: 0 },
         top: { x: 0, y: 0 },
@@ -75,15 +83,32 @@ export default {
       // return intermediate / (this.currentMap.length / 2) + intermediate;
     },
     isoCoords() {
-      const d = (this.tileWidth * this.currentMap.length) / 2; //общая ширина всех ячеек /2
-      const x = parseInt(this.widthScene) / 2 - d; //от середины карты вычитываем половину длины всех ячеек
+      const d = (this.tileWidth * this.currentMap.length) / 2; // общая ширина всех ячеек /2
+      const x = parseInt(this.widthScene) / 2 - d; // от середины карты вычитываем половину длины всех ячеек
       const y = parseInt(this.heightScene) / 2;
       return { x, y };
     }
   },
   methods: {
     drawMap,
-    handlerMousemoveOnGlobalMap() {},
+    getCursorPositionOnScene,
+    checkMouseCoordsOnMap,
+    getTileCoordsOnMap,
+    handlerMousemoveOnGlobalMap(event) {
+      this.mouseCoords = this.getCursorPositionOnScene(event);
+      if (this.checkMouseCoordsOnMap()) {
+        const rombIndex = this.getTileCoordsOnMap();
+        if (this.currentTile !== this.currentMap[rombIndex.x][rombIndex.y]) {
+          this.currentTile = this.currentMap[rombIndex.x][rombIndex.y];
+          this.showTooltip = true;
+        }
+      } else {
+        this.hideTooltip();
+      }
+    },
+    hideTooltip() {
+      this.showTooltip = false;
+    },
     setBorderIsoMap() {
       const currentLength = this.currentMap.length;
       const height = this.tileWidth / 2;
