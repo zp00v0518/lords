@@ -14,16 +14,17 @@ function login(req, res, loginData, Cookies) {
         Cookies.set("session", checkLoginResult.sessionCookies);
         const answer = {};
         answer.status = "registrOk";
-        answer.nextStep = config.listFile.html.user + ".html";
+        answer.nextStep = config.listFile.html.cabinet + ".html";
         sendResponse(res, JSON.stringify(answer));
         //добавляю юзера в список онлайновых
-        UserOnline[checkLoginResult.userCookies] = {};
+        // UserOnline[checkLoginResult.userCookies] = {};
         return;
       } else if (status === "registrErr") {
         sendResponse(res, JSON.stringify(checkLoginResult));
       } else if (status === "authErr") {
         sendResponse(res, JSON.stringify(checkLoginResult));
       } else if (status === "authOk") {
+
         Cookies.set("user", checkLoginResult.userCookies, { maxAge: twoWeek });
         Cookies.set("session", checkLoginResult.sessionCookies);
         const answer = {};

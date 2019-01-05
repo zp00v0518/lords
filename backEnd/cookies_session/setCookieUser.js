@@ -2,8 +2,8 @@ const { updateDB, config } = require("../tube.js");
 const { getRandomString } = require("template_func");
 const update = new updateDB();
 
-function setCookieUser(userId) {
-  const cookie = getRandomString(config.cookieSize);
+function setCookieUser(userId, cookie = getRandomString(config.cookieSize)) {
+  // const cookie = getRandomString(config.cookieSize);
   const optionsForUpdate = {
     collectionName: config.db.collections.users,
     filtr: {

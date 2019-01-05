@@ -90,6 +90,7 @@ export default {
     hideTooltip() {
       this.showTooltip = false;
       this.drawMap();
+      this.currentTile = {};
     },
     setBorderIsoMap() {
       const currentLength = this.currentMap.length;

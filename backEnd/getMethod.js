@@ -43,14 +43,25 @@ function getMethod(req, res, startPath) {
     });
     //если userCookies есть, ищем совпадение в БД
   } else if (userCookies) {
-    const checkServerName = config.db.collections.servers.includes(pathName.split('/')[1]);
-    pathName = checkServerName ? config.listFile.html.game + ".html" : config.listFile.html.cabinet + ".html";
-    // pathName = config.listFile.html.cabinet + ".html";
-    const pathJoin = path.join(startPath, config.basePathToFiles, pathName);
-    const ext = path.parse(pathName).ext;
-    fileReader(pathJoin, (err, data) => {
-      sendResponse(res, data, mimeType[ext]);
-      return;
+    findUserInDB(userCookies).then(result => {
+      if (result) {
+        const checkServerName = config.db.collections.servers.includes(
+          pathName.split("/")[1]
+        );
+        pathName = checkServerName
+          ? config.listFile.html.game + ".html"
+          : config.listFile.html.cabinet + ".html";
+      } else {
+        pathName = config.listFile.html.login + ".html" ;
+      }
+      
+      // pathName = config.listFile.html.cabinet + ".html";
+      const pathJoin = path.join(startPath, config.basePathToFiles, pathName);
+      const ext = path.parse(pathName).ext;
+      fileReader(pathJoin, (err, data) => {
+        sendResponse(res, data, mimeType[ext]);
+        return;
+      });
     });
   }
 }

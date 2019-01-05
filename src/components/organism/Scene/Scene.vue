@@ -51,7 +51,7 @@ export default {
     }
   },
   mounted() {
-    this.scenes.region = true;
+    this.scenes.globalMap = true;
   }
 };
 </script>

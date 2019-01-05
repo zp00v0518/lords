@@ -35,38 +35,52 @@ wsServer.on("connection", (ws, req) => {
     type: "startMessages",
     chat
   };
+  console.log(userCookies)
   findUserInDB(userCookies).then(user => {
-    User = user;
-    UserOnline[server][User._id] = {};
-    UserOnline[server][User._id].ws = ws;
-    UserOnline[server].count++;
-    UserOnline[server][User._id].user = User;
-    getInfoForStartGame(user, server).then(infoForStartGame => {
-      UserOnline[server][User._id].user.globalMap = {};
-      UserOnline[server][User._id].user.globalMap.zoom = 1;
-      UserOnline[server][User._id].user.globalMap.centerMap = {};
-      UserOnline[server][User._id].user.globalMap.centerMap.x = infoForStartGame[0].x;
-      UserOnline[server][User._id].user.globalMap.centerMap.y = infoForStartGame[0].y;
-      getGlobalMapSector(
-        UserOnline[server][User._id].user,
-        server,
-        currentMap => {
-          start.currentMap = currentMap;
-          start.towns = infoForStartGame;
-          ws.send(JSON.stringify(start));
-        }
-      );
-    });
+    if (user) {
+      User = user;
+      UserOnline[server][User._id] = {};
+      UserOnline[server][User._id].ws = ws;
+      UserOnline[server].count++;
+      UserOnline[server][User._id].user = User;
+      getInfoForStartGame(user, server).then(infoForStartGame => {
+        UserOnline[server][User._id].user.globalMap = {};
+        UserOnline[server][User._id].user.globalMap.zoom = 1;
+        UserOnline[server][User._id].user.globalMap.centerMap = {};
+        UserOnline[server][User._id].user.globalMap.centerMap.x =
+          infoForStartGame[0].x;
+        UserOnline[server][User._id].user.globalMap.centerMap.y =
+          infoForStartGame[0].y;
+        getGlobalMapSector(
+          UserOnline[server][User._id].user,
+          server,
+          currentMap => {
+            start.currentMap = currentMap;
+            start.towns = infoForStartGame;
+            ws.send(JSON.stringify(start));
+          }
+        );
+      });
+    } else {
+      console.log("Юзер не найден");
+      const message = {
+        status: false,
+        redirectUrl: "/"
+      };
+      ws.send(JSON.stringify(message));
+    }
   });
 
   ws.on("close", function() {
-    delete UserOnline[server][User._id];
-    UserOnline[server].count--;
+    if (User) {
+      delete UserOnline[server][User._id];
+      UserOnline[server].count--;
+    }
   });
   ws.on("message", message => {
     const mess = JSON.parse(message);
     const baseInfo = {
-      player:  UserOnline[server][User._id],
+      player: UserOnline[server][User._id],
       server,
       userCookies
     };
@@ -76,8 +90,8 @@ wsServer.on("connection", (ws, req) => {
       const message = {
         status: true,
         type: "change"
-      }
-      ws.send(JSON.stringify(message))
+      };
+      ws.send(JSON.stringify(message));
     }
   });
 });

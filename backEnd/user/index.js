@@ -4,6 +4,7 @@ const { findUserInGlobalMap, findUserInDB } = require("./findUser.js");
 // const findUserInGlobalMap = require("./findUserInGlobalMap.js");
 const getInfoForStartGame= require("./getInfoForStartGame.js");
 const addNewUserToGlobalMap= require("./addNewUserToGlobalMap.js");
+const updateUser= require("./updateUser.js");
 
 module.exports = {
   userCreate,
@@ -12,4 +13,5 @@ module.exports = {
   findUserInDB,
   getInfoForStartGame,
   addNewUserToGlobalMap,
+  updateUser,
 };

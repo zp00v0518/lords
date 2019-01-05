@@ -113,6 +113,7 @@ export default {
     hideTooltip() {
       this.showTooltip = false;
       this.drawMap();
+      this.currentTile = {};
     },
     setBorderIsoMap() {
       const currentLength = this.currentMap.length;
@@ -130,7 +131,7 @@ export default {
       this.borderIsoMap.bottom.y =
         this.borderIsoMap.left.y + (height * currentLength) / 2;
     },
-    moveOnMap() {
+    moveOnMap(event) {
       const target = event.target;
       const way = target.id;
       const message = {
