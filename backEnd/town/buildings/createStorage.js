@@ -10,7 +10,8 @@ function createStorage(listMine = gameVariables.mineTypeList){
 				gold: 100000,
 				baseResource: 18,
 				unicResource: 10,
-			}
+			},
+			sources: {},
 	}
 	//создаются поля, которые соответствуют перечню шахт
 	for (let i=0; i<listMine.length; i++){
@@ -20,9 +21,9 @@ function createStorage(listMine = gameVariables.mineTypeList){
 				addValue: 0,
 				nowValue: 0,
 			}
-			storage[type] = obj;
-			if (type == "gold"){
-				storage.gold.nowValue = 5000;
+			storage.sources[type] = obj;
+			if (type === "gold"){
+				storage.sources.gold.nowValue = 50000;
 			}
 
 	}

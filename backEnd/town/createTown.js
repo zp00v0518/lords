@@ -59,7 +59,7 @@ function createRegionMap() {
 function Town(townName, listMine) {
   const { createStorage } = tube;
   const town = {
-    storage: createStorage(listMine),
+    storage: createStorage(),
     name: townName
   };
   return town;

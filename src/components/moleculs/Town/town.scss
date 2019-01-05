@@ -1,0 +1,196 @@
+.castle_item_wrap {
+  width: 100%;
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+.castle_item_wrap .castle_interface {
+  width: 100%;
+  height: 150px;
+  border: 1px solid #000000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+.castle_item_wrap .castle_interface .castle_icon {
+  width: 25%;
+  height: 100%;
+  border: 1px solid #000000;
+  background-image: url("../../../img/towns/icon/rampart.png");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: -5px -10px;
+}
+.castle_item_wrap .castle_interface .castle_other {
+  width: 75%;
+  height: 100%;
+  border: 1px solid #000000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+.castle_item_wrap .castle_interface .castle_other .castle_name {
+  width: 100%;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  height: 15px;
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap {
+  width: 88%;
+  height: 80px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .resource_item {
+  width: 20%;
+  -webkit-box-flex: 3;
+      -ms-flex-positive: 3;
+          flex-grow: 3;
+  height: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .resource_item .resource_icon {
+  width: 40px;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: top right;
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .resource_item .resource_sum_wrap {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding-left: 4px;
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .resource_item .resource_sum_wrap .resource_sum {
+  width: 100%;
+  height: 40%;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .resource_item .resource_sum_wrap .resource_count {
+  width: 100%;
+  height: 50%;
+  text-align: left;
+  font-size: 12px;
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .gold {
+  width: 50%;
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .gold .resource_icon {
+  background-image: url("../../../img/resources/gold.gif");
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .wood .resource_icon {
+  background-image: url("../../../img/resources/wood.gif");
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .ore .resource_icon {
+  background-image: url("../../../img/resources/ore.gif");
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .sulfur .resource_icon {
+  background-image: url("../../../img/resources/sulfur.gif");
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .crystal .resource_icon {
+  background-image: url("../../../img/resources/crystal.gif");
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .mercury .resource_icon {
+  background-image: url("../../../img/resources/mercury.gif");
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .gem .resource_icon {
+  background-image: url("../../../img/resources/gem.gif");
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap .storage_wrap {
+  width: 12%;
+  height: 80px;
+  border-left: 1px solid #C0C0C0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.castle_item_wrap .castle_interface .castle_other .resource_wrap .storage_wrap .storage_item {
+  width: 100%;
+  height: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  font-size: 12px;
+  font-weight: 600;
+}
