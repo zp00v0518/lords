@@ -31,7 +31,6 @@ class WS {
     };
   }
   moveGlobalMap(eventData) {
-    console.log(eventData)
     this.store.commit("SET_CURRENTMAP", eventData);
   }
   startMessages(eventData) {

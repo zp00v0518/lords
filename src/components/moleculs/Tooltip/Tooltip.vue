@@ -34,7 +34,6 @@ export default {
   },
   watch: {
     tile: function() {
-      console.log(this.tile);
       const size = this.$el ? this.$el.getBoundingClientRect() : { height: 0 };
       const left = this.mouseCoords.x + 30 + "px";
       const top = this.mouseCoords.y - size.height - 50 + "px";

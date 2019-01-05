@@ -11,26 +11,26 @@ function moveGlobalMap(message, info, callback = function() {}) {
     let nowY = user.globalMap.centerMap.y;
     if (way == "top") {
       user.globalMap.centerMap.x = nowX + step;
-      if (nowX + step > GlobalMap.length - 1) {
-        user.globalMap.centerMap.x = nowX + step - GlobalMap.length;
+      if (nowX + step > GlobalMap[server].length - 1) {
+        user.globalMap.centerMap.x = nowX + step - GlobalMap[server].length;
       }
-    } else if (way == "bottom") {
+    } else if (way === "bottom") {
       user.globalMap.centerMap.x = nowX - step;
       if (nowX - step < 0) {
-        user.globalMap.centerMap.x = GlobalMap.length - Math.abs(nowX - step);
+        user.globalMap.centerMap.x = GlobalMap[server].length - Math.abs(nowX - step);
       }
-    } else if (way == "left") {
+    } else if (way === "left") {
       user.globalMap.centerMap.y = nowY - step;
       if (nowY - step < 0) {
-        user.globalMap.centerMap.y = GlobalMap.length - Math.abs(nowY - step);
+        user.globalMap.centerMap.y = GlobalMap[server].length - Math.abs(nowY - step);
       }
-    } else if (way == "right") {
+    } else if (way === "right") {
       user.globalMap.centerMap.y = nowY + step;
-      if (nowY + step > GlobalMap.length - 1) {
-        user.globalMap.centerMap.y = nowY + step - GlobalMap.length;
+      if (nowY + step > GlobalMap[server].length - 1) {
+        user.globalMap.centerMap.y = nowY + step - GlobalMap[server].length;
       }
     }
-    // console.log(`X:${user.globalMap.center.x}  Y:${user.globalMap.center.y}`)
+    // console.log(`X:${user.globalMap.centerMap.x}  Y:${user.globalMap.centerMap.y}`)
     getGlobalMapSector(user, server, result => {
       const response ={
         type: message.type,
