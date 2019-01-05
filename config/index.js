@@ -8,7 +8,7 @@ module.exports = {
   dev: {
 
     // Paths
-    assetsSubDirectory: 'static',
+    assetsSubDirectory: '../static',
     // assetsSubDirectory: '../dist', // подключить при билде
     assetsPublicPath: '/',
     proxyTable: {},
