@@ -28,7 +28,7 @@ function login(req, res, loginData, Cookies) {
         Cookies.set("session", checkLoginResult.sessionCookies);
         const answer = {};
         answer.status = "authOk";
-        answer.nextStep = config.listFile.html.user + ".html";
+        answer.nextStep = config.listFile.html.cabinet + ".html";
         sendResponse(res, JSON.stringify(answer));
         //добавляю юзера в список онлайновых
         UserOnline[checkLoginResult.userCookies] = {};

@@ -36,6 +36,7 @@ class WS {
   startMessages(eventData) {
     this.store.commit("START_MESSAGES", eventData);
     this.store.commit("SET_CURRENTMAP", eventData);
+    this.store.commit('SET_CURRENT_REGION', eventData.towns[0]);
   }
   chatMessage(eventData) {
     this.store.commit("UNSHIFT_MESSAGE", eventData);

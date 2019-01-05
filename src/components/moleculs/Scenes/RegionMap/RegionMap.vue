@@ -1,18 +1,116 @@
 <template>
- <div> RegionMap</div>
+  <div class="regionmap">
+    <canvas
+      ref="scene"
+      :width="widthScene"
+      :height="heightScene"
+    ></canvas>
+  </div>
 </template>
 
 <script>
+import {
+  drawMap,
+  getCursorPositionOnScene,
+  checkMouseCoordsOnMap,
+  getTileCoordsOnMap
+} from "../modules";
+import Tooltip from "../../Tooltip";
+
 export default {
   name: "RegionMap",
+  components: {
+    Tooltip
+  },
+  props: ["widthScene", "heightScene"],
   data() {
-    return {};
+    return {
+      ctx: null,
+      currentMap: [],
+      currentTile: {},
+      borderIsoMap: {
+        left: { x: 0, y: 0 },
+        top: { x: 0, y: 0 },
+        right: { x: 0, y: 0 },
+        bottom: { x: 0, y: 0 }
+      },
+      mouseCoords: { x: 0, y: 0 }
+    };
   },
   created() {
+    this.currentMap = this.$store.state.regionMap.currentRegion;
   },
-  computed: {},
+  watch: {
+    "$store.state.regionMap.currentRegion": function() {
+      this.currentMap = this.$store.state.regionMap.currentRegion;
+      this.drawMap();
+      this.setBorderIsoMap();
+    }
+  },
+  computed: {
+    tileWidth() {
+      const widthParse = parseInt(this.widthScene) / 2;
+      const intermediate = widthParse / (this.currentMap.length / 2);
+      return intermediate * 1.4;
+      // return intermediate / (this.currentMap.length / 2) + intermediate;
+    },
+    isoCoords() {
+      const d = (this.tileWidth * this.currentMap.length) / 2; // общая ширина всех ячеек /2
+      const x = parseInt(this.widthScene) / 2 - d; // от середины карты вычитываем половину длины всех ячеек
+      const y = parseInt(this.heightScene) / 2;
+      return { x, y };
+    }
+  },
   methods: {
-    getData() {}
+    drawMap,
+    getCursorPositionOnScene,
+    checkMouseCoordsOnMap,
+    getTileCoordsOnMap,
+    handlerMousemoveOnGlobalMap(event) {
+      this.mouseCoords = this.getCursorPositionOnScene(event);
+      if (this.checkMouseCoordsOnMap()) {
+        const rombIndex = this.getTileCoordsOnMap();
+        if (this.currentTile !== this.currentMap[rombIndex.x][rombIndex.y]) {
+          this.currentTile = this.currentMap[rombIndex.x][rombIndex.y];
+          this.showTooltip = true;
+        }
+      } else {
+        this.hideTooltip();
+      }
+    },
+    hideTooltip() {
+      this.showTooltip = false;
+    },
+    setBorderIsoMap() {
+      const currentLength = this.currentMap.length;
+      const height = this.tileWidth / 2;
+      this.borderIsoMap.left.x = this.isoCoords.x;
+      this.borderIsoMap.left.y = this.isoCoords.y;
+      this.borderIsoMap.top.x =
+        this.borderIsoMap.left.x + (this.tileWidth * currentLength) / 2;
+      this.borderIsoMap.top.y =
+        this.borderIsoMap.left.y - (height * currentLength) / 2;
+      this.borderIsoMap.right.x =
+        this.borderIsoMap.left.x + this.tileWidth * currentLength;
+      this.borderIsoMap.right.y = this.borderIsoMap.left.y;
+      this.borderIsoMap.bottom.x = this.borderIsoMap.top.x;
+      this.borderIsoMap.bottom.y =
+        this.borderIsoMap.left.y + (height * currentLength) / 2;
+    },
+    moveOnMap() {
+      const target = event.target;
+      const way = target.id;
+      const message = {
+        type: "moveGlobalMap",
+        way
+      };
+      this.$ws.sendMessage(message);
+    }
+  },
+  mounted() {
+    this.ctx = this.$refs.scene.getContext("2d");
+    this.drawMap();
+    this.setBorderIsoMap();
   }
 };
 </script>
