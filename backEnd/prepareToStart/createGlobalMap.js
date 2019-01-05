@@ -93,10 +93,10 @@ function createRegionMap() {
       section.id = countSection++;
       section.x = i;
       section.y = h;
-      section.type = 1; //индекс леса
+      section.type = 0; //индекс леса
       //центр всегда является замком
       if (i == 2 && h == 2) {
-        section.type = 2; //индекс замка
+        section.type = 1; //индекс замка
       }
       regionMap[i][h] = section;
     }
@@ -107,7 +107,7 @@ function createRegionMap() {
     let index = d[k];
     let x = coordsMine[index].x;
     let y = coordsMine[index].y;
-    regionMap[x][y].type = 3; //индекс шахты
+    regionMap[x][y].type = 2; //индекс шахты
     regionMap[x][y].mine = createMine();
   }
   return regionMap;

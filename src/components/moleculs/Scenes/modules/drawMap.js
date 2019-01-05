@@ -42,7 +42,8 @@ function drawMap() {
  const colors = {
 		0: "green",
 		1:"blue",
-		2:"brown",
+    2:"brown",
+    3: "black",
 	};
 
 

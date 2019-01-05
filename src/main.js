@@ -6,11 +6,13 @@ import router from './router'
 import store from './store'
 import ws from  './api/ws'
 import config from '../backEnd/config/config'
+import dictionary from './utils/dictionary'
 
 
 Vue.config.productionTip = false;
 Vue.prototype.$ws = new ws();
 Vue.prototype.$ws.init(`ws://localhost:${config.port.ws}${location.pathname}`, store);
+Vue.prototype.$dictionary = dictionary;
 
 /* eslint-disable no-new */
 new Vue({

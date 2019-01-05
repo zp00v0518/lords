@@ -1,9 +1,12 @@
 <template>
   <div class="regionmap">
+    <TooltipRegion v-show="showTooltip" :mouseCoords="mouseCoords" :tile="currentTile"></TooltipRegion>
     <canvas
       ref="scene"
       :width="widthScene"
       :height="heightScene"
+      @mousemove="handlerMousemoveOnGlobalMap"
+      @mouseleave="hideTooltip"
     ></canvas>
   </div>
 </template>
@@ -15,16 +18,17 @@ import {
   checkMouseCoordsOnMap,
   getTileCoordsOnMap
 } from "../modules";
-import Tooltip from "../../Tooltip";
+import TooltipRegion from "../../TooltipRegion";
 
 export default {
   name: "RegionMap",
   components: {
-    Tooltip
+    TooltipRegion
   },
   props: ["widthScene", "heightScene"],
   data() {
     return {
+      showTooltip: false,
       ctx: null,
       currentMap: [],
       currentTile: {},
@@ -51,12 +55,11 @@ export default {
     tileWidth() {
       const widthParse = parseInt(this.widthScene) / 2;
       const intermediate = widthParse / (this.currentMap.length / 2);
-      return intermediate * 1.4;
+      return intermediate;
       // return intermediate / (this.currentMap.length / 2) + intermediate;
     },
     isoCoords() {
-      const d = (this.tileWidth * this.currentMap.length) / 2; // общая ширина всех ячеек /2
-      const x = parseInt(this.widthScene) / 2 - d; // от середины карты вычитываем половину длины всех ячеек
+      const x = 0
       const y = parseInt(this.heightScene) / 2;
       return { x, y };
     }
@@ -70,10 +73,10 @@ export default {
       this.mouseCoords = this.getCursorPositionOnScene(event);
       if (this.checkMouseCoordsOnMap()) {
         const rombIndex = this.getTileCoordsOnMap();
-        if (this.currentTile !== this.currentMap[rombIndex.x][rombIndex.y]) {
+        // if (this.currentTile !== this.currentMap[rombIndex.x][rombIndex.y]) {
           this.currentTile = this.currentMap[rombIndex.x][rombIndex.y];
           this.showTooltip = true;
-        }
+        // }
       } else {
         this.hideTooltip();
       }

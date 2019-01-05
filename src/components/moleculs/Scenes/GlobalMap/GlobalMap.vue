@@ -98,10 +98,10 @@ export default {
       this.mouseCoords = this.getCursorPositionOnScene(event);
       if (this.checkMouseCoordsOnMap()) {
         const rombIndex = this.getTileCoordsOnMap();
-        if (this.currentTile !== this.currentMap[rombIndex.x][rombIndex.y]) {
+        // if (this.currentTile !== this.currentMap[rombIndex.x][rombIndex.y]) {
           this.currentTile = this.currentMap[rombIndex.x][rombIndex.y];
           this.showTooltip = true;
-        }
+        // }
       } else {
         this.hideTooltip();
       }
