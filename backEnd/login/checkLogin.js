@@ -59,7 +59,7 @@ function checkLogin(req, requestData, callback = function() {}) {
                   headers.user_id = user_id;
                   sessionCreate(headers)
                     .then(resultSessionCreate => {
-                      checkLoginResult.status = "registerOk";
+                      checkLoginResult.status = "registrOk";
                       checkLoginResult.userCookies = userCookies;
                       checkLoginResult.sessionCookies =
                         resultSessionCreate.cookie;

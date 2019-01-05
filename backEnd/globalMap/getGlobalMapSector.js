@@ -8,6 +8,7 @@ function getGlobalMapSector(user, server, callback){
 	let length = GlobalMap[server].length;
 	let zoom = user.globalMap.zoom;
 	let rangeSize = gameVariables.viewSectionGlobalMapNow*zoom;//10*zoom;
+	rangeSize = rangeSize % 2 !== 0 ? rangeSize : rangeSize+1;
 	let halfSize = Math.floor(rangeSize/2);
 	let minX = user.globalMap.centerMap.x-halfSize;
 	let minY = user.globalMap.centerMap.y-halfSize;

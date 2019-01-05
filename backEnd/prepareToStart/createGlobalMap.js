@@ -33,7 +33,7 @@ function toDb() {
           }
         };
         let persent = getRandomNumber(100);
-        if (persent <= 10) {
+        if (persent <= 2) {
           sector.type = 2;
         }
         GlobalMap[i][h] = sector;
