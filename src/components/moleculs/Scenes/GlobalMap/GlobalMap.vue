@@ -5,7 +5,7 @@
       ref="scene"
       :width="widthScene"
       :height="heightScene"
-      @mousemove="handlerMousemoveOnGlobalMap"
+      @mousemove="handlerMousemoveOnMap"
       @mouseleave="hideTooltip"
     ></canvas>
     <button
@@ -41,7 +41,10 @@ import {
   getCursorPositionOnScene,
   checkMouseCoordsOnMap,
   getTileCoordsOnMap,
-  drawHoverLine
+  drawHoverLine,
+  setBorderIsoMap,
+  hideTooltip,
+  handlerMousemoveOnMap
 } from "../modules";
 import Tooltip from "../../Tooltip";
 
@@ -96,41 +99,9 @@ export default {
     checkMouseCoordsOnMap,
     getTileCoordsOnMap,
     drawHoverLine,
-    handlerMousemoveOnGlobalMap(event) {
-      this.mouseCoords = this.getCursorPositionOnScene(event);
-      if (this.checkMouseCoordsOnMap()) {
-        const rombIndex = this.getTileCoordsOnMap();
-        if (this.currentTile !== this.currentMap[rombIndex.x][rombIndex.y]) {
-          this.drawMap();
-          this.drawHoverLine(rombIndex)
-          this.currentTile = this.currentMap[rombIndex.x][rombIndex.y];
-          this.showTooltip = true;
-        }
-      } else {
-        this.hideTooltip();
-      }
-    },
-    hideTooltip() {
-      this.showTooltip = false;
-      this.drawMap();
-      this.currentTile = {};
-    },
-    setBorderIsoMap() {
-      const currentLength = this.currentMap.length;
-      const height = this.tileWidth / 2;
-      this.borderIsoMap.left.x = this.isoCoords.x;
-      this.borderIsoMap.left.y = this.isoCoords.y;
-      this.borderIsoMap.top.x =
-        this.borderIsoMap.left.x + (this.tileWidth * currentLength) / 2;
-      this.borderIsoMap.top.y =
-        this.borderIsoMap.left.y - (height * currentLength) / 2;
-      this.borderIsoMap.right.x =
-        this.borderIsoMap.left.x + this.tileWidth * currentLength;
-      this.borderIsoMap.right.y = this.borderIsoMap.left.y;
-      this.borderIsoMap.bottom.x = this.borderIsoMap.top.x;
-      this.borderIsoMap.bottom.y =
-        this.borderIsoMap.left.y + (height * currentLength) / 2;
-    },
+    setBorderIsoMap,
+    hideTooltip,
+    handlerMousemoveOnMap,
     moveOnMap(event) {
       const target = event.target;
       const way = target.id;

@@ -5,7 +5,7 @@
       ref="scene"
       :width="widthScene"
       :height="heightScene"
-      @mousemove="handlerMousemoveOnGlobalMap"
+      @mousemove="handlerMousemoveOnMap"
       @mouseleave="hideTooltip"
     ></canvas>
   </div>
@@ -18,6 +18,9 @@ import {
   checkMouseCoordsOnMap,
   getTileCoordsOnMap,
   drawHoverLine,
+  setBorderIsoMap,
+  hideTooltip,
+  handlerMousemoveOnMap
 } from "../modules";
 import TooltipRegion from "../../TooltipRegion";
 
@@ -60,7 +63,7 @@ export default {
       // return intermediate / (this.currentMap.length / 2) + intermediate;
     },
     isoCoords() {
-      const x = 0
+      const x = 0;
       const y = parseInt(this.heightScene) / 2;
       return { x, y };
     }
@@ -71,52 +74,9 @@ export default {
     checkMouseCoordsOnMap,
     getTileCoordsOnMap,
     drawHoverLine,
-    handlerMousemoveOnGlobalMap(event) {
-      this.mouseCoords = this.getCursorPositionOnScene(event);
-      if (this.checkMouseCoordsOnMap()) {
-        const rombIndex = this.getTileCoordsOnMap();
-        if (this.currentTile !== this.currentMap[rombIndex.x][rombIndex.y]) {
-          rombIndex.x = rombIndex.x > 4 ? 4 : rombIndex.x // костыль (лень править формулу)
-          rombIndex.y= rombIndex.y > 4 ? 4 : rombIndex.y // костыль
-          this.drawMap();
-          this.drawHoverLine(rombIndex)
-          this.currentTile = this.currentMap[rombIndex.x][rombIndex.y];
-          this.showTooltip = true;
-        }
-      } else {
-        this.hideTooltip();
-      }
-    },
-    hideTooltip() {
-      this.showTooltip = false;
-      this.drawMap();
-      this.currentTile = {};
-    },
-    setBorderIsoMap() {
-      const currentLength = this.currentMap.length;
-      const height = this.tileWidth / 2;
-      this.borderIsoMap.left.x = this.isoCoords.x;
-      this.borderIsoMap.left.y = this.isoCoords.y;
-      this.borderIsoMap.top.x =
-        this.borderIsoMap.left.x + (this.tileWidth * currentLength) / 2;
-      this.borderIsoMap.top.y =
-        this.borderIsoMap.left.y - (height * currentLength) / 2;
-      this.borderIsoMap.right.x =
-        this.borderIsoMap.left.x + this.tileWidth * currentLength;
-      this.borderIsoMap.right.y = this.borderIsoMap.left.y;
-      this.borderIsoMap.bottom.x = this.borderIsoMap.top.x;
-      this.borderIsoMap.bottom.y =
-        this.borderIsoMap.left.y + (height * currentLength) / 2;
-    },
-    moveOnMap() {
-      const target = event.target;
-      const way = target.id;
-      const message = {
-        type: "moveGlobalMap",
-        way
-      };
-      this.$ws.sendMessage(message);
-    }
+    setBorderIsoMap,
+    hideTooltip,
+    handlerMousemoveOnMap
   },
   mounted() {
     this.ctx = this.$refs.scene.getContext("2d");
