@@ -27,8 +27,6 @@ function getMethod(req, res, startPath) {
     const ext = path.parse(pathName).ext;
     const pathJoin = path.join(startPath, config.basePathToFiles, pathName);
     fileReader(pathJoin, (err, data) => {
-      console.log(pathJoin)
-      console.log(ext)
       sendResponse(res, data, mimeType[ext]);
       return;
     });

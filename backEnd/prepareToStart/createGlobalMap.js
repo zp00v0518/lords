@@ -14,7 +14,7 @@ const coordsMine = []; //возможные координаты шахт на r
 
 function toDb() {
   serverList.forEach(serverName => {
-  let countRegion = 0;
+    let countRegion = 0;
     for (let i = 0; i < numSectionGlobalMap; i++) {
       let row = [];
       GlobalMap.push(row);
@@ -48,8 +48,6 @@ function toDb() {
     }
   });
 }
-
-setTimeout(toDb, 5000);
 
 getPositionMine();
 //создает перечень возможных координат шахт для regionMap
@@ -114,14 +112,89 @@ function createRegionMap() {
 }
 
 //конструктор региона
-function createRegion(id, sectionMap) {
+function createRegion() {
   var Region = {};
   Region.regionMap = createRegionMap();
-  // Region.mapId = sectionMap.id;
-  // Region.map_Id = sectionMap._id;
-  // Region.mapX = sectionMap.x;
-  // Region.mapY = sectionMap.y;
-  // Region.type = sectionMap.type;
-  // Region.id = id;
+
   return Region;
 }
+function createGlobalMap() {
+  serverList.forEach(serverName => {
+    let countRegion = 0;
+    GlobalMap[serverName] = [];
+    for (let i = 0; i < numSectionGlobalMap; i++) {
+      let row = [];
+      GlobalMap[serverName].push(row);
+      for (let h = 0; h < numSectionGlobalMap; h++) {
+        let sector = {};
+        sector.server = serverName;
+        sector.id = countRegion++;
+        sector.type = 0;
+        sector.x = i;
+        sector.y = h;
+        sector.region = createRegion();
+        sector.listUpgrade = {
+          castle: {},
+          region: {
+            mine: []
+          }
+        };
+        let persent = getRandomNumber(100);
+        if (persent <= 2) {
+          sector.type = 2;
+        }
+        row.push(sector);
+      }
+    }
+  });
+}
+
+function recursiveOne(i, arr, callback) {
+  if (i < arr.length) {
+    insertDB.one(
+      { collectionName: config.db.collections.map, doc: arr[i] },
+      result => {
+        console.log(result.ops);
+        i++;
+        recursiveOne(i, arr, callback);
+      }
+    );
+  } else {
+    callback();
+  }
+}
+
+function recursiveTwo(h, i, arr, callback) {
+  if (h < arr.length) {
+    let nextArr = arr[h];
+    recursiveOne(i, nextArr, () => {
+      h++;
+      recursiveTwo(h, i, arr, callback);
+    });
+  } else {
+    callback();
+  }
+}
+
+function recursiveTree(a, h, i, serverList, callback) {
+  if (a < serverList.length) {
+    const serverName = serverList[a];
+    let nextArr = GlobalMap[serverName];
+    recursiveTwo(h, i, nextArr, () => {
+      a++;
+      recursiveTree(a, h, i, serverList, callback);
+    });
+  } else {
+    callback();
+  }
+}
+createGlobalMap();
+
+setTimeout(function() {
+  console.log('start')
+  recursiveTree(0, 0, 0, serverList, () => {
+    console.log("done");
+    insertDB.close();
+  });
+},5000)
+
