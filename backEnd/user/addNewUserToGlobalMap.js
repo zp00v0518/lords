@@ -6,7 +6,7 @@ const update = new updateDB();
 //добавляю нового Игрока на глобальную карту
 function addNewUserToGlobalMap(user, server, callback=function() {}) {
   const { createTown } = tube;
-  console.log("********** addNewUserToGlobalMap Work ************");
+  // console.log("********** addNewUserToGlobalMap Work ************");
   return new Promise((resolve, reject) => {
     checkUserPosition(server, (x, y) => {
       const newTown = createTown({ status: "new", townName: "Some name" });
@@ -35,11 +35,11 @@ function addNewUserToGlobalMap(user, server, callback=function() {}) {
           }
         }
       };
-      console.log(ops)
       update.one(optionsForUpdateBD).then(result => {
         GlobalMap[server][x][y].region = newTown.regionMap;
         GlobalMap[server][x][y].userId = user._id;
         GlobalMap[server][x][y].type = 1;
+        GlobalMap[server][x][y].nickName = user.nickName;
         GlobalMap[server][x][y].town = {
           name: newTown.townName,
           storage: newTown.storage

@@ -62,7 +62,7 @@ wsServer.on("connection", (ws, req) => {
         );
       });
     } else {
-      console.log("Юзер не найден");
+      // console.log("Юзер не найден");
       const message = {
         status: false,
         redirectUrl: "/"
