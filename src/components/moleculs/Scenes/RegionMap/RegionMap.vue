@@ -7,6 +7,7 @@
       :height="heightScene"
       @mousemove="handlerMousemoveOnMap"
       @mouseleave="hideTooltip"
+      @click="handlerClick"
     ></canvas>
   </div>
 </template>
@@ -34,6 +35,7 @@ export default {
     return {
       showTooltip: false,
       ctx: null,
+      cursorOnScene: false,
       currentMap: [],
       currentTile: {},
       borderIsoMap: {
@@ -69,6 +71,12 @@ export default {
     }
   },
   methods: {
+    handlerClick() {
+      if (!this.cursorOnScene || this.currentTile.type === 1) return;
+      console.log(this.currentTile)
+      
+      this.$store.commit("DIALOG_SHOW")
+    },
     drawMap,
     getCursorPositionOnScene,
     checkMouseCoordsOnMap,

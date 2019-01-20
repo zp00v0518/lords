@@ -57,6 +57,7 @@ export default {
   data() {
     return {
       showTooltip: false,
+      cursorOnScene: false,
       ctx: null,
       currentMap: [],
       currentTile: {},

@@ -1,18 +1,25 @@
 <template>
-  <section v-if="$store.state.dialog.show" class="dialog">
-    <div class="dialog__header">
-      <Icon class="dialog__close" name="circle-close" @click.native="closeDialogWindow"></Icon>
+  <section v-if="$store.state.dialog.show" class="dialog__wrap">
+    <div class="dialog">
+      <div class="dialog__header">
+        <div class="dialog__title">Title</div>
+        <Icon class="dialog__close" name="circle-close" @click.native="closeDialogWindow"></Icon>
+      </div>
+      <components is="UpgradeBuilding"></components>
     </div>
   </section>
 </template>
 
 <script>
+import DialogContent from  './DialogContent'
+
 export default {
   name: "DialogWindow",
   props: [],
+  components: {...DialogContent},
   data() {
     return {
-      showComponent: true,
+      showComponent: true
     };
   },
   methods: {

@@ -14,7 +14,9 @@ function checkMouseCoordsOnMap() {
   ctx.lineTo(bottom.x, bottom.y);
   ctx.stroke();
   ctx.closePath();
-  return ctx.isPointInPath(this.mouseCoords.x, this.mouseCoords.y);
+  const flag  = ctx.isPointInPath(this.mouseCoords.x, this.mouseCoords.y);
+  this.cursorOnScene =  flag;
+  return flag
 }
 
 module.exports = checkMouseCoordsOnMap;

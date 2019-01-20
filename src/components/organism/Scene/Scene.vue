@@ -7,7 +7,7 @@
       <button type="button" class="scene__buttons__item" data-flag="town">Город</button>
       <button type="button" class="scene__buttons__item" data-flag="globalMap">Карта</button>
     </div>
-    <DialogWindow v-if="showDialogWindow"></DialogWindow>
+    <DialogWindow></DialogWindow>
   </section>
 </template>
 
@@ -24,7 +24,6 @@ export default {
   },
   data() {
     return {
-      showDialogWindow: true,
       scenes: {
         globalMap: false,
         region: false,
