@@ -1,0 +1,27 @@
+.dialog {
+  width: 95%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+  position: absolute;
+  top: 2.5%;
+  left: 2.5%;
+  background-color: white;
+
+  &__header {
+    height: 25px;
+    border: 1px solid;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    padding: 5px;
+  }
+
+  &__close {
+    color: red;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+}

@@ -7,20 +7,24 @@
       <button type="button" class="scene__buttons__item" data-flag="town">Город</button>
       <button type="button" class="scene__buttons__item" data-flag="globalMap">Карта</button>
     </div>
+    <DialogWindow v-if="showDialogWindow"></DialogWindow>
   </section>
 </template>
 
 <script>
 import { GlobalMap, RegionMap } from "../../moleculs/Scenes";
+import DialogWindow from "../../moleculs/DialogWindow";
 
 export default {
   name: "Scene",
   components: {
     GlobalMap,
-    RegionMap
+    RegionMap,
+    DialogWindow
   },
   data() {
     return {
+      showDialogWindow: true,
       scenes: {
         globalMap: false,
         region: false,
@@ -29,7 +33,6 @@ export default {
     };
   },
   created() {
-    // console.log(this);
   },
   computed: {
     widthScene() {
@@ -51,7 +54,7 @@ export default {
     }
   },
   mounted() {
-    this.scenes.globalMap = true;
+    this.scenes.region = true;
   }
 };
 </script>

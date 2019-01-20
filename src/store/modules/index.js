@@ -3,6 +3,7 @@ import globalMap from './globalMap'
 import regionMap from './regionMap'
 import local from './local'
 import towns from './towns'
+import dialog from './dialog'
 
 export default {
   chat,
@@ -10,4 +11,5 @@ export default {
   regionMap,
   local,
   towns,
+  dialog,
 }
