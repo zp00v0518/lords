@@ -87,7 +87,6 @@ export default {
   created() {
     this.storage = this.town.town.storage;
     this.name = this.town.town.name;
-    console.log(this.storage)
   },
   computed: {},
   methods: {}

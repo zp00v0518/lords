@@ -1,6 +1,6 @@
 const dialog = {
   state: {
-    show: true,
+    show: false,
     data: {},
     title: "",
   },

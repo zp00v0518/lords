@@ -2,7 +2,7 @@
   <section v-if="$store.state.dialog.show" class="dialog__wrap">
     <div class="dialog">
       <div class="dialog__header">
-        <div class="dialog__title">Title</div>
+        <div class="dialog__title">{{$store.state.dialog.title}}</div>
         <Icon class="dialog__close" name="circle-close" @click.native="closeDialogWindow"></Icon>
       </div>
       <components is="UpgradeBuilding"></components>

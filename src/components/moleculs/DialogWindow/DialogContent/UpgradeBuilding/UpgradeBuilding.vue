@@ -10,7 +10,9 @@ export default {
   props: [],
   components: {},
   data() {
-    return {}; 
+    return {
+      lang: this.$store.state.local.lang,
+    }; 
   },
   methods: {}
 };
