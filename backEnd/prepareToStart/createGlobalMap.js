@@ -12,42 +12,42 @@ const numSectionRegionMap = gameVariable.numSectionRegionMap;
 const GlobalMap = [];
 const coordsMine = []; //возможные координаты шахт на regionMap
 
-function toDb() {
-  serverList.forEach(serverName => {
-    let countRegion = 0;
-    for (let i = 0; i < numSectionGlobalMap; i++) {
-      let row = [];
-      GlobalMap.push(row);
-      for (let h = 0; h < numSectionGlobalMap; h++) {
-        let sector = {};
-        sector.server = serverName;
-        sector.id = countRegion++;
-        sector.type = 0;
-        sector.x = i;
-        sector.y = h;
-        sector.region = createRegion();
-        sector.listUpgrade = {
-          castle: {},
-          region: {
-            mine: []
-          }
-        };
-        let persent = getRandomNumber(100);
-        if (persent <= 2) {
-          sector.type = 2;
-        }
-        GlobalMap[i][h] = sector;
-        insertDB.one(
-          { collectionName: config.db.collections.map, doc: GlobalMap[i][h] },
-          result => {
-            console.log(result.ops);
-            insertDB.close();
-          }
-        );
-      }
-    }
-  });
-}
+// function toDb() {
+//   serverList.forEach(serverName => {
+//     let countRegion = 0;
+//     for (let i = 0; i < numSectionGlobalMap; i++) {
+//       let row = [];
+//       GlobalMap.push(row);
+//       for (let h = 0; h < numSectionGlobalMap; h++) {
+//         let sector = {};
+//         sector.server = serverName;
+//         sector.id = countRegion++;
+//         sector.type = 0;
+//         sector.x = i;
+//         sector.y = h;
+//         sector.region = createRegion();
+//         sector.listUpgrade = {
+//           castle: {},
+//           region: {
+//             sector: []
+//           }
+//         };
+//         let persent = getRandomNumber(100);
+//         if (persent <= 2) {
+//           sector.type = 2;
+//         }
+//         GlobalMap[i][h] = sector;
+//         insertDB.one(
+//           { collectionName: config.db.collections.map, doc: GlobalMap[i][h] },
+//           result => {
+//             console.log(result.ops);
+//             insertDB.close();
+//           }
+//         );
+//       }
+//     }
+//   });
+// }
 
 getPositionMine();
 //создает перечень возможных координат шахт для regionMap
@@ -106,7 +106,7 @@ function createRegionMap() {
     let x = coordsMine[index].x;
     let y = coordsMine[index].y;
     regionMap[x][y].type = 2; //индекс шахты
-    regionMap[x][y].mine = createMine();
+    regionMap[x][y].sector = createMine();
   }
   return regionMap;
 }
@@ -136,7 +136,7 @@ function createGlobalMap() {
         sector.listUpgrade = {
           castle: {},
           region: {
-            mine: []
+            sector: []
           }
         };
         let persent = getRandomNumber(100);
