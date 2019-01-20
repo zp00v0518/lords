@@ -5,7 +5,7 @@
       <div class="tooltip__header" v-if="tile.type === 1">Замок</div>
     </template>
     <template v-if="tile.type === 2"> 
-       <div class="tooltip__header">{{this.$dictionary.mine.type[this.type].name[this.lang]}}</div>
+       <div class="tooltip__header">{{this.$dictionary[this.nameSector].type[this.type].name[this.lang]}}</div>
         <div class="tooltip__town"> {{this.$dictionary.general.lvl[this.lang]}}:{{this.tile.mine.lvl}}</div>
     </template>
   </div>
@@ -28,7 +28,7 @@ export default {
       position: {},
       lang: this.$store.state.local.lang,
       mine: this.tile.mine,
-      
+      nameSector: '',
     };
   },
   created () {
@@ -41,14 +41,14 @@ export default {
   },
   watch: {
     tile: function() {
-      // console.log(this.tile)
+      this.nameSector = this.$region.type[this.tile.type];
       const size = this.$el ? this.$el.getBoundingClientRect() : { height: 0 };
       const left = this.mouseCoords.x + "px";
       const top = this.mouseCoords.y - size.height - 70 + "px";
       this.position = { left, top };
     }
   }
-};
+}; 
 </script>
 
 <style lang='scss' scoped>

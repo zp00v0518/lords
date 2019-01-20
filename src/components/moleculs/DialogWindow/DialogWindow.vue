@@ -5,22 +5,20 @@
         <div class="dialog__title">{{$store.state.dialog.title}}</div>
         <Icon class="dialog__close" name="circle-close" @click.native="closeDialogWindow"></Icon>
       </div>
-      <components is="UpgradeBuilding"></components>
+      <components :is="$store.state.dialog.component" :data="$store.state.dialog.data"></components>
     </div>
   </section>
 </template>
 
 <script>
-import DialogContent from  './DialogContent'
+import DialogContent from "./DialogContent";
 
 export default {
   name: "DialogWindow",
   props: [],
-  components: {...DialogContent},
+  components: { ...DialogContent },
   data() {
-    return {
-      showComponent: true
-    };
+    return {};
   },
   methods: {
     closeDialogWindow() {

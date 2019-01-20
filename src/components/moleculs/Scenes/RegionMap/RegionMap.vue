@@ -49,7 +49,6 @@ export default {
   },
   created() {
     this.currentMap = this.$store.state.regionMap.currentRegion;
-    console.log(this.$dictionary)
   },
   watch: {
     "$store.state.regionMap.currentRegion": function() {
@@ -74,15 +73,16 @@ export default {
   methods: {
     handlerClick() {
       if (!this.cursorOnScene || this.currentTile.type === 1 || this.currentTile.type === 0) return;
-      console.log(this.currentTile)
       const nameRegion = this.$region.type[this.currentTile.type];
       const building = this.currentTile[nameRegion];
-      const typeBuilding = building.type
+      const typeBuilding = building.type;
       const payload = {
         title: this.$dictionary[nameRegion].type[typeBuilding].name[this.$lang],
         data: building,
-      }
-      this.$store.commit("DIALOG_SHOW", payload)
+        component: 'UpgradeBuilding',
+      };
+
+      this.$store.commit("DIALOG_SHOW", payload);
     },
     drawMap,
     getCursorPositionOnScene,
