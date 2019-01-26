@@ -4,17 +4,12 @@ const { GlobalMap, config, updateDB } = tube;
 const update = new updateDB();
 
 //добавляю нового Игрока на глобальную карту
-function addNewUserToGlobalMap(user, server, callback=function() {}) {
+function addNewUserToGlobalMap(user, server, callback = function() {}) {
   const { createTown } = tube;
   // console.log("********** addNewUserToGlobalMap Work ************");
   return new Promise((resolve, reject) => {
     checkUserPosition(server, (x, y) => {
       const newTown = createTown({ status: "new", name: "Some name" });
-      // const ops = {
-      //   town: createTown({ status: "new", townName: "Some name" }),
-      //   x,
-      //   y
-      // };
       const optionsForUpdateBD = {
         collectionName: config.db.collections.map,
         filtr: {
@@ -28,7 +23,7 @@ function addNewUserToGlobalMap(user, server, callback=function() {}) {
             userId: user._id,
             type: 1,
             nickName: user.nickName,
-            town: newTown,
+            town: newTown
           }
         }
       };
@@ -38,9 +33,8 @@ function addNewUserToGlobalMap(user, server, callback=function() {}) {
         GlobalMap[server][x][y].type = 1;
         GlobalMap[server][x][y].nickName = user.nickName;
         GlobalMap[server][x][y].town = newTown;
-      resolve(GlobalMap[server][x][y]);
-      return callback(null, GlobalMap[server][x][y]);
-
+        resolve(GlobalMap[server][x][y]);
+        return callback(null, GlobalMap[server][x][y]);
       });
     });
   });

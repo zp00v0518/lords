@@ -1,16 +1,19 @@
 const tube = require("../tube.js");
-const listMine = ["gold", "wood", "ore", "gem"];
+const Region = require("../region/Region");
+const Race = require("../race/Race");
+let listMine = [];
 
 function createTown(options) {
   const { createStorage } = tube;
-  // const townName = options.townName || "New Castle";
-  // const newTown = Town(townName, listMine);
+  const indexRace = options.race || Number(0);
+  const race = Race.typeList[indexRace];
+  listMine = Race[race].mine.default;
   const town = {
     name: options.name || "New Castle",
     storage: createStorage(),
     regionMap: null,
     lvl: options.lvl || 0,
-    race: options.race || 0,
+    race: indexRace
   };
   //если замок первый, то создается регион со стандартными шахтами и их положением
   if (options.status === "new") {
@@ -40,10 +43,10 @@ function createRegionMap() {
       section.id = countSection++;
       section.x = i;
       section.y = h;
-      section.type = 0; //индекс леса
+      section.type = Region.type.forest; //индекс леса
       //центр всегда является замком
       if (i == 2 && h == 2) {
-        section.type = 1; //индекс замка
+        section.type = Region.type.town; //индекс замка
       }
       regionMap[i][h] = section;
     }
@@ -52,20 +55,11 @@ function createRegionMap() {
   for (let k = 0; k < coordsMine.length; k++) {
     let x = coordsMine[k].x;
     let y = coordsMine[k].y;
-    regionMap[x][y].type = 2; //индекс шахты
+    regionMap[x][y].type = Region.type.mine; //индекс шахты
     regionMap[x][y].sector = createMine(); //создается рандомный тип шахты
     regionMap[x][y].sector.type = listMine[k]; //исправляю рандомный тип шахты на установленный
   }
   return regionMap;
-}
-
-function Town(townName, listMine) {
-  const { createStorage } = tube;
-  const town = {
-    storage: createStorage(),
-    name: townName,
-  };
-  return town;
 }
 
 module.exports = createTown;

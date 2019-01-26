@@ -1,5 +1,7 @@
 const config = require('../config/config.js');
 const Mine = require('../region/mine/Mine.js');
+const Region = require('../region/Region.js');
+const Race = require('../race/Race.js');
 const time = config.time;
 
 const gameVariables = {
@@ -19,6 +21,9 @@ const gameVariables = {
 		saveDataDB:time.minute, 							//1 минута - интервал считывания данных и записи их в БД
 		perTime: time.hour, 					//час - время в миллисекундах, которое используется при расчете прироста игровых ресоурсов
 	},
+	mine: Mine,
+	region: Region,
+	race: Race,
 	mineTypeList: Mine.mineTypeList,
 	valueUpgrade: Mine.valueUpgrade,
 };

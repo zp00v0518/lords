@@ -11,43 +11,7 @@ const numSectionGlobalMap = gameVariable.numSectionGlobalMap;
 const numSectionRegionMap = gameVariable.numSectionRegionMap;
 const GlobalMap = [];
 const coordsMine = []; //возможные координаты шахт на regionMap
-
-// function toDb() {
-//   serverList.forEach(serverName => {
-//     let countRegion = 0;
-//     for (let i = 0; i < numSectionGlobalMap; i++) {
-//       let row = [];
-//       GlobalMap.push(row);
-//       for (let h = 0; h < numSectionGlobalMap; h++) {
-//         let sector = {};
-//         sector.server = serverName;
-//         sector.id = countRegion++;
-//         sector.type = 0;
-//         sector.x = i;
-//         sector.y = h;
-//         sector.region = createRegion();
-//         sector.listUpgrade = {
-//           castle: {},
-//           region: {
-//             sector: []
-//           }
-//         };
-//         let persent = getRandomNumber(100);
-//         if (persent <= 2) {
-//           sector.type = 2;
-//         }
-//         GlobalMap[i][h] = sector;
-//         insertDB.one(
-//           { collectionName: config.db.collections.map, doc: GlobalMap[i][h] },
-//           result => {
-//             console.log(result.ops);
-//             insertDB.close();
-//           }
-//         );
-//       }
-//     }
-//   });
-// }
+const Region = require("../region/Region");
 
 getPositionMine();
 //создает перечень возможных координат шахт для regionMap
@@ -91,11 +55,11 @@ function createRegionMap() {
       section.id = countSection++;
       section.x = i;
       section.y = h;
-      section.type = 0; //индекс леса
+      section.type = Region.type.forest; //индекс леса
       section.sector = {};
       //центр всегда является замком
       if (i == 2 && h == 2) {
-        section.type = 1; //индекс замка
+        section.type = Region.type.town; //индекс замка
       }
       regionMap[i][h] = section;
     }
@@ -106,7 +70,7 @@ function createRegionMap() {
     let index = d[k];
     let x = coordsMine[index].x;
     let y = coordsMine[index].y;
-    regionMap[x][y].type = 2; //индекс шахты
+    regionMap[x][y].type = Region.type.mine; //индекс шахты
     regionMap[x][y].sector = createMine();
   }
   return regionMap;
@@ -119,6 +83,7 @@ function createRegion() {
 
   return Region;
 }
+
 function createGlobalMap() {
   serverList.forEach(serverName => {
     let countRegion = 0;
@@ -192,10 +157,9 @@ function recursiveTree(a, h, i, serverList, callback) {
 createGlobalMap();
 
 setTimeout(function() {
-  console.log('start')
+  console.log("start");
   recursiveTree(0, 0, 0, serverList, () => {
     console.log("done");
     insertDB.close();
   });
-},5000)
-
+}, 5000);
