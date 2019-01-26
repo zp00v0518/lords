@@ -34,6 +34,7 @@ class WS {
     this.store.commit("SET_CURRENTMAP", eventData);
   }
   startMessages(eventData) {
+    console.log(eventData)
     this.store.commit("START_MESSAGES", eventData);
     this.store.commit("SET_CURRENTMAP", eventData);
     this.store.commit('SET_CURRENT_REGION', eventData.towns[0]);

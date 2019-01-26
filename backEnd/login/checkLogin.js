@@ -48,8 +48,6 @@ function checkLogin(req, requestData, callback = function() {}) {
                 .one({ collectionName: usersCollection, doc: user })
                 .then(insertUser => {
                   const user_id = insertUser.ops[0]._id;
-                  const userId = insertUser.ops[0].id;
-                  const nickName = insertUser.ops[0].nickName;
                   //устанавливаю новому Пользователю куки и заношу в БД
                   const userCookies = setCookieUser(user_id);
                   //создаю сессию

@@ -1,6 +1,7 @@
 require("../variables/global_variables.js");
 const allHandler = require("./allHandler.js");
 const chat = require("../chat/chat.js");
+const getLangDictonary = require("../dictonary/getLangDictonary");
 const {
   config,
   findUserInDB,
@@ -57,6 +58,7 @@ wsServer.on("connection", (ws, req) => {
           currentMap => {
             start.currentMap = currentMap;
             start.towns = infoForStartGame;
+            start.dictonary = getLangDictonary(user.lang);
             ws.send(JSON.stringify(start));
           }
         );

@@ -22,8 +22,8 @@
               <input type="range">
             </div>
             <div class="answer">
-              <div class="answer_result yes" v-on:click="upgradeYes($event)">Да</div>
-              <div class="answer_result no" v-on:click="close">Нет</div>
+              <div class="answer_result yes" v-on:click="{}">Да</div>
+              <div class="answer_result no" v-on:click="{}">Нет</div>
             </div>
           </div>
         </div>
@@ -39,10 +39,34 @@ export default {
     data: Object
   },
   created() {
-    console.log(this.data);
+    console.log(this);
   },
   data() {
-    return {};
+   		return {
+			nameMine: "Description.mine.type[this.sector.mine.type].name[lang]",
+			info:{
+				style:{
+					backgroundImage: "url()",
+				},
+				text:["Lorem ipsum dolor sit amet."],
+		},
+			upgrade:{
+				question:"???",
+				text:"Description.dialog.valueUpgrade[lang]",
+				source:[
+					{
+						style:{
+							backgroundImage: "url()",
+						},
+						value: "3333"
+					},
+				],
+			},
+			time:{
+				text:"wefsd",
+				result:"s123455",
+			}
+		}
   }
 };
 </script>

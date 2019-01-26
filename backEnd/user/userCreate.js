@@ -7,6 +7,7 @@ function userCreate(userData) {
   user.pass = userData.pass;
   user.email = userData.email;
   user.nickName = userData.nickName;
+  user.lang = userData.lang || 'ru';
   user.date = {
     registr: new Date(),
     addCookie: new Date()
