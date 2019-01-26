@@ -2,15 +2,18 @@ const tube = require("../tube.js");
 const listMine = ["gold", "wood", "ore", "gem"];
 
 function createTown(options) {
-  const townName = options.townName || "New Castle";
-  const newTown = Town(townName, listMine);
+  const { createStorage } = tube;
+  // const townName = options.townName || "New Castle";
+  // const newTown = Town(townName, listMine);
   const town = {
-    townName: newTown.name,
-    storage: newTown.storage,
-    regionMap: null
+    name: options.name || "New Castle",
+    storage: createStorage(),
+    regionMap: null,
+    lvl: options.lvl || 0,
+    race: options.race || 0,
   };
   //если замок первый, то создается регион со стандартными шахтами и их положением
-  if (options.status == "new") {
+  if (options.status === "new") {
     town.regionMap = createRegionMap();
   }
   return town;
@@ -50,8 +53,8 @@ function createRegionMap() {
     let x = coordsMine[k].x;
     let y = coordsMine[k].y;
     regionMap[x][y].type = 2; //индекс шахты
-    regionMap[x][y].mine = createMine(); //создается рандомный тип шахты
-    regionMap[x][y].mine.type = listMine[k]; //исправляю рандомный тип шахты на установленный
+    regionMap[x][y].sector = createMine(); //создается рандомный тип шахты
+    regionMap[x][y].sector.type = listMine[k]; //исправляю рандомный тип шахты на установленный
   }
   return regionMap;
 }
@@ -60,7 +63,7 @@ function Town(townName, listMine) {
   const { createStorage } = tube;
   const town = {
     storage: createStorage(),
-    name: townName
+    name: townName,
   };
   return town;
 }

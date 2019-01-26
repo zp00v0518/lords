@@ -92,6 +92,7 @@ function createRegionMap() {
       section.x = i;
       section.y = h;
       section.type = 0; //индекс леса
+      section.sector = {};
       //центр всегда является замком
       if (i == 2 && h == 2) {
         section.type = 1; //индекс замка

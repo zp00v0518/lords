@@ -8,7 +8,8 @@
     "dev": "webpack --watch --config build/webpack.dev.conf.js",
     "start": "node start",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "base": "node backEnd/prepareToStart/createGlobalMap.js"
   },
   "dependencies": {
     "cookies": "^0.7.3",

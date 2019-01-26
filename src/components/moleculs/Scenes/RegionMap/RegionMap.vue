@@ -74,7 +74,7 @@ export default {
     handlerClick() {
       if (!this.cursorOnScene || this.currentTile.type === 1 || this.currentTile.type === 0) return;
       const nameRegion = this.$region.type[this.currentTile.type];
-      const building = this.currentTile[nameRegion];
+      const building = this.currentTile.sector;
       const typeBuilding = building.type;
       const payload = {
         title: this.$dictionary[nameRegion].type[typeBuilding].name[this.$lang],

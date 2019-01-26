@@ -6,7 +6,7 @@
     </template>
     <template v-if="tile.type === 2"> 
        <div class="tooltip__header">{{this.$dictionary[this.nameSector].type[this.type].name[this.lang]}}</div>
-        <div class="tooltip__town"> {{this.$dictionary.general.lvl[this.lang]}}:{{this.tile.mine.lvl}}</div>
+        <div class="tooltip__town"> {{this.$dictionary.general.lvl[this.lang]}}:{{this.tile.sector.lvl}}</div>
     </template>
   </div>
 </template>
@@ -35,8 +35,8 @@ export default {
   },
   computed: {
     type() {
-      if (!this.tile.mine) return;
-      return this.tile.mine.type
+      if (!this.tile.sector.type) return;
+      return this.tile.sector.type
     }
   },
   watch: {

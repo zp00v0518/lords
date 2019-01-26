@@ -9,12 +9,12 @@ function addNewUserToGlobalMap(user, server, callback=function() {}) {
   // console.log("********** addNewUserToGlobalMap Work ************");
   return new Promise((resolve, reject) => {
     checkUserPosition(server, (x, y) => {
-      const newTown = createTown({ status: "new", townName: "Some name" });
-      const ops = {
-        town: createTown({ status: "new", townName: "Some name" }),
-        x,
-        y
-      };
+      const newTown = createTown({ status: "new", name: "Some name" });
+      // const ops = {
+      //   town: createTown({ status: "new", townName: "Some name" }),
+      //   x,
+      //   y
+      // };
       const optionsForUpdateBD = {
         collectionName: config.db.collections.map,
         filtr: {
@@ -28,10 +28,7 @@ function addNewUserToGlobalMap(user, server, callback=function() {}) {
             userId: user._id,
             type: 1,
             nickName: user.nickName,
-            town: {
-              name: newTown.townName,
-              storage: newTown.storage
-            }
+            town: newTown,
           }
         }
       };
@@ -40,10 +37,7 @@ function addNewUserToGlobalMap(user, server, callback=function() {}) {
         GlobalMap[server][x][y].userId = user._id;
         GlobalMap[server][x][y].type = 1;
         GlobalMap[server][x][y].nickName = user.nickName;
-        GlobalMap[server][x][y].town = {
-          name: newTown.townName,
-          storage: newTown.storage
-        };
+        GlobalMap[server][x][y].town = newTown;
       resolve(GlobalMap[server][x][y]);
       return callback(null, GlobalMap[server][x][y]);
 
