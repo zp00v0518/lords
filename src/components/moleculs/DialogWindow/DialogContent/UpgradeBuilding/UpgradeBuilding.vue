@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="info_wrap">
-      <div class="icon" v-bind:style="info.style"></div>
+      <div class="icon" :style="info.style"></div>
       <div class="info">
         <p class="string" v-for="(item ,index) in info.text" :key="index">{{item}}</p>
         <div class="question">{{upgrade.question}}</div>
@@ -10,7 +10,7 @@
           <div class="price_wrap">
             <div class="resource_wrap">
               <div class="resource_item" v-for="(item, index) in upgrade.source" :key="index">
-                <div class="icon" v-bind:style="item.style"></div>
+                <div class="icon" :style="item.style"></div>
                 <div class="sum">{{item.value}}</div>
               </div>
             </div>
@@ -43,7 +43,6 @@ export default {
   },
   data() {
    		return {
-			nameMine: "Description.mine.type[this.sector.mine.type].name[lang]",
 			info:{
 				style:{
 					backgroundImage: "url()",

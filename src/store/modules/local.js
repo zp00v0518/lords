@@ -1,8 +1,13 @@
 const local = {
   state: {
-    lang: 'ru'
+    lang: 'ru',
+    dictionary: {},
     },
-  mutations: {},
+  mutations: {
+    SET_DICTIONARY(state, payload) {
+      state.dictionary = payload;
+    }
+  },
   actions: {}
 }
 

@@ -43,10 +43,10 @@ function createRegionMap() {
       section.id = countSection++;
       section.x = i;
       section.y = h;
-      section.type = Region.type.forest; //индекс леса
+      section.type = Region.typeList.indexOf("forest"); //индекс леса
       //центр всегда является замком
       if (i == 2 && h == 2) {
-        section.type = Region.type.town; //индекс замка
+        section.type = Region.typeList.indexOf("town"); //индекс замка
       }
       regionMap[i][h] = section;
     }
@@ -55,7 +55,7 @@ function createRegionMap() {
   for (let k = 0; k < coordsMine.length; k++) {
     let x = coordsMine[k].x;
     let y = coordsMine[k].y;
-    regionMap[x][y].type = Region.type.mine; //индекс шахты
+    regionMap[x][y].type = Region.typeList.indexOf("mine"); //индекс шахты
     regionMap[x][y].sector = createMine(); //создается рандомный тип шахты
     regionMap[x][y].sector.type = listMine[k]; //исправляю рандомный тип шахты на установленный
   }

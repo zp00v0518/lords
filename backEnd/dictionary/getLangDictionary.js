@@ -1,6 +1,6 @@
 const dictionary = require('./dictionary');
 
-function getLangDictonary(lang) {
+function getLangDictionary(lang) {
   const newObj = {};
   forEach(dictionary, newObj);
 
@@ -10,7 +10,7 @@ function getLangDictonary(lang) {
         next[key] = {}
         forEach(obj[key], next[key]);
       } else {
-        next[lang] = obj[lang] || "";
+        next.txt = obj[lang] || "";
       }
     }
   }
@@ -18,4 +18,4 @@ function getLangDictonary(lang) {
 }
 
 
-module.exports = getLangDictonary
+module.exports = getLangDictionary

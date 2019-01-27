@@ -68,20 +68,22 @@ export default {
       const x = 0;
       const y = parseInt(this.heightScene) / 2;
       return { x, y };
+    },
+    gloss(){
+      return this.$store.state.local.dictionary;
     }
   },
   methods: {
     handlerClick() {
       if (!this.cursorOnScene || this.currentTile.type === 1 || this.currentTile.type === 0) return;
-      const nameRegion = this.$region.type[this.currentTile.type];
+      const nameRegion = this.$region.typeList[this.currentTile.type];
       const building = this.currentTile.sector;
       const typeBuilding = building.type;
       const payload = {
-        title: this.$dictionary[nameRegion].type[typeBuilding].name[this.$lang],
+        title: this.gloss[nameRegion].type[typeBuilding].name.txt,
         data: building,
         component: 'UpgradeBuilding',
       };
-
       this.$store.commit("DIALOG_SHOW", payload);
     },
     drawMap,

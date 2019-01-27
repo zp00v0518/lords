@@ -1,11 +1,5 @@
 const Region = {
-  type: {
-    forest: 0,
-    town: 1,
-    mine: 2,
-    empty: 3,
-    "исследовательское строение": 4
-  }
+  typeList: [ "forest", "town", "mine", "empty", "исследовательское строение"],
 };
 
 module.exports = Region;
