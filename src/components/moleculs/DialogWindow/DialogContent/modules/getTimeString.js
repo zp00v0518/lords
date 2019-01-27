@@ -1,5 +1,4 @@
 function getTimeString(time) {
-  console.log(this.$var)
   const timeList = this.$var.time;
   let string = "";
   if (time >= timeList.day) {
