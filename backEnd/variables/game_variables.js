@@ -24,8 +24,6 @@ const gameVariables = {
 	mine: Mine,
 	region: Region,
 	race: Race,
-	mineTypeList: Mine.mineTypeList,
-	valueUpgrade: Mine.valueUpgrade,
 };
 
 module.exports = gameVariables;

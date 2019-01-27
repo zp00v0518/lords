@@ -1,6 +1,6 @@
 const tube = require("../../tube.js");
 
-function createStorage(listMine = gameVariables.mine.mineTypeList) {
+function createStorage(listMine = gameVariables.mine.typeList) {
   const { upgradeSection } = tube;
   //listMine - массив типов шахт;
   const storage = {

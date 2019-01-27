@@ -1,5 +1,5 @@
 const { getRandomNumber } = require("template_func");
-const mineTypeList = require("../../variables/game_variables.js").mine.mineTypeList;
+const mineTypeList = require("../../variables/game_variables.js").mine.typeList;
 
 const UpgradeSection = require("../../town/buildings/upgradeSection.js"); //такой способ пожключения выбран из-за того, что модуль "createMine"
 //используется при запуске файлов в "prepareToStart"

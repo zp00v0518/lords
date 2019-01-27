@@ -100,7 +100,7 @@ function createGlobalMap() {
         sector.y = h;
         sector.region = createRegion();
         sector.listUpgrade = {
-          castle: {},
+          town: {},
           region: {
             sector: []
           }

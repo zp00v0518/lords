@@ -6,7 +6,7 @@ class WS {
       chatMessage: eventData => this.chatMessage(eventData),
       startMessages: eventData => this.startMessages(eventData),
       change: eventData => this.change(eventData),
-      moveGlobalMap: eventData => this.moveGlobalMap(eventData),
+      moveGlobalMap: eventData => this.moveGlobalMap(eventData)
     };
     this.outgoing = {};
   }
@@ -34,12 +34,12 @@ class WS {
     this.store.commit("SET_CURRENTMAP", eventData);
   }
   startMessages(eventData) {
-    console.log(eventData)
+    console.log(eventData);
     this.store.commit("START_MESSAGES", eventData);
     this.store.commit("SET_CURRENTMAP", eventData);
-    this.store.commit('SET_CURRENT_REGION', eventData.towns[0]);
-    this.store.commit('SET_TOWNS', eventData.towns);
-    this.store.commit('SET_DICTIONARY', eventData.dictionary);
+    this.store.commit("SET_CURRENT_REGION", eventData.towns[0]);
+    this.store.commit("SET_TOWNS", eventData.towns);
+    this.store.commit("SET_DICTIONARY", eventData.dictionary);
   }
   chatMessage(eventData) {
     this.store.commit("UNSHIFT_MESSAGE", eventData);

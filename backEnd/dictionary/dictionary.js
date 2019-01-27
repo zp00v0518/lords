@@ -87,4 +87,4 @@ const dictionary = {
   }
 };
 
-module.exports =  dictionary;
+module.exports = dictionary;

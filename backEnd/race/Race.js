@@ -1,4 +1,4 @@
-const mineTypeList = require("../region/mine/Mine.js").mineTypeList;
+const mineTypeList = require("../region/mine/Mine.js").typeList;
 
 const Race = {
   typeList: ["castle", "elf"],

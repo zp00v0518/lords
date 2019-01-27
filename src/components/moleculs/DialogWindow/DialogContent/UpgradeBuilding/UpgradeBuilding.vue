@@ -1,16 +1,16 @@
 <template>
   <section>
     <div class="info_wrap">
-      <div class="icon" :style="info.style"></div>
+      <img class="icon" :src="info.url">
       <div class="info">
         <p class="string" v-for="(item ,index) in info.text" :key="index">{{item}}</p>
-        <div class="question">{{upgrade.question}}</div>
+        <div class="question">{{gloss.dialog.questions.upgrade.txt}}</div>
         <div class="upgrade_info_wrap">
-          <div class="text">{{upgrade.text}}</div>
+          <div class="text">{{gloss.dialog.valueUpgrade.txt}}</div>
           <div class="price_wrap">
             <div class="resource_wrap">
               <div class="resource_item" v-for="(item, index) in upgrade.source" :key="index">
-                <div class="icon" :style="item.style"></div>
+                <img class="icon" :src="item.url">
                 <div class="sum">{{item.value}}</div>
               </div>
             </div>
@@ -39,33 +39,33 @@ export default {
     data: Object
   },
   created() {
-    console.log(this);
+    this.gloss = this.$store.state.local.dictionary;
+  },
+  watch: {
+    "$store.state.local.dictionary": function() {
+      this.gloss = this.$store.state.local.dictionary;
+    },
   },
   data() {
-   		return {
-			info:{
-				style:{
-					backgroundImage: "url()",
-				},
-				text:["Lorem ipsum dolor sit amet."],
-		},
-			upgrade:{
-				question:"???",
-				text:"Description.dialog.valueUpgrade[lang]",
-				source:[
-					{
-						style:{
-							backgroundImage: "url()",
-						},
-						value: "3333"
-					},
-				],
-			},
-			time:{
-				text:"wefsd",
-				result:"s123455",
-			}
-		}
+    return {
+      gloss: {},
+      info: {
+        url: "img/resources/" + this.data.type + ".gif",
+        text: ["Lorem ipsum dolor sit amet."]
+      },
+      upgrade: {
+        source: [
+          {
+            url: 'img/resources/gold.gif',
+            value: "3333"
+          },
+        ]
+      },
+      time: {
+        text: "wefsd",
+        result: "s123455"
+      }
+    };
   }
 };
 </script>
