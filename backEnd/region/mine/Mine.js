@@ -3,13 +3,8 @@ const resources = require('../../resources/Resources');
 const Mine = {
 	valueUpgrade: [1,2,3,5,8,13,21,34,55],
 	typeList: resources.typeList,
-	priceUpgrade: [
-		{
-			resource: {},
-		}
-	],
 		//возвращает время в течении которого будет проводиться улучшение, в милисекундах
-	timeUpgrade: function(lvl){
+	getTimeUpgrade: function(lvl){
 		let sec = 1000;
 		let minute = 60*sec;
 		let lvl2 = minute*20;
@@ -24,7 +19,9 @@ const Mine = {
 			return 10*sec; 
 		}
 	},
-
+	getResourcesForUpgrade(lvl) {
+		return [{resource: resources.typeList[0], value: this.valueUpgrade[lvl] * 1000}]
+	}
 }
 
 module.exports  = Mine;

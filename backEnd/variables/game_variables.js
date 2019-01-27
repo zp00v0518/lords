@@ -24,6 +24,7 @@ const gameVariables = {
 	mine: Mine,
 	region: Region,
 	race: Race,
+	time,
 };
 
 module.exports = gameVariables;
