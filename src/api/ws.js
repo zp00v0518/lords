@@ -38,7 +38,7 @@ class WS {
     this.store.commit("START_MESSAGES", eventData);
     this.store.commit("SET_CURRENTMAP", eventData);
     this.store.commit("SET_CURRENT_REGION", eventData.towns[0]);
-    this.store.commit("SET_TOWNS", eventData.towns);
+    this.store.dispatch("SET_DATA_CONNECTION", eventData.towns);
     this.store.commit("SET_DICTIONARY", eventData.dictionary);
   }
   chatMessage(eventData) {

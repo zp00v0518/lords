@@ -9,19 +9,26 @@ import config from "../backEnd/config/config";
 const region = require("../backend/region/Region");
 const variables = require("../backend/variables/game_variables");
 import "./components/atoms";
+import "./assets/main.scss";
 const bus = new Vue();
 
 Vue.config.productionTip = false;
 Vue.prototype.$ws = new ws();
 Vue.prototype.$ws.init(
   `ws://localhost:${config.port.ws}${location.pathname}`,
-  store,
+  store
 );
 Vue.prototype.$region = region;
 Vue.prototype.$bus = bus;
 Vue.prototype.$lang = store.state.local.lang;
 Vue.prototype.$var = variables;
 
+Vue.filter("upperFirstSymbol", function(str) {
+  if (!str) return str;
+  return str[0].toUpperCase() + str.slice(1);
+});
+
+import "./assets/mixins.scss";
 /* eslint-disable no-new */
 new Vue({
   el: "#app",

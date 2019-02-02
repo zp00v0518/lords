@@ -18,26 +18,32 @@
             v-for="(item, index) in upgrade.source"
             :key="index"
           >
-            <div class="upgrade__info__resource--icon">
+            <div class="upgrade__price__resource--icon">
               <img :src="'img/resources/'+item.resource+'.gif'">
             </div>
             <div class="upgrade__info__resource--sum">{{item.value}}</div>
           </div>
         </div>
         <div class="upgrade__price--item">
-          <div class="text">{{gloss.date.time.txt}}</div>
+          <div class="text">{{gloss.date.time.txt | upperFirstSymbol}}</div>
           <div class="value">{{upgrade.time}}</div>
         </div>
       </div>
       <div class="upgrade__range">
         <h5 class="upgrade__range--txt">Изменить стоимость и время улучшения</h5>
-        <div class="upgrade__range--item"> 
+        <div class="upgrade__range--item">
           <input type="range" min="70" max="130" v-model="rangeValue" step="1">
         </div>
       </div>
-      <div class="answer">
-        <div class="answer_result yes" v-on:click="{}">Да</div>
-        <div class="answer_result no" v-on:click="{}">Нет</div>
+      <div class="upgrade__answer">
+        <div
+          class="upgrade__answer__item yes"
+          @click="upgratedBuilding"
+        >{{gloss.dialog.answer.yes.txt}}</div>
+        <div
+          class="upgrade__answer__item no"
+          @click="closeDialogWindow"
+        >{{gloss.dialog.answer.no.txt}}</div>
       </div>
     </div>
   </div>
@@ -52,14 +58,18 @@ export default {
   },
   created() {
     this.gloss = this.$store.state.local.dictionary;
-    this.data.lvl = 5;
   },
   computed: {
     upgrade() {
       return {
-        time: this.getTimeString(this.$var.mine.getTimeUpgrade(this.data.lvl, this.rangeValue)),
-        source: this.$var.mine.getResourcesForUpgrade(this.data.lvl, this.rangeValue)
-      }
+        time: this.getTimeString(
+          this.$var.mine.getTimeUpgrade(this.data.lvl, this.rangeValue)
+        ),
+        source: this.$var.mine.getResourcesForUpgrade(
+          this.data.lvl,
+          this.rangeValue
+        )
+      };
     }
   },
   watch: {
@@ -74,15 +84,20 @@ export default {
       info: {
         url: "img/resources/" + this.data.type + ".gif",
         text: ["Lorem ipsum dolor sit amet.", "2Lorem ipsum dolor sit amet."]
-      },
-      // upgrade: {
-      //   time: this.getTimeString(this.$var.mine.getTimeUpgrade(this.data.lvl, this.rangeValue)),
-      //   source: this.$var.mine.getResourcesForUpgrade(this.data.lvl, this.rangeValue)
-      // }
+      }
     };
   },
   methods: {
     getTimeString,
+    closeDialogWindow() {
+      this.$store.commit("DIALOG_CLOSE");
+    },
+    upgratedBuilding() {
+      console.log(this.rangeValue);
+      console.log(this.data.lvl);
+      console.log(this.upgrade.source);
+    },
+    checkSource(sourceArr) {}
   }
 };
 </script>

@@ -1,3 +1,5 @@
+@import "@/assets/variable.scss";
+
 @mixin border($color: black, $width: 1px) {
   border: $width solid $color;
 }
@@ -6,4 +8,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+@mixin short_answer($bg_color: green, $color: yellow, $size: 30px) {
+  @include center;
+  border-radius: 50%;
+  width: $size;
+  height: $size;
+  background-color: $bg_color;
+  color: $color;
+  padding: 18px;
+  font-size: $main-font-size - 2;
+  cursor: pointer;
+  line-height: 12px;
 }

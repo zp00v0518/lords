@@ -1,0 +1,9 @@
+@import "@/assets/variable.scss";
+@import "@/assets/mixins.scss";
+
+.yes {
+  @include short_answer;
+}
+.no {
+  @include short_answer(red, white);
+}
