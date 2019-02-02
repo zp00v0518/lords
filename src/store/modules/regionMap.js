@@ -4,7 +4,7 @@ const regionMap = {
     },
   mutations: {
     SET_CURRENT_REGION(state, town) {
-      state.currentRegion = town.region;
+      state.currentRegion = town.town.regionMap;
     },
   },
   actions: {}

@@ -87,13 +87,14 @@ wsServer.on("connection", (ws, req) => {
       userCookies
     };
     if (allHandler[mess.type]) {
-      allHandler[mess.type](JSON.parse(message), baseInfo);
+      allHandler[mess.type](mess, baseInfo);
     } else {
-      const message = {
-        status: true,
-        type: "change"
-      };
-      ws.send(JSON.stringify(message));
+      // const errMessage = {
+      //   status: true,
+      //   type: "change"
+      // };
+      // ws.send(JSON.stringify(errMessage));
+      ws.send(message);
     }
   });
 });

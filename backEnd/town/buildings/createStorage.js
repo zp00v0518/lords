@@ -1,10 +1,11 @@
 const tube = require("../../tube.js");
+const baseBuilding = require("./baseBuilding.js");
 
 function createStorage(listMine = gameVariables.mine.typeList) {
   const { upgradeSection } = tube;
   //listMine - массив типов шахт;
   const storage = {
-    lvl: 1,
+    lvl: 0,
     upgrade: upgradeSection(),
     maxValue: {
       gold: 100000,
@@ -13,6 +14,7 @@ function createStorage(listMine = gameVariables.mine.typeList) {
     },
     sources: {}
   };
+  Object.assign(storage, baseBuilding)
   //создаются поля, которые соответствуют перечню шахт
   for (let i = 0; i < listMine.length; i++) {
     const type = listMine[i];

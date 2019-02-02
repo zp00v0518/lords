@@ -48,11 +48,19 @@ export default {
     };
   },
   created() {
-    this.currentMap = this.$store.state.regionMap.currentRegion;
+    // this.currentMap = this.$store.state.regionMap.currentRegion;
+    if (this.$store.state.towns.currentTown) {
+     this.currentMap = this.$store.state.towns.currentTown.town.regionMap;
+    }
   },
   watch: {
-    "$store.state.regionMap.currentRegion": function() {
-      this.currentMap = this.$store.state.regionMap.currentRegion;
+    // "$store.state.regionMap.currentRegion": function() {
+    //   this.currentMap = this.$store.state.regionMap.currentRegion;
+    //   this.drawMap();
+    //   this.setBorderIsoMap();
+    // },
+     "$store.state.towns.currentTown.town.regionMap": function() {
+      this.currentMap = this.$store.state.towns.currentTown.town.regionMap;;
       this.drawMap();
       this.setBorderIsoMap();
     }

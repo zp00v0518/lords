@@ -1,7 +1,7 @@
 const towns = {
   state: {
-    towns: [],
-    currentTown: {}
+    towns: null,
+    currentTown: null
   },
   mutations: {
     SET_TOWNS(state, towns) {

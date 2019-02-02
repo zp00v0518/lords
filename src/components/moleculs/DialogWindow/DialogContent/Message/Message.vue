@@ -27,7 +27,6 @@ export default {
       this.$store.commit("DIALOG_CLOSE");
     }
   },
-  mounted() {}
 };
 </script>
 

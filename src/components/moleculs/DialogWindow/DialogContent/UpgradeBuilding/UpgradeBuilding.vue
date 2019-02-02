@@ -73,6 +73,9 @@ export default {
           this.rangeValue
         )
       };
+    },
+    currentTown() {
+      return this.$store.state.towns.currentTown;
     }
   },
   data() {
@@ -91,6 +94,14 @@ export default {
     },
     upgratedBuilding() {
       if (this.checkSource(this.upgrade.source)) {
+        const message = {
+          type: "upgradeBuilding",
+          data: this.data,
+          townIndex: this.$store.state.towns.towns.indexOf(this.currentTown),
+          persent: this.rangeValue,
+        }
+        this.$ws.sendMessage(message)
+        this.$store.commit("DIALOG_CLOSE");
       } else {
         const payload = {
           data: {txt: this.gloss.dialog.notResources.txt},
@@ -100,7 +111,7 @@ export default {
       }
     },
     checkSource(sourceArr) {
-      const sources = this.$store.state.towns.currentTown.town.storage.sources;
+      const sources = this.currentTown.town.storage.sources;
       let flag = true;
       for (let i = 0; i < sourceArr.length; i++) {
         const type = sourceArr[i].resource;
