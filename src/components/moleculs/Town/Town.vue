@@ -80,12 +80,13 @@ export default {
   props: ["town"],
   data() {
     return {
-      name: "1212",
+      name: "Default Name",
       storage: {}
     };
   },
   created() {
-    this.storage = this.town.town.storage;
+    const type = this.$var.town.listBuilding[0];
+    this.storage = this.town.town[type];
     this.name = this.town.town.name;
   },
   computed: {},

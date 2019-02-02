@@ -55,7 +55,7 @@ import glossary from "@/components/mixins/glossary.vue";
 
 export default {
   name: "UpgradeBuilding",
-   mixins: [glossary],
+  mixins: [glossary],
   props: {
     data: Object
   },
@@ -96,22 +96,26 @@ export default {
       if (this.checkSource(this.upgrade.source)) {
         const message = {
           type: "upgradeBuilding",
-          data: this.data,
-          townIndex: this.$store.state.towns.towns.indexOf(this.currentTown),
-          persent: this.rangeValue,
-        }
-        this.$ws.sendMessage(message)
+          data: {
+            townIndex: this.$store.state.towns.towns.indexOf(this.currentTown),
+            persent: this.rangeValue,
+            typeBuilding: this.data.type,
+            parent: this.data.parent
+          }
+        };
+        this.$ws.sendMessage(message);
         this.$store.commit("DIALOG_CLOSE");
       } else {
         const payload = {
-          data: {txt: this.gloss.dialog.notResources.txt},
+          data: { txt: this.gloss.dialog.notResources.txt },
           type: "message"
         };
         this.$store.dispatch("DIALOG_SHOW", payload);
       }
     },
     checkSource(sourceArr) {
-      const sources = this.currentTown.town.storage.sources;
+      const type = this.$var.town.listBuilding[0];
+      const sources = this.currentTown.town[type].sources;
       let flag = true;
       for (let i = 0; i < sourceArr.length; i++) {
         const type = sourceArr[i].resource;
