@@ -1,6 +1,6 @@
 const chat = {
   state: {
-    is: false,
+    is: true,
     messages: [],
     },
   mutations: {

@@ -44,7 +44,7 @@ export default {
   },
   data() {
     return {
-      showChat: false,
+      showChat: true,
       showSmallChat: true,
       messageForSend: {
         text: "",
