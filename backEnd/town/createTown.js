@@ -8,9 +8,10 @@ function createTown(options) {
   const indexRace = options.race || Number(0);
   const race = Race.typeList[indexRace];
   listMine = Race[race].mine.default;
+  const storage = createStorage();
   const town = {
     name: options.name || "New Castle",
-    storage: createStorage(),
+    [storage.type] : storage,
     regionMap: null,
     lvl: options.lvl || 0,
     race: indexRace

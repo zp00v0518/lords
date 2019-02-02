@@ -19,8 +19,8 @@ function Mine(type, lvl = 0) {
 
 function createMine(type) {
   if (!type) {
-    let index = getRandomNumber(baseMine.mineTypeList.length - 1);
-    let mine = new Mine(baseMine.mineTypeList[index]);
+    let index = getRandomNumber(baseMine.typeList.length - 1);
+    let mine = new Mine(baseMine.typeList[index]);
     return mine;
   } else {
     let mine = new Mine(type);

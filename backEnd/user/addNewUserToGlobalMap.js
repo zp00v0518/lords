@@ -9,7 +9,7 @@ function addNewUserToGlobalMap(user, server, callback = function() {}) {
   // console.log("********** addNewUserToGlobalMap Work ************");
   return new Promise((resolve, reject) => {
     checkUserPosition(server, (x, y) => {
-      const newTown = createTown({ status: "new", name: "Some name" });
+      const newTown = createTown({ status: "new", name: "New Castle" });
       const optionsForUpdateBD = {
         collectionName: config.db.collections.map,
         filtr: {
