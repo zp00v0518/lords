@@ -82,7 +82,7 @@ export default {
       const payload = {
         title: this.gloss[nameRegion].type[typeBuilding].name.txt,
         data: building,
-        component: 'UpgradeBuilding',
+        type: 'upgradeBuilding',
       };
       this.$store.commit("DIALOG_SHOW", payload);
     },

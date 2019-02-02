@@ -58,6 +58,7 @@ export default {
   },
   created() {
     this.gloss = this.$store.state.local.dictionary;
+    this.data.lvl = 8;
   },
   computed: {
     upgrade() {
@@ -93,11 +94,28 @@ export default {
       this.$store.commit("DIALOG_CLOSE");
     },
     upgratedBuilding() {
-      console.log(this.rangeValue);
-      console.log(this.data.lvl);
-      console.log(this.upgrade.source);
+      if (this.checkSource(this.upgrade.source)) {
+      } else {
+        const payload = {
+          data: {txt: "Не хватает ресурсов"},
+          type: "message"
+        };
+        this.$store.dispatch("DIALOG_SHOW", payload);
+      }
     },
-    checkSource(sourceArr) {}
+    checkSource(sourceArr) {
+      const sources = this.$store.state.towns.currentTown.town.storage.sources;
+      let flag = true;
+      for (let i = 0; i < sourceArr.length; i++) {
+        const type = sourceArr[i].resource;
+        const value = +sourceArr[i].value;
+        if (sources[type].nowValue < value) {
+          flag = false;
+          break;
+        }
+      }
+      return flag;
+    }
   }
 };
 </script>
