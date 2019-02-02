@@ -1,0 +1,17 @@
+@import "@/assets/variable.scss";
+@import "@/assets/mixins.scss";
+
+.message {
+  flex-grow: 5;
+  display: flex;
+  flex-direction: column;
+   &__content {
+     height: 80%;
+     @include center;
+     border-bottom: 1px solid;
+   }
+   &__answer{
+    padding: 5px;
+    @include center;
+   }
+}

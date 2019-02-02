@@ -51,14 +51,16 @@
 
 <script>
 import { getTimeString } from "../modules";
+import glossary from "@/components/mixins/glossary.vue";
+
 export default {
   name: "UpgradeBuilding",
+   mixins: [glossary],
   props: {
     data: Object
   },
   created() {
-    this.gloss = this.$store.state.local.dictionary;
-    this.data.lvl = 8;
+    this.$emit("set-height", { width: "90%", height: "90%" });
   },
   computed: {
     upgrade() {
@@ -73,18 +75,12 @@ export default {
       };
     }
   },
-  watch: {
-    "$store.state.local.dictionary": function() {
-      this.gloss = this.$store.state.local.dictionary;
-    }
-  },
   data() {
     return {
-      gloss: {},
       rangeValue: 100,
       info: {
         url: "img/resources/" + this.data.type + ".gif",
-        text: ["Lorem ipsum dolor sit amet.", "2Lorem ipsum dolor sit amet."]
+        text: ["Lorem ipsum dolor sit amet.", "2 Lorem ipsum dolor sit amet."]
       }
     };
   },
@@ -97,7 +93,7 @@ export default {
       if (this.checkSource(this.upgrade.source)) {
       } else {
         const payload = {
-          data: {txt: "Не хватает ресурсов"},
+          data: {txt: this.gloss.dialog.notResources.txt},
           type: "message"
         };
         this.$store.dispatch("DIALOG_SHOW", payload);

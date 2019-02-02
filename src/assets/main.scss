@@ -7,3 +7,6 @@
 .no {
   @include short_answer(red, white);
 }
+.ok {
+  @include short_answer;
+}

@@ -1,5 +1,10 @@
 <template>
-  <div class="upgrade">{{data.txt}}</div>
+  <div class="message">
+    <div class="message__content">{{data.txt}}</div>
+    <div class="message__answer">
+      <div class="ok" @click="closeDialogWindow">OK</div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -12,7 +17,7 @@ export default {
     data: Object
   },
   created() {
-    this.$emit("set-height", {width: "50%", height: "50%"})
+    this.$emit("set-height", { width: "50%", height: "50%" });
   },
   data() {
     return {};
@@ -22,8 +27,7 @@ export default {
       this.$store.commit("DIALOG_CLOSE");
     }
   },
-  mounted () {
-  }
+  mounted() {}
 };
 </script>
 

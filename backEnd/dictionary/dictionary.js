@@ -27,6 +27,9 @@ const dictionary = {
     valueUpgrade: {
       ru: "Стоимость улучшения"
     },
+    notResources:{
+      ru: "Не хватает ресурсов"
+    },
     questions: {
       upgrade: {
         ru: "Вы хотите улучшить это здание?"
