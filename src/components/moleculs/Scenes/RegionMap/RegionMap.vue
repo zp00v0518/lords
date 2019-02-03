@@ -90,7 +90,7 @@ export default {
       const payload = {
         title: this.gloss[nameRegion].type[typeBuilding].name.txt,
         data: building,
-        type: 'upgradeBuilding',
+        type: 'upgradeRegion',
       };
       this.$store.commit("DIALOG_SHOW", payload);
     },

@@ -1,7 +1,7 @@
-import UpgradeBuilding from './UpgradeBuilding'
+import UpgradeRegion from './UpgradeRegion'
 import Message from './Message'
 
 export default {
-  UpgradeBuilding,
+  UpgradeRegion,
   Message,
 };

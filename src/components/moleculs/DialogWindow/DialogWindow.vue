@@ -37,6 +37,9 @@ export default {
       this.width = e.width;
     }
   },
+  updated () {
+    // console.log(this.$store)
+  }
 };
 </script>
 

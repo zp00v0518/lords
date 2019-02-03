@@ -32,6 +32,6 @@ export default dialog;
 
 
 const typeDialog = {
-  upgradeBuilding: "UpgradeBuilding",
+  upgradeRegion: "UpgradeRegion",
   message: "Message"
 }

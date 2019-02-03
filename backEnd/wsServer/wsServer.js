@@ -8,7 +8,6 @@ const {
   getInfoForStartGame,
   getGlobalMapSector
 } = require("../tube.js");
-const tube = require("../tube.js");
 const WS = require("ws");
 const watcher = require("../liveReload/watchFs.js");
 const Cookies = require("cookies");
@@ -89,11 +88,6 @@ wsServer.on("connection", (ws, req) => {
     if (allHandler[mess.type]) {
       allHandler[mess.type](mess, baseInfo);
     } else {
-      // const errMessage = {
-      //   status: true,
-      //   type: "change"
-      // };
-      // ws.send(JSON.stringify(errMessage));
       ws.send(message);
     }
   });
@@ -105,7 +99,7 @@ function callbackForWatcher() {
     if (UserOnline[server].count > 0) {
       const message = {
         status: true,
-        type: "change"
+        type: "reload"
       };
       for (let user in UserOnline[server]) {
         if (user !== "count") {

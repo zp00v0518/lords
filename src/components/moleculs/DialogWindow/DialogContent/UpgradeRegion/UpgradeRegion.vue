@@ -94,8 +94,10 @@ export default {
     },
     upgratedBuilding() {
       if (this.checkSource(this.upgrade.source)) {
+          console.log(this.currentTown)
+
         const message = {
-          type: "upgradeBuilding",
+          type: "upgradeRegion",
           data: {
             townIndex: this.$store.state.towns.towns.indexOf(this.currentTown),
             persent: this.rangeValue,
@@ -132,5 +134,5 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-@import "upgrade_building.scss";
+@import "upgrade_region.scss";
 </style>

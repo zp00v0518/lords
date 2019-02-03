@@ -5,7 +5,7 @@ class WS {
     this.incoming = {
       chatMessage: eventData => this.chatMessage(eventData),
       startMessages: eventData => this.startMessages(eventData),
-      change: eventData => this.change(eventData),
+      reload: eventData => this.reload(eventData),
       moveGlobalMap: eventData => this.moveGlobalMap(eventData)
     };
     this.outgoing = {};
@@ -52,7 +52,7 @@ class WS {
     this.sendMessage(message);
   }
 
-  change() {
+  reload() {
     location.reload();
   }
 }
