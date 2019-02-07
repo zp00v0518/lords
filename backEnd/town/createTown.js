@@ -2,6 +2,7 @@ const tube = require("../tube.js");
 const Region = require("../region/Region");
 const Race = require("../race/Race");
 let listMine = [];
+let townCount = 0;
 
 function createTown(options) {
   const { createStorage } = tube;
@@ -10,6 +11,7 @@ function createTown(options) {
   listMine = Race[race].mine.default;
   const storage = createStorage();
   const town = {
+    id: townCount++,
     name: options.name || "New Castle",
     [storage.type] : storage,
     regionMap: null,

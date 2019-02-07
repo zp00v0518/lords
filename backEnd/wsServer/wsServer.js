@@ -11,6 +11,7 @@ const {
 const WS = require("ws");
 const watcher = require("../liveReload/watchFs.js");
 const Cookies = require("cookies");
+const {tryJsonParse} = require('template_func')
 
 class WsServer {
   init(port) {
@@ -79,7 +80,11 @@ wsServer.on("connection", (ws, req) => {
     }
   });
   ws.on("message", message => {
-    const mess = JSON.parse(message);
+    const mess = tryJsonParse(message);
+    if (!mess) {
+      console.log("Не удалось распарсить строку пришедшую от клиента")
+      ws.send(message);
+    }
     const baseInfo = {
       player: UserOnline[server][User._id],
       server,

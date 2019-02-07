@@ -89,7 +89,11 @@ export default {
       const typeBuilding = building.type;
       const payload = {
         title: this.gloss[nameRegion].type[typeBuilding].name.txt,
-        data: building,
+        data: {
+          building,
+          x: this.currentTile.x,
+          y: this.currentTile.y,
+        },
         type: 'upgradeRegion',
       };
       this.$store.commit("DIALOG_SHOW", payload);

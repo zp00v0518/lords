@@ -59,17 +59,28 @@ export default {
   props: {
     data: Object
   },
+    data() {
+    return {
+      building: null,
+      rangeValue: 100,
+      info: {
+        url: "img/resources/" + this.data.building.type + ".gif",
+        text: ["Lorem ipsum dolor sit amet.", "2 Lorem ipsum dolor sit amet."]
+      }
+    };
+  },
   created() {
+    this.building = this.data.building;
     this.$emit("set-height", { width: "90%", height: "90%" });
   },
   computed: {
     upgrade() {
       return {
         time: this.getTimeString(
-          this.$var.mine.getTimeUpgrade(this.data.lvl, this.rangeValue)
+          this.$var.mine.getTimeUpgrade(this.building.lvl, this.rangeValue)
         ),
         source: this.$var.mine.getResourcesForUpgrade(
-          this.data.lvl,
+          this.building.lvl,
           this.rangeValue
         )
       };
@@ -78,15 +89,7 @@ export default {
       return this.$store.state.towns.currentTown;
     }
   },
-  data() {
-    return {
-      rangeValue: 100,
-      info: {
-        url: "img/resources/" + this.data.type + ".gif",
-        text: ["Lorem ipsum dolor sit amet.", "2 Lorem ipsum dolor sit amet."]
-      }
-    };
-  },
+
   methods: {
     getTimeString,
     closeDialogWindow() {
@@ -94,15 +97,22 @@ export default {
     },
     upgratedBuilding() {
       if (this.checkSource(this.upgrade.source)) {
-          console.log(this.currentTown)
-
         const message = {
           type: "upgradeRegion",
           data: {
             townIndex: this.$store.state.towns.towns.indexOf(this.currentTown),
             persent: this.rangeValue,
-            typeBuilding: this.data.type,
-            parent: this.data.parent
+            building: { 
+              type: this.building.type,
+                x: this.data.x,
+                y: this.data.y,
+              },
+            parent: this.building.parent,
+            regionCoords: {
+              
+            }
+
+            
           }
         };
         this.$ws.sendMessage(message);
