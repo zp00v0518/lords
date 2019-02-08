@@ -1,7 +1,9 @@
+require('./backEnd/config/srcRequire.js');
 require("./backEnd/variables/global_variables.js");
 require("./backEnd/wsServer/wsServer.js");
 
 const http = require("http");
+
 
 const { config, getMethod, postMethod } = require("./backEnd/tube.js");
 

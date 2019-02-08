@@ -45,7 +45,7 @@ function getMethod(req, res, startPath) {
   } else if (userCookies) {
     findUserInDB(userCookies).then(result => {
       if (result) {
-        const checkServerName = config.db.collections.servers.includes(
+        const checkServerName = config.db.collections.servers.map(item => item.name).includes(
           pathName.split("/")[1]
         );
         pathName = checkServerName

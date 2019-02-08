@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>User</title>
-	<script src="js/template/templateFunc.js"></script>
-	<!-- <script src='js/liveReload.js'></script> -->
-	<link rel="stylesheet" href="style/user/header.css">
-	<script src="js/developer.js"></script>
-	<script src="js/user/userPage.js"></script>
-	<style>
-		body {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-		}
-	</style>
-</head>
-<body>
-		<input id="dev" type="text" style="width:400px; margin-bottom: 100px;">
+  <head>
+    <meta charset="UTF-8" />
+    <title>User</title>
+    <script src="js/template/templateFunc.js"></script>
+    <!-- <script src='js/liveReload.js'></script> -->
+    <link rel="stylesheet" href="style/user/header.css" />
+    <script src="js/developer.js"></script>
+    <script src="js/user/userPage.js"></script>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="dev" type="text" style="width:400px; margin-bottom: 100px;" />
 
-	<header><span id='userName' class="userName"></span></header>
-	<main>
-			<div id="choiseServer" class="choice_server">
-			<a href="server_1">	<button type='button' data-server='server_1'>Server #1</button></a>
-				<button type='button' data-server='server_2'><a href="server_2">Server #2</a></button>
-		</div>
-	</main>
-	<footer></footer>
+    <header><span id="userName" class="userName"></span></header>
+    <main>
+      <div id="choiseServer" class="choice_server">
+        <a href="First">
+          <button type="button" data-server="server_1">Server #1</button></a
+        >
+        <button type="button" data-server="server_2">
+          <a href="Second">Server #2</a>
+        </button>
+      </div>
+    </main>
+    <footer></footer>
 
-	<!-- <script>
+    <!-- <script>
 	const serverList = document.getElementById('choiseServer');
 		serverList.addEventListener('click', choiseServer);
 
@@ -40,5 +44,5 @@
 			})
 		}
 	</script> -->
-</body>
+  </body>
 </html>

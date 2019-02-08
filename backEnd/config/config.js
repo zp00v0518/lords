@@ -11,7 +11,7 @@ module.exports = {
     collections: {
       users: "users",
       session: "session",
-      servers: ["server_1"],
+      servers: [{name:"First", collectionName:'server_1'}, {name:"Second", collectionName:'server_2'}],
       map: 'globalMap',
       chat: 'chat',
     }

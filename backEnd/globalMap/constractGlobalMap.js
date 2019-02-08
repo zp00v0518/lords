@@ -2,12 +2,14 @@
 //чтобы не обращаться постоянно в БД
 
 const { findInDB, config } = require("../tube.js");
+const schema = require('../workWithMongoDB/schema')
 const find = new findInDB();
 const GlobalMap = {};
 const serverList = config.db.collections.servers;
 
 function constractGlobalMap() {
-  serverList.forEach(serverName => {
+  serverList.forEach(server => {
+    const serverName = server.collectionName;
     GlobalMap[serverName] = [];
     for (let i=0; i<gameVariables.numSectionGlobalMap; i++){
       let row = [];
@@ -18,8 +20,9 @@ function constractGlobalMap() {
       }
     };
     const findOptions = {
-      collectionName: config.db.collections.map,
-      query: {server: serverName},
+      collectionName: serverName,
+      // collectionName: config.db.collections.map,
+      query: {class: schema.document.class.map},
     };
     find.all(findOptions).then(result => {
       const regionsArr = result.result;

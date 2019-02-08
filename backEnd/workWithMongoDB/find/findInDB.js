@@ -3,11 +3,6 @@ const config = require("../../config/config.js");
 const mongo = new connectMongoDB();
 mongo.connect({ dbName: config.db.name });
 
-class findInDB {
-  
-}
-
-
 function findInDB() {
   // console.log("**********findInDB work*********");
   this.one = function(options, callback = function() {}) {

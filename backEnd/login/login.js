@@ -24,7 +24,6 @@ function login(req, res, loginData, Cookies) {
       } else if (status === "authErr") {
         sendResponse(res, JSON.stringify(checkLoginResult));
       } else if (status === "authOk") {
-
         Cookies.set("user", checkLoginResult.userCookies, { maxAge: twoWeek });
         Cookies.set("session", checkLoginResult.sessionCookies);
         const answer = {};
@@ -32,7 +31,7 @@ function login(req, res, loginData, Cookies) {
         answer.nextStep = config.listFile.html.cabinet + ".html";
         sendResponse(res, JSON.stringify(answer));
         //добавляю юзера в список онлайновых
-        UserOnline[checkLoginResult.userCookies] = {};
+        // UserOnline[checkLoginResult.userCookies] = {};
         return;
       }
       sendResponse(res, JSON.stringify(checkLoginResult));

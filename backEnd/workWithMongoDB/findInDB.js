@@ -1,8 +1,6 @@
 const connectMongoDB = require("./connectMongoDB.js");
 const config = require("../config/config.js");
-// const {config} = require('../tube.js');
 const mongo = new connectMongoDB();
-// mongo.connect({dbName:'test'});
 mongo.connect({ dbName: config.db.name });
 
 function findInDB() {

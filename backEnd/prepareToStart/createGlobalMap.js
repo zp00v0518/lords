@@ -1,6 +1,7 @@
 //создает коллекцию globalMap в БД
 const { getRandomNumber } = require("template_func");
 const insert = require("../workWithMongoDB/insertDB.js");
+const schema = require("../workWithMongoDB/schema.js");
 const gameVariable = require("../variables/game_variables.js");
 const createMine = require("../region/mine/createMine.js");
 const config = require("../config/config.js");
@@ -85,15 +86,17 @@ function createRegion() {
 }
 
 function createGlobalMap() {
-  serverList.forEach(serverName => {
+  serverList.forEach(server => {
     let countRegion = 0;
+    const serverName = server.collectionName;
     GlobalMap[serverName] = [];
     for (let i = 0; i < numSectionGlobalMap; i++) {
       let row = [];
       GlobalMap[serverName].push(row);
       for (let h = 0; h < numSectionGlobalMap; h++) {
         let sector = {};
-        sector.server = serverName;
+        sector.class = schema.document.class.map;
+        sector.serverName = serverName;
         sector.id = countRegion++;
         sector.type = 0;
         sector.x = i;
@@ -115,14 +118,14 @@ function createGlobalMap() {
   });
 }
 
-function recursiveOne(i, arr, callback) {
+function recursiveOne(i, arr, serverName, callback) {
   if (i < arr.length) {
     insertDB.one(
-      { collectionName: config.db.collections.map, doc: arr[i] },
+      { collectionName: serverName, doc: arr[i] },
       result => {
         console.log(result.ops);
         i++;
-        recursiveOne(i, arr, callback);
+        recursiveOne(i, arr, serverName, callback);
       }
     );
   } else {
@@ -130,12 +133,12 @@ function recursiveOne(i, arr, callback) {
   }
 }
 
-function recursiveTwo(h, i, arr, callback) {
+function recursiveTwo(h, i, arr, serverName, callback) {
   if (h < arr.length) {
     let nextArr = arr[h];
-    recursiveOne(i, nextArr, () => {
+    recursiveOne(i, nextArr, serverName, () => {
       h++;
-      recursiveTwo(h, i, arr, callback);
+      recursiveTwo(h, i, arr, serverName, callback);
     });
   } else {
     callback();
@@ -144,9 +147,9 @@ function recursiveTwo(h, i, arr, callback) {
 
 function recursiveTree(a, h, i, serverList, callback) {
   if (a < serverList.length) {
-    const serverName = serverList[a];
+    const serverName = serverList[a].collectionName;
     let nextArr = GlobalMap[serverName];
-    recursiveTwo(h, i, nextArr, () => {
+    recursiveTwo(h, i, nextArr, serverName, () => {
       a++;
       recursiveTree(a, h, i, serverList, callback);
     });
@@ -162,4 +165,4 @@ setTimeout(function() {
     console.log("done");
     insertDB.close();
   });
-}, 5000);
+}, 4000);

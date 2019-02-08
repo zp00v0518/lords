@@ -9,7 +9,8 @@ const appStatistic = {
   }
 };
 
-config.db.collections.servers.forEach(serverName => {
+config.db.collections.servers.forEach(server => {
+  const serverName = server.collectionName;
   UserOnline[serverName] = {};
   UserOnline[serverName].count = 0;
 })

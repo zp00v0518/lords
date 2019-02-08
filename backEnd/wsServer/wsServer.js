@@ -11,7 +11,8 @@ const {
 const WS = require("ws");
 const watcher = require("../liveReload/watchFs.js");
 const Cookies = require("cookies");
-const {tryJsonParse} = require('template_func')
+const {tryJsonParse} = require('template_func');
+const getCollectionName = srcRequire('/template_modules/getCollectionName');
 
 class WsServer {
   init(port) {
@@ -27,7 +28,7 @@ class WsServer {
 const wsServer = new WsServer();
 wsServer.init(config.port.ws);
 wsServer.on("connection", (ws, req) => {
-  const server = req.url.split("/")[1];
+  const server = getCollectionName(req.url.split("/")[1]);
   const cookies = new Cookies(req);
   const userCookies = cookies.get("user");
   let User;
@@ -52,6 +53,7 @@ wsServer.on("connection", (ws, req) => {
           infoForStartGame[0].x;
         UserOnline[server][User._id].user.globalMap.centerMap.y =
           infoForStartGame[0].y;
+          console.log(123)
         getGlobalMapSector(
           UserOnline[server][User._id].user,
           server,
