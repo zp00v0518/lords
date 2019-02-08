@@ -37,7 +37,6 @@ wsServer.on("connection", (ws, req) => {
     type: "startMessages",
     chat
   };
-  // console.log(userCookies)
   findUserInDB(userCookies).then(user => {
     if (user) {
       User = user;
@@ -65,7 +64,6 @@ wsServer.on("connection", (ws, req) => {
         );
       });
     } else {
-      // console.log("Юзер не найден");
       const message = {
         status: false,
         redirectUrl: "/"

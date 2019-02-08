@@ -5,8 +5,8 @@ import config from '../../backEnd/config/config'
 
 Vue.use(Router);
 
-const servers = config.db.collections.servers.map(name => {
-  return '/'+name;
+const servers = config.db.collections.servers.map(item => {
+  return '/'+item.name;
 })
 
 export default new Router({
