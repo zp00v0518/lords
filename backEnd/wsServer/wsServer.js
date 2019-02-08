@@ -53,7 +53,6 @@ wsServer.on("connection", (ws, req) => {
           infoForStartGame[0].x;
         UserOnline[server][User._id].user.globalMap.centerMap.y =
           infoForStartGame[0].y;
-          console.log(123)
         getGlobalMapSector(
           UserOnline[server][User._id].user,
           server,

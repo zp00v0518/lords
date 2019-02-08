@@ -8,9 +8,10 @@ const {
   sendResponse,
   config,
   findUserInDB,
-  findUserInGlobalMap
+  addCollectionsToUser
 } = require("./tube.js");
 const log = new template.Log(__filename);
+const { getCollectionName } = srcRequire("./template_modules");
 
 function getMethod(req, res, startPath) {
   // log.log("**********getMethod work*********");
@@ -43,18 +44,22 @@ function getMethod(req, res, startPath) {
     });
     //если userCookies есть, ищем совпадение в БД
   } else if (userCookies) {
-    findUserInDB(userCookies).then(result => {
-      if (result) {
-        const checkServerName = config.db.collections.servers.map(item => item.name).includes(
-          pathName.split("/")[1]
-        );
-        pathName = checkServerName
-          ? config.listFile.html.game + ".html"
-          : config.listFile.html.cabinet + ".html";
+    findUserInDB(userCookies).then(resultFinUser => {
+      if (resultFinUser) {
+        const checkServerName = getCollectionName(pathName.split("/")[1]);
+        if (!checkServerName) {
+          //отправляем пользователя в личный кабинет
+          pathName = config.listFile.html.cabinet + ".html";
+        } else if (!resultFinUser.collections.includes(checkServerName)) {
+          addCollectionsToUser(resultFinUser._id, checkServerName);
+          pathName = config.listFile.html.game + ".html";
+        } else {
+          pathName = config.listFile.html.game + ".html";
+        }
       } else {
-        pathName = config.listFile.html.login + ".html" ;
+        pathName = config.listFile.html.login + ".html";
       }
-      
+
       // pathName = config.listFile.html.cabinet + ".html";
       const pathJoin = path.join(startPath, config.basePathToFiles, pathName);
       const ext = path.parse(pathName).ext;

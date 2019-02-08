@@ -14,7 +14,7 @@ function userCreate(userData) {
   };
   user.cookie = "";
   user.session = [];
-  user.server = [];
+  user.collections = [];
   return user;
 }
 

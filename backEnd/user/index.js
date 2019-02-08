@@ -1,10 +1,10 @@
 const userCreate = require("./userCreate.js");
 const getInfoForUserPage = require("./getInfoForUserPage.js");
 const { findUserInGlobalMap, findUserInDB } = require("./findUser.js");
-// const findUserInGlobalMap = require("./findUserInGlobalMap.js");
-const getInfoForStartGame= require("./getInfoForStartGame.js");
-const addNewUserToGlobalMap= require("./addNewUserToGlobalMap.js");
-const updateUser= require("./updateUser.js");
+const getInfoForStartGame = require("./getInfoForStartGame.js");
+const addNewUserToGlobalMap = require("./addNewUserToGlobalMap.js");
+const updateUser = require("./updateUser.js");
+const addCollectionsToUser = require("./addCollectionsToUser.js");
 
 module.exports = {
   userCreate,
@@ -14,4 +14,5 @@ module.exports = {
   getInfoForStartGame,
   addNewUserToGlobalMap,
   updateUser,
+  addCollectionsToUser
 };
