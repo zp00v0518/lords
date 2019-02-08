@@ -1,4 +1,5 @@
 const path = require("path");
+const schema = require("../workWithMongoDB/schema");
 module.exports = {
   port: {
     http: 4000,
@@ -33,5 +34,6 @@ module.exports = {
       err: "404",
       game: "game"
     }
-  }
+  },
+  schema,
 };

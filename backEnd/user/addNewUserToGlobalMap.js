@@ -4,18 +4,18 @@ const { GlobalMap, config, updateDB } = tube;
 const update = new updateDB();
 
 //добавляю нового Игрока на глобальную карту
-function addNewUserToGlobalMap(user, server, callback = function() {}) {
+function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
   const { createTown } = tube;
   // console.log("********** addNewUserToGlobalMap Work ************");
   return new Promise((resolve, reject) => {
-    checkUserPosition(server, (x, y) => {
+    checkUserPosition(serverName, (x, y) => {
       const newTown = createTown({ status: "new", name: "New Castle" });
       const optionsForUpdateBD = {
-        collectionName: config.db.collections.map,
+        collectionName: serverName,
         filtr: {
           x,
           y,
-          server
+          class: config.schema.document.class.map,
         },
         updateDoc: {
           $set: {
@@ -28,23 +28,23 @@ function addNewUserToGlobalMap(user, server, callback = function() {}) {
         }
       };
       update.one(optionsForUpdateBD).then(result => {
-        GlobalMap[server][x][y].region = newTown.regionMap;
-        GlobalMap[server][x][y].userId = user._id;
-        GlobalMap[server][x][y].type = 1;
-        GlobalMap[server][x][y].nickName = user.nickName;
-        GlobalMap[server][x][y].town = newTown;
-        resolve(GlobalMap[server][x][y]);
-        return callback(null, GlobalMap[server][x][y]);
+        GlobalMap[serverName][x][y].region = newTown.regionMap;
+        GlobalMap[serverName][x][y].userId = user._id;
+        GlobalMap[serverName][x][y].type = 1;
+        GlobalMap[serverName][x][y].nickName = user.nickName;
+        GlobalMap[serverName][x][y].town = newTown;
+        resolve(GlobalMap[serverName][x][y]);
+        return callback(null, GlobalMap[serverName][x][y]);
       });
     });
   });
 }
 
 //получения случайного региона и проверка на занятость другим игроком или памятником
-function checkUserPosition(server, callback) {
+function checkUserPosition(serverName, callback) {
   var x = getRandomNumber(gameVariables.numSectionGlobalMap - 1);
   var y = getRandomNumber(gameVariables.numSectionGlobalMap - 1);
-  var region = GlobalMap[server][x][y];
+  var region = GlobalMap[serverName][x][y];
   if (region.type !== 0) {
     return checkUserPosition(callback);
   } else {
