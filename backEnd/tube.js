@@ -88,3 +88,6 @@ module.exports.postMethod = postMethod;
 const { reloadMessage, redirectMessage } = require('./wsServer');
 module.exports.reloadMessage = reloadMessage;
 module.exports.redirectMessage = redirectMessage;
+
+const gloss = require("./dictionary/dictionary.js")
+module.exports.gloss = gloss;

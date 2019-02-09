@@ -1,4 +1,4 @@
-const { checkSource, checkSchema, redirectMessage } = require("../tube.js");
+const { checkSource, checkSchema, redirectMessage, gloss } = require("../tube.js");
 const regionLength = gameVariables.numSectionRegionMap;
 
 function upgradeBuilding(message, info) {
@@ -9,10 +9,25 @@ function upgradeBuilding(message, info) {
     return;
   }
   const sector = info.player.sectors[data.sectorIndex];
-  const regionSector = sector.region[data.building.x][data.building.y];
+  const building = sector.region[data.building.x][data.building.y].sector;
+  if (building.type !== data.building.type) {
+    redirectMessage(ws);
+    return;
+  }
+  const lang = info.player.user.lang;
+  if (building.upgrade.is) {
+    const response = {
+      type: "upgradeBuilding",
+      status: true,
+      upgrade: false,
+      message: gloss.dialog.isUpgrade[lang]
+    };
+    ws.send(JSON.stringify(response));
+    return;
+  }
   
-  ws.send(JSON.stringify(message));
-  ws.send(JSON.stringify(info));
+  // ws.send(JSON.stringify(message));
+  // ws.send(JSON.stringify(info));
 }
 
 module.exports = upgradeBuilding;

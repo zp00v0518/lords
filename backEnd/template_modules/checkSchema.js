@@ -25,6 +25,7 @@ function checkSchema(obj, schema) {
       }
       if (type === 'string' && schema[key].regExp) {
         flag = schema[key].regExp.test(value);
+        schema[key].regExp.lastIndex = 0;
         if(!flag){
           break;
         }

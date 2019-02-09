@@ -1,3 +1,5 @@
+import modules  from "./modules";
+
 class WS {
   init(wsAddr, store) {
     this.connectionToWs(wsAddr);
@@ -6,7 +8,8 @@ class WS {
       chatMessage: eventData => this.chatMessage(eventData),
       startMessages: eventData => this.startMessages(eventData),
       reload: eventData => this.reload(eventData),
-      moveGlobalMap: eventData => this.moveGlobalMap(eventData)
+      moveGlobalMap: eventData => this.moveGlobalMap(eventData),
+      upgradeBuilding: eventData => this.upgradeBuilding(eventData)
     };
     this.outgoing = {};
   }
@@ -25,7 +28,7 @@ class WS {
         if (data.redirectUrl) {
           location = data.redirectUrl;
         } else {
-          console.log(data);
+          console.log(data)
         }
       }
     };
@@ -51,9 +54,10 @@ class WS {
     message.type = "chatMessage";
     this.sendMessage(message);
   }
-
   reload() {
     location.reload();
   }
+  upgradeBuilding = modules.upgradeBuilding;
+
 }
 export default WS;
