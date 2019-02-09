@@ -1,10 +1,10 @@
-const { checkSource, checkSchema } = require('../tube.js');
+const { checkSource, checkSchema, redirectMessage } = require('../tube.js');
 
 function upgradeBuilding(message, info) {
   const data = message.data;
   const ws = info.player.ws;
   if (!checkSchema(data, schema)){
-    ws.send(JSON.stringify(message));
+    redirectMessage(ws)
     return;
   }
   const sectors = info.player.sectors;

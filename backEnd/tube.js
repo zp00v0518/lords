@@ -84,3 +84,7 @@ module.exports.getMethod = getMethod;
 
 const postMethod = require("./postMethod.js");
 module.exports.postMethod = postMethod;
+
+const { reloadMessage, redirectMessage } = require('./wsServer');
+module.exports.reloadMessage = reloadMessage;
+module.exports.redirectMessage = redirectMessage;
