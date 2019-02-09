@@ -45,6 +45,7 @@ wsServer.on("connection", (ws, req) => {
       UserOnline[server].count++;
       UserOnline[server][User._id].user = User;
       getInfoForStartGame(user, server).then(infoForStartGame => {
+        UserOnline[server][User._id].sectors = infoForStartGame;
         UserOnline[server][User._id].user.globalMap = {};
         UserOnline[server][User._id].user.globalMap.zoom = 1;
         UserOnline[server][User._id].user.globalMap.centerMap = {};
@@ -57,7 +58,7 @@ wsServer.on("connection", (ws, req) => {
           server,
           currentMap => {
             start.currentMap = currentMap;
-            start.towns = infoForStartGame;
+            start.sectors = infoForStartGame;
             start.dictionary = getLangDictionary(user.lang);
             ws.send(JSON.stringify(start));
           }

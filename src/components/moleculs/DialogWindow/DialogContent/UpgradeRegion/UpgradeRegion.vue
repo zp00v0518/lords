@@ -86,7 +86,7 @@ export default {
       };
     },
     currentTown() {
-      return this.$store.state.towns.currentTown;
+      return this.$store.state.userSectors.currentTown;
     }
   },
 
@@ -100,7 +100,7 @@ export default {
         const message = {
           type: "upgradeRegion",
           data: {
-            townIndex: this.$store.state.towns.towns.indexOf(this.currentTown),
+            townIndex: this.$store.state.userSectors.sectors.indexOf(this.currentTown),
             persent: this.rangeValue,
             building: { 
               type: this.building.type,

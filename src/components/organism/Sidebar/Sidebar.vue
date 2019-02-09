@@ -19,8 +19,8 @@ export default {
   },
   computed: {},
   watch: {
-    '$store.state.towns.towns': function() {
-      this.towns = this.$store.state.towns.towns;
+    '$store.state.userSectors.sectors': function() {
+      this.towns = this.$store.state.userSectors.sectors;
     },
   },
   methods: {}
