@@ -3,6 +3,7 @@ const mimeType = require("./mimeType.js");
 const sendResponse = require("./sendResponse.js");
 const reqOn = require("./reqOn.js");
 const getCollectionName = require('./getCollectionName.js')
+const checkSchema = require('./checkSchema.js')
 
 module.exports = {
   fileReader,
@@ -10,4 +11,5 @@ module.exports = {
   sendResponse,
   reqOn,
   getCollectionName,
+  checkSchema,
 };

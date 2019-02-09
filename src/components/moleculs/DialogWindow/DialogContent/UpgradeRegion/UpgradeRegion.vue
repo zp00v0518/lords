@@ -111,7 +111,7 @@ export default {
         const message = {
           type: "upgradeRegion",
           data: {
-            setorIndex: this.$store.state.userSectors.sectors.indexOf(this.currentSector),
+            sectorIndex: this.$store.state.userSectors.sectors.indexOf(this.currentSector),
             persent: this.rangeValue,
             building: { 
               type: this.building.type,

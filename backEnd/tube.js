@@ -21,12 +21,14 @@ const {
   fileReader,
   mimeType,
   sendResponse,
-  reqOn
+  reqOn,
+  checkSchema,
 } = require("./template_modules");
 module.exports.fileReader = fileReader;
 module.exports.mimeType = mimeType;
 module.exports.sendResponse = sendResponse;
 module.exports.reqOn = reqOn;
+module.exports.checkSchema = checkSchema;
 
 const {
   setCookieUser,
