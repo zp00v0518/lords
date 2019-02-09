@@ -30,6 +30,9 @@ const dictionary = {
     notResources:{
       ru: "Не хватает ресурсов"
     },
+    isUpgrade:{
+      ru: "Объект в данный момент улучшается",
+    },
     questions: {
       upgrade: {
         ru: "Вы хотите улучшить это здание?"

@@ -49,8 +49,8 @@ export default {
   },
   created() {
     // this.currentMap = this.$store.state.regionMap.currentRegion;
-    if (this.$store.state.userSectors.currentTown) {
-     this.currentMap = this.$store.state.userSectors.currentTown.town.regionMap;
+    if (this.$store.state.userSectors.currentSector) {
+     this.currentMap = this.$store.state.userSectors.currentSector.region;
     }
   },
   watch: {
@@ -59,8 +59,8 @@ export default {
     //   this.drawMap();
     //   this.setBorderIsoMap();
     // },
-     "$store.state.userSectors.currentTown.town.regionMap": function() {
-      this.currentMap = this.$store.state.userSectors.currentTown.town.regionMap;;
+     "$store.state.userSectors.currentSector.region": function() {
+      this.currentMap = this.$store.state.userSectors.currentSector.region;;
       this.drawMap();
       this.setBorderIsoMap();
     }

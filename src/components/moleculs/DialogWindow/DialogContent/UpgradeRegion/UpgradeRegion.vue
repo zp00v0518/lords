@@ -52,6 +52,8 @@
 <script>
 import { getTimeString } from "../modules";
 import glossary from "@/components/mixins/glossary.vue";
+import fromBackend from "@/fromBackend";
+const checkSource = fromBackend.checkSource;
 
 export default {
   name: "UpgradeBuilding",
@@ -85,60 +87,61 @@ export default {
         )
       };
     },
-    currentTown() {
-      return this.$store.state.userSectors.currentTown;
+    currentSector() {
+      return this.$store.state.userSectors.currentSector;
     }
   },
 
   methods: {
     getTimeString,
+    checkSource,
     closeDialogWindow() {
       this.$store.commit("DIALOG_CLOSE");
     },
     upgratedBuilding() {
-      if (this.checkSource(this.upgrade.source)) {
+      if (this.building.upgrade.is){
+         const dialog = {
+          data: { txt: this.gloss.dialog.isUpgrade.txt },
+          type: "message"
+        };
+        this.$store.dispatch("DIALOG_SHOW", dialog);
+      }
+      const storageName = this.$var.town.listBuilding[0];
+      if (this.checkSource(this.upgrade.source, this.currentSector.town[storageName].sources)) {
         const message = {
           type: "upgradeRegion",
           data: {
-            townIndex: this.$store.state.userSectors.sectors.indexOf(this.currentTown),
+            setorIndex: this.$store.state.userSectors.sectors.indexOf(this.currentSector),
             persent: this.rangeValue,
             building: { 
               type: this.building.type,
                 x: this.data.x,
                 y: this.data.y,
               },
-            parent: this.building.parent,
-            regionCoords: {
-              
-            }
-
-            
           }
         };
         this.$ws.sendMessage(message);
         this.$store.commit("DIALOG_CLOSE");
       } else {
-        const payload = {
+        const dialog = {
           data: { txt: this.gloss.dialog.notResources.txt },
           type: "message"
         };
-        this.$store.dispatch("DIALOG_SHOW", payload);
+        this.$store.dispatch("DIALOG_SHOW", dialog);
       }
     },
-    checkSource(sourceArr) {
-      const type = this.$var.town.listBuilding[0];
-      const sources = this.currentTown.town[type].sources;
-      let flag = true;
-      for (let i = 0; i < sourceArr.length; i++) {
-        const type = sourceArr[i].resource;
-        const value = +sourceArr[i].value;
-        if (sources[type].nowValue < value) {
-          flag = false;
-          break;
-        }
-      }
-      return flag;
-    }
+    // checkSource(sourceArr, sources) {
+    //   let flag = true;
+    //   for (let i = 0; i < sourceArr.length; i++) {
+    //     const type = sourceArr[i].resource;
+    //     const value = +sourceArr[i].value;
+    //     if (sources[type].nowValue < value) {
+    //       flag = false;
+    //       break;
+    //     }
+    //   }
+    //   return flag;
+    // }
   }
 };
 </script>

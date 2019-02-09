@@ -27,6 +27,7 @@ function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
           }
         }
       };
+      delete newTown.regionMap;
       update.one(optionsForUpdateBD).then(result => {
         GlobalMap[serverName][x][y].region = newTown.regionMap;
         GlobalMap[serverName][x][y].userId = user._id;

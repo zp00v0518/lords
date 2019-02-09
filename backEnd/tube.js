@@ -71,6 +71,9 @@ const { Mine, createMine } = require("./region/mine");
 module.exports.Mine = Mine;
 module.exports.createMine = createMine;
 
+const {checkSource} = require('./resources');
+module.exports.checkSource = checkSource;
+
 const login = require("./login/login.js");
 module.exports.login = login;
 

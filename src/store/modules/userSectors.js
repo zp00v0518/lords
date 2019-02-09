@@ -1,20 +1,20 @@
 const userSectors = {
   state: {
     sectors: null,
-    currentTown: null
+    currentSector: null
   },
   mutations: {
     SET_SECTORS(state, sectors) {
       state.sectors = sectors;
     },
-    SET_CURRENT_TOWN(state, town) {
-      state.currentTown = town;
+    SET_CURRENT_SECTOR(state, sector) {
+      state.currentSector = sector;
     }
   },
   actions: {
     SET_DATA_CONNECTION({ commit }, sectors) {
       commit("SET_SECTORS", sectors);
-      commit("SET_CURRENT_TOWN", sectors[0]);
+      commit("SET_CURRENT_SECTOR", sectors[0]);
     }
   }
 };
