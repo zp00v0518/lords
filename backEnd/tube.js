@@ -69,12 +69,16 @@ const { createStorage, upgradeSection } = require("./town/buildings");
 module.exports.createStorage = createStorage;
 module.exports.upgradeSection = upgradeSection;
 
+const { setUpgradeChange } = require("./region");
+module.exports.setUpgradeChange = setUpgradeChange;
+
 const { Mine, createMine } = require("./region/mine");
 module.exports.Mine = Mine;
 module.exports.createMine = createMine;
 
-const {checkSource} = require('./resources');
+const {checkSource, deleteSource} = require('./resources');
 module.exports.checkSource = checkSource;
+module.exports.deleteSource = deleteSource;
 
 const login = require("./login/login.js");
 module.exports.login = login;

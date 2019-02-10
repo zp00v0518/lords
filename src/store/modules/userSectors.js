@@ -1,15 +1,22 @@
+import Vue from 'vue';
+
 const userSectors = {
   state: {
     sectors: null,
-    currentSector: null
+    currentSector: null,
+    changeSectors: false,
   },
   mutations: {
     SET_SECTORS(state, sectors) {
-      state.sectors = sectors;
+      Vue.set(state, 'sectors', [...sectors]);
     },
     SET_CURRENT_SECTOR(state, sector) {
-      state.currentSector = sector;
-    }
+      Vue.set(state, 'currentSector', sector);
+    },
+    CHANGE_STORAGE(state, payload){
+      state.sectors[payload.sectorIndex].town.storage = payload.storage;
+      Vue.set(state, 'sectors', [...state.sectors]);
+    },
   },
   actions: {
     SET_DATA_CONNECTION({ commit }, sectors) {

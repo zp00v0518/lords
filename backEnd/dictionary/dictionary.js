@@ -27,6 +27,9 @@ const dictionary = {
     valueUpgrade: {
       ru: "Стоимость улучшения"
     },
+    maxLvl: {
+      ru: "Объект достиг максимального уровня"
+    },
     notResources:{
       ru: "Не хватает ресурсов"
     },

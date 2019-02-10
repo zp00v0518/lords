@@ -9,6 +9,11 @@ export default function upgradeBuilding(data) {
     this.store.commit("DIALOG_SHOW", message);
   }
   if (data.upgrade) {
+    const storageChange = {
+      sectorIndex: data.sectorIndex,
+      storage: data.storage,
+    }
+    this.store.commit("CHANGE_STORAGE", storageChange);
     const message = {
       type: "message",
       data: {

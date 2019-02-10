@@ -9,7 +9,8 @@ class WS {
       startMessages: eventData => this.startMessages(eventData),
       reload: eventData => this.reload(eventData),
       moveGlobalMap: eventData => this.moveGlobalMap(eventData),
-      upgradeBuilding: eventData => this.upgradeBuilding(eventData)
+      upgradeBuilding: eventData => this.upgradeBuilding(eventData),
+      consoles: eventData => this.consoles(eventData)
     };
     this.outgoing = {};
   }
@@ -26,6 +27,7 @@ class WS {
         this.incoming[data.type](data);
       } else {
         if (data.redirectUrl) {
+          console.log(data)
           location = data.redirectUrl;
         } else {
           console.log(data)
@@ -56,6 +58,9 @@ class WS {
   }
   reload() {
     location.reload();
+  }
+  consoles(e){
+    console.log(e)
   }
   upgradeBuilding = modules.upgradeBuilding;
 

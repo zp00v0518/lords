@@ -1,5 +1,6 @@
 const { checkType } = require('template_func');
 
+//проверяет данные на соответствие схемы
 function checkSchema(obj, schema) {
   let flag = true;
   forEach(obj);
@@ -31,6 +32,9 @@ function checkSchema(obj, schema) {
         }
       }
     }
+  }
+  if(!flag){
+    console.log('bad shema')
   }
   return flag;
 }

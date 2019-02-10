@@ -38,7 +38,7 @@
       <div class="upgrade__answer">
         <div
           class="upgrade__answer__item yes"
-          @click="upgratedBuilding"
+          @click="upgradeBuilding"
         >{{gloss.dialog.answer.yes.txt}}</div>
         <div
           class="upgrade__answer__item no"
@@ -91,14 +91,13 @@ export default {
       return this.$store.state.userSectors.currentSector;
     }
   },
-
   methods: {
     getTimeString,
     checkSource,
     closeDialogWindow() {
       this.$store.commit("DIALOG_CLOSE");
     },
-    upgratedBuilding() {
+    upgradeBuilding() {
       if (this.building.upgrade.is){
          const dialog = {
           data: { txt: this.gloss.dialog.isUpgrade.txt },
@@ -112,7 +111,7 @@ export default {
           type: "upgradeRegion",
           data: {
             sectorIndex: this.$store.state.userSectors.sectors.indexOf(this.currentSector),
-            persent: this.rangeValue,
+            persent: +this.rangeValue,
             building: { 
               type: this.building.type,
                 x: this.data.x,

@@ -9,7 +9,7 @@ function Mine(type, lvl = 0) {
   this.type = type;
   this.lvl = lvl;
   this.upgrade = UpgradeSection();
-  this.mining = {
+  this.work = {
     is: false, // true
     date: 0, // время изменения is
     bonus: 0,

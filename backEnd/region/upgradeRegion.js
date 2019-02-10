@@ -1,4 +1,11 @@
-const { checkSource, checkSchema, redirectMessage, gloss } = require("../tube.js");
+const {
+  checkSource,
+  checkSchema,
+  redirectMessage,
+  gloss,
+  deleteSource,
+  setUpgradeChange
+} = require("../tube.js");
 const regionLength = gameVariables.numSectionRegionMap;
 const mine = gameVariables.mine;
 
@@ -27,12 +34,23 @@ function upgradeBuilding(message, info) {
     ws.send(JSON.stringify(response));
     return;
   }
-  const needResources = mine.getResourcesForUpgrade(building.lvl, data.persent);
+  const needResources = mine.getResourcesForUpgrade(
+    building.lvl,
+    data.persent
+  );
+  if (!needResources) {
+    response.message = gloss.dialog.maxLvl[lang];
+    ws.send(JSON.stringify(response));
+    return;
+  }
   const storageName = gameVariables.town.listBuilding[0];
   const storage = sector.town[storageName];
   if (checkSource(needResources, storage.sources)) {
+    setUpgradeChange(building)
+    response.storage = deleteSource(needResources, storage);
     response.upgrade = true;
     response.message = gloss.dialog.upgradeDone[lang];
+    response.sectorIndex = data.sectorIndex;
     ws.send(JSON.stringify(response));
     return;
   } else {
@@ -48,6 +66,6 @@ const schema = {
   type: { type: "string", regExp: /^[a-z]{2,6}$/gi },
   x: { type: "number", min: 0, max: regionLength },
   y: { type: "number", min: 0, max: regionLength },
-  persent: { type: "number", min: 0, max: 100 },
+  persent: { type: "number", min: 70, max: 130 },
   sectorIndex: { type: "number", min: 0 }
 };

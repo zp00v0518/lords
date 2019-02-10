@@ -1,7 +1,7 @@
 const resources = require("../../resources/Resources");
 
 const Mine = {
-  valueUpgrade: [1, 2, 3, 5, 8, 13, 21, 34, 55, 89],
+  valueUpgrade: [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89],
   typeList: resources.typeList,
   parent: "region",
   //возвращает время в течении которого будет проводиться улучшение, в милисекундах
@@ -26,12 +26,16 @@ const Mine = {
     }
   },
   getResourcesForUpgrade(lvl, persent) {
+    lvl += 1;
     persent = persent > 100 ? 100 + (persent - 100) * 1.5 : persent;
     const value = ((this.valueUpgrade[lvl] * 1000) / 100) * persent;
+    if (!value) {
+      return false;
+    }
     return [
       {
         resource: resources.typeList[0],
-        value: value.toFixed(0)
+        value: +value.toFixed(0)
       }
     ];
   }

@@ -1,4 +1,5 @@
 const gameVariables = require("./game_variables");
+global.gameVariables = gameVariables;
 const {config, GlobalMap} = require("../tube");
 
 const UserOnline = {};
@@ -16,7 +17,6 @@ config.db.collections.servers.forEach(server => {
 })
 
 
-global.gameVariables = gameVariables;
 global.UserOnline = UserOnline;
 global.appStatistic = appStatistic;
 

@@ -1,6 +1,6 @@
 <template>
     <section class="sidebar">
-      <Town v-for='(town, index) in towns' :key="index" :town="town"></Town>
+      <Town v-for='(sector, index) in sectors' :key="index" :sector="sector">{{forUpdate(sector)}}</Town>
     </section>
 </template>
 
@@ -14,16 +14,16 @@ export default {
   },
   data() {
     return {
-      towns: [],
     };
   },
-  computed: {},
-  watch: {
-    '$store.state.userSectors.sectors': function() {
-      this.towns = this.$store.state.userSectors.sectors;
-    },
+  computed: {
+    sectors() {
+      return this.$store.state.userSectors.sectors;
+    }
   },
-  methods: {}
+  methods: {
+    forUpdate(){}
+  }
 };
 </script>
 

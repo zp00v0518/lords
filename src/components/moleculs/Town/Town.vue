@@ -77,7 +77,7 @@
 <script>
 export default {
   name: "Town",
-  props: ["town"],
+  props: ["sector", "indexTown"],
   data() {
     return {
       name: "Default Name",
@@ -86,11 +86,16 @@ export default {
   },
   created() {
     const type = this.$var.town.listBuilding[0];
-    this.storage = this.town.town[type];
-    this.name = this.town.town.name;
+    this.storage = this.sector.town[type];
+    this.name = this.sector.town.name;
   },
   computed: {},
-  methods: {}
+  methods: {},
+  updated () {
+    const type = this.$var.town.listBuilding[0];
+    this.storage = this.sector.town[type];
+    this.name = this.sector.town.name;
+  }
 };
 </script>
 
