@@ -36,11 +36,12 @@ function controlStateGlobal(param) {
 	if(param.target === "all"){
 		serverList.forEach(item => {
 			const userServer = item.collectionName;
-			Object.keys(UserOnline[userServer]).forEach(userInOnline => {
+			Object.keys(UserOnline[userServer]).forEach(key => {
+				const userInOnline = UserOnline[userServer][key];
 				const sectors = userInOnline.sectors;
 				const ws = userInOnline.ws;
 				sectors.forEach(sector => {
-					
+					calcStorageNowValue(sector.town.storage)
 				})
 			})
 		})

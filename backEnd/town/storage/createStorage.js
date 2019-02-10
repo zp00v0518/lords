@@ -1,5 +1,6 @@
 const tube = require("../../tube.js");
 const Town = require("../Town.js");
+const Resources = gameVariables.resources;
 
 function createStorage(listMine = gameVariables.mine.typeList, lvl = 0) {
   const { upgradeSection } = tube;
@@ -9,13 +10,13 @@ function createStorage(listMine = gameVariables.mine.typeList, lvl = 0) {
     lvl: lvl,
     upgrade: upgradeSection(),
     maxValue: {
-      gold: 100000,
-      baseResource: 18,
-      unicResource: 10
+      gold: Resources.maxValue.gold,
+      baseResource: Resources.maxValue.baseResource,
+      unicResource: Resources.maxValue.unicResource,
     },
     sources: {}
   };
-  Object.assign(storage, Town.baseBuilding)
+  Object.assign(storage, Town.baseBuilding);
   //создаются поля, которые соответствуют перечню шахт
   for (let i = 0; i < listMine.length; i++) {
     const type = listMine[i];
@@ -27,8 +28,15 @@ function createStorage(listMine = gameVariables.mine.typeList, lvl = 0) {
     storage.sources[type] = obj;
     if (type === "gold") {
       storage.sources.gold.nowValue = 50000;
+      storage.sources.gold.maxValue =  Resources.maxValue.gold;
     }
   }
+  Resources.baseResource.forEach(item => {
+    storage.sources[item].maxValue = Resources.maxValue.baseResource;
+  });
+  Resources.unicResource.forEach(item => {
+    storage.sources[item].maxValue = Resources.maxValue.unicResource;
+  });
   return storage;
 }
 

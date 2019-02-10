@@ -3,6 +3,7 @@ const Mine = require('../region/mine/Mine.js');
 const Region = require('../region/Region.js');
 const Race = require('../race/Race.js');
 const Town = require("../town/Town.js");
+const resources = require("../resources/Resources.js");
 const time = config.time;
 
 const gameVariables = {
@@ -27,6 +28,8 @@ const gameVariables = {
 	race: Race,
 	time,
 	town: Town,
+	resources,
+
 };
 
 module.exports = gameVariables;

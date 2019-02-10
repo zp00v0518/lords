@@ -17,7 +17,7 @@ const dialog = {
       state.show = true;
       state.data = payload.data;
       state.title = payload.title;
-      state.component = typeDialog[type]
+      state.component = payload.componentName;
     }
   },
   actions: {
