@@ -102,12 +102,7 @@ function createGlobalMap() {
         sector.x = i;
         sector.y = h;
         sector.region = createRegion();
-        sector.listUpgrade = {
-          town: {},
-          region: {
-            sector: []
-          }
-        };
+        sector.listUpgrade = [];
         let persent = getRandomNumber(100);
         if (persent <= 2) {
           sector.type = 2;

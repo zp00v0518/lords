@@ -65,12 +65,13 @@ module.exports.addCollectionsToUser = addCollectionsToUser;
 const { createTown } = require("./town");
 module.exports.createTown = createTown;
 
-const { createStorage, upgradeSection } = require("./town/buildings");
+const { createStorage, upgradeSection } = require("./town/storage");
 module.exports.createStorage = createStorage;
 module.exports.upgradeSection = upgradeSection;
 
-const { setUpgradeChange } = require("./region");
+const { setUpgradeChange, checkUpgrade } = require("./region");
 module.exports.setUpgradeChange = setUpgradeChange;
+module.exports.checkUpgrade = checkUpgrade;
 
 const { Mine, createMine } = require("./region/mine");
 module.exports.Mine = Mine;

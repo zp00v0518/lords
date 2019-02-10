@@ -4,7 +4,8 @@ const {
   redirectMessage,
   gloss,
   deleteSource,
-  setUpgradeChange
+  setUpgradeChange,
+  checkUpgrade,
 } = require("../tube.js");
 const regionLength = gameVariables.numSectionRegionMap;
 const mine = gameVariables.mine;
@@ -29,6 +30,7 @@ function upgradeBuilding(message, info) {
     message: ""
   };
   const lang = info.player.user.lang;
+  // checkUpgrade(building);
   if (building.upgrade.is) {
     response.message = gloss.dialog.isUpgrade[lang];
     ws.send(JSON.stringify(response));
@@ -46,7 +48,7 @@ function upgradeBuilding(message, info) {
   const storageName = gameVariables.town.listBuilding[0];
   const storage = sector.town[storageName];
   if (checkSource(needResources, storage.sources)) {
-    setUpgradeChange(building)
+    setUpgradeChange(building, data.persent, sector)
     response.storage = deleteSource(needResources, storage);
     response.upgrade = true;
     response.message = gloss.dialog.upgradeDone[lang];

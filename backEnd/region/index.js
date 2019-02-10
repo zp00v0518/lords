@@ -1,3 +1,4 @@
 const setUpgradeChange = require('./setUpgradeChange');
+const checkUpgrade = require('./checkUpgrade');
 
-module.exports = { setUpgradeChange }
+module.exports = { setUpgradeChange, checkUpgrade }
