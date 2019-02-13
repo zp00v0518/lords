@@ -6,12 +6,15 @@ function controlStateGlobal(param) {
     serverList.forEach(item => {
       const userServer = item.collectionName;
       Object.keys(UserOnline[userServer]).forEach(key => {
+        if (key === "count") return;
         const userInOnline = UserOnline[userServer][key];
         const sectors = userInOnline.sectors;
         const ws = userInOnline.ws;
         sectors.forEach(sector => {
-          sector.listUpgrade.forEach(upgradeBuilding => {
-            checkUpgrade(upgradeBuilding, sector);
+          sector.listUpgrade.forEach((upgradeBuilding, index) => {
+            if (checkUpgrade(upgradeBuilding, sector)){
+              sector.listUpgrade.splice(index,1);
+            }
           });
           calcStorageNowValue(sector.town.storage);
 				});

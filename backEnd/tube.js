@@ -97,3 +97,6 @@ module.exports.redirectMessage = redirectMessage;
 
 const gloss = require("./dictionary/dictionary.js")
 module.exports.gloss = gloss;
+
+const { controlStateGlobal } = require('./controlState');
+module.exports.controlStateGlobal = controlStateGlobal;

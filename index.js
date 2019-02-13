@@ -5,7 +5,7 @@ require("./backEnd/wsServer/wsServer.js");
 const http = require("http");
 
 
-const { config, getMethod, postMethod } = require("./backEnd/tube.js");
+const { config, getMethod, postMethod, controlStateGlobal } = require("./backEnd/tube.js");
 
 const template = require("template_func");
 const log = new template.Log(__filename);
@@ -35,3 +35,7 @@ server.on("request", (req, res) => {
     resp.end("Сервер не может удовлетворить Ваши запросы");
   }
 });
+
+setInterval(()=>{
+  controlStateGlobal({target: 'all'})
+},gameVariables.timer.controlState)

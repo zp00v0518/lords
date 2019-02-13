@@ -61,8 +61,7 @@ class WS {
     location.reload();
   }
   changeSectors(eventData) {
-    this.store.commit("SET_SECTORS", eventData.sectors);
-    
+    this.store.dispatch("SET_SECTORS_WITH_CURRENT_SECTOR", eventData.sectors);
   }
 
   consoles(e){

@@ -8,7 +8,7 @@ function checkUpgrade(building, sector) {
     building.upgrade.date = 0;
     building.lvl++;
     if (mine.typeList.includes(building.type)){
-      building.work.addValue =  building.lvl *  building.valueMining[building.type];
+      building.work.addValue =  building.lvl *  mine.valueMining[building.type];
       if (sector){
         addValueToStorage(building.type,building.work.addValue, sector )
       }
@@ -22,5 +22,6 @@ module.exports = checkUpgrade;
 
 function addValueToStorage(typeSource, value, sector){
   const storage = sector.town.storage;
-  storage[typeSource].addValue = value;
+  storage.sources[typeSource].addValue = value;
+  storage.sources[typeSource].lastCalc = new Date().getTime();
 }

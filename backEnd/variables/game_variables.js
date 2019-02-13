@@ -19,9 +19,9 @@ const gameVariables = {
 																			// в данный момент 1 сутки
 	serverList:config.db.collections.servers,
 	timer:{
-		controlState: time.minute,
+		controlState: time.minute/10,
 		saveDataDB:time.minute, 							//1 минута - интервал считывания данных и записи их в БД
-		perTime: time.hour, 					//час - время в миллисекундах, которое используется при расчете прироста игровых ресоурсов
+		perTime: time.hour/60, 					//час - время в миллисекундах, которое используется при расчете прироста игровых ресоурсов
 	},
 	mine: Mine,
 	region: Region,
@@ -29,7 +29,6 @@ const gameVariables = {
 	time,
 	town: Town,
 	resources,
-
 };
 
 module.exports = gameVariables;
