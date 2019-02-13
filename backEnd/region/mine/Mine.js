@@ -2,6 +2,15 @@ const resources = require("../../resources/Resources");
 
 const Mine = {
   valueUpgrade: [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89],
+  valueMining: {
+		gold:2000,
+		wood:2,
+		ore:2,
+		gem:1,
+		sulfur:1,
+		crystal:1,
+		mercury:1,
+	},
   typeList: resources.typeList,
   parent: "region",
   //возвращает время в течении которого будет проводиться улучшение, в милисекундах

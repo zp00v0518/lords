@@ -10,6 +10,7 @@ class WS {
       reload: eventData => this.reload(eventData),
       moveGlobalMap: eventData => this.moveGlobalMap(eventData),
       upgradeBuilding: eventData => this.upgradeBuilding(eventData),
+      changeSectors: eventData => this.changeSectors(eventData),
       consoles: eventData => this.consoles(eventData)
     };
     this.outgoing = {};
@@ -59,6 +60,11 @@ class WS {
   reload() {
     location.reload();
   }
+  changeSectors(eventData) {
+    this.store.commit("SET_SECTORS", eventData.sectors);
+    
+  }
+
   consoles(e){
     console.log(e)
   }

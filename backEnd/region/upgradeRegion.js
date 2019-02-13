@@ -30,7 +30,6 @@ function upgradeBuilding(message, info) {
     message: ""
   };
   const lang = info.player.user.lang;
-  // checkUpgrade(building);
   if (building.upgrade.is) {
     response.message = gloss.dialog.isUpgrade[lang];
     ws.send(JSON.stringify(response));

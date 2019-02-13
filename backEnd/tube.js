@@ -65,9 +65,10 @@ module.exports.addCollectionsToUser = addCollectionsToUser;
 const { createTown } = require("./town");
 module.exports.createTown = createTown;
 
-const { createStorage, upgradeSection } = require("./town/storage");
+const { createStorage, upgradeSection, calcStorageNowValue} = require("./town/storage");
 module.exports.createStorage = createStorage;
 module.exports.upgradeSection = upgradeSection;
+module.exports.calcStorageNowValue = calcStorageNowValue;
 
 const { setUpgradeChange, checkUpgrade } = require("./region");
 module.exports.setUpgradeChange = setUpgradeChange;
