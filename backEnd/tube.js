@@ -10,12 +10,14 @@ const {
   connectMongoDB,
   findInDB,
   updateDB,
-  insertDB
+  insertDB,
+  saveDataInDB
 } = require("./workWithMongoDB");
 module.exports.connectMongoDB = connectMongoDB;
 module.exports.findInDB = findInDB;
 module.exports.updateDB = updateDB;
 module.exports.insertDB = insertDB;
+module.exports.saveDataInDB = saveDataInDB;
 
 const {
   fileReader,
@@ -62,8 +64,9 @@ module.exports.addNewUserToGlobalMap = addNewUserToGlobalMap;
 module.exports.updateUser = updateUser;
 module.exports.addCollectionsToUser = addCollectionsToUser;
 
-const { createTown } = require("./town");
+const { createTown, updateStateTown } = require("./town");
 module.exports.createTown = createTown;
+module.exports.updateStateTown = updateStateTown;
 
 const { createStorage, upgradeSection, calcStorageNowValue} = require("./town/storage");
 module.exports.createStorage = createStorage;

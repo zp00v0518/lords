@@ -5,7 +5,7 @@ require("./backEnd/wsServer/wsServer.js");
 const http = require("http");
 
 
-const { config, getMethod, postMethod, controlStateGlobal } = require("./backEnd/tube.js");
+const { config, getMethod, postMethod, controlStateGlobal, saveDataInDB } = require("./backEnd/tube.js");
 
 const template = require("template_func");
 const log = new template.Log(__filename);
@@ -38,4 +38,8 @@ server.on("request", (req, res) => {
 
 setInterval(()=>{
   controlStateGlobal({target: 'all'})
-},gameVariables.timer.controlState)
+},gameVariables.timer.controlState);
+
+setInterval(()=>{
+  saveDataInDB({target: 'all'})
+},gameVariables.timer.saveDataDB);

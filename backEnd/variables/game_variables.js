@@ -20,7 +20,7 @@ const gameVariables = {
 	serverList:config.db.collections.servers,
 	timer:{
 		controlState: time.minute/10,
-		saveDataDB:time.minute, 							//1 минута - интервал считывания данных и записи их в БД
+		saveDataDB:time.minute/10, 							//1 минута - интервал считывания данных и записи их в БД
 		perTime: time.hour/60, 					//час - время в миллисекундах, которое используется при расчете прироста игровых ресоурсов
 	},
 	mine: Mine,
