@@ -1,5 +1,6 @@
 <template>
   <section class="scene">
+    <TimeLine></TimeLine>
     <GlobalMap v-if="scenes.globalMap" :widthScene="widthScene" :heightScene="heightScene" key='globalMap'></GlobalMap>
     <RegionMap v-if="scenes.region" :widthScene="widthScene" :heightScene="heightScene" key='regionMap'></RegionMap>
     <div class="scene__buttons" @click="changeScene">
@@ -12,7 +13,7 @@
 </template>
 
 <script>
-import { GlobalMap, RegionMap } from "../../moleculs/Scenes";
+import { GlobalMap, RegionMap, TimeLine } from "../../moleculs/Scenes";
 import DialogWindow from "../../moleculs/DialogWindow";
 
 export default {
@@ -20,7 +21,8 @@ export default {
   components: {
     GlobalMap,
     RegionMap,
-    DialogWindow
+    DialogWindow,
+    TimeLine
   },
   data() {
     return {
