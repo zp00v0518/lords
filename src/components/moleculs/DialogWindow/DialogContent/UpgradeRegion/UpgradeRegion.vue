@@ -8,43 +8,49 @@
         <p v-for="(item ,index) in info.text" :key="index">{{item}}</p>
       </div>
     </div>
-    <h4 class="upgrade__question">{{gloss.dialog.questions.upgrade.txt}}</h4>
-    <div class="upgrade__info--wrap">
-      <div class="upgrade__info--txt">{{gloss.dialog.valueUpgrade.txt}}</div>
-      <div class="upgrade__price--wrap">
-        <div class="upgrade__price--item">
-          <div
-            class="upgrade__price__resource"
-            v-for="(item, index) in upgrade.source"
-            :key="index"
-          >
-            <div class="upgrade__price__resource--icon">
-              <img :src="'img/resources/'+item.resource+'.gif'">
+    <template v-if="checkMaxLvl">
+      <h4 class="upgrade__question">{{gloss.dialog.questions.upgrade.txt}}</h4>
+      <div class="upgrade__info--wrap">
+        <div class="upgrade__info--txt">{{gloss.dialog.valueUpgrade.txt}}</div>
+        <div class="upgrade__price--wrap">
+          <div class="upgrade__price--item">
+            <div
+              class="upgrade__price__resource"
+              v-for="(item, index) in upgrade.source"
+              :key="index"
+            >
+              <div class="upgrade__price__resource--icon">
+                <img :src="'img/resources/'+item.resource+'.gif'">
+              </div>
+              <div class="upgrade__info__resource--sum">{{item.value}}</div>
             </div>
-            <div class="upgrade__info__resource--sum">{{item.value}}</div>
+          </div>
+          <div class="upgrade__price--item">
+            <div class="text">{{gloss.date.time.txt | upperFirstSymbol}}</div>
+            <div class="value">{{upgrade.time}}</div>
           </div>
         </div>
-        <div class="upgrade__price--item">
-          <div class="text">{{gloss.date.time.txt | upperFirstSymbol}}</div>
-          <div class="value">{{upgrade.time}}</div>
+        <div class="upgrade__range">
+          <h5 class="upgrade__range--txt">Изменить стоимость и время улучшения</h5>
+          <div class="upgrade__range--item">
+            <input type="range" min="70" max="130" v-model="rangeValue" step="1">
+          </div>
         </div>
       </div>
-      <div class="upgrade__range">
-        <h5 class="upgrade__range--txt">Изменить стоимость и время улучшения</h5>
-        <div class="upgrade__range--item">
-          <input type="range" min="70" max="130" v-model="rangeValue" step="1">
-        </div>
-      </div>
-      <div class="upgrade__answer">
-        <div
-          class="upgrade__answer__item yes"
-          @click="upgradeBuilding"
-        >{{gloss.dialog.answer.yes.txt}}</div>
-        <div
-          class="upgrade__answer__item no"
-          @click="closeDialogWindow"
-        >{{gloss.dialog.answer.no.txt}}</div>
-      </div>
+    </template>
+    <template v-else>
+      <div class="upgrade__info--txt">{{gloss.dialog.maxLvl.txt}}</div>
+    </template>
+    <div class="upgrade__answer">
+      <div
+        class="upgrade__answer__item yes"
+        @click="upgradeBuilding"
+      >{{gloss.dialog.answer.yes.txt}}</div>
+      <div
+        v-if="checkMaxLvl"
+        class="upgrade__answer__item no"
+        @click="closeDialogWindow"
+      >{{gloss.dialog.answer.no.txt}}</div>
     </div>
   </div>
 </template>
@@ -61,7 +67,7 @@ export default {
   props: {
     data: Object
   },
-    data() {
+  data() {
     return {
       building: null,
       rangeValue: 100,
@@ -89,6 +95,12 @@ export default {
     },
     currentSector() {
       return this.$store.state.userSectors.currentSector;
+    },
+    checkMaxLvl() {
+      if (this.building.lvl >= this.$var.mine.valueUpgrade.length - 1) {
+        return false;
+      }
+      return true;
     }
   },
   methods: {
@@ -98,25 +110,37 @@ export default {
       this.$store.commit("DIALOG_CLOSE");
     },
     upgradeBuilding() {
-      if (this.building.upgrade.is){
-         const dialog = {
+      if(!this.checkMaxLvl) {
+        this.$store.commit("DIALOG_CLOSE");
+        return;
+      };
+      if (this.building.upgrade.is) {
+        const dialog = {
           data: { txt: this.gloss.dialog.isUpgrade.txt },
           type: "message"
         };
         this.$store.dispatch("DIALOG_SHOW", dialog);
+        return;
       }
       const storageName = this.$var.town.listBuilding[0];
-      if (this.checkSource(this.upgrade.source, this.currentSector.town[storageName].sources)) {
+      if (
+        this.checkSource(
+          this.upgrade.source,
+          this.currentSector.town[storageName].sources
+        )
+      ) {
         const message = {
           type: "upgradeRegion",
           data: {
-            sectorIndex: this.$store.state.userSectors.sectors.indexOf(this.currentSector),
+            sectorIndex: this.$store.state.userSectors.sectors.indexOf(
+              this.currentSector
+            ),
             persent: +this.rangeValue,
-            building: { 
+            building: {
               type: this.building.type,
-                x: this.data.x,
-                y: this.data.y,
-              },
+              x: this.data.x,
+              y: this.data.y
+            }
           }
         };
         this.$ws.sendMessage(message);
@@ -128,7 +152,7 @@ export default {
         };
         this.$store.dispatch("DIALOG_SHOW", dialog);
       }
-    },
+    }
     // checkSource(sourceArr, sources) {
     //   let flag = true;
     //   for (let i = 0; i < sourceArr.length; i++) {
