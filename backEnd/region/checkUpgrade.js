@@ -1,4 +1,5 @@
 const  mine = gameVariables.mine;
+const { calcStorageNowValue } = require('../tube.js');
 
 function checkUpgrade(building, sector) {
   const now = new Date().getTime();
@@ -22,6 +23,12 @@ module.exports = checkUpgrade;
 
 function addValueToStorage(typeSource, value, sector){
   const storage = sector.town.storage;
-  storage.sources[typeSource].addValue = value;
-  storage.sources[typeSource].lastCalc = new Date().getTime();
+  if (storage.sources[typeSource].lastCalc === 0) {
+    storage.sources[typeSource].lastCalc = new Date().getTime();
+    storage.sources[typeSource].addValue = value;
+    calcStorageNowValue(storage);
+  } else {
+    calcStorageNowValue(storage);
+    storage.sources[typeSource].addValue = value;
+  }
 }

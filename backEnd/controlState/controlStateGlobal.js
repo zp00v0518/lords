@@ -1,43 +1,32 @@
 const serverList = gameVariables.serverList;
-const { checkUpgrade, calcStorageNowValue, config} = require("../tube.js");
+const { checkUpgrade, calcStorageNowValue, config } = require('../tube.js');
 
 function controlStateGlobal(param) {
-  if (param.target === "all") {
+  if (param.target === 'all') {
     serverList.forEach(item => {
       const userServer = item.collectionName;
       Object.keys(UserOnline[userServer]).forEach(key => {
-        if (key === "count") return;
+        if (key === 'count') return;
         const userInOnline = UserOnline[userServer][key];
         const sectors = userInOnline.sectors;
         const ws = userInOnline.ws;
         sectors.forEach(sector => {
           sector.listUpgrade.forEach((upgradeBuilding, index) => {
-            if (checkUpgrade(upgradeBuilding, sector)){
-              sector.listUpgrade.splice(index,1);
+            if (checkUpgrade(upgradeBuilding, sector)) {
+              sector.listUpgrade.splice(index, 1);
             }
           });
           calcStorageNowValue(sector.town.storage);
-				});
-				const response = {
-					type: 'changeSectors',
-					status: true,
-					sectors: sectors,
-				}
-				ws.send(JSON.stringify(response))
+        });
+        const response = {
+          type: 'changeSectors',
+          status: true,
+          sectors: sectors
+        };
+        ws.send(JSON.stringify(response));
       });
     });
   }
 }
 
 module.exports = controlStateGlobal;
-
-
-// function startControl() {
-//   const flag = config.db.check;
-//   if (flag) {
-//     constractGlobalMap();
-//   } else {
-//     setTimeout(startConstractMap, 300);
-//   }
-// }
-// startConstractMap();

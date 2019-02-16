@@ -1,13 +1,18 @@
 require('./backEnd/config/srcRequire.js');
-require("./backEnd/variables/global_variables.js");
-require("./backEnd/wsServer/wsServer.js");
+require('./backEnd/variables/global_variables.js');
+require('./backEnd/wsServer/wsServer.js');
 
-const http = require("http");
+const http = require('http');
 
+const {
+  config,
+  getMethod,
+  postMethod,
+  controlStateGlobal,
+  saveDataInDB
+} = require('./backEnd/tube.js');
 
-const { config, getMethod, postMethod, controlStateGlobal, saveDataInDB } = require("./backEnd/tube.js");
-
-const template = require("template_func");
+const template = require('template_func');
 const log = new template.Log(__filename);
 
 class Server {
@@ -24,22 +29,22 @@ class Server {
 }
 const server = new Server();
 server.init(config.port.http);
-server.on("request", (req, res) => {
+server.on('request', (req, res) => {
   const method = req.method;
-  if (method === "GET") {
+  if (method === 'GET') {
     getMethod(req, res, __dirname);
-  } else if (method === "POST") {
+  } else if (method === 'POST') {
     postMethod(req, res);
   } else {
-    resp.writeHead(200, { "Content-Type": "text/plain" });
-    resp.end("Сервер не может удовлетворить Ваши запросы");
+    resp.writeHead(200, { 'Content-Type': 'text/plain' });
+    resp.end('Сервер не может удовлетворить Ваши запросы');
   }
 });
 
-setInterval(()=>{
-  controlStateGlobal({target: 'all'})
-},gameVariables.timer.controlState);
+setInterval(() => {
+  controlStateGlobal({ target: 'all' });
+}, gameVariables.timer.controlState);
 
-setInterval(()=>{
-  saveDataInDB({target: 'all'})
-},gameVariables.timer.saveDataDB);
+setInterval(() => {
+  saveDataInDB({ target: 'all' });
+}, gameVariables.timer.saveDataDB);

@@ -73,9 +73,13 @@ module.exports.createStorage = createStorage;
 module.exports.upgradeSection = upgradeSection;
 module.exports.calcStorageNowValue = calcStorageNowValue;
 
-const { setUpgradeChange, checkUpgrade } = require("./region");
+const { setUpgradeChange, checkUpgrade, updateStateRegion } = require("./region");
 module.exports.setUpgradeChange = setUpgradeChange;
 module.exports.checkUpgrade = checkUpgrade;
+module.exports.updateStateRegion = updateStateRegion;
+
+const { upfateStateSector }  = require('./sector');
+module.exports.upfateStateSector = upfateStateSector;
 
 const { Mine, createMine } = require("./region/mine");
 module.exports.Mine = Mine;

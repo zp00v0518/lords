@@ -36,9 +36,9 @@ function recursiveTwo(h, i, arr, serverName, callback = function() {}) {
 
 function recursiveOne(i, arr, serverName, callback) {
   if (i < arr.length) {
-    const { updateStateTown } = tube;
+    const { upfateStateSector } = tube;
     const sector = arr[i];
-    updateStateTown(sector, serverName)
+    upfateStateSector(sector, serverName)
       .then(result => {
         i++;
         recursiveOne(i, arr, serverName, callback);

@@ -2,7 +2,7 @@ const { updateDB } = require('../tube.js');
 const update = new updateDB();
 
 //обновляет состояние региона в БД (не замка или его-то другого. ТОлько региона)
-function updateStateRegion(
+function upfateStateSector(
   sector,
   serverName,
   ops = { upsert: false },
@@ -13,7 +13,7 @@ function updateStateRegion(
     const optionsForUpdate = {
       collectionName: serverName,
       filtr: { _id: sector._id },
-      updateDoc: { $set: { region: sector.region } },
+      updateDoc: { $set: { region: sector.region, town: sector.town } },
       ops
     };
     update.one(optionsForUpdate, result => {
@@ -23,4 +23,4 @@ function updateStateRegion(
   });
 }
 
-module.exports = updateStateRegion;
+module.exports = upfateStateSector;
