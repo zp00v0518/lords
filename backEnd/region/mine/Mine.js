@@ -1,5 +1,6 @@
 const resources = require("../../resources/Resources");
 const schema = require('../../workWithMongoDB/schema');
+const config = require('../../config');
 
 const Mine = {
   classInstance: schema.document.class.mine,
@@ -22,8 +23,8 @@ const Mine = {
     persent = persent < 100 ? 100 + (persent - 100) * 1.5 : persent;
     //переворачиваю значение, т.к при движении ползунка время должно уменьшаться, а стоимость расти
     persent = 100 - (persent - 100);
-    let sec = 1000;
-    let minute = 60 * sec;
+    let sec = config.time.sec/config.time.speedGame;
+    let minute = config.time.minute/config.time.speedGame;
     let lvl2 = minute * 20;
     if (lvl > 1) {
       let result = lvl2; //с первого на второй лвл
@@ -31,10 +32,9 @@ const Mine = {
         result = lvl2 * 2.1;
         lvl2 = result;
       }
-
       return (result / 100) * persent;
     } else if (lvl <= 1) {
-      return (40000 / 100) * persent;
+      return ((sec*40) / 100) * persent;
     }
   },
   getResourcesForUpgrade(lvl, persent) {
