@@ -122,7 +122,7 @@ export default {
         this.$store.dispatch("DIALOG_SHOW", dialog);
         return;
       }
-      const storageName = this.$var.town.listBuilding[0];
+      const storageName = this.$var.classInstance.storage;
       if (
         this.checkSource(
           this.upgrade.source,

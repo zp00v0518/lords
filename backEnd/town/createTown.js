@@ -11,6 +11,7 @@ function createTown(options) {
   listMine = Race[race].mine.default;
   const storage = createStorage();
   const town = {
+    class: gameVariables.classInstance.town,
     id: townCount++,
     name: options.name || "New Castle",
     [storage.type] : storage,

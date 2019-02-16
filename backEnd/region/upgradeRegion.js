@@ -44,7 +44,7 @@ function upgradeBuilding(message, info) {
     ws.send(JSON.stringify(response));
     return;
   }
-  const storageName = gameVariables.town.listBuilding[0];
+  const storageName = gameVariables.classInstance.storage;
   const storage = sector.town[storageName];
   if (checkSource(needResources, storage.sources)) {
     setUpgradeChange(building, data.persent, sector)

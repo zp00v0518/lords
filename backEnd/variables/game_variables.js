@@ -4,6 +4,7 @@ const Region = require('../region/Region.js');
 const Race = require('../race/Race.js');
 const Town = require("../town/Town.js");
 const resources = require("../resources/Resources.js");
+const schema = require('../workWithMongoDB/schema.js')
 const time = config.time;
 
 const gameVariables = {
@@ -29,6 +30,7 @@ const gameVariables = {
 	time,
 	town: Town,
 	resources,
+	classInstance: schema.document.class,
 };
 
 module.exports = gameVariables;

@@ -1,6 +1,8 @@
 const resources = require("../../resources/Resources");
+const schema = require('../../workWithMongoDB/schema');
 
 const Mine = {
+  classInstance: schema.document.class.mine,
   valueUpgrade: [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89],
   valueMining: {
 		gold:2000,

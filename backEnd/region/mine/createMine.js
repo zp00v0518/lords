@@ -6,6 +6,7 @@ const UpgradeSection = require("../../town/storage/upgradeSection.js"); //так
 
 function Mine(type, lvl = 0) {
   this.parent = baseMine.parent;
+  this.class = baseMine.class;
   this.type = type;
   this.lvl = lvl;
   this.upgrade = UpgradeSection();

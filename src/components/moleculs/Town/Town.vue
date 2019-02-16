@@ -85,14 +85,14 @@ export default {
     };
   },
   created() {
-    const type = this.$var.town.listBuilding[0];
+    const type = this.$var.classInstance.storage;
     this.storage = this.sector.town[type];
     this.name = this.sector.town.name;
   },
   computed: {},
   methods: {},
   updated () {
-    const type = this.$var.town.listBuilding[0];
+    const type = this.$var.classInstance.storage;
     this.storage = this.sector.town[type];
     this.name = this.sector.town.name;
   }

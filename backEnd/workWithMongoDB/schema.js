@@ -6,6 +6,9 @@ const document = {
     art: "art",
     hero:"hero",
     clan:"clan",
+    storage:"storage",
+    mine:"mine",
+    town:"town",
   }
 };
 
