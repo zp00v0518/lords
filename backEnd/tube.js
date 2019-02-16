@@ -78,8 +78,9 @@ module.exports.setUpgradeChange = setUpgradeChange;
 module.exports.checkUpgrade = checkUpgrade;
 module.exports.updateStateRegion = updateStateRegion;
 
-const { upfateStateSector }  = require('./sector');
+const { upfateStateSector, formListUpgrade }  = require('./sector');
 module.exports.upfateStateSector = upfateStateSector;
+module.exports.formListUpgrade = formListUpgrade;
 
 const { Mine, createMine } = require("./region/mine");
 module.exports.Mine = Mine;

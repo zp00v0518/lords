@@ -1,8 +1,9 @@
 const  mine = gameVariables.mine;
 const { calcStorageNowValue } = require('../tube.js');
 
-function checkUpgrade(building, sector) {
+function checkUpgrade(cell, sector) {
   const now = new Date().getTime();
+  const building = cell.sector;
   const upgradeTime = building.upgrade.date;
   if (now > upgradeTime) {
     building.upgrade.is = false;

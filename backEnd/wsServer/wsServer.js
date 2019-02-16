@@ -6,7 +6,8 @@ const {
   config,
   findUserInDB,
   getInfoForStartGame,
-  getGlobalMapSector
+  getGlobalMapSector,
+  formListUpgrade
 } = require("../tube.js");
 const WS = require("ws");
 const watcher = require("../liveReload/watchFs.js");
@@ -45,6 +46,10 @@ wsServer.on("connection", (ws, req) => {
       UserOnline[server].count++;
       UserOnline[server][User._id].user = User;
       getInfoForStartGame(user, server).then(infoForStartGame => {
+        infoForStartGame.forEach(item => {
+          formListUpgrade(item)
+          GlobalMap[server][item.x][item.y] = item;
+        });
         UserOnline[server][User._id].sectors = infoForStartGame;
         UserOnline[server][User._id].user.globalMap = {};
         UserOnline[server][User._id].user.globalMap.zoom = 1;

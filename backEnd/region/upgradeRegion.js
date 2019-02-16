@@ -47,7 +47,8 @@ function upgradeBuilding(message, info) {
   const storageName = gameVariables.classInstance.storage;
   const storage = sector.town[storageName];
   if (checkSource(needResources, storage.sources)) {
-    setUpgradeChange(building, data.persent, sector)
+    const cell = sector.region[data.building.x][data.building.y];
+    setUpgradeChange(cell, data.persent, sector)
     response.storage = deleteSource(needResources, storage);
     response.upgrade = true;
     response.message = gloss.dialog.upgradeDone[lang];

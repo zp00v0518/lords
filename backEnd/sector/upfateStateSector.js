@@ -13,7 +13,7 @@ function upfateStateSector(
     const optionsForUpdate = {
       collectionName: serverName,
       filtr: { _id: sector._id },
-      updateDoc: { $set: { region: sector.region, town: sector.town } },
+      updateDoc: { $set: { region: sector.region, town: sector.town} },
       ops
     };
     update.one(optionsForUpdate, result => {
