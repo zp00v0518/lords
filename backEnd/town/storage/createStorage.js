@@ -1,5 +1,5 @@
-const tube = require("../../tube.js");
-const Town = require("../Town.js");
+const tube = require('../../tube.js');
+const Town = require('../Town.js');
 const Resources = gameVariables.resources;
 
 function createStorage(listMine = gameVariables.mine.typeList, lvl = 0) {
@@ -8,12 +8,12 @@ function createStorage(listMine = gameVariables.mine.typeList, lvl = 0) {
   const storage = {
     type: Town.listBuilding[0], // надо будет удалить
     lvl: lvl,
-    classInstance: gameVariables.class.storage,
+    class: gameVariables.classInstance.storage,
     upgrade: upgradeSection(),
     maxValue: {
       gold: Resources.maxValue.gold,
       baseResource: Resources.maxValue.baseResource,
-      unicResource: Resources.maxValue.unicResource,
+      unicResource: Resources.maxValue.unicResource
     },
     sources: {}
   };
@@ -27,9 +27,9 @@ function createStorage(listMine = gameVariables.mine.typeList, lvl = 0) {
       nowValue: 0
     };
     storage.sources[type] = obj;
-    if (type === "gold") {
+    if (type === 'gold') {
       storage.sources.gold.nowValue = 50000;
-      storage.sources.gold.maxValue =  Resources.maxValue.gold;
+      storage.sources.gold.maxValue = Resources.maxValue.gold;
     }
   }
   Resources.baseResource.forEach(item => {

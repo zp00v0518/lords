@@ -1,4 +1,4 @@
-import modules  from "./modules";
+import modules from './modules';
 
 class WS {
   init(wsAddr, store) {
@@ -28,46 +28,45 @@ class WS {
         this.incoming[data.type](data);
       } else {
         if (data.redirectUrl) {
-          console.log(data)
+          console.log(data);
           location = data.redirectUrl;
         } else {
-          console.log(data)
+          console.log(data);
         }
       }
     };
   }
   moveGlobalMap(eventData) {
-    this.store.commit("SET_CURRENTMAP", eventData);
+    this.store.commit('SET_CURRENTMAP', eventData);
   }
   startMessages(eventData) {
     console.log(eventData);
-    this.store.commit("START_MESSAGES", eventData);
-    this.store.commit("SET_CURRENTMAP", eventData);
-    this.store.dispatch("SET_DATA_CONNECTION", eventData.sectors);
+    this.store.commit('START_MESSAGES', eventData);
+    this.store.commit('SET_CURRENTMAP', eventData);
+    this.store.dispatch('SET_DATA_CONNECTION', eventData.sectors);
     // this.store.commit("SET_CURRENT_REGION", eventData.sectors[0]);
-    this.store.commit("SET_DICTIONARY", eventData.dictionary);
+    this.store.commit('SET_DICTIONARY', eventData.dictionary);
   }
   chatMessage(eventData) {
-    this.store.commit("UNSHIFT_MESSAGE", eventData);
+    this.store.commit('UNSHIFT_MESSAGE', eventData);
   }
   sendMessage(message) {
     this.wsInstance.send(JSON.stringify(message));
   }
   sendChatMessage(message) {
-    message.type = "chatMessage";
+    message.type = 'chatMessage';
     this.sendMessage(message);
   }
   reload() {
     location.reload();
   }
   changeSectors(eventData) {
-    this.store.dispatch("SET_SECTORS_WITH_CURRENT_SECTOR", eventData.sectors);
+    this.store.dispatch('SET_SECTORS_WITH_CURRENT_SECTOR', eventData.sectors);
   }
 
-  consoles(e){
-    console.log(e)
+  consoles(e) {
+    console.log(e);
   }
   upgradeBuilding = modules.upgradeBuilding;
-
 }
 export default WS;

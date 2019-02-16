@@ -1,12 +1,12 @@
-const { getRandomNumber } = require("template_func");
-const baseMine = require("../../variables/game_variables.js").mine;
+const { getRandomNumber } = require('template_func');
+const baseMine = require('../../variables/game_variables.js').mine;
 
-const UpgradeSection = require("../../town/storage/upgradeSection.js"); //такой способ пожключения выбран из-за того, что модуль "createMine"
+const UpgradeSection = require('../../town/storage/upgradeSection.js'); //такой способ пожключения выбран из-за того, что модуль "createMine"
 //используется при запуске файлов в "prepareToStart"
 
 function Mine(type, lvl = 0) {
   this.parent = baseMine.parent;
-  this.class = baseMine.class;
+  this.class = baseMine.classInstance;
   this.type = type;
   this.lvl = lvl;
   this.upgrade = UpgradeSection();

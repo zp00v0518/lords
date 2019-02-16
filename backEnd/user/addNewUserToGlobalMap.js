@@ -1,5 +1,5 @@
-const { getRandomNumber } = require("template_func");
-const tube = require("../tube.js");
+const { getRandomNumber } = require('template_func');
+const tube = require('../tube.js');
 const { GlobalMap, config, updateDB } = tube;
 const update = new updateDB();
 
@@ -9,13 +9,13 @@ function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
   // console.log("********** addNewUserToGlobalMap Work ************");
   return new Promise((resolve, reject) => {
     checkUserPosition(serverName, (x, y) => {
-      const newTown = createTown({ status: "new", name: "New Castle" });
+      const newTown = createTown({ status: 'new', name: 'New Castle' });
       const optionsForUpdateBD = {
         collectionName: serverName,
         filtr: {
           x,
           y,
-          class: config.schema.document.class.map,
+          class: config.schema.document.class.map
         },
         updateDoc: {
           $set: {
@@ -27,15 +27,15 @@ function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
           }
         }
       };
-      delete newTown.regionMap;
       update.one(optionsForUpdateBD).then(result => {
         GlobalMap[serverName][x][y].region = newTown.regionMap;
         GlobalMap[serverName][x][y].userId = user._id;
         GlobalMap[serverName][x][y].type = 1;
         GlobalMap[serverName][x][y].nickName = user.nickName;
         GlobalMap[serverName][x][y].town = newTown;
-        resolve(GlobalMap[serverName][x][y]);
-        return callback(null, GlobalMap[serverName][x][y]);
+        delete newTown.regionMap;
+        callback(null, GlobalMap[serverName][x][y]);
+        return resolve(GlobalMap[serverName][x][y]);
       });
     });
   });
