@@ -1,7 +1,6 @@
 <template>
-  <div class="timeline">
-    sdzd
-    <!-- <canvas ref="scene" :width="widthScene" :height="heightScene"></canvas> -->
+  <div class="timeline" :style="{width: widthScene, height:heightScene }">
+    <canvas ref="scene" :width="widthScene" :height="heightScene"></canvas>
   </div>
 </template>
 
@@ -11,14 +10,17 @@ export default {
   components: {},
   props: ["widthScene", "heightScene"],
   data() {
-    return {};
+    return {
+      ctx: {},
+    };
   },
   created() {},
   watch: {},
   computed: {},
   methods: {},
   mounted() {
-    // this.ctx = this.$refs.scene.getContext("2d");
+    this.ctx = this.$refs.scene.getContext("2d");
+    console.log(this.ctx)
   }
 };
 </script>

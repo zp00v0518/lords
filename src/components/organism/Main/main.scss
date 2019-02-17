@@ -20,4 +20,11 @@
     display: flex;
     justify-content: space-between;
   }
+  &__scenes {
+    border: 1px solid blue;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }

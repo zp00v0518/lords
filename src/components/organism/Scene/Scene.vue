@@ -1,6 +1,5 @@
 <template>
   <section class="scene">
-    <TimeLine></TimeLine>
     <GlobalMap v-if="scenes.globalMap" :widthScene="widthScene" :heightScene="heightScene" key='globalMap'></GlobalMap>
     <RegionMap v-if="scenes.region" :widthScene="widthScene" :heightScene="heightScene" key='regionMap'></RegionMap>
     <div class="scene__buttons" @click="changeScene">

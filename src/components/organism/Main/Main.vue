@@ -2,7 +2,10 @@
   <main class="main">
     <Vheader></Vheader>
     <div class="main__content">
-      <Scene></Scene>
+      <div class="main__scenes" ref="scenes">
+        <TimeLine :widthScene="widthScene" :heightScene="heightScene" kye="timeline"></TimeLine>
+        <Scene></Scene>
+      </div>
       <Sidebar></Sidebar>
     </div>
     <chat></chat>
@@ -14,6 +17,7 @@ import Chat from "../Chat";
 import Vheader from "../Header";
 import Sidebar from "../Sidebar";
 import Scene from "../Scene";
+import TimeLine from "../../moleculs/Scenes/TimeLine/TimeLine.vue";
 
 export default {
   name: "Main",
@@ -22,6 +26,21 @@ export default {
     Vheader,
     Sidebar,
     Scene,
+    TimeLine
+  },
+  data() {
+    return {
+      widthTimeLine: '',
+      heightTimeLine: '',
+    };
+  },
+  computed: {
+    widthScene() {
+      return this.widthTimeLine;
+    },
+    heightScene() {
+      return this.heightTimeLine;
+    }
   },
   watch: {
     "$store.state.chat.is": function() {
@@ -32,6 +51,14 @@ export default {
         this.$el.style.marginRight = "0";
       }
     }
+  },
+  mounted(){
+    const styles = this.$refs.scenes.getBoundingClientRect();
+    let  height = styles.height/100*10;
+    height = height > 25 ? 25 : height;
+    this.heightTimeLine = height  + "px";
+    this.widthTimeLine = styles.width + "px";
+
   }
 };
 </script>
