@@ -1,11 +1,15 @@
 <template>
-  <div class="timeline" :style="{width: widthScene, height:heightScene }">
+  <div class="timeline" :style="{width: widthScene+'px', height:heightScene+'px'}">
     <canvas ref="scene" :width="widthScene" :height="heightScene"></canvas>
   </div>
 </template>
 
 <script>
-import {formBreakpoint} from "../modules";
+import {
+  formBreakpoint,
+  drawBreakpointTime,
+  drawDefaultTime
+} from "../modules";
 export default {
   name: "TimeLine",
   components: {},
@@ -14,17 +18,35 @@ export default {
     return {
       ctx: {},
       breakpoint: [],
+      intervalNumber: ""
     };
   },
-  created() {
-  },
+  created() {},
+  watch: {},
   computed: {},
   methods: {
     formBreakpoint,
+    drawBreakpointTime,
+    drawDefaultTime,
+    drawLoop() {
+      this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+      this.drawBreakpointTime(this.ctx, this.breakpoint);
+      this.drawDefaultTime(this.ctx, this.breakpoint);
+    }
   },
   mounted() {
     this.ctx = this.$refs.scene.getContext("2d");
-    this.breakpoint = this.formBreakpoint(this.breakpoint, this.ctx.canvas.width);
+    this.breakpoint = this.formBreakpoint(
+      this.breakpoint,
+      parseFloat(this.widthScene)
+    );
+    this.drawLoop();
+    this.intervalNumber = setInterval(() => {
+      this.drawLoop();
+    }, 1000 * 15);
+  },
+  beforeDestroy() {
+    clearInterval(this.intervalNumber);
   }
 };
 </script>

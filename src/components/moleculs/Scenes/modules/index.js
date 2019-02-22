@@ -7,6 +7,8 @@ import setBorderIsoMap from './setBorderIsoMap';
 import hideTooltip from './hideTooltip';
 import handlerMousemoveOnMap from './handlerMousemoveOnMap';
 import formBreakpoint from './formBreakpoint';
+import drawBreakpointTime from './drawBreakpointTime';
+import drawDefaultTime from './drawDefaultTime';
 
 export {
   drawMap,
@@ -17,5 +19,7 @@ export {
   setBorderIsoMap,
   hideTooltip,
   handlerMousemoveOnMap,
-  formBreakpoint
+  formBreakpoint,
+  drawBreakpointTime,
+  drawDefaultTime
 };
