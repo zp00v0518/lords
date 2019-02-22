@@ -30,8 +30,8 @@ export default {
   },
   data() {
     return {
-      widthTimeLine: '',
-      heightTimeLine: '',
+      widthTimeLine: "",
+      heightTimeLine: ""
     };
   },
   computed: {
@@ -52,13 +52,12 @@ export default {
       }
     }
   },
-  mounted(){
+  mounted() {
     const styles = this.$refs.scenes.getBoundingClientRect();
-    let  height = styles.height/100*10;
-    height = height > 25 ? 25 : height;
-    this.heightTimeLine = height  + "px";
+    let height = (styles.height / 100) * 10;
+    height = height > 20 ? 20 : height;
+    this.heightTimeLine = height + "px";
     this.widthTimeLine = styles.width + "px";
-
   }
 };
 </script>

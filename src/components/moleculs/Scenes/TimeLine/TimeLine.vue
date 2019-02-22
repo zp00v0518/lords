@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import {formBreakpoint} from "../modules";
 export default {
   name: "TimeLine",
   components: {},
@@ -12,15 +13,18 @@ export default {
   data() {
     return {
       ctx: {},
+      breakpoint: [],
     };
   },
-  created() {},
-  watch: {},
+  created() {
+  },
   computed: {},
-  methods: {},
+  methods: {
+    formBreakpoint,
+  },
   mounted() {
     this.ctx = this.$refs.scene.getContext("2d");
-    console.log(this.ctx)
+    this.breakpoint = this.formBreakpoint(this.breakpoint, this.ctx.canvas.width);
   }
 };
 </script>
