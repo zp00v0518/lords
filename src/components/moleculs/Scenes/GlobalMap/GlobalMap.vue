@@ -45,7 +45,7 @@ import {
   setBorderIsoMap,
   hideTooltip,
   handlerMousemoveOnMap
-} from "../modules";
+} from "../utils";
 import Tooltip from "../../Tooltip";
 
 export default {

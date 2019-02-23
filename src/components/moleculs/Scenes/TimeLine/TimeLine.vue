@@ -8,8 +8,9 @@
 import {
   formBreakpoint,
   drawBreakpointTime,
-  drawDefaultTime
-} from "../modules";
+  drawDefaultTime,
+  getPositionEvent
+} from "./utils";
 export default {
   name: "TimeLine",
   components: {},
@@ -28,6 +29,7 @@ export default {
     formBreakpoint,
     drawBreakpointTime,
     drawDefaultTime,
+    getPositionEvent,
     drawLoop() {
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
       this.drawBreakpointTime(this.ctx, this.breakpoint);
@@ -44,6 +46,8 @@ export default {
     this.intervalNumber = setInterval(() => {
       this.drawLoop();
     }, 1000 * 15);
+    const now = new Date().getTime();
+    this.getPositionEvent(now + (1000*60*60));
   },
   beforeDestroy() {
     clearInterval(this.intervalNumber);
