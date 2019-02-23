@@ -1,6 +1,7 @@
 function formBreakpoint(result, width) {
   if (!width) return;
-  const segments = 24;
+  width -= 30; // для того, чтобы точки не находились на границах холста
+  const segments = 25;
   const startWidth = (width / 100) * 15;
   const step = 0.9;
   result = [];
@@ -26,6 +27,7 @@ function formBreakpoint(result, width) {
     });
     sum = result.reduce((sum, index) => sum + index);
   }
+  result.unshift(20);
   return result;
 }
 
