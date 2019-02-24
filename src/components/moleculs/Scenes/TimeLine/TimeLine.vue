@@ -1,7 +1,7 @@
 <template>
   <div class="timeline" :style="{width: widthScene+'px', height:heightScene+'px'}">
     <canvas ref="scene" :width="widthScene" :height="heightScene"></canvas>
-    <div class="event" :style="{left: position+'px'}"></div>
+    <div class="event" v-if="position" :style="{left: position+'px'}"></div>
   </div>
 </template>
 
@@ -21,16 +21,21 @@ export default {
     return {
       ctx: {},
       breakpoint: [],
-      intervalNumber: ""
+      intervalNumber: "",
+      timeEvent: '',
+      eventsList: [],
     };
   },
   created() {},
-  watch: {},
+  watch: {
+    "$store.state.timeline.eventsList": function() {
+      this.eventsList = this.$store.state.timeline.eventsList;
+    }
+  },
   computed: {
     position() {
       const now = new Date().getTime();
-      const position = this.getPositionEvent(now, now + 1000 * 60 * 60 * 2.5);
-      console.log(position);
+      const position = this.getPositionEvent(now, this.timeEvent);
       return position;
     }
   },
@@ -44,10 +49,7 @@ export default {
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
       this.drawBreakpointTime(this.ctx, this.breakpoint);
       this.drawDefaultTime(this.ctx, this.breakpoint);
-
       this.drawEventPoint(this.position);
-
-      // const position = this.getPositionEvent();
     }
   },
   mounted() {
@@ -71,8 +73,8 @@ export default {
 @import "timeline.scss";
 
 .event {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   border: 1px solid;
   position: absolute;
   top: 100%;

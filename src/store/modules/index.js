@@ -4,6 +4,7 @@ import regionMap from './regionMap'
 import local from './local'
 import userSectors from './userSectors'
 import dialog from './dialog'
+import timeline from './timeline'
 
 export default {
   chat,
@@ -12,4 +13,5 @@ export default {
   local,
   userSectors,
   dialog,
+  timeline,
 }
