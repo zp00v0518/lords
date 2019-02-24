@@ -1,7 +1,8 @@
 const Mine = gameVariables.mine;
-// const checkWorkBuilding = require("../tube.js").checkWorkBuilding;
+const tube = require('../tube.js');
 
-function setUpgradeChange(cell, persent = 100, sector) {
+function setUpgradeChange(cell, persent = 100, sector, info) {
+  const { addEventToDB } = tube;
   // console.log("********** setUpgradeChange Work ************");
   const building = cell.sector;
   const lvl = building.lvl;
@@ -10,7 +11,15 @@ function setUpgradeChange(cell, persent = 100, sector) {
   building.upgrade.is = true;
   building.upgrade.date = new Date().getTime() + timeUpgrade;
   sector.listUpgrade.push(cell);
-  // checkWorkBuilding(building, type,  building[type].upgrade.date);
+  const dataForDB = {
+    target: sector._id,
+    init: sector._id,
+    type: 'upgradeRegion',
+    start: new Date().getTime(),
+    end: building.upgrade.date,
+    data: building
+  };
+  addEventToDB(dataForDB, info.server);
 }
 
 module.exports = setUpgradeChange;

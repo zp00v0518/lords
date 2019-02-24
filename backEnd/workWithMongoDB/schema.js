@@ -9,8 +9,18 @@ const document = {
     storage:"storage",
     mine:"mine",
     town:"town",
+    event: "event",
   }
 };
+const event = {
+  type: String,
+  target: "ObjectId",
+  init: "ObjectId",
+  start: Date,
+  end: Date,
+  data: Object,
+  status: Boolean,
+}
 
 const map = {
   type: Number,
@@ -85,4 +95,5 @@ module.exports = {
   sector,
   region,
   storage,
+  event,
 }
