@@ -72,7 +72,7 @@ function createRegionMap() {
     let x = coordsMine[index].x;
     let y = coordsMine[index].y;
     regionMap[x][y].type = Region.typeList.indexOf("mine"); //индекс шахты
-    regionMap[x][y].sector = createMine();
+    regionMap[x][y].sector = createMine(x, y);
   }
   return regionMap;
 }
@@ -80,7 +80,7 @@ function createRegionMap() {
 //конструктор региона
 function createRegion() {
   var Region = {};
-  Region.regionMap = createRegionMap();
+  Region = createRegionMap();
 
   return Region;
 }

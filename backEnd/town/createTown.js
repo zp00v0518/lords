@@ -60,7 +60,7 @@ function createRegionMap() {
     let x = coordsMine[k].x;
     let y = coordsMine[k].y;
     regionMap[x][y].type = Region.typeList.indexOf("mine"); //индекс шахты
-    regionMap[x][y].sector = createMine(); //создается рандомный тип шахты
+    regionMap[x][y].sector = createMine(x, y); //создается рандомный тип шахты
     regionMap[x][y].sector.type = listMine[k]; //исправляю рандомный тип шахты на установленный
   }
   return regionMap;
