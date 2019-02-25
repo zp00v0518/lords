@@ -7,7 +7,8 @@ const {
   findUserInDB,
   getInfoForStartGame,
   getGlobalMapSector,
-  formListUpgrade
+  formListUpgrade,
+  formEventsList,
 } = require("../tube.js");
 const WS = require("ws");
 const watcher = require("../liveReload/watchFs.js");
@@ -62,6 +63,7 @@ wsServer.on("connection", (ws, req) => {
           UserOnline[server][User._id].user,
           server,
           currentMap => {
+      formEventsList( UserOnline[server][User._id])
             start.currentMap = currentMap;
             start.sectors = infoForStartGame;
             start.dictionary = getLangDictionary(user.lang);
