@@ -14,8 +14,14 @@ const document = {
 };
 const event = {
   type: String,
-  target: "ObjectId",
-  init: "ObjectId",
+  target: {
+    user: "ObjectId",
+    sector: "ObjectId",
+  },
+  init: {
+    user: "ObjectId",
+    sector: "ObjectId",
+  },
   start: Date,
   end: Date,
   data: Object,

@@ -12,8 +12,14 @@ function setUpgradeChange(cell, persent = 100, sector, info) {
   building.upgrade.date = new Date().getTime() + timeUpgrade;
   sector.listUpgrade.push(cell);
   const dataForDB = {
-    target: sector._id,
-    init: sector._id,
+    target: {
+      sector: sector._id,
+      user: info.player.user._id, 
+    },
+    init: {
+      sector: sector._id,
+      user: info.player.user._id, 
+    },
     type: 'upgradeRegion',
     start: new Date().getTime(),
     end: building.upgrade.date,

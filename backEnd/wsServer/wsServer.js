@@ -63,7 +63,7 @@ wsServer.on("connection", (ws, req) => {
           UserOnline[server][User._id].user,
           server,
           currentMap => {
-      formEventsList( UserOnline[server][User._id])
+      formEventsList( UserOnline[server][User._id], server)
             start.currentMap = currentMap;
             start.sectors = infoForStartGame;
             start.dictionary = getLangDictionary(user.lang);
