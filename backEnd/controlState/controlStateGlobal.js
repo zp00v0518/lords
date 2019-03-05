@@ -1,5 +1,5 @@
 const serverList = gameVariables.serverList;
-const { checkUpgrade, calcStorageNowValue, config } = require('../tube.js');
+const { checkUpgrade, calcStorageNowValue, controlSatateEventsList } = require('../tube.js');
 
 function controlStateGlobal(param) {
   if (param.target === 'all') {
@@ -10,6 +10,7 @@ function controlStateGlobal(param) {
         const userInOnline = UserOnline[userServer][key];
         const sectors = userInOnline.sectors;
         const ws = userInOnline.ws;
+        controlSatateEventsList(userInOnline);
         sectors.forEach(sector => {
           sector.listUpgrade.forEach((upgradeBuilding, index) => {
             if (checkUpgrade(upgradeBuilding, sector)) {

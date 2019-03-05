@@ -86,9 +86,10 @@ const { Mine, createMine } = require("./region/mine");
 module.exports.Mine = Mine;
 module.exports.createMine = createMine;
 
-const { addEventToDB, formEventsList } = require('./events');
+const { addEventToDB, formEventsList, controlSatateEventsList} = require('./events');
 module.exports.addEventToDB = addEventToDB;
 module.exports.formEventsList = formEventsList;
+module.exports.controlSatateEventsList = controlSatateEventsList;
 
 const {checkSource, deleteSource} = require('./resources');
 module.exports.checkSource = checkSource;
