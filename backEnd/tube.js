@@ -112,3 +112,9 @@ module.exports.gloss = gloss;
 
 const { controlStateGlobal } = require('./controlState');
 module.exports.controlStateGlobal = controlStateGlobal;
+
+function moduleExports(modules){
+  Object.keys(modules).forEach(key => {
+    module.exports[key] = modules[key]
+  })
+}

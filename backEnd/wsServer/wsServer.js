@@ -1,19 +1,19 @@
-require("../variables/global_variables.js");
-const allHandler = require("./allHandler.js");
-const chat = require("../chat/chat.js");
-const getLangDictionary = require("../dictionary/getLangDictionary");
+require('../variables/global_variables.js');
+const allHandler = require('./allHandler.js');
+const chat = require('../chat/chat.js');
+const getLangDictionary = require('../dictionary/getLangDictionary');
 const {
   config,
   findUserInDB,
   getInfoForStartGame,
   getGlobalMapSector,
   formListUpgrade,
-  formEventsList,
-} = require("../tube.js");
-const WS = require("ws");
-const watcher = require("../liveReload/watchFs.js");
-const Cookies = require("cookies");
-const {tryJsonParse} = require('template_func');
+  formEventsList
+} = require('../tube.js');
+const WS = require('ws');
+const watcher = require('../liveReload/watchFs.js');
+const Cookies = require('cookies');
+const { tryJsonParse } = require('template_func');
 const getCollectionName = srcRequire('/template_modules/getCollectionName');
 
 class WsServer {
@@ -29,14 +29,14 @@ class WsServer {
 
 const wsServer = new WsServer();
 wsServer.init(config.port.ws);
-wsServer.on("connection", (ws, req) => {
-  const server = getCollectionName(req.url.split("/")[1]);
+wsServer.on('connection', (ws, req) => {
+  const server = getCollectionName(req.url.split('/')[1]);
   const cookies = new Cookies(req);
-  const userCookies = cookies.get("user");
+  const userCookies = cookies.get('user');
   let User;
   const start = {
     status: true,
-    type: "startMessages",
+    type: 'startMessages',
     chat
   };
   findUserInDB(userCookies).then(user => {
@@ -48,7 +48,7 @@ wsServer.on("connection", (ws, req) => {
       UserOnline[server][User._id].user = User;
       getInfoForStartGame(user, server).then(infoForStartGame => {
         infoForStartGame.forEach(item => {
-          formListUpgrade(item)
+          formListUpgrade(item);
           GlobalMap[server][item.x][item.y] = item;
         });
         UserOnline[server][User._id].sectors = infoForStartGame;
@@ -63,33 +63,38 @@ wsServer.on("connection", (ws, req) => {
           UserOnline[server][User._id].user,
           server,
           currentMap => {
-      formEventsList( UserOnline[server][User._id], server)
-            start.currentMap = currentMap;
-            start.sectors = infoForStartGame;
-            start.dictionary = getLangDictionary(user.lang);
-            ws.send(JSON.stringify(start));
+            formEventsList(UserOnline[server][User._id], server).then(
+              eventList => {
+                UserOnline[server][User._id].eventList = eventList;
+                start.eventList = eventList
+                start.currentMap = currentMap;
+                start.sectors = infoForStartGame;
+                start.dictionary = getLangDictionary(user.lang);
+                ws.send(JSON.stringify(start));
+              }
+            );
           }
         );
       });
     } else {
       const message = {
         status: false,
-        redirectUrl: "/"
+        redirectUrl: '/'
       };
       ws.send(JSON.stringify(message));
     }
   });
 
-  ws.on("close", function() {
+  ws.on('close', function() {
     if (User) {
       delete UserOnline[server][User._id];
       UserOnline[server].count--;
     }
   });
-  ws.on("message", message => {
+  ws.on('message', message => {
     const mess = tryJsonParse(message);
     if (!mess) {
-      console.log("Не удалось распарсить строку пришедшую от клиента")
+      console.log('Не удалось распарсить строку пришедшую от клиента');
       ws.send(message);
     }
     const baseInfo = {
@@ -111,10 +116,10 @@ function callbackForWatcher() {
     if (UserOnline[server].count > 0) {
       const message = {
         status: true,
-        type: "reload"
+        type: 'reload'
       };
       for (let user in UserOnline[server]) {
-        if (user !== "count") {
+        if (user !== 'count') {
           UserOnline[server][user].ws.send(JSON.stringify(message));
         }
       }

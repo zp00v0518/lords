@@ -10,7 +10,7 @@ class WS {
       reload: eventData => this.reload(eventData),
       moveGlobalMap: eventData => this.moveGlobalMap(eventData),
       upgradeBuilding: eventData => this.upgradeBuilding(eventData),
-      changeSectors: eventData => this.changeSectors(eventData),
+      controlState: eventData => this.controlState(eventData),
       consoles: eventData => this.consoles(eventData)
     };
     this.outgoing = {};
@@ -60,7 +60,7 @@ class WS {
   reload() {
     location.reload();
   }
-  changeSectors(eventData) {
+  controlState(eventData) {
     this.store.dispatch('SET_SECTORS_WITH_CURRENT_SECTOR', eventData.sectors);
   }
 

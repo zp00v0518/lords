@@ -19,7 +19,7 @@ function controlStateGlobal(param) {
           calcStorageNowValue(sector.town.storage);
         });
         const response = {
-          type: 'changeSectors',
+          type: 'controlState',
           status: true,
           sectors: sectors
         };
