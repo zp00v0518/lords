@@ -10,7 +10,7 @@ function controlStateGlobal(param) {
         const userInOnline = UserOnline[userServer][key];
         const sectors = userInOnline.sectors;
         const ws = userInOnline.ws;
-        controlSatateEventsList(userInOnline);
+        // controlSatateEventsList(userInOnline);
         sectors.forEach(sector => {
           sector.listUpgrade.forEach((upgradeBuilding, index) => {
             if (checkUpgrade(upgradeBuilding, sector)) {

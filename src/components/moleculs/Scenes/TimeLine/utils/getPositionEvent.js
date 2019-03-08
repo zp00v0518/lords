@@ -4,7 +4,7 @@ function getPositionEvent(now, time) {
   const widthHour = this.breakpoint[difTime.hour + 1];
   const widthMinute = widthHour / 60;
   const mediumArr = [...this.breakpoint];
-  mediumArr.length = difTime.hour;
+  mediumArr.length = difTime.hour+1;
   const position = mediumArr.reduce((sum, current) => {
     return sum + current;
   }, difTime.minute * widthMinute);
@@ -22,6 +22,6 @@ function getDifferrentTime(now, time) {
     hour: +hour.toString()[0],
     minute: difMinute % 60
   };
-  if (!result.hour || !result.minute) return false;
+  if (Number.isNaN(result.hour) || result.minute < 0) return false;
   return result;
 }

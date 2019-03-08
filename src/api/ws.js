@@ -11,7 +11,8 @@ class WS {
       moveGlobalMap: eventData => this.moveGlobalMap(eventData),
       upgradeBuilding: eventData => this.upgradeBuilding(eventData),
       controlState: eventData => this.controlState(eventData),
-      consoles: eventData => this.consoles(eventData)
+      consoles: eventData => this.consoles(eventData),
+      setEvents: eventData => this.setEvents(eventData),
     };
     this.outgoing = {};
   }
@@ -46,6 +47,7 @@ class WS {
     this.store.dispatch('SET_DATA_CONNECTION', eventData.sectors);
     // this.store.commit("SET_CURRENT_REGION", eventData.sectors[0]);
     this.store.commit('SET_DICTIONARY', eventData.dictionary);
+    this.store.commit('SET_EVENTS', eventData.eventList);
   }
   chatMessage(eventData) {
     this.store.commit('UNSHIFT_MESSAGE', eventData);
@@ -56,12 +58,15 @@ class WS {
   sendChatMessage(message) {
     message.type = 'chatMessage';
     this.sendMessage(message);
-  }
+  };
   reload() {
     location.reload();
-  }
+  };
   controlState(eventData) {
     this.store.dispatch('SET_SECTORS_WITH_CURRENT_SECTOR', eventData.sectors);
+  };
+  setEvents(eventData){
+    this.store.commit('SET_EVENTS', eventData.eventList);
   }
 
   consoles(e) {

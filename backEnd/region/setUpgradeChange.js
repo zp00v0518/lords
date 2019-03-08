@@ -14,11 +14,15 @@ function setUpgradeChange(cell, persent = 100, sector, info) {
   const dataForDB = {
     target: {
       sector: sector._id,
-      user: info.player.user._id, 
+      user: info.player.user._id,
+      x: sector.x,
+      y: sector.y,
     },
     init: {
       sector: sector._id,
-      user: info.player.user._id, 
+      user: info.player.user._id,
+      x: sector.x,
+      y: sector.y,
     },
     type: 'upgradeRegion',
     start: new Date().getTime(),

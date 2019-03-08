@@ -6,7 +6,6 @@ function controlSatateEventsList(player){
     const now = new Date();
     const end = new Date(item.end)
     if (end > now) return false;
-    
   });
 }
 

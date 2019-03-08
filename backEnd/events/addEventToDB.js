@@ -22,10 +22,14 @@ const schema = {
   target: {
     user: "ObjectId",
     sector: "ObjectId",
+    x: 'coordX',
+    y: 'coordY',
   },
   init: {
     user: "ObjectId",
     sector: "ObjectId",
+    x: 'coordX',
+    y: 'coordY',
   },
   start: Date,
   end: Date,

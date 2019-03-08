@@ -1,7 +1,12 @@
 <template>
   <div class="timeline" :style="{width: widthScene+'px', height:heightScene+'px'}">
     <canvas ref="scene" :width="widthScene" :height="heightScene"></canvas>
-    <div class="event" v-if="position" :style="{left: position+'px'}"></div>
+    <div
+      class="event"
+      v-for="(eventItem, index) in eventsList"
+      :key="index"
+      :style="{left: getPosition(eventItem)}"
+    ></div>
   </div>
 </template>
 
@@ -21,9 +26,10 @@ export default {
     return {
       ctx: {},
       breakpoint: [],
-      intervalNumber: "",
-      timeEvent: '',
-      eventsList: [],
+      timerId: "",
+      timerId_2: "",
+      timeEvent: "",
+      eventsList: []
     };
   },
   created() {},
@@ -33,11 +39,11 @@ export default {
     }
   },
   computed: {
-    position() {
-      const now = new Date().getTime();
-      const position = this.getPositionEvent(now, this.timeEvent);
-      return position;
-    }
+    // position() {
+    //   const now = new Date().getTime();
+    //   const position = this.getPositionEvent(now, this.timeEvent);
+    //   return position;
+    // }
   },
   methods: {
     formBreakpoint,
@@ -50,6 +56,11 @@ export default {
       this.drawBreakpointTime(this.ctx, this.breakpoint);
       this.drawDefaultTime(this.ctx, this.breakpoint);
       this.drawEventPoint(this.position);
+    },
+    getPosition(eventItem){
+      const now = new Date().getTime();
+      const position = this.getPositionEvent(now, eventItem.end);
+      return position + "px";
     }
   },
   mounted() {
@@ -59,12 +70,16 @@ export default {
       parseFloat(this.widthScene)
     );
     this.drawLoop();
-    this.intervalNumber = setInterval(() => {
+    this.timerId = setInterval(() => {
       this.drawLoop();
+    }, 1000 * 15);
+    this.timerId_2 = setInterval(() => {
+      this.$store.commit('UPDATE_EVENTS');
     }, 1000 * 15);
   },
   beforeDestroy() {
-    clearInterval(this.intervalNumber);
+    clearInterval(this.timerId);
+    clearInterval(this.timerId_2);
   }
 };
 </script>
@@ -78,6 +93,6 @@ export default {
   border: 1px solid;
   position: absolute;
   top: 100%;
-  transform: translateX(-50%);
+  // transform: translateX(-50%);
 }
 </style>
