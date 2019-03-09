@@ -1,12 +1,34 @@
 const { checkUpgrade, calcStorageNowValue } = require('../tube.js');
+const fixingResultUpgradeMine = require('../region/mine/fixingResultUpgradeMine.js');
 
-function controlSatateEventsList(player){
-  const eventList = player.eventList;
-  eventList.every(item => {
+function controlSatateEventsList(eventsList) {
+  for (let i = 0; i < eventsList.length; i++) {
+    const item = eventsList[i];
     const now = new Date();
-    const end = new Date(item.end)
-    if (end > now) return false;
-  });
+    const end = new Date(item.end);
+    if (end > now) {
+      break;
+    } else {
+      const eventItem = eventsList.splice(i, 1)[0];
+      const type = eventItem.type;
+      const serverName = eventItem.serverName;
+      if (type === 'upgradeRegion') {
+        const x = eventItem.target.x;
+        const y = eventItem.target.y;
+        const sector = GlobalMap[serverName][x][y];
+        const storage = sector.town.storage;
+        const mineX = eventItem.data.x;
+        const mineY = eventItem.data.y;
+        const mine = sector.region[mineX][mineY].sector;
+        calcStorageNowValue(storage, eventItem.end);
+        fixingResultUpgradeMine(mine, eventItem);
+        addValueToStorage(mine.type, mine.work.addValue, storage);
+        calcStorageNowValue(storage, eventItem.end);
+      }
+      i--;
+    }
+  }
+  return eventsList;
 }
 
 module.exports = controlSatateEventsList;

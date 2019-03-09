@@ -13,9 +13,9 @@ function controlStateGlobal(param) {
         // controlSatateEventsList(userInOnline);
         sectors.forEach(sector => {
           sector.listUpgrade.forEach((upgradeBuilding, index) => {
-            if (checkUpgrade(upgradeBuilding, sector)) {
-              sector.listUpgrade.splice(index, 1);
-            }
+            // if (checkUpgrade(upgradeBuilding, sector)) { 
+            //   sector.listUpgrade.splice(index, 1);
+            // }
           });
           calcStorageNowValue(sector.town.storage);
         });

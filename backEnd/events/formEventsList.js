@@ -1,7 +1,8 @@
-const { findInDB, config } = require('../tube.js');
-const find = new findInDB();
+const tube = require('../tube.js');
+const find = new tube.findInDB();
 
 function formEventsList(player, serverName, callback = () => {}) {
+  const {controlSatateEventsList} = tube;
   return new Promise((resolve, reject) => {
     const findOptions = {
       collectionName: serverName,
@@ -21,7 +22,7 @@ function formEventsList(player, serverName, callback = () => {}) {
         callback(null, result.result);
         return resolve(result.result)
       } else {
-        console.log(result.result)
+        controlSatateEventsList(result.result)
         callback(null, result.result);
         return resolve(result.result)
       }

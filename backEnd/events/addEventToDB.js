@@ -10,7 +10,8 @@ function addEventToDB(data, serverName) {
     end: data.end,
     data: data.data,
     type: data.type,
-    status: true
+    status: true,
+    serverName,
   };
   insert.one({ collectionName: serverName, doc: doc }, result => {});
 }

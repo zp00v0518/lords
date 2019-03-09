@@ -10,7 +10,7 @@ const {
 const regionLength = gameVariables.numSectionRegionMap;
 const mine = gameVariables.mine;
 
-function upgradeBuilding(message, info) {
+function handlerResponseUpgradeRegion(message, info) {
   const data = message.data;
   const ws = info.player.ws;
   if (!checkSchema(data, schema)) {
@@ -58,7 +58,7 @@ function upgradeBuilding(message, info) {
   }
 }
 
-module.exports = upgradeBuilding;
+module.exports = handlerResponseUpgradeRegion;
 
 const schema = {
   building: { type: 'object' },
