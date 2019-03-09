@@ -1,6 +1,6 @@
 // const { calcStorageNowValue } = require('../../tube.js');
 
-function addValueToStorage(typeSource, value ){
+function addValueToStorage(typeSource, value, storage) {
   const previosValue = storage.sources[typeSource].addValue;
   if (storage.sources[typeSource].lastCalc === 0) {
     storage.sources[typeSource].lastCalc = new Date().getTime();

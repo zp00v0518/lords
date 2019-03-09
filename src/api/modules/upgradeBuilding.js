@@ -1,4 +1,5 @@
 export default function upgradeBuilding(data) {
+  console.log(data)
   if (!data.upgrade) {
     const message = {
       type: "message",
@@ -14,6 +15,7 @@ export default function upgradeBuilding(data) {
       storage: data.storage,
     }
     this.store.commit("CHANGE_STORAGE", storageChange);
+    this.store.commit('SET_EVENTS', data.eventsList);
     const message = {
       type: "message",
       data: {

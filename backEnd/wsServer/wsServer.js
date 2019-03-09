@@ -7,7 +7,6 @@ const {
   findUserInDB,
   getInfoForStartGame,
   getGlobalMapSector,
-  formListUpgrade,
   formEventsList
 } = require('../tube.js');
 const WS = require('ws');
@@ -48,7 +47,6 @@ wsServer.on('connection', (ws, req) => {
       UserOnline[server][User._id].user = User;
       getInfoForStartGame(user, server).then(infoForStartGame => {
         infoForStartGame.forEach(item => {
-          formListUpgrade(item);
           GlobalMap[server][item.x][item.y] = item;
         });
         UserOnline[server][User._id].sectors = infoForStartGame;
@@ -64,9 +62,9 @@ wsServer.on('connection', (ws, req) => {
           server,
           currentMap => {
             formEventsList(UserOnline[server][User._id], server).then(
-              eventList => {
-                UserOnline[server][User._id].eventList = eventList;
-                start.eventList = eventList
+              eventsList => {
+                UserOnline[server][User._id].eventsList = eventsList;
+                start.eventsList = eventsList
                 start.currentMap = currentMap;
                 start.sectors = infoForStartGame;
                 start.dictionary = getLangDictionary(user.lang);

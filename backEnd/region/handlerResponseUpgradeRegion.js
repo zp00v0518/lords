@@ -4,8 +4,7 @@ const {
   redirectMessage,
   gloss,
   deleteSource,
-  setUpgradeChange,
-  checkUpgrade
+  setUpgradeChange
 } = require('../tube.js');
 const regionLength = gameVariables.numSectionRegionMap;
 const mine = gameVariables.mine;
@@ -45,13 +44,17 @@ function handlerResponseUpgradeRegion(message, info) {
   const storage = sector.town[storageName];
   if (checkSource(needResources, storage.sources)) {
     const cell = sector.region[data.building.x][data.building.y];
-    setUpgradeChange(cell, data.persent, sector, info);
-    response.storage = deleteSource(needResources, storage);
-    response.upgrade = true;
-    response.message = gloss.dialog.upgradeDone[lang];
-    response.sectorIndex = data.sectorIndex;
-    ws.send(JSON.stringify(response));
-    return;
+    setUpgradeChange(cell, data.persent, sector, info)
+      .then(result => {
+        response.storage = deleteSource(needResources, storage);
+        response.upgrade = true;
+        response.message = gloss.dialog.upgradeDone[lang];
+        response.sectorIndex = data.sectorIndex;
+        response.eventsList = info.player.eventsList;
+        ws.send(JSON.stringify(response));
+        return;
+      })
+      .catch(err => console.log(err));
   } else {
     response.message = gloss.dialog.notResources[lang];
     ws.send(JSON.stringify(response));

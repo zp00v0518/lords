@@ -1,7 +1,10 @@
 const { checkUpgrade, calcStorageNowValue } = require('../tube.js');
 const fixingResultUpgradeMine = require('../region/mine/fixingResultUpgradeMine.js');
+const addValueToStorage = require('../town/storage/addValueToStorage.js');
 
 function controlSatateEventsList(eventsList) {
+  // console.log("***controlSatateEventsList work***")
+  // console.log(eventsList)
   for (let i = 0; i < eventsList.length; i++) {
     const item = eventsList[i];
     const now = new Date();

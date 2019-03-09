@@ -47,7 +47,7 @@ class WS {
     this.store.dispatch('SET_DATA_CONNECTION', eventData.sectors);
     // this.store.commit("SET_CURRENT_REGION", eventData.sectors[0]);
     this.store.commit('SET_DICTIONARY', eventData.dictionary);
-    this.store.commit('SET_EVENTS', eventData.eventList);
+    this.store.commit('SET_EVENTS', eventData.eventsList);
   }
   chatMessage(eventData) {
     this.store.commit('UNSHIFT_MESSAGE', eventData);
@@ -64,9 +64,10 @@ class WS {
   };
   controlState(eventData) {
     this.store.dispatch('SET_SECTORS_WITH_CURRENT_SECTOR', eventData.sectors);
+    this.store.commit('SET_EVENTS', eventData.eventsList);
   };
   setEvents(eventData){
-    this.store.commit('SET_EVENTS', eventData.eventList);
+    this.store.commit('SET_EVENTS', eventData.eventsList);
   }
 
   consoles(e) {
