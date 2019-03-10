@@ -36,7 +36,7 @@ wsServer.on('connection', (ws, req) => {
   const start = {
     status: true,
     type: 'startMessages',
-    chat
+    chat: chat[server],
   };
   findUserInDB(userCookies).then(user => {
     if (user) {
@@ -88,7 +88,7 @@ wsServer.on('connection', (ws, req) => {
   });
   ws.on('message', message => {
     const mess = tryJsonParse(message);
-    if (!mess) {
+    if (!mess && !mess.type) {
       console.log('Не удалось распарсить строку пришедшую от клиента');
       ws.send(message);
     }

@@ -47,6 +47,7 @@ export default {
       showChat: true,
       showSmallChat: true,
       messageForSend: {
+        // qwqw: "",
         text: "",
         chanel: "",
         privat: ""

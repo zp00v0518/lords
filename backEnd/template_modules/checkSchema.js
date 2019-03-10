@@ -8,6 +8,7 @@ function checkSchema(obj, schema) {
   function forEach(obj) {
     for (let key in obj) {
       const type = checkType(obj[key]);
+      // console.log(type)
       if (type !== schema[key].type) {
         flag = false;
         break;
