@@ -1,13 +1,13 @@
 <template>
-  <div class="sector__events" :style="{left: data.position + 'px'}">
+  <div class="sector__events" :style="styles">
     <div
       v-for="(eventData, index) in data.listEvents"
       :key="index"
       class="event"
-      @mouseenter="handlerMouseEnter(eventData)"
-      @mouseleave="handlerMouseEnter(null)"
+      @mouseenter="handlerMouseEnter($event, eventData)"
+      @mouseleave="handlerMouseEnter($event, null)"
     ></div>
-    <EventTooltip v-if="showTooltip" :dataEvent="dataEvent"></EventTooltip>
+    <EventTooltip v-if="showTooltip" :dataEvent="dataEvent" :position='position'></EventTooltip>
   </div>
 </template>
 
@@ -17,34 +17,43 @@ export default {
   name: "ViewSectorEvents",
   components: { EventTooltip },
   props: {
-    data: Object
+    data: Object,
+    styles: null,
   },
   data() {
     return {
       showTooltip: false,
-      dataEvent: {}
+      dataEvent: {},
+      position: 0,
+      topEl: null,
     };
   },
   methods: {
-    handlerMouseEnter(eventData) {
-      if (!eventData) {
+    handlerMouseEnter($event, data) {
+      if (!data) {
         this.showTooltip = false;
         this.dataEvent = {};
         return;
       }
+      const target = $event.target;
+      const style = target.getBoundingClientRect();
+      this.position = style.top - this.topEl;
       this.showTooltip = true;
-      this.dataEvent = eventData;
+      this.dataEvent = data;
     }
+  },
+  mounted () {
+    this.topEl = this.$el.getBoundingClientRect().top;
   }
 };
 </script>
 
 <style lang='scss' scoped>
 .sector__events {
+  position: relative;
   width: 15px;
   position: absolute;
   top: 100%;
-  z-index: 10;
 }
 .event {
   position: relative;

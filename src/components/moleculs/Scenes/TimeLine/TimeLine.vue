@@ -6,8 +6,13 @@
       v-for="(eventItem, index) in eventsList"
       :key="index"
       :style="{left: getPosition(eventItem)}"
-    ></div> -->
-    <ViewSectorEvents v-for="(sectorEvent, index) in sectorsEventsPosition" :key="index" :data="sectorEvent"></ViewSectorEvents>
+    ></div>-->
+    <ViewSectorEvents
+      v-for="(sectorEvent, index) in sectorsEventsPosition"
+      :key="index"
+      :data="sectorEvent"
+      :styles="{left: sectorEvent.position + 'px', zIndex: 100 - index}"
+    ></ViewSectorEvents>
   </div>
 </template>
 
@@ -50,13 +55,13 @@ export default {
       const now = new Date().getTime();
       const step = 15;
       const result = [];
-      let previos = this.getPositionEvent(now, arr[0].end)
+      let previos = this.getPositionEvent(now, arr[0].end);
       let inter = {
         position: previos,
-        listEvents: [arr[0]],
-      }
+        listEvents: [arr[0]]
+      };
       for (let i = 1; i < arr.length; i++) {
-        const position = this.getPositionEvent(now, arr[i].end)
+        const position = this.getPositionEvent(now, arr[i].end);
         const dif = position - previos;
         if (dif > step) {
           inter.listEvents = inter.listEvents.map(item => item);
@@ -64,8 +69,8 @@ export default {
           inter.position = 0;
           inter.listEvents = [];
         }
-        if (inter.listEvents.length === 0){
-          inter.position = this.getPositionEvent(now, arr[i].end)
+        if (inter.listEvents.length === 0) {
+          inter.position = this.getPositionEvent(now, arr[i].end);
         }
         inter.listEvents.push(arr[i]);
         previos = position;
