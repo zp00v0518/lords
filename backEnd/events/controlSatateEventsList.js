@@ -4,7 +4,6 @@ const addValueToStorage = require('../town/storage/addValueToStorage.js');
 
 function controlSatateEventsList(eventsList) {
   // console.log("***controlSatateEventsList work***")
-  // console.log(eventsList)
   for (let i = 0; i < eventsList.length; i++) {
     const item = eventsList[i];
     const now = new Date();
@@ -26,7 +25,7 @@ function controlSatateEventsList(eventsList) {
         calcStorageNowValue(storage, eventItem.end);
         fixingResultUpgradeMine(mine, eventItem);
         addValueToStorage(mine.type, mine.work.addValue, storage);
-        calcStorageNowValue(storage, eventItem.end);
+        calcStorageNowValue(storage);
       }
       i--;
     }

@@ -37,7 +37,7 @@ function setUpgradeChange( cell, persent = 100,  sector, info,  callback = funct
         const addEvent = result.ops[0];
         info.player.eventsList.push(addEvent);
         info.player.eventsList.sort((a,b) => {
-          return a-b;
+          return a.end - b.end;
         })
         callback(null);
         return resolve();

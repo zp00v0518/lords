@@ -7,7 +7,7 @@ const {
   findUserInDB,
   getInfoForStartGame,
   getGlobalMapSector,
-  formEventsList
+  calcStorageNowValue,
 } = require('../tube.js');
 const WS = require('ws');
 const watcher = require('../liveReload/watchFs.js');
@@ -46,31 +46,28 @@ wsServer.on('connection', (ws, req) => {
       UserOnline[server].count++;
       UserOnline[server][User._id].user = User;
       getInfoForStartGame(user, server).then(infoForStartGame => {
-        infoForStartGame.forEach(item => {
+        infoForStartGame.sectors.forEach(item => {
           GlobalMap[server][item.x][item.y] = item;
+          calcStorageNowValue(item.town.storage)
         });
-        UserOnline[server][User._id].sectors = infoForStartGame;
+        UserOnline[server][User._id].sectors = infoForStartGame.sectors;
+        UserOnline[server][User._id].eventsList = infoForStartGame.eventsList;
         UserOnline[server][User._id].user.globalMap = {};
         UserOnline[server][User._id].user.globalMap.zoom = 1;
         UserOnline[server][User._id].user.globalMap.centerMap = {};
         UserOnline[server][User._id].user.globalMap.centerMap.x =
-          infoForStartGame[0].x;
+          infoForStartGame.sectors[0].x;
         UserOnline[server][User._id].user.globalMap.centerMap.y =
-          infoForStartGame[0].y;
+          infoForStartGame.sectors[0].y;
         getGlobalMapSector(
           UserOnline[server][User._id].user,
           server,
           currentMap => {
-            formEventsList(UserOnline[server][User._id], server).then(
-              eventsList => {
-                UserOnline[server][User._id].eventsList = eventsList;
-                start.eventsList = eventsList
-                start.currentMap = currentMap;
-                start.sectors = infoForStartGame;
-                start.dictionary = getLangDictionary(user.lang);
-                ws.send(JSON.stringify(start));
-              }
-            );
+            start.eventsList = infoForStartGame.eventsList;
+            start.currentMap = currentMap;
+            start.sectors = infoForStartGame.sectors;
+            start.dictionary = getLangDictionary(user.lang);
+            ws.send(JSON.stringify(start));
           }
         );
       });

@@ -1,15 +1,15 @@
 const tube = require('../tube.js');
 const find = new tube.findInDB();
 
-function formEventsList(player, serverName, callback = () => {}) {
+function formEventsList(user, serverName, callback = () => {}) {
   const { controlSatateEventsList } = tube;
   return new Promise((resolve, reject) => {
     const findOptions = {
       collectionName: serverName,
       query: {
         $or: [
-          { 'target.user': player.user._id },
-          { 'init.user': player.user._id }
+          { 'target.user': user._id },
+          { 'init.user': user._id }
         ],
         class: 'event',
         status: true
@@ -20,7 +20,7 @@ function formEventsList(player, serverName, callback = () => {}) {
       .all(findOptions)
       .then(result => {
         const now = new Date().getTime;
-        if (result.result.length === 0 || result.result[0].end > now + 100) {
+        if (result.result.length === 0 || result.result[0].end > now) {
           callback(null, result.result);
           return resolve(result.result);
         } else {
