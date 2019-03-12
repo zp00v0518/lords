@@ -1,6 +1,6 @@
 <template>
   <div class="small" @click="showChat">
-    <div>{{messages.length}}</div>
+    <div>{{messages}}</div>
   </div>
 </template>
 
@@ -8,11 +8,17 @@
 export default {
   name: "ChatSmall",
   data() {
-    return {};
+    return {
+      fixLength: 0,
+    };
+  },
+  created(){
+    this.fixLength = this.$store.state.chat.messages.length;
+    console.log(this.fixLength)
   },
   computed: {
     messages() {
-      return this.$store.state.chat.messages;
+      return this.$store.state.chat.messages.length - this.fixLength;
     }
   },
   methods: {

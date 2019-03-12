@@ -1,5 +1,4 @@
 export default function upgradeBuilding(data) {
-  console.log(data)
   if (!data.upgrade) {
     const message = {
       type: "message",

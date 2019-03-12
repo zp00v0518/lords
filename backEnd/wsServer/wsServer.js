@@ -7,7 +7,7 @@ const {
   findUserInDB,
   getInfoForStartGame,
   getGlobalMapSector,
-  calcStorageNowValue,
+  calcStorageNowValue
 } = require('../tube.js');
 const WS = require('ws');
 const watcher = require('../liveReload/watchFs.js');
@@ -25,6 +25,15 @@ class WsServer {
     this.server.on(event, callback);
   }
 }
+const template = {
+  author: 'admin',
+  chanel: '',
+  privat: '',
+  status: true,
+  text: 'Добро пожаловать в мой пэт-проект. После старта сессии, в чате отображается до 30 последних сообщений ',
+  time: '2019-03-10T22:00:00.934Z',
+  type: 'chatMessage'
+};
 
 const wsServer = new WsServer();
 wsServer.init(config.port.ws);
@@ -33,11 +42,16 @@ wsServer.on('connection', (ws, req) => {
   const cookies = new Cookies(req);
   const userCookies = cookies.get('user');
   let User;
-  const start = {
-    status: true,
-    type: 'startMessages',
-    chat: chat[server],
-  };
+  let start = {};
+  if(server){
+    start = {
+      status: true,
+      type: 'startMessages',
+      chat: chat[server].map(item => item)
+    };
+    start.chat.unshift(template)
+  }
+  
   findUserInDB(userCookies).then(user => {
     if (user) {
       User = user;
@@ -48,7 +62,7 @@ wsServer.on('connection', (ws, req) => {
       getInfoForStartGame(user, server).then(infoForStartGame => {
         infoForStartGame.sectors.forEach(item => {
           GlobalMap[server][item.x][item.y] = item;
-          calcStorageNowValue(item.town.storage)
+          calcStorageNowValue(item.town.storage);
         });
         UserOnline[server][User._id].sectors = infoForStartGame.sectors;
         UserOnline[server][User._id].eventsList = infoForStartGame.eventsList;
