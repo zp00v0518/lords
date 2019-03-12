@@ -3,8 +3,9 @@ const { getGlobalMapSector } = require("../tube.js");
 function moveGlobalMap(message, info, callback = function() {}) {
     // console.log("********** moveGlobalMap Work ************");
     const { player, server } = info;
-    const { way } = message;
+    const { way, zoom} = message;
     const { user, ws } = player;
+    user.globalMap.zoom = zoom || 1;
     let step = Math.floor(gameVariables.stepMoveGlobalMap * user.globalMap.zoom);
     // console.log(`centerX:${user.globalMap.centerMap.x}   centerY:${user.globalMap.centerMap.y}`)
     let nowX = user.globalMap.centerMap.x;

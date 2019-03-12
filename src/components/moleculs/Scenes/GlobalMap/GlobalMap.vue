@@ -32,10 +32,14 @@
       type="button"
       @click="moveOnMap"
     >bottom</button>
+    <div class="zoom__wrap">
+      <button  id="zoom" class="zoom__btn" @click="changeZoom">{{zoomText}}</button>
+    </div>
   </div>
 </template>
 
 <script>
+
 import {
   drawMap,
   getCursorPositionOnScene,
@@ -67,7 +71,8 @@ export default {
         right: { x: 0, y: 0 },
         bottom: { x: 0, y: 0 }
       },
-      mouseCoords: { x: 0, y: 0 }
+      mouseCoords: { x: 0, y: 0 },
+      zoom: 1,
     };
   },
   created() {
@@ -81,6 +86,9 @@ export default {
     }
   },
   computed: {
+    zoomText(){
+      return this.zoom === 1 ? "Zoom +" : "Zoom - "
+    },
     tileWidth() {
       const widthParse = parseInt(this.widthScene) / 2;
       const intermediate = widthParse / (this.currentMap.length / 2);
@@ -103,12 +111,17 @@ export default {
     setBorderIsoMap,
     hideTooltip,
     handlerMousemoveOnMap,
+    changeZoom(event) {
+      this.zoom = this.zoom === 1 ? 2 : 1;
+      this.moveOnMap(event)
+    },
     moveOnMap(event) {
       const target = event.target;
       const way = target.id;
       const message = {
         type: "moveGlobalMap",
-        way
+        way,
+        zoom: this.zoom,
       };
       this.$ws.sendMessage(message);
     }
