@@ -50,7 +50,6 @@ export default {
 
 <style lang='scss' scoped>
 .sector__events {
-  position: relative;
   width: 15px;
   position: absolute;
   top: 100%;

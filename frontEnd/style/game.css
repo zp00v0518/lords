@@ -1,0 +1,47 @@
+body {
+  height: 100vh;
+  width: 100vw;
+  /* overflow-y: hidden; */
+}
+#app {
+  display: none;
+}
+#gameLoadingWrap {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+}
+#gameLoadingWrap .game_loading_item {
+  margin: 0;
+  padding: 0;
+  width: 40%;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#gameLoadingWrap .game_loading_item .text {
+  margin: 0;
+  padding: 0;
+  font-size: 21px;
+}
+#gameLoadingWrap .game_loading_item .loaading_block {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 30px;
+  border: 1px solid #000000;
+  overflow: hidden;
+}
+#gameLoadingWrap .game_loading_item .loaading_block .loaded_block {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: grey;
+}
