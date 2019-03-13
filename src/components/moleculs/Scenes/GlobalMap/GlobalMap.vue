@@ -39,7 +39,6 @@
 </template>
 
 <script>
-
 import {
   drawMap,
   getCursorPositionOnScene,

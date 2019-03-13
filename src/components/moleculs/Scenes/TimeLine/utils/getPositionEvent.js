@@ -1,6 +1,7 @@
 function getPositionEvent(now, time, maxWidth) {
   const difTime = getDifferrentTime(now, time);
   if (!difTime) return;
+  difTime.hour = difTime.hour >= (this.breakpoint.length-2) ? (this.breakpoint.length-2) :  difTime.hour;
   const widthHour = this.breakpoint[difTime.hour + 1];
   const widthMinute = widthHour / 60;
   const mediumArr = [...this.breakpoint];
@@ -8,9 +9,9 @@ function getPositionEvent(now, time, maxWidth) {
   let position = mediumArr.reduce((sum, current) => {
     return sum + current;
   }, difTime.minute * widthMinute);
-  if (maxWidth) {
-    position = position >= maxWidth ? maxWidth : position;
-  }
+  // if (maxWidth) {
+  //   position = position >= maxWidth ? maxWidth : position;
+  // }
   return position;
 }
 
