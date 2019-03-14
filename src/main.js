@@ -1,15 +1,15 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from "vue";
-import App from "./App";
-import router from "./router";
-import store from "./store";
-import ws from "./api/ws";
-import config from "../backEnd/config/config";
-const region = require("../backend/region/Region");
-const variables = require("../backend/variables/game_variables");
-import "./components/atoms";
-import "./assets/main.scss";
+import Vue from 'vue';
+import App from './App';
+import router from './router';
+import store from './store';
+import ws from './api/ws';
+import config from '../backEnd/config/config';
+const region = require('../backend/region/Region');
+const variables = require('../backend/variables/game_variables');
+import './components/atoms';
+import './assets/main.scss';
 const bus = new Vue();
 
 Vue.config.productionTip = false;
@@ -23,17 +23,26 @@ Vue.prototype.$bus = bus;
 Vue.prototype.$lang = store.state.local.lang;
 Vue.prototype.$var = variables;
 
-Vue.filter("upperFirstSymbol", function(str) {
+Vue.filter('upperFirstSymbol', function(str) {
   if (!str) return str;
   return str[0].toUpperCase() + str.slice(1);
 });
 
-import "./assets/mixins.scss";
+import './assets/mixins.scss';
 /* eslint-disable no-new */
-new Vue({
-  el: "#app",
-  store,
-  router,
-  components: { App },
-  template: "<App/>"
-});
+
+function mounting() {
+  if (sourceLoader.loadedNum !== sourceLoader.sourceNum) {
+    setTimeout(mounting, 100);
+  } else {
+    new Vue({
+      el: '#app',
+      store,
+      router,
+      components: { App },
+      template: '<App/>'
+    });
+  }
+}
+
+mounting();

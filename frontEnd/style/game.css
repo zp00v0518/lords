@@ -16,6 +16,8 @@ body {
   text-align: center;
   width: 100vw;
   height: 100vh;
+  background-color: white;
+  z-index: 100000;
 }
 #gameLoadingWrap .game_loading_item {
   margin: 0;

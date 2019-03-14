@@ -39,7 +39,7 @@ export default {
 .event__tooltip{
   position: absolute;
   border: 1px solid red;
-  left: 150%;
+  left: 200%;
   top:0;
   z-index: 120;
   background-color: white;

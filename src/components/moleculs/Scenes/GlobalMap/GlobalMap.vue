@@ -33,7 +33,7 @@
       @click="moveOnMap"
     >bottom</button>
     <div class="zoom__wrap">
-      <button  id="zoom" class="zoom__btn" @click="changeZoom">{{zoomText}}</button>
+      <button id="zoom" class="zoom__btn" @click="changeZoom">{{zoomText}}</button>
     </div>
   </div>
 </template>
@@ -70,8 +70,7 @@ export default {
         right: { x: 0, y: 0 },
         bottom: { x: 0, y: 0 }
       },
-      mouseCoords: { x: 0, y: 0 },
-      zoom: 1,
+      mouseCoords: { x: 0, y: 0 }
     };
   },
   created() {
@@ -85,8 +84,11 @@ export default {
     }
   },
   computed: {
-    zoomText(){
-      return this.zoom === 1 ? "Zoom +" : "Zoom - "
+    zoomText() {
+      return this.zoom === 1 ? "Zoom +" : "Zoom - ";
+    },
+    zoom() {
+      return this.$store.state.globalMap.zoom;
     },
     tileWidth() {
       const widthParse = parseInt(this.widthScene) / 2;
@@ -111,8 +113,9 @@ export default {
     hideTooltip,
     handlerMousemoveOnMap,
     changeZoom(event) {
-      this.zoom = this.zoom === 1 ? 2 : 1;
-      this.moveOnMap(event)
+      // this.zoom = this.zoom === 1 ? 1.5 : 1;
+      this.$store.commit("CHANGE__ZOOM");
+      this.moveOnMap(event);
     },
     moveOnMap(event) {
       const target = event.target;
@@ -120,7 +123,7 @@ export default {
       const message = {
         type: "moveGlobalMap",
         way,
-        zoom: this.zoom,
+        zoom: this.zoom
       };
       this.$ws.sendMessage(message);
     }

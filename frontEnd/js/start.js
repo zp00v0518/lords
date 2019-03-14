@@ -49,7 +49,7 @@ sourceLoader.allOnLoad(function(){
   setTimeout(function(){
     gameLoadingWrap.style.display = "none";
     gameWindow.style.display = "flex";
-    console.log(sourceLoader)
+    // console.log(sourceLoader)
   },100)
 });
 

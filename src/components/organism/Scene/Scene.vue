@@ -4,9 +4,9 @@
     <RegionMap v-if="scenes.region" :widthScene="widthScene" :heightScene="heightScene" key='regionMap'></RegionMap>
     <TownMap v-if="scenes.town" :widthScene="widthScene" :heightScene="heightScene" key='townMap'></TownMap>
     <div class="scene__buttons" @click="changeScene">
-      <button type="button" class="scene__buttons__item" data-flag="region">Регион</button>
-      <button type="button" class="scene__buttons__item" data-flag="town">Город</button>
-      <button type="button" class="scene__buttons__item" data-flag="globalMap">Карта</button>
+      <button type="button" :class="['scene__buttons__item', {'scene__buttons__item--active': scenes.region}]" data-flag="region">Регион</button>
+      <button type="button" :class="['scene__buttons__item', {'scene__buttons__item--active': scenes.town}]" data-flag="town">Город</button>
+      <button type="button" :class="['scene__buttons__item', {'scene__buttons__item--active': scenes.globalMap}]" data-flag="globalMap">Карта</button>
     </div>
     <DialogWindow></DialogWindow>
   </section>
@@ -53,7 +53,7 @@ export default {
     }
   },
   mounted() {
-    this.scenes.region = true;
+    this.scenes.town = true;
   }
 };
 </script>

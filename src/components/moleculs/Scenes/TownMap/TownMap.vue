@@ -1,10 +1,6 @@
 <template>
   <div class="townmap">
-    <canvas
-      ref="scene"
-      :width="widthScene"
-      :height="heightScene"
-    ></canvas>
+    <canvas ref="scene" :width="widthScene" :height="heightScene"></canvas>
   </div>
 </template>
 
@@ -19,20 +15,15 @@ export default {
   props: ["widthScene", "heightScene"],
   data() {
     return {
-      ctx: null,
+      ctx: null
     };
   },
   created() {
+    console.log(sourceLoader);
   },
-  watch: {
-
-  },
-  computed: {
-
-  },
-  methods: {
-
-  },
+  watch: {},
+  computed: {},
+  methods: {},
   mounted() {
     this.ctx = this.$refs.scene.getContext("2d");
   }
