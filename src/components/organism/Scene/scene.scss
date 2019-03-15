@@ -13,6 +13,7 @@
     &__item {
       cursor: pointer;
       padding: 3px;
+      border: none;
       &--active {
         font-weight: 700;
         background-color: grey;

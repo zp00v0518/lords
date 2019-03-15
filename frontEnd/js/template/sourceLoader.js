@@ -17,16 +17,24 @@ var sourceLoader = {
       loadedBlock.style.width = persent + '%';
     };
     if (type === 'img') {
-      var img = new Image();
+      const img = new Image();
       img.onload = loaded;
       img.src = src;
+      const d = src.split('/');
       if (!id) {
-        let d = src.split('/');
         let j = d[d.length - 1];
         let r = j.split('.');
         id = r[0];
       }
-      sourceLoader.sources[id] = img;
+      const keyTown = d[d.length - 2];
+      const keySector = d[d.length - 3];
+      if (!sourceLoader.sources[keySector]){
+        sourceLoader.sources[keySector] = {};
+      }
+      if(!sourceLoader.sources[keySector][keyTown]){
+        sourceLoader.sources[keySector][keyTown] = {};
+      }
+      sourceLoader.sources[keySector][keyTown][id] = img;
     } else if (type === 'js') {
       var script = document.createElement('script');
       var head = document.querySelector('head');
