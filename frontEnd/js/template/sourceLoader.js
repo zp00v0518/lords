@@ -20,7 +20,10 @@ var sourceLoader = {
       const img = new Image();
       img.onload = loaded;
       img.src = src;
-      const d = src.split('/');
+      let  d = src.split('/');
+      if (d.length === 1) {
+        d = src.split("\\")
+      }
       if (!id) {
         let j = d[d.length - 1];
         let r = j.split('.');
