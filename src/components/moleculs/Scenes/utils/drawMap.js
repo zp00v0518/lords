@@ -6,7 +6,7 @@ function drawMap() {
   let tileHeight = tileWidth / 2;
   let halfHeight = tileHeight / 2;
   // console.log(`tileWidth:${tileWidth} tileHeight:${tileHeight} halfHeight:${halfHeight}`)
-  //сдвиг начала оси Х влево
+  // сдвиг начала оси Х влево
   let startX = this.isoCoords.x;
   let startY = this.isoCoords.y;
   let startCenterX = startX + tileHeight;
@@ -27,7 +27,7 @@ function drawMap() {
     // console.log(`centerX:${centerX} centerY:${centerY}`)
     ctx.beginPath();
     ctx.fillStyle = colors[grid];
-    ctx.strokeStyle = "black";
+    ctx.strokeStyle = 'black';
     ctx.moveTo(centerX, centerY - halfHeight + step);
     ctx.lineTo(centerX + step - tileHeight, centerY);
     ctx.lineTo(centerX, centerY + halfHeight - step);
@@ -41,10 +41,10 @@ function drawMap() {
   }
 }
 const colors = {
-  0: "green",
-  1: "blue",
-  2: "brown",
-  3: "black"
+  0: 'green',
+  1: 'blue',
+  2: 'brown',
+  3: 'black'
 };
 
 export default drawMap;

@@ -19,7 +19,7 @@ function getTileCoordsOnMap() {
   q = Math.pow(downX - isoX, 2) + Math.pow(downY - isoY, 2);
   const lineDown = Math.sqrt(q);
   const rombY = Math.floor(lineDown / l);
-
+  // eslint-disable-next-line
   return (coords = {
     x: rombX,
     y: rombY

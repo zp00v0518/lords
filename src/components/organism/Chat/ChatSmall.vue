@@ -9,12 +9,12 @@ export default {
   name: "ChatSmall",
   data() {
     return {
-      fixLength: 0,
+      fixLength: 0
     };
   },
-  created(){
+  created() {
     this.fixLength = this.$store.state.chat.messages.length;
-    console.log(this.fixLength)
+    console.log(this.fixLength);
   },
   computed: {
     messages() {

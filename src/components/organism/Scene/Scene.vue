@@ -1,12 +1,34 @@
 <template>
   <section class="scene">
-    <GlobalMap v-if="scenes.globalMap" :widthScene="widthScene" :heightScene="heightScene" key='globalMap'></GlobalMap>
-    <RegionMap v-if="scenes.region" :widthScene="widthScene" :heightScene="heightScene" key='regionMap'></RegionMap>
-    <TownMap v-if="scenes.town" :widthScene="widthScene" :heightScene="heightScene" key='townMap'></TownMap>
+    <GlobalMap
+      v-if="scenes.globalMap"
+      :widthScene="widthScene"
+      :heightScene="heightScene"
+      key="globalMap"
+    ></GlobalMap>
+    <RegionMap
+      v-if="scenes.region"
+      :widthScene="widthScene"
+      :heightScene="heightScene"
+      key="regionMap"
+    ></RegionMap>
+    <TownMap v-if="scenes.town" :widthScene="widthScene" :heightScene="heightScene" key="townMap"></TownMap>
     <div class="scene__buttons" @click="changeScene">
-      <button type="button" :class="['scene__buttons__item', {'scene__buttons__item--active': scenes.region}]" data-flag="region">Регион</button>
-      <button type="button" :class="['scene__buttons__item', {'scene__buttons__item--active': scenes.town}]" data-flag="town">Город</button>
-      <button type="button" :class="['scene__buttons__item', {'scene__buttons__item--active': scenes.globalMap}]" data-flag="globalMap">Карта</button>
+      <button
+        type="button"
+        :class="['scene__buttons__item', {'scene__buttons__item--active': scenes.region}]"
+        data-flag="region"
+      >Регион</button>
+      <button
+        type="button"
+        :class="['scene__buttons__item', {'scene__buttons__item--active': scenes.town}]"
+        data-flag="town"
+      >Город</button>
+      <button
+        type="button"
+        :class="['scene__buttons__item', {'scene__buttons__item--active': scenes.globalMap}]"
+        data-flag="globalMap"
+      >Карта</button>
     </div>
     <DialogWindow></DialogWindow>
   </section>
@@ -20,7 +42,7 @@ export default {
   name: "Scene",
   components: {
     DialogWindow,
-    ...Scenes,
+    ...Scenes
   },
   data() {
     return {
@@ -31,17 +53,16 @@ export default {
       }
     };
   },
-  created() {
-  },
+  created() {},
   computed: {
     widthScene() {
       const styles = this.$el.getBoundingClientRect();
-      return styles.width + 'px';
+      return styles.width + "px";
     },
     heightScene() {
       const styles = this.$el.getBoundingClientRect();
-      return styles.height + 'px';
-    },
+      return styles.height + "px";
+    }
   },
   methods: {
     changeScene(event) {

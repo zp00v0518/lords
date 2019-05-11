@@ -15,6 +15,5 @@ export {
   drawHoverLine,
   setBorderIsoMap,
   hideTooltip,
-  handlerMousemoveOnMap,
-
+  handlerMousemoveOnMap
 };

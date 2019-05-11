@@ -5,7 +5,11 @@
         <div class="dialog__title">{{title}}</div>
         <Icon class="dialog__close" name="circle-close" @click.native="closeDialogWindow"></Icon>
       </div>
-      <components  @set-height="setHeight" :is="$store.state.dialog.component" :data="$store.state.dialog.data"></components>
+      <components
+        @set-height="setHeight"
+        :is="$store.state.dialog.component"
+        :data="$store.state.dialog.data"
+      ></components>
     </div>
   </section>
 </template>
@@ -24,7 +28,7 @@ export default {
     };
   },
   computed: {
-    title(){
+    title() {
       return this.$store.state.dialog.title;
     }
   },
@@ -32,12 +36,12 @@ export default {
     closeDialogWindow() {
       this.$store.commit("DIALOG_CLOSE");
     },
-    setHeight(e){
+    setHeight(e) {
       this.height = e.height;
       this.width = e.width;
     }
   },
-  updated () {
+  updated() {
     // console.log(this.$store)
   }
 };

@@ -4,8 +4,8 @@ function drawDefaultTime(ctx, breakpoint) {
   const hour = 1000 * 60 * 60;
   const now = new Date().getTime();
   breakpoint.reduce((x, next, index) => {
-    if (defaultPoint.includes(index-1)) {
-      const timeTxt = getTimeTxt(now + hour * (index-1));
+    if (defaultPoint.includes(index - 1)) {
+      const timeTxt = getTimeTxt(now + hour * (index - 1));
       const textWidth = ctx.measureText(timeTxt).width;
       ctx.strokeText(timeTxt, x - textWidth / 2, y);
     }

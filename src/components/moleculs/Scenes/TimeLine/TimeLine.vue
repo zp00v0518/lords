@@ -101,7 +101,7 @@ export default {
     this.ctx = this.$refs.scene.getContext("2d");
     this.breakpoint = this.formBreakpoint(
       this.breakpoint,
-      parseFloat(this.widthScene-5)
+      parseFloat(this.widthScene - 5)
     );
     this.drawLoop();
     this.timerId = setInterval(() => {

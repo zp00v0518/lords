@@ -21,7 +21,9 @@ export default {
   props: {
     mouseCoords: {
       type: Object,
-      default: { x: 0, y: 0 }
+      default: () => {
+        return { x: 0, y: 0 };
+      }
     },
     tile: {
       type: Object
@@ -35,7 +37,7 @@ export default {
   watch: {
     tile: function() {
       const size = this.$el ? this.$el.getBoundingClientRect() : { height: 0 };
-      const left = this.mouseCoords.x  + "px";
+      const left = this.mouseCoords.x + "px";
       const top = this.mouseCoords.y - size.height - 50 + "px";
       this.position = { left, top };
     }

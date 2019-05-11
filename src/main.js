@@ -1,19 +1,21 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import './components/atoms';
+import './assets/main.scss';
+import './assets/mixins.scss';
 import Vue from 'vue';
 import App from './App';
 import router from './router';
 import store from './store';
-import ws from './api/ws';
+import Ws from './api/ws';
 import config from '../backEnd/config/config';
 const region = require('../backend/region/Region');
 const variables = require('../backend/variables/game_variables');
-import './components/atoms';
-import './assets/main.scss';
+
 const bus = new Vue();
 
 Vue.config.productionTip = false;
-Vue.prototype.$ws = new ws();
+Vue.prototype.$ws = new Ws();
 Vue.prototype.$ws.init(
   `ws://localhost:${config.port.ws}${location.pathname}`,
   store
@@ -28,10 +30,10 @@ Vue.filter('upperFirstSymbol', function(str) {
   return str[0].toUpperCase() + str.slice(1);
 });
 
-import './assets/mixins.scss';
 /* eslint-disable no-new */
 
 function mounting() {
+  // eslint-disable-next-line
   if (sourceLoader.loadedNum !== sourceLoader.sourceNum) {
     setTimeout(mounting, 100);
   } else {

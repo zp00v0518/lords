@@ -1,10 +1,6 @@
 <template>
   <section class="chat__wrap">
-    <div
-      v-show="showChat"
-      class="chat"
-      :class="{chat__closed: !showChat}"
-    >
+    <div v-show="showChat" class="chat" :class="{chat__closed: !showChat}">
       <div class="chat__header">
         <div @click="closeChat" class="chat__close">x</div>
       </div>
@@ -31,16 +27,16 @@
         </div>
       </div>
     </div>
-    <ChatSmall v-if="!showChat"> </ChatSmall>
+    <ChatSmall v-if="!showChat"></ChatSmall>
   </section>
 </template>
 
 <script>
-import ChatSmall from './ChatSmall'
+import ChatSmall from "./ChatSmall";
 export default {
   name: "Chat",
   components: {
-    ChatSmall,
+    ChatSmall
   },
   data() {
     return {
@@ -54,14 +50,13 @@ export default {
       }
     };
   },
-  created() {
-  },
+  created() {},
   computed: {
     messages() {
       return this.$store.state.chat.messages;
     }
   },
-    watch: {
+  watch: {
     "$store.state.chat.is": function() {
       this.showChat = !this.showChat;
     }

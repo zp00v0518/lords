@@ -7,7 +7,7 @@
       @mouseenter="handlerMouseEnter($event, eventData)"
       @mouseleave="handlerMouseEnter($event, null)"
     ></div>
-    <EventTooltip v-if="showTooltip" :dataEvent="dataEvent" :position='position'></EventTooltip>
+    <EventTooltip v-if="showTooltip" :dataEvent="dataEvent" :position="position"></EventTooltip>
   </div>
 </template>
 
@@ -18,14 +18,14 @@ export default {
   components: { EventTooltip },
   props: {
     data: Object,
-    styles: null,
+    styles: null
   },
   data() {
     return {
       showTooltip: false,
       dataEvent: {},
       position: 0,
-      topEl: null,
+      topEl: null
     };
   },
   methods: {
@@ -42,7 +42,7 @@ export default {
       this.dataEvent = data;
     }
   },
-  mounted () {
+  mounted() {
     this.topEl = this.$el.getBoundingClientRect().top;
   }
 };

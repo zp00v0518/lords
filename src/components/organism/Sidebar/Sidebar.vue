@@ -1,20 +1,19 @@
 <template>
-    <section class="sidebar">
-      <Town v-for='(sector, index) in sectors' :key="index" :sector="sector">{{forUpdate(sector)}}</Town>
-    </section>
+  <section class="sidebar">
+    <Town v-for="(sector, index) in sectors" :key="index" :sector="sector">{{forUpdate(sector)}}</Town>
+  </section>
 </template>
 
 <script>
-import Town from '../../moleculs/Town';
+import Town from "../../moleculs/Town";
 
 export default {
   name: "Sidebar",
   components: {
-    Town,
+    Town
   },
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     sectors() {
@@ -22,7 +21,7 @@ export default {
     }
   },
   methods: {
-    forUpdate(){}
+    forUpdate() {}
   }
 };
 </script>

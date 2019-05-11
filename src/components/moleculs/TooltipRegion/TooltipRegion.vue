@@ -4,9 +4,9 @@
       <div class="tooltip__header" v-if="tile.type === 0">Лес</div>
       <div class="tooltip__header" v-if="tile.type === 1">Замок</div>
     </template>
-    <template v-if="tile.type === 2"> 
-       <div class="tooltip__header">{{this.gloss[this.nameSector].type[this.type].name.txt}}</div>
-        <div class="tooltip__town"> {{this.gloss.general.lvl.txt}}:{{this.tile.sector.lvl}}</div>
+    <template v-if="tile.type === 2">
+      <div class="tooltip__header">{{this.gloss[this.nameSector].type[this.type].name.txt}}</div>
+      <div class="tooltip__town">{{this.gloss.general.lvl.txt}}:{{this.tile.sector.lvl}}</div>
     </template>
   </div>
 </template>
@@ -17,7 +17,9 @@ export default {
   props: {
     mouseCoords: {
       type: Object,
-      default: { x: 0, y: 0 }
+      default: () => {
+        return { x: 0, y: 0 };
+      }
     },
     tile: {
       type: Object
@@ -28,17 +30,16 @@ export default {
       position: {},
       lang: this.$store.state.local.lang,
       mine: this.tile.mine,
-      nameSector: '',
+      nameSector: ""
     };
   },
-  created () {
-  },
+  created() {},
   computed: {
     type() {
       if (!this.tile.sector.type) return;
-      return this.tile.sector.type
+      return this.tile.sector.type;
     },
-    gloss(){
+    gloss() {
       return this.$store.state.local.dictionary;
     }
   },
@@ -51,7 +52,7 @@ export default {
       this.position = { left, top };
     }
   }
-}; 
+};
 </script>
 
 <style lang='scss' scoped>

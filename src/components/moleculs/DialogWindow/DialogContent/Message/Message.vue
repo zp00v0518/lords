@@ -26,7 +26,7 @@ export default {
     closeDialogWindow() {
       this.$store.commit("DIALOG_CLOSE");
     }
-  },
+  }
 };
 </script>
 

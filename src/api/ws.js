@@ -12,7 +12,7 @@ class WS {
       upgradeBuilding: eventData => this.upgradeBuilding(eventData),
       controlState: eventData => this.controlState(eventData),
       consoles: eventData => this.consoles(eventData),
-      setEvents: eventData => this.setEvents(eventData),
+      setEvents: eventData => this.setEvents(eventData)
     };
     this.outgoing = {};
   }
@@ -30,6 +30,7 @@ class WS {
       } else {
         if (data.redirectUrl) {
           console.log(data);
+          // eslint-disable-next-line
           location = data.redirectUrl;
         } else {
           console.log(data);
@@ -58,15 +59,15 @@ class WS {
   sendChatMessage(message) {
     message.type = 'chatMessage';
     this.sendMessage(message);
-  };
+  }
   reload() {
     location.reload();
-  };
+  }
   controlState(eventData) {
     this.store.dispatch('SET_SECTORS_WITH_CURRENT_SECTOR', eventData.sectors);
     this.store.commit('SET_EVENTS', eventData.eventsList);
-  };
-  setEvents(eventData){
+  }
+  setEvents(eventData) {
     this.store.commit('SET_EVENTS', eventData.eventsList);
   }
 

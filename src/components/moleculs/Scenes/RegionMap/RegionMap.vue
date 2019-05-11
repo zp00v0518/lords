@@ -50,7 +50,7 @@ export default {
   created() {
     // this.currentMap = this.$store.state.regionMap.currentRegion;
     if (this.$store.state.userSectors.currentSector) {
-     this.currentMap = this.$store.state.userSectors.currentSector.region;
+      this.currentMap = this.$store.state.userSectors.currentSector.region;
     }
   },
   watch: {
@@ -59,8 +59,8 @@ export default {
     //   this.drawMap();
     //   this.setBorderIsoMap();
     // },
-     "$store.state.userSectors.currentSector.region": function() {
-      this.currentMap = this.$store.state.userSectors.currentSector.region;;
+    "$store.state.userSectors.currentSector.region": function() {
+      this.currentMap = this.$store.state.userSectors.currentSector.region;
       this.drawMap();
       this.setBorderIsoMap();
     }
@@ -77,13 +77,19 @@ export default {
       const y = parseInt(this.heightScene) / 2;
       return { x, y };
     },
-    gloss(){
+    gloss() {
       return this.$store.state.local.dictionary;
     }
   },
   methods: {
     handlerClick() {
-      if (!this.cursorOnScene || this.currentTile.type === 1 || this.currentTile.type === 0) return;
+      if (
+        !this.cursorOnScene ||
+        this.currentTile.type === 1 ||
+        this.currentTile.type === 0
+      ) {
+        return;
+      }
       const nameRegion = this.$region.typeList[this.currentTile.type];
       const building = this.currentTile.sector;
       const typeBuilding = building.type;
@@ -92,9 +98,9 @@ export default {
         data: {
           building,
           x: this.currentTile.x,
-          y: this.currentTile.y,
+          y: this.currentTile.y
         },
-        type: 'upgradeRegion',
+        type: "upgradeRegion"
       };
       this.$store.commit("DIALOG_SHOW", payload);
     },

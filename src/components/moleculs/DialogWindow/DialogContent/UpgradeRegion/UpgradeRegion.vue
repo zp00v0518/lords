@@ -110,10 +110,10 @@ export default {
       this.$store.commit("DIALOG_CLOSE");
     },
     upgradeBuilding() {
-      if(!this.checkMaxLvl) {
+      if (!this.checkMaxLvl) {
         this.$store.commit("DIALOG_CLOSE");
         return;
-      };
+      }
       if (this.building.upgrade.is) {
         const dialog = {
           data: { txt: this.gloss.dialog.isUpgrade.txt },

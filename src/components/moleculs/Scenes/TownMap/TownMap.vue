@@ -6,6 +6,8 @@
 
 <script>
 import Tooltip from "../../Tooltip";
+import castle from "./utils/Castles";
+console.log(castle)
 
 export default {
   name: "TownMap",
@@ -19,6 +21,7 @@ export default {
     };
   },
   created() {
+    // eslint-disable-next-line
     console.log(sourceLoader);
   },
   watch: {},

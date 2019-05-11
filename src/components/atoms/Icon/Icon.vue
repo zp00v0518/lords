@@ -14,4 +14,3 @@ export default {
 <style lang='scss' scoped>
 @import "./icon.scss";
 </style>
-

@@ -1,7 +1,10 @@
 function getPositionEvent(now, time, maxWidth) {
   const difTime = getDifferrentTime(now, time);
   if (!difTime) return;
-  difTime.hour = difTime.hour >= (this.breakpoint.length-2) ? (this.breakpoint.length-2) :  difTime.hour;
+  difTime.hour =
+    difTime.hour >= this.breakpoint.length - 2
+      ? this.breakpoint.length - 2
+      : difTime.hour;
   const widthHour = this.breakpoint[difTime.hour + 1];
   const widthMinute = widthHour / 60;
   const mediumArr = [...this.breakpoint];
