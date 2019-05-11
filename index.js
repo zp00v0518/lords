@@ -1,6 +1,7 @@
 require('./backEnd/config/srcRequire.js');
 require('./backEnd/variables/global_variables.js');
 require('./backEnd/wsServer/wsServer.js');
+require('./get_files.js');
 
 const http = require('http');
 
