@@ -1,13 +1,12 @@
 <template>
   <div class="townmap">
-    <canvas ref="scene" :width="widthScene" :height="heightScene"></canvas>
+    <canvas v-show="currentTown" ref="scene" :width="widthScene" :height="heightScene"></canvas>
   </div>
 </template>
 
 <script>
 import Tooltip from "../../Tooltip";
-import castle from "./utils/Castles";
-console.log(castle)
+import drawtown from "./drawTown"
 
 export default {
   name: "TownMap",
@@ -17,7 +16,7 @@ export default {
   props: ["widthScene", "heightScene"],
   data() {
     return {
-      ctx: null
+      ctx: null,
     };
   },
   created() {
@@ -25,10 +24,27 @@ export default {
     console.log(sourceLoader);
   },
   watch: {},
-  computed: {},
-  methods: {},
+  computed: {
+    currentTown(){
+      return  this.$store.state.userSectors.currentSector
+    },
+    raceTownIndex(){
+      const currentTown = this.currentTown;
+      return currentTown.town.race
+    },
+    raceName(){
+      const index = this.raceTownIndex;
+      const Race = this.$store.state.globalConfig.Race;
+      return Race.typeList[this.raceTownIndex]
+    }
+  },
+  methods: {
+    drawtown,
+  },
   mounted() {
     this.ctx = this.$refs.scene.getContext("2d");
+    this.drawtown()
+
   }
 };
 </script>

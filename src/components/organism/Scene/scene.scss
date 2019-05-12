@@ -1,6 +1,11 @@
+$widthScene: 500px;
 .scene {
   flex-grow: 5;
   // border: 1px solid black;
+  // min-height: widthScene - 100px;
+  // max-height: widthScene - 150px;
+  // min-width: widthScene;
+  // max-width: widthScene + 300px;
   position: relative;
 
   &__buttons {

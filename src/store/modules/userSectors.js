@@ -10,8 +10,7 @@ const userSectors = {
     SET_SECTORS(state, sectors) {
       Vue.set(state, "sectors", [...sectors]);
     },
-    SET_CURRENT_SECTOR(state, sector) {
-      Vue.set(state, "currentSector", sector);
+    SET_CURRENT_SECTOR(state, sector) {      Vue.set(state, "currentSector", sector);
     },
     CHANGE_STORAGE(state, payload) {
       state.sectors[payload.sectorIndex].town.storage = payload.storage;

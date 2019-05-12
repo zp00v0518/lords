@@ -1,7 +1,7 @@
-import list from '../../../../../../backEnd/town/Town';
-console.log(list);
+import Town_from_backend from '../../../../../../backEnd/town/Town';
+console.log(Town_from_backend);
 // eslint-disable-next-line
-const Castles = {
+const Towns = {
   backScene: 111,
   listDrawBuilding: [],
   hoverNow: null,
@@ -146,3 +146,5 @@ const Castles = {
     }
   }
 };
+
+export default Towns;

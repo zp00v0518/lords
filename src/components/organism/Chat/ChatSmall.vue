@@ -14,7 +14,7 @@ export default {
   },
   created() {
     this.fixLength = this.$store.state.chat.messages.length;
-    console.log(this.fixLength);
+    // console.log(this.fixLength);
   },
   computed: {
     messages() {

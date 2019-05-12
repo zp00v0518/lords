@@ -12,7 +12,7 @@
       :heightScene="heightScene"
       key="regionMap"
     ></RegionMap>
-    <TownMap v-if="scenes.town" :widthScene="widthScene" :heightScene="heightScene" key="townMap"></TownMap>
+    <TownMap v-if="scenes.town && readyToDraw" :widthScene="widthScene" :heightScene="heightScene" key="townMap"></TownMap>
     <div class="scene__buttons" @click="changeScene">
       <button
         type="button"
@@ -62,7 +62,10 @@ export default {
     heightScene() {
       const styles = this.$el.getBoundingClientRect();
       return styles.height + "px";
-    }
+    },
+    readyToDraw(){
+      return  this.$store.state.userSectors.currentSector
+    },
   },
   methods: {
     changeScene(event) {
