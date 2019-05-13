@@ -6,7 +6,7 @@ function createStorage(listMine = gameVariables.mine.typeList, lvl = 0) {
   const { upgradeSection } = tube;
   //listMine - массив типов шахт;
   const storage = {
-    type: Town.listBuilding[0], // надо будет удалить
+    // type: Town.listBuilding[0], // надо будет удалить
     lvl: lvl,
     class: gameVariables.classInstance.storage,
     upgrade: upgradeSection(),

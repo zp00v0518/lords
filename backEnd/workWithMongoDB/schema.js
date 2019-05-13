@@ -1,12 +1,16 @@
 const document = {
   class: {
     map:'map',
-    army:"army",
     letter:"letter",
     art: "art",
     hero:"hero",
     clan:"clan",
     storage:"storage",
+    market: 'market',
+    fort: 'fort',
+    guild:'guild',
+    tavern:'tavern',
+    army:"army",
     mine:"mine",
     town:"town",
     event: "event",

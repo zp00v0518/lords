@@ -6,7 +6,7 @@
 
 <script>
 import Tooltip from "../../Tooltip";
-import drawtown from "./drawTown"
+import drawtown from "./drawTown";
 
 export default {
   name: "TownMap",
@@ -17,6 +17,7 @@ export default {
   data() {
     return {
       ctx: null,
+      races: this.$store.state.globalConfig.races,
     };
   },
   created() {
@@ -34,9 +35,9 @@ export default {
     },
     raceName(){
       const index = this.raceTownIndex;
-      const Race = this.$store.state.globalConfig.Race;
-      return Race.typeList[this.raceTownIndex]
-    }
+      const races = this.$store.state.globalConfig.races;
+      return races.typeList[this.raceTownIndex]
+    },
   },
   methods: {
     drawtown,
