@@ -1,8 +1,8 @@
-import Race from '../../../backEnd/race/Race';
+import fromBackend from '../../fromBackend';
 
 const globalConfig = {
   state: {
-    races: Race
+    races: fromBackend.Race
   }
 };
 

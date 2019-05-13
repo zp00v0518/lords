@@ -12,12 +12,14 @@ const Town = {
     type.fort,
     type.quild,
     type.tavern,
-    'manage',
+    'hall',
     'barracks_1',
     'barracks_2',
     'barracks_3',
     'barracks_4',
     'barracks_5',
+    'barracks_6',
+    'barracks_7',
   ]
 };
 
