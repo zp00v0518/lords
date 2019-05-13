@@ -20,24 +20,20 @@ var sourceLoader = {
       const img = new Image();
       img.onload = loaded;
       img.src = src;
-      let  d = src.split('/');
+      /* тут какая-то смешанная старая с новой логика 
+      формирования объекта со всеми загруженными картинками */
+      const newPath = src.replace('img\\', '');
+      let d = newPath.split('/');
       if (d.length === 1) {
-        d = src.split("\\")
+        d = newPath.split('\\');
       }
       if (!id) {
         let j = d[d.length - 1];
         let r = j.split('.');
         id = r[0];
       }
-      const keyTown = d[d.length - 2];
-      const keySector = d[d.length - 3];
-      if (!sourceLoader.sources[keySector]){
-        sourceLoader.sources[keySector] = {};
-      }
-      if(!sourceLoader.sources[keySector][keyTown]){
-        sourceLoader.sources[keySector][keyTown] = {};
-      }
-      sourceLoader.sources[keySector][keyTown][id] = img;
+      const pathToObj = pathIntoObject(sourceLoader.sources, null, null, d);
+      pathToObj[id] = img;
     } else if (type === 'js') {
       var script = document.createElement('script');
       var head = document.querySelector('head');
@@ -56,3 +52,30 @@ var sourceLoader = {
     }
   }
 };
+
+function pathIntoObject(obj, path, separator, separatorArr) {
+  let q = [...separatorArr];
+  if (!q) q = path.split(separator);
+  q.length = q.length - 1;
+  let result;
+  recurcive(0, q, obj, itog => {
+    result = itog;
+  });
+
+  return result;
+
+  function recurcive(i, arr, obj, callback) {
+    if (i < arr.length) {
+      const nextKey = arr[i];
+      let nextObj = obj[nextKey];
+      if (!nextObj) {
+        obj[nextKey] = {};
+        nextObj = obj[nextKey];
+      }
+      i++;
+      recurcive(i, arr, nextObj, callback);
+    } else {
+      callback(obj);
+    }
+  }
+}
