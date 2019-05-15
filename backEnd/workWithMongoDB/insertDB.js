@@ -1,6 +1,6 @@
-const connectMongoDB = require("./connectMongoDB.js");
+const connectMongoDB = require('./connectMongoDB.js');
 // const {config} = require('../tube.js');
-const config = require("../config/config.js");
+const config = require('../config/config.js');
 const mongo = new connectMongoDB();
 mongo.connect({ dbName: config.db.name });
 
@@ -8,6 +8,7 @@ function insertDB() {
   //options  - объект с полями:
   //collectionName = String;
   //doc = Object;
+  this.mongo = mongo;
   this.one = function(options, callback = function() {}) {
     return new Promise((resolve, reject) => {
       let collection = mongo.open(options.collectionName);

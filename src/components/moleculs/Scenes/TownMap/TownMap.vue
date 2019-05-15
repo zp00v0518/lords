@@ -7,6 +7,7 @@
 <script>
 import Tooltip from "../../Tooltip";
 import drawtown from "./drawTown";
+import drawBaseImg from "./utils/drawBaseImg";
 
 export default {
   name: "TownMap",
@@ -17,7 +18,7 @@ export default {
   data() {
     return {
       ctx: null,
-      races: this.$store.state.globalConfig.races,
+      races: this.$store.state.globalConfig.races
     };
   },
   created() {
@@ -26,26 +27,30 @@ export default {
   },
   watch: {},
   computed: {
-    currentTown(){
-      return  this.$store.state.userSectors.currentSector
+    currentTown() {
+      return this.$store.state.userSectors.currentSector;
     },
-    raceTownIndex(){
+    raceTownIndex() {
       const currentTown = this.currentTown;
-      return currentTown.town.race
+      return currentTown.town.race;
     },
-    raceName(){
+    raceName() {
       const index = this.raceTownIndex;
       const races = this.$store.state.globalConfig.races;
-      return races.typeList[this.raceTownIndex]
-    },
+      return races.typeList[this.raceTownIndex];
+    }
   },
   methods: {
-    drawtown,
+    drawtown
   },
   mounted() {
     this.ctx = this.$refs.scene.getContext("2d");
-    this.drawtown()
-
+    this.drawtown();
+    drawBaseImg(
+      this.ctx,
+      sourceLoader.sources.towns[this.raceName],
+      this.raceName
+    );
   }
 };
 </script>

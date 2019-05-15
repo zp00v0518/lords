@@ -2,8 +2,9 @@ const { checkUpgrade, calcStorageNowValue } = require('../tube.js');
 const fixingResultUpgradeMine = require('../region/mine/fixingResultUpgradeMine.js');
 const addValueToStorage = require('../town/storage/addValueToStorage.js');
 
-function controlSatateEventsList(eventsList) {
+function controlSatateEventsList(eventsList = []) {
   // console.log("***controlSatateEventsList work***")
+  if (eventsList.length === 0) return eventsList;
   for (let i = 0; i < eventsList.length; i++) {
     const item = eventsList[i];
     const now = new Date();

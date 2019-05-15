@@ -64,13 +64,13 @@ module.exports.addNewUserToGlobalMap = addNewUserToGlobalMap;
 module.exports.updateUser = updateUser;
 module.exports.addCollectionsToUser = addCollectionsToUser;
 
-const { createTown, updateStateTown } = require("./town");
+const { createTown, upgradeSection, updateStateTown } = require("./town");
 module.exports.createTown = createTown;
 module.exports.updateStateTown = updateStateTown;
-
-const { createStorage, upgradeSection, calcStorageNowValue} = require("./town/storage");
-module.exports.createStorage = createStorage;
 module.exports.upgradeSection = upgradeSection;
+
+const { createStorage, calcStorageNowValue} = require("./town/storage");
+module.exports.createStorage = createStorage;
 module.exports.calcStorageNowValue = calcStorageNowValue;
 
 const { setUpgradeChange, checkUpgrade, updateStateRegion } = require("./region");

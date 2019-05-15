@@ -1,36 +1,37 @@
 const document = {
   class: {
-    map:'map',
-    letter:"letter",
-    art: "art",
-    hero:"hero",
-    clan:"clan",
-    storage:"storage",
+    map: 'map',
+    letter: 'letter',
+    art: 'art',
+    hero: 'hero',
+    clan: 'clan',
+    storage: 'storage',
+    hall: 'hall',
     market: 'market',
     fort: 'fort',
-    guild:'guild',
-    tavern:'tavern',
-    army:"army",
-    mine:"mine",
-    town:"town",
-    event: "event",
+    guild: 'guild',
+    tavern: 'tavern',
+    army: 'army',
+    mine: 'mine',
+    town: 'town',
+    event: 'event'
   }
 };
 const event = {
   type: String,
   target: {
-    user: "ObjectId",
-    sector: "ObjectId",
+    user: 'ObjectId',
+    sector: 'ObjectId'
   },
   init: {
-    user: "ObjectId",
-    sector: "ObjectId",
+    user: 'ObjectId',
+    sector: 'ObjectId'
   },
   start: Date,
   end: Date,
   data: Object,
-  status: Boolean,
-}
+  status: Boolean
+};
 
 const map = {
   type: Number,
@@ -39,7 +40,7 @@ const map = {
   y: Number,
   region: Object,
   town: Object,
-  nickName: String,
+  nickName: String
 };
 
 const town = {
@@ -49,6 +50,7 @@ const town = {
   race: Number,
   storage: Object,
   regionMap: Array,
+  hall: Object
 };
 
 const storage = {
@@ -56,8 +58,16 @@ const storage = {
   lvl: Number,
   maxValue: Object,
   sources: Object,
-  parent: "town",
+  parent: 'town',
+  upgrade: Object
+};
+
+const hall = {
+  type: document.class.hall,
+  lvl: Number,
+  parent: 'town',
   upgrade: Object,
+  work: Object
 };
 
 const region = {
@@ -65,34 +75,45 @@ const region = {
   x: Number,
   y: Number,
   type: Number,
-  sector: Object,
+  sector: Object
 };
 
-const sector ={
+const sector = {
   parent: 'region',
   type: String,
   lvl: Number,
-  mining: Object,
-  upgrade: Object,
+  work: Object,
+  upgrade: Object
 };
 
 const upgrade = {
   is: Boolean,
   date: Date,
-  bonus: Number,
+  bonus: Number
 };
 
-const mining = {
+const work = {
   is: Boolean,
   date: Date,
   bonus: Number,
-  addValue: Number,
+  addValue: Number
 };
 
 const maxValue = {
   gold: Number,
   baseResource: Number,
-  unicResource: Number,
+  unicResource: Number
+};
+
+const mine = {
+  parent: 'region',
+  class: document.class.mine,
+  type: String,
+  lvl: Number,
+  x: Number,
+  y: Number,
+  upgrade: Object,
+  work: Object
 };
 
 module.exports = {
@@ -100,10 +121,12 @@ module.exports = {
   map,
   town,
   upgrade,
-  mining,
+  work,
   maxValue,
   sector,
   region,
   storage,
   event,
-}
+  hall,
+  mine
+};

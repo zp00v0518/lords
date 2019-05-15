@@ -1,10 +1,10 @@
 //создает коллекцию globalMap в БД
-const { getRandomNumber } = require("template_func");
-const insert = require("../workWithMongoDB/insertDB.js");
-const schema = require("../workWithMongoDB/schema.js");
-const gameVariable = require("../variables/game_variables.js");
-const createMine = require("../region/mine/createMine.js");
-const config = require("../config/config.js");
+const { getRandomNumber } = require('template_func');
+const insert = require('../workWithMongoDB/insertDB.js');
+const schema = require('../workWithMongoDB/schema.js');
+const gameVariable = require('../variables/game_variables.js');
+const createMine = require('../region/mine/createMine.js');
+const config = require('../config/config.js');
 const serverList = config.db.collections.servers;
 const insertDB = new insert();
 
@@ -12,7 +12,7 @@ const numSectionGlobalMap = gameVariable.numSectionGlobalMap;
 const numSectionRegionMap = gameVariable.numSectionRegionMap;
 const GlobalMap = [];
 const coordsMine = []; //возможные координаты шахт на regionMap
-const Region = require("../region/Region");
+const Region = require('../region/Region');
 
 getPositionMine();
 //создает перечень возможных координат шахт для regionMap
@@ -56,11 +56,11 @@ function createRegionMap() {
       section.id = countSection++;
       section.x = i;
       section.y = h;
-      section.type = Region.typeList.indexOf("forest"); //индекс леса
+      section.type = Region.typeList.indexOf('forest'); //индекс леса
       section.sector = {};
       //центр всегда является замком
       if (i == 2 && h == 2) {
-        section.type = Region.typeList.indexOf("town"); //индекс замка
+        section.type = Region.typeList.indexOf('town'); //индекс замка
       }
       regionMap[i][h] = section;
     }
@@ -71,7 +71,7 @@ function createRegionMap() {
     let index = d[k];
     let x = coordsMine[index].x;
     let y = coordsMine[index].y;
-    regionMap[x][y].type = Region.typeList.indexOf("mine"); //индекс шахты
+    regionMap[x][y].type = Region.typeList.indexOf('mine'); //индекс шахты
     regionMap[x][y].sector = createMine(x, y);
   }
   return regionMap;
@@ -115,14 +115,11 @@ function createGlobalMap() {
 
 function recursiveOne(i, arr, serverName, callback) {
   if (i < arr.length) {
-    insertDB.one(
-      { collectionName: serverName, doc: arr[i] },
-      result => {
-        console.log(result.ops);
-        i++;
-        recursiveOne(i, arr, serverName, callback);
-      }
-    );
+    insertDB.one({ collectionName: serverName, doc: arr[i] }, result => {
+      console.log(result.ops);
+      i++;
+      recursiveOne(i, arr, serverName, callback);
+    });
   } else {
     callback();
   }
@@ -155,9 +152,12 @@ function recursiveTree(a, h, i, serverList, callback) {
 createGlobalMap();
 
 setTimeout(function() {
-  console.log("start");
-  recursiveTree(0, 0, 0, serverList, () => {
-    console.log("done");
-    insertDB.close();
+  insertDB.mongo.db.dropDatabase(result => {
+    console.log('База данных удалена');
+    console.log('Создание новой...');
+    recursiveTree(0, 0, 0, serverList, () => {
+      console.log('done');
+      insertDB.close();
+    });
   });
 }, 4000);

@@ -1,7 +1,7 @@
 const { getRandomNumber } = require('template_func');
 const baseMine = require('../../variables/game_variables.js').mine;
 
-const UpgradeSection = require('../../town/storage/upgradeSection.js'); //такой способ пожключения выбран из-за того, что модуль "createMine"
+const UpgradeSection = require('../../town/upgradeSection.js'); //такой способ пожключения выбран из-за того, что модуль "createMine"
 //используется при запуске файлов в "prepareToStart"
 
 function Mine(type, x, y, lvl = 0) {
@@ -21,7 +21,7 @@ function Mine(type, x, y, lvl = 0) {
 }
 
 function createMine(x, y, type) {
-  let mine; 
+  let mine;
   if (!type) {
     let index = getRandomNumber(baseMine.typeList.length - 1);
     mine = new Mine(baseMine.typeList[index], x, y);
