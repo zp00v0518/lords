@@ -29,6 +29,8 @@ function createStorage(listMine = gameVariables.mine.typeList, lvl = 0) {
     storage.sources[type] = obj;
     if (type === 'gold') {
       storage.sources.gold.nowValue = 50000;
+      storage.sources.gold.addValue = 2000;
+      storage.sources.gold.lastCalc = new Date();
       storage.sources.gold.maxValue = Resources.maxValue.gold;
     }
   }
