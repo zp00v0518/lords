@@ -24,7 +24,7 @@ const Rampart = {
             wood: 5
           },
           imgInfo: {
-            name: 'rmarket.gif'
+            name: 'market'
           }
         }
       }
@@ -47,7 +47,7 @@ const Rampart = {
             univResourc: 10
           },
           imgInfo: {
-            name: 'rstorage.gif'
+            name: 'storage'
           }
         },
         1: {
@@ -66,7 +66,7 @@ const Rampart = {
             univResourc: 10
           },
           imgInfo: {
-            name: 'rstorage.gif'
+            name: 'storage'
           }
         },
         2: {
@@ -85,7 +85,7 @@ const Rampart = {
             univResourc: 10
           },
           imgInfo: {
-            name: 'rstorage.gif'
+            name: 'storage'
           }
         },
         3: {
@@ -103,7 +103,7 @@ const Rampart = {
             univResourc: 15
           },
           imgInfo: {
-            name: 'rstorage.gif'
+            name: 'storage'
           }
         },
         4: {
@@ -125,7 +125,7 @@ const Rampart = {
             univResourc: 15
           },
           imgInfo: {
-            name: 'rstorage.gif'
+            name: 'storage'
           }
         }
       }
@@ -142,7 +142,7 @@ const Rampart = {
             ore: 5
           },
           imgInfo: {
-            name: 'rmag1.gif'
+            name: 'guild_1'
           },
           spellsValue: 5 //количество заклинаний}
         },
@@ -160,7 +160,7 @@ const Rampart = {
             mercury: 4
           },
           imgInfo: {
-            name: 'rmag2.gif'
+            name: 'guild_2'
           },
           spellsValue: 4
         }, //количество заклинаний},
@@ -179,7 +179,7 @@ const Rampart = {
           },
           spellsValue: 3, //количество заклинаний
           imgInfo: {
-            name: 'rmag3.gif'
+            name: 'guild_3'
           }
         },
         3: {
@@ -196,7 +196,7 @@ const Rampart = {
             mercury: 8
           },
           imgInfo: {
-            name: 'rmag4.gif'
+            name: 'guild_4'
           },
           spellsValue: 2
         }, //количество заклинаний},
@@ -215,7 +215,7 @@ const Rampart = {
           },
           spellsValue: 1, //количество заклинаний
           imgInfo: {
-            name: 'rmag5.gif'
+            name: 'guild_5'
           }
         }
       }
@@ -232,7 +232,37 @@ const Rampart = {
             ore: 5
           },
           imgInfo: {
-            name: 'rfort1.gif'
+            name: 'fort_1'
+          }
+        }
+      }
+    },
+    [t.hall]: {
+      lvl: {
+        0: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: {
+            gold: 1000,
+            wood: 5,
+            ore: 5
+          },
+          imgInfo: {
+            name: 'hall_1'
+          }
+        },
+        1: {
+          is: false,
+          prepare: false,
+          if: [{ buildig: t.hall, lvl: 0 }],
+          price: {
+            gold: 1000,
+            wood: 5,
+            ore: 5
+          },
+          imgInfo: {
+            name: 'hall_2'
           }
         }
       }

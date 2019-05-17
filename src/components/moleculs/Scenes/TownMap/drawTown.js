@@ -8,6 +8,5 @@ function drawTown(){
 export default drawTown;
 
 function drawBackground(ctx, img, width, height){
-  console.log(img)
   ctx.drawImage(img, 0, 0, width, height);
 }

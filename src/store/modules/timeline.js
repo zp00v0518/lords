@@ -7,11 +7,10 @@ const timeline = {
       state.eventsList = payload.map(item => item);
     },
     UPDATE_EVENTS(state) {
-      state.eventsList = state.eventsList.map(item => item)
+      state.eventsList = state.eventsList.map(item => item);
     }
   },
-  actions: {
-  }
+  actions: {}
 };
 
 export default timeline;

@@ -8,6 +8,7 @@
 import Tooltip from "../../Tooltip";
 import drawtown from "./drawTown";
 import drawBaseImg from "./utils/drawBaseImg";
+import formCurrentImageList from "./formCurrentImageList";
 
 export default {
   name: "TownMap",
@@ -18,11 +19,11 @@ export default {
   data() {
     return {
       ctx: null,
-      races: this.$store.state.globalConfig.races
+      races: this.$store.state.globalConfig.races,
+      count: 0
     };
   },
   created() {
-    // eslint-disable-next-line
     console.log(sourceLoader);
   },
   watch: {},
@@ -31,13 +32,23 @@ export default {
       return this.$store.state.userSectors.currentSector;
     },
     raceTownIndex() {
-      const currentTown = this.currentTown;
-      return currentTown.town.race;
+      return this.currentTown.town.race;
     },
     raceName() {
-      const index = this.raceTownIndex;
-      const races = this.$store.state.globalConfig.races;
-      return races.typeList[this.raceTownIndex];
+      return this.races.typeList[this.raceTownIndex];
+    }
+  },
+  watch: {
+    currentTown: function() {
+      if (this.count === 0) {
+        this.count++;
+        const arrImgBuilding = formCurrentImageList(
+          this.currentTown,
+          this.raceName,
+          this.$store.state.globalConfig
+        );
+        this.drawtown(arrImgBuilding);
+      }
     }
   },
   methods: {

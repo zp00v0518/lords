@@ -5,5 +5,5 @@ const globalConfig = {
     races: fromBackend.Race
   }
 };
-console.log(globalConfig.state.races.rampart)
+console.log(globalConfig.state.races.rampart);
 export default globalConfig;
