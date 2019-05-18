@@ -1,5 +1,6 @@
 <template>
-  <main class="main">
+  <main class="main" :style="{width: '900px', height: '551px'}">
+  <!-- <main class="main"> -->
     <Vheader></Vheader>
     <div class="main__content">
       <div class="main__scenes" ref="scenes">

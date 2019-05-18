@@ -1,19 +1,9 @@
-const mineTypeList = require('../region/mine/Mine.js').typeList;
-const { document } = require('../workWithMongoDB/schema');
-const t = document.class;
+//файл создан для удобства разработки, временно
+// потом его данные надо переместить в backEnd/race/Rampart
 
 const Rampart = {
-  mine: {
-    default: [
-      mineTypeList[0],
-      mineTypeList[1],
-      mineTypeList[2],
-      mineTypeList[6]
-    ]
-  },
   buildings: {
-    listBuildings: [t.tavern, t.storage, t.hall, t.fort, t.market, t.guild],
-    [t.market]: {
+    'market': {
       lvl: {
         0: {
           is: true,
@@ -25,12 +15,12 @@ const Rampart = {
           },
           imgInfo: {
             name: 'market',
-            coords: { x: 0, y: 0}
+            coords: { x: 0, y: 0} // в процентах
           }
         }
       }
     },
-    [t.storage]: {
+    'storage': {
       lvl: {
         0: {
           is: true,
@@ -49,13 +39,13 @@ const Rampart = {
           },
           imgInfo: {
             name: 'storage',
-            coords: { x: 0, y: 0}
+            coords: { x: 20, y: 90} // в процентах
           }
         },
         1: {
           is: false,
           prepare: false,
-          if: [{ buildig: t.storage, lvl: 0 }],
+          if: [{ buildig: 'storage', lvl: 0 }],
           price: {
             gold: 1000,
             wood: 5,
@@ -69,13 +59,13 @@ const Rampart = {
           },
           imgInfo: {
             name: 'storage',
-            coords: { x: 0, y: 0}
+            coords: { x: 0, y: 0} // в процентах
           }
         },
         2: {
           is: false,
           prepare: false,
-          if: [{ buildig: t.storage, lvl: 1 }],
+          if: [{ buildig: 'storage', lvl: 1 }],
           price: {
             gold: 1000,
             wood: 5,
@@ -95,7 +85,7 @@ const Rampart = {
         3: {
           is: false,
           prepare: false,
-          if: [{ buildig: t.storage, lvl: 2 }],
+          if: [{ buildig: 'storage', lvl: 2 }],
           price: {
             gold: 5000,
             wood: 8,
@@ -114,7 +104,7 @@ const Rampart = {
         4: {
           is: false,
           prepare: false,
-          if: [{ buildig: t.storage, lvl: 3 }],
+          if: [{ buildig: 'storage', lvl: 3 }],
           price: {
             gold: 5000,
             wood: 5,
@@ -136,7 +126,7 @@ const Rampart = {
         }
       }
     },
-    [t.guild]: {
+    ['guild']: {
       lvl: {
         0: {
           is: false,
@@ -156,7 +146,7 @@ const Rampart = {
         1: {
           is: false,
           prepare: false,
-          if: [{ buildig: t.guild, lvl: 0 }],
+          if: [{ buildig: 'guild', lvl: 0 }],
           price: {
             gold: 5000,
             wood: 5,
@@ -175,7 +165,7 @@ const Rampart = {
         2: {
           is: false,
           prepare: false,
-          if: [{ buildig: t.guild, lvl: 1 }],
+          if: [{ buildig: 'guild', lvl: 1 }],
           price: {
             gold: 5000,
             wood: 5,
@@ -194,7 +184,7 @@ const Rampart = {
         3: {
           is: false,
           prepare: false,
-          if: [{ buildig: t.guild, lvl: 2 }],
+          if: [{ buildig: 'guild', lvl: 2 }],
           price: {
             gold: 5000,
             wood: 5,
@@ -213,7 +203,7 @@ const Rampart = {
         4: {
           is: true,
           prepare: false,
-          if: [{ buildig: t.guild, lvl: 3 }],
+          if: [{ buildig: 'guild', lvl: 3 }],
           price: {
             gold: 5000,
             wood: 5,
@@ -231,12 +221,12 @@ const Rampart = {
         }
       }
     },
-    [t.fort]: {
+    fort: {
       lvl: {
         0: {
           is: false,
           prepare: false,
-          if: [{ buildig: t.guild, lvl: 0 }, { buildig: t.market, lvl: 0 }],
+          if: [{ buildig: 'guild', lvl: 0 }, { buildig: 'market', lvl: 0 }],
           price: {
             gold: 1000,
             wood: 5,
@@ -249,7 +239,7 @@ const Rampart = {
         }
       }
     },
-    [t.hall]: {
+    hall: {
       lvl: {
         0: {
           is: false,
@@ -262,13 +252,13 @@ const Rampart = {
           },
           imgInfo: {
             name: 'hall_1',
-            coords: { x: 40, y: 50}
+            coords: { x: 60, y: 65}
           }
         },
         1: {
           is: false,
           prepare: false,
-          if: [{ buildig: t.hall, lvl: 0 }],
+          if: [{ buildig: "hall", lvl: 0 }],
           price: {
             gold: 1000,
             wood: 5,
@@ -276,7 +266,7 @@ const Rampart = {
           },
           imgInfo: {
             name: 'hall_2',
-            coords: { x: 150, y: 200},
+            coords: { x: 500, y: 400},// в процентах
           }
         }
       }
@@ -284,4 +274,4 @@ const Rampart = {
   }
 };
 
-module.exports = Rampart;
+export default Rampart;

@@ -57,11 +57,11 @@ export default {
   mounted() {
     this.ctx = this.$refs.scene.getContext("2d");
     this.drawtown();
-    drawBaseImg(
-      this.ctx,
-      sourceLoader.sources.towns[this.raceName],
-      this.raceName
-    );
+    // drawBaseImg(
+    //   this.ctx,
+    //   sourceLoader.sources.towns[this.raceName],
+    //   this.raceName
+    // );
   }
 };
 </script>
