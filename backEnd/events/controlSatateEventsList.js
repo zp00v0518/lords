@@ -23,9 +23,10 @@ function controlSatateEventsList(eventsList = []) {
         const mineX = eventItem.data.x;
         const mineY = eventItem.data.y;
         const mine = sector.region[mineX][mineY].sector;
+        const previosValue = mine.work.addValue;
         calcStorageNowValue(storage, eventItem.end);
         fixingResultUpgradeMine(mine, eventItem);
-        addValueToStorage(mine.type, mine.work.addValue, storage);
+        addValueToStorage(mine.type, mine.work.addValue - previosValue, storage);
         calcStorageNowValue(storage);
       }
       i--;
