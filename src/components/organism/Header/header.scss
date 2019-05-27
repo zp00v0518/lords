@@ -5,5 +5,5 @@
   width: 100%;
   height: 10%;
   min-height: 50px;
-  @include border(black)
+  border-bottom:1px solid black;
 }

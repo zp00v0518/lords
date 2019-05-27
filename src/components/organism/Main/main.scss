@@ -1,5 +1,5 @@
-@import "@/assets/variable.scss";
-@import "@/assets/mixins.scss";
+@import '@/assets/variable.scss';
+@import '@/assets/mixins.scss';
 
 .main {
   position: relative;
@@ -8,12 +8,14 @@
   min-height: 200px;
   min-width: 350px;
   margin-right: 14%;
-  @include border(blue);
+  @include border(black);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: $main-bg;
+  // background-image: url('../../../../frontEnd/img/main/background/panelcoloredbg.jpg');
 
-  &__content{
+  &__content {
     width: 100%;
     height: 85%;
     flex-grow: 5;
@@ -21,7 +23,7 @@
     justify-content: space-between;
   }
   &__scenes {
-    border: 1px solid blue;
+    // border: 1px solid blue;
     width: 100%;
     display: flex;
     flex-direction: column;

@@ -24,7 +24,7 @@ export default {
     };
   },
   created() {
-    console.log(sourceLoader);
+    // console.log(sourceLoader);
   },
   watch: {},
   computed: {
@@ -47,7 +47,6 @@ export default {
           this.raceName,
           this.$store.state.globalConfig
         );
-        console.log(arrImgBuilding)
         this.drawtown(arrImgBuilding);
       }
     }

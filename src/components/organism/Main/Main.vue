@@ -1,5 +1,5 @@
 <template>
-  <main class="main" :style="{width: '900px', height: '551px'}">
+  <main class="main" :style="{width: '1000px', height: '651px'}">
   <!-- <main class="main"> -->
     <Vheader></Vheader>
     <div class="main__content">
