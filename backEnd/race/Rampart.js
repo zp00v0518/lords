@@ -25,7 +25,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'market',
-            coords: { x: 0, y: 0}
+            coords: { x: 135, y: 300},
+            zoom: 7
           }
         }
       }
@@ -49,7 +50,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'storage',
-            coords: { x: 0, y: 0}
+            coords: { x: 255, y: 325},
+            zoom: 8
           }
         },
         1: {
@@ -69,7 +71,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'storage',
-            coords: { x: 0, y: 0}
+            coords: { x: 255, y: 325},
+            zoom: 8
           }
         },
         2: {
@@ -89,7 +92,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'storage',
-            coords: { x: 0, y: 0}
+            coords: { x: 255, y: 325},
+            zoom: 8
           }
         },
         3: {
@@ -108,7 +112,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'storage',
-            coords: { x: 0, y: 0}
+            coords: { x: 255, y: 325},
+            zoom: 8
           }
         },
         4: {
@@ -131,7 +136,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'storage',
-            coords: { x: 0, y: 0}
+            coords: { x: 255, y: 325},
+            zoom: 8
           }
         }
       }
@@ -149,7 +155,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'guild_1',
-            coords: { x: 0, y: 0}
+            coords: { x: 380, y: 100},
+            zoom: 5,
           },
           spellsValue: 5 //количество заклинаний}
         },
@@ -168,7 +175,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'guild_2',
-            coords: { x: 0, y: 0}
+            coords: { x: 380, y: 100},
+            zoom: 5,
           },
           spellsValue: 4
         }, //количество заклинаний},
@@ -188,7 +196,8 @@ const Rampart = {
           spellsValue: 3, //количество заклинаний
           imgInfo: {
             name: 'guild_3',
-            coords: { x: 0, y: 0}
+            coords: { x: 380, y: 100},
+            zoom: 5,
           }
         },
         3: {
@@ -206,7 +215,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'guild_4',
-            coords: { x: 0, y: 0}
+            coords: { x: 380, y: 100},
+            zoom: 5,
           },
           spellsValue: 2
         }, //количество заклинаний},
@@ -226,7 +236,8 @@ const Rampart = {
           spellsValue: 1, //количество заклинаний
           imgInfo: {
             name: 'guild_5',
-            coords: { x: 0, y: 0}
+            coords: { x: 380, y: 100},
+            zoom: 5,
           }
         }
       }
@@ -244,7 +255,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'fort_1',
-            coords: { x: 0, y: 0}
+            coords: { x: 60, y: 25},
+            zoom: 1,
           }
         }
       }
@@ -262,7 +274,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'hall_1',
-            coords: { x: 40, y: 50}
+            coords: { x: 560, y: 215},
+            zoom: 15,
           }
         },
         1: {
@@ -276,7 +289,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'hall_2',
-            coords: { x: 150, y: 200},
+            coords: { x: 535, y: 180},
+            zoom: 15,
           }
         }
       }

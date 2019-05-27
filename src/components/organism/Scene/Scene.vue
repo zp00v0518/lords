@@ -1,18 +1,25 @@
 <template>
   <section class="scene">
-    <GlobalMap
-      v-if="scenes.globalMap"
-      :widthScene="widthScene"
-      :heightScene="heightScene"
-      key="globalMap"
-    ></GlobalMap>
-    <RegionMap
-      v-if="scenes.region"
-      :widthScene="widthScene"
-      :heightScene="heightScene"
-      key="regionMap"
-    ></RegionMap>
-    <TownMap v-if="scenes.town && readyToDraw" :widthScene="widthScene" :heightScene="heightScene" key="townMap"></TownMap>
+    <keep-alive>
+      <GlobalMap
+        v-if="scenes.globalMap"
+        :widthScene="widthScene"
+        :heightScene="heightScene"
+        key="globalMap"
+      ></GlobalMap>
+      <RegionMap
+        v-if="scenes.region"
+        :widthScene="widthScene"
+        :heightScene="heightScene"
+        key="regionMap"
+      ></RegionMap>
+      <TownMap
+        v-if="scenes.town && readyToDraw"
+        :widthScene="widthScene"
+        :heightScene="heightScene"
+        key="townMap"
+      ></TownMap>
+    </keep-alive>
     <div class="scene__buttons" @click="changeScene">
       <button
         type="button"
@@ -63,9 +70,9 @@ export default {
       const styles = this.$el.getBoundingClientRect();
       return styles.height + "px";
     },
-    readyToDraw(){
-      return  this.$store.state.userSectors.currentSector
-    },
+    readyToDraw() {
+      return this.$store.state.userSectors.currentSector;
+    }
   },
   methods: {
     changeScene(event) {

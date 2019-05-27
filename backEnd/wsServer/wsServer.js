@@ -36,7 +36,7 @@ const template = {
 };
 
 const wsServer = new WsServer();
-wsServer.init(config.port.ws);
+wsServer.init(config.server.port.ws);
 wsServer.on('connection', (ws, req) => {
   const server = getCollectionName(req.url.split('/')[1]);
   const cookies = new Cookies(req);

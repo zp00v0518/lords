@@ -29,17 +29,22 @@ class Server {
   }
 }
 const server = new Server();
-server.init(config.port.http);
+server.init(config.server.port.http);
 server.on('request', (req, res) => {
-  const method = req.method;
-  if (method === 'GET') {
-    getMethod(req, res, __dirname);
-  } else if (method === 'POST') {
-    postMethod(req, res);
+  if (config.server.ready_to_work) {
+    const method = req.method;
+    if (method === 'GET') {
+      getMethod(req, res, __dirname);
+    } else if (method === 'POST') {
+      postMethod(req, res);
+    } else {
+      resp.writeHead(200, { 'Content-Type': 'text/plain' });
+      resp.end('Сервер не может удовлетворить Ваши запросы');
+    }
   } else {
     resp.writeHead(200, { 'Content-Type': 'text/plain' });
-    resp.end('Сервер не может удовлетворить Ваши запросы');
-  }
+      resp.end('Сервер не готов, поробуйте немного позже');
+    }
 });
 
 setInterval(() => {

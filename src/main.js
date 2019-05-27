@@ -17,7 +17,7 @@ const bus = new Vue();
 Vue.config.productionTip = false;
 Vue.prototype.$ws = new Ws();
 Vue.prototype.$ws.init(
-  `ws://localhost:${config.port.ws}${location.pathname}`,
+  `ws://localhost:${config.server.port.ws}${location.pathname}`,
   store
 );
 Vue.prototype.$region = region;

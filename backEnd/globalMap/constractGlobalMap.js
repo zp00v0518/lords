@@ -34,6 +34,7 @@ function constractGlobalMap() {
       console.log(`Построение глобальной карты для ${serverName} завершено`)
     });
   });
+  config.server.ready_to_work = true;
 }
 
 function returnGlobalMap() {

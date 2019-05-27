@@ -47,6 +47,7 @@ export default {
           this.raceName,
           this.$store.state.globalConfig
         );
+        console.log(arrImgBuilding)
         this.drawtown(arrImgBuilding);
       }
     }
