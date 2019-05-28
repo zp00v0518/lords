@@ -12,19 +12,21 @@
   display: flex;
 }
 .chat {
-  @include border(green);
+  @include border(black);
+
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   font-size: 12px;
+  background-color: $main-bg;
 
     &__header {
     display: flex;
     justify-content: flex-end;
     height: 5%;
     min-height: 30px;
-    @include border();
+    // @include border();
   }
 
   &__close {
@@ -58,7 +60,7 @@
   &__form {
     display: flex;
     flex-direction: column;
-    border: 1px solid red;
+    // border: 1px solid black;
     height: 15%;
     min-height: 60px;
     font-size: inherit;
@@ -72,18 +74,26 @@
       width: 45%;
       flex-grow: 2;
       font-size: inherit;
+      background-color: $main-bg;
+      border: 1px solid black;
     }
     &__select {
       width: 45%;
       font-size: inherit;
+      background-color: $main-bg;
+      border: 1px solid black;
     }
     &__message {
-      margin-top: 10px;
+      // margin-top: 10px;
       min-height: 30px;
       font-size: inherit;
       flex-grow: 2;
       display: flex;
       flex-direction: column;
+      background-color: $main-bg;
+      border: 1px solid black;
+      border-left: none;
+      border-right: none;
     }
   }
   &__messages {
