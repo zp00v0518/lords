@@ -4,14 +4,15 @@ let scale_X = 1; // масштаб, по отношени. к базовым р�
 let scale_Y = 1;
 
 function drawTown(arrImg) {
+  console.log(arrImg)
   const ctx = this.ctx;
   scale_X = ctx.canvas.width / WIDTH;
   scale_Y = ctx.canvas.height / HEIGHT;
   const raceName = this.raceName;
-  const img = sourceLoader.sources.towns[raceName][raceName];
+  const bg = sourceLoader.sources.towns[raceName][raceName];
   drawBackground(
     ctx,
-    img,
+    bg,
     parseFloat(this.widthScene),
     parseFloat(this.heightScene)
   );
@@ -20,8 +21,7 @@ function drawTown(arrImg) {
       const imgInfo = item.imgInfo;
       const coords = imgInfo.coords;
       const img = imgInfo.img;
-      const convert = convertCoords(ctx, imgInfo.coords);
-      ctx.drawImage(
+      const arrForDraw = [
         img,
         0,
         0,
@@ -30,8 +30,11 @@ function drawTown(arrImg) {
         coords.x * scale_X,
         coords.y * scale_Y,
         (img.width / 2) * scale_X,
-        img.height * scale_Y
-      );
+        img.height * scale_Y]
+      if(imgInfo.is_default){
+        arrForDraw[3] = img.width;
+      }
+      ctx.drawImage(...arrForDraw);
     });
   }
 }
@@ -42,12 +45,3 @@ function drawBackground(ctx, img, width, height) {
   ctx.drawImage(img, 0, 0, width, height);
 }
 
-function convertCoords(ctx, coords) {
-  const widthScene = ctx.canvas.width;
-  const heightScene = ctx.canvas.height;
-  const convert = {
-    x: (widthScene / 100) * coords.x,
-    y: (heightScene / 100) * coords.y
-  };
-  return convert;
-}

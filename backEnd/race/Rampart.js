@@ -2,6 +2,53 @@ const mineTypeList = require('../region/mine/Mine.js').typeList;
 const { document } = require('../workWithMongoDB/schema');
 const t = document.class;
 
+const default_img = [
+  {
+    is: true,
+    prepare: false,
+    if: [],
+    imgInfo: {
+      name: 'rhou1',
+      coords: { x: 320, y: 235 },
+      zoom: 15,
+      is_default: true
+    }
+  },
+  {
+    is: true,
+    prepare: false,
+    if: [],
+    imgInfo: {
+      name: 'rhou2',
+      coords: { x: 290, y: 235 },
+      zoom: 14,
+      is_default: true
+    }
+  },
+  {
+    is: true,
+    prepare: false,
+    if: [],
+    imgInfo: {
+      name: 'rhou3',
+      coords: { x: 300, y: 190 },
+      zoom: 9,
+      is_default: true
+    }
+  },
+  {
+    is: true,
+    prepare: false,
+    if: [],
+    imgInfo: {
+      name: 'rhou4',
+      coords: { x: 250, y: 170 },
+      zoom: 8,
+      is_default: true
+    }
+  }
+];
+
 const Rampart = {
   mine: {
     default: [
@@ -13,6 +60,7 @@ const Rampart = {
   },
   buildings: {
     listBuildings: [t.tavern, t.storage, t.hall, t.fort, t.market, t.guild],
+    default_img: default_img,
     [t.market]: {
       lvl: {
         0: {
@@ -25,8 +73,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'market',
-            coords: { x: 135, y: 300},
-            zoom: 7
+            coords: { x: 135, y: 300 },
+            zoom: 17
           }
         }
       }
@@ -50,8 +98,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'storage',
-            coords: { x: 255, y: 325},
-            zoom: 8
+            coords: { x: 255, y: 325 },
+            zoom: 18
           }
         },
         1: {
@@ -71,8 +119,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'storage',
-            coords: { x: 255, y: 325},
-            zoom: 8
+            coords: { x: 255, y: 325 },
+            zoom: 18
           }
         },
         2: {
@@ -92,8 +140,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'storage',
-            coords: { x: 255, y: 325},
-            zoom: 8
+            coords: { x: 255, y: 325 },
+            zoom: 18
           }
         },
         3: {
@@ -112,8 +160,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'storage',
-            coords: { x: 255, y: 325},
-            zoom: 8
+            coords: { x: 255, y: 325 },
+            zoom: 18
           }
         },
         4: {
@@ -136,8 +184,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'storage',
-            coords: { x: 255, y: 325},
-            zoom: 8
+            coords: { x: 255, y: 325 },
+            zoom: 18
           }
         }
       }
@@ -155,8 +203,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'guild_1',
-            coords: { x: 380, y: 100},
-            zoom: 5,
+            coords: { x: 380, y: 100 },
+            zoom: 10
           },
           spellsValue: 5 //количество заклинаний}
         },
@@ -175,8 +223,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'guild_2',
-            coords: { x: 380, y: 100},
-            zoom: 5,
+            coords: { x: 380, y: 100 },
+            zoom: 10
           },
           spellsValue: 4
         }, //количество заклинаний},
@@ -196,8 +244,8 @@ const Rampart = {
           spellsValue: 3, //количество заклинаний
           imgInfo: {
             name: 'guild_3',
-            coords: { x: 380, y: 100},
-            zoom: 5,
+            coords: { x: 380, y: 100 },
+            zoom: 10
           }
         },
         3: {
@@ -215,8 +263,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'guild_4',
-            coords: { x: 380, y: 100},
-            zoom: 5,
+            coords: { x: 380, y: 100 },
+            zoom: 10
           },
           spellsValue: 2
         }, //количество заклинаний},
@@ -236,8 +284,8 @@ const Rampart = {
           spellsValue: 1, //количество заклинаний
           imgInfo: {
             name: 'guild_5',
-            coords: { x: 380, y: 100},
-            zoom: 5,
+            coords: { x: 380, y: 100 },
+            zoom: 10
           }
         }
       }
@@ -255,8 +303,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'fort_1',
-            coords: { x: 60, y: 25},
-            zoom: 1,
+            coords: { x: 60, y: 25 },
+            zoom: 0
           }
         }
       }
@@ -274,8 +322,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'hall_1',
-            coords: { x: 560, y: 215},
-            zoom: 15,
+            coords: { x: 560, y: 215 },
+            zoom: 16
           }
         },
         1: {
@@ -289,8 +337,8 @@ const Rampart = {
           },
           imgInfo: {
             name: 'hall_2',
-            coords: { x: 535, y: 180},
-            zoom: 15,
+            coords: { x: 535, y: 180 },
+            zoom: 16
           }
         }
       }
@@ -299,3 +347,27 @@ const Rampart = {
 };
 
 module.exports = Rampart;
+
+
+const coords = {
+  guild_5: { x: 380, y: 100, zoom: 10},
+  fort_3: { x: 60, y: 25, zoom: 0},
+  market: { x: 135, y: 300, zoom: 17},
+  storage: { x: 255, y: 325, zoom: 18},
+  tavern: { x: 180, y: 225, zoom: 13},
+  barraks_1_2: { x: 0, y: 235, zoom: 12},
+  barraks_2_2: { x: 0, y: 150, zoom: 10},
+  // rdwf2h: { x: 0, y: 150, zoom: 7 },
+  barraks_3_2: { x: 665, y: 95, zoom: 6},
+  barraks_4_2: { x: 290, y: 25, zoom: 4},
+  barraks_5_2: { x: 55, y: 150, zoom: 11},
+  barraks_6_2: { x: 370, y: 90, zoom: 3},
+  barraks_7_2: { x: 490, y: 0, zoom: 2},
+  rgar2a: { x: 550, y: 295, zoom: 19},
+  rhou1: { x: 320, y: 235, zoom: 15, is_default: true},
+  rhou2: { x: 290, y: 235, zoom: 14, is_default: true},
+  rhou3: { x: 300, y: 190, zoom: 9, is_default: true},
+  rhou4: { x: 250, y: 170, zoom: 8, is_default: true},
+  raid: { x: 530, y: 100, zoom: 5},
+  hall_4: { x: 535, y: 180, zoom: 16},
+}

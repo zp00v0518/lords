@@ -42,7 +42,7 @@ export default {
     currentTown: function() {
       if (this.count === 0) {
         this.count++;
-        const arrImgBuilding = formCurrentImageList(
+        const arrImgBuilding = formCurrentImageList.call(this,
           this.currentTown,
           this.raceName,
           this.$store.state.globalConfig

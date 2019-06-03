@@ -38,12 +38,12 @@ server.on('request', (req, res) => {
     } else if (method === 'POST') {
       postMethod(req, res);
     } else {
-      resp.writeHead(200, { 'Content-Type': 'text/plain' });
-      resp.end('Сервер не может удовлетворить Ваши запросы');
+      res.writeHead(200, { 'Content-Type': 'text/plain' });
+      res.end('Сервер не может удовлетворить Ваши запросы');
     }
   } else {
-    resp.writeHead(200, { 'Content-Type': 'text/plain' });
-      resp.end('Сервер не готов, поробуйте немного позже');
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+      res.end('Сервер не готов, поробуйте немного позже');
     }
 });
 
