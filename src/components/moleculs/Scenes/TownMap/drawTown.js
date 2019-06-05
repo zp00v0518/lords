@@ -1,13 +1,8 @@
-const WIDTH = 800; // базовые размеры canvas , на основании которого, формировался первоначальный вид рисунка
-const HEIGHT = 374;
-let scale_X = 1; // масштаб, по отношени. к базовым размерам
-let scale_Y = 1;
-
 function drawTown(arrImg) {
   console.log(arrImg)
   const ctx = this.ctx;
-  scale_X = ctx.canvas.width / WIDTH;
-  scale_Y = ctx.canvas.height / HEIGHT;
+  const scale_X = this.scale_X;
+  const scale_Y = this.scale_Y;
   const raceName = this.raceName;
   const bg = sourceLoader.sources.towns[raceName][raceName];
   drawBackground(

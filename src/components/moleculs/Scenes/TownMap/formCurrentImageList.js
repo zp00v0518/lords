@@ -1,4 +1,4 @@
-
+// подготавливает массив для отрисовке на канве
 function formCurrentImageList(sector, raceName, allBuildings) {
   const listImg = sourceLoader.sources.towns[raceName];
   let arr = [];
@@ -14,6 +14,8 @@ function formCurrentImageList(sector, raceName, allBuildings) {
       const imgInfo = obj.imgInfo;
       const img = listImg[imgInfo.name];
       imgInfo.img = img;
+      // передача this
+      prepareToDraw.call(self, imgInfo)
       arr.push(obj);
     }
   });
@@ -21,7 +23,7 @@ function formCurrentImageList(sector, raceName, allBuildings) {
     if(item.is){
       const name = item.imgInfo.name;
       item.imgInfo.img = listImg[name];
-      prepareToDraw.call(self, item.imgInfo.img)
+      prepareToDraw.call(self, item.imgInfo)
       arr.push(item)
     }
   })
@@ -31,11 +33,18 @@ function formCurrentImageList(sector, raceName, allBuildings) {
   return arr;
 }
 
-function prepareToDraw(img) {
-  console.log(this)
+// создает офф-канву с нарисованной на ней картинкой
+function prepareToDraw(elem) {
+  const img = elem.img;
+  const scale_X = this.scale_X;
+  const scale_Y = this.scale_Y;
   const pic = document.createElement('canvas');
-  pic.width = img.width;
-  pic.height = img.height;
+  pic.width = img.width * scale_X;
+  pic.height = img.height * scale_Y;
+  const picCtx = pic.getContext('2d');
+  picCtx.drawImage = (img, pic.width, pic.height);
+  elem.picCtx = picCtx;
+  // elem.pixArr = picCtx.getImageData(0,0,pic.width, pic.height);
 }
 
 export default formCurrentImageList;

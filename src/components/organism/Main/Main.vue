@@ -1,5 +1,5 @@
 <template>
-  <main class="main" :style="{width: '1100px', height: '700px'}">
+  <main class="main" :style="{width: mainSize.width, height: mainSize.height}">
   <!-- <main class="main"> -->
     <Vheader></Vheader>
     <div class="main__content">
@@ -41,6 +41,17 @@ export default {
     };
   },
   computed: {
+    mainSize(){
+      let width = document.documentElement.clientWidth;
+      let height = document.documentElement.clientHeight;
+      width = width/100 * 70;
+      height = height/100 * 70;
+      const mainSize = {
+        width: width + 'px',
+        height: height + 'px',
+      }
+      return mainSize
+    },
     widthScene() {
       return this.widthTimeLine;
     },
