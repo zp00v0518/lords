@@ -35,12 +35,14 @@ export default {
       scale_X: 1, // масштаб, по отношени. к базовым размерам
       scale_Y: 1,
       arrDrawImg: [],
-      mouseCoords: null
+      mouseCoords: null,
+      hover: null
     };
   },
   created() {
     this.helperCtx.canvas.width = parseFloat(this.widthScene);
     this.helperCtx.canvas.height = parseFloat(this.heightScene);
+    document.body.appendChild(this.helperCtx.canvas);
   },
   computed: {
     currentTown() {
@@ -72,21 +74,23 @@ export default {
     getCursorPositionOnScene,
     handlerMouseMove(event) {
       this.mouseCoords = this.getCursorPositionOnScene(event);
-      // checkElemUnderMouse(this.mouseCoords.x, this.mouseCoords.y, this.arrDrawImg)
-    },
-    handlerClick(event) {
-      const mouseCoords = this.getCursorPositionOnScene(event);
-      this.ctx.arc(mouseCoords.x, mouseCoords.y, 2, 0, 2 * Math.PI);
-      this.ctx.fill();
-      checkElemUnderMouse(
+      this.hover = checkElemUnderMouse(
         this.mouseCoords.x,
         this.mouseCoords.y,
         this.arrDrawImg,
         this.helperCtx,
         this.scale_X,
-        this,
-        scale_Y
+        this.scale_Y
       );
+      this.drawtown(this.arrDrawImg);
+      this.ctx.canvas.style.cursor = this.hover ? 'pointer' : 'default';
+    },
+    handlerClick(event) {
+      const mouseCoords = this.getCursorPositionOnScene(event);
+      this.ctx.beginPath();
+      this.ctx.arc(mouseCoords.x, mouseCoords.y, 2, 0, 2 * Math.PI);
+      this.ctx.fill();
+      this.ctx.closePath();
     }
   },
   mounted() {

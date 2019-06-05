@@ -45,7 +45,7 @@ export default {
       let width = document.documentElement.clientWidth;
       let height = document.documentElement.clientHeight;
       width = width/100 * 70;
-      height = height/100 * 70;
+      height = height/100 * 90;
       const mainSize = {
         width: width + 'px',
         height: height + 'px',
