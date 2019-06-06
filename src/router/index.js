@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Main from '@/components/organism/Main/Main';
-import config from '../../backEnd/config/config';
+import config from '../../backend/config/config';
 
 Vue.use(Router);
 

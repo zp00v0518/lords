@@ -8,20 +8,21 @@
       @mousemove="handlerMouseMove"
       @click="handlerClick"
     ></canvas>
+    <Building v-if="component.is" :name="component.name"></Building> 
   </div>
 </template>
 
 <script>
 import Tooltip from "../../Tooltip";
-import drawtown from "./drawTown";
-import checkElemUnderMouse from "./checkElemUnderMouse";
 import { getCursorPositionOnScene } from "../utils";
-import formCurrentImageList from "./formCurrentImageList";
+import { formCurrentImageList, drawTown, checkElemUnderMouse } from "./utils_town";
+import Building from "./Building";
 
 export default {
   name: "TownMap",
   components: {
-    Tooltip
+    Tooltip,
+    Building
   },
   props: ["widthScene", "heightScene"],
   data() {
@@ -36,13 +37,17 @@ export default {
       scale_Y: 1,
       arrDrawImg: [],
       mouseCoords: null,
-      hover: null
+      hover: null,
+      component:{
+        is: false,
+        name: ''
+      }
     };
   },
   created() {
     this.helperCtx.canvas.width = parseFloat(this.widthScene);
     this.helperCtx.canvas.height = parseFloat(this.heightScene);
-    document.body.appendChild(this.helperCtx.canvas);
+    // document.body.appendChild(this.helperCtx.canvas);
   },
   computed: {
     currentTown() {
@@ -65,12 +70,12 @@ export default {
           this.raceName,
           this.$store.state.globalConfig
         );
-        this.drawtown(this.arrDrawImg);
+        this.drawTown(this.arrDrawImg);
       }
     }
   },
   methods: {
-    drawtown,
+    drawTown,
     getCursorPositionOnScene,
     handlerMouseMove(event) {
       this.mouseCoords = this.getCursorPositionOnScene(event);
@@ -82,13 +87,16 @@ export default {
         this.scale_X,
         this.scale_Y
       );
-      this.drawtown(this.arrDrawImg);
+      this.drawTown(this.arrDrawImg);
       this.ctx.canvas.style.cursor = this.hover ? "pointer" : "default";
     },
     handlerClick(event) {
       // const mouseCoords = this.getCursorPositionOnScene(event);
       if (this.hover) {
         console.log(this.hover);
+        this.component.name = this.hover.class;
+        this.component.is = true;
+
       }
       // this.ctx.beginPath();
       // this.ctx.arc(mouseCoords.x, mouseCoords.y, 2, 0, 2 * Math.PI);
@@ -100,7 +108,7 @@ export default {
     this.ctx = this.$refs.scene.getContext("2d");
     this.scale_X = this.ctx.canvas.width / this.WIDTH;
     this.scale_Y = this.ctx.canvas.height / this.HEIGHT;
-    this.drawtown();
+    this.drawTown();
   }
 };
 </script>

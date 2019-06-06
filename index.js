@@ -1,6 +1,6 @@
-require('./backEnd/config/srcRequire.js');
-require('./backEnd/variables/global_variables.js');
-require('./backEnd/wsServer/wsServer.js');
+require('./backend/config/srcRequire.js');
+require('./backend/variables/global_variables.js');
+require('./backend/wsServer/wsServer.js');
 require('./get_files.js');
 
 const http = require('http');
@@ -11,7 +11,7 @@ const {
   postMethod,
   controlStateGlobal,
   saveDataInDB
-} = require('./backEnd/tube.js');
+} = require('./backend/tube.js');
 
 const template = require('template_func');
 const log = new template.Log(__filename);

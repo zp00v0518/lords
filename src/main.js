@@ -8,7 +8,7 @@ import App from './App';
 import router from './router';
 import store from './store';
 import Ws from './api/ws';
-import config from '../backEnd/config/config';
+import config from '../backend/config/config';
 const region = require('../backend/region/Region');
 const variables = require('../backend/variables/game_variables');
 

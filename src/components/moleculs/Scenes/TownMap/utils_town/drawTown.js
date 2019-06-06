@@ -1,3 +1,4 @@
+/* eslint-disable */
 function drawTown(arrImg) {
   const ctx = this.ctx;
   const scale_X = this.scale_X;
@@ -41,8 +42,8 @@ function drawTown(arrImg) {
   }
 }
 
-export default drawTown;
-
 function drawBackground(ctx, img, width, height) {
   ctx.drawImage(img, 0, 0, width, height);
 }
+
+export default drawTown;

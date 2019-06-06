@@ -9,7 +9,7 @@
     "start": "node start",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js",
-    "base": "node backEnd/prepareToStart/createGlobalMap.js",
+    "base": "node backend/prepareToStart/createGlobalMap.js",
     "serv": "supervisor --inspect --watch backend index.js"
   },
   "dependencies": {

@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack --watch --config build/webpack.dev.conf.js",
-    "start": "supervisor --watch backEnd index.js",
+    "start": "supervisor --watch backend index.js",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js"
   },
