@@ -83,14 +83,17 @@ export default {
         this.scale_Y
       );
       this.drawtown(this.arrDrawImg);
-      this.ctx.canvas.style.cursor = this.hover ? 'pointer' : 'default';
+      this.ctx.canvas.style.cursor = this.hover ? "pointer" : "default";
     },
     handlerClick(event) {
-      const mouseCoords = this.getCursorPositionOnScene(event);
-      this.ctx.beginPath();
-      this.ctx.arc(mouseCoords.x, mouseCoords.y, 2, 0, 2 * Math.PI);
-      this.ctx.fill();
-      this.ctx.closePath();
+      // const mouseCoords = this.getCursorPositionOnScene(event);
+      if (this.hover) {
+        console.log(this.hover);
+      }
+      // this.ctx.beginPath();
+      // this.ctx.arc(mouseCoords.x, mouseCoords.y, 2, 0, 2 * Math.PI);
+      // this.ctx.fill();
+      // this.ctx.closePath();
     }
   },
   mounted() {

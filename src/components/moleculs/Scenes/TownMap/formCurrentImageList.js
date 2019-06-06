@@ -1,3 +1,4 @@
+/* eslint-disable */
 // подготавливает массив для отрисовке на канве
 function formCurrentImageList(sector, raceName, allBuildings) {
   const listImg = sourceLoader.sources.towns[raceName];
@@ -10,6 +11,7 @@ function formCurrentImageList(sector, raceName, allBuildings) {
     if (d) {
       const lvl = d.lvl;
       const obj = allBuildings.races.rampart.buildings[name].lvl[lvl];
+      obj.class = d.class;
       // const obj = buildings[name].lvl[lvl]; временно, для определения координат картинки
       const imgInfo = obj.imgInfo;
       const img = listImg[imgInfo.name];

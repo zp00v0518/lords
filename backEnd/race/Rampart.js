@@ -62,6 +62,7 @@ const Rampart = {
     listBuildings: [t.tavern, t.storage, t.hall, t.fort, t.market, t.guild],
     default_img: default_img,
     [t.market]: {
+      type: t.market,
       lvl: {
         0: {
           is: true,
@@ -80,6 +81,7 @@ const Rampart = {
       }
     },
     [t.storage]: {
+      type: t.storage,
       lvl: {
         0: {
           is: true,
@@ -191,6 +193,7 @@ const Rampart = {
       }
     },
     [t.guild]: {
+      type: t.guild,
       lvl: {
         0: {
           is: false,
@@ -291,6 +294,7 @@ const Rampart = {
       }
     },
     [t.fort]: {
+      type: t.fort,
       lvl: {
         0: {
           is: false,
@@ -310,6 +314,7 @@ const Rampart = {
       }
     },
     [t.hall]: {
+      type: t.hall,
       lvl: {
         0: {
           is: false,
