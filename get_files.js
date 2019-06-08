@@ -3,7 +3,7 @@
 */
 const fs = require("fs");
 const path = require('path');
-const startPath = 'img';
+const startPath = 'img/for_canvas';
 let arrPath = [];
 
 function getPath(nextPath){

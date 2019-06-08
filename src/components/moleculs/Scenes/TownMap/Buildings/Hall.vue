@@ -6,10 +6,6 @@
         <div class="hall__row__item-footer"></div>
       </div>
     </div>
-    <!-- <div class="hall__row"></div>
-    <div class="hall__row"></div>
-    <div class="hall__row"></div>
-    <div class="hall__row"></div>-->
   </section>
 </template>
 
@@ -45,6 +41,17 @@ export default {
       width: 20%;
       min-width: 17%;
       border: 1px solid white;
+      display: flex;
+      flex-direction: column;
+      &-icon{
+        height: 80%;
+        border: 1px solid green;
+        background-image: url('')
+      }
+      &-footer{
+        height: 20%;
+        min-height: 30px;
+      }
     }
   }
 }

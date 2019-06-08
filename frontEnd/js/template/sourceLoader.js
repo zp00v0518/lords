@@ -22,7 +22,7 @@ var sourceLoader = {
       img.src = src;
       /* тут какая-то смешанная старая с новой логика 
       формирования объекта со всеми загруженными картинками */
-      const newPath = src.replace('img\\', '');
+      const newPath = src.replace('img\\for_canvas\\', '');
       let d = newPath.split('/');
       if (d.length === 1) {
         d = newPath.split('\\');
