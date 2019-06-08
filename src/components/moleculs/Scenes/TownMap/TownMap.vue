@@ -8,14 +8,18 @@
       @mousemove="handlerMouseMove"
       @click="handlerClick"
     ></canvas>
-    <Building v-if="component.is" :name="component.name"></Building> 
+    <Building v-if="component.is" :name="component.name" @close="component.is = false"></Building>
   </div>
 </template>
 
 <script>
 import Tooltip from "../../Tooltip";
 import { getCursorPositionOnScene } from "../utils";
-import { formCurrentImageList, drawTown, checkElemUnderMouse } from "./utils_town";
+import {
+  formCurrentImageList,
+  drawTown,
+  checkElemUnderMouse
+} from "./utils_town";
 import Building from "./Building";
 
 export default {
@@ -38,9 +42,9 @@ export default {
       arrDrawImg: [],
       mouseCoords: null,
       hover: null,
-      component:{
+      component: {
         is: false,
-        name: ''
+        name: ""
       }
     };
   },
@@ -96,7 +100,6 @@ export default {
         console.log(this.hover);
         this.component.name = this.hover.class;
         this.component.is = true;
-
       }
       // this.ctx.beginPath();
       // this.ctx.arc(mouseCoords.x, mouseCoords.y, 2, 0, 2 * Math.PI);

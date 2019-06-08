@@ -1,5 +1,7 @@
-import Hall from "./Hall";
+import Hall from './Hall';
+import Storage from './Storage';
 
 export default {
-  Hall
+  Hall,
+  Storage
 };
