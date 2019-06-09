@@ -6,7 +6,10 @@ function formCurrentImageList(sector, raceName, allBuildings) {
   const buildings = allBuildings.races[raceName].buildings;
   const listBuildings = buildings.listBuildings;
   const self = this;
-  listBuildings.forEach(name => {
+  
+  Object.keys(listBuildings).forEach(key => {
+    const item = listBuildings[key];
+    const name = item.name
     const d = sector.town[name];
     if (d) {
       const lvl = d.lvl;

@@ -20,7 +20,8 @@ export default {
   },
   created() {
     const z = this.$store.state.globalConfig.listBuildings;
-    this.rowsIndex = [[z.hall, z.fort, z.tavern]];
+    console.log(z)
+    this.rowsIndex = [[z.hall.name, z.fort.name, z.tavern.name]];
   },
   methods: {},
   mounted() {

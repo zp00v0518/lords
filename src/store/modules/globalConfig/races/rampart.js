@@ -51,7 +51,7 @@ const default_img = [
 const rampart = {
   buildings: {
     default_img: default_img,
-    [listBuildings[3]]: {
+    [listBuildings.market.name]: {
       lvl: {
         0: {
           imgInfo: {
@@ -62,7 +62,7 @@ const rampart = {
         }
       }
     },
-    [listBuildings[4]]: {
+    [listBuildings.storage.name]: {
       lvl: {
         0: {
           imgInfo: {
@@ -101,7 +101,7 @@ const rampart = {
         }
       }
     },
-    [listBuildings[5]]: {
+    [listBuildings.guild.name]: {
       lvl: {
         0: {
           imgInfo: {
@@ -140,7 +140,7 @@ const rampart = {
         }
       }
     },
-    [listBuildings[2]]: {
+    [listBuildings.fort.name]: {
       lvl: {
         0: {
           imgInfo: {
@@ -151,7 +151,7 @@ const rampart = {
         }
       }
     },
-    [listBuildings[0]]: {
+    [listBuildings.hall.name]: {
       lvl: {
         0: {
           imgInfo: {
