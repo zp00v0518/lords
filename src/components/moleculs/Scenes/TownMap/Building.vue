@@ -4,7 +4,7 @@
       <div class="building__header-title">{{name}}</div>
       <Icon class="building__header-close" name="circle-close" @click.native="closeBuilding"></Icon>
     </div>
-    <component :is="name"></component>
+    <component :is="name" :raceName="raceName"></component>
   </section>
 </template>
 
@@ -14,7 +14,8 @@ import Buildings from "./Buildings";
 export default {
   name: "Building",
   props: {
-    name: String
+    name: String,
+    raceName: String
   },
   components: {
     ...Buildings
@@ -45,19 +46,19 @@ export default {
     background-color: rgba(0, 0, 0, 0.9);
     z-index: 1000;
   }
-  &__header{
+  &__header {
     display: flex;
     justify-content: flex-end;
-    &-title{
+    &-title {
       flex-grow: 10;
-      @include  center;
+      @include center;
       text-transform: capitalize;
     }
-    &-close{
+    &-close {
       width: 20px;
-    color: red;
-    font-size: 18px;
-    cursor: pointer;
+      color: red;
+      font-size: 18px;
+      cursor: pointer;
     }
   }
 }

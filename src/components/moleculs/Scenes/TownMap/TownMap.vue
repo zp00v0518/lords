@@ -8,7 +8,12 @@
       @mousemove="handlerMouseMove"
       @click="handlerClick"
     ></canvas>
-    <Building v-if="component.is" :name="component.name" @close="component.is = false"></Building>
+    <Building
+      v-if="component.is"
+      :name="component.name"
+      @close="component.is  = false"
+      :raceName="raceName"
+    ></Building>
   </div>
 </template>
 
@@ -97,7 +102,6 @@ export default {
     handlerClick(event) {
       // const mouseCoords = this.getCursorPositionOnScene(event);
       if (this.hover) {
-        console.log(this.hover);
         this.component.name = this.hover.class;
         this.component.is = true;
       }
