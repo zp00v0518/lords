@@ -46,7 +46,11 @@ export default {
       &-icon{
         height: 80%;
         border: 1px solid green;
-        background-image: url('')
+        background-image: url('../../../../../../frontEnd/img/towns/rampart/ramparttiles.jpg');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position-x: 0px;
+        background-position-y: 0px;
       }
       &-footer{
         height: 20%;

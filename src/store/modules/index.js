@@ -5,7 +5,7 @@ import local from './local';
 import userSectors from './userSectors';
 import dialog from './dialog';
 import timeline from './timeline';
-import globalConfig from './globalConfig';
+import globalConfig from './globalConfig/globalConfig';
 
 export default {
   chat,
