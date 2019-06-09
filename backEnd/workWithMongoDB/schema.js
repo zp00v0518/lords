@@ -14,7 +14,8 @@ const document = {
     army: 'army',
     mine: 'mine',
     town: 'town',
-    event: 'event'
+    event: 'event',
+    barraks: 'barraks'
   }
 };
 const event = {

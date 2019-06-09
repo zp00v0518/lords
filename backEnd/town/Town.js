@@ -6,21 +6,36 @@ const Town = {
     parent: 'town',
     lvl: 0
   },
-  listBuilding: [
-    type.storage,
-    type.market,
+  listBuildings: [
+    type.hall,
     type.fort,
-    type.quild,
     type.tavern,
-    'hall',
-    'barracks_1',
-    'barracks_2',
-    'barracks_3',
-    'barracks_4',
-    'barracks_5',
-    'barracks_6',
-    'barracks_7',
-  ]
+    type.market,
+    type.storage,
+    type.quild,
+    type.barraks +'_1',
+    type.barraks +'_2',
+    type.barraks +'_3',
+    type.barraks +'_4',
+    type.barraks +'_5',
+    type.barraks +'_6',
+    type.barraks +'_7',
+  ],
+  // listBuildings: {
+  //   [type.hall]: {name: type.hall},
+  //   [type.fort]: {name: type.fort},
+  //   [type.tavern]: {name: type.tavern},
+  //   [type.market]: {name: type.market},
+  //   [type.storage]: {name: type.storage},
+  //   [type.guild]: {name: type.guild},
+  //   [type.barraks+'_1']: {name: type.barraks+'_1'},
+  //   [type.barraks+'_2']: {name: type.barraks+'_2'},
+  //   [type.barraks+'_3']: {name: type.barraks+'_3'},
+  //   [type.barraks+'_4']: {name: type.barraks+'_4'},
+  //   [type.barraks+'_5']: {name: type.barraks+'_5'},
+  //   [type.barraks+'_6']: {name: type.barraks+'_6'},
+  //   [type.barraks+'_7']: {name: type.barraks+'_7'},
+  // }
 };
 
 module.exports = Town;

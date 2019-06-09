@@ -1,8 +1,8 @@
 <template>
   <section class="hall__wrap">
-    <div class="hall__row" v-for=" row in 5" :key="row">
-      <div v-for="index in rowsIndex[row-1]" :key="index" class="hall__row__item">
-        <div class="hall__row__item-icon"></div>
+    <div class="hall__row" v-for="(row, rowIndex) in rowsIndex" :key="rowIndex">
+      <div v-for="item in row" :key="item" class="hall__row__item">
+        <canvas :ref="'canvas'+item" class="hall__row__item-icon"></canvas>
         <div class="hall__row__item-footer"></div>
       </div>
     </div>
@@ -14,11 +14,18 @@ export default {
   name: "Hall",
   data() {
     return {
-      rowsIndex: [4, 3, 3, 4, 3]
+      rowsIndex: [],
+      TI: {}
     };
   },
-
-  methods: {}
+  created() {
+    const z = this.$store.state.globalConfig.listBuildings;
+    this.rowsIndex = [[z.hall, z.fort, z.tavern]];
+  },
+  methods: {},
+  mounted() {
+    console.log(this.$refs);
+  }
 };
 </script>
 
@@ -43,16 +50,16 @@ export default {
       border: 1px solid white;
       display: flex;
       flex-direction: column;
-      &-icon{
+      &-icon {
         height: 80%;
         border: 1px solid green;
-        background-image: url('../../../../../../frontEnd/img/towns/rampart/ramparttiles.jpg');
+        background-image: url("../../../../../../frontEnd/img/towns/rampart/ramparttiles.jpg");
         background-size: 100% 100%;
         background-repeat: no-repeat;
         background-position-x: 0px;
         background-position-y: 0px;
       }
-      &-footer{
+      &-footer {
         height: 20%;
         min-height: 30px;
       }

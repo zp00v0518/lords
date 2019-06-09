@@ -1,9 +1,9 @@
 import checkSource  from"../resources/checkSource.js";
 import Race  from"../race/Race";
-import {document}  from '../workWithMongoDB/schema';
+import Town from '../town/Town';
 
 export default {
   checkSource,
   Race,
-  document
+  Town,
 };

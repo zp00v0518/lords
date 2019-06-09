@@ -11,7 +11,8 @@ fromBackend.Race.typeList.forEach(key => {
 
 const globalConfig = {
   state: {
-    races: fromBackend.Race
+    races: fromBackend.Race,
+    listBuildings: fromBackend.Town.listBuildings
   }
 };
 export default globalConfig;

@@ -1,6 +1,5 @@
 import fromBackend from '../../../../fromBackend';
-// import { mergeRcursive } from '../../../../utils';
-const type = fromBackend.document.class;
+const listBuildings = fromBackend.Town.listBuildings;
 
 const default_img = [
   {
@@ -52,7 +51,7 @@ const default_img = [
 const rampart = {
   buildings: {
     default_img: default_img,
-    [type.market]: {
+    [listBuildings[3]]: {
       lvl: {
         0: {
           imgInfo: {
@@ -63,7 +62,7 @@ const rampart = {
         }
       }
     },
-    [type.storage]: {
+    [listBuildings[4]]: {
       lvl: {
         0: {
           imgInfo: {
@@ -102,7 +101,7 @@ const rampart = {
         }
       }
     },
-    [type.guild]: {
+    [listBuildings[5]]: {
       lvl: {
         0: {
           imgInfo: {
@@ -141,7 +140,7 @@ const rampart = {
         }
       }
     },
-    [type.fort]: {
+    [listBuildings[2]]: {
       lvl: {
         0: {
           imgInfo: {
@@ -152,7 +151,7 @@ const rampart = {
         }
       }
     },
-    [type.hall]: {
+    [listBuildings[0]]: {
       lvl: {
         0: {
           imgInfo: {
@@ -172,7 +171,5 @@ const rampart = {
     }
   }
 };
-
-// mergeRcursive(back_rampart, rampart);
 
 export default rampart;
