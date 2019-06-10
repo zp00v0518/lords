@@ -17,7 +17,7 @@ const Rampart = {
     [t.market.name]: {
       type: t.market.name,
       lvl: {
-        0: {
+        1: {
           is: true,
           prepare: false,
           if: [],
@@ -31,26 +31,10 @@ const Rampart = {
     [t.storage.name]: {
       type: t.storage.name,
       lvl: {
-        0: {
+        1: {
           is: true,
           prepare: false,
           if: [],
-          price: {
-            gold: 1000,
-            wood: 5,
-            ore: 5
-          },
-          maxValue: {
-            //вместимость склада
-            gold: 150000,
-            baseResource: 20,
-            univResourc: 10
-          }
-        },
-        1: {
-          is: false,
-          prepare: false,
-          if: [{ buildig: t.storage.name, lvl: 0 }],
           price: {
             gold: 1000,
             wood: 5,
@@ -66,7 +50,7 @@ const Rampart = {
         2: {
           is: false,
           prepare: false,
-          if: [{ buildig: t.storage.name, lvl: 1 }],
+          if: [{ building: t.storage.name, lvl: 1 }],
           price: {
             gold: 1000,
             wood: 5,
@@ -82,7 +66,23 @@ const Rampart = {
         3: {
           is: false,
           prepare: false,
-          if: [{ buildig: t.storage.name, lvl: 2 }],
+          if: [{ building: t.storage.name, lvl: 1 }],
+          price: {
+            gold: 1000,
+            wood: 5,
+            ore: 5
+          },
+          maxValue: {
+            //вместимость склада
+            gold: 150000,
+            baseResource: 20,
+            univResourc: 10
+          }
+        },
+        4: {
+          is: false,
+          prepare: false,
+          if: [{ building: t.storage.name, lvl: 2 }],
           price: {
             gold: 5000,
             wood: 8,
@@ -94,10 +94,10 @@ const Rampart = {
             univResourc: 15
           }
         },
-        4: {
+        5: {
           is: false,
           prepare: false,
-          if: [{ buildig: t.storage.name, lvl: 3 }],
+          if: [{ building: t.storage.name, lvl: 3 }],
           price: {
             gold: 5000,
             wood: 5,
@@ -118,7 +118,7 @@ const Rampart = {
     [t.guild.name]: {
       type: t.guild.name,
       lvl: {
-        0: {
+        1: {
           is: false,
           prepare: false,
           if: [],
@@ -129,10 +129,10 @@ const Rampart = {
           },
           spellsValue: 5 //количество заклинаний}
         },
-        1: {
+        2: {
           is: false,
           prepare: false,
-          if: [{ buildig: t.guild.name, lvl: 0 }],
+          if: [{ building: t.guild.name, lvl: 1 }],
           price: {
             gold: 5000,
             wood: 5,
@@ -144,10 +144,10 @@ const Rampart = {
           },
           spellsValue: 4
         }, //количество заклинаний},
-        2: {
+        3: {
           is: false,
           prepare: false,
-          if: [{ buildig: t.guild.name, lvl: 1 }],
+          if: [{ building: t.guild.name, lvl: 1 }],
           price: {
             gold: 5000,
             wood: 5,
@@ -159,10 +159,10 @@ const Rampart = {
           },
           spellsValue: 3 //количество заклинаний
         },
-        3: {
+        4: {
           is: false,
           prepare: false,
-          if: [{ buildig: t.guild.name, lvl: 2 }],
+          if: [{ building: t.guild.name, lvl: 2 }],
           price: {
             gold: 5000,
             wood: 5,
@@ -174,10 +174,10 @@ const Rampart = {
           },
           spellsValue: 2
         }, //количество заклинаний},
-        4: {
+        5: {
           is: true,
           prepare: false,
-          if: [{ buildig: t.guild.name, lvl: 3 }],
+          if: [{ building: t.guild.name, lvl: 3 }],
           price: {
             gold: 5000,
             wood: 5,
@@ -194,12 +194,12 @@ const Rampart = {
     [t.fort.name]: {
       type: t.fort.name,
       lvl: {
-        0: {
+        1: {
           is: false,
           prepare: false,
           if: [
-            { buildig: t.guild.name, lvl: 0 },
-            { buildig: t.market.name, lvl: 0 }
+            { building: t.guild.name, lvl: 1 },
+            { building: t.market.name, lvl: 1 }
           ],
           price: {
             gold: 1000,
@@ -212,7 +212,7 @@ const Rampart = {
     [t.hall.name]: {
       type: t.hall.name,
       lvl: {
-        0: {
+        1: {
           is: false,
           prepare: false,
           if: [],
@@ -222,10 +222,10 @@ const Rampart = {
             ore: 5
           }
         },
-        1: {
+        2: {
           is: false,
           prepare: false,
-          if: [{ buildig: t.hall.name, lvl: 0 }],
+          if: [{ building: t.hall.name, lvl: 1 }],
           price: {
             gold: 1000,
             wood: 5,

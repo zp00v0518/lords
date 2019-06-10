@@ -53,7 +53,7 @@ const rampart = {
     default_img: default_img,
     [listBuildings.market.name]: {
       lvl: {
-        0: {
+        1: {
           imgInfo: {
             name: 'market',
             coords: { x: 135, y: 300 },
@@ -64,13 +64,6 @@ const rampart = {
     },
     [listBuildings.storage.name]: {
       lvl: {
-        0: {
-          imgInfo: {
-            name: 'storage',
-            coords: { x: 255, y: 325 },
-            zoom: 18
-          }
-        },
         1: {
           imgInfo: {
             name: 'storage',
@@ -93,6 +86,13 @@ const rampart = {
           }
         },
         4: {
+          imgInfo: {
+            name: 'storage',
+            coords: { x: 255, y: 325 },
+            zoom: 18
+          }
+        },
+        5: {
           imgInfo: {
             name: 'storage',
             coords: { x: 255, y: 325 },
@@ -103,35 +103,35 @@ const rampart = {
     },
     [listBuildings.guild.name]: {
       lvl: {
-        0: {
+        1: {
           imgInfo: {
             name: 'guild_1',
             coords: { x: 380, y: 100 },
             zoom: 10
           }
         },
-        1: {
+        2: {
           imgInfo: {
             name: 'guild_2',
             coords: { x: 380, y: 100 },
             zoom: 10
           }
         },
-        2: {
+        3: {
           imgInfo: {
             name: 'guild_3',
             coords: { x: 380, y: 100 },
             zoom: 10
           }
         },
-        3: {
+        4: {
           imgInfo: {
             name: 'guild_4',
             coords: { x: 380, y: 100 },
             zoom: 10
           }
         },
-        4: {
+        5: {
           imgInfo: {
             name: 'guild_5',
             coords: { x: 380, y: 100 },
@@ -142,7 +142,7 @@ const rampart = {
     },
     [listBuildings.fort.name]: {
       lvl: {
-        0: {
+        1: {
           imgInfo: {
             name: 'fort_1',
             coords: { x: 60, y: 25 },
@@ -153,14 +153,14 @@ const rampart = {
     },
     [listBuildings.hall.name]: {
       lvl: {
-        0: {
+        1: {
           imgInfo: {
             name: 'hall_1',
             coords: { x: 560, y: 215 },
             zoom: 16
           }
         },
-        1: {
+        2: {
           imgInfo: {
             name: 'hall_2',
             coords: { x: 535, y: 180 },

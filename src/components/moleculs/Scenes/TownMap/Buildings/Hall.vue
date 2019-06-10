@@ -43,9 +43,13 @@ export default {
     checkPrepare(name) {
       let flag;
       if (name === "hall") {
-         const if_buildings = this.buildings[name].if;
-        console.log(this.currentTown);
-        console.log(this.buildings[name]);
+        const currBuilding = this.currentTown.town[name];
+        const nextLvl = currBuilding ? currBuilding.lvl + 1 : 1;
+        const if_buildings = this.buildings[name].lvl[nextLvl].if;
+        if_buildings.some(item => {
+          const nextBuilding = this.buildings[item.building];
+          console.log(nextBuilding)
+        })
       }
       return flag;
     }

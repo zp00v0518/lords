@@ -2,7 +2,7 @@ const tube = require('../../tube.js');
 const Town = require('../Town.js');
 const Resources = gameVariables.resources;
 
-function createStorage(listMine = gameVariables.mine.typeList, lvl = 0) {
+function createStorage(listMine = gameVariables.mine.typeList, lvl = 1) {
   const { upgradeSection } = tube;
   //listMine - массив типов шахт;
   const storage = {

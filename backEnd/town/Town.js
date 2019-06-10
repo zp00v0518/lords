@@ -4,7 +4,7 @@ const Town = {
   classInstance: schema.document.class.town,
   baseBuilding: {
     parent: 'town',
-    lvl: 0
+    lvl: 1
   },
   // listBuildings: [
   //   type.hall,
