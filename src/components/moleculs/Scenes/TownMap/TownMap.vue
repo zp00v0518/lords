@@ -12,7 +12,8 @@
       v-if="component.is"
       :name="component.name"
       @close="component.is  = false"
-      :raceName="raceName"
+      :townRaceName="townRaceName"
+      :currentTown="currentTown"
     ></Building>
   </div>
 </template>
@@ -65,7 +66,7 @@ export default {
     raceTownIndex() {
       return this.currentTown.town.race;
     },
-    raceName() {
+    townRaceName() {
       return this.races.typeList[this.raceTownIndex];
     }
   },
@@ -76,7 +77,7 @@ export default {
         this.arrDrawImg = formCurrentImageList.call(
           this,
           this.currentTown,
-          this.raceName,
+          this.townRaceName,
           this.$store.state.globalConfig
         );
         this.drawTown(this.arrDrawImg);

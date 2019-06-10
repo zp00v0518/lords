@@ -1,7 +1,8 @@
 const tube = require('../tube.js');
 const Region = require('../region/Region');
 const Race = require('../race/Race');
-const createHall = require('./hall/createHall');
+const {createHall} = require('./buildings');
+// const createHall = require('./hall/createHall');
 let listMine = [];
 let townCount = 0;
 

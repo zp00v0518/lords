@@ -1,9 +1,9 @@
 /* eslint-disable */
 // подготавливает массив для отрисовке на канве
-function formCurrentImageList(sector, raceName, allBuildings) {
-  const listImg = sourceLoader.sources.towns[raceName];
+function formCurrentImageList(sector, townRaceName, allBuildings) {
+  const listImg = sourceLoader.sources.towns[townRaceName];
   let arr = [];
-  const buildings = allBuildings.races[raceName].buildings;
+  const buildings = allBuildings.races[townRaceName].buildings;
   const listBuildings = buildings.listBuildings;
   const self = this;
   

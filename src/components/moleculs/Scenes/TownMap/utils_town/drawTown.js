@@ -3,8 +3,8 @@ function drawTown(arrImg) {
   const ctx = this.ctx;
   const scale_X = this.scale_X;
   const scale_Y = this.scale_Y;
-  const raceName = this.raceName;
-  const bg = sourceLoader.sources.towns[raceName][raceName];
+  const townRaceName = this.townRaceName;
+  const bg = sourceLoader.sources.towns[townRaceName][townRaceName];
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   drawBackground(
     ctx,

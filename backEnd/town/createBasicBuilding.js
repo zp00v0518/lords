@@ -1,9 +1,9 @@
 const upgradeSection = require('./upgradeSection');
 
-function createBasicBuilding(classBuilding, parent = 'town') {
+function createBasicBuilding(classBuilding, lvl = 0, parent = 'town') {
   const basic = {
     upgrade: upgradeSection(),
-    lvl: 0,
+    lvl: lvl,
     class: classBuilding,
     parent
   };

@@ -4,7 +4,7 @@
       <div class="building__header-title">{{name}}</div>
       <Icon class="building__header-close" name="circle-close" @click.native="closeBuilding"></Icon>
     </div>
-    <component :is="name" :raceName="raceName"></component>
+    <component :is="name" :townRaceName="townRaceName" :currentTown="currentTown"></component>
   </section>
 </template>
 
@@ -15,7 +15,8 @@ export default {
   name: "Building",
   props: {
     name: String,
-    raceName: String
+    townRaceName: String,
+    currentTown: null
   },
   components: {
     ...Buildings

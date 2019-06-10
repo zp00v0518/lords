@@ -3,7 +3,7 @@
     <div class="hall__row" v-for="(row, rowIndex) in rowsIndex" :key="rowIndex">
       <div v-for="item in row" :key="item" class="hall__row__item">
         <canvas :ref="'canvas'+item" :data-building="item" class="hall__row__item-icon"></canvas>
-        <div class="hall__row__item-footer">{{item}}</div>
+        <div :class="['hall__row__item-footer', {'prepare': checkPrepare(item)}]">{{item}}</div>
       </div>
     </div>
   </section>
@@ -13,19 +13,20 @@
 export default {
   name: "Hall",
   props: {
-    raceName: String
+    townRaceName: String,
+    currentTown: null
   },
   data() {
     return {
       rowsIndex: [],
       races: this.$store.state.globalConfig.races,
-      TI: {}
+      TI: {},
+      listBuildings: null
     };
   },
   created() {
-    console.log(this.raceName);
     const z = this.$store.state.globalConfig.listBuildings;
-    console.log(z);
+    this.listBuildings = z;
     this.rowsIndex = [
       [z.hall.name, z.fort.name, z.tavern.name],
       [z.market.name, z.guild.name, z.storage.name],
@@ -33,11 +34,27 @@ export default {
       [z.barraks_5.name, z.barraks_6.name, z.barraks_7.name]
     ];
   },
-  methods: {},
+  computed: {
+    buildings() {
+      return this.$store.state.globalConfig.races[this.townRaceName].buildings;
+    }
+  },
+  methods: {
+    checkPrepare(name) {
+      let flag;
+      if (name === "hall") {
+         const if_buildings = this.buildings[name].if;
+        console.log(this.currentTown);
+        console.log(this.buildings[name]);
+      }
+      return flag;
+    }
+  },
   mounted() {
-    const raceName = this.raceName;
+    const townRaceName = this.townRaceName;
+    const fileName = townRaceName + "tiles";
     // eslint-disable-next-line
-    const img = sourceLoader.sources.towns[raceName][raceName + "tiles"];
+    const img = sourceLoader.sources.towns[townRaceName][fileName];
     Object.keys(this.$refs).forEach(key => {
       const el = this.$refs[key][0];
       const ctx = el.getContext("2d");
@@ -112,6 +129,10 @@ const tumb = {
         min-height: 20px;
         @include center;
         text-transform: capitalize;
+        background-color: red;
+        &.prepare {
+          background-color: green;
+        }
       }
     }
   }
