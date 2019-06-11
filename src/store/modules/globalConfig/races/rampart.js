@@ -147,7 +147,8 @@ const rampart = {
             name: 'fort_1',
             coords: { x: 60, y: 25 },
             zoom: 0
-          }
+          },
+          tumb: { x: 900, y: 0 }
         }
       }
     },
@@ -158,14 +159,16 @@ const rampart = {
             name: 'hall_1',
             coords: { x: 560, y: 215 },
             zoom: 16
-          }
+          },
+          tumb: { x: 150, y: 70 }
         },
         2: {
           imgInfo: {
             name: 'hall_2',
             coords: { x: 535, y: 180 },
             zoom: 16
-          }
+          },
+          tumb: { x: 150, y: 70 }
         }
       }
     }
