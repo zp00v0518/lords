@@ -213,7 +213,7 @@ const Rampart = {
       type: t.hall.name,
       lvl: {
         1: {
-          is: false,
+          is: true,
           prepare: false,
           if: [],
           price: {
@@ -233,7 +233,127 @@ const Rampart = {
           }
         }
       }
-    }
+    },
+    [t.tavern.name]: {
+      type: t.tavern.name,
+      lvl: {
+        1: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: {
+            gold: 1000,
+            wood: 5,
+            ore: 5
+          }
+        }
+      }
+    },
+    [t.barraks_1.name]: {
+      type: t.barraks_1.name,
+      lvl: {
+        1: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: {
+            gold: 1000,
+            wood: 5,
+            ore: 5
+          }
+        }
+      }
+    },
+    [t.barraks_2.name]: {
+      type: t.barraks_2.name,
+      lvl: {
+        1: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: {
+            gold: 1000,
+            wood: 5,
+            ore: 5
+          }
+        }
+      }
+    },
+    [t.barraks_3.name]: {
+      type: t.barraks_3.name,
+      lvl: {
+        1: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: {
+            gold: 1000,
+            wood: 5,
+            ore: 5
+          }
+        }
+      }
+    },
+    [t.barraks_4.name]: {
+      type: t.barraks_4.name,
+      lvl: {
+        1: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: {
+            gold: 1000,
+            wood: 5,
+            ore: 5
+          }
+        }
+      }
+    },
+    [t.barraks_5.name]: {
+      type: t.barraks_5.name,
+      lvl: {
+        1: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: {
+            gold: 1000,
+            wood: 5,
+            ore: 5
+          }
+        }
+      }
+    },
+    [t.barraks_6.name]: {
+      type: t.barraks_6.name,
+      lvl: {
+        1: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: {
+            gold: 1000,
+            wood: 5,
+            ore: 5
+          }
+        }
+      }
+    },
+    [t.barraks_7.name]: {
+      type: t.barraks_7.name,
+      lvl: {
+        1: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: {
+            gold: 1000,
+            wood: 5,
+            ore: 5
+          }
+        }
+      }
+    },
   }
 };
 
