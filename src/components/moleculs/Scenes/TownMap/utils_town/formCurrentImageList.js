@@ -21,6 +21,7 @@ function formCurrentImageList(sector, townRaceName, allBuildings) {
       imgInfo.img = img;
       // передача this
       prepareToDraw.call(self, imgInfo);
+      obj.is = true;
       arr.push(obj);
     }
   });

@@ -107,7 +107,7 @@ const { reloadMessage, redirectMessage } = require('./wsServer');
 module.exports.reloadMessage = reloadMessage;
 module.exports.redirectMessage = redirectMessage;
 
-const gloss = require("./dictionary/dictionary.js")
+const gloss = require("./dictionary")
 module.exports.gloss = gloss;
 
 const { controlStateGlobal } = require('./controlState');

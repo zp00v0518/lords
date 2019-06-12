@@ -1,4 +1,4 @@
-const dictionary = require('./dictionary');
+const dictionary = require('./index.js');
 
 function getLangDictionary(lang) {
   const newObj = {};

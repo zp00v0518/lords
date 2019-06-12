@@ -1,7 +1,9 @@
 const mineTypeList = require('../region/mine/Mine.js').typeList;
-const { document } = require('../workWithMongoDB/schema');
-const t = require('../town/Town').listBuildings;
-// const t = document.class;
+const Resources = require('../resources/Resources');
+const formPrice = Resources.formPrice;
+const Town = require('../town/Town');
+const t = Town.listBuildings;
+const form_IfBuilding = Town.form_IfBuilding;
 
 const Rampart = {
   mine: {
@@ -21,10 +23,7 @@ const Rampart = {
           is: true,
           prepare: false,
           if: [],
-          price: {
-            gold: 500,
-            wood: 5
-          }
+          price: formPrice({ gold: 500, wood: 5 })
         }
       }
     },
@@ -35,11 +34,7 @@ const Rampart = {
           is: true,
           prepare: false,
           if: [],
-          price: {
-            gold: 1000,
-            wood: 5,
-            ore: 5
-          },
+          price: formPrice({ gold: 1000, wood: 5, ore: 5 }),
           maxValue: {
             //вместимость склада
             gold: 150000,
@@ -50,12 +45,8 @@ const Rampart = {
         2: {
           is: false,
           prepare: false,
-          if: [{ building: t.storage.name, lvl: 1 }],
-          price: {
-            gold: 1000,
-            wood: 5,
-            ore: 5
-          },
+          if: form_IfBuilding({ [t.storage.name]: 1 }),
+          price: formPrice({ gold: 1000, wood: 5, ore: 5 }),
           maxValue: {
             //вместимость склада
             gold: 150000,
@@ -67,11 +58,7 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [{ building: t.storage.name, lvl: 1 }],
-          price: {
-            gold: 1000,
-            wood: 5,
-            ore: 5
-          },
+          price: formPrice({ gold: 1000, wood: 5, ore: 5 }),
           maxValue: {
             //вместимость склада
             gold: 150000,
@@ -83,11 +70,7 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [{ building: t.storage.name, lvl: 2 }],
-          price: {
-            gold: 5000,
-            wood: 8,
-            ore: 8
-          },
+          price: formPrice({ gold: 1000, wood: 8, ore: 8 }),
           maxValue: {
             gold: 100000,
             baseResource: 30,
@@ -98,15 +81,15 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [{ building: t.storage.name, lvl: 3 }],
-          price: {
+          price: formPrice({
             gold: 5000,
             wood: 5,
             ore: 5,
-            gem: 1,
             sulfur: 1,
             crystal: 1,
-            mercury: 1
-          },
+            mercury: 1,
+            gem: 1
+          }),
           maxValue: {
             gold: 100000,
             baseResource: 30,
@@ -122,71 +105,67 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [],
-          price: {
-            gold: 5000,
-            wood: 5,
-            ore: 5
-          },
+          price: formPrice({ gold: 5000, wood: 5, ore: 5 }),
           spellsValue: 5 //количество заклинаний}
         },
         2: {
           is: false,
           prepare: false,
           if: [{ building: t.guild.name, lvl: 1 }],
-          price: {
+          price: formPrice({
             gold: 5000,
             wood: 5,
             ore: 5,
-            gem: 4,
             sulfur: 4,
             crystal: 4,
-            mercury: 4
-          },
+            mercury: 4,
+            gem: 4
+          }),
           spellsValue: 4
         }, //количество заклинаний},
         3: {
           is: false,
           prepare: false,
           if: [{ building: t.guild.name, lvl: 1 }],
-          price: {
+          price: formPrice({
             gold: 5000,
             wood: 5,
             ore: 5,
-            gem: 6,
             sulfur: 6,
             crystal: 6,
-            mercury: 6
-          },
+            mercury: 6,
+            gem: 6
+          }),
           spellsValue: 3 //количество заклинаний
         },
         4: {
           is: false,
           prepare: false,
           if: [{ building: t.guild.name, lvl: 2 }],
-          price: {
+          price: formPrice({
             gold: 5000,
             wood: 5,
             ore: 5,
-            gem: 8,
             sulfur: 8,
             crystal: 8,
-            mercury: 8
-          },
+            mercury: 8,
+            gem: 8
+          }),
           spellsValue: 2
         }, //количество заклинаний},
         5: {
           is: true,
           prepare: false,
           if: [{ building: t.guild.name, lvl: 3 }],
-          price: {
+          price: formPrice({
             gold: 5000,
             wood: 5,
             ore: 5,
-            gem: 10,
             sulfur: 10,
             crystal: 10,
-            mercury: 10
-          },
+            mercury: 10,
+            gem: 10
+          }),
           spellsValue: 1 //количество заклинаний
         }
       }
@@ -201,11 +180,7 @@ const Rampart = {
             { building: t.guild.name, lvl: 1 },
             { building: t.market.name, lvl: 1 }
           ],
-          price: {
-            gold: 1000,
-            wood: 5,
-            ore: 5
-          }
+          price: formPrice({ gold: 5000, wood: 5, ore: 5 })
         }
       }
     },
@@ -213,24 +188,104 @@ const Rampart = {
       type: t.hall.name,
       lvl: {
         1: {
-          is: false,
+          is: true,
           prepare: false,
           if: [],
-          price: {
-            gold: 1000,
-            wood: 5,
-            ore: 5
-          }
+          price: formPrice({ gold: 1000, wood: 5, ore: 5 })
         },
         2: {
           is: false,
           prepare: false,
           if: [{ building: t.hall.name, lvl: 1 }],
-          price: {
-            gold: 1000,
-            wood: 5,
-            ore: 5
-          }
+          price: formPrice({ gold: 1000, wood: 5, ore: 5 })
+        }
+      }
+    },
+    [t.tavern.name]: {
+      type: t.tavern.name,
+      lvl: {
+        1: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: formPrice({ gold: 1000, wood: 5, ore: 5 })
+        }
+      }
+    },
+    [t.barraks_1.name]: {
+      type: t.barraks_1.name,
+      lvl: {
+        1: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: formPrice({ gold: 1000, wood: 10, ore: 5 })
+        }
+      }
+    },
+    [t.barraks_2.name]: {
+      type: t.barraks_2.name,
+      lvl: {
+        1: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: formPrice({ gold: 1000, wood: 10, ore: 5 })
+        }
+      }
+    },
+    [t.barraks_3.name]: {
+      type: t.barraks_3.name,
+      lvl: {
+        1: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: formPrice({ gold: 1000, wood: 15, ore: 5 })
+        }
+      }
+    },
+    [t.barraks_4.name]: {
+      type: t.barraks_4.name,
+      lvl: {
+        1: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: formPrice({ gold: 1000, wood: 5, ore: 5, crystal: 5 })
+        }
+      }
+    },
+    [t.barraks_5.name]: {
+      type: t.barraks_5.name,
+      lvl: {
+        1: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: formPrice({ gold: 1000, wood: 10, ore: 5, sulfur: 5 })
+        }
+      }
+    },
+    [t.barraks_6.name]: {
+      type: t.barraks_6.name,
+      lvl: {
+        1: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: formPrice({ gold: 1000, wood: 5, ore: 5, gem: 15 })
+        }
+      }
+    },
+    [t.barraks_7.name]: {
+      type: t.barraks_7.name,
+      lvl: {
+        1: {
+          is: false,
+          prepare: false,
+          if: [],
+          price: formPrice({ gold: 500, wood: 5, ore: 5, crystal: 10 })
         }
       }
     }
