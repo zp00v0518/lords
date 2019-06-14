@@ -1,0 +1,3 @@
+const barraks_1 = {
+  
+}
