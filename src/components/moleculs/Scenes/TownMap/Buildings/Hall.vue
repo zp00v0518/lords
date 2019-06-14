@@ -3,7 +3,7 @@
     <div class="hall__row" v-for="(row, rowIndex) in rowsIndex" :key="rowIndex">
       <div v-for="item in row" :key="item" class="hall__row__item">
         <canvas :ref="'canvas'+item" :data-building="item" class="hall__row__item-icon"></canvas>
-        <div :class="['hall__row__item-footer', {'prepare': checkPrepare(item)}]">{{item}}</div>
+        <div :class="['hall__row__item-footer', {'prepare': checkPrepare(item)}]">{{names[item]}}</div>
       </div>
     </div>
   </section>
@@ -14,16 +14,17 @@ export default {
   name: "Hall",
   props: {
     townRaceName: String,
-    currentTown: null
+    currentTown: null,
+    gloss: null
   },
   data() {
     return {
       rowsIndex: [],
       races: this.$store.state.globalConfig.races,
-      TI: {},
       listBuildings: null,
       checkSource: this.$store.state.globalConfig.all.checkSource,
-      sources: this.currentTown.town.storage.sources
+      sources: this.currentTown.town.storage.sources,
+      names: {}
     };
   },
   created() {
@@ -46,6 +47,7 @@ export default {
       let flag;
       const currBuilding = this.currentTown.town[name];
       const nextLvl = currBuilding ? currBuilding.lvl + 1 : 1;
+      this.names[name] = this.gloss[name].lvl[nextLvl].txt;
       const nextBuilding = this.buildings[name].lvl[nextLvl];
       const if_buildings = nextBuilding.if;
       flag = if_buildings.length === 0;

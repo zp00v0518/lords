@@ -4,7 +4,7 @@
       <div class="building__header-title">{{name}}</div>
       <Icon class="building__header-close" name="circle-close" @click.native="closeBuilding"></Icon>
     </div>
-    <component :is="name" :townRaceName="townRaceName" :currentTown="currentTown"></component>
+    <component :is="name" :townRaceName="townRaceName" :currentTown="currentTown" :gloss="gloss"></component>
   </section>
 </template>
 
@@ -20,6 +20,11 @@ export default {
   },
   components: {
     ...Buildings
+  },
+  computed: {
+    gloss() {
+      return this.$store.state.local.dictionary.town.race[this.townRaceName];
+    }
   },
   data() {
     return {};
