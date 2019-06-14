@@ -1,3 +1,0 @@
-const barraks_1 = {
-  
-}
