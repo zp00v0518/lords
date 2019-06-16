@@ -55,6 +55,7 @@ export default {
     };
   },
   created() {
+    console.log(this.$var);
     this.helperCtx.canvas.width = parseFloat(this.widthScene);
     this.helperCtx.canvas.height = parseFloat(this.heightScene);
     // document.body.appendChild(this.helperCtx.canvas);

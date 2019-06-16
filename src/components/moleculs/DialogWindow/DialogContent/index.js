@@ -1,7 +1,7 @@
-import UpgradeRegion from './UpgradeRegion';
 import Message from './Message';
+import Upgrade from './Upgrade';
 
 export default {
-  UpgradeRegion,
-  Message
+  Message,
+  ...Upgrade
 };
