@@ -1,9 +1,11 @@
 <template>
   <section class="hall__wrap">
     <div class="hall__row" v-for="(row, rowIndex) in rowsIndex" :key="rowIndex">
-      <div v-for="item in row" :key="item" class="hall__row__item">
+      <div v-for="item in row" :key="item" class="hall__row__item" @click="handlerClick(item)">
         <canvas :ref="'canvas'+item" :data-building="item" class="hall__row__item-icon"></canvas>
-        <div :class="['hall__row__item-footer', {'prepare': checkPrepare(item)}]">{{item}}</div>
+        <div
+          :class="['hall__row__item-footer', {'prepare': checkPrepare(item)}]"
+        >{{houses[item].name}}</div>
       </div>
     </div>
   </section>
@@ -14,16 +16,17 @@ export default {
   name: "Hall",
   props: {
     townRaceName: String,
-    currentTown: null
+    currentTown: null,
+    gloss: null
   },
   data() {
     return {
       rowsIndex: [],
       races: this.$store.state.globalConfig.races,
-      TI: {},
       listBuildings: null,
       checkSource: this.$store.state.globalConfig.all.checkSource,
-      sources: this.currentTown.town.storage.sources
+      sources: this.currentTown.town.storage.sources,
+      houses: {}
     };
   },
   created() {
@@ -42,11 +45,24 @@ export default {
     }
   },
   methods: {
+    handlerClick(nameBuilding) {
+      const build = this.houses[nameBuilding];
+      const payload = {
+        title: build.name,
+        data: {
+          building: build
+        },
+        type: "upgradeRegion"
+      };
+      this.$store.commit("DIALOG_SHOW", payload);
+    },
     checkPrepare(name) {
       let flag;
       const currBuilding = this.currentTown.town[name];
       const nextLvl = currBuilding ? currBuilding.lvl + 1 : 1;
       const nextBuilding = this.buildings[name].lvl[nextLvl];
+      this.houses[name] = nextBuilding;
+      this.houses[name].name = this.gloss[name].lvl[nextLvl].txt;
       const if_buildings = nextBuilding.if;
       flag = if_buildings.length === 0;
       flag = if_buildings.every(item => {

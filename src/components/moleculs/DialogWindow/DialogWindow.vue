@@ -27,6 +27,7 @@ export default {
       width: "90%"
     };
   },
+  created() {},
   computed: {
     title() {
       return this.$store.state.dialog.title;
