@@ -1,7 +1,12 @@
 <template>
   <section class="hall__wrap">
     <div class="hall__row" v-for="(row, rowIndex) in rowsIndex" :key="rowIndex">
-      <div v-for="item in row" :key="item" class="hall__row__item" @click="handlerClick(item)">
+      <div
+        v-for="item in row"
+        :key="item"
+        class="hall__row__item"
+        @click="handlerClick($event, item)"
+      >
         <canvas :ref="'canvas'+item" :data-building="item" class="hall__row__item-icon"></canvas>
         <div
           :class="['hall__row__item-footer', {'prepare': checkPrepare(item)}]"
@@ -45,14 +50,26 @@ export default {
     }
   },
   methods: {
-    handlerClick(nameBuilding) {
+    handlerClick(event, nameBuilding) {
       const build = this.houses[nameBuilding];
+      const target = event.target.parentNode.querySelector('.hall__row__item-icon');
+      const coords = tumb[target.dataset.building];
+      const fileName = this.townRaceName + "tiles";
+      // eslint-disable-next-line
+      const img = sourceLoader.sources.towns[this.townRaceName][fileName];
       const payload = {
         title: build.name,
         data: {
-          building: build
+          building: build,
+          raceName: this.townRaceName,
+          storage: this.sources,
+          tumb: {
+            coords,
+            elem: target,
+            img
+          }
         },
-        type: "upgradeRegion"
+        type: "upgradeBuilding"
       };
       this.$store.commit("DIALOG_SHOW", payload);
     },

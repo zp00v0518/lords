@@ -14,6 +14,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      .icon {
+        width: 70%;
+      }
     }
     &--txt {
       padding: 10px;
