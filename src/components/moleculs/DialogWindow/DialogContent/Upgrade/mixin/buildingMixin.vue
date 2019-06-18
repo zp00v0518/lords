@@ -8,16 +8,16 @@ export default {
       }
     };
   },
+  created() {
+    console.log(this.data);
+  },
   computed: {
     upgrade() {
       return {
         time: this.getTimeString(
           this.$var.mine.getTimeUpgrade(this.building.lvl, this.rangeValue)
         ),
-        source: this.$var.mine.getResourcesForUpgrade(
-          this.building.lvl,
-          this.rangeValue
-        )
+        source: this.data.building.price
       };
     },
     currentSector() {

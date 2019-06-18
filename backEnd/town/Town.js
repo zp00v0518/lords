@@ -22,19 +22,19 @@ const Town = {
   //   type.barraks +'_7',
   // ],
   listBuildings: {
-    hall: { name: type.hall },
-    fort: { name: type.fort },
-    tavern: { name: type.tavern },
-    market: { name: type.market },
-    storage: { name: type.storage },
-    guild: { name: type.guild },
-    barraks_1: { name: type.barraks + '_1' },
-    barraks_2: { name: type.barraks + '_2' },
-    barraks_3: { name: type.barraks + '_3' },
-    barraks_4: { name: type.barraks + '_4' },
-    barraks_5: { name: type.barraks + '_5' },
-    barraks_6: { name: type.barraks + '_6' },
-    barraks_7: { name: type.barraks + '_7' }
+    hall: { name: type.hall, maxLvl: 3 },
+    fort: { name: type.fort, maxLvl: 3 },
+    tavern: { name: type.tavern, maxLvl: 1 },
+    market: { name: type.market, maxLvl: 1 },
+    storage: { name: type.storage, maxLvl: 10 },
+    guild: { name: type.guild, maxLvl: 5 },
+    barraks_1: { name: type.barraks + '_1', maxLvl: 2 },
+    barraks_2: { name: type.barraks + '_2', maxLvl: 2 },
+    barraks_3: { name: type.barraks + '_3', maxLvl: 2 },
+    barraks_4: { name: type.barraks + '_4', maxLvl: 2 },
+    barraks_5: { name: type.barraks + '_5', maxLvl: 2 },
+    barraks_6: { name: type.barraks + '_6', maxLvl: 2 },
+    barraks_7: { name: type.barraks + '_7', maxLvl: 2 }
   },
   form_IfBuilding: function(values) {
     const result = [];
