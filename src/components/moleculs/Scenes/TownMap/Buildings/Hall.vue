@@ -52,7 +52,9 @@ export default {
   methods: {
     handlerClick(event, nameBuilding) {
       const build = this.houses[nameBuilding];
-      const target = event.target.parentNode.querySelector('.hall__row__item-icon');
+      const target = event.target.parentNode.querySelector(
+        ".hall__row__item-icon"
+      );
       const coords = tumb[target.dataset.building];
       const fileName = this.townRaceName + "tiles";
       // eslint-disable-next-line

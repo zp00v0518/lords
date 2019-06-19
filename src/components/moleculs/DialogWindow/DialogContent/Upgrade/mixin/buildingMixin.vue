@@ -5,19 +5,28 @@ export default {
       info: {
         url: "",
         text: ["Lorem ipsum dolor sit amet.", "2 Lorem ipsum dolor sit amet."]
-      }
+      },
+      in_gold: this.$var.resources.getInGold(this.data.building.price)
     };
   },
-  created() {
-    console.log(this.data);
-  },
+  // created() {
+  //   console.log(this.$var);
+  // },
   computed: {
     upgrade() {
+      const seconds = this.in_gold * this.$var.time.sec;
+      const town = this.$var.town;
+      const index = this.$var.indexes.upgrade_town;
+      const rangeValue = this.rangeValue;
       return {
         time: this.getTimeString(
-          this.$var.mine.getTimeUpgrade(this.building.lvl, this.rangeValue)
+          town.getTimeForUpgrade(seconds, rangeValue, index)
         ),
-        source: this.data.building.price
+        source: town.getResoursesForUpgrade(
+          this.data.building.price,
+          rangeValue,
+          index
+        )
       };
     },
     currentSector() {

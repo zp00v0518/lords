@@ -16,7 +16,6 @@ config.db.collections.servers.forEach(server => {
   UserOnline[serverName].count = 0;
 })
 
-
 global.UserOnline = UserOnline;
 global.appStatistic = appStatistic;
 

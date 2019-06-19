@@ -24,6 +24,10 @@ const gameVariables = {
 		saveDataDB:time.minute/10, 							//1 минута - интервал считывания данных и записи их в БД
 		perTime: time.hour/5, // расчетное время прироста игровых ресурсов
 	},
+	indexes: {
+		upgrade_town: 1.5,
+		upgrade_mine: 1.5,
+	},
 	mine: Mine,
 	region: Region,
 	race: Race,
