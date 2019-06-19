@@ -1,7 +1,7 @@
 <div class="upgrade">
   <div class="upgrade__header">
     <div class="upgrade__header--icon">
-      <img class="icon" :src="info.url" />
+      <img ref="tumb" class="icon" :src="info.url" />
     </div>
     <div class="upgrade__header--txt">
       <p v-for="(item ,index) in info.text" :key="index">{{ item }}</p>
@@ -25,8 +25,11 @@
           </div>
         </div>
         <div class="upgrade__price--item">
-          <div class="text">{{ gloss.date.time.txt | upperFirstSymbol }}</div>
+          <div class="upgrade__price__resource">
+            <div class="text">{{ gloss.date.time.txt | upperFirstSymbol }}</div>
           <div class="value">{{ upgrade.time }}</div>
+          </div>
+          
         </div>
       </div>
       <div class="upgrade__range">

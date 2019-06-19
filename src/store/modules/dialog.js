@@ -13,7 +13,6 @@ const dialog = {
       state.data = {};
     },
     DIALOG_SHOW(state, payload) {
-      console.log(payload)
       const type = payload.type;
       state.show = true;
       state.data = payload.data;
