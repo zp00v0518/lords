@@ -80,8 +80,9 @@ export default {
       const currBuilding = this.currentTown.town[name];
       const nextLvl = currBuilding ? currBuilding.lvl + 1 : 1;
       const nextBuilding = this.buildings[name].lvl[nextLvl];
-      this.houses[name] = nextBuilding;
+      this.houses[name] = {...this.buildings[name]};
       this.houses[name].name = this.gloss[name].lvl[nextLvl].txt;
+      this.houses[name].nextLvl = nextLvl;
       const if_buildings = nextBuilding.if;
       flag = if_buildings.length === 0;
       flag = if_buildings.every(item => {

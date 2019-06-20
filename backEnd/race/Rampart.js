@@ -23,7 +23,7 @@ const Rampart = {
           is: true,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 500, wood: 5 })
+          price: formPrice({ gold: 2000, wood: 5, ore:5 })
         }
       }
     },
@@ -34,7 +34,7 @@ const Rampart = {
           is: true,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 1000, wood: 5, ore: 5 }),
+          price: formPrice({ gold: 2000, wood: 5, ore: 5 }),
           maxValue: {
             //вместимость склада
             gold: 150000,
@@ -46,7 +46,7 @@ const Rampart = {
           is: false,
           prepare: false,
           if: form_IfBuilding({ [t.storage.name]: 1 }),
-          price: formPrice({ gold: 1000, wood: 5, ore: 5 }),
+          price: formPrice({ gold: 4000, wood: 5, ore: 5 }),
           maxValue: {
             //вместимость склада
             gold: 150000,
@@ -58,7 +58,7 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [{ building: t.storage.name, lvl: 1 }],
-          price: formPrice({ gold: 1000, wood: 5, ore: 5 }),
+          price: formPrice({ gold: 8000, wood: 5, ore: 5 }),
           maxValue: {
             //вместимость склада
             gold: 150000,
@@ -70,7 +70,7 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [{ building: t.storage.name, lvl: 2 }],
-          price: formPrice({ gold: 1000, wood: 8, ore: 8 }),
+          price: formPrice({ gold: 16000, wood: 8, ore: 8 }),
           maxValue: {
             gold: 100000,
             baseResource: 30,
@@ -82,7 +82,7 @@ const Rampart = {
           prepare: false,
           if: [{ building: t.storage.name, lvl: 3 }],
           price: formPrice({
-            gold: 5000,
+            gold: 32000,
             wood: 5,
             ore: 5,
             sulfur: 1,
@@ -113,7 +113,7 @@ const Rampart = {
           prepare: false,
           if: [{ building: t.guild.name, lvl: 1 }],
           price: formPrice({
-            gold: 5000,
+            gold: 10000,
             wood: 5,
             ore: 5,
             sulfur: 4,
@@ -128,7 +128,7 @@ const Rampart = {
           prepare: false,
           if: [{ building: t.guild.name, lvl: 1 }],
           price: formPrice({
-            gold: 5000,
+            gold: 15000,
             wood: 5,
             ore: 5,
             sulfur: 6,
@@ -143,7 +143,7 @@ const Rampart = {
           prepare: false,
           if: [{ building: t.guild.name, lvl: 2 }],
           price: formPrice({
-            gold: 5000,
+            gold: 20000,
             wood: 5,
             ore: 5,
             sulfur: 8,
@@ -158,7 +158,7 @@ const Rampart = {
           prepare: false,
           if: [{ building: t.guild.name, lvl: 3 }],
           price: formPrice({
-            gold: 5000,
+            gold: 25000,
             wood: 5,
             ore: 5,
             sulfur: 10,
@@ -180,7 +180,7 @@ const Rampart = {
             { building: t.guild.name, lvl: 1 },
             { building: t.market.name, lvl: 1 }
           ],
-          price: formPrice({ gold: 5000, wood: 5, ore: 5 })
+          price: formPrice({ gold: 10000, wood: 10, ore: 10 })
         }
       }
     },
@@ -191,13 +191,13 @@ const Rampart = {
           is: true,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 1000, wood: 5, ore: 5 })
+          price: formPrice({ gold: 5000, wood: 10, ore: 10 })
         },
         2: {
           is: false,
           prepare: false,
           if: [{ building: t.hall.name, lvl: 1 }],
-          price: formPrice({ gold: 1000, wood: 5, ore: 5 })
+          price: formPrice({ gold: 10000, wood: 15, ore: 15 })
         }
       }
     },
@@ -208,7 +208,7 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 1000, wood: 5, ore: 5 })
+          price: formPrice({ gold: 5000, wood: 5, ore: 5 })
         }
       }
     },
@@ -219,7 +219,7 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 1000, wood: 10, ore: 5 })
+          price: formPrice({ gold: 5000, wood: 10, ore: 5 })
         }
       }
     },
@@ -230,7 +230,7 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 1000, wood: 10, ore: 5 })
+          price: formPrice({ gold: 7000, wood: 10, ore: 10 })
         }
       }
     },
@@ -241,7 +241,7 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 1000, wood: 15, ore: 5 })
+          price: formPrice({ gold: 15000, wood: 15, ore: 5 })
         }
       }
     },
@@ -252,7 +252,7 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 1000, wood: 5, ore: 5, crystal: 5 })
+          price: formPrice({ gold: 20000, wood: 5, ore: 5, crystal: 5 })
         }
       }
     },
@@ -263,7 +263,7 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 1000, wood: 10, ore: 5, sulfur: 5 })
+          price: formPrice({ gold: 25000, wood: 10, ore: 5, sulfur: 5 })
         }
       }
     },
@@ -274,7 +274,7 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 1000, wood: 5, ore: 5, gem: 15 })
+          price: formPrice({ gold: 30000, wood: 5, ore: 5, gem: 15 })
         }
       }
     },
@@ -285,7 +285,7 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 500, wood: 5, ore: 5, crystal: 10 })
+          price: formPrice({ gold: 35000, wood: 5, ore: 5, crystal: 10 })
         }
       }
     }

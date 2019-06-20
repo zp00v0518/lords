@@ -6,13 +6,18 @@ export default {
         url: "",
         text: ["Lorem ipsum dolor sit amet.", "2 Lorem ipsum dolor sit amet."]
       },
-      in_gold: this.$var.resources.getInGold(this.data.building.price)
+      in_gold: 0,
     };
   },
-  // created() {
-  //   console.log(this.$var);
-  // },
+  created() {
+    this.in_gold = this.$var.resources.getInGold(this.nextBuilding.price)
+    console.log(this.$var, this.data);
+  },
   computed: {
+    nextBuilding(){
+      const nextLvl = this.data.building.nextLvl;
+      return this.data.building.lvl[nextLvl];
+    },
     upgrade() {
       const seconds = this.in_gold * this.$var.time.sec;
       const town = this.$var.town;
@@ -23,7 +28,7 @@ export default {
           town.getTimeForUpgrade(seconds, rangeValue, index)
         ),
         source: town.getResoursesForUpgrade(
-          this.data.building.price,
+          this.nextBuilding.price,
           rangeValue,
           index
         )
@@ -33,10 +38,10 @@ export default {
       return this.$store.state.userSectors.currentSector;
     },
     checkMaxLvl() {
-      if (this.building.lvl >= this.$var.mine.valueUpgrade.length - 1) {
-        return false;
-      }
-      return true;
+     if (this.nextBuilding){
+      return false;
+     };
+     return true;
     }
   },
   methods: {
@@ -44,7 +49,7 @@ export default {
       this.$store.commit("DIALOG_CLOSE");
     },
     upgradeBuilding() {
-      if (!this.checkMaxLvl) {
+      if (this.checkMaxLvl) {
         this.$store.commit("DIALOG_CLOSE");
         return;
       }

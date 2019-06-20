@@ -25,9 +25,9 @@ export default {
     },
     checkMaxLvl() {
       if (this.building.lvl >= this.$var.mine.valueUpgrade.length - 1) {
-        return false;
+        return true;
       }
-      return true;
+      return false;
     }
   },
   methods: {
@@ -35,7 +35,7 @@ export default {
       this.$store.commit("DIALOG_CLOSE");
     },
     upgradeBuilding() {
-      if (!this.checkMaxLvl) {
+      if (this.checkMaxLvl) {
         this.$store.commit("DIALOG_CLOSE");
         return;
       }
