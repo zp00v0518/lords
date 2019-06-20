@@ -20,9 +20,17 @@ export default {
     this.building = this.data.building;
     this.$emit("set-height", { width: "80%", height: "80%" });
   },
+  computed: {
+    currentSector() {
+      return this.$store.state.userSectors.currentSector;
+    }
+  },
   methods: {
     getTimeString,
-    checkSource
+    checkSource,
+    closeDialogWindow() {
+      this.$store.commit("DIALOG_CLOSE");
+    }
   }
 };
 </script>

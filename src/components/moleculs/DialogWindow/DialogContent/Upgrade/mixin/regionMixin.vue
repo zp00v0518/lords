@@ -20,9 +20,6 @@ export default {
         )
       };
     },
-    currentSector() {
-      return this.$store.state.userSectors.currentSector;
-    },
     checkMaxLvl() {
       if (this.building.lvl >= this.$var.mine.valueUpgrade.length - 1) {
         return true;
@@ -31,9 +28,6 @@ export default {
     }
   },
   methods: {
-    closeDialogWindow() {
-      this.$store.commit("DIALOG_CLOSE");
-    },
     upgradeBuilding() {
       if (this.checkMaxLvl) {
         this.$store.commit("DIALOG_CLOSE");

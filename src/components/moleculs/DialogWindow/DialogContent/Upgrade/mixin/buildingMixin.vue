@@ -6,15 +6,15 @@ export default {
         url: "",
         text: ["Lorem ipsum dolor sit amet.", "2 Lorem ipsum dolor sit amet."]
       },
-      in_gold: 0,
+      in_gold: 0
     };
   },
   created() {
-    this.in_gold = this.$var.resources.getInGold(this.nextBuilding.price)
+    this.in_gold = this.$var.resources.getInGold(this.nextBuilding.price);
     console.log(this.$var, this.data);
   },
   computed: {
-    nextBuilding(){
+    nextBuilding() {
       const nextLvl = this.data.building.nextLvl;
       return this.data.building.lvl[nextLvl];
     },
@@ -34,20 +34,15 @@ export default {
         )
       };
     },
-    currentSector() {
-      return this.$store.state.userSectors.currentSector;
-    },
+
     checkMaxLvl() {
-     if (this.nextBuilding){
-      return false;
-     };
-     return true;
+      if (this.nextBuilding) {
+        return false;
+      }
+      return true;
     }
   },
   methods: {
-    closeDialogWindow() {
-      this.$store.commit("DIALOG_CLOSE");
-    },
     upgradeBuilding() {
       if (this.checkMaxLvl) {
         this.$store.commit("DIALOG_CLOSE");
