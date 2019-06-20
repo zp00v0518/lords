@@ -11,7 +11,7 @@ const Rampart = {
       mineTypeList[0],
       mineTypeList[1],
       mineTypeList[2],
-      mineTypeList[6]
+      mineTypeList[4]
     ]
   },
   buildings: {

@@ -1,13 +1,13 @@
 const createBasicBuilding = require('../../createBasicBuilding');
 const { document } = require('../../../workWithMongoDB/schema');
 
-function createMarket() {
-  const basic = createBasicBuilding(document.class.market, 1);
+function createMarket({ lvl = 0, addValue = 0 }) {
+  const basic = createBasicBuilding(document.class.market, lvl);
   basic.work = {
-    is: true,
+    is: false,
     date: new Date(),
     bonus: 0,
-    addValue: 2000
+    addValue,
   };
   return basic;
 }

@@ -1,13 +1,13 @@
 const createBasicBuilding = require('../../createBasicBuilding');
 const { document } = require('../../../workWithMongoDB/schema');
 
-function createBarraks() {
-  const basic = createBasicBuilding(document.class.barraks, 1);
+function createBarraks({ lvl = 0, addValue = 0 }) {
+  const basic = createBasicBuilding(document.class.barraks, lvl);
   basic.work = {
-    is: true,
+    is: false,
     date: new Date(),
     bonus: 0,
-    addValue: 2000
+    addValue
   };
   return basic;
 }

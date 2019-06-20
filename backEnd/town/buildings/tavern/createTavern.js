@@ -1,13 +1,13 @@
 const createBasicBuilding = require('../../createBasicBuilding');
 const { document } = require('../../../workWithMongoDB/schema');
 
-function createTavern() {
-  const basic = createBasicBuilding(document.class.tavern, 1);
+function createTavern({ lvl = 0, addValue = 0 }) {
+  const basic = createBasicBuilding(document.class.tavern, lvl);
   basic.work = {
-    is: true,
+    is: false,
     date: new Date(),
     bonus: 0,
-    addValue: 2000
+    addValue
   };
   return basic;
 }

@@ -1,13 +1,13 @@
 const createBasicBuilding = require('../../createBasicBuilding');
 const { document } = require('../../../workWithMongoDB/schema');
 
-function createFort() {
-  const basic = createBasicBuilding(document.class.fort, 1);
+function createFort({ lvl = 0, addValue = 0 }) {
+  const basic = createBasicBuilding(document.class.fort, lvl);
   basic.work = {
-    is: true,
+    is: false,
     date: new Date(),
     bonus: 0,
-    addValue: 2000
+    addValue
   };
   return basic;
 }
