@@ -65,7 +65,7 @@ module.exports = handlerResponseUpgradeRegion;
 
 const schema = {
   building: { type: 'object' },
-  type: { type: 'string', regExp: /^[a-z]{2,6}$/gi },
+  type: { type: 'string', regExp: /^[a-z]{2,7}$/gi },
   x: { type: 'number', min: 0, max: regionLength },
   y: { type: 'number', min: 0, max: regionLength },
   persent: { type: 'number', min: 70, max: 130 },
