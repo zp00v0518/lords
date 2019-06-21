@@ -6,12 +6,15 @@ export default {
         url: "",
         text: ["Lorem ipsum dolor sit amet.", "2 Lorem ipsum dolor sit amet."]
       },
-      in_gold: 0
+      in_gold: 0,
+      building: this.data.building,
+      build_from_db: null
     };
   },
   created() {
     this.in_gold = this.$var.resources.getInGold(this.nextBuilding.price);
-    console.log(this.$var, this.data);
+    const type = this.building.type;
+    this.build_from_db = this.currentSector.town[type];
   },
   computed: {
     nextBuilding() {
@@ -34,7 +37,6 @@ export default {
         )
       };
     },
-
     checkMaxLvl() {
       if (this.nextBuilding) {
         return false;
@@ -48,7 +50,7 @@ export default {
         this.$store.commit("DIALOG_CLOSE");
         return;
       }
-      if (this.building.upgrade.is) {
+      if (this.build_from_db.upgrade.is) {
         const dialog = {
           data: { txt: this.gloss.dialog.isUpgrade.txt },
           type: "message"
@@ -56,24 +58,20 @@ export default {
         this.$store.dispatch("DIALOG_SHOW", dialog);
         return;
       }
-      const storageName = this.$var.classInstance.storage;
-      if (
-        this.checkSource(
-          this.upgrade.source,
-          this.currentSector.town[storageName].sources
-        )
-      ) {
+      const isSources = this.checkSource(
+        this.upgrade.source,
+        this.data.storage
+      );
+      if (isSources) {
         const message = {
-          type: "upgradeRegion",
+          type: "upgradeBuilding",
           data: {
             sectorIndex: this.$store.state.userSectors.sectors.indexOf(
               this.currentSector
             ),
             persent: +this.rangeValue,
             building: {
-              type: this.building.type,
-              x: this.data.x,
-              y: this.data.y
+              type: this.build_from_db.type || this.build_from_db.class
             }
           }
         };
