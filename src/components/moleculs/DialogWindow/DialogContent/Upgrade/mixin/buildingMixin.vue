@@ -22,7 +22,8 @@ export default {
       return this.data.building.lvl[nextLvl];
     },
     upgrade() {
-      const seconds = this.in_gold * this.$var.time.sec;
+      const sec = this.in_gold * this.$var.time.sec;
+      const seconds = sec / this.$var.time.speedGame;
       const town = this.$var.town;
       const index = this.$var.indexes.upgrade_town;
       const rangeValue = this.rangeValue;
@@ -30,7 +31,7 @@ export default {
         time: this.getTimeString(
           town.getTimeForUpgrade(seconds, rangeValue, index)
         ),
-        source: town.getResoursesForUpgrade(
+        source: town.getResourcesForUpgrade(
           this.nextBuilding.price,
           rangeValue,
           index

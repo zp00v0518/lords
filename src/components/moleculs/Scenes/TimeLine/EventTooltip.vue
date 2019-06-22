@@ -2,7 +2,7 @@
   <div class="event__tooltip" :style="{top: position+'px'}">
     <div
       class="event__tooltip__item"
-    >{{upperFirstSymbol(gloss.timeLine.upgrade.txt)}} : {{gloss.mine.type[this.type].name.txt}}</div>
+    >{{upperFirstSymbol(gloss.timeLine.upgrade.txt)}} : {{gloss[this.parentBuild].type[this.type].name.txt}}</div>
     <div
       class="event__tooltip__item"
     >{{upperFirstSymbol(gloss.timeLine.timeEnd.txt)}}:{{formDataToView(dataEvent.end)}}</div>
@@ -22,7 +22,13 @@ export default {
       eventData: null
     };
   },
+  created(){
+    console.log(this.dataEvent)
+  },
   computed: {
+    parentBuild(){
+      return this.dataEvent.data.parent;
+    },
     type() {
       return this.dataEvent.data.type;
     }

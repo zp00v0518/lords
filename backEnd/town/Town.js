@@ -38,13 +38,13 @@ const Town = {
     });
     return result;
   },
-  getResoursesForUpgrade(price, persent = 100, index = 1.5){
+  getResourcesForUpgrade(price, persent = 100, index = 1.5){
     persent = persent > 100 ? 100 + (persent - 100) * index : persent;
     // persent = formPersent(persent);
     const result = price.map(item =>{
       const obj = Object.assign({},item);
       let value =  obj.value / 100 * persent;
-      obj.value = value.toFixed(0);
+      obj.value = +value.toFixed(0);
       return obj
     });
     return result;
@@ -57,9 +57,5 @@ const Town = {
     return time / 100 * persent;
   },
 };
-
-// function formPersent(persent){
-//   return persent > 100 ? 100 + (persent - 100) * 1.5 : persent;
-// };
 
 module.exports = Town;
