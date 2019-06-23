@@ -1,4 +1,4 @@
-const { checkUpgrade, calcStorageNowValue } = require('../tube.js');
+const { calcStorageNowValue } = require('../tube.js');
 const fixingResultUpgradeMine = require('../region/mine/fixingResultUpgradeMine.js');
 const fixingResultUpgrade_building = require('../town/buildings/fixingResultUpgrade_building');
 const addValueToStorage = require('../town/storage/addValueToStorage.js');
@@ -34,6 +34,7 @@ function controlSatateEventsList(eventsList = []) {
         );
         calcStorageNowValue(storage);
       } else if (type === 'upgradeTown') {
+        console.log(eventItem)
         const typeBuilding = eventItem.data.type;
         const townUpgrade = sector.town[typeBuilding];
         if (townUpgrade.work.static) {

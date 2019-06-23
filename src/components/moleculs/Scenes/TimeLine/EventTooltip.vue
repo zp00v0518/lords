@@ -22,11 +22,11 @@ export default {
       eventData: null
     };
   },
-  created(){
-    console.log(this.dataEvent)
+  created() {
+    console.log(this.dataEvent);
   },
   computed: {
-    parentBuild(){
+    parentBuild() {
       return this.dataEvent.data.parent;
     },
     type() {
