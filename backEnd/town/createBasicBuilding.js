@@ -5,7 +5,8 @@ function createBasicBuilding(classBuilding, lvl = 0, parent = 'town') {
     upgrade: upgradeSection(),
     lvl: lvl,
     class: classBuilding,
-    parent
+    parent,
+    type: classBuilding,
   };
   return basic;
 }

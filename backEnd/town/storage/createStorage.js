@@ -1,6 +1,7 @@
 const tube = require('../../tube.js');
 const Town = require('../Town.js');
 const Resources = gameVariables.resources;
+const workSection = require('..//buildings/workSection');
 
 function createStorage(listMine = gameVariables.mine.typeList, lvl = 1) {
   const { upgradeSection } = tube;
@@ -9,7 +10,9 @@ function createStorage(listMine = gameVariables.mine.typeList, lvl = 1) {
     // type: Town.listBuilding[0], // надо будет удалить
     lvl: lvl,
     class: gameVariables.classInstance.storage,
+    type: gameVariables.classInstance.storage,
     upgrade: upgradeSection(),
+    work: workSection({}),
     maxValue: {
       gold: Resources.maxValue.gold,
       baseResource: Resources.maxValue.baseResource,

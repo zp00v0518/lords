@@ -11,8 +11,9 @@ function formCurrentImageList(sector, townRaceName, allBuildings) {
     const item = listBuildings[key];
     const name = item.name
     const d = sector.town[name];
-    if (d) {
-      const lvl = d.lvl;
+    // отбираю строения, которые уже построены
+    if (d.lvl !== 0) {
+      const lvl = d.lvl
       const obj = allBuildings.races.rampart.buildings[name].lvl[lvl];
       obj.class = d.class;
       // const obj = buildings[name].lvl[lvl]; временно, для определения координат картинки

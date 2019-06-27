@@ -1,5 +1,6 @@
-const { checkUpgrade, calcStorageNowValue } = require('../tube.js');
+const { calcStorageNowValue } = require('../tube.js');
 const fixingResultUpgradeMine = require('../region/mine/fixingResultUpgradeMine.js');
+const fixingResultUpgrade_building = require('../town/buildings/fixingResultUpgrade_building');
 const addValueToStorage = require('../town/storage/addValueToStorage.js');
 
 function controlSatateEventsList(eventsList = []) {
@@ -15,10 +16,10 @@ function controlSatateEventsList(eventsList = []) {
       const eventItem = eventsList.splice(i, 1)[0];
       const type = eventItem.type;
       const serverName = eventItem.serverName;
+      const x = eventItem.target.x;
+      const y = eventItem.target.y;
+      const sector = GlobalMap[serverName][x][y];
       if (type === 'upgradeRegion') {
-        const x = eventItem.target.x;
-        const y = eventItem.target.y;
-        const sector = GlobalMap[serverName][x][y];
         const storage = sector.town.storage;
         const mineX = eventItem.data.x;
         const mineY = eventItem.data.y;
@@ -26,8 +27,19 @@ function controlSatateEventsList(eventsList = []) {
         const previosValue = mine.work.addValue;
         calcStorageNowValue(storage, eventItem.end);
         fixingResultUpgradeMine(mine, eventItem);
-        addValueToStorage(mine.type, mine.work.addValue - previosValue, storage);
+        addValueToStorage(
+          mine.type,
+          mine.work.addValue - previosValue,
+          storage
+        );
         calcStorageNowValue(storage);
+      } else if (type === 'upgradeTown') {
+        console.log(eventItem)
+        const typeBuilding = eventItem.data.type;
+        const townUpgrade = sector.town[typeBuilding];
+        if (townUpgrade.work.static) {
+          fixingResultUpgrade_building(townUpgrade, eventItem);
+        }
       }
       i--;
     }

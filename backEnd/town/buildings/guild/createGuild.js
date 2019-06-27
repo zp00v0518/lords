@@ -1,14 +1,10 @@
 const createBasicBuilding = require('../../createBasicBuilding');
 const { document } = require('../../../workWithMongoDB/schema');
+const workSection = require('../workSection');
 
-function createGuild() {
-  const basic = createBasicBuilding(document.class.guild, 1);
-  basic.work = {
-    is: true,
-    date: new Date(),
-    bonus: 0,
-    addValue: 2000
-  };
+function createGuild({ lvl = 0, addValue = 0 }) {
+  const basic = createBasicBuilding(document.class.guild, lvl);
+  basic.work = workSection({addValue});
   return basic;
 }
 

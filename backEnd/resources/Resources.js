@@ -2,6 +2,16 @@ const Resources = {
   typeList: ['gold', 'wood', 'ore', 'sulfur', 'crystal', 'mercury', 'gem'],
   baseResource: ['wood', 'ore'],
   unicResource: ['sulfur', 'crystal', 'mercury', 'gem'],
+  cost: {
+    base: {
+      gold: 1000,
+      unic: 0.5
+    },
+    unic: {
+      gold: 2000,
+      base: 2
+    }
+  },
   maxValue: {
     gold: 100000,
     baseResource: 18,
@@ -19,6 +29,26 @@ const Resources = {
       }
     });
     return result;
+  },
+  getInGold(arr) {
+    const baseResource = this.baseResource;
+    const base_cost = this.cost.base.gold;
+    const unic_cost = this.cost.unic.gold;
+    let in_gold = 0;
+    arr.forEach(item => {
+      let value = item.value;
+      const resource = item.resource;
+      // проверка на золото
+      if (resource !== this.typeList[0]) {
+        if (baseResource.includes(resource)) {
+          value = value * base_cost;
+        } else {
+          value = value * unic_cost;
+        }
+      }
+      in_gold += value;
+    });
+    return in_gold;
   }
 };
 

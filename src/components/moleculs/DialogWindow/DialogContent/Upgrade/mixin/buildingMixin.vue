@@ -5,41 +5,53 @@ export default {
       info: {
         url: "",
         text: ["Lorem ipsum dolor sit amet.", "2 Lorem ipsum dolor sit amet."]
-      }
+      },
+      in_gold: 0,
+      building: this.data.building,
+      build_from_db: null
     };
   },
   created() {
-    console.log(this.data);
+    this.in_gold = this.$var.resources.getInGold(this.nextBuilding.price);
+    const type = this.building.type;
+    this.build_from_db = this.currentSector.town[type];
   },
   computed: {
+    nextBuilding() {
+      const nextLvl = this.data.building.nextLvl;
+      return this.data.building.lvl[nextLvl];
+    },
     upgrade() {
+      const sec = this.in_gold * this.$var.time.sec;
+      const seconds = sec / this.$var.time.speedGame;
+      const town = this.$var.town;
+      const index = this.$var.indexes.upgrade_town;
+      const rangeValue = this.rangeValue;
       return {
         time: this.getTimeString(
-          this.$var.mine.getTimeUpgrade(this.building.lvl, this.rangeValue)
+          town.getTimeForUpgrade(seconds, rangeValue, index)
         ),
-        source: this.data.building.price
+        source: town.getResourcesForUpgrade(
+          this.nextBuilding.price,
+          rangeValue,
+          index
+        )
       };
     },
-    currentSector() {
-      return this.$store.state.userSectors.currentSector;
-    },
     checkMaxLvl() {
-      if (this.building.lvl >= this.$var.mine.valueUpgrade.length - 1) {
+      if (this.nextBuilding) {
         return false;
       }
       return true;
     }
   },
   methods: {
-    closeDialogWindow() {
-      this.$store.commit("DIALOG_CLOSE");
-    },
     upgradeBuilding() {
-      if (!this.checkMaxLvl) {
+      if (this.checkMaxLvl) {
         this.$store.commit("DIALOG_CLOSE");
         return;
       }
-      if (this.building.upgrade.is) {
+      if (this.build_from_db.upgrade.is) {
         const dialog = {
           data: { txt: this.gloss.dialog.isUpgrade.txt },
           type: "message"
@@ -47,24 +59,20 @@ export default {
         this.$store.dispatch("DIALOG_SHOW", dialog);
         return;
       }
-      const storageName = this.$var.classInstance.storage;
-      if (
-        this.checkSource(
-          this.upgrade.source,
-          this.currentSector.town[storageName].sources
-        )
-      ) {
+      const isSources = this.checkSource(
+        this.upgrade.source,
+        this.data.storage
+      );
+      if (isSources) {
         const message = {
-          type: "upgradeRegion",
+          type: "upgradeBuilding",
           data: {
             sectorIndex: this.$store.state.userSectors.sectors.indexOf(
               this.currentSector
             ),
             persent: +this.rangeValue,
             building: {
-              type: this.building.type,
-              x: this.data.x,
-              y: this.data.y
+              type: this.build_from_db.type || this.build_from_db.class
             }
           }
         };

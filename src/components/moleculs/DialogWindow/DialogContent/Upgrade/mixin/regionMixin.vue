@@ -20,22 +20,16 @@ export default {
         )
       };
     },
-    currentSector() {
-      return this.$store.state.userSectors.currentSector;
-    },
     checkMaxLvl() {
       if (this.building.lvl >= this.$var.mine.valueUpgrade.length - 1) {
-        return false;
+        return true;
       }
-      return true;
+      return false;
     }
   },
   methods: {
-    closeDialogWindow() {
-      this.$store.commit("DIALOG_CLOSE");
-    },
     upgradeBuilding() {
-      if (!this.checkMaxLvl) {
+      if (this.checkMaxLvl) {
         this.$store.commit("DIALOG_CLOSE");
         return;
       }

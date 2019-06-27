@@ -8,9 +8,7 @@
         @click="handlerClick($event, item)"
       >
         <canvas :ref="'canvas'+item" :data-building="item" class="hall__row__item-icon"></canvas>
-        <div
-          :class="['hall__row__item-footer', {'prepare': checkPrepare(item)}]"
-        >{{houses[item].name}}</div>
+        <div :class="['hall__row__item-footer', {[checkPrepare(item)]: true}]">{{houses[item].name}}</div>
       </div>
     </div>
   </section>
@@ -52,7 +50,9 @@ export default {
   methods: {
     handlerClick(event, nameBuilding) {
       const build = this.houses[nameBuilding];
-      const target = event.target.parentNode.querySelector('.hall__row__item-icon');
+      const target = event.target.parentNode.querySelector(
+        ".hall__row__item-icon"
+      );
       const coords = tumb[target.dataset.building];
       const fileName = this.townRaceName + "tiles";
       // eslint-disable-next-line
@@ -76,10 +76,19 @@ export default {
     checkPrepare(name) {
       let flag;
       const currBuilding = this.currentTown.town[name];
-      const nextLvl = currBuilding ? currBuilding.lvl + 1 : 1;
-      const nextBuilding = this.buildings[name].lvl[nextLvl];
-      this.houses[name] = nextBuilding;
+      let nextLvl = currBuilding ? currBuilding.lvl + 1 : 1;
+      let nextBuilding = this.buildings[name].lvl[nextLvl];
+      const maxLvl = nextBuilding === undefined;
+      if (maxLvl) {
+        nextBuilding = this.buildings[name].lvl[nextLvl - 1];
+        nextLvl--;
+      }
+      this.houses[name] = { ...this.buildings[name] };
       this.houses[name].name = this.gloss[name].lvl[nextLvl].txt;
+      this.houses[name].nextLvl = nextLvl;
+      if (maxLvl) {
+        return "max-lvl";
+      }
       const if_buildings = nextBuilding.if;
       flag = if_buildings.length === 0;
       flag = if_buildings.every(item => {
@@ -89,7 +98,7 @@ export default {
       if (flag) {
         flag = this.checkSource(nextBuilding.price, this.sources);
       }
-      return flag;
+      return flag ? "prepare" : "no-prepare";
     }
   },
   mounted() {
@@ -138,6 +147,8 @@ const tumb = {
 .hall {
   &__wrap {
     color: white;
+    font-size: 13px;
+    letter-spacing: 0.1em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -171,9 +182,15 @@ const tumb = {
         min-height: 20px;
         @include center;
         text-transform: capitalize;
-        background-color: red;
         &.prepare {
           background-color: green;
+        }
+        &.no-prepare {
+          background-color: red;
+        }
+        &.max-lvl {
+          background-color: yellow;
+          color: blue;
         }
       }
     }
