@@ -11,7 +11,11 @@ const Rampart = {
       mineTypeList[0],
       mineTypeList[1],
       mineTypeList[2],
-      mineTypeList[4]
+      mineTypeList[4],
+      // для разработки добавил и остальные шахты
+      mineTypeList[3],
+      mineTypeList[5],
+      mineTypeList[6],
     ]
   },
   buildings: {
