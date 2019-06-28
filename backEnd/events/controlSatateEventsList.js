@@ -34,7 +34,6 @@ function controlSatateEventsList(eventsList = []) {
         );
         calcStorageNowValue(storage);
       } else if (type === 'upgradeTown') {
-        console.log(eventItem)
         const typeBuilding = eventItem.data.type;
         const townUpgrade = sector.town[typeBuilding];
         if (townUpgrade.work.static) {
