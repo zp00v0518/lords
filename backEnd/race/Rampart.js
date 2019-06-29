@@ -61,7 +61,7 @@ const Rampart = {
         3: {
           is: false,
           prepare: false,
-          if: [{ building: t.storage.name, lvl: 1 }],
+          if: [{ building: t.storage.name, lvl: 2 }],
           price: formPrice({ gold: 8000, wood: 5, ore: 5 }),
           maxValue: {
             //вместимость склада
@@ -73,7 +73,7 @@ const Rampart = {
         4: {
           is: false,
           prepare: false,
-          if: [{ building: t.storage.name, lvl: 2 }],
+          if: [{ building: t.storage.name, lvl: 3 }],
           price: formPrice({ gold: 16000, wood: 8, ore: 8 }),
           maxValue: {
             gold: 250000,
@@ -84,7 +84,7 @@ const Rampart = {
         5: {
           is: false,
           prepare: false,
-          if: [{ building: t.storage.name, lvl: 3 }],
+          if: [{ building: t.storage.name, lvl: 4 }],
           price: formPrice({
             gold: 32000,
             wood: 5,

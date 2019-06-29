@@ -8,14 +8,14 @@ const schema = require('../workWithMongoDB/schema.js')
 const time = config.time;
 
 const gameVariables = {
-	numSectionGlobalMap : 50, 					//количество ячеек на ГЛОБАЛЬНОЙ карте, по одной оси
+	numSectionGlobalMap : 20, 					//количество ячеек на ГЛОБАЛЬНОЙ карте, по одной оси
 																			//при изменении кол-ва ячеек, нужно поменять кол-во отображаемых ячеек на 1-й оси
 																			//как здесь, так и на клиенте
 	getMaxIndexMap: function(){
 		return gameVariables.numSectionGlobalMap - 1
 	},																	// максимальный индекс для массива карты
 	numSectionRegionMap: 5,							//количество ячеек на карте РЕГИОНА, по одной оси
-	viewSectionGlobalMapNow:13, 				//количество ячеек на Глобальной карте, по одной оси
+	viewSectionGlobalMapNow:7, 				//количество ячеек на Глобальной карте, по одной оси
 	stepMoveGlobalMap:2, 								//кол-во ячеек, на которорое происходит сдвиг карты при передвижении
 																			// в данный момент 1 сутки
 	serverList:config.db.collections.servers,
