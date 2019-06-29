@@ -58,11 +58,11 @@
           </div>
           <div class="storage_wrap">
             <div class="storage_item">
-              <div class="storage_resource_sum">{{storage.maxValue.baseResource}}</div>
+              <div class="storage_resource_sum">{{maxValue.baseResource}}</div>
               <div class="storage_resource_max">max</div>
             </div>
             <div class="storage_item">
-              <div class="storage_resource_sum">{{storage.maxValue.unicResource}}</div>
+              <div class="storage_resource_sum">{{maxValue.unicResource}}</div>
               <div class="storage_resource_max">max</div>
             </div>
           </div>
@@ -80,21 +80,32 @@ export default {
   props: ["sector", "indexTown"],
   data() {
     return {
-      name: "Default Name",
-      storage: {}
+      name: "Default Name"
     };
   },
   created() {
-    const type = this.$var.classInstance.storage;
-    this.storage = this.sector.town[type];
     this.name = this.sector.town.name;
   },
-  computed: {},
-  methods: {},
-  updated() {
-    const type = this.$var.classInstance.storage;
-    this.storage = this.sector.town[type];
-    this.name = this.sector.town.name;
+  computed: {
+    races() {
+      return this.globalConfig.races;
+    },
+    typeStorage() {
+      return this.globalConfig.listBuildings.storage.name;
+    },
+    storage() {
+      return this.sector.town[this.typeStorage];
+    },
+    maxValue() {
+      const lvl = this.storage.lvl;
+      const allBuildings = this.races[this.townRace].buildings;
+      const infoAllStorage = allBuildings[this.typeStorage];
+      return infoAllStorage.lvl[lvl].maxValue;
+    },
+    townRace() {
+      const typeTown = this.sector.town.race;
+      return this.races.typeList[typeTown];
+    }
   }
 };
 </script>

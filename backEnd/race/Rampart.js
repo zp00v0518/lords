@@ -15,7 +15,7 @@ const Rampart = {
       // для разработки добавил и остальные шахты
       mineTypeList[3],
       mineTypeList[5],
-      mineTypeList[6],
+      mineTypeList[6]
     ]
   },
   buildings: {
@@ -27,7 +27,7 @@ const Rampart = {
           is: true,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 2000, wood: 5, ore:5 })
+          price: formPrice({ gold: 2000, wood: 5, ore: 5 })
         }
       }
     },
@@ -41,9 +41,9 @@ const Rampart = {
           price: formPrice({ gold: 2000, wood: 5, ore: 5 }),
           maxValue: {
             //вместимость склада
-            gold: 150000,
-            baseResource: 20,
-            univResourc: 10
+            gold: 100000,
+            baseResource: 18,
+            unicResource: 10
           }
         },
         2: {
@@ -54,8 +54,8 @@ const Rampart = {
           maxValue: {
             //вместимость склада
             gold: 150000,
-            baseResource: 20,
-            univResourc: 10
+            baseResource: 25,
+            unicResource: 14
           }
         },
         3: {
@@ -65,9 +65,9 @@ const Rampart = {
           price: formPrice({ gold: 8000, wood: 5, ore: 5 }),
           maxValue: {
             //вместимость склада
-            gold: 150000,
-            baseResource: 20,
-            univResourc: 10
+            gold: 200000,
+            baseResource: 30,
+            unicResource: 18
           }
         },
         4: {
@@ -76,9 +76,9 @@ const Rampart = {
           if: [{ building: t.storage.name, lvl: 2 }],
           price: formPrice({ gold: 16000, wood: 8, ore: 8 }),
           maxValue: {
-            gold: 100000,
-            baseResource: 30,
-            univResourc: 15
+            gold: 250000,
+            baseResource: 45,
+            unicResource: 24
           }
         },
         5: {
@@ -95,9 +95,9 @@ const Rampart = {
             gem: 1
           }),
           maxValue: {
-            gold: 100000,
+            gold: 300000,
             baseResource: 30,
-            univResourc: 15
+            unicResource: 15
           }
         }
       }
