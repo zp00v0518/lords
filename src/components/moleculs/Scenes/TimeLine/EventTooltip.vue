@@ -45,10 +45,6 @@ export default {
     }
   },
   methods: {
-    upperFirstSymbol(str) {
-      const d = str.charAt(0);
-      return d.toUpperCase() + str.substr(1);
-    },
     formDataToView(date) {
       return new Date(date);
     }
