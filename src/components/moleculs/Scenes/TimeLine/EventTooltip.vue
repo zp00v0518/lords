@@ -30,7 +30,8 @@ export default {
       return this.gloss.town.race[this.eventRace];
     },
     eventRace() {
-      return this.$var.race.typeList[this.dataEvent.init.race];
+      const races = this.$store.state.globalConfig.races;
+      return races.typeList[this.dataEvent.init.race];
     },
     buildingName() {
       const eventType = this.dataEvent.type;
