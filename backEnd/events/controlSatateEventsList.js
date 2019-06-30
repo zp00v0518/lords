@@ -3,7 +3,8 @@ const fixingResultUpgradeMine = require('../region/mine/fixingResultUpgradeMine.
 const fixingResultUpgrade_building = require('../town/buildings/fixingResultUpgrade_building');
 const addValueToStorage = require('../town/storage/addValueToStorage.js');
 const finishEvent = require('./finishEvent');
-const races = require('../race');
+const { updateDB } = require('../tube.js');
+const update = new updateDB();
 
 function controlSatateEventsList(eventsList = []) {
   // console.log("***controlSatateEventsList work***")
@@ -38,11 +39,15 @@ function controlSatateEventsList(eventsList = []) {
       } else if (type === 'upgradeTown') {
         const typeBuilding = eventItem.data.type;
         const townUpgrade = sector.town[typeBuilding];
-        if (typeBuilding === 'storage'){
+        if (typeBuilding === 'storage') {
           finishEvent[typeBuilding](sector.town.storage, eventItem);
-          return;
-        }
-        if (townUpgrade.work.static) {
+          const optionsForUpdate = {
+            collectionName: eventItem.serverName,
+            filtr: { _id: eventItem._id },
+            updateDoc: { $set: { status: false } }
+          };
+          update.one(optionsForUpdate).then(result => {});
+        } else if (townUpgrade.work.static) {
           fixingResultUpgrade_building(townUpgrade, eventItem);
         }
       }

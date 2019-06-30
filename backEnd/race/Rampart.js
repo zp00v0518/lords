@@ -96,8 +96,8 @@ const Rampart = {
           }),
           maxValue: {
             gold: 300000,
-            baseResource: 30,
-            unicResource: 15
+            baseResource: 60,
+            unicResource: 30
           }
         }
       }

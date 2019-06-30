@@ -7,9 +7,12 @@ function finishStorage(storage, eventData) {
   const raceName = race.typeList[indexRace];
   const storageName = listBuildings.storage.name;
   const nextLvl = eventData.data.nextLvl;
-  const maxValue = race[raceName].buildings[storageName].lvl[nextLvl].maxValue;
+  const buildinInfo = race[raceName].buildings[storageName];
+  const maxValue = buildingInfo.lvl[nextLvl].maxValue;
   const inStorage = storage.sources;
-  storage.lvl = nextLvl;
+  storage.lvl = buildinInfo.lvl[nextLvl] ? nextLvl : storage.lvl;
+  storage.upgrade.is = false;
+  storage.maxValue = maxValue;
   Object.keys(inStorage).forEach(nameSource => {
     const item = inStorage[nameSource];
     if (Resources.unicResource.includes(nameSource)) {

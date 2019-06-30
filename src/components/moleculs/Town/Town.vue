@@ -100,6 +100,7 @@ export default {
       const lvl = this.storage.lvl;
       const allBuildings = this.races[this.townRace].buildings;
       const infoAllStorage = allBuildings[this.typeStorage];
+      console.log(lvl)
       return infoAllStorage.lvl[lvl].maxValue;
     },
     townRace() {
