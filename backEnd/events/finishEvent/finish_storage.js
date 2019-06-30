@@ -1,16 +1,18 @@
-const race = require('../../race').Race;
-const listBuildings = require('../../town/Town').listBuildings;
+// const race = require('../../race').Race;
+// const listBuildings = require('../../town/Town').listBuildings;
 const Resources = require('../../resources/Resources');
+const getParamsForFinish = require('./getParamsForFinish');
 
 function finishStorage(storage, eventData) {
-  const indexRace = eventData.init.race;
-  const raceName = race.typeList[indexRace];
-  const storageName = listBuildings.storage.name;
-  const nextLvl = eventData.data.nextLvl;
-  const buildinInfo = race[raceName].buildings[storageName];
+  const { buildingInfo, nextLvl } = getParamsForFinish(eventData);
+  // const indexRace = eventData.init.race;
+  // const raceName = race.typeList[indexRace];
+  // const storageName = listBuildings.storage.name;
+  // const nextLvl = eventData.data.nextLvl;
+  // const buildingInfo = race[raceName].buildings[storageName];
   const maxValue = buildingInfo.lvl[nextLvl].maxValue;
   const inStorage = storage.sources;
-  storage.lvl = buildinInfo.lvl[nextLvl] ? nextLvl : storage.lvl;
+  storage.lvl = buildingInfo.lvl[nextLvl] ? nextLvl : storage.lvl;
   storage.upgrade.is = false;
   storage.maxValue = maxValue;
   Object.keys(inStorage).forEach(nameSource => {
