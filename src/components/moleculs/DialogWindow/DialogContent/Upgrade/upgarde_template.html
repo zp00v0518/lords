@@ -26,10 +26,9 @@
         </div>
         <div class="upgrade__price--item">
           <div class="upgrade__price__resource">
-            <div class="text">{{ gloss.date.time.txt | upperFirstSymbol }}</div>
-          <div class="value">{{ upgrade.time }}</div>
+            <div class="text">{{ upperFirstSymbol(gloss.date.time.txt) }}</div>
+            <div class="value">{{ upgrade.time }}</div>
           </div>
-          
         </div>
       </div>
       <div class="upgrade__range">

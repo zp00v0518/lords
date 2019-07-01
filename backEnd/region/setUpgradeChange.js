@@ -18,12 +18,14 @@ function setUpgradeChange( cell, persent = 100,  sector, info,  callback = funct
       target: {
         sector: sector._id,
         user: info.player.user._id,
+        race: sector.town.race,
         x: sector.x,
         y: sector.y
       },
       init: {
         sector: sector._id,
         user: info.player.user._id,
+        race: sector.town.race,
         x: sector.x,
         y: sector.y
       },

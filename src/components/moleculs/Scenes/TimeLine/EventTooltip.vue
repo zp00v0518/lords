@@ -2,7 +2,7 @@
   <div class="event__tooltip" :style="{top: position+'px'}">
     <div
       class="event__tooltip__item"
-    >{{upperFirstSymbol(gloss.timeLine.upgrade.txt)}} : {{gloss[this.parentBuild].type[this.type].name.txt}}</div>
+    >{{upperFirstSymbol(gloss.timeLine.upgrade.txt)}} : {{upperFirstSymbol(buildingName)}}</div>
     <div
       class="event__tooltip__item"
     >{{upperFirstSymbol(gloss.timeLine.timeEnd.txt)}}:{{formDataToView(dataEvent.end)}}</div>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import glossary from "@/components/mixins/glossary.vue";
+import glossary from "../../../mixins/glossary";
 
 export default {
   name: "EventTooltip",
@@ -22,22 +22,29 @@ export default {
       eventData: null
     };
   },
-  created() {
-    console.log(this.dataEvent);
-  },
   computed: {
-    parentBuild() {
-      return this.dataEvent.data.parent;
-    },
     type() {
       return this.dataEvent.data.type;
+    },
+    allNames() {
+      return this.gloss.town.race[this.eventRace];
+    },
+    eventRace() {
+      const races = this.$store.state.globalConfig.races;
+      return races.typeList[this.dataEvent.init.race];
+    },
+    buildingName() {
+      const eventType = this.dataEvent.type;
+      if (eventType === "upgradeTown") {
+        const lvl = this.dataEvent.data.nextLvl;
+        return this.allNames[this.type].lvl[lvl].txt;
+      } else if (eventType === "upgradeRegion") {
+        const classBuild = this.dataEvent.data.class;
+        return this.gloss[classBuild].type[this.type].name.txt;
+      }
     }
   },
   methods: {
-    upperFirstSymbol(str) {
-      const d = str.charAt(0);
-      return d.toUpperCase() + str.substr(1);
-    },
     formDataToView(date) {
       return new Date(date);
     }

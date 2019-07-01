@@ -147,39 +147,41 @@ const tumb = {
 .hall {
   &__wrap {
     color: white;
-    font-size: 13px;
-    letter-spacing: 0.1em;
+    font-size: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex-grow: 10;
-    padding: 3% 0;
+    padding: 1% 0;
+    @media (max-width: $tablet) {
+      font-size: 10px;
+    }
+    @media (max-width: $laptop) {
+      font-size: 12px;
+    }
   }
   &__row {
     display: flex;
     justify-content: center;
-    height: 17%;
-    // padding: 3% 0;
+    height: 23%;
     &__item {
       margin: 0 3%;
       width: 20%;
-      min-width: 17%;
       border: 1px solid white;
       display: flex;
       flex-direction: column;
       cursor: pointer;
+      text-align: center;
+      overflow: hidden;
       &-icon {
         height: 75%;
         border: 1px solid green;
-        // background-image: url("../../../../../../frontEnd/img/towns/rampart/ramparttiles.jpg");
-        // background-size: 100% 100%;
-        // background-repeat: no-repeat;
-        // background-position-x: 0px;
-        // background-position-y: 0px;
+        @media (max-width: $tablet) {
+          height: 70%;
+        }
       }
       &-footer {
-        height: 25%;
-        min-height: 20px;
+        flex-grow: 2;
         @include center;
         text-transform: capitalize;
         &.prepare {

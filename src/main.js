@@ -9,6 +9,8 @@ import router from './router';
 import store from './store';
 import Ws from './api/ws';
 import config from '../backend/config/config';
+import upperFirstSymbol from './components/mixins/upperFirstSymbol';
+import globalConfig from './components/mixins/globalConfig';
 const region = require('../backend/region/Region');
 const variables = require('../backend/variables/game_variables');
 
@@ -25,10 +27,8 @@ Vue.prototype.$bus = bus;
 Vue.prototype.$lang = store.state.local.lang;
 Vue.prototype.$var = variables;
 
-Vue.filter('upperFirstSymbol', function(str) {
-  if (!str) return str;
-  return str[0].toUpperCase() + str.slice(1);
-});
+Vue.mixin(upperFirstSymbol);
+Vue.mixin(globalConfig);
 
 /* eslint-disable no-new */
 

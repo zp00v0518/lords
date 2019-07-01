@@ -12,6 +12,7 @@ function setUpUpgradeChange_building({
     const dataForDB = {
       target: {
         sector: sector._id,
+        race: sector.town.race,
         user: info.player.user._id,
         x: sector.x,
         y: sector.y
@@ -19,6 +20,7 @@ function setUpUpgradeChange_building({
       init: {
         sector: sector._id,
         user: info.player.user._id,
+        race: sector.town.race,
         x: sector.x,
         y: sector.y
       },
@@ -27,6 +29,7 @@ function setUpUpgradeChange_building({
       end: building.upgrade.date,
       data: building
     };
+    dataForDB.data.nextLvl = dataForDB.data.lvl + 1;
     addEventToDB(dataForDB, info.server)
       .then(result => {
         const addEvent = result.ops[0];
