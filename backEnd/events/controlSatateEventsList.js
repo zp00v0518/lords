@@ -37,7 +37,7 @@ function controlSatateEventsList(eventsList = []) {
         );
         calcStorageNowValue(storage);
       } else if (type === 'upgradeTown') {
-        const typeBuilding = eventItem.data.type;
+        let typeBuilding = eventItem.data.type;
         const townUpgrade = sector.town[typeBuilding];
         if (typeBuilding === 'storage') {
           finishEvent[typeBuilding](sector.town.storage, eventItem);
@@ -55,7 +55,15 @@ function controlSatateEventsList(eventsList = []) {
             updateDoc: { $set: { status: false } }
           };
           update.one(optionsForUpdate).then(result => {});
-        } 
+        } else if (typeBuilding.indexOf('barraks') !== -1){
+          finishEvent[typeBuilding](sector.town[typeBuilding], eventItem, sector);
+          const optionsForUpdate = {
+            collectionName: eventItem.serverName,
+            filtr: { _id: eventItem._id },
+            updateDoc: { $set: { status: false } }
+          };
+          update.one(optionsForUpdate).then(result => {});
+        }
         else if (townUpgrade.work.static) {
           fixingResultUpgrade_building(townUpgrade, eventItem);
         }
