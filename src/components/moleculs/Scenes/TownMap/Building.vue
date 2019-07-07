@@ -21,19 +21,25 @@ export default {
   components: {
     ...Buildings
   },
+  created() {
+    document.addEventListener("keyup", this.handlerKeyup);
+  },
   computed: {
     gloss() {
       return this.$store.state.local.dictionary.town.race[this.townRaceName];
     }
   },
-  data() {
-    return {};
-  },
-
   methods: {
     closeBuilding() {
       this.$emit("close");
+    },
+    handlerKeyup(event) {
+      if (event.key !== "Escape") return;
+      this.closeBuilding();
     }
+  },
+  beforeDestroy() {
+    document.removeEventListener("ketup", this.handlerKeyup);
   }
 };
 </script>

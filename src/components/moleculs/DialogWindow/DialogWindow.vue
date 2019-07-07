@@ -27,13 +27,19 @@ export default {
       width: "90%"
     };
   },
-  created() {},
+  created() {
+    document.addEventListener("keyup", this.handlerKeyup);
+  },
   computed: {
     title() {
       return this.$store.state.dialog.title;
     }
   },
   methods: {
+    handlerKeyup(event) {
+      if (event.key !== "Escape") return;
+      this.closeDialogWindow();
+    },
     closeDialogWindow() {
       this.$store.commit("DIALOG_CLOSE");
     },
@@ -42,8 +48,8 @@ export default {
       this.width = e.width;
     }
   },
-  updated() {
-    // console.log(this.$store)
+  beforeDestroy() {
+    document.removEventListener("keyup", this.handlerKeyup);
   }
 };
 </script>
