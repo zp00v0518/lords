@@ -47,7 +47,16 @@ function controlSatateEventsList(eventsList = []) {
             updateDoc: { $set: { status: false } }
           };
           update.one(optionsForUpdate).then(result => {});
-        } else if (townUpgrade.work.static) {
+        } else if (typeBuilding === 'hall'){
+          finishEvent[typeBuilding](sector.town[typeBuilding], eventItem, sector);
+          const optionsForUpdate = {
+            collectionName: eventItem.serverName,
+            filtr: { _id: eventItem._id },
+            updateDoc: { $set: { status: false } }
+          };
+          update.one(optionsForUpdate).then(result => {});
+        } 
+        else if (townUpgrade.work.static) {
           fixingResultUpgrade_building(townUpgrade, eventItem);
         }
       }

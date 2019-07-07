@@ -195,13 +195,19 @@ const Rampart = {
           is: true,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 5000, wood: 10, ore: 10 })
+          price: formPrice({ gold: 5000, wood: 1, ore: 1 }),
+          effect:{
+            gold: 2000,
+          }
         },
         2: {
           is: false,
           prepare: false,
           if: [{ building: t.hall.name, lvl: 1 }],
-          price: formPrice({ gold: 10000, wood: 15, ore: 15 })
+          price: formPrice({ gold: 10000, wood: 1, ore: 1 }),
+          effect: {
+            gold: 6000,
+          }
         }
       }
     },
