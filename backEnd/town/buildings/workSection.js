@@ -11,7 +11,7 @@ function workSection({ addValue = 0, static = true }) {
       date: new Date(),
       bonus: 0,
       addValue,
-      lactCalc: 0,
+      lastCalc: 0,
       nowValue: 0,
       static: false // признак того, что строение дает прирост чего-нибудь
     };

@@ -1,5 +1,7 @@
 const schema = require('../workWithMongoDB/schema');
 const type = schema.document.class;
+const Army = require('../army/Army');
+
 const Town = {
   classInstance: schema.document.class.town,
   baseBuilding: {
@@ -7,6 +9,7 @@ const Town = {
     lvl: 1
   },
   listBuildings: {
+    // ...Army.list,
     hall: { name: type.hall, maxLvl: 3 },
     fort: { name: type.fort, maxLvl: 3 },
     tavern: { name: type.tavern, maxLvl: 1 },
@@ -38,24 +41,24 @@ const Town = {
     });
     return result;
   },
-  getResourcesForUpgrade(price, persent = 100, index = 1.5){
+  getResourcesForUpgrade(price, persent = 100, index = 1.5) {
     persent = persent > 100 ? 100 + (persent - 100) * index : persent;
     // persent = formPersent(persent);
-    const result = price.map(item =>{
-      const obj = Object.assign({},item);
-      let value =  obj.value / 100 * persent;
+    const result = price.map(item => {
+      const obj = Object.assign({}, item);
+      let value = (obj.value / 100) * persent;
       obj.value = +value.toFixed(0);
-      return obj
+      return obj;
     });
     return result;
   },
-  getTimeForUpgrade(time, persent = 100, index = 1.5){
+  getTimeForUpgrade(time, persent = 100, index = 1.5) {
     persent = persent < 100 ? 100 + (persent - 100) * index : persent;
-     //переворачиваю значение, т.к при движении ползунка время должно уменьшаться, а стоимость расти
+    //переворачиваю значение, т.к при движении ползунка время должно уменьшаться, а стоимость расти
     persent = 100 - (persent - 100);
     // persent = formPersent(persent);
-    return time / 100 * persent;
-  },
+    return (time / 100) * persent;
+  }
 };
 
 module.exports = Town;

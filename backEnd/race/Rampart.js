@@ -195,14 +195,20 @@ const Rampart = {
           is: true,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 5000, wood: 10, ore: 10 })
+          price: formPrice({ gold: 5000, wood: 1, ore: 1 }),
+          effect:{
+            gold: 2000,
+          }
         },
         2: {
           is: false,
           prepare: false,
           if: [{ building: t.hall.name, lvl: 1 }],
-          price: formPrice({ gold: 10000, wood: 15, ore: 15 })
-        }
+          price: formPrice({ gold: 10000, wood: 1, ore: 1 }),
+          effect: {
+            gold: 16000,
+          }
+        },
       }
     },
     [t.tavern.name]: {
@@ -223,7 +229,19 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 5000, wood: 10, ore: 5 })
+          price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
+          effect:{
+            addValue: 12
+          }
+        },
+        2: {
+          is: false,
+          prepare: false,
+          if: [{ building: t.barraks_1.name, lvl: 1 }],
+          price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
+          effect: {
+            addValue: 0,
+          }
         }
       }
     },
@@ -234,7 +252,19 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 7000, wood: 10, ore: 10 })
+          price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
+          effect: {
+            addValue: 10,
+          }
+        },
+        2: {
+          is: false,
+          prepare: false,
+          if: [{ building: t.barraks_2.name, lvl: 1 }],
+          price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
+          effect: {
+            addValue: 0,
+          }
         }
       }
     },
@@ -245,7 +275,19 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 15000, wood: 15, ore: 5 })
+          price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
+          effect: {
+            addValue: 8,
+          }
+        },
+        2: {
+          is: false,
+          prepare: false,
+          if: [{ building: t.barraks_3.name, lvl: 1 }],
+          price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
+          effect: {
+            addValue: 0,
+          }
         }
       }
     },
@@ -256,7 +298,19 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 20000, wood: 5, ore: 5, crystal: 5 })
+          price: formPrice({ gold: 1000, wood: 1, ore: 1, crystal: 1 }),
+          effect: {
+            addValue: 6,
+          }
+        },
+        2: {
+          is: false,
+          prepare: false,
+          if: [{ building: t.barraks_4.name, lvl: 1 }],
+          price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
+          effect: {
+            addValue: 0,
+          }
         }
       }
     },
@@ -267,7 +321,19 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 25000, wood: 10, ore: 5, sulfur: 5 })
+          price: formPrice({ gold: 100, wood: 1, ore: 1, sulfur: 1 }),
+          effect: {
+            addValue: 4,
+          }
+        },
+        2: {
+          is: false,
+          prepare: false,
+          if: [{ building: t.barraks_5.name, lvl: 1 }],
+          price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
+          effect: {
+            addValue: 0,
+          }
         }
       }
     },
@@ -278,7 +344,19 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 30000, wood: 5, ore: 5, gem: 15 })
+          price: formPrice({ gold: 1000, wood: 1, ore: 1, gem: 1 }),
+          effect: {
+            addValue: 2,
+          }
+        },
+        2: {
+          is: false,
+          prepare: false,
+          if: [{ building: t.barraks_6.name, lvl: 1 }],
+          price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
+          effect: {
+            addValue: 0,
+          }
         }
       }
     },
@@ -289,7 +367,19 @@ const Rampart = {
           is: false,
           prepare: false,
           if: [],
-          price: formPrice({ gold: 35000, wood: 5, ore: 5, crystal: 10 })
+          price: formPrice({ gold: 1000, wood: 1, ore: 1, crystal: 1 }),
+          effect: {
+            addValue: 1,
+          }
+        },
+        2: {
+          is: false,
+          prepare: false,
+          if: [{ building: t.barraks_7.name, lvl: 1 }],
+          price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
+          effect: {
+            addValue: 0,
+          }
         }
       }
     }
