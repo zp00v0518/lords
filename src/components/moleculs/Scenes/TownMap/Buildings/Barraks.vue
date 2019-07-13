@@ -1,21 +1,26 @@
 <template>
-  <section class="storage"></section>
+  <section class="storage">
+
+  </section>
 </template>
 
 <script>
 export default {
-  name: "Stroage",
+  name: "Barraks",
   props: {
     townRaceName: String,
     currentTown: null,
-    gloss: null
+    gloss: null,
+    buildingData: null,
   },
-  created() {},
+  created () {
+    console.log(this.buildingData)
+  },
   data() {
     return {};
   },
   computed: {
-    storage() {
+    storage(){
       return this.currentTown.town.storage;
     }
   },

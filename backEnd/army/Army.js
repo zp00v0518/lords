@@ -2,6 +2,17 @@ const schema = require('../workWithMongoDB/schema');
 const type = schema.document.class;
 
 const Army = {
+  types: {
+    fly: {
+      name: 'fly',
+    },
+    kon: {
+      name: 'kon',
+    },
+    pex: {
+      name: 'pex',
+    }
+  },
   list: {
     barraks_1: { name: type.barraks + '_1', maxLvl: 2 },
     barraks_2: { name: type.barraks + '_2', maxLvl: 2 },

@@ -16,6 +16,7 @@ function formCurrentImageList(sector, townRaceName, allBuildings) {
       const lvl = d.lvl
       const obj = allBuildings.races.rampart.buildings[name].lvl[lvl];
       obj.class = d.class;
+      obj.buildingData = d;
       // const obj = buildings[name].lvl[lvl]; временно, для определения координат картинки
       const imgInfo = obj.imgInfo;
       const img = listImg[imgInfo.name];
