@@ -1,5 +1,6 @@
 const mineTypeList = require('../../region/mine/Mine.js').typeList;
 const buildings = require('./buildings');
+const rampart_units = require('../../army/units/rampart_units')
 
 const Rampart = {
   mine: {
@@ -14,7 +15,8 @@ const Rampart = {
       mineTypeList[6]
     ]
   },
-  buildings
+  buildings,
+  units: rampart_units
 };
 
 module.exports = Rampart;

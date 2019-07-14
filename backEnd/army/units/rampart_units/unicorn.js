@@ -11,7 +11,7 @@ function createPegas(lvl = 1) {
       [type_resources.gem]: 600
     };
     return createUnit({
-      name: 'pegas',
+      name: 'unicorn',
       type: army_types.kon,
       health: 60,
       cost,
@@ -24,7 +24,7 @@ function createPegas(lvl = 1) {
       [type_resources.gem]: 1
     };
     return createUnit({
-      name: 'pegas',
+      name: 'unicorn',
       type: army_types.kon,
       health: 65,
       cost,
