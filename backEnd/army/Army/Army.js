@@ -1,19 +1,10 @@
-const schema = require('../workWithMongoDB/schema');
+const schema = require('../../workWithMongoDB/schema');
+const army_types = require('./army_types');
 const type = schema.document.class;
 
 const Army = {
-  types: {
-    fly: {
-      name: 'fly',
-    },
-    kon: {
-      name: 'kon',
-    },
-    pex: {
-      name: 'pex',
-    }
-  },
-  list: {
+  types: army_types,
+  armyBuildings: {
     barraks_1: { name: type.barraks + '_1', maxLvl: 2 },
     barraks_2: { name: type.barraks + '_2', maxLvl: 2 },
     barraks_3: { name: type.barraks + '_3', maxLvl: 2 },

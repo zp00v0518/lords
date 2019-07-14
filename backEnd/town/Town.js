@@ -1,6 +1,5 @@
 const schema = require('../workWithMongoDB/schema');
 const type = schema.document.class;
-const Army = require('../army/Army');
 
 const Town = {
   classInstance: schema.document.class.town,
@@ -9,7 +8,6 @@ const Town = {
     lvl: 1
   },
   listBuildings: {
-    // ...Army.list,
     hall: { name: type.hall, maxLvl: 3 },
     fort: { name: type.fort, maxLvl: 3 },
     tavern: { name: type.tavern, maxLvl: 1 },

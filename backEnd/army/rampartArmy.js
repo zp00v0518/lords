@@ -1,5 +1,5 @@
 const Army = require('./Army');
-const l = Army.list;
+const l = Army.armyBuildings;
 const types = Army.types;
 const createUnit = require('./units/createUnit');
 
@@ -15,7 +15,7 @@ module.exports = {
           defense: 5,
           health: 10,
           cost: { gold: 100 }
-        }),
+        })
       },
       2: {
         param: createUnit({
@@ -24,8 +24,8 @@ module.exports = {
           attak: 10,
           defense: 10,
           health: 15,
-          cost: { gold: 120 },
-        }),
+          cost: { gold: 120 }
+        })
       }
     }
   }

@@ -1,13 +1,11 @@
-function cretateUnit({ name, cost, type, attak, defense, health }) {
-  const param = {
-    name,
+function cretateUnit({ name, cost, type, health, lvl = 1 }) {
+  return {
     cost,
+    health,
+    name,
     type,
-    attak,
-    defense,
-    health
+    lvl
   };
-  return param;
 }
 
 module.exports = cretateUnit;
