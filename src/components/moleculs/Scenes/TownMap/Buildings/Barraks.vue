@@ -1,7 +1,5 @@
 <template>
-  <section class="storage">
-
-  </section>
+  <section class="storage"></section>
 </template>
 
 <script>
@@ -11,16 +9,16 @@ export default {
     townRaceName: String,
     currentTown: null,
     gloss: null,
-    buildingData: null,
+    buildingData: null
   },
-  created () {
-    console.log(this.buildingData)
+  created() {
+    console.log(this.buildingData);
   },
   data() {
     return {};
   },
   computed: {
-    storage(){
+    storage() {
       return this.currentTown.town.storage;
     }
   },

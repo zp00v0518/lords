@@ -1,13 +1,7 @@
 const army_types = {
-  arch: {
-    name: 'arch'
-  },
-  kon: {
-    name: 'kon'
-  },
-  pex: {
-    name: 'pex'
-  }
+  arch: 'arch',
+  kon: 'kon',
+  pex: 'pex'
 };
 
 module.exports = army_types;

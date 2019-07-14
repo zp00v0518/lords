@@ -3,7 +3,7 @@ const formPrice = Resources.formPrice;
 const Town = require('../../town/Town');
 const t = Town.listBuildings;
 const form_IfBuilding = Town.form_IfBuilding;
-const army_list = require('../../army/units/rapmart_units/list');
+const army_list = require('../../army/units/rampart_units/list');
 
 const buildings = {
     listBuildings: t,
@@ -221,7 +221,7 @@ const buildings = {
           effect:{
             addValue: 12
           },
-          unit: army_list.kentavr
+          unit: {name:army_list.kentavr}
         },
         2: {
           is: false,
@@ -231,7 +231,7 @@ const buildings = {
           effect: {
             addValue: 0,
           },
-          unit: army_list.kentavr_2
+          unit: {name:army_list.kentavr_2}
         }
       }
     },
@@ -246,7 +246,7 @@ const buildings = {
           effect: {
             addValue: 10,
           },
-          unit: army_list.gnom
+          unit: {name: army_list.gnom}
         },
         2: {
           is: false,
@@ -256,7 +256,7 @@ const buildings = {
           effect: {
             addValue: 0,
           },
-          unit: army_list.gnom_2
+          unit: {name: army_list.gnom_2}
         }
       }
     },
@@ -271,7 +271,7 @@ const buildings = {
           effect: {
             addValue: 8,
           },
-          unit: army_list.elf
+          unit: {name: army_list.elf}
         },
         2: {
           is: false,
@@ -281,7 +281,7 @@ const buildings = {
           effect: {
             addValue: 0,
           },
-          unit: army_list.elf_2
+          unit: {name: army_list.elf_2}
         }
       }
     },
@@ -296,7 +296,7 @@ const buildings = {
           effect: {
             addValue: 6,
           },
-          unit: army_list.pegas
+          unit:{name: army_list.pegas}
         },
         2: {
           is: false,
@@ -306,7 +306,7 @@ const buildings = {
           effect: {
             addValue: 0,
           },
-          unit: army_list.pegas_2
+          unit: {name:army_list.pegas_2}
         }
       }
     },
@@ -321,7 +321,7 @@ const buildings = {
           effect: {
             addValue: 4,
           },
-          unit: army_list.dendroid
+          unit: {name:army_list.dendroid}
         },
         2: {
           is: false,
@@ -331,7 +331,7 @@ const buildings = {
           effect: {
             addValue: 0,
           },
-          unit: army_list.dendroid_2
+          unit: {name: army_list.dendroid_2}
         }
       }
     },
@@ -346,7 +346,7 @@ const buildings = {
           effect: {
             addValue: 2,
           },
-          unit: army_list.unicorn
+          unit: {name: army_list.unicorn}
         },
         2: {
           is: false,
@@ -356,7 +356,7 @@ const buildings = {
           effect: {
             addValue: 0,
           },
-          unit: army_list.unicorn_2
+          unit: {name: army_list.unicorn_2}
         }
       }
     },
@@ -371,7 +371,7 @@ const buildings = {
           effect: {
             addValue: 1,
           },
-          unit: army_list.green_dragon
+          unit: {name: army_list.green_dragon}
         },
         2: {
           is: false,
@@ -381,7 +381,7 @@ const buildings = {
           effect: {
             addValue: 0,
           },
-          unit: army_list.green_dragon_2
+          unit: {name: army_list.green_dragon_2}
         }
       }
     }
