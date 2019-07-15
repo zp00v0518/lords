@@ -14,6 +14,7 @@
       @close="component.is  = false"
       :townRaceName="townRaceName"
       :currentTown="currentTown"
+      :buildingData="component.buildingData"
     ></Building>
   </div>
 </template>
@@ -50,7 +51,8 @@ export default {
       hover: null,
       component: {
         is: false,
-        name: ""
+        name: "",
+        buildingData: {}
       }
     };
   },
@@ -104,6 +106,7 @@ export default {
       // const mouseCoords = this.getCursorPositionOnScene(event);
       if (this.hover) {
         this.component.name = this.hover.class;
+        this.component.buildingData = this.hover.buildingData;
         this.component.is = true;
       }
       // this.ctx.beginPath();

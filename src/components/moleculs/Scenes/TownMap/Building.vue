@@ -4,7 +4,13 @@
       <div class="building__header-title">{{name}}</div>
       <Icon class="building__header-close" name="circle-close" @click.native="closeBuilding"></Icon>
     </div>
-    <component :is="name" :townRaceName="townRaceName" :currentTown="currentTown" :gloss="gloss"></component>
+    <component
+      :is="name"
+      :townRaceName="townRaceName"
+      :currentTown="currentTown"
+      :gloss="gloss"
+      :buildingData="buildingData"
+    ></component>
   </section>
 </template>
 
@@ -16,7 +22,8 @@ export default {
   props: {
     name: String,
     townRaceName: String,
-    currentTown: null
+    currentTown: null,
+    buildingData: null
   },
   components: {
     ...Buildings
@@ -62,6 +69,7 @@ export default {
     display: flex;
     justify-content: flex-end;
     &-title {
+      color: white;
       flex-grow: 10;
       @include center;
       text-transform: capitalize;
