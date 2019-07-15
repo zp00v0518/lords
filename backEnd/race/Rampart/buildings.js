@@ -231,7 +231,7 @@ const buildings = {
           effect: {
             addValue: 0,
           },
-          unit: {name:army_list.kentavr_2}
+          unit: {name:army_list.kentavr}
         }
       }
     },
@@ -256,7 +256,7 @@ const buildings = {
           effect: {
             addValue: 0,
           },
-          unit: {name: army_list.gnom_2}
+          unit: {name: army_list.gnom}
         }
       }
     },
@@ -281,7 +281,7 @@ const buildings = {
           effect: {
             addValue: 0,
           },
-          unit: {name: army_list.elf_2}
+          unit: {name: army_list.elf}
         }
       }
     },
@@ -306,7 +306,7 @@ const buildings = {
           effect: {
             addValue: 0,
           },
-          unit: {name:army_list.pegas_2}
+          unit: {name:army_list.pegas}
         }
       }
     },
@@ -331,7 +331,7 @@ const buildings = {
           effect: {
             addValue: 0,
           },
-          unit: {name: army_list.dendroid_2}
+          unit: {name: army_list.dendroid}
         }
       }
     },
@@ -356,7 +356,7 @@ const buildings = {
           effect: {
             addValue: 0,
           },
-          unit: {name: army_list.unicorn_2}
+          unit: {name: army_list.unicorn}
         }
       }
     },
@@ -381,7 +381,7 @@ const buildings = {
           effect: {
             addValue: 0,
           },
-          unit: {name: army_list.green_dragon_2}
+          unit: {name: army_list.green_dragon}
         }
       }
     }

@@ -8,7 +8,7 @@ function createPegas(lvl = 1) {
   if (lvl === 1) {
     const cost = {
       [type_resources.gold]: 600,
-      [type_resources.gem]: 600
+      [type_resources.gem]: 1
     };
     return createUnit({
       name: 'unicorn',
