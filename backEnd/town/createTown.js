@@ -9,6 +9,7 @@ const {
   createTavern,
   createHall
 } = require('./buildings');
+const {Army, createArmy} = require('../army/Army');
 let listMine = [];
 let townCount = 0;
 
@@ -50,7 +51,7 @@ function createTown(options) {
   return town;
 }
 
-function createRegionMap() {
+function createRegionMap(townIndex = 1) {
   const numSectionRegionMap = gameVariables.numSectionRegionMap;
   const { createMine } = tube;
   const regionMap = [];
@@ -65,6 +66,7 @@ function createRegionMap() {
     { x: 4, y: 2 },
     { x: 2, y: 4 }
   ];
+  const range_power_army = Army.army_base_range.map(i => i * townIndex)
 
   //создаю сетку региона
   for (let i = 0; i < numSectionRegionMap; i++) {
@@ -76,6 +78,8 @@ function createRegionMap() {
       section.x = i;
       section.y = h;
       section.type = Region.typeList.indexOf('forest'); //индекс леса
+      const army = createArmy({range_power_army});
+      section.army = army;
       //центр всегда является замком
       if (i == 2 && h == 2) {
         section.type = Region.typeList.indexOf('town'); //индекс замка
