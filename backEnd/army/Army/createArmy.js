@@ -5,7 +5,6 @@ function createArmy({
   stackRange = [1, 7],
   units = []
 }) {
-  console.log(units);
   const stack_count = getRandomNumber(stackRange[0], stackRange[1]);
   let power_army = getRandomNumber(range_power_army[0], range_power_army[1]);
   const stack_units = getUnits({ stack_count, units });

@@ -12,7 +12,7 @@ function createDendroid(lvl = 1) {
     return createUnit({
       name: 'dendroid',
       type: army_types.pex,
-      health: 50,
+      hp: 50,
       cost,
       lvl,
       race
@@ -24,7 +24,7 @@ function createDendroid(lvl = 1) {
     return createUnit({
       name: 'dendroid',
       type: army_types.pex,
-      health: 55,
+      hp: 55,
       cost,
       lvl,
       race

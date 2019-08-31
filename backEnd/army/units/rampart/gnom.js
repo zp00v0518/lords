@@ -12,7 +12,7 @@ function createGnom(lvl = 1) {
     return createUnit({
       name: 'gnom',
       type: army_types.pex,
-      health: 20,
+      hp: 20,
       cost,
       lvl,
       race
@@ -24,7 +24,7 @@ function createGnom(lvl = 1) {
     return createUnit({
       name: 'gnom',
       type: army_types.pex,
-      health: 25,
+      hp: 25,
       cost,
       lvl,
       race

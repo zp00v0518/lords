@@ -16,7 +16,7 @@ const Race = {
   getRandom() {
     const index = getRandomNumber(0);
     // const index = getRandomNumber(this.typeList.length - 1);
-    const name = this.typeList[name];
+    const name = this.typeList[index];
     return { name, index };
   }
 };

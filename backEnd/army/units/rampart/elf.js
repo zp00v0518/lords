@@ -12,7 +12,7 @@ function createElf(lvl = 1) {
     return createUnit({
       name: 'elf',
       type: army_types.arch,
-      health: 30,
+      hp: 30,
       cost,
       lvl,
       race
@@ -24,7 +24,7 @@ function createElf(lvl = 1) {
     return createUnit({
       name: 'elf',
       type: army_types.arch,
-      health: 35,
+      hp: 35,
       cost,
       lvl,
       race

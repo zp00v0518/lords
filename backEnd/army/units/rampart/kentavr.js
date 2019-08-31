@@ -12,7 +12,7 @@ function createKentavr(lvl = 1) {
     return createUnit({
       name: 'kentavr',
       type: army_types.kon,
-      health: 10,
+      hp: 10,
       cost,
       lvl,
       race
@@ -24,7 +24,7 @@ function createKentavr(lvl = 1) {
     return createUnit({
       name: 'kentavr',
       type: army_types.kon,
-      health: 12,
+      hp: 12,
       cost,
       lvl,
       race

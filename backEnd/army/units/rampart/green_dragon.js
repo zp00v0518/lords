@@ -13,7 +13,7 @@ function createGreenDragon(lvl = 1) {
     return createUnit({
       name: 'green_dragon',
       type: army_types.kon,
-      health: 70,
+      hp: 70,
       cost,
       lvl,
       race
@@ -26,7 +26,7 @@ function createGreenDragon(lvl = 1) {
     return createUnit({
       name: 'green_dragon',
       type: army_types.kon,
-      health: 75,
+      hp: 75,
       cost,
       lvl,
       race

@@ -13,7 +13,7 @@ function createPegas(lvl = 1) {
     return createUnit({
       name: 'unicorn',
       type: army_types.kon,
-      health: 60,
+      hp: 60,
       cost,
       lvl,
       race
@@ -26,7 +26,7 @@ function createPegas(lvl = 1) {
     return createUnit({
       name: 'unicorn',
       type: army_types.kon,
-      health: 65,
+      hp: 65,
       cost,
       lvl,
       race

@@ -9,7 +9,7 @@ const {
   createTavern,
   createHall
 } = require('./buildings');
-const {Army, createArmy} = require('../army/Army');
+const { Army, createArmy } = require('../army/Army');
 let listMine = [];
 let townCount = 0;
 
@@ -42,11 +42,11 @@ function createTown(options) {
     const barraks = createBarraks({});
     const key = barraks.class + `_${i + 1}`;
     town[key] = barraks;
-    town[key].type  = key;
+    town[key].type = key;
   }
   //если замок первый, то создается регион со стандартными шахтами и их положением
   if (options.status === 'new') {
-    town.regionMap = createRegionMap();
+    town.regionMap = createRegionMap(1);
   }
   return town;
 }
@@ -66,21 +66,24 @@ function createRegionMap(townIndex = 1) {
     { x: 4, y: 2 },
     { x: 2, y: 4 }
   ];
-  const range_power_army = Army.army_base_range.map(i => i * townIndex)
+  const range_power_army = Army.army_base_range.map(i => i * townIndex);
 
   //создаю сетку региона
   for (let i = 0; i < numSectionRegionMap; i++) {
     let row = [];
     regionMap.push(row);
+    const armyRace = Race.getRandom();
+    const units = Object.values(Race[armyRace.name].units);
+    // console.log(units, range_power_army)
     for (let h = 0; h < numSectionRegionMap; h++) {
       let section = {};
       section.id = countSection++;
       section.x = i;
       section.y = h;
       section.type = Region.typeList.indexOf('forest'); //индекс леса
-      const armyRace = Race.getRandom();
-      const units = Race[armyRace.name].units;
-      const army = createArmy({range_power_army, units});
+      // const armyRace = Race.getRandom();
+      // const units = Object.values(Race[armyRace.name].units);
+      const army = createArmy({ range_power_army, units });
       section.army = army;
       //центр всегда является замком
       if (i == 2 && h == 2) {
