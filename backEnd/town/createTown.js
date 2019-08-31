@@ -78,7 +78,9 @@ function createRegionMap(townIndex = 1) {
       section.x = i;
       section.y = h;
       section.type = Region.typeList.indexOf('forest'); //индекс леса
-      const army = createArmy({range_power_army});
+      const armyRace = Race.getRandom();
+      const units = Race[armyRace.name].units;
+      const army = createArmy({range_power_army, units});
       section.army = army;
       //центр всегда является замком
       if (i == 2 && h == 2) {
