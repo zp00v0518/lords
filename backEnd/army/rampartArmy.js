@@ -13,7 +13,7 @@ module.exports = {
           type: types.pex.name,
           attak: 5,
           defense: 5,
-          health: 10,
+          hp: 10,
           cost: { gold: 100 }
         })
       },
@@ -23,7 +23,7 @@ module.exports = {
           type: types.pex.name,
           attak: 10,
           defense: 10,
-          health: 15,
+          hp: 15,
           cost: { gold: 120 }
         })
       }

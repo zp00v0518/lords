@@ -4,31 +4,33 @@ const type_resources = require('../../../resources/type_resources');
 const types_races = require('../../../race/types_races');
 const race = types_races.rampart;
 
-function createKentavr(lvl = 1) {
+function createGreenDragon(lvl = 1) {
   if (lvl === 1) {
     const cost = {
-      [type_resources.gold]: 100
+      [type_resources.gold]: 700,
+      [type_resources.crystal]: 1
     };
     return createUnit({
-      name: 'kentavr',
+      name: 'green_dragon',
       type: army_types.kon,
-      health: 10,
+      hp: 70,
       cost,
       lvl,
       race
     });
   } else if (lvl === 2) {
     const cost = {
-      [type_resources.gold]: 125
+      [type_resources.gold]: 750,
+      [type_resources.crystal]: 2
     };
     return createUnit({
-      name: 'kentavr',
+      name: 'green_dragon',
       type: army_types.kon,
-      health: 12,
+      hp: 75,
       cost,
       lvl,
       race
     });
   }
 }
-module.exports = createKentavr;
+module.exports = createGreenDragon;

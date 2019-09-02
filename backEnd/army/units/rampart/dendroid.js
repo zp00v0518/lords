@@ -4,31 +4,31 @@ const type_resources = require('../../../resources/type_resources');
 const types_races = require('../../../race/types_races');
 const race = types_races.rampart;
 
-function createPegas(lvl = 1) {
+function createDendroid(lvl = 1) {
   if (lvl === 1) {
     const cost = {
-      [type_resources.gold]: 400
+      [type_resources.gold]: 500
     };
     return createUnit({
-      name: 'pegas',
-      type: army_types.kon,
-      health: 40,
+      name: 'dendroid',
+      type: army_types.pex,
+      hp: 50,
       cost,
       lvl,
       race
     });
   } else if (lvl === 2) {
     const cost = {
-      [type_resources.gold]: 450
+      [type_resources.gold]: 550
     };
     return createUnit({
-      name: 'pegas',
-      type: army_types.kon,
-      health: 45,
+      name: 'dendroid',
+      type: army_types.pex,
+      hp: 55,
       cost,
       lvl,
       race
     });
   }
 }
-module.exports = createPegas;
+module.exports = createDendroid;

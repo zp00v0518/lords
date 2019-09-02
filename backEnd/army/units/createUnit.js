@@ -1,7 +1,7 @@
-function cretateUnit({ name, cost, type, health, race, lvl = 1 }) {
+function cretateUnit({ name, cost, type, hp, race, lvl = 1 }) {
   return {
     cost,
-    health,
+    hp,
     name,
     type,
     lvl,

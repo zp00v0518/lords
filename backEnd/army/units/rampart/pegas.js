@@ -4,31 +4,31 @@ const type_resources = require('../../../resources/type_resources');
 const types_races = require('../../../race/types_races');
 const race = types_races.rampart;
 
-function createGnom(lvl = 1) {
+function createPegas(lvl = 1) {
   if (lvl === 1) {
     const cost = {
-      [type_resources.gold]: 200
+      [type_resources.gold]: 400
     };
     return createUnit({
-      name: 'gnom',
-      type: army_types.pex,
-      health: 20,
+      name: 'pegas',
+      type: army_types.kon,
+      hp: 40,
       cost,
       lvl,
       race
     });
   } else if (lvl === 2) {
     const cost = {
-      [type_resources.gold]: 225
+      [type_resources.gold]: 450
     };
     return createUnit({
-      name: 'gnom',
-      type: army_types.pex,
-      health: 25,
+      name: 'pegas',
+      type: army_types.kon,
+      hp: 45,
       cost,
       lvl,
       race
     });
   }
 }
-module.exports = createGnom;
+module.exports = createPegas;

@@ -12,7 +12,8 @@ const Army = {
     barraks_5: { name: type.barraks + '_5', maxLvl: 2 },
     barraks_6: { name: type.barraks + '_6', maxLvl: 2 },
     barraks_7: { name: type.barraks + '_7', maxLvl: 2 }
-  }
+  },
+  army_base_range: [1000, 2000]
 };
 
 module.exports = Army;
