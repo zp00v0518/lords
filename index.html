@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>lords</title>
     <script src="js/template/templateFunc.js"></script>
+    <script src="js/template/sourceLoader.js"></script>
+    <script src="js/list_img_for_canvas.js"></script>
     <!-- <script src="js/liveReload.js"></script> -->
   </head>
   <body>
-    <input id="dev" type="text" style="width:400px; position: absolute">
+    <input id="dev" type="text" style="width:400px; position: absolute" />
+    <figure id="gameLoadingWrap">
+      <div class="game_loading_item">
+        <h4 class="text">Загрузка ...</h4>
+        <div class="loaading_block">
+          <div id="loadedBlock" class="loaded_block"></div>
+        </div>
+      </div>
+    </figure>
     <div id="app"></div>
     <!-- built files will be auto injected -->
-    <script type="text/javascript" src="dist/app.js"></script></body>
+    <!-- <script type="text/javascript" src="static/app.js"></script> -->
+    <script type="text/javascript" src="js/start.js"></script>
     <script src="js/developer.js"></script>
   </body>
 </html>
