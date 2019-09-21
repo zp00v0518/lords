@@ -2,6 +2,7 @@
 const Rampart = require('./Rampart');
 const types_races = require('./types_races');
 const { getRandomNumber } = require('template_func');
+const Heroes = require('../heroes');
 
 const Race = {
   types: types_races,
@@ -13,6 +14,7 @@ const Race = {
   //   }
   // },
   elf: {},
+  heroes: Heroes,
   getRandom() {
     const index = getRandomNumber(0);
     // const index = getRandomNumber(this.typeList.length - 1);

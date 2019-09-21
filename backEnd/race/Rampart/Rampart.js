@@ -1,6 +1,7 @@
 const mineTypeList = require('../../region/mine/Mine.js').typeList;
 const buildings = require('./buildings');
 const rampart_units = require('../../army/units/rampart');
+const Heroes = require('../../heroes');
 
 const Rampart = {
   mine: {
@@ -16,6 +17,7 @@ const Rampart = {
     ]
   },
   buildings,
+  heroes: Heroes.race.rampart,
   units: rampart_units
 };
 
