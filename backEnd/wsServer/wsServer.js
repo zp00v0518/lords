@@ -30,7 +30,8 @@ const template = {
   chanel: '',
   privat: '',
   status: true,
-  text: 'Добро пожаловать в мой пэт-проект. После старта сессии, в чате отображается до 30 последних сообщений ',
+  text:
+    'Добро пожаловать в мой пэт-проект. После старта сессии, в чате отображается до 30 последних сообщений ',
   time: '2019-03-10T22:00:00.934Z',
   type: 'chatMessage'
 };
@@ -42,24 +43,30 @@ wsServer.on('connection', (ws, req) => {
   const cookies = new Cookies(req);
   const userCookies = cookies.get('user');
   let User;
-  let start = {};
-  if(server){
-    start = {
+  let startMessage = {};
+  if (server) {
+    startMessage = {
       status: true,
       type: 'startMessages',
       chat: chat[server].map(item => item)
     };
-    start.chat.unshift(template)
+    startMessage.chat.unshift(template);
   }
-  
+
   findUserInDB(userCookies).then(user => {
     if (user) {
-      User = user;
-      UserOnline[server][User._id] = {};
-      UserOnline[server][User._id].ws = ws;
-      UserOnline[server].count++;
-      UserOnline[server][User._id].user = User;
       getInfoForStartGame(user, server).then(infoForStartGame => {
+        if (infoForStartGame.status === 'no_town') {
+          startMessage.type = 'choice_heroe';
+          startMessage.chat = [];
+          ws.send(JSON.stringify(startMessage));
+          return;
+        }
+        User = user;
+        UserOnline[server][User._id] = {};
+        UserOnline[server][User._id].ws = ws;
+        UserOnline[server].count++;
+        UserOnline[server][User._id].user = User;
         infoForStartGame.sectors.forEach(item => {
           GlobalMap[server][item.x][item.y] = item;
           calcStorageNowValue(item.town.storage);
@@ -77,11 +84,11 @@ wsServer.on('connection', (ws, req) => {
           UserOnline[server][User._id].user,
           server,
           currentMap => {
-            start.eventsList = infoForStartGame.eventsList;
-            start.currentMap = currentMap;
-            start.sectors = infoForStartGame.sectors;
-            start.dictionary = getLangDictionary(user.lang);
-            ws.send(JSON.stringify(start));
+            startMessage.eventsList = infoForStartGame.eventsList;
+            startMessage.currentMap = currentMap;
+            startMessage.sectors = infoForStartGame.sectors;
+            startMessage.dictionary = getLangDictionary(user.lang);
+            ws.send(JSON.stringify(startMessage));
           }
         );
       });
