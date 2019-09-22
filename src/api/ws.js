@@ -63,7 +63,7 @@ class WS {
   }
 
   choiceHeroes(message) {
-    this.store.commit('CHOICHE_HEROES', {status: true})
+    this.store.commit('CHOICHE_HEROES', { status: true });
   }
 
   reload() {

@@ -11,6 +11,7 @@ const {
 } = require('../tube.js');
 const WS = require('ws');
 const watcher = require('../liveReload/watchFs.js');
+const { Race } = require('../race');
 const Cookies = require('cookies');
 const { tryJsonParse } = require('template_func');
 const getCollectionName = srcRequire('/template_modules/getCollectionName');
@@ -25,19 +26,10 @@ class WsServer {
     this.server.on(event, callback);
   }
 }
-const template = {
-  author: 'admin',
-  chanel: '',
-  privat: '',
-  status: true,
-  text:
-    'Добро пожаловать в мой пэт-проект. После старта сессии, в чате отображается до 30 последних сообщений ',
-  time: '2019-03-10T22:00:00.934Z',
-  type: 'chatMessage'
-};
 
 const wsServer = new WsServer();
 wsServer.init(config.server.port.ws);
+
 wsServer.on('connection', (ws, req) => {
   const server = getCollectionName(req.url.split('/')[1]);
   const cookies = new Cookies(req);
@@ -50,14 +42,21 @@ wsServer.on('connection', (ws, req) => {
       type: 'startMessages',
       chat: chat[server].map(item => item)
     };
-    startMessage.chat.unshift(template);
+    startMessage.chat.unshift(chat.template);
+  } else {
+    const message = {
+      status: false,
+      redirectUrl: '/'
+    };
+    ws.send(JSON.stringify(message));
+    return;
   }
 
   findUserInDB(userCookies).then(user => {
     if (user) {
       getInfoForStartGame(user, server).then(infoForStartGame => {
         if (infoForStartGame.status === 'no_town') {
-          startMessage.type = 'choice_heroe';
+          startMessage.type = 'choiceHeroes';
           startMessage.chat = [];
           ws.send(JSON.stringify(startMessage));
           return;
