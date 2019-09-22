@@ -13,16 +13,12 @@ function getInfoForStartGame(user, server, callback = function() {}) {
           sectors: []
         };
         if (findSectors.length === 0) {
-          infoForStartGame.status = 'no_town'
+          infoForStartGame.status = 'no_town';
           // addNewUserToGlobalMap(user, server)
           //   .then(sectorGlobalMap => {
           //     infoForStartGame.sectors.push(sectorGlobalMap);
-          //     resolve(infoForStartGame);
-          //     return callback(null, infoForStartGame);
-          //   })
-          //   .catch(err => {
-          //     console.log(err);
-          //   });
+          resolve(infoForStartGame);
+          return callback(infoForStartGame);
         } else {
           formEventsList(user, server).then(eventsList => {
             //  нужно для того, чтобы в UserOnline.sectors хранились ссылки на обекты из GlobalMap

@@ -6,13 +6,9 @@ const Heroes = require('../heroes');
 
 const Race = {
   types: types_races,
-  typeList: ['rampart', 'elf'],
-  rampart: Rampart,
-  // rampart: {
-  //   mine: {
-  //     default: [mineTypeList[0], mineTypeList[1], mineTypeList[2], mineTypeList[6]]
-  //   }
-  // },
+  typeList: ['rampart'],
+  // typeList: ['rampart', 'elf'],
+  [`${types_races.rampart}`]: Rampart,
   elf: {},
   heroes: Heroes,
   getRandom() {
@@ -20,6 +16,19 @@ const Race = {
     // const index = getRandomNumber(this.typeList.length - 1);
     const name = this.typeList[index];
     return { name, index };
+  },
+  getRacesForChoice() {
+    const { types } = this;
+    const arr = Object.keys(types).map(key => {
+      const type = types[key];
+      const race = this[type];
+      const template = {
+        type: race.type,
+        heroes: race.heroes
+      };
+      return template;
+    });
+    return arr;
   }
 };
 module.exports = Race;

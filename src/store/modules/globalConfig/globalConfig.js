@@ -13,7 +13,13 @@ const globalConfig = {
   state: {
     races: fromBackend.Race,
     listBuildings: fromBackend.Town.listBuildings,
-    all: fromBackend
+    all: fromBackend,
+    choiceHeroes: false
+  },
+  mutations: {
+    CHOICHE_HEROES(state, payload) {
+      state.choiceHeroes = payload.status;
+    }
   }
 };
 export default globalConfig;
