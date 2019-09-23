@@ -67,6 +67,7 @@ class WS {
   }
 
   reload() {
+    console.log('reload')
     location.reload();
   }
   controlState(eventData) {

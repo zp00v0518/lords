@@ -49,7 +49,7 @@ export default {
     }
   },
   beforeDestroy() {
-    document.removEventListener("keyup", this.handlerKeyup);
+    document.removeEventListener("keyup", this.handlerKeyup);
   }
 };
 </script>
