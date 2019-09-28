@@ -7,6 +7,4 @@ const images = {
   )
 };
 
-console.log(images)
-
 module.exports = images;

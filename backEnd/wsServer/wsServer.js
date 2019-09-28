@@ -11,7 +11,7 @@ const {
 } = require('../tube.js');
 const WS = require('ws');
 const watcher = require('../liveReload/watchFs.js');
-const { Race } = require('../race');
+// const { Race } = require('../race');
 const Cookies = require('cookies');
 const { tryJsonParse } = require('template_func');
 const getCollectionName = srcRequire('/template_modules/getCollectionName');
@@ -56,7 +56,7 @@ wsServer.on('connection', (ws, req) => {
     if (user) {
       getInfoForStartGame(user, server).then(infoForStartGame => {
         if (infoForStartGame.status === 'no_town') {
-          startMessage.type = 'ChoicesRace';
+          startMessage.type = 'choicesRace';
           startMessage.chat = [];
           ws.send(JSON.stringify(startMessage));
           return;

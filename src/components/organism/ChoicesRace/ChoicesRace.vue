@@ -7,7 +7,7 @@ export default {
   name: "ChoicesRace",
   created() {
     const races = this.globalConfig.races;
-    console.log(races.getRacesForChoice());
+    console.log(races.heroes.getHeroes()); 
   }
 };
 </script>
