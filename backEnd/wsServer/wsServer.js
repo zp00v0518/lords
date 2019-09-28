@@ -126,7 +126,7 @@ wsServer.on('connection', (ws, req) => {
 });
 
 function callbackForWatcher() {
-  watcher(config.watchFolder, callbackForWatcher);
+  watcher(config.frontEnd.watchFolder, callbackForWatcher);
   Object.keys(UserOnline).forEach(server => {
     if (UserOnline[server].count > 0) {
       const message = {
@@ -141,4 +141,4 @@ function callbackForWatcher() {
     }
   });
 }
-watcher(config.watchFolder, callbackForWatcher);
+watcher(config.frontEnd.watchFolder, callbackForWatcher);

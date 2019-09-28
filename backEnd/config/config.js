@@ -7,9 +7,12 @@ module.exports = {
       http: 4000,
       ws: 4001
     },
-    ready_to_work: false,
+    ready_to_work: false
   },
-  watchFolder: path.resolve(__dirname, '../../frontEnd'),
+  frontEnd: {
+    watchFolder: path.resolve(__dirname, '../../frontEnd'),
+    folder: 'frontEnd'
+  },
   db: {
     check: false,
     name: 'lords',
