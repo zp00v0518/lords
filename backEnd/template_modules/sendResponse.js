@@ -6,7 +6,6 @@ function sendResponse(
 ) {
   response.writeHead(status, { "Content-Type": contentType });
   response.end(data);
-  // console.log("*********Ответ успешно отправлен****************");
 }
 
 module.exports = sendResponse;

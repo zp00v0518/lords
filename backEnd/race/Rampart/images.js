@@ -6,6 +6,5 @@ const images = {
     'frontEnd/img/for_canvas/towns/rampart/ico/rampart.png'
   )
 };
-console.log(images);
 
 module.exports = images;

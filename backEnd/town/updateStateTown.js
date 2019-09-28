@@ -8,7 +8,6 @@ function updateStateTown(
   ops = { upsert: false },
   callback = function() {}
 ) {
-  // console.log("********** updateStateTown ************");
   return new Promise((reslove, reject) => {
     const optionsForUpdate = {
       collectionName: serverName,

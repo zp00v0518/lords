@@ -4,7 +4,6 @@ const mongo = new connectMongoDB();
 mongo.connect({ dbName: config.db.name });
 
 function findInDB() {
-  // console.log("**********findInDB work*********");
   this.one = function(options, callback = function() {}) {
     return new Promise((resolve, reject) => {
       let collection = mongo.open(options.collectionName);

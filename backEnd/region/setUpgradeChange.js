@@ -4,7 +4,6 @@ const tube = require('../tube.js');
 function setUpgradeChange( cell, persent = 100,  sector, info,  callback = function() {}) {
   const { addEventToDB } = tube;
   return new Promise((resolve, reject) => {
-    // console.log("********** setUpgradeChange Work ************");
     const building = cell.sector;
     const lvl = building.lvl;
     const classInstance = building.class;

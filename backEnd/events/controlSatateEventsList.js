@@ -8,7 +8,6 @@ const { updateDB } = require("../workWithMongoDB");
 const update = new updateDB();
 
 function controlSatateEventsList(eventsList = []) {
-  // console.log("***controlSatateEventsList work***")
   if (eventsList.length === 0) return eventsList;
   for (let i = 0; i < eventsList.length; i++) {
     const item = eventsList[i];

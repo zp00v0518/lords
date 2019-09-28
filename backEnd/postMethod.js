@@ -11,12 +11,10 @@ const template = require("template_func");
 const log = new template.Log(__filename);
 
 function postMethod(req, res, startPath) {
-  // console.log("********** PostMethod Work ************");
   let urlParse = url.parse(req.url);
   let pathName = urlParse.path;
   let cookies = new Cookies(req, res);
   let userCookies = cookies.get("user");
-  // log.log(pathName);
   reqOn(req)
     .then(data => {
       let requestData = template.tryJsonParse(data);

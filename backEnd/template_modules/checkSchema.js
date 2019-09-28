@@ -8,7 +8,6 @@ function checkSchema(obj, schema) {
   function forEach(obj) {
     for (let key in obj) {
       const type = checkType(obj[key]);
-      // console.log(type)
       if (type !== schema[key].type) {
         flag = false;
         break;
@@ -20,7 +19,6 @@ function checkSchema(obj, schema) {
       if (type === "number") {
         if (schema[key].min === 0 || schema[key].min || schema[key].max || schema[key].max === 0) {
           if (value < schema[key].min || value > schema[key].max ) {
-            console.log(123)
             flag = false;
             break;
           }

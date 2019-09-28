@@ -5,7 +5,6 @@ const config = require("../config/config.js");
 function Mongo() {
   (this.open = function(collectionName) {
     this.collection = this.db.collection(collectionName);
-    // console.log(`Успешное подключение к коллекции:${collectionName}`);
     return this.collection;
   }),
     (this.close = function() {
