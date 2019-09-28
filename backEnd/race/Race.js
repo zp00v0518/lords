@@ -17,16 +17,13 @@ const Race = {
     const name = this.typeList[index];
     return { name, index };
   },
-  getRacesForChoice() {
+  getRace(race_name) {
     const { types } = this;
+    if (race_name) return this[race_name];
     const arr = Object.keys(types).map(key => {
       const type = types[key];
       const race = this[type];
-      const template = {
-        type: race.type,
-        heroes: race.heroes
-      };
-      return template;
+      return race;
     });
     return arr;
   }
