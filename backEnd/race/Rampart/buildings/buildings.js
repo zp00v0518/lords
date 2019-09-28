@@ -1,9 +1,9 @@
-const Resources = require('../../resources/Resources');
+const Resources = require('../../../resources/Resources');
 const formPrice = Resources.formPrice;
-const Town = require('../../town/Town');
+const Town = require('../../../town/Town');
 const t = Town.listBuildings;
 const form_IfBuilding = Town.form_IfBuilding;
-const army_list = require('../../army/units/rampart/list');
+const army_list = require('../../../army/units/rampart/list');
 
 const buildings = {
     listBuildings: t,

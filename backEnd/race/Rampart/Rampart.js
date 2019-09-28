@@ -19,7 +19,7 @@ const Rampart = {
     ]
   },
   buildings,
-  heroes: Heroes.race.rampart,
+  heroes: Heroes.races.rampart,
   units: rampart_units
 };
 
