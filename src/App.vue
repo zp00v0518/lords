@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <template v-if="choicesHeroes">
-      <ChoicesHeroes />
+      <ChoicesRace />
     </template>
     <template v-else>
       <router-view />
@@ -10,15 +10,15 @@
 </template>
 
 <script>
-import ChoicesHeroes from "./components/organism/ChoicesHeroes";
+import ChoicesRace from "./components/organism/ChoicesRace";
 export default {
   name: "App",
   components: {
-    ChoicesHeroes
+    ChoicesRace
   },
   computed: {
     choicesHeroes() {
-      return this.globalConfig.choiceHeroes;
+      return this.globalConfig.choicesRace;
     }
   }
 };

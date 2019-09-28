@@ -14,11 +14,11 @@ const globalConfig = {
     races: fromBackend.Race,
     listBuildings: fromBackend.Town.listBuildings,
     all: fromBackend,
-    choiceHeroes: false
+    choicesRace: false
   },
   mutations: {
-    CHOICHE_HEROES(state, payload) {
-      state.choiceHeroes = payload.status;
+    CHOICE_RASE(state, payload) {
+      state.choicesRace = payload.status;
     }
   }
 };

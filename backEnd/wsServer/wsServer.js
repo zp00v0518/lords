@@ -56,7 +56,7 @@ wsServer.on('connection', (ws, req) => {
     if (user) {
       getInfoForStartGame(user, server).then(infoForStartGame => {
         if (infoForStartGame.status === 'no_town') {
-          startMessage.type = 'choiceHeroes';
+          startMessage.type = 'ChoicesRace';
           startMessage.chat = [];
           ws.send(JSON.stringify(startMessage));
           return;

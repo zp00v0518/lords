@@ -13,7 +13,7 @@ class WS {
       controlState: eventData => this.controlState(eventData),
       consoles: eventData => this.consoles(eventData),
       setEvents: eventData => this.setEvents(eventData),
-      choiceHeroes: eventData => this.choiceHeroes(eventData)
+      choicesRace: eventData => this.choicesRace(eventData)
     };
     this.outgoing = {};
   }
@@ -62,8 +62,8 @@ class WS {
     this.sendMessage(message);
   }
 
-  choiceHeroes(message) {
-    this.store.commit('CHOICHE_HEROES', { status: true });
+  choicesRace(message) {
+    this.store.commit('CHOICE_RASE', { status: true });
   }
 
   reload() {
