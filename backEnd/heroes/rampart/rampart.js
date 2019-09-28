@@ -1,42 +1,25 @@
-const types = require('../types');
+const typeList = require('../types').list;
+const createHeroes = require('../createHeroes');
 
 const rampart = {
-  [types[0]]: {
-    default: {
-      attack: 3,
-      def: 2,
-      magic: 0
-    },
-    up: {
-      attack: 50,
-      def: 30,
-      magic: 20
-    }
-  },
-  [types[1]]: {
-    default: {
-      attack: 1,
-      def: 3,
-      magic: 1
-    },
-    up: {
-      attack: 20,
-      def: 50,
-      magic: 30
-    }
-  },
-  [types[2]]: {
-    default: {
-      attack: 0,
-      def: 2,
-      magic: 3
-    },
-    up: {
-      attack: 20,
-      def: 30,
-      magic: 50
-    }
-  }
+  0: createHeroes({
+    type: typeList[0],
+    progress: [50, 30, 20],
+    img: 'kir',
+    name: 'Kirr'
+  }),
+  1: createHeroes({
+    type: typeList[1],
+    progress: [20, 50, 30],
+    img: 'klency',
+    name: 'Klency'
+  }),
+  2: createHeroes({
+    type: typeList[2],
+    progress: [20, 30, 50],
+    img: 'elezar',
+    name: 'Elezar'
+  })
 };
 
 module.exports = rampart;
