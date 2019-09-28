@@ -5,11 +5,10 @@
 <script>
 export default {
   name: "ChoicesRace",
-  created () {
+  created() {
     const races = this.globalConfig.races;
-    console.log(races.getRacesForChoice())
-  },
-
+    console.log(races.getRacesForChoice());
+  }
 };
 </script>
 

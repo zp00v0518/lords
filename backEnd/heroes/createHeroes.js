@@ -5,9 +5,7 @@ function createHeroes({type, progress, img, name}){
   const heroes = {
     name,
     progress: setProgress(progress),
-    img: {
-      name: img
-    }
+    img
   }
   Object.assign(heroes, types[type])
   return heroes;
