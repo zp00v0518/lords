@@ -31,7 +31,8 @@ export default {
       listRaces: [],
       listHeroes: [],
       itogMessage: {
-        type: "choicesRace"
+        type: "choicesRace",
+        url: location.pathname,
       }
     };
   },
@@ -70,7 +71,7 @@ export default {
       itogMessage[code] = value.type;
     },
     sendChoiceToServer() {
-      console.log(this.itogMessage);
+      this.$ws.sendMessage(this.itogMessage);
     }
   }
 };

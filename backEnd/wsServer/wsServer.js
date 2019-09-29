@@ -112,12 +112,16 @@ wsServer.on('connection', (ws, req) => {
       console.log('Не удалось распарсить строку пришедшую от клиента');
       ws.send(message);
     }
-    const baseInfo = {
-      player: UserOnline[server][User._id],
-      server,
-      userCookies
-    };
+    if (mess.type === 'choicesRace') {
+      allHandler[mess.type](mess, { userCookies, ws });
+      return;
+    }
     if (allHandler[mess.type]) {
+      const baseInfo = {
+        player: UserOnline[server][User._id],
+        server,
+        userCookies
+      };
       allHandler[mess.type](mess, baseInfo);
     } else {
       ws.send(message);

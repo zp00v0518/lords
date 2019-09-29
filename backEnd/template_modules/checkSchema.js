@@ -8,17 +8,25 @@ function checkSchema(obj, schema) {
   function forEach(obj) {
     for (let key in obj) {
       const type = checkType(obj[key]);
+      if (!schema[key]) {
+        continue;
+      }
       if (type !== schema[key].type) {
         flag = false;
         break;
       }
-      if (type === "object") {
+      if (type === 'object') {
         forEach(obj[key]);
       }
       const value = obj[key];
-      if (type === "number") {
-        if (schema[key].min === 0 || schema[key].min || schema[key].max || schema[key].max === 0) {
-          if (value < schema[key].min || value > schema[key].max ) {
+      if (type === 'number') {
+        if (
+          schema[key].min === 0 ||
+          schema[key].min ||
+          schema[key].max ||
+          schema[key].max === 0
+        ) {
+          if (value < schema[key].min || value > schema[key].max) {
             flag = false;
             break;
           }
@@ -27,14 +35,14 @@ function checkSchema(obj, schema) {
       if (type === 'string' && schema[key].regExp) {
         flag = schema[key].regExp.test(value);
         schema[key].regExp.lastIndex = 0;
-        if(!flag){
+        if (!flag) {
           break;
         }
       }
     }
   }
-  if(!flag){
-    console.log('bad shema')
+  if (!flag) {
+    console.log('bad shema');
   }
   return flag;
 }
