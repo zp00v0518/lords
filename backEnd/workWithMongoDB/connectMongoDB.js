@@ -1,5 +1,5 @@
-const mongoClient = require("mongodb").MongoClient;
-const config = require("../config/config.js");
+const mongoClient = require('mongodb').MongoClient;
+const config = require('../config/config.js');
 // const {config} = require('../tube.js')
 
 function Mongo() {
@@ -9,13 +9,13 @@ function Mongo() {
   }),
     (this.close = function() {
       this.client.close();
-      console.log("Подключение к Монго закрыто");
+      console.log('Подключение к Монго закрыто');
       return;
     }),
     (this.connect = function(options = {}, callback = function() {}) {
       return new Promise((resolve, reject) => {
-        let dbName = options.dbName || "test";
-        this.url = options.url || "mongodb://localhost:27017";
+        let dbName = options.dbName || 'test';
+        this.url = options.url || 'mongodb://localhost:27017';
         mongoClient.connect(
           this.url,
           { useNewUrlParser: true },
@@ -25,7 +25,7 @@ function Mongo() {
               reject(err);
               throw err;
             }
-            console.log("Подключение к Монго прошло успешно");
+            console.log('Подключение к Монго прошло успешно');
             this.db = client.db(dbName);
             this.client = client;
             config.db.check = true;
