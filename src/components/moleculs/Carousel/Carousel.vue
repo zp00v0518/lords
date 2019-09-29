@@ -30,9 +30,6 @@ export default {
     data: { type: Array, default: () => [] },
     code: { type: String, default: "carousel" }
   },
-  created() {
-    console.log(this.data);
-  },
   data() {
     return {
       active: 0
