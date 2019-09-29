@@ -1,16 +1,79 @@
 <template>
-  <div>ChoicesRace</div>
+  <div class="choices-race">
+    <h3 class="choices-race__title">Выберите расу и героя</h3>
+    <div class="choices-race__content">
+      <Carousel class="choices-race__item" :data="listRaces" :code="'race'"/>
+      <Carousel class="choices-race__item" :data="listHeroes" @carousel-change-item='handlerChangeItem' :code="'heroes'"/>
+    </div>
+
+  </div>
 </template>
 
 <script>
+import Carousel from "../../moleculs/Carousel";
+
 export default {
   name: "ChoicesRace",
+  components: {
+    Carousel,
+  },
+  data() {
+    return {
+      listRaces: [],
+      listHeroes: [],
+      itogMessage: {
+        type: "choicesRace",
+      },
+    }
+  },
   created() {
-    const races = this.globalConfig.races;
-    console.log(races.heroes.getHeroes()); 
-  }
+    this.createListRaces();
+    this.createListHeroes('rampart');
+  },
+  methods: {
+    createListRaces() {
+      const races = this.globalConfig.races;
+      const result = races.getRace().map(item => {
+        const template = {
+          type: item.type,
+          url:`${item.images.ico.dir}/${item.images.ico.base}`,
+          title: item.type,
+        };
+        return template;
+      });
+      this.listRaces = result;
+      this.itogMessage.race = this.listRaces[0].type;
+    
+    },
+    createListHeroes(type_race){
+      const races = this.globalConfig.races;
+      const heroes = races.heroes.getHeroes(type_race);
+      const result = heroes.map(item => {
+        item.url =`${item.img.ava.dir}/${item.img.ava.base}`;
+        item.title = item.name;
+        return item;
+      })
+      this.listHeroes = result;
+    },
+    handlerChangeItem(event){
+      console.log(event)
+    }
+  },
 };
 </script>
 
 <style lang="scss">
+.choices-race{
+  align-self: flex-start;
+  margin-top: 100px;
+  &__content{
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item{
+    height: 50%;
+    width: 100%;
+  }
+}
 </style>
