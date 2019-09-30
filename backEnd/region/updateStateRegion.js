@@ -8,7 +8,6 @@ function updateStateRegion(
   ops = { upsert: false },
   callback = function() {}
 ) {
-  // console.log("********** updateStateRegion ************");
   return new Promise((reslove, reject) => {
     const optionsForUpdate = {
       collectionName: serverName,

@@ -74,7 +74,6 @@ function createRegionMap(townIndex = 1) {
     regionMap.push(row);
     const armyRace = Race.getRandom();
     const units = Object.values(Race[armyRace.name].units);
-    // console.log(units, range_power_army)
     for (let h = 0; h < numSectionRegionMap; h++) {
       let section = {};
       section.id = countSection++;

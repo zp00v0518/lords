@@ -1,8 +1,13 @@
 const mineTypeList = require('../../region/mine/Mine.js').typeList;
 const buildings = require('./buildings');
 const rampart_units = require('../../army/units/rampart');
+const Heroes = require('../../heroes');
+const types_races = require('../types_races');
+const images = require('./images.js');
 
 const Rampart = {
+  images,
+  type: types_races.rampart,
   mine: {
     default: [
       mineTypeList[0],
@@ -16,6 +21,7 @@ const Rampart = {
     ]
   },
   buildings,
+  heroes: Heroes.races.rampart,
   units: rampart_units
 };
 

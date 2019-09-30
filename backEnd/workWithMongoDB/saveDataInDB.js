@@ -3,7 +3,6 @@ const tube = require('../tube.js');
 const serverList = gameVariables.serverList;
 
 function saveDataInDB(param) {
-  // console.log("********** saveDataInDB ************");
   if (param.target == 'all') {
     for (let i = 0; i < serverList.length; i++) {
       const serverName = serverList[i].collectionName;

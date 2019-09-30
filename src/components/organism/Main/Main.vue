@@ -1,6 +1,5 @@
 <template>
   <main class="main" :style="{width: mainSize.width, height: mainSize.height}">
-    <!-- <main class="main"> -->
     <Vheader></Vheader>
     <div class="main__content">
       <div class="main__scenes" ref="scenes">

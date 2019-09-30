@@ -12,7 +12,8 @@ class WS {
       upgradeBuilding: eventData => this.upgradeBuilding(eventData),
       controlState: eventData => this.controlState(eventData),
       consoles: eventData => this.consoles(eventData),
-      setEvents: eventData => this.setEvents(eventData)
+      setEvents: eventData => this.setEvents(eventData),
+      choicesRace: eventData => this.choicesRace(eventData)
     };
     this.outgoing = {};
   }
@@ -60,7 +61,13 @@ class WS {
     message.type = 'chatMessage';
     this.sendMessage(message);
   }
+
+  choicesRace(message) {
+    this.store.commit('CHOICE_RASE', { status: true });
+  }
+
   reload() {
+    console.log('reload')
     location.reload();
   }
   controlState(eventData) {

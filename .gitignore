@@ -1,6 +1,7 @@
 .DS_Store
 node_modules/
 frontEnd/dist/
+frontEnd/static/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

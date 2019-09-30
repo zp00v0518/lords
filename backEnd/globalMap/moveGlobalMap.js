@@ -1,7 +1,6 @@
 const { getGlobalMapSector } = require("../tube.js");
 
 function moveGlobalMap(message, info, callback = function() {}) {
-    // console.log("********** moveGlobalMap Work ************");
     const { player, server } = info;
     const { way, zoom} = message;
     const { user, ws } = player;

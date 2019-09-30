@@ -6,7 +6,6 @@ const update = new updateDB();
 //добавляю нового Игрока на глобальную карту
 function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
   const { createTown } = tube;
-  // console.log("********** addNewUserToGlobalMap Work ************");
   return new Promise((resolve, reject) => {
     checkUserPosition(serverName, (x, y) => {
       const newTown = createTown({ status: 'new', name: 'New Castle' });
