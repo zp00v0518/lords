@@ -14,6 +14,7 @@ function getInfoForStartGame(user, server, callback = function() {}) {
         };
         if (findSectors.length === 0) {
           infoForStartGame.status = 'no_town';
+          // логика добавления нового юзера перенесаны в choicesRace
           // addNewUserToGlobalMap(user, server)
           //   .then(sectorGlobalMap => {
           //     infoForStartGame.sectors.push(sectorGlobalMap);

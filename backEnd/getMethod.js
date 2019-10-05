@@ -51,6 +51,7 @@ function getMethod(req, res, startPath) {
           //отправляем пользователя в личный кабинет
           pathName = config.listFile.html.cabinet + '.html';
         } else if (!resultFinUser.collections.includes(checkServerName)) {
+          log.log(123);
           addCollectionsToUser(resultFinUser._id, checkServerName);
           pathName = config.listFile.html.game + '.html';
         } else {

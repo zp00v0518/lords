@@ -2,7 +2,7 @@
 const Rampart = require('./Rampart');
 const types_races = require('./types_races');
 const { getRandomNumber } = require('template_func');
-const Heroes = require('../heroes');
+const { Heroes } = require('../heroes');
 
 const Race = {
   types: types_races,
