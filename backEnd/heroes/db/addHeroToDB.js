@@ -1,6 +1,6 @@
-const { Heroes } = require('../heroes');
-const { document } = require('../workWithMongoDB/schema');
-const { insertDB } = require('../workWithMongoDB');
+const { Heroes } = require('../../heroes');
+const { document } = require('../../workWithMongoDB/schema');
+const { insertDB } = require('../../workWithMongoDB');
 const insert = new insertDB();
 
 function addHeroToDB({ server, race, type, userId, callback = function() {} }) {
@@ -21,7 +21,7 @@ function addHeroToDB({ server, race, type, userId, callback = function() {} }) {
 
 module.exports = addHeroToDB;
 
-function createTemplateHero(race, type,) {
+function createTemplateHero(race, type) {
   const hero = Heroes.getOneHero(race, type);
   const template = {
     name: hero.name,
@@ -32,7 +32,7 @@ function createTemplateHero(race, type,) {
     created: new Date().getTime(),
     exp: 0,
     skills: [],
-    stat: hero.stat,
+    stat: hero.stat
   };
   return template;
 }

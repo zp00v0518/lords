@@ -25,7 +25,7 @@ const hero = {
   stat: {
     attack: Number,
     def: Number,
-    magic: Number,
+    magic: Number
   },
   userId: 'ObjectId',
   townId: 'ObjectId',
@@ -66,7 +66,8 @@ const town = {
   race: Number,
   storage: Object,
   regionMap: Array,
-  hall: Object
+  hall: Object,
+  heroes: Array
 };
 
 const storage = {
