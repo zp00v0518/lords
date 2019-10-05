@@ -1,10 +1,10 @@
 const types = require('./types');
-const setProgress = require('./types/setProgress');
 
-function createHeroes({ type, img, name }) {
+function createHeroes({ type, img, name, race }) {
   const heroes = {
     name,
-    img
+    img,
+    race
   };
   Object.assign(heroes, types[type]);
   return heroes;

@@ -22,6 +22,10 @@ const Heroes = {
       return Object.values(race);
     }
   },
+  getOneHero(race_name, type){
+    const allHeroes = this.getHeroes(race_name);
+    return allHeroes.find(item => item.type === type);
+  },
   checkHeroesInRace(race_name, type){
     if (race_name  === undefined || type === undefined){
       console.log("checkHeroesInRace: inncorrect arguments")

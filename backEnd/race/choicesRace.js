@@ -6,6 +6,7 @@ const {
 const { redirectMessage } = require('../wsServer/defaultMessages');
 const { getCollectionName, checkSchema } = require('../template_modules');
 const { Heroes } = require('../heroes');
+const addHeroToDB = require('../heroes/addHeroToDB');
 
 function choicesRace(message, { userCookies, ws }) {
   if (!checkSchema(message, schema)) {
@@ -31,6 +32,9 @@ function choicesRace(message, { userCookies, ws }) {
         redirectMessage(ws);
         return;
       }
+      addHeroToDB({server: serverName, race, type: heroes, userId: user._id}).then(insertHero => {
+        console.log(insertHero)
+      }).catch(err => {console.log(err)})
 
       ws.send(JSON.stringify({ user, message }));
     });
