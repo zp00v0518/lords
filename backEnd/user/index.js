@@ -5,6 +5,7 @@ const getInfoForStartGame = require("./getInfoForStartGame.js");
 const addNewUserToGlobalMap = require("./addNewUserToGlobalMap.js");
 const updateUser = require("./updateUser.js");
 const addCollectionsToUser = require("./addCollectionsToUser.js");
+const setUserOnline = require("./setUserOnline");
 
 module.exports = {
   userCreate,
@@ -14,5 +15,6 @@ module.exports = {
   getInfoForStartGame,
   addNewUserToGlobalMap,
   updateUser,
-  addCollectionsToUser
+  addCollectionsToUser,
+  setUserOnline
 };

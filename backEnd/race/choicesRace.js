@@ -1,7 +1,9 @@
 const {
   findUserInDB,
   findUserInGlobalMap,
-  addNewUserToGlobalMap
+  addNewUserToGlobalMap,
+  getInfoForStartGame,
+  setUserOnline
 } = require('../user');
 const { redirectMessage } = require('../wsServer/defaultMessages');
 const { getCollectionName, checkSchema } = require('../template_modules');
@@ -38,9 +40,17 @@ function choicesRace(message, { userCookies, ws }) {
             .then(insertTown => {
               addHeroToTown(serverName, insertTown._id, insertHero._id)
                 .then(addResult => {
-                  ws.send(
-                    JSON.stringify({ user, message, insertTown, insertHero })
-                  );
+                  getInfoForStartGame(user, serverName)
+                    .then(info_for_start_game => {
+                      setUserOnline(user, serverName, info_for_start_game, ws);
+                      return;
+                      // ws.send(
+                      //   JSON.stringify({ user, message, insertTown, insertHero })
+                      // );
+                    })
+                    .catch(err => {
+                      console.log(err);
+                    });
                 })
                 .catch(err => {
                   console.log(err);

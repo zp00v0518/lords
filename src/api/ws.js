@@ -44,6 +44,7 @@ class WS {
   }
   startMessages(eventData) {
     console.log(eventData);
+    this.store.commit('CHOICE_RASE', { status: false });
     this.store.commit('START_MESSAGES', eventData);
     this.store.commit('SET_CURRENTMAP', eventData);
     this.store.dispatch('SET_DATA_CONNECTION', eventData.sectors);

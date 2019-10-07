@@ -153,6 +153,7 @@ const tumb = {
     justify-content: space-between;
     flex-grow: 10;
     padding: 1% 0;
+    height: 100%;
     @media (max-width: $tablet) {
       font-size: 10px;
     }
