@@ -33,6 +33,7 @@ function setUserOnline(user, server, info_for_game, ws) {
     startMessage.eventsList = info_for_game.eventsList;
     startMessage.currentMap = currentMap;
     startMessage.sectors = info_for_game.sectors;
+    startMessage.heroes = info_for_game.heroes;
     startMessage.dictionary = getLangDictionary(user.lang);
     ws.send(JSON.stringify(startMessage));
   });
