@@ -1,4 +1,4 @@
-const tube = require("../tube.js");
+// const tube = require("../tube.js");
 
 //возвращает участок глобальной карты, который будет отображен на экране Пользователя
 function getGlobalMapSector(user, server, callback){

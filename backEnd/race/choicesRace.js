@@ -8,7 +8,7 @@ const {
 const { redirectMessage } = require('../wsServer/defaultMessages');
 const { getCollectionName, checkSchema } = require('../template_modules');
 const { Heroes } = require('../heroes');
-const { addHeroToDB, addHeroToTown } = require('../heroes/db');
+const { addHeroToDB, addHeroToTown, addTownToHero } = require('../heroes/db');
 
 function choicesRace(message, { userCookies, ws }) {
   if (!checkSchema(message, schema)) {
@@ -39,14 +39,25 @@ function choicesRace(message, { userCookies, ws }) {
           addNewUserToGlobalMap(user, serverName)
             .then(insertTown => {
               addHeroToTown(serverName, insertTown._id, insertHero._id)
-                .then(addResult => {
-                  getInfoForStartGame(user, serverName)
-                    .then(info_for_start_game => {
-                      setUserOnline(user, serverName, info_for_start_game, ws);
-                      return;
-                      // ws.send(
-                      //   JSON.stringify({ user, message, insertTown, insertHero })
-                      // );
+                .then(() => {
+                  addTownToHero(serverName, insertTown._id, insertHero._id)
+                    .then(() => {
+                      getInfoForStartGame(user, serverName)
+                        .then(info_for_start_game => {
+                          setUserOnline(
+                            user,
+                            serverName,
+                            info_for_start_game,
+                            ws
+                          );
+                          return;
+                          // ws.send(
+                          //   JSON.stringify({ user, message, insertTown, insertHero })
+                          // );
+                        })
+                        .catch(err => {
+                          console.log(err);
+                        });
                     })
                     .catch(err => {
                       console.log(err);
