@@ -1,6 +1,9 @@
 const serverList = gameVariables.serverList;
 const { calcStorageNowValue, controlSatateEventsList } = require('../tube.js');
 const globalCalcUnit = require('../army/globalCalcUnit');
+const template = require('template_func');
+const log = new template.Log(__filename);
+
 
 function controlStateGlobal(param) {
   if (param.target === 'all') {
@@ -22,6 +25,7 @@ function controlStateGlobal(param) {
           sectors: sectors,
           eventsList: userInOnline.eventsList
         };
+        log.log(ws.readyState)
         ws.send(JSON.stringify(response));
       });
     });

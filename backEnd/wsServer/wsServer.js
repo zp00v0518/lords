@@ -17,6 +17,7 @@ const { tryJsonParse } = require('template_func');
 const { setUserOnline } = require('../user');
 const getCollectionName = srcRequire('/template_modules/getCollectionName');
 
+
 class WsServer {
   init(port) {
     this.server = new WS.Server({ port: port }, () => {
@@ -55,6 +56,7 @@ wsServer.on('connection', (ws, req) => {
 
   findUserInDB(userCookies).then(user => {
     if (user) {
+      User = user;
       getInfoForStartGame(user, server).then(infoForStartGame => {
         if (infoForStartGame.status === 'no_town') {
           startMessage.type = 'choicesRace';
@@ -62,7 +64,6 @@ wsServer.on('connection', (ws, req) => {
           ws.send(JSON.stringify(startMessage));
           return;
         }
-        User = user;
         setUserOnline(user, server, infoForStartGame, ws);
         return;
         // UserOnline[server][User._id] = {};

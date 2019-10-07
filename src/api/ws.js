@@ -26,6 +26,7 @@ class WS {
     };
     this.wsInstance.onmessage = event => {
       const data = JSON.parse(event.data);
+      console.log(`Входящий запрос: ${data.type}`);
       if (data.status === true) {
         this.incoming[data.type](data);
       } else {
@@ -68,7 +69,7 @@ class WS {
   }
 
   reload() {
-    console.log('reload')
+    console.log('reload');
     location.reload();
   }
   controlState(eventData) {
