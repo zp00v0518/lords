@@ -7,8 +7,10 @@ function handlerMousemoveOnGlobalMap(event) {
       this.drawMap();
       this.currentTile = this.currentMap[rombIndex.x][rombIndex.y];
       this.showTooltip = true;
+      this.ctx.canvas.style.cursor = "pointer";
     }
   } else {
+    this.ctx.canvas.style.cursor = "default";
     this.hideTooltip();
   }
 }

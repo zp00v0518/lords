@@ -3,7 +3,7 @@
     <template v-if="choicesHeroes">
       <ChoicesRace />
     </template>
-    <template v-else>
+    <template v-if="!choicesHeroes && allLoad">
       <router-view />
     </template>
   </div>
@@ -16,9 +16,22 @@ export default {
   components: {
     ChoicesRace
   },
+  created() {
+    document.addEventListener("allLoad", this.handlerAllLoad);
+  },
+  data() {
+    return {
+      allLoad: false
+    };
+  },
   computed: {
     choicesHeroes() {
       return this.globalConfig.choicesRace;
+    }
+  },
+  methods: {
+    handlerAllLoad() {
+      this.allLoad = true;
     }
   }
 };
