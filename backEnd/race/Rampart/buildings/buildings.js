@@ -118,7 +118,7 @@ const buildings = {
         3: {
           is: false,
           prepare: false,
-          if: [{ building: t.guild.name, lvl: 1 }],
+          if: [{ building: t.guild.name, lvl: 2 }],
           price: formPrice({
             gold: 15000,
             wood: 5,
@@ -133,7 +133,7 @@ const buildings = {
         4: {
           is: false,
           prepare: false,
-          if: [{ building: t.guild.name, lvl: 2 }],
+          if: [{ building: t.guild.name, lvl: 3 }],
           price: formPrice({
             gold: 20000,
             wood: 5,
@@ -148,7 +148,7 @@ const buildings = {
         5: {
           is: true,
           prepare: false,
-          if: [{ building: t.guild.name, lvl: 3 }],
+          if: [{ building: t.guild.name, lvl: 4 }],
           price: formPrice({
             gold: 25000,
             wood: 5,

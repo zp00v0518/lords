@@ -106,28 +106,28 @@ const rampart = {
         1: {
           imgInfo: {
             name: 'guild_1',
-            coords: { x: 380, y: 100 },
+            coords: { x: 380, y: 150 },
             zoom: 10
           }
         },
         2: {
           imgInfo: {
             name: 'guild_2',
-            coords: { x: 380, y: 100 },
+            coords: { x: 380, y: 170 },
             zoom: 10
           }
         },
         3: {
           imgInfo: {
             name: 'guild_3',
-            coords: { x: 380, y: 100 },
+            coords: { x: 380, y: 140 },
             zoom: 10
           }
         },
         4: {
           imgInfo: {
             name: 'guild_4',
-            coords: { x: 380, y: 100 },
+            coords: { x: 380, y: 120 },
             zoom: 10
           }
         },
@@ -188,14 +188,14 @@ const rampart = {
         1: {
           imgInfo: {
             name: 'barraks_1_1',
-            coords: { x: 135, y: 300 },
+            coords: { x: 0, y: 250 },
             zoom: 12
           }
         },
         2: {
           imgInfo: {
             name: 'barraks_1_2',
-            coords: { x: 135, y: 300 },
+            coords: { x: 0, y: 250 },
             zoom: 12
           }
         }
@@ -212,7 +212,7 @@ const rampart = {
         },
         2: {
           imgInfo: {
-            name: 'barraks_1_2',
+            name: 'barraks_2_2',
             coords: { x: 0, y: 150 },
             zoom: 10
           }
@@ -242,7 +242,7 @@ const rampart = {
         1: {
           imgInfo: {
             name: 'barraks_4_1',
-            coords: { x: 290, y: 25 },
+            coords: { x: 290, y: 70 },
             zoom: 4
           }
         },
@@ -285,7 +285,7 @@ const rampart = {
         2: {
           imgInfo: {
             name: 'barraks_6_2',
-            coords: { x: 370, y: 90 },
+            coords: { x: 370, y: 85 },
             zoom: 3
           }
         }
@@ -296,7 +296,7 @@ const rampart = {
         1: {
           imgInfo: {
             name: 'barraks_7_1',
-            coords: { x: 490, y: 0 },
+            coords: { x: 515, y: 30 },
             zoom: 2
           }
         },
