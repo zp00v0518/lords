@@ -6,14 +6,14 @@ function formCurrentImageList(sector, townRaceName, allBuildings) {
   const buildings = allBuildings.races[townRaceName].buildings;
   const listBuildings = buildings.listBuildings;
   const self = this;
-  
+
   Object.keys(listBuildings).forEach(key => {
     const item = listBuildings[key];
-    const name = item.name
+    const name = item.name;
     const d = sector.town[name];
     // отбираю строения, которые уже построены
     if (d.lvl !== 0) {
-      const lvl = d.lvl
+      const lvl = d.lvl;
       const obj = allBuildings.races.rampart.buildings[name].lvl[lvl];
       obj.class = d.class;
       obj.buildingData = d;
@@ -62,7 +62,12 @@ function prepareToDraw(elem) {
     pic.height
   );
   elem.picCtx = picCtx;
-  elem.pixArr = picCtx.getImageData(0, 0, pic.width, pic.height);
+  try {
+    elem.pixArr = picCtx.getImageData(0, 0, pic.width, pic.height);
+  } catch (err) {
+    console.log(err);
+    console.log(img);
+  }
 }
 
 export default formCurrentImageList;

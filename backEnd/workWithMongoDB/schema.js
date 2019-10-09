@@ -18,6 +18,21 @@ const document = {
     barraks: 'barraks'
   }
 };
+const hero = {
+  lvl: Number,
+  type: String,
+  race: String,
+  stat: {
+    attack: Number,
+    def: Number,
+    magic: Number
+  },
+  userId: 'ObjectId',
+  townId: 'ObjectId',
+  created: Date,
+  exp: Number,
+  skills: []
+};
 const event = {
   type: String,
   target: {
@@ -51,7 +66,8 @@ const town = {
   race: Number,
   storage: Object,
   regionMap: Array,
-  hall: Object
+  hall: Object,
+  heroes: Array
 };
 
 const storage = {
@@ -129,5 +145,6 @@ module.exports = {
   storage,
   event,
   hall,
-  mine
+  mine,
+  hero
 };

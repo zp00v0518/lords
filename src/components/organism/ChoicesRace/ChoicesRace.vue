@@ -32,7 +32,7 @@ export default {
       listHeroes: [],
       itogMessage: {
         type: "choicesRace",
-        url: location.pathname,
+        url: location.pathname
       }
     };
   },

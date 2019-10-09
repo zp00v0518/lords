@@ -74,7 +74,7 @@ export default {
   },
   watch: {
     currentTown: function() {
-      if (this.count === 0) {
+      if (this.count === 0 && this.ctx) {
         this.count++;
         this.arrDrawImg = formCurrentImageList.call(
           this,

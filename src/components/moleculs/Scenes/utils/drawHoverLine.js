@@ -2,6 +2,7 @@ function drawHoverLine(rombIndex) {
   let x = rombIndex.x;
   let y = rombIndex.y;
   let obj = this.currentMap[x][y];
+  if (!obj) return;
   let ctx = this.ctx;
   let tileWidth = this.tileWidth;
   let tileHeight = tileWidth / 2;
@@ -18,6 +19,7 @@ function drawHoverLine(rombIndex) {
   ctx.lineTo(centerX, centerY - halfHeight + step);
   ctx.stroke();
   ctx.closePath();
+  return true;
 }
 
 module.exports = drawHoverLine;

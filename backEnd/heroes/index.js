@@ -1,3 +1,3 @@
 const Heroes = require('./Heroes');
 
-module.exports = Heroes;
+module.exports = { Heroes };

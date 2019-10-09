@@ -26,6 +26,7 @@ class WS {
     };
     this.wsInstance.onmessage = event => {
       const data = JSON.parse(event.data);
+      console.log(`Входящий запрос: ${data.type}`);
       if (data.status === true) {
         this.incoming[data.type](data);
       } else {
@@ -44,6 +45,7 @@ class WS {
   }
   startMessages(eventData) {
     console.log(eventData);
+    this.store.commit('CHOICE_RASE', { status: false });
     this.store.commit('START_MESSAGES', eventData);
     this.store.commit('SET_CURRENTMAP', eventData);
     this.store.dispatch('SET_DATA_CONNECTION', eventData.sectors);
@@ -67,7 +69,7 @@ class WS {
   }
 
   reload() {
-    console.log('reload')
+    console.log('reload');
     location.reload();
   }
   controlState(eventData) {

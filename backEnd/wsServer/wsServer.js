@@ -1,20 +1,22 @@
 require('../variables/global_variables.js');
 const allHandler = require('./allHandler.js');
 const chat = require('../chat/chat.js');
-const getLangDictionary = require('../dictionary/getLangDictionary');
+// const getLangDictionary = require('../dictionary/getLangDictionary');
 const {
   config,
   findUserInDB,
   getInfoForStartGame,
-  getGlobalMapSector,
-  calcStorageNowValue
+  // getGlobalMapSector,
+  // calcStorageNowValue
 } = require('../tube.js');
 const WS = require('ws');
 const watcher = require('../liveReload/watchFs.js');
 // const { Race } = require('../race');
 const Cookies = require('cookies');
 const { tryJsonParse } = require('template_func');
+const { setUserOnline } = require('../user');
 const getCollectionName = srcRequire('/template_modules/getCollectionName');
+
 
 class WsServer {
   init(port) {
@@ -54,6 +56,7 @@ wsServer.on('connection', (ws, req) => {
 
   findUserInDB(userCookies).then(user => {
     if (user) {
+      User = user;
       getInfoForStartGame(user, server).then(infoForStartGame => {
         if (infoForStartGame.status === 'no_town') {
           startMessage.type = 'choicesRace';
@@ -61,35 +64,36 @@ wsServer.on('connection', (ws, req) => {
           ws.send(JSON.stringify(startMessage));
           return;
         }
-        User = user;
-        UserOnline[server][User._id] = {};
-        UserOnline[server][User._id].ws = ws;
-        UserOnline[server].count++;
-        UserOnline[server][User._id].user = User;
-        infoForStartGame.sectors.forEach(item => {
-          GlobalMap[server][item.x][item.y] = item;
-          calcStorageNowValue(item.town.storage);
-        });
-        UserOnline[server][User._id].sectors = infoForStartGame.sectors;
-        UserOnline[server][User._id].eventsList = infoForStartGame.eventsList;
-        UserOnline[server][User._id].user.globalMap = {};
-        UserOnline[server][User._id].user.globalMap.zoom = 1;
-        UserOnline[server][User._id].user.globalMap.centerMap = {};
-        UserOnline[server][User._id].user.globalMap.centerMap.x =
-          infoForStartGame.sectors[0].x;
-        UserOnline[server][User._id].user.globalMap.centerMap.y =
-          infoForStartGame.sectors[0].y;
-        getGlobalMapSector(
-          UserOnline[server][User._id].user,
-          server,
-          currentMap => {
-            startMessage.eventsList = infoForStartGame.eventsList;
-            startMessage.currentMap = currentMap;
-            startMessage.sectors = infoForStartGame.sectors;
-            startMessage.dictionary = getLangDictionary(user.lang);
-            ws.send(JSON.stringify(startMessage));
-          }
-        );
+        setUserOnline(user, server, infoForStartGame, ws);
+        return;
+        // UserOnline[server][User._id] = {};
+        // UserOnline[server][User._id].ws = ws;
+        // UserOnline[server].count++;
+        // UserOnline[server][User._id].user = User;
+        // infoForStartGame.sectors.forEach(item => {
+        //   GlobalMap[server][item.x][item.y] = item;
+        //   calcStorageNowValue(item.town.storage);
+        // });
+        // UserOnline[server][User._id].sectors = infoForStartGame.sectors;
+        // UserOnline[server][User._id].eventsList = infoForStartGame.eventsList;
+        // UserOnline[server][User._id].user.globalMap = {};
+        // UserOnline[server][User._id].user.globalMap.zoom = 1;
+        // UserOnline[server][User._id].user.globalMap.centerMap = {};
+        // UserOnline[server][User._id].user.globalMap.centerMap.x =
+        //   infoForStartGame.sectors[0].x;
+        // UserOnline[server][User._id].user.globalMap.centerMap.y =
+        //   infoForStartGame.sectors[0].y;
+        // getGlobalMapSector(
+        //   UserOnline[server][User._id].user,
+        //   server,
+        //   currentMap => {
+        //     startMessage.eventsList = infoForStartGame.eventsList;
+        //     startMessage.currentMap = currentMap;
+        //     startMessage.sectors = infoForStartGame.sectors;
+        //     startMessage.dictionary = getLangDictionary(user.lang);
+        //     ws.send(JSON.stringify(startMessage));
+        //   }
+        // );
       });
     } else {
       const message = {
