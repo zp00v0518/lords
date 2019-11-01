@@ -24,7 +24,7 @@
             </div>
           </div>
         </div>
-          <ArmyLine />
+        <ArmyLine />
       </div>
     </div>
 
@@ -34,11 +34,11 @@
 
 <script>
 import modules from "./module";
-import ArmyLine from '../ArmyLine';
+import ArmyLine from "../ArmyLine";
 
 export default {
   name: "Town",
-  components: { ...modules, ArmyLine},
+  components: { ...modules, ArmyLine },
   props: ["sector", "indexTown"],
   data() {
     return {

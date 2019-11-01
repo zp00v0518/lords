@@ -5,9 +5,7 @@
 </template>
 
 <script>
-const army = [
-  
-];
+const army = [];
 export default {
   name: "ArmyLine",
   props: {
@@ -15,6 +13,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-</style>
