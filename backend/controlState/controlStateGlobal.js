@@ -25,7 +25,7 @@ function controlStateGlobal(param) {
           sectors: sectors,
           eventsList: userInOnline.eventsList
         };
-        log.log(ws.readyState)
+        // log.log(ws.readyState)
         ws.send(JSON.stringify(response));
       });
     });

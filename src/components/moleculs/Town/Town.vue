@@ -6,55 +6,12 @@
         <div class="castle_name">{{name}}</div>
         <div class="resource_wrap">
           <div class="resource_item_wrap">
-            <div class="resource_item gold">
-              <div class="resource_icon"></div>
-              <div class="resource_sum_wrap">
-                <div class="resource_sum">{{Math.floor(storage.sources.gold.nowValue)}}</div>
-                <div class="resource_count">+{{storage.sources.gold.addValue}}</div>
-              </div>
-            </div>
-            <div class="resource_item wood">
-              <div class="resource_icon"></div>
-              <div class="resource_sum_wrap">
-                <div class="resource_sum">{{Math.floor(storage.sources.wood.nowValue)}}</div>
-                <div class="resource_count">+{{storage.sources.wood.addValue}}</div>
-              </div>
-            </div>
-            <div class="resource_item ore">
-              <div class="resource_icon"></div>
-              <div class="resource_sum_wrap">
-                <div class="resource_sum">{{Math.floor(storage.sources.ore.nowValue)}}</div>
-                <div class="resource_count">+{{storage.sources.ore.addValue}}</div>
-              </div>
-            </div>
-            <div class="resource_item sulfur">
-              <div class="resource_icon"></div>
-              <div class="resource_sum_wrap">
-                <div class="resource_sum">{{Math.floor(storage.sources.sulfur.nowValue)}}</div>
-                <div class="resource_count">+{{storage.sources.sulfur.addValue}}</div>
-              </div>
-            </div>
-            <div class="resource_item crystal">
-              <div class="resource_icon"></div>
-              <div class="resource_sum_wrap">
-                <div class="resource_sum">{{Math.floor(storage.sources.crystal.nowValue)}}</div>
-                <div class="resource_count">+{{storage.sources.crystal.addValue}}</div>
-              </div>
-            </div>
-            <div class="resource_item mercury">
-              <div class="resource_icon"></div>
-              <div class="resource_sum_wrap">
-                <div class="resource_sum">{{Math.floor(storage.sources.mercury.nowValue)}}</div>
-                <div class="resource_count">+{{storage.sources.mercury.addValue}}</div>
-              </div>
-            </div>
-            <div class="resource_item gem">
-              <div class="resource_icon"></div>
-              <div class="resource_sum_wrap">
-                <div class="resource_sum">{{Math.floor(storage.sources.gem.nowValue)}}</div>
-                <div class="resource_count">+{{storage.sources.gem.addValue}}</div>
-              </div>
-            </div>
+            <ResourceItem
+              v-for="(item, index) in storage.sources"
+              :key="index"
+              :resource="item"
+              :name="index"
+            />
           </div>
           <div class="storage_wrap">
             <div class="storage_item">
@@ -67,6 +24,7 @@
             </div>
           </div>
         </div>
+        <ArmyLine />
       </div>
     </div>
 
@@ -75,8 +33,12 @@
 </template>
 
 <script>
+import modules from "./module";
+import ArmyLine from "../ArmyLine";
+
 export default {
   name: "Town",
+  components: { ...modules, ArmyLine },
   props: ["sector", "indexTown"],
   data() {
     return {
@@ -110,6 +72,6 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 @import "town.scss";
 </style>

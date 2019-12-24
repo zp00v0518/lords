@@ -8,7 +8,7 @@ const schema = require('../workWithMongoDB/schema.js')
 const time = config.time;
 
 const gameVariables = {
-	numSectionGlobalMap : 20, 					//количество ячеек на ГЛОБАЛЬНОЙ карте, по одной оси
+	numSectionGlobalMap : 100, 					//количество ячеек на ГЛОБАЛЬНОЙ карте, по одной оси
 																			//при изменении кол-ва ячеек, нужно поменять кол-во отображаемых ячеек на 1-й оси
 																			//как здесь, так и на клиенте
 	getMaxIndexMap: function(){
@@ -20,9 +20,9 @@ const gameVariables = {
 																			// в данный момент 1 сутки
 	serverList:config.db.collections.servers,
 	timer:{
-		controlState: time.minute/10,
-		saveDataDB:time.minute/10, 							//1 минута - интервал считывания данных и записи их в БД
-		perTime: time.hour/5, // расчетное время прироста игровых ресурсов
+		controlState: time.minute/6,
+		saveDataDB:time.minute, 							//1 минута - интервал считывания данных и записи их в БД
+		perTime: time.hour/2, // расчетное время прироста игровых ресурсов
 	},
 	indexes: {
 		upgrade_town: 1.5,

@@ -15,17 +15,30 @@ function createArmy({
       const unit = stack_units[i];
       const { name, hp } = unit;
       if (!result[name]) {
-        result[name] = 0;
+        result[name] = createTemplate(unit);
       }
-      result[name]++;
+      result[name].count++;
       power_army -= hp;
     }
   } else {
     const { name, hp } = stack_units[0];
-    result[name] = Math.floor(power_army / hp);
+    result[name] = createTemplate(stack_units[0]);
+    result[name].count = Math.floor(power_army / hp);
   }
-  return result;
+  return Object.values(result);
 }
+
+function createTemplate(unit) {
+  const { name, race, lvl } = unit;
+  const template = {
+    race,
+    name,
+    lvl,
+    count: 0
+  };
+  return template;
+}
+
 function getUnits({ stack_count = 1, units = [] }) {
   const allUnits = units.slice();
   const result = [];
