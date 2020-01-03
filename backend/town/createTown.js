@@ -1,6 +1,6 @@
-const tube = require('../tube.js');
-const Region = require('../region/Region');
-const Race = require('../race/Race');
+const tube = require("../tube.js");
+const Region = require("../region/Region");
+const Race = require("../race/Race");
 const {
   createBarraks,
   createFort,
@@ -8,8 +8,8 @@ const {
   createMarket,
   createTavern,
   createHall
-} = require('./buildings');
-const { Army, createArmy } = require('../army/Army');
+} = require("./buildings");
+const { Army, createArmy } = require("../army/Army");
 let listMine = [];
 let townCount = 0;
 
@@ -27,7 +27,7 @@ function createTown(options) {
   const town = {
     class: gameVariables.classInstance.town,
     id: townCount++,
-    name: options.name || 'New Castle',
+    name: options.name || "New Castle",
     [storage.class]: storage,
     [hall.class]: hall,
     [fort.class]: fort,
@@ -45,7 +45,7 @@ function createTown(options) {
     town[key].type = key;
   }
   //если замок первый, то создается регион со стандартными шахтами и их положением
-  if (options.status === 'new') {
+  if (options.status === "new") {
     town.regionMap = createRegionMap(1);
   }
   return town;
@@ -73,20 +73,21 @@ function createRegionMap(townIndex = 1) {
     let row = [];
     regionMap.push(row);
     const armyRace = Race.getRandom();
+    console.log(armyRace)
     const units = Object.values(Race[armyRace.name].units);
     for (let h = 0; h < numSectionRegionMap; h++) {
       let section = {};
       section.id = countSection++;
       section.x = i;
       section.y = h;
-      section.type = Region.typeList.indexOf('forest'); //индекс леса
+      section.type = Region.typeList.indexOf("forest"); //индекс леса
       // const armyRace = Race.getRandom();
       // const units = Object.values(Race[armyRace.name].units);
       const army = createArmy({ range_power_army, units });
       section.army = army;
       //центр всегда является замком
       if (i == 2 && h == 2) {
-        section.type = Region.typeList.indexOf('town'); //индекс замка
+        section.type = Region.typeList.indexOf("town"); //индекс замка
       }
       regionMap[i][h] = section;
     }
@@ -95,7 +96,7 @@ function createRegionMap(townIndex = 1) {
   for (let k = 0; k < coordsMine.length; k++) {
     let x = coordsMine[k].x;
     let y = coordsMine[k].y;
-    regionMap[x][y].type = Region.typeList.indexOf('mine'); //индекс шахты
+    regionMap[x][y].type = Region.typeList.indexOf("mine"); //индекс шахты
     regionMap[x][y].sector = createMine(x, y); //создается рандомный тип шахты
     regionMap[x][y].sector.type = listMine[k]; //исправляю рандомный тип шахты на установленный
   }
