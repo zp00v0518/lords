@@ -6,6 +6,7 @@ import userSectors from './userSectors';
 import dialog from './dialog';
 import timeline from './timeline';
 import globalConfig from './globalConfig/globalConfig';
+import heroes from './heroes';
 
 export default {
   chat,
@@ -15,5 +16,6 @@ export default {
   userSectors,
   dialog,
   timeline,
-  globalConfig
+  globalConfig,
+  heroes
 };

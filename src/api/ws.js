@@ -52,6 +52,7 @@ class WS {
     // this.store.commit("SET_CURRENT_REGION", eventData.sectors[0]);
     this.store.commit('SET_DICTIONARY', eventData.dictionary);
     this.store.commit('SET_EVENTS', eventData.eventsList);
+    this.store.commit('SET_HEROES_LIST', eventData.heroes);
   }
   chatMessage(eventData) {
     this.store.commit('UNSHIFT_MESSAGE', eventData);
