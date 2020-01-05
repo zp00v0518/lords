@@ -32,6 +32,7 @@ export default {
   methods: {
     handlerAllLoad() {
       this.allLoad = true;
+      this.$store.commit("SET_GAME_SOURCES", sourceLoader.sources);
     }
   }
 };
@@ -40,7 +41,7 @@ export default {
 @import 'app.scss';
 </style>
 
-<style lang='scss'>
+<style lang="scss">
 body {
   height: 100vh;
   width: 100vw;

@@ -7,6 +7,7 @@ import dialog from './dialog';
 import timeline from './timeline';
 import globalConfig from './globalConfig/globalConfig';
 import heroes from './heroes';
+import gameSources from './gameSources';
 
 export default {
   chat,
@@ -17,5 +18,6 @@ export default {
   dialog,
   timeline,
   globalConfig,
-  heroes
+  heroes,
+  gameSources
 };

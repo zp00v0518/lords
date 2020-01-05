@@ -5,7 +5,13 @@
       :key="index"
       class="heroes-in-town__item"
     >
-      heroes in town
+      <div>
+        img
+      </div>
+      <div>control</div>
+      <div>
+        content
+      </div>
     </div>
   </div>
 </template>
@@ -21,3 +27,11 @@ export default {
   }
 };
 </script>
+<style lang="scss">
+.heroes-in-town{
+  border: 1px solid red;
+  display: flex;
+  width: 100%;
+}
+
+</style>
