@@ -28,21 +28,23 @@
             </div>
           </div>
         </div>
-        <ArmyLine />
       </div>
+      <ArmyLine />
     </div>
-
-    <div class="hero_in_castle_wrap"></div>
+    <div class="hero_in_castle_wrap">
+      <HeroesInTown :heroesList="heroesList"/>
+    </div>
   </div>
 </template>
 
 <script>
 import modules from "./module";
 import ArmyLine from "../ArmyLine";
+import HeroesInTown from "../HeroesInTown";
 
 export default {
   name: "Town",
-  components: { ...modules, ArmyLine },
+  components: { ...modules, ArmyLine, HeroesInTown },
   props: ["sector", "indexTown"],
   data() {
     return {
@@ -73,7 +75,7 @@ export default {
       const typeTown = this.sector.town.race;
       return this.races.typeList[typeTown];
     },
-    heroesInTown() {
+    heroesList() {
       return this.$store.getters.getHeroesFromTown(this.townId);
     }
   }

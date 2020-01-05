@@ -1,6 +1,6 @@
 <template>
   <div class="army-line">
-    <div v-for="(item, index) in army" :key="index" class="army-line__item">s</div>
+    <div v-for="(item, index) in army" :key="index" class="army-line__item">armyline</div>
   </div>
 </template>
 
