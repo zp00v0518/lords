@@ -1,6 +1,10 @@
 const { Heroes } = require('../../heroes');
 const { document } = require('../../workWithMongoDB/schema');
 const { insertDB } = require('../../workWithMongoDB');
+const Race = require("../../race/Race");
+const { Army, createArmy } = require("../../army/Army");
+
+
 const insert = new insertDB();
 
 function addHeroToDB({ server, race, type, userId, callback = function() {} }) {
@@ -37,4 +41,4 @@ function createTemplateHero(race, type) {
   return template;
 }
 
-createTemplateHero('rampart', 'warrior');
+// createTemplateHero('rampart', 'warrior');

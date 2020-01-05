@@ -1,12 +1,13 @@
-function cretateUnit({ name, cost, type, hp, race, lvl = 1 }) {
+function createUnit({ name, cost, type, hp, race, up = 0, lvl }) {
   return {
     cost,
     hp,
     name,
     type,
     lvl,
-    race
+    race,
+    up
   };
 }
 
-module.exports = cretateUnit;
+module.exports = createUnit;
