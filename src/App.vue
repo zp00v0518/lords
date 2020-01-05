@@ -32,7 +32,9 @@ export default {
   methods: {
     handlerAllLoad() {
       this.allLoad = true;
-      this.$store.commit("SET_GAME_SOURCES", sourceLoader.sources);
+      // eslint-disable-next-line
+      this.$store.commit("SET_GAME_SOURCES", window.sourceLoader.sources);
+      document.removeEventListener("allLoad", this.handlerAllLoad);
     }
   }
 };
