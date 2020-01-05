@@ -1,6 +1,6 @@
 <template>
   <section class="sidebar">
-    <Town v-for="(sector, index) in sectors" :key="index" :sector="sector">{{forUpdate(sector)}}</Town>
+    <Town v-for="(sector, index) in sectors" :indexTown="index" :key="index" :sector="sector">{{forUpdate(sector)}}</Town>
   </section>
 </template>
 

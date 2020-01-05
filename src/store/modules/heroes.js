@@ -1,5 +1,3 @@
-import sectors from "./userSectors";
-
 const heroes = {
   state: {
     heroesList: []

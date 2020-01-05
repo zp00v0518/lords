@@ -3,7 +3,7 @@
     <div class="castle_interface">
       <div class="castle_icon"></div>
       <div class="castle_other">
-        <div class="castle_name">{{name}}</div>
+        <div class="castle_name">{{ name }}</div>
         <div class="resource_wrap">
           <div class="resource_item_wrap">
             <ResourceItem
@@ -15,11 +15,15 @@
           </div>
           <div class="storage_wrap">
             <div class="storage_item">
-              <div class="storage_resource_sum">{{maxValue.baseResource}}</div>
+              <div class="storage_resource_sum">
+                {{ maxValue.baseResource }}
+              </div>
               <div class="storage_resource_max">max</div>
             </div>
             <div class="storage_item">
-              <div class="storage_resource_sum">{{maxValue.unicResource}}</div>
+              <div class="storage_resource_sum">
+                {{ maxValue.unicResource }}
+              </div>
               <div class="storage_resource_max">max</div>
             </div>
           </div>
@@ -42,7 +46,8 @@ export default {
   props: ["sector", "indexTown"],
   data() {
     return {
-      name: "Default Name"
+      name: "Default Name",
+      townId: this.sector._id
     };
   },
   created() {
@@ -67,11 +72,14 @@ export default {
     townRace() {
       const typeTown = this.sector.town.race;
       return this.races.typeList[typeTown];
+    },
+    heroesInTown() {
+      return this.$store.getters.getHeroesFromTown(this.townId);
     }
   }
 };
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 @import "town.scss";
 </style>
