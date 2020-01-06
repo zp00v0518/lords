@@ -144,7 +144,7 @@ const tumb = {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 .hall {
   &__wrap {
     color: white;
@@ -154,7 +154,7 @@ const tumb = {
     justify-content: space-between;
     flex-grow: 10;
     padding: 1% 0;
-    height: 100%;
+    overflow: hidden;
     @media (max-width: $tablet) {
       font-size: 10px;
     }
@@ -165,7 +165,8 @@ const tumb = {
   &__row {
     display: flex;
     justify-content: center;
-    height: 23%;
+    height: 20%;
+    margin: 10px 0px;
     &__item {
       margin: 0 3%;
       width: 20%;

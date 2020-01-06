@@ -44,7 +44,6 @@ export default {
 
 <style lang="scss">
 .heroes-in-town {
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   width: 100%;
