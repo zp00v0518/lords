@@ -5,7 +5,9 @@
         class="army-line__item--icon"
         :style="getIconUnit(army[index - 1])"
       ></div>
-      <div class="army-line__item--count"></div>
+      <div class="army-line__item--count">
+        {{ getCountUnits(army[index - 1]) }}
+      </div>
     </div>
   </div>
 </template>
@@ -20,8 +22,15 @@ export default {
     getIconUnit(unit) {
       if (!unit) return {};
       const Army = this.globalConfig.all.Army;
-      // const pathImg = Army.getIconUnit()
-      console.log(unit);
+      const pathImg = Army.getIconUnit({ unit });
+      const styles = {
+        backgroundImage: `url(${pathImg})`
+      };
+      return styles;
+    },
+    getCountUnits(unit) {
+      if (!unit) return "";
+      return unit.count;
     }
   }
 };
@@ -43,6 +52,8 @@ export default {
       height: 18px;
       border: 1px solid;
       margin-bottom: 2px;
+      background-size: 100%;
+      background-repeat: no-repeat;
     }
     &--count {
       font-size: 10px;

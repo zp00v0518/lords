@@ -43,8 +43,9 @@ const Army = {
     });
     return result;
   },
-  getIconUnit(race_name, unit_name, icon_type = "ico") {
-    return `img/units/${race_name}/${icon_type}/${unit_name}`;
+  getIconUnit({unit, iconType = 'ico', ext = ".gif"}) {
+    const {race, name} = unit;
+    return `img/units/${race}/${iconType}/${name}${ext}`;
   }
 };
 
