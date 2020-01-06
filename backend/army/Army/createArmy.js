@@ -1,4 +1,4 @@
-const { getRandomNumber } = require('template_func');
+const { getRandomNumber } = require("template_func");
 
 function createArmy({
   range_power_army = [2000, 3000],

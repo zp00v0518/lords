@@ -1,9 +1,8 @@
-const { Heroes } = require('../../heroes');
-const { document } = require('../../workWithMongoDB/schema');
-const { insertDB } = require('../../workWithMongoDB');
+const { Heroes } = require("../../heroes");
+const { document } = require("../../workWithMongoDB/schema");
+const { insertDB } = require("../../workWithMongoDB");
 const Race = require("../../race/Race");
 const { Army, createArmy } = require("../../army/Army");
-
 
 const insert = new insertDB();
 
@@ -27,6 +26,9 @@ module.exports = addHeroToDB;
 
 function createTemplateHero(race, type) {
   const hero = Heroes.getOneHero(race, type);
+  const units = Army.getUnitsFromRace(race, [1, 2, 3]);
+  const range_power_army = Army.army_range.hero;
+  const army = createArmy({ range_power_army, units });
   const template = {
     name: hero.name,
     lvl: 0,
@@ -36,7 +38,8 @@ function createTemplateHero(race, type) {
     created: new Date().getTime(),
     exp: 0,
     skills: [],
-    stat: hero.stat
+    stat: hero.stat,
+    army
   };
   return template;
 }

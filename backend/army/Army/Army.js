@@ -15,9 +15,26 @@ const Army = {
     barraks_6: { name: type.barraks + "_6", maxLvl: 2 },
     barraks_7: { name: type.barraks + "_7", maxLvl: 2 }
   },
-  army_base_range: [1000, 2000],
+  army_range: {
+    base: [1000, 2000],
+    hero: [500, 1000]
+  },
   race: {
-    [race_types.rampart]: rampart_units,
+    [race_types.rampart]: rampart_units
+  },
+  getUnitsFromRace(race_name, lvlArr = [], up = 1) {
+    const { race } = this;
+    if (lvlArr.length === 0) return race[race_name];
+    let result = [];
+    const units = Object.values(race[race_name]);
+    lvlArr.forEach(needLvl => {
+      units.forEach(unit => {
+        if (unit.lvl === needLvl && unit.up === up) {
+          result.push(unit);
+        }
+      });
+    });
+    return result;
   }
 };
 

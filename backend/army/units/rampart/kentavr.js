@@ -12,7 +12,7 @@ function createKentavr(up = 0) {
   let lvl = 1;
   if (up) {
     cost[type_resources.gold] = 125;
-    lvl += 0.5;
+    // lvl += 0.5;
     hp = 12;
   }
 

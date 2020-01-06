@@ -14,7 +14,7 @@ function createGreenDragon(up = 0) {
   if (up) {
     cost[type_resources.gold] = 750;
     cost[type_resources.crystal] = 2;
-    lvl += 0.5;
+    // lvl += 0.5;
     hp = 75;
   }
   return createUnit({

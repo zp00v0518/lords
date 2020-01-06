@@ -11,7 +11,7 @@ function createGnom(up = 0) {
   let hp = 20;
   let lvl = 2;
   if (up) {
-    lvl += 0.5;
+    // lvl += 0.5;
     cost[type_resources.gold] = 225;
     hp = 25;
   }

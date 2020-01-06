@@ -13,7 +13,7 @@ function createUnicorn(up = 0) {
   let lvl = 6;
   if (up) {
     cost[type_resources.gold] = 650;
-    lvl += 0.5;
+    // lvl += 0.5;
     hp = 65;
   }
   return createUnit({

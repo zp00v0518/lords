@@ -12,7 +12,7 @@ function createDendroid(up = 0) {
   let lvl = 5;
   if (up) {
     cost[type_resources.gold] = 550;
-    lvl += 0.5;
+    // lvl += 0.5;
     hp = 55;
   }
   return createUnit({

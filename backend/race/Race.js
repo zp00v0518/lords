@@ -1,12 +1,12 @@
 // const mineTypeList = require("../region/mine/Mine.js").typeList;
-const Rampart = require('./Rampart');
-const types_races = require('./types_races');
-const { getRandomNumber } = require('template_func');
-const { Heroes } = require('../heroes');
+const Rampart = require("./Rampart");
+const types_races = require("./types_races");
+const { getRandomNumber } = require("template_func");
+const { Heroes } = require("../heroes");
 
 const Race = {
   types: types_races,
-  typeList: ['rampart'],
+  typeList: ["rampart"],
   // typeList: ['rampart', 'elf'],
   [`${types_races.rampart}`]: Rampart,
   elf: {},

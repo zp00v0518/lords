@@ -12,7 +12,7 @@ function createElf(up = 0) {
   let lvl = 3;
   if (up) {
     cost[type_resources.gold] = 350;
-    lvl += 0.5;
+    // lvl += 0.5;
     hp = 35;
   }
   return createUnit({

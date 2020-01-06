@@ -25,6 +25,10 @@ function createTown(options) {
   const guild = createGuild({});
   const fort = createFort({});
   const town = {
+    army: {
+      def: false,
+      units: []
+    },
     class: gameVariables.classInstance.town,
     id: townCount++,
     name: options.name || "New Castle",
@@ -66,7 +70,7 @@ function createRegionMap(townIndex = 1) {
     { x: 4, y: 2 },
     { x: 2, y: 4 }
   ];
-  const range_power_army = Army.army_base_range.map(i => i * townIndex);
+  const range_power_army = Army.army_range.base.map(i => i * townIndex);
 
   //создаю сетку региона
   for (let i = 0; i < numSectionRegionMap; i++) {

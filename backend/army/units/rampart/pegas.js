@@ -12,7 +12,7 @@ function createPegas(up = 0) {
   let lvl = 4;
   if (up) {
     cost[type_resources.gold] = 450;
-    lvl += 0.5;
+    // lvl += 0.5;
     hp = 45;
   }
 
