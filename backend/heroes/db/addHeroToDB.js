@@ -1,7 +1,6 @@
 const { Heroes } = require("../../heroes");
 const { document } = require("../../workWithMongoDB/schema");
 const { insertDB } = require("../../workWithMongoDB");
-const Race = require("../../race/Race");
 const { Army, createArmy } = require("../../army/Army");
 
 const insert = new insertDB();
@@ -26,7 +25,7 @@ module.exports = addHeroToDB;
 
 function createTemplateHero(race, type) {
   const hero = Heroes.getOneHero(race, type);
-  const units = Army.getUnitsFromRace(race, [1, 2, 3]);
+  const units = Army.getUnitsFromRace(race, [1, 2, 3], false);
   const range_power_army = Army.army_range.hero;
   const army = createArmy({ range_power_army, units, random: false });
   const template = {

@@ -18,11 +18,12 @@ function createArmy({
     while (power_army > 0) {
       const i = getRandomNumber(stack_units.length - 1);
       const unit = stack_units[i];
-      const { name, hp } = unit;
-      if (!result[name]) {
-        result[name] = createTemplate(unit);
+      const { name, hp, up } = unit;
+      const key = up ? `${name}_up` : name;
+      if (!result[key]) {
+        result[key] = createTemplate(unit);
       }
-      result[name].count++;
+      result[key].count++;
       power_army -= hp;
     }
   } else {
@@ -34,12 +35,13 @@ function createArmy({
 }
 
 function createTemplate(unit) {
-  const { name, race, lvl } = unit;
+  const { name, race, lvl, up } = unit;
   const template = {
     race,
     name,
     lvl,
-    count: 0
+    count: 0,
+    up
   };
   return template;
 }

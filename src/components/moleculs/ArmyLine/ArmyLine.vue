@@ -1,7 +1,10 @@
 <template>
   <div class="army-line">
     <div v-for="index in 7" :key="index" class="army-line__item">
-      <div class="army-line__item--icon"></div>
+      <div
+        class="army-line__item--icon"
+        :style="getIconUnit(army[index - 1])"
+      ></div>
       <div class="army-line__item--count"></div>
     </div>
   </div>
@@ -12,6 +15,12 @@ export default {
   name: "ArmyLine",
   props: {
     army: { type: Array, default: () => [] }
+  },
+  methods: {
+    getIconUnit(unit) {
+      if (!unit) return {};
+      console.log(unit);
+    }
   }
 };
 </script>

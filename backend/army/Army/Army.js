@@ -22,15 +22,22 @@ const Army = {
   race: {
     [race_types.rampart]: rampart_units
   },
-  getUnitsFromRace(race_name, lvlArr = [], up = 1) {
+  getUnitsFromRace(race_name, lvlArr = [], withUp = true) {
     const { race } = this;
     if (lvlArr.length === 0) return race[race_name];
     let result = [];
     const units = Object.values(race[race_name]);
     lvlArr.forEach(needLvl => {
       units.forEach(unit => {
-        if (unit.lvl === needLvl && unit.up === up) {
-          result.push(unit);
+        if (unit.lvl === needLvl) {
+          if (withUp) {
+            result.push(unit);
+            return;
+          }
+          if (!unit.up) {
+            result.push(unit);
+            return;
+          }
         }
       });
     });

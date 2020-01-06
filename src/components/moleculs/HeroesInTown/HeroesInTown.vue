@@ -18,7 +18,7 @@
             lvl: {{ hero.lvl }}
           </div>
         </div>
-        <ArmyLine />
+        <ArmyLine :army="hero.army"/>
       </div>
     </div>
   </div>
