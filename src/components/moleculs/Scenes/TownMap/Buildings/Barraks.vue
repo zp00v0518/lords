@@ -118,10 +118,10 @@ export default {
   methods: {
     getImageUrl(index) {
       if (index === 1) {
-        return `${this.baseUrl}${this.townRaceName}/${this.unit.name}.jpg`;
+        return `${this.baseUrl}${this.townRaceName}/ava/${this.unit.name}.jpg`;
       }
       if (index === 2) {
-        return `${this.baseUrl}${this.townRaceName}/${this.unit.name}_2.jpg`;
+        return `${this.baseUrl}${this.townRaceName}/ava/${this.unit.name}_2.jpg`;
       }
     }
   }

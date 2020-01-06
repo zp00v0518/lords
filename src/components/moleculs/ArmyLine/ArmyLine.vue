@@ -24,7 +24,7 @@ export default {
     width: calc(100% / 7);
     height: 100%;
     margin-right: 3px;
-    &:last-child{
+    &:last-child {
       margin-right: 0px;
     }
     &--icon {

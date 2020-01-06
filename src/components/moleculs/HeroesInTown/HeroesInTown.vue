@@ -41,6 +41,7 @@ export default {
   }
 };
 </script>
+
 <style lang="scss">
 .heroes-in-town {
   border: 1px solid red;

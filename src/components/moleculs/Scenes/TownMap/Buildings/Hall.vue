@@ -106,6 +106,7 @@ export default {
     const fileName = townRaceName + "tiles";
     // eslint-disable-next-line
     const img = sourceLoader.sources.towns[townRaceName][fileName];
+    console.log(fileName)
     Object.keys(this.$refs).forEach(key => {
       const el = this.$refs[key][0];
       const ctx = el.getContext("2d");
