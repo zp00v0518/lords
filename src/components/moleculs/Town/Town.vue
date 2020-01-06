@@ -28,11 +28,15 @@
             </div>
           </div>
         </div>
+        <div class="army_in_castle--wrap">
+          <!-- <div class="army_in_castle--insert"></div> -->
+          <ArmyLine />
+        </div>
       </div>
-      <ArmyLine />
     </div>
+
     <div class="hero_in_castle_wrap">
-      <HeroesInTown :heroesList="heroesList"/>
+      <HeroesInTown :heroesList="heroesList" />
     </div>
   </div>
 </template>
@@ -84,4 +88,13 @@ export default {
 
 <style lang="scss">
 @import "town.scss";
+.army_in_castle{
+  &--wrap{
+    display: flex;
+  }
+  &--insert{
+    padding-left: 10px;
+  }
+
+}
 </style>

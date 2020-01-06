@@ -50,7 +50,7 @@ export default {
   &__item {
     display: flex;
     &--img {
-      flex-basis: 20%;
+      flex-basis: 17%;
       padding: 3px;
       & > img {
         width: 100%;
@@ -66,7 +66,6 @@ export default {
     &__content {
       display: flex;
       flex-direction: column;
-      width: 60%;
       &__info {
         display: flex;
         padding: 3px;
