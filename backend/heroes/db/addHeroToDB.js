@@ -28,7 +28,7 @@ function createTemplateHero(race, type) {
   const hero = Heroes.getOneHero(race, type);
   const units = Army.getUnitsFromRace(race, [1, 2, 3]);
   const range_power_army = Army.army_range.hero;
-  const army = createArmy({ range_power_army, units });
+  const army = createArmy({ range_power_army, units, random: false });
   const template = {
     name: hero.name,
     lvl: 0,

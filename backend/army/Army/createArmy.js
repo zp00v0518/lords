@@ -3,10 +3,15 @@ const { getRandomNumber } = require("template_func");
 function createArmy({
   range_power_army = [2000, 3000],
   stackRange = [1, 7],
-  units = []
+  units = [],
+  random = true
 }) {
-  const stack_count = getRandomNumber(stackRange[0], stackRange[1]);
-  let power_army = getRandomNumber(range_power_army[0], range_power_army[1]);
+  const stack_count = random
+    ? getRandomNumber(stackRange[0], stackRange[1])
+    : units.length;
+  let power_army = random
+    ? getRandomNumber(range_power_army[0], range_power_army[1])
+    : range_power_army[0];
   const stack_units = getUnits({ stack_count, units });
   let result = {};
   if (stack_units.length > 1) {
