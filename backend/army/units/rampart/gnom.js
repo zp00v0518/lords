@@ -4,7 +4,7 @@ const type_resources = require("../../../resources/type_resources");
 const types_races = require("../../../race/types_races");
 const race = types_races.rampart;
 
-function createGnom(up = 0) {
+function createGnom(name, up = 0) {
   let cost = {
     [type_resources.gold]: 200
   };
@@ -16,7 +16,7 @@ function createGnom(up = 0) {
     hp = 25;
   }
   return createUnit({
-    name: "gnom",
+    name,
     type: army_types.pex,
     hp,
     cost,

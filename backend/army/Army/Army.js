@@ -1,7 +1,7 @@
-const schema = require("../../workWithMongoDB/schema");
 const army_types = require("./army_types");
 const race_types = require("../../race/types_races");
 const rampart_units = require("../units/rampart");
+const schema = require("../../workWithMongoDB/schema");
 const type = schema.document.class;
 
 const Army = {
@@ -42,6 +42,9 @@ const Army = {
       });
     });
     return result;
+  },
+  getIconUnit(race_name, unit_name, icon_type = "ico") {
+    return `img/units/${race_name}/${icon_type}/${unit_name}`;
   }
 };
 

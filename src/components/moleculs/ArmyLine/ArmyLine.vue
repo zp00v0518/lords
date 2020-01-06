@@ -19,6 +19,8 @@ export default {
   methods: {
     getIconUnit(unit) {
       if (!unit) return {};
+      const Army = this.globalConfig.all.Army;
+      // const pathImg = Army.getIconUnit()
       console.log(unit);
     }
   }

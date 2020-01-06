@@ -4,7 +4,7 @@ const type_resources = require("../../../resources/type_resources");
 const types_races = require("../../../race/types_races");
 const race = types_races.rampart;
 
-function createKentavr(up = 0) {
+function createKentavr(name, up = 0) {
   let cost = {
     [type_resources.gold]: 100
   };
@@ -17,7 +17,7 @@ function createKentavr(up = 0) {
   }
 
   return createUnit({
-    name: "kentavr",
+    name,
     type: army_types.kon,
     hp,
     cost,
