@@ -18,7 +18,10 @@
             lvl: {{ hero.lvl }}
           </div>
         </div>
-        <ArmyLine :army="hero.army"/>
+        <ArmyLine
+          class="heroes-in-town__item__content__army"
+          :army="hero.army"
+        />
       </div>
     </div>
   </div>
@@ -66,6 +69,8 @@ export default {
     &__content {
       display: flex;
       flex-direction: column;
+      max-width: 75%;
+
       &__info {
         display: flex;
         padding: 3px;

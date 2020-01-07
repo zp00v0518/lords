@@ -85,11 +85,12 @@ export default {
       return styles;
     },
     getArmyForce() {
+      const { globalConfig } = this;
       const { army } = this.tile;
-      console.log(army)
       const result = army.reduce((acc, unit) => {
-        const { hp, count } = unit;
-        return (acc += hp * count);
+        const { count, race, name } = unit;
+        const unitInfo = globalConfig.races[race].units[name];
+        return (acc += unitInfo.hp * count);
       }, 0);
       return result;
     }

@@ -33,12 +33,15 @@
   &__army {
     display: flex;
     flex-direction: column;
+    padding: 5px;
     &--header {
       @include center;
+      margin-bottom: 10px;
     }
     &--wrap {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
+      margin-bottom: 10px;
     }
     &__item {
       display: flex;
@@ -59,6 +62,9 @@
         @include center;
         font-weight: bold;
       }
+    }
+    &--force {
+      @include center;
     }
   }
 }

@@ -1,6 +1,6 @@
 const region = {
   header: {
-    ru: "Оборона",
+    ru: "Оборона"
   },
   army_force: {
     ru: "Сила армии"
