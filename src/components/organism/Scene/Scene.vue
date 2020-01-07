@@ -84,7 +84,7 @@ export default {
     }
   },
   mounted() {
-    this.scenes.town = true;
+    this.scenes.region = true;
   }
 };
 </script>

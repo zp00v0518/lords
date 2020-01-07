@@ -30,4 +30,35 @@
   &__player {
     margin-bottom: 5px;
   }
+  &__army {
+    display: flex;
+    flex-direction: column;
+    &--header {
+      @include center;
+    }
+    &--wrap {
+      display: flex;
+      justify-content: space-between;
+    }
+    &__item {
+      display: flex;
+      flex-direction: column;
+      margin-right: 10px;
+      &:last-child {
+        margin-right: 0px;
+      }
+      &--icon {
+        width: 40px;
+        height: 40px;
+        border: 1px solid;
+        margin-bottom: 10px;
+        background-size: 100%;
+        background-repeat: no-repeat;
+      }
+      &--count {
+        @include center;
+        font-weight: bold;
+      }
+    }
+  }
 }

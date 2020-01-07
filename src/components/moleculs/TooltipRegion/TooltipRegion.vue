@@ -1,12 +1,34 @@
 <template>
   <div class="tooltip" :style="position">
     <template v-if="tile.type !== 2">
-      <div class="tooltip__header" v-if="tile.type === 0">Лес</div>
+      <div class="tooltip__army" v-if="tile.type === 0">
+        <div class="tooltip__army--header">{{ gloss.region.header.txt }}</div>
+        <div class="tooltip__army--wrap">
+          <div
+            v-for="(unit, index) in tile.army"
+            :key="index"
+            class="tooltip__army__item"
+          >
+            <div
+              class="tooltip__army__item--icon"
+              :style="getIconUnit(unit)"
+            ></div>
+            <div class="tooltip__army__item--count">{{ unit.count }}</div>
+          </div>
+        </div>
+        <div class="tooltip__army--force">
+          {{ gloss.region.army_force.txt }}:{{ getArmyForce() }}
+        </div>
+      </div>
       <div class="tooltip__header" v-if="tile.type === 1">Замок</div>
     </template>
     <template v-if="tile.type === 2">
-      <div class="tooltip__header">{{this.gloss[this.nameSector].type[this.type].name.txt}}</div>
-      <div class="tooltip__town">{{this.gloss.general.lvl.txt}}:{{this.tile.sector.lvl}}</div>
+      <div class="tooltip__header">
+        {{ this.gloss[this.nameSector].type[this.type].name.txt }}
+      </div>
+      <div class="tooltip__town">
+        {{ this.gloss.general.lvl.txt }}:{{ this.tile.sector.lvl }}
+      </div>
     </template>
   </div>
 </template>
@@ -33,7 +55,6 @@ export default {
       nameSector: ""
     };
   },
-  created() {},
   computed: {
     type() {
       if (!this.tile.sector.type) return;
@@ -46,15 +67,39 @@ export default {
   watch: {
     tile: function() {
       this.nameSector = this.$region.typeList[this.tile.type];
-      const size = this.$el ? this.$el.getBoundingClientRect() : { height: 0 };
+      // const size = this.$el ? this.$el.getBoundingClientRect() : { height: 0 };
       const left = this.mouseCoords.x + "px";
-      const top = this.mouseCoords.y - size.height - 70 + "px";
+      const top = this.mouseCoords.y - 200 + "px";
+      // const top = this.mouseCoords.y - size.height - 70 + "px";
       this.position = { left, top };
     }
+  },
+  methods: {
+    getIconUnit(unit) {
+      if (!unit) return {};
+      const Army = this.globalConfig.all.Army;
+      const pathImg = Army.getIconUnit({ unit, iconType: "ava", ext: ".jpg" });
+      const styles = {
+        backgroundImage: `url(${pathImg})`
+      };
+      return styles;
+    },
+    getArmyForce() {
+      const { army } = this.tile;
+      console.log(army)
+      const result = army.reduce((acc, unit) => {
+        const { hp, count } = unit;
+        return (acc += hp * count);
+      }, 0);
+      return result;
+    }
+  },
+  updated() {
+    // console.log(this.tile);
   }
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import "tooltipRegion.scss";
 </style>
