@@ -1,22 +1,33 @@
 <template>
   <section class="barraks">
-    <div class="barraks__title">Нанять {{unit.name}}</div>
+    <div class="barraks__title">Нанять {{ unit.name }}</div>
     <div class="barraks__icons">
       <div
-        :class="['barraks__icons__item',{hoverItem: hoverItem === i} ]"
+        :class="['barraks__icons__item', { hoverItem: hoverItem === i }]"
         v-for="i in buildingData.lvl"
         :key="i"
       >
-        <img :src="getImageUrl(i)" class="barraks__icons__unit" @click="hoverItem = i" />
+        <img
+          :src="getImageUrl(i)"
+          class="barraks__icons__unit"
+          @click="hoverItem = i"
+        />
       </div>
     </div>
     <div class="barraks__cost">
       <div class="barraks__cost--base">
         <span class="barraks__cost--title">Стоимость</span>
         <div class="barraks__cost--wrap">
-          <div class="barraks__cost--item" v-for="(value, resource) in cost" :key="resource">
-            <img :src="`img/resources/${resource}.gif`" class="barraks__cost--resource" />
-            <span class="barraks__cost--value">{{value}}</span>
+          <div
+            class="barraks__cost--item"
+            v-for="(value, resource) in cost"
+            :key="resource"
+          >
+            <img
+              :src="`img/resources/${resource}.gif`"
+              class="barraks__cost--resource"
+            />
+            <span class="barraks__cost--value">{{ value }}</span>
           </div>
         </div>
       </div>
@@ -24,11 +35,11 @@
       <div class="barraks__cost--calculate">
         <div class="barraks__cost--sum">
           <span class="barraks__cost--title">Доступно</span>
-          <span class="barraks__cost--value">{{available}}</span>
+          <span class="barraks__cost--value">{{ available }}</span>
         </div>
         <div class="barraks__cost--hiring">
           <span class="barraks__cost--title">Нанять</span>
-          <span class="barraks__cost--value">{{hiring}}</span>
+          <span class="barraks__cost--value">{{ hiring }}</span>
         </div>
         <input
           class="barraks__cost--range"
@@ -43,9 +54,20 @@
       <div class="barraks__cost--total">
         <span class="barraks__cost--title">Тотал</span>
         <div class="barraks__cost--wrap">
-          <div class="barraks__cost--item" v-for="(value, resource) in totalCost" :key="resource">
-            <img :src="`img/resources/${resource}.gif`" class="barraks__cost--resource" />
-            <span class="barraks__cost--value">{{value}}</span>
+          <div
+            class="barraks__cost--item"
+            v-for="(value, resource) in totalCost"
+            :key="resource"
+          >
+            <img
+              :src="`img/resources/${resource}.gif`"
+              class="barraks__cost--resource"
+            />
+            <span
+              class="barraks__cost--value"
+              :class="{ isNotCost: getIsNotCost(value, resource) }"
+              >{{ value }}</span
+            >
           </div>
         </div>
       </div>
@@ -81,6 +103,15 @@ export default {
     cost() {
       return this.unit.cost;
     },
+    // isNotCost(){
+    //   const {totalCost, storage} = this;
+    //   const flag = Object.keys(totalCost).some(sourceName => {
+    //     const num = totalCost[sourceName];
+    //     const realNum = storage.sources[sourceName].nowValue;
+    //     return num > Math.floor(realNum);
+    //   })
+    //   return flag;
+    // },
     totalCost() {
       const newCost = Object.assign({}, this.cost);
       const { hiring } = this;
@@ -102,8 +133,11 @@ export default {
       const { type, lvl } = this.buildingData;
       return raceBuildings[type].lvl[lvl];
     },
+    unitName() {
+      return this.buildInfo.unit.name;
+    },
     unit() {
-      const unitName = this.buildInfo.unit.name;
+      const { unitName } = this;
       if (this.hoverItem === 1) {
         return this.raceData.units[unitName];
       }
@@ -117,18 +151,24 @@ export default {
   },
   methods: {
     getImageUrl(index) {
+      const { unitName } = this;
       if (index === 1) {
-        return `${this.baseUrl}${this.townRaceName}/ava/${this.unit.name}.jpg`;
+        return `${this.baseUrl}${this.townRaceName}/ava/${unitName}.jpg`;
       }
       if (index === 2) {
-        return `${this.baseUrl}${this.townRaceName}/ava/${this.unit.name}_2.jpg`;
+        return `${this.baseUrl}${this.townRaceName}/ava/${unitName}_2.jpg`;
       }
+    },
+    getIsNotCost(value, resourceName) {
+      const { storage } = this;
+      const realNum = storage.sources[resourceName].nowValue;
+      return value > Math.floor(realNum);
     }
   }
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .barraks {
   width: 80%;
   height: 80%;
@@ -215,6 +255,9 @@ export default {
       font-size: 13px;
       @include center;
       color: white;
+      &.isNotCost {
+        color: red;
+      }
     }
   }
 }
