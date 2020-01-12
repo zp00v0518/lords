@@ -72,6 +72,10 @@
         </div>
       </div>
     </div>
+    <div class="barraks__confirm">
+      <GuiBtn type="ok" />
+      <GuiBtn type="cancel" />
+    </div>
   </section>
 </template>
 
