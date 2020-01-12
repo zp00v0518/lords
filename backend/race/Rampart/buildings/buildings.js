@@ -229,7 +229,7 @@ const buildings = {
           if: [{ building: t.barraks_1.name, lvl: 1 }],
           price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
           effect: {
-            addValue: 0,
+            addValue: 12,
           },
           unit: {name:army_list.kentavr}
         }
@@ -254,7 +254,7 @@ const buildings = {
           if: [{ building: t.barraks_2.name, lvl: 1 }],
           price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
           effect: {
-            addValue: 0,
+            addValue: 10,
           },
           unit: {name: army_list.gnom}
         }
@@ -279,7 +279,7 @@ const buildings = {
           if: [{ building: t.barraks_3.name, lvl: 1 }],
           price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
           effect: {
-            addValue: 0,
+            addValue: 8,
           },
           unit: {name: army_list.elf}
         }
@@ -304,7 +304,7 @@ const buildings = {
           if: [{ building: t.barraks_4.name, lvl: 1 }],
           price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
           effect: {
-            addValue: 0,
+            addValue: 6,
           },
           unit: {name:army_list.pegas}
         }
@@ -329,7 +329,7 @@ const buildings = {
           if: [{ building: t.barraks_5.name, lvl: 1 }],
           price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
           effect: {
-            addValue: 0,
+            addValue: 4,
           },
           unit: {name: army_list.dendroid}
         }
@@ -354,7 +354,7 @@ const buildings = {
           if: [{ building: t.barraks_6.name, lvl: 1 }],
           price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
           effect: {
-            addValue: 0,
+            addValue: 2,
           },
           unit: {name: army_list.unicorn}
         }

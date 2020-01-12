@@ -1,11 +1,13 @@
-const { Army } = require('../army/Army');
-const calcValueUnitInBarraks = require('./calcValueUnitInBarraks');
+const { Army } = require("../army/Army");
+const calcValueUnitInBarraks = require("./calcValueUnitInBarraks");
 
 function globalCalcUnit(town) {
   const list = Army.armyBuildings;
   Object.keys(list).forEach(key => {
     const item = town[key];
-    calcValueUnitInBarraks(item);
+    if (item.work.is) {
+      calcValueUnitInBarraks(item);
+    }
   });
 }
 
