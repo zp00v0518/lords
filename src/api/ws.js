@@ -13,7 +13,8 @@ class WS {
       controlState: eventData => this.controlState(eventData),
       consoles: eventData => this.consoles(eventData),
       setEvents: eventData => this.setEvents(eventData),
-      choicesRace: eventData => this.choicesRace(eventData)
+      choicesRace: eventData => this.choicesRace(eventData),
+      buyUnits: eventData => this.buyUnits(eventData)
     };
     this.outgoing = {};
   }
@@ -85,5 +86,6 @@ class WS {
     console.log(e);
   }
   upgradeBuilding = modules.upgradeBuilding;
+  buyUnits = modules.buyUnits;
 }
 export default WS;

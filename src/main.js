@@ -1,18 +1,18 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import './components/atoms';
-import './assets/main.scss';
-import './assets/mixins.scss';
-import Vue from 'vue';
-import App from './App';
-import router from './router';
-import store from './store';
-import Ws from './api/ws';
-import config from '../backend/config/config';
-import upperFirstSymbol from './components/mixins/upperFirstSymbol';
-import globalConfig from './components/mixins/globalConfig';
-const region = require('../backend/region/Region');
-const variables = require('../backend/variables/game_variables');
+import "./components/atoms";
+import "./assets/main.scss";
+import "./assets/mixins.scss";
+import Vue from "vue";
+import App from "./App";
+import router from "./router";
+import store from "./store";
+import Ws from "./api/ws";
+import config from "../backend/config/config";
+import upperFirstSymbol from "./components/mixins/upperFirstSymbol";
+import globalConfig from "./components/mixins/globalConfig";
+const region = require("../backend/region/Region");
+const variables = require("../backend/variables/game_variables");
 
 const bus = new Vue();
 
@@ -38,11 +38,11 @@ function mounting() {
     setTimeout(mounting, 100);
   } else {
     new Vue({
-      el: '#app',
+      el: "#app",
       store,
       router,
       components: { App },
-      template: '<App/>'
+      template: "<App/>"
     });
   }
 }

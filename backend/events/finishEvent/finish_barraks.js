@@ -1,6 +1,6 @@
-const getParamsForFinish = require('./getParamsForFinish');
-const calcValueUnitInBarraks = require('../../army/calcValueUnitInBarraks');
-const template = require('template_func');
+const getParamsForFinish = require("./getParamsForFinish");
+const { calcValueUnitInBarraks } = require("../../army");
+const template = require("template_func");
 const log = new template.Log(__filename);
 
 function finishBarraks(barraks, eventData) {

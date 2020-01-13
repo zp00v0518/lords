@@ -1,6 +1,6 @@
 const serverList = gameVariables.serverList;
 const { calcStorageNowValue, controlSatateEventsList } = require('../tube.js');
-const globalCalcUnit = require('../army/globalCalcUnit');
+const {globalCalcUnit} = require('../army');
 const template = require('template_func');
 const log = new template.Log(__filename);
 
