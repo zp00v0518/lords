@@ -137,6 +137,9 @@ export default {
       });
       return newCost;
     },
+    army(){
+      return this.currentTown.town.army.units;
+    },
     storage() {
       return this.currentTown.town.storage;
     },
@@ -163,11 +166,32 @@ export default {
     },
     sumUnits() {
       return this.buildingData.work.nowValue;
+    },
+    currentSector() {
+      return this.$store.state.userSectors.currentSector;
     }
   },
   methods: {
     buyUnits() {
-      console.log(123);
+      const {hiring,totalCost, unit, army, currentTown} = this;
+      const army_length = Object.values(army).length;
+      if (army_length > 7) {
+        console.log("В городе нет места для юнита");
+        return
+      }
+      console.log( this.currentSector)
+      const message = {
+        type: 'consoles',
+        data: {
+          hiring: +hiring,
+          unitName: unit.name,
+          sectorIndex: this.$store.state.userSectors.sectors.indexOf(
+              this.currentSector
+            ),
+        }
+
+      }
+      this.$ws.sendMessage(message);
     },
     getImageUrl(index) {
       const { unitName } = this;
