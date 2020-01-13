@@ -10,6 +10,7 @@
       :currentTown="currentTown"
       :gloss="gloss"
       :buildingData="buildingData"
+      @close="closeBuilding"
     ></component>
   </section>
 </template>

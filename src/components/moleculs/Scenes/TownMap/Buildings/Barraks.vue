@@ -73,8 +73,8 @@
       </div>
     </div>
     <div class="barraks__confirm">
-      <GuiBtn type="ok" />
-      <GuiBtn type="cancel" />
+      <GuiBtn type="buy" class="barraks__confirm--btn"/>
+      <GuiBtn type="cancel" class="barraks__confirm--btn" @click="$emit('close')" />
     </div>
   </section>
 </template>
@@ -212,6 +212,7 @@ export default {
     height: 25%;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 15px;
     &--wrap {
       display: flex;
       width: 100%;
@@ -262,6 +263,12 @@ export default {
       &.isNotCost {
         color: red;
       }
+    }
+  }
+  &__confirm{
+    display: flex;
+    &--btn{
+      margin: 0px 5px;
     }
   }
 }

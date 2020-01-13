@@ -10,7 +10,8 @@ const requireComponent = require.context(
 );
 
 requireComponent.keys().forEach(fileName => {
-  if (fileName !== './index.js') {
+  const arrPath = fileName.split('/');
+  if (fileName !== './index.js' && arrPath.length <= 3) {
     // Get the component config
     const componentConfig = requireComponent(fileName);
     // Get the component name
