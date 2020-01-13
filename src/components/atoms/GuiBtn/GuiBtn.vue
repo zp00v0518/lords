@@ -1,6 +1,10 @@
 <template>
   <div class="guibtn">
-    <component :is="type + 'Btn'" :disabled="disabled" @click.native="$emit('click', $event)"></component>
+    <component
+      :is="type + 'Btn'"
+      :disabled="disabled"
+      @click.native="handlerClick"
+    ></component>
   </div>
 </template>
 
@@ -13,12 +17,18 @@ export default {
   props: {
     type: { type: String, default: "cancel" },
     disabled: { type: Boolean, default: false }
+  },
+  methods: {
+    handlerClick(event) {
+      if (this.disabled) return;
+      this.$emit("click", event);
+    }
   }
 };
 </script>
 
 <style lang="scss">
-.guibtn{
+.guibtn {
   cursor: pointer;
 }
 </style>

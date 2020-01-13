@@ -73,8 +73,17 @@
       </div>
     </div>
     <div class="barraks__confirm">
-      <GuiBtn type="buy" class="barraks__confirm--btn"/>
-      <GuiBtn type="cancel" class="barraks__confirm--btn" @click="$emit('close')" />
+      <GuiBtn
+        type="buy"
+        class="barraks__confirm--btn"
+        :disabled="isCanBuy"
+        @click="buyUnits"
+      />
+      <GuiBtn
+        type="cancel"
+        class="barraks__confirm--btn"
+        @click="$emit('close')"
+      />
     </div>
   </section>
 </template>
@@ -91,7 +100,7 @@ export default {
   data() {
     return {
       baseUrl: "img/units/",
-      hiring: 0,
+      hiring: "0",
       hoverItem: 1,
       maxRange: 3000
     };
@@ -107,15 +116,18 @@ export default {
     cost() {
       return this.unit.cost;
     },
-    // isNotCost(){
-    //   const {totalCost, storage} = this;
-    //   const flag = Object.keys(totalCost).some(sourceName => {
-    //     const num = totalCost[sourceName];
-    //     const realNum = storage.sources[sourceName].nowValue;
-    //     return num > Math.floor(realNum);
-    //   })
-    //   return flag;
-    // },
+    isCanBuy() {
+      return this.hiring === "0" || this.isNotCost;
+    },
+    isNotCost() {
+      const { totalCost, storage } = this;
+      const flag = Object.keys(totalCost).some(sourceName => {
+        const num = totalCost[sourceName];
+        const realNum = storage.sources[sourceName].nowValue;
+        return num > Math.floor(realNum);
+      });
+      return flag;
+    },
     totalCost() {
       const newCost = Object.assign({}, this.cost);
       const { hiring } = this;
@@ -154,6 +166,9 @@ export default {
     }
   },
   methods: {
+    buyUnits() {
+      console.log(123);
+    },
     getImageUrl(index) {
       const { unitName } = this;
       if (index === 1) {
@@ -265,9 +280,9 @@ export default {
       }
     }
   }
-  &__confirm{
+  &__confirm {
     display: flex;
-    &--btn{
+    &--btn {
       margin: 0px 5px;
     }
   }

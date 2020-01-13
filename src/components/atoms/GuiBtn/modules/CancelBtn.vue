@@ -1,9 +1,10 @@
 <template>
-  <img :src="img" alt="" />
+  <img :src="img" alt="" @mouseover="img = overImg" @mouseleave="img = upImg"/>
 </template>
 
 <script>
-import cancelImg from "../../../../../frontEnd/img/buttons/cancel/up.gif";
+import upImg from "../../../../../frontEnd/img/buttons/cancel/up.gif";
+import overImg from "../../../../../frontEnd/img/buttons/cancel/over.gif";
 
 export default {
   name: "CancelBtn",
@@ -12,7 +13,9 @@ export default {
   },
   data() {
     return {
-      img: cancelImg
+      img: upImg,
+      overImg,
+      upImg
     };
   }
 };
