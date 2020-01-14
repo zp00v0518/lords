@@ -379,7 +379,7 @@ const buildings = {
           if: [{ building: t.barraks_7.name, lvl: 1 }],
           price: formPrice({ gold: 1000, wood: 1, ore: 1 }),
           effect: {
-            addValue: 0,
+            addValue: 1,
           },
           unit: {name: army_list.green_dragon}
         }
