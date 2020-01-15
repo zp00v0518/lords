@@ -1,8 +1,8 @@
-const { checkSchema, redirectMessage, gloss } = require('../../tube');
-const { Race } = require('../../race');
-const { checkSource, deleteSource } = require('../../resources');
-const Town = require('../Town');
-const setUpUpgradeChange_building = require('./setUpUpgradeChange_building');
+const { checkSchema, redirectMessage, gloss } = require("../../tube");
+const { Race } = require("../../race");
+const { checkSource, deleteSource } = require("../../resources");
+const Town = require("../Town");
+const setUpUpgradeChange_building = require("./setUpUpgradeChange_building");
 
 function handlerResponseUpgradeBuilding(message, info) {
   const data = message.data;
@@ -14,6 +14,10 @@ function handlerResponseUpgradeBuilding(message, info) {
   }
 
   const sector = info.player.sectors[data.sectorIndex];
+  if (!sector) {
+    redirectMessage(ws);
+    return;
+  }
   const typeBuilding = data.building.type;
   const raceName = Race.typeList[sector.town.race];
   const race = Race[raceName];
@@ -25,10 +29,10 @@ function handlerResponseUpgradeBuilding(message, info) {
   const lvl = building.lvl;
   const build_for_upgrade = race.buildings[typeBuilding].lvl[lvl + 1];
   const response = {
-    type: 'upgradeBuilding',
+    type: "upgradeBuilding",
     status: true,
     upgrade: false,
-    message: ''
+    message: ""
   };
   const lang = info.player.user.lang;
   if (!build_for_upgrade) {
@@ -77,8 +81,8 @@ function handlerResponseUpgradeBuilding(message, info) {
 module.exports = handlerResponseUpgradeBuilding;
 
 const schema = {
-  building: { type: 'object' },
-  type: { type: 'string', regExp: /^[a-z_0-9]{4,9}$/gi },
-  persent: { type: 'number', min: 70, max: 130 },
-  sectorIndex: { type: 'number', min: 0 }
+  building: { type: "object" },
+  type: { type: "string", regExp: /^[a-z_0-9]{4,9}$/gi },
+  persent: { type: "number", min: 70, max: 130 },
+  sectorIndex: { type: "number", min: 0 }
 };

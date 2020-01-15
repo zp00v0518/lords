@@ -5,7 +5,7 @@ const {
   gloss,
   deleteSource,
   setUpgradeChange
-} = require('../tube.js');
+} = require("../tube.js");
 const regionLength = gameVariables.numSectionRegionMap;
 const mine = gameVariables.mine;
 
@@ -17,16 +17,20 @@ function handlerResponseUpgradeRegion(message, info) {
     return;
   }
   const sector = info.player.sectors[data.sectorIndex];
+  if (!sector) {
+    redirectMessage(ws);
+    return;
+  }
   const building = sector.region[data.building.x][data.building.y].sector;
   if (building.type !== data.building.type) {
     redirectMessage(ws);
     return;
   }
   const response = {
-    type: 'upgradeBuilding',
+    type: "upgradeBuilding",
     status: true,
     upgrade: false,
-    message: ''
+    message: ""
   };
   const lang = info.player.user.lang;
   if (building.upgrade.is) {
@@ -64,10 +68,10 @@ function handlerResponseUpgradeRegion(message, info) {
 module.exports = handlerResponseUpgradeRegion;
 
 const schema = {
-  building: { type: 'object' },
-  type: { type: 'string', regExp: /^[a-z]{2,7}$/gi },
-  x: { type: 'number', min: 0, max: regionLength },
-  y: { type: 'number', min: 0, max: regionLength },
-  persent: { type: 'number', min: 70, max: 130 },
-  sectorIndex: { type: 'number', min: 0 }
+  building: { type: "object" },
+  type: { type: "string", regExp: /^[a-z]{2,7}$/gi },
+  x: { type: "number", min: 0, max: regionLength },
+  y: { type: "number", min: 0, max: regionLength },
+  persent: { type: "number", min: 70, max: 130 },
+  sectorIndex: { type: "number", min: 0 }
 };
