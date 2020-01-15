@@ -43,6 +43,16 @@ const Army = {
     });
     return result;
   },
+  getTotalCost(cost, unitSum){
+    return Object.keys(cost).reduce((result, key)=>{
+      const item = cost[key];
+      result[key] = unitSum * item;
+      return result;
+    }, {})
+  },
+  getUnitInfo(raceName, unitName){
+    return this.race[raceName][unitName];
+  },
   getIconUnit({unit, iconType = 'ico', ext = ".gif"}) {
     const {race, name} = unit;
     return `img/units/${race}/${iconType}/${name}${ext}`;

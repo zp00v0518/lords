@@ -6,6 +6,7 @@ const addNewUserToGlobalMap = require("./addNewUserToGlobalMap.js");
 const updateUser = require("./updateUser.js");
 const addCollectionsToUser = require("./addCollectionsToUser.js");
 const setUserOnline = require("./setUserOnline");
+// const User = require("./User");
 
 module.exports = {
   userCreate,
@@ -16,5 +17,6 @@ module.exports = {
   addNewUserToGlobalMap,
   updateUser,
   addCollectionsToUser,
-  setUserOnline
+  setUserOnline,
+  // User
 };

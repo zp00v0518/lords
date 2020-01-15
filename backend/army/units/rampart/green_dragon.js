@@ -4,7 +4,7 @@ const type_resources = require("../../../resources/type_resources");
 const types_races = require("../../../race/types_races");
 const race = types_races.rampart;
 
-function createGreenDragon(name, up = 0) {
+function createGreenDragon(unitInfo, up = 0) {
   let cost = {
     [type_resources.gold]: 700,
     [type_resources.crystal]: 1
@@ -18,7 +18,7 @@ function createGreenDragon(name, up = 0) {
     hp = 75;
   }
   return createUnit({
-    name,
+    unitInfo,
     type: army_types.kon,
     hp,
     cost,

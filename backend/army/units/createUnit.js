@@ -1,4 +1,5 @@
-function createUnit({ name, cost, type, hp, race, up = 0, lvl }) {
+function createUnit({ unitInfo, cost, type, hp, race, up = 0, lvl }) {
+  const { name, building } = unitInfo;
   return {
     cost,
     hp,
@@ -6,7 +7,8 @@ function createUnit({ name, cost, type, hp, race, up = 0, lvl }) {
     type,
     lvl,
     race,
-    up
+    up,
+    building
   };
 }
 

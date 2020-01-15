@@ -4,7 +4,7 @@ const type_resources = require("../../../resources/type_resources");
 const types_races = require("../../../race/types_races");
 const race = types_races.rampart;
 
-function createUnicorn(name, up = 0) {
+function createUnicorn(unitInfo, up = 0) {
   let cost = {
     [type_resources.gold]: 600,
     [type_resources.gem]: 1
@@ -17,7 +17,7 @@ function createUnicorn(name, up = 0) {
     hp = 65;
   }
   return createUnit({
-    name,
+    unitInfo,
     type: army_types.kon,
     hp,
     cost,

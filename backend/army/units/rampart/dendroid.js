@@ -4,7 +4,7 @@ const type_resources = require("../../../resources/type_resources");
 const types_races = require("../../../race/types_races");
 const race = types_races.rampart;
 
-function createDendroid(name, up = 0) {
+function createDendroid(unitInfo, up = 0) {
   let cost = {
     [type_resources.gold]: 500
   };
@@ -16,7 +16,7 @@ function createDendroid(name, up = 0) {
     hp = 55;
   }
   return createUnit({
-    name,
+    unitInfo,
     type: army_types.pex,
     hp,
     cost,
