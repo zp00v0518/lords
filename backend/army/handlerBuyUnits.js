@@ -2,8 +2,9 @@
 const { checkSchema } = require("../template_modules");
 const { redirectMessage } = require("../wsServer");
 const { Race } = require("../race");
-const { Army } = require("./army");
+const { Army, createStackItemTemplate } = require("./army");
 const { checkSource } = require("../resources");
+const checkUnitInBarraks = require("./checkUnitInBarraks");
 
 function handlerBuyUnits(message, info) {
   console.log(arguments.callee.name);
@@ -22,30 +23,50 @@ function handlerBuyUnits(message, info) {
     redirectMessage(ws);
     return;
   }
-  const army_in_town = sector.town.army;
-  response.status = true;
-  response.buy = {};
-  if (army_in_town.units.length >= 7) {
-    response.buy.is = false;
-    response.buy.status = "full_army_in_town";
-    ws.send(JSON.stringify(response));
+  const { town } = sector;
+  const army_in_town = town.army;
+
+  if (army_in_town.units.length >= Army.army_length + 1) {
+    redirectMessage(ws);
+    // ws.send(JSON.stringify(response));
     return;
   }
-  const { unitName } = data;
-  const raceName = Race.typeList[sector.town.race];
+  const { unitName, hiring } = data;
+  const raceName = Race.typeList[town.race];
   const unitInfo = Army.getUnitInfo(raceName, unitName);
+
   if (!unitInfo) {
     redirectMessage(ws);
     return;
   }
-  const totalCost = Army.getTotalCost(unitInfo.cost, data.hiring);
-  const storage = sector.town.storage.sources;
+  const totalCost = Army.getTotalCost(unitInfo.cost, hiring);
+  const storage = town.storage.sources;
   if (!checkSource(totalCost, storage)) {
     redirectMessage(ws);
     return;
   }
-
-  ws.send(JSON.stringify(unitInfo));
+  response.status = true;
+  response.buy = {};
+  const barakk_name = unitInfo.building;
+  const barrak = town[barakk_name];
+  if (!checkUnitInBarraks(barrak, hiring)) {
+    response.buy.is = false;
+    response.buy.status = "not_enough_army";
+    ws.send(JSON.stringify(response));
+    return;
+  }
+  const stackItemTemplate = Object.assign(createStackItemTemplate(), unitInfo);
+  stackItemTemplate.count = hiring;
+  // const unitForMerge = {
+  //   name: unitName,
+  //   count: hiring,
+  // };
+  const test = JSON.parse(JSON.stringify(army_in_town.units));
+  const result = Army.mergeTwoArmy(test, [stackItemTemplate]);
+  response.result = result;
+  response.unit = unitInfo;
+  response.unitOne = Army.getOneUnitFromRace(unitInfo.race, unitInfo.name);
+  ws.send(JSON.stringify(response));
 }
 
 module.exports = handlerBuyUnits;

@@ -1,4 +1,5 @@
 const { getRandomNumber } = require("template_func");
+const createStackItemTemplate = require("./createStackItemTemplate");
 
 function createArmy({
   range_power_army = [2000, 3000],
@@ -21,30 +22,30 @@ function createArmy({
       const { name, hp, up } = unit;
       const key = up ? `${name}_up` : name;
       if (!result[key]) {
-        result[key] = createTemplate(unit);
+        result[key] = createStackItemTemplate(unit);
       }
       result[key].count++;
       power_army -= hp;
     }
   } else {
     const { name, hp } = stack_units[0];
-    result[name] = createTemplate(stack_units[0]);
+    result[name] = createStackItemTemplate(stack_units[0]);
     result[name].count = Math.floor(power_army / hp);
   }
   return Object.values(result);
 }
 
-function createTemplate(unit) {
-  const { name, race, lvl, up } = unit;
-  const template = {
-    race,
-    name,
-    lvl,
-    count: 0,
-    up
-  };
-  return template;
-}
+// function createTemplate(unit) {
+//   const { name, race, lvl, up } = unit;
+//   const template = {
+//     race,
+//     name,
+//     lvl,
+//     count: 0,
+//     up
+//   };
+//   return template;
+// }
 
 function getUnits({ stack_count = 1, units = [] }) {
   const allUnits = units.slice();
