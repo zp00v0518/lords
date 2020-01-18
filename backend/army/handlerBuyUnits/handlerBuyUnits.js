@@ -1,11 +1,11 @@
 // const { checkSchema, redirectMessage, gloss } = require('../../tube');
-const { checkSchema } = require("../template_modules");
-const { redirectMessage } = require("../wsServer");
-const { Race } = require("../race");
-const { Army, createStackItemTemplate } = require("./army");
-const { checkSource } = require("../resources");
-const checkUnitInBarraks = require("./checkUnitInBarraks");
-const { deleteSource } = require("../resources");
+const { checkSchema } = require("../../template_modules");
+const { redirectMessage } = require("../../wsServer");
+const { Race } = require("../../race");
+const { Army, createStackItemTemplate } = require("./../army");
+const { checkSource } = require("../../resources");
+const checkUnitInBarraks = require("./../checkUnitInBarraks");
+const { deleteSource } = require("../../resources");
 
 function handlerBuyUnits(message, info) {
   console.log(arguments.callee.name);
