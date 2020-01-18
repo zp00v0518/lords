@@ -11,7 +11,7 @@
     <Building
       v-if="component.is"
       :name="component.name"
-      @close="component.is  = false"
+      @close="component.is = false"
       :townRaceName="townRaceName"
       :currentTown="currentTown"
       :buildingData="component.buildingData"
@@ -83,6 +83,13 @@ export default {
           this.$store.state.globalConfig
         );
         this.drawTown(this.arrDrawImg);
+      } else {
+        this.arrDrawImg = formCurrentImageList.call(
+          this,
+          this.currentTown,
+          this.townRaceName,
+          this.$store.state.globalConfig
+        );
       }
     }
   },
@@ -124,5 +131,4 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-</style>
+<style lang="scss" scoped></style>

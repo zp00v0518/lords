@@ -30,7 +30,7 @@
         </div>
         <div class="army_in_castle--wrap">
           <!-- <div class="army_in_castle--insert"></div> -->
-          <ArmyLine />
+          <ArmyLine :army="army" />
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@ import HeroesInTown from "../HeroesInTown";
 export default {
   name: "Town",
   components: { ...modules, ArmyLine, HeroesInTown },
-  props: ["sector", "indexTown"],
+  props: ["sector"],
   data() {
     return {
       name: "Default Name",
@@ -60,6 +60,9 @@ export default {
     this.name = this.sector.town.name;
   },
   computed: {
+    army() {
+      return this.sector.town.army.units;
+    },
     races() {
       return this.globalConfig.races;
     },
@@ -88,13 +91,12 @@ export default {
 
 <style lang="scss">
 @import "town.scss";
-.army_in_castle{
-  &--wrap{
+.army_in_castle {
+  &--wrap {
     display: flex;
   }
-  &--insert{
+  &--insert {
     padding-left: 10px;
   }
-
 }
 </style>

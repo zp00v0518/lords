@@ -1,13 +1,17 @@
 <template>
   <section class="building__wrap">
     <div class="building__header">
-      <div class="building__header-title">{{name}}</div>
-      <Icon class="building__header-close" name="circle-close" @click.native="closeBuilding"></Icon>
+      <div class="building__header-title">{{ name }}</div>
+      <Icon
+        class="building__header-close"
+        name="circle-close"
+        @click.native="closeBuilding"
+      ></Icon>
     </div>
     <component
       :is="name"
       :townRaceName="townRaceName"
-      :currentTown="currentTown"
+      :currentTown="curTown"
       :gloss="gloss"
       :buildingData="buildingData"
       @close="closeBuilding"
@@ -29,12 +33,25 @@ export default {
   components: {
     ...Buildings
   },
+  data() {
+    return {
+      curTown: this.currentTown
+    };
+  },
   created() {
     document.addEventListener("keyup", this.handlerKeyup);
   },
   computed: {
     gloss() {
       return this.$store.state.local.dictionary.town.race[this.townRaceName];
+    }
+  },
+  watch: {
+    currentTown: {
+      deep: true,
+      handler(e) {
+        this.curTown = e;
+      }
     }
   },
   methods: {
@@ -52,7 +69,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .building {
   &__wrap {
     display: flex;
