@@ -7,7 +7,6 @@ const { checkSource } = require("../resources");
 const checkUnitInBarraks = require("./checkUnitInBarraks");
 const { deleteSource } = require("../resources");
 
-
 function handlerBuyUnits(message, info) {
   console.log(arguments.callee.name);
   const data = message.data;
@@ -26,17 +25,16 @@ function handlerBuyUnits(message, info) {
     return;
   }
   const { town } = sector;
-  const army_in_town = town.army;
-
-  if (army_in_town.units.length >= Army.army_length) {
+  const army_in_town = town.army.units;
+  const { unitName, hiring } = data;
+  const unit_in_town = army_in_town.some(i => i.name === unitName);
+  if (army_in_town.length >= Army.army_length && !unit_in_town) {
     redirectMessage(ws);
     // ws.send(JSON.stringify(response));
     return;
   }
-  const { unitName, hiring } = data;
   const raceName = Race.typeList[town.race];
   const unitInfo = Army.getUnitInfo(raceName, unitName);
-
   if (!unitInfo) {
     redirectMessage(ws);
     return;
@@ -59,13 +57,9 @@ function handlerBuyUnits(message, info) {
   }
   const stackItemTemplate = Object.assign(createStackItemTemplate(), unitInfo);
   stackItemTemplate.count = hiring;
-  const result = Army.mergeTwoArmy(army_in_town.units, [stackItemTemplate]);
   storage = deleteSource(totalCost, storage);
   barrak.work.nowValue -= hiring;
-  response.result = result;
-  response.totalCost = totalCost;
-  response.storage = storage;
-  response.barrak = barrak;
+  const result = Army.mergeTwoArmy(army_in_town, [stackItemTemplate]);
   ws.send(JSON.stringify(response));
 }
 

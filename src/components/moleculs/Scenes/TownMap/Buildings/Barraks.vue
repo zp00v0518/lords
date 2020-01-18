@@ -144,7 +144,7 @@ export default {
       return this.currentTown.town.storage;
     },
     raceData() {
-      const { globalConfig } = this.$store.state;
+      const { globalConfig } = this;
       return globalConfig.races[this.townRaceName];
     },
     buildInfo() {
@@ -173,10 +173,12 @@ export default {
   },
   methods: {
     buyUnits() {
-      const { hiring, totalCost, unit, army, currentTown } = this;
+      const { hiring, totalCost, unit, army, currentTown, globalConfig } = this;
+      const base_army_length = globalConfig.all.Army.army_length;
       const army_length = Object.values(army).length;
-      if (army_length > 7) {
-        console.log("В городе нет места для юнита");
+      const unit_in_town = Object.values(army).some(i => i.name === unit.name)
+      if ( army_length >= base_army_length && !unit_in_town) {
+        alert("В городе нет места для юнита");
         return;
       }
       const message = {
