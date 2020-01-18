@@ -4,6 +4,7 @@ const rampart_units = require("../units/rampart");
 const schema = require("../../workWithMongoDB/schema");
 const type = schema.document.class;
 const createStackItemTemplate = require("./createStackItemTemplate");
+const time = require("../../config/config").time;
 
 const Army = {
   army_length: 7,
@@ -94,6 +95,9 @@ const Army = {
     result.target = target;
     result.outcoming = second;
     return result;
+  },
+  getBaseHiringTime(hp, count) {
+    return hp * count * time.hiring;
   }
 };
 
