@@ -1,4 +1,4 @@
-const { addEventToDB } = require("../../events");
+const addEventToDB = require("../../events/addEventToDB");
 
 function setEventForHiringUnit({
   sector,
@@ -8,7 +8,7 @@ function setEventForHiringUnit({
   timeHiring = 0,
   callback = () => {}
 }) {
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const dataForDB = {
       target: {
         sector: sector._id,

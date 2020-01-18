@@ -56,11 +56,11 @@ function handlerBuyUnits(message, info) {
     ws.send(JSON.stringify(response));
     return;
   }
-  barrak.work.nowValue -= hiring;
-  storage = deleteSource(totalCost, storage);
   const timeHiring = Army.getBaseHiringTime(unitInfo.hp, hiring);
   setEventForHiringUnit({ sector, info, unitName, count: hiring, timeHiring })
     .then(() => {
+      storage = deleteSource(totalCost, storage);
+      barrak.work.nowValue -= hiring;
       ws.send(JSON.stringify(response));
     })
     .catch(err => {

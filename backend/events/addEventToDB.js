@@ -1,10 +1,10 @@
-const { insertDB } = require('../tube.js');
+const { insertDB } = require("../tube.js");
 const insert = new insertDB();
 
 function addEventToDB(data, serverName, callback = function() {}) {
   return new Promise((resolve, reject) => {
     const doc = {
-      class: 'event',
+      class: "event",
       target: data.target,
       init: data.init,
       start: data.start,
@@ -32,16 +32,16 @@ module.exports = addEventToDB;
 const schema = {
   type: String,
   target: {
-    user: 'ObjectId',
-    sector: 'ObjectId',
-    x: 'coordX',
-    y: 'coordY'
+    user: "ObjectId",
+    sector: "ObjectId",
+    x: "coordX",
+    y: "coordY"
   },
   init: {
-    user: 'ObjectId',
-    sector: 'ObjectId',
-    x: 'coordX',
-    y: 'coordY'
+    user: "ObjectId",
+    sector: "ObjectId",
+    x: "coordX",
+    y: "coordY"
   },
   start: Date,
   end: Date,
