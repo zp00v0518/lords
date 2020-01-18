@@ -1,11 +1,11 @@
-const handlerBuyUnits = require("./handlerBuyUnits");
 const globalCalcUnit = require("./globalCalcUnit");
 const calcValueUnitInBarraks = require("./calcValueUnitInBarraks");
 const checkUnitInBarraks = require("./checkUnitInBarraks");
+const army = require('./Army')
 
 module.exports = {
-  handlerBuyUnits,
   globalCalcUnit,
   calcValueUnitInBarraks,
-  checkUnitInBarraks
+  checkUnitInBarraks,
+  ...army
 };

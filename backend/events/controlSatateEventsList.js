@@ -9,7 +9,6 @@ const eventType = require("./Event").types;
 const update = new updateDB();
 
 function controlSatateEventsList(eventsList = []) {
-  console.log(eventsList);
   if (eventsList.length === 0) return eventsList;
   for (let i = 0; i < eventsList.length; i++) {
     const item = eventsList[i];

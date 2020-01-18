@@ -67,9 +67,6 @@ function handlerBuyUnits(message, info) {
       response.error = err;
       ws.send(JSON.stringify(response));
     });
-  // const stackItemTemplate = Object.assign(createStackItemTemplate(), unitInfo);
-  // stackItemTemplate.count = hiring;
-  // const result = Army.mergeTwoArmy(army_in_town, [stackItemTemplate]);
 }
 
 module.exports = handlerBuyUnits;
