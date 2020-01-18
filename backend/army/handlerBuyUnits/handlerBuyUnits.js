@@ -6,6 +6,7 @@ const { Army, createStackItemTemplate } = require("./../army");
 const { checkSource } = require("../../resources");
 const checkUnitInBarraks = require("./../checkUnitInBarraks");
 const { deleteSource } = require("../../resources");
+const setEventForHiringUnit = require('./setEventForHiringUnit');
 
 function handlerBuyUnits(message, info) {
   console.log(arguments.callee.name);
@@ -13,7 +14,8 @@ function handlerBuyUnits(message, info) {
   const ws = info.player.ws;
   const response = {
     status: false,
-    type: message.type
+    type: message.type,
+    info,
   };
   if (!checkSchema(data, schema)) {
     redirectMessage(ws);
@@ -57,9 +59,9 @@ function handlerBuyUnits(message, info) {
   }
   const stackItemTemplate = Object.assign(createStackItemTemplate(), unitInfo);
   stackItemTemplate.count = hiring;
-  storage = deleteSource(totalCost, storage);
-  barrak.work.nowValue -= hiring;
-  const result = Army.mergeTwoArmy(army_in_town, [stackItemTemplate]);
+  // storage = deleteSource(totalCost, storage);
+  // barrak.work.nowValue -= hiring;
+  // const result = Army.mergeTwoArmy(army_in_town, [stackItemTemplate]);
   ws.send(JSON.stringify(response));
 }
 

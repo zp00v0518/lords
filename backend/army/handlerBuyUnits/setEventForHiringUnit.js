@@ -1,35 +1,38 @@
 const { addEventToDB } = require("../../events");
-function setUpUpgradeChange_building({
-  building = {},
-  time_for_upgrade = 0,
-  sector = {},
-  info = {},
-  callback = function() {}
+
+function setEventForHiringUnit({
+  sector,
+  info,
+  unitName,
+  count,
+  timeHiring = 0,
+  callback = () => {}
 }) {
-  return new Promise((resolve, reject) => {
-    building.upgrade.is = true;
-    building.upgrade.date = new Date().getTime() + time_for_upgrade;
+  new Promise((resolve, reject) => {
     const dataForDB = {
       target: {
         sector: sector._id,
         race: sector.town.race,
-        user: info.player.user._id,
+        user: sector.userId,
         x: sector.x,
         y: sector.y
       },
       init: {
         sector: sector._id,
-        user: info.player.user._id,
         race: sector.town.race,
+        user: sector.userId,
         x: sector.x,
         y: sector.y
       },
-      type: "upgradeTown",
+      type: "hiringUnits",
       start: new Date().getTime(),
-      end: building.upgrade.date,
-      data: building
+      end: new Date().getTime() + timeHiring,
+      data: {
+        unitName,
+        count,
+        unitRace: sector.town.race
+      }
     };
-    dataForDB.data.nextLvl = dataForDB.data.lvl + 1;
     addEventToDB(dataForDB, info.server)
       .then(result => {
         const addEvent = result.ops[0];
@@ -47,4 +50,4 @@ function setUpUpgradeChange_building({
   });
 }
 
-module.exports = setUpUpgradeChange_building;
+module.exports = setEventForHiringUnit;
