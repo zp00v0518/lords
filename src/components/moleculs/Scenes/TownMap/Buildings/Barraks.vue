@@ -39,7 +39,7 @@
         </div>
         <div class="barraks__cost--hiring">
           <span class="barraks__cost--title">Нанять</span>
-          <span class="barraks__cost--value">{{ hiring }}</span>
+          <span class="barraks__cost--value" :class="{ 'isNotCost': isNotCost }">{{ hiring }}</span>
         </div>
         <input
           class="barraks__cost--range"
@@ -192,6 +192,7 @@ export default {
         }
       };
       this.$ws.sendMessage(message);
+      this.$emit('close');
     },
     getImageUrl(index) {
       const { unitName } = this;

@@ -36,13 +36,12 @@ export default {
       const races = this.$store.state.globalConfig.races;
       return races.typeList[this.dataEvent.init.race];
     },
-    typesEvent(){
-      return this.globalConfig.all.Event.types
+    typesEvent() {
+      return this.globalConfig.all.Event.types;
     },
     buildingName() {
-      const {typesEvent, dataEvent} = this;
+      const { typesEvent, dataEvent } = this;
       const eventType = dataEvent.type;
-        console.log(dataEvent)
       if (eventType === "upgradeTown") {
         const lvl = dataEvent.data.nextLvl;
         return this.allNames[this.type].lvl[lvl].txt;
@@ -50,7 +49,9 @@ export default {
         const classBuild = dataEvent.data.class;
         return this.gloss[classBuild].type[this.type].name.txt;
       } else if (eventType === typesEvent.hiringUnits) {
-        // return this.gloss[classBuild].type[this.type].name.txt;
+        const { unitName } = dataEvent.data;
+        const base = this.gloss.timeLine.hiring.txt;
+        return `${base} ${unitName}`;
       }
     }
   },

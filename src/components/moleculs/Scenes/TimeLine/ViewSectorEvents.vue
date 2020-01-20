@@ -53,6 +53,7 @@ export default {
   width: 15px;
   position: absolute;
   top: 100%;
+  background: grey;
 }
 .event {
   position: relative;
@@ -60,5 +61,6 @@ export default {
   border: 1px solid;
   height: 15px;
   cursor: pointer;
+  border-top: none;
 }
 </style>
