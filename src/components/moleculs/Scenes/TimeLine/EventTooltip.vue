@@ -1,11 +1,14 @@
 <template>
-  <div class="event__tooltip" :style="{top: position+'px'}">
-    <div
-      class="event__tooltip__item"
-    >{{upperFirstSymbol(gloss.timeLine.upgrade.txt)}} : {{upperFirstSymbol(buildingName)}}</div>
-    <div
-      class="event__tooltip__item"
-    >{{upperFirstSymbol(gloss.timeLine.timeEnd.txt)}}:{{formDataToView(dataEvent.end)}}</div>
+  <div class="event__tooltip" :style="{ top: position + 'px' }">
+    <div class="event__tooltip__item">
+      {{ upperFirstSymbol(gloss.timeLine.upgrade.txt) }} :
+      {{ upperFirstSymbol(buildingName) }}
+    </div>
+    <div class="event__tooltip__item">
+      {{ upperFirstSymbol(gloss.timeLine.timeEnd.txt) }}:{{
+        formDataToView(dataEvent.end)
+      }}
+    </div>
   </div>
 </template>
 
@@ -33,14 +36,21 @@ export default {
       const races = this.$store.state.globalConfig.races;
       return races.typeList[this.dataEvent.init.race];
     },
+    typesEvent(){
+      return this.globalConfig.all.Event.types
+    },
     buildingName() {
-      const eventType = this.dataEvent.type;
+      const {typesEvent, dataEvent} = this;
+      const eventType = dataEvent.type;
+        console.log(dataEvent)
       if (eventType === "upgradeTown") {
-        const lvl = this.dataEvent.data.nextLvl;
+        const lvl = dataEvent.data.nextLvl;
         return this.allNames[this.type].lvl[lvl].txt;
       } else if (eventType === "upgradeRegion") {
-        const classBuild = this.dataEvent.data.class;
+        const classBuild = dataEvent.data.class;
         return this.gloss[classBuild].type[this.type].name.txt;
+      } else if (eventType === typesEvent.hiringUnits) {
+        // return this.gloss[classBuild].type[this.type].name.txt;
       }
     }
   },
@@ -52,7 +62,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .event__tooltip {
   position: absolute;
   border: 1px solid red;

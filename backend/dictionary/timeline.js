@@ -4,6 +4,9 @@ const timeLine = {
   },
   upgrade: {
     ru: 'улучшение'
+  },
+  hiring:{
+    ru: 'наем'
   }
 };
 module.exports = timeLine;
