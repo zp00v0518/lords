@@ -1,4 +1,4 @@
-import modules from './modules';
+import modules from "./modules";
 
 class WS {
   init(wsAddr, store) {
@@ -42,48 +42,61 @@ class WS {
     };
   }
   moveGlobalMap(eventData) {
-    this.store.commit('SET_CURRENTMAP', eventData);
+    this.store.commit("SET_CURRENTMAP", eventData);
   }
   startMessages(eventData) {
     console.log(eventData);
-    this.store.commit('CHOICE_RASE', { status: false });
-    this.store.commit('START_MESSAGES', eventData);
-    this.store.commit('SET_CURRENTMAP', eventData);
-    this.store.dispatch('SET_DATA_CONNECTION', eventData.sectors);
+    this.store.commit("CHOICE_RASE", { status: false });
+    this.store.commit("START_MESSAGES", eventData);
+    this.store.commit("SET_CURRENTMAP", eventData);
+    this.store.dispatch("SET_DATA_CONNECTION", eventData.sectors);
     // this.store.commit("SET_CURRENT_REGION", eventData.sectors[0]);
-    this.store.commit('SET_DICTIONARY', eventData.dictionary);
-    this.store.commit('SET_EVENTS', eventData.eventsList);
-    this.store.commit('SET_HEROES_LIST', eventData.heroes);
+    this.store.commit("SET_DICTIONARY", eventData.dictionary);
+    this.store.commit("SET_EVENTS", eventData.eventsList);
+    this.store.commit("SET_HEROES_LIST", eventData.heroes);
   }
   chatMessage(eventData) {
-    this.store.commit('UNSHIFT_MESSAGE', eventData);
+    this.store.commit("UNSHIFT_MESSAGE", eventData);
   }
   sendMessage(message) {
     this.wsInstance.send(JSON.stringify(message));
   }
   sendChatMessage(message) {
-    message.type = 'chatMessage';
+    message.type = "chatMessage";
     this.sendMessage(message);
   }
 
   choicesRace(message) {
-    this.store.commit('CHOICE_RASE', { status: true });
+    this.store.commit("CHOICE_RASE", { status: true });
   }
 
   reload() {
-    console.log('reload');
+    console.log("reload");
     location.reload();
   }
   controlState(eventData) {
-    this.store.dispatch('SET_SECTORS_WITH_CURRENT_SECTOR', eventData.sectors);
-    this.store.commit('SET_EVENTS', eventData.eventsList);
+    this.store.dispatch("SET_SECTORS_WITH_CURRENT_SECTOR", eventData.sectors);
+    this.store.commit("SET_EVENTS", eventData.eventsList);
   }
   setEvents(eventData) {
-    this.store.commit('SET_EVENTS', eventData.eventsList);
+    this.store.commit("SET_EVENTS", eventData.eventsList);
   }
 
   consoles(e) {
     console.log(e);
+  }
+  get(e) {
+    const { wsInstance } = this;
+    const { type } = e;
+    return new Promise((resolve, reject) => {
+      wsInstance.send(JSON.stringify(e));
+      wsInstance.addEventListener("message", res => {
+        const data = JSON.parse(res.data);
+        if (data.type === type) {
+          resolve(data);
+        }
+      });
+    });
   }
   upgradeBuilding = modules.upgradeBuilding;
   buyUnits = modules.buyUnits;

@@ -6,6 +6,9 @@ export default {
     },
     gameSources() {
       return this.$store.state.gameSources;
+    },
+    currentSector() {
+      return this.$store.state.userSectors.currentSector;
     }
   }
 };

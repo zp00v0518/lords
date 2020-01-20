@@ -56,6 +56,9 @@ export default {
           )
         }
       };
+      this.$ws.get(message).then(res =>{
+        console.log(res)
+      });
     }
   }
 };
