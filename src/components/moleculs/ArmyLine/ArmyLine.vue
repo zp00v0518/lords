@@ -40,6 +40,7 @@ export default {
 .army-line {
   display: flex;
   justify-content: space-between;
+  padding-left: 3px;
   &__item {
     width: calc(100% / 7);
     height: 100%;

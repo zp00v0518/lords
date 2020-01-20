@@ -8,7 +8,10 @@
       <div class="heroes-in-town__item--img">
         <img :src="getHeroesAvatar(hero)" alt="heroavatar" />
       </div>
-      <div class="heroes-in-town__item__control">control</div>
+      <div class="heroes-in-town__item__control">
+        <GuiBtn type="up" class="heroes-in-town__item__control--item" @click="mergeArmy(index, 'up')"/>
+        <GuiBtn type="down" class="heroes-in-town__item__control--item" @click="mergeArmy(index, 'down')"/>
+      </div>
       <div class="heroes-in-town__item__content">
         <div class="heroes-in-town__item__content__info">
           <div class="heroes-in-town__item__content__info--name">
@@ -40,6 +43,19 @@ export default {
     getHeroesAvatar(hero) {
       const { races } = this.globalConfig;
       return races.heroes.getHeroImg(hero.race, hero.type);
+    },
+    mergeArmy(index, way){
+      const hero = this.heroesList[index];
+      const message = {
+        type: "mergeArmy",
+        data: {
+          id: hero._id,
+          way,
+          sectorIndex: this.$store.state.userSectors.sectors.indexOf(
+            this.currentSector
+          )
+        }
+      };
     }
   }
 };
@@ -62,9 +78,13 @@ export default {
     &__control {
       display: flex;
       flex-direction: column;
+      justify-content: center;
       width: 15px;
       overflow: hidden;
-      writing-mode: vertical-rl;
+      // writing-mode: vertical-rl;
+      &--item{
+        width: 100%;
+      }
     }
     &__content {
       display: flex;

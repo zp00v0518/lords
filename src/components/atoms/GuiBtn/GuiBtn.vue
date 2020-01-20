@@ -4,6 +4,7 @@
       :is="type + 'Btn'"
       :disabled="disabled"
       @click.native="handlerClick"
+      class="guibtn--item"
     ></component>
   </div>
 </template>
@@ -30,5 +31,8 @@ export default {
 <style lang="scss">
 .guibtn {
   cursor: pointer;
+  &--item{
+    width: 100%;
+  }
 }
 </style>

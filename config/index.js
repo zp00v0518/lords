@@ -10,8 +10,9 @@ module.exports = {
     // Paths
     assetsSubDirectory: '../static',
     // assetsSubDirectory: '../dist', // подключить при билде
-    assetsPublicPath: '/',
-    proxyTable: {},
+    assetsPublicPath: '/dist/',
+    publicPath: "",
+    proxyTable: '/asd',
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

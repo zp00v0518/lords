@@ -39,7 +39,11 @@
         </div>
         <div class="barraks__cost--hiring">
           <span class="barraks__cost--title">Нанять</span>
-          <span class="barraks__cost--value" :class="{ 'isNotCost': isNotCost }">{{ hiring }}</span>
+          <span
+            class="barraks__cost--value"
+            :class="{ isNotCost: isNotCost }"
+            >{{ hiring }}</span
+          >
         </div>
         <input
           class="barraks__cost--range"
@@ -173,11 +177,11 @@ export default {
   },
   methods: {
     buyUnits() {
-      const { hiring, totalCost, unit, army, currentTown, globalConfig } = this;
+      const { hiring, unit, army, globalConfig } = this;
       const base_army_length = globalConfig.all.Army.army_length;
       const army_length = Object.values(army).length;
-      const unit_in_town = Object.values(army).some(i => i.name === unit.name)
-      if ( army_length >= base_army_length && !unit_in_town) {
+      const unit_in_town = Object.values(army).some(i => i.name === unit.name);
+      if (army_length >= base_army_length && !unit_in_town) {
         alert("В городе нет места для юнита");
         return;
       }
@@ -192,7 +196,7 @@ export default {
         }
       };
       this.$ws.sendMessage(message);
-      this.$emit('close');
+      this.$emit("close");
     },
     getImageUrl(index) {
       const { unitName } = this;
