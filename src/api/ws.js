@@ -79,6 +79,7 @@ class WS {
   controlState(eventData) {
     this.store.dispatch("SET_SECTORS_WITH_CURRENT_SECTOR", eventData.sectors);
     this.store.commit("SET_EVENTS", eventData.eventsList);
+    this.store.commit("SET_HEROES_LIST", eventData.heroesList);
   }
   setEvents(eventData) {
     this.store.commit("SET_EVENTS", eventData.eventsList);

@@ -1,10 +1,11 @@
 const { checkSchema } = require("../../template_modules");
 const { redirectMessage } = require("../../wsServer");
-const {getHeroesFromDB} = require('../../heroes/db');
+const { Army } = require("../Army");
+// const { getHeroesFromDB } = require("../../heroes/db");
 
 function handlerMergeArmy(message, info) {
   const data = message.data;
-  const ws = info.player.ws;
+  const { ws } = info.player;
   const response = {
     status: false,
     type: message.type,
@@ -21,21 +22,27 @@ function handlerMergeArmy(message, info) {
   }
   const heroId = data.id;
   const heroes_in_town = sector.heroes;
-  if (!heroes_in_town || !heroes_in_town.some(i => i.toString() === heroId)){
+  if (!heroes_in_town || !heroes_in_town.some(i => i.toString() === heroId)) {
     redirectMessage(ws);
+    return;
   }
-  const {server} = info;
-
-  // const army_in_town = town.army.units;
-  getHeroesFromDB(server, {heroId}).then(hero => {
-    const army_hero = hero.army;
-    response.res = res;
-    response.message = message;
-      ws.send(JSON.stringify(response));
-
-  }).catch(err => {
+  const { heroesList } = info.player;
+  const hero = heroesList.find(i => i._id.toString() === heroId);
+  if (!hero) {
     redirectMessage(ws);
-  })
+    return;
+  }
+  const army_hero = hero.army;
+  const army_in_town = sector.town.army.units;
+  let mergeResult;
+  const mergeWay = data.way;
+  if (mergeWay === "in") {
+    mergeResult = Army.mergeTwoArmy(army_hero, army_in_town);
+  }
+  response.res = hero;
+  response.mergeResult = mergeResult;
+  ws.send(JSON.stringify(response));
+
 }
 
 const schema = {
