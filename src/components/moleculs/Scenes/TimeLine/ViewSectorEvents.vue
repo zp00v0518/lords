@@ -57,7 +57,6 @@ export default {
 }
 .event {
   position: relative;
-  width: 100%;
   border: 1px solid;
   height: 15px;
   cursor: pointer;

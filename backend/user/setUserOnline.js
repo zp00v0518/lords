@@ -22,6 +22,7 @@ function setUserOnline(user, server, info_for_game, ws) {
   });
   UserOnline[server][User._id].sectors = info_for_game.sectors;
   UserOnline[server][User._id].eventsList = info_for_game.eventsList;
+   UserOnline[server][User._id].heroesList = info_for_game.heroesList;
   UserOnline[server][User._id].user.globalMap = {};
   UserOnline[server][User._id].user.globalMap.zoom = 1;
   UserOnline[server][User._id].user.globalMap.centerMap = {};
@@ -33,7 +34,7 @@ function setUserOnline(user, server, info_for_game, ws) {
     startMessage.eventsList = info_for_game.eventsList;
     startMessage.currentMap = currentMap;
     startMessage.sectors = info_for_game.sectors;
-    startMessage.heroes = info_for_game.heroes;
+    startMessage.heroesList = info_for_game.heroesList;
     startMessage.dictionary = getLangDictionary(user.lang);
     ws.send(JSON.stringify(startMessage));
   });

@@ -5,4 +5,5 @@ module.exports = {
   upgradeBuilding: require('../town/buildings/handlerResponseUpgradeBuilding'),
   choicesRace: require('../race/choicesRace'),
   buyUnits: require('../army/handlerBuyUnits'),
+  mergeArmy: require('../army/handlerMergeArmy'),
 };

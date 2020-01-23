@@ -70,7 +70,7 @@ const Army = {
       status: false,
       cause: "full_army"
     };
-    if (target.length > army_length) return result;
+    // if (target.length > army_length) return result;
     for (let i = 0; i < second.length; i++) {
       const stack = second[i];
       const { name } = stack;

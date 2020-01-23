@@ -73,6 +73,6 @@ module.exports = handlerBuyUnits;
 
 const schema = {
   hiring: { type: "number", min: 1, max: 9999999 },
-  unitName: { type: "string", regExp: /^[a-z0-9_]{1,30}/gi },
+  unitName: { type: "string", regExp: /^[a-z0-9_]{1,30}/g },
   sectorIndex: { type: "number", min: 0 }
 };

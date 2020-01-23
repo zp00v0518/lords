@@ -30,7 +30,7 @@ function getInfoForStartGame(user, server, callback = function() {}) {
               });
               infoForStartGame.sectors = currentSectors;
               infoForStartGame.eventsList = eventsList;
-              infoForStartGame.heroes = resultFindHero.result;
+              infoForStartGame.heroesList = resultFindHero.result;
               resolve(infoForStartGame);
               return callback(null, infoForStartGame);
             });

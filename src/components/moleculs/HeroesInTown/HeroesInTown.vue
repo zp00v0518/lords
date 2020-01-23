@@ -9,8 +9,8 @@
         <img :src="getHeroesAvatar(hero)" alt="heroavatar" />
       </div>
       <div class="heroes-in-town__item__control">
-        <GuiBtn type="up" class="heroes-in-town__item__control--item" @click="mergeArmy(index, 'up')"/>
-        <GuiBtn type="down" class="heroes-in-town__item__control--item" @click="mergeArmy(index, 'down')"/>
+        <GuiBtn type="up" class="heroes-in-town__item__control--item" @click="mergeArmy(index, 'out')"/>
+        <GuiBtn type="down" class="heroes-in-town__item__control--item" @click="mergeArmy(index, 'in')"/>
       </div>
       <div class="heroes-in-town__item__content">
         <div class="heroes-in-town__item__content__info">
@@ -57,7 +57,7 @@ export default {
         }
       };
       this.$ws.get(message).then(res =>{
-        console.log(res)
+     
       });
     }
   }

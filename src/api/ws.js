@@ -29,7 +29,9 @@ class WS {
       const data = JSON.parse(event.data);
       console.log(`Входящий запрос: ${data.type}`);
       if (data.status === true) {
-        this.incoming[data.type](data);
+        if (this.incoming[data.type]) {
+          this.incoming[data.type](data);
+        }
       } else {
         if (data.redirectUrl) {
           console.log(data);
@@ -53,7 +55,7 @@ class WS {
     // this.store.commit("SET_CURRENT_REGION", eventData.sectors[0]);
     this.store.commit("SET_DICTIONARY", eventData.dictionary);
     this.store.commit("SET_EVENTS", eventData.eventsList);
-    this.store.commit("SET_HEROES_LIST", eventData.heroes);
+    this.store.commit("SET_HEROES_LIST", eventData.heroesList);
   }
   chatMessage(eventData) {
     this.store.commit("UNSHIFT_MESSAGE", eventData);
@@ -88,14 +90,16 @@ class WS {
   get(e) {
     const { wsInstance } = this;
     const { type } = e;
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       wsInstance.send(JSON.stringify(e));
-      wsInstance.addEventListener("message", res => {
+      wsInstance.addEventListener("message", handler);
+      function handler(res) {
         const data = JSON.parse(res.data);
         if (data.type === type) {
+          wsInstance.removeEventListener("message", handler);
           resolve(data);
         }
-      });
+      }
     });
   }
   upgradeBuilding = modules.upgradeBuilding;
