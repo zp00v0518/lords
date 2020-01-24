@@ -11,8 +11,7 @@ function handlerMergeArmy(message, info) {
   const { ws } = info.player;
   const response = {
     status: false,
-    type: message.type,
-    info
+    type: message.type
   };
   if (!checkSchema(data, schema)) {
     redirectMessage(ws);
@@ -37,12 +36,11 @@ function handlerMergeArmy(message, info) {
   }
   const army_hero = hero.army;
   const army_in_town = sector.town.army.units;
-  let mergeResult;
   const mergeWay = data.way;
   if (mergeWay === "in") {
-    mergeResult = Army.mergeTwoArmy(army_hero, army_in_town);
+    Army.mergeTwoArmy(army_hero, army_in_town);
   } else if (mergeWay === "out") {
-    mergeResult = Army.mergeTwoArmy(army_in_town, army_hero);
+    Army.mergeTwoArmy(army_in_town, army_hero);
   } else {
     redirectMessage(ws);
     return;
@@ -60,23 +58,27 @@ function handlerMergeArmy(message, info) {
   };
   update
     .one(updateOps)
-    .then(res => {
+    .then(() => {
       const sectrId = sector._id;
       updateOps.filtr._id = sectrId;
       updateOps.updateDoc = {
         $set: { "town.army.units": army_in_town }
       };
-      updateOps.ops = {
-        upsert: false
-      };
-      update.one(updateOps).then(res => {
-        response.res = hero;
-        response.town = sector.town;
+      update.one(updateOps).then(() => {
+        response.data = {
+          town: {
+            army: army_in_town
+          },
+          hero: {
+            army: army_hero
+          }
+        };
         ws.send(JSON.stringify(response));
       });
     })
     .catch(err => {
       console.log(err);
+      redirectMessage(ws);
     });
 }
 

@@ -16,6 +16,15 @@ const userSectors = {
     CHANGE_STORAGE(state, payload) {
       state.sectors[payload.sectorIndex].town.storage = payload.storage;
       Vue.set(state, "sectors", [...state.sectors]);
+    },
+    UPDATE_TOWN_ARMY(state, payload) {
+      const { sectorIndex, army } = payload;
+      const sector = state.sectors[sectorIndex];
+      if (sector) {
+        sector.town.army.units = army;
+      } else {
+        console.log("Сектор не найден");
+      }
     }
   },
   actions: {

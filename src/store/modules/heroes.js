@@ -5,6 +5,15 @@ const heroes = {
   mutations: {
     SET_HEROES_LIST(state, allheroes) {
       state.heroesList = allheroes;
+    },
+    UPDATE_HERO_ARMY(state, data) {
+      const { heroId, army } = data;
+      const hero = state.heroesList.find(i => i._id === heroId);
+      if (hero) {
+        hero.army = army;
+      } else {
+        console.log("Герой не найден");
+      }
     }
   },
   actions: {},

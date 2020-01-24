@@ -13,13 +13,13 @@
           type="up"
           class="heroes-in-town__item__control--item"
           @click="mergeArmy(index, 'out')"
-          :disabled="hero.army.length === 0"
+          :disabled="hero.army.length === 0 || allDisabled"
         />
         <GuiBtn
           type="down"
           class="heroes-in-town__item__control--item"
           @click="mergeArmy(index, 'in')"
-          :disabled="disabled_in"
+          :disabled="disabled_in || allDisabled"
         />
       </div>
       <div class="heroes-in-town__item__content">
@@ -51,7 +51,8 @@ export default {
   },
   data() {
     return {
-      list: this.heroesList
+      list: this.heroesList,
+      allDisabled: false
     };
   },
   computed: {
@@ -76,17 +77,39 @@ export default {
     },
     mergeArmy(index, way) {
       const hero = this.list[index];
+      const sectorIndex = this.$store.state.userSectors.sectors.indexOf(
+        this.currentSector
+      );
       const message = {
         type: "mergeArmy",
         data: {
           id: hero._id,
           way,
-          sectorIndex: this.$store.state.userSectors.sectors.indexOf(
-            this.currentSector
-          )
+          sectorIndex
         }
       };
-      this.$ws.get(message).then(res => {});
+      this.allDisabled = true;
+      this.$ws
+        .get(message)
+        .then(res => {
+          this.allDisabled = false;
+          const { data } = res;
+          const payload = {};
+          if (data.hero) {
+            payload.heroId = hero._id;
+            payload.army = data.hero.army;
+            this.$store.commit("UPDATE_HERO_ARMY", payload);
+          }
+          if (data.town) {
+            payload.sectorIndex = sectorIndex;
+            payload.army = data.town.army;
+            this.$store.commit("UPDATE_TOWN_ARMY", payload);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          this.allDisabled = false;
+        });
     }
   }
 };
