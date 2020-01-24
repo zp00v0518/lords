@@ -15,9 +15,16 @@ function upfateStateSector(
       updateDoc: { $set: { region: sector.region, town: sector.town} },
       ops
     };
-    update.one(optionsForUpdate, result => {
+    // update.one(optionsForUpdate, result => {
+    //   callback(result.result);
+    //   return reslove(result.result);
+    // });
+    update.one(optionsForUpdate).then(result => {
       callback(result.result);
       return reslove(result.result);
+    }).catch(err => {
+      callback(err);
+      return reject(err);
     });
   });
 }

@@ -1,6 +1,9 @@
+const ObjectId = require("mongodb").ObjectID;
 const { checkSchema } = require("../../template_modules");
 const { redirectMessage } = require("../../wsServer");
 const { Army } = require("../Army");
+const { updateDB } = require("../../workWithMongoDB");
+const update = new updateDB();
 // const { getHeroesFromDB } = require("../../heroes/db");
 
 function handlerMergeArmy(message, info) {
@@ -38,11 +41,43 @@ function handlerMergeArmy(message, info) {
   const mergeWay = data.way;
   if (mergeWay === "in") {
     mergeResult = Army.mergeTwoArmy(army_hero, army_in_town);
+  } else if (mergeWay === "out") {
+    mergeResult = Army.mergeTwoArmy(army_in_town, army_hero);
+  } else {
+    redirectMessage(ws);
+    return;
   }
-  response.res = hero;
-  response.mergeResult = mergeResult;
-  ws.send(JSON.stringify(response));
-
+  const { server } = info;
+  const updateOps = {
+    collectionName: server,
+    filtr: {
+      _id: ObjectId(hero._id)
+    },
+    updateDoc: {
+      $set: { army: army_hero }
+    },
+    ops: { upsert: false }
+  };
+  update
+    .one(updateOps)
+    .then(res => {
+      const sectrId = sector._id;
+      updateOps.filtr._id = sectrId;
+      updateOps.updateDoc = {
+        $set: { "town.army.units": army_in_town }
+      };
+      updateOps.ops = {
+        upsert: false
+      };
+      update.one(updateOps).then(res => {
+        response.res = hero;
+        response.town = sector.town;
+        ws.send(JSON.stringify(response));
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
 }
 
 const schema = {

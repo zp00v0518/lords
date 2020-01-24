@@ -1,4 +1,4 @@
-const { updateDB } = require('../tube.js');
+const { updateDB } = require("../tube.js");
 const update = new updateDB();
 
 //обновляет состояние города в БД (не Региона или его-то другого. ТОлько города)
@@ -15,9 +15,16 @@ function updateStateTown(
       updateDoc: { $set: { town: sector.town } },
       ops: ops
     };
-    update.one(optionsForUpdate, result => {
+    // update.one(optionsForUpdate, result => {
+    //   callback(result.result);
+    //   return reslove(result.result);
+    // });
+    update.one(optionsForUpdate).then(result => {
       callback(result.result);
       return reslove(result.result);
+    }).catch(err => {
+      callback(err);
+      return reject(err);
     });
   });
 }

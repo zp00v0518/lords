@@ -1,7 +1,7 @@
 <template>
   <div class="heroes-in-town">
     <div
-      v-for="(hero, index) in heroesList"
+      v-for="(hero, index) in list"
       :key="index"
       class="heroes-in-town__item"
     >
@@ -9,8 +9,18 @@
         <img :src="getHeroesAvatar(hero)" alt="heroavatar" />
       </div>
       <div class="heroes-in-town__item__control">
-        <GuiBtn type="up" class="heroes-in-town__item__control--item" @click="mergeArmy(index, 'out')"/>
-        <GuiBtn type="down" class="heroes-in-town__item__control--item" @click="mergeArmy(index, 'in')"/>
+        <GuiBtn
+          type="up"
+          class="heroes-in-town__item__control--item"
+          @click="mergeArmy(index, 'out')"
+          :disabled="hero.army.length === 0"
+        />
+        <GuiBtn
+          type="down"
+          class="heroes-in-town__item__control--item"
+          @click="mergeArmy(index, 'in')"
+          :disabled="disabled_in"
+        />
       </div>
       <div class="heroes-in-town__item__content">
         <div class="heroes-in-town__item__content__info">
@@ -39,13 +49,33 @@ export default {
   props: {
     heroesList: { type: Array, default: () => [] }
   },
+  data() {
+    return {
+      list: this.heroesList
+    };
+  },
+  computed: {
+    disabled_in() {
+      const { currentSector } = this;
+      const army_in_town = currentSector.town.army.units;
+      return army_in_town.length === 0;
+    }
+  },
+  watch: {
+    heroesList: {
+      deep: true,
+      handler(e) {
+        this.list = e;
+      }
+    }
+  },
   methods: {
     getHeroesAvatar(hero) {
       const { races } = this.globalConfig;
       return races.heroes.getHeroImg(hero.race, hero.type);
     },
-    mergeArmy(index, way){
-      const hero = this.heroesList[index];
+    mergeArmy(index, way) {
+      const hero = this.list[index];
       const message = {
         type: "mergeArmy",
         data: {
@@ -56,9 +86,7 @@ export default {
           )
         }
       };
-      this.$ws.get(message).then(res =>{
-     
-      });
+      this.$ws.get(message).then(res => {});
     }
   }
 };
@@ -81,11 +109,9 @@ export default {
     &__control {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       width: 15px;
       overflow: hidden;
-      // writing-mode: vertical-rl;
-      &--item{
+      &--item {
         width: 100%;
       }
     }
