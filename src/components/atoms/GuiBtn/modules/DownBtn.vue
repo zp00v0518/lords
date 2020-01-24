@@ -1,6 +1,6 @@
 <template>
   <img
-    :src="img"
+    :src="computedImg"
     alt=""
     @mouseover="img = getImg($event)"
     @mouseleave="img = getImg($event)"
@@ -11,29 +11,17 @@
 import disabledImg from "../../../../../frontEnd/img/buttons/down/16/disabled.gif";
 import upImg from "../../../../../frontEnd/img/buttons/down/16/up.gif";
 import overImg from "../../../../../frontEnd/img/buttons/down/16/over.gif";
+import mixin from "./mixin";
 
 export default {
   name: "DownBtn",
-  props: {
-    disabled: { type: Boolean, default: false }
-  },
+  mixins: [mixin],
   data() {
     return {
-      img: this.getImg()
+      upImg,
+      disabledImg,
+      overImg
     };
-  },
-  watch: {
-    disabled: function() {
-      this.img = this.getImg();
-    }
-  },
-  methods: {
-    getImg(event) {
-      if (this.disabled) return disabledImg;
-      if (event === undefined) return upImg;
-      if (event.type === "mouseover") return overImg;
-      if (event.type === "mouseleave") return upImg;
-    }
   }
 };
 </script>
