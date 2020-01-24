@@ -3,6 +3,11 @@ export default {
   props: {
     disabled: { type: Boolean, default: false }
   },
+  data() {
+    return {
+      img: this.getImg()
+    };
+  },
   created() {
     this.img = this.getImg();
   },
