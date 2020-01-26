@@ -98,7 +98,8 @@ export default {
   props: {
     townRaceName: String,
     gloss: null,
-    buildingData: null
+    buildingData: null,
+    currentSector: { type: Object, default: ()=> ({})}
   },
   data() {
     return {
@@ -110,6 +111,7 @@ export default {
   },
   created() {
     this.maxRange = this.available;
+    console.log(this.currentSector)
   },
   computed: {
     available() {

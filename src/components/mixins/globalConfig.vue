@@ -6,13 +6,13 @@ export default {
     },
     gameSources() {
       return this.$store.state.gameSources;
-    },
-    currentSector() {
-      const {userSectors} = this.$store.state;
-      const index = userSectors.currentSector;
-      const sectors = userSectors.sectors;
-      return sectors[index];
     }
-  },
+    // currentSector() {
+    //   const {userSectors} = this.$store.state;
+    //   const index = userSectors.currentSector;
+    //   const sectors = userSectors.sectors;
+    //   return sectors[index];
+    // }
+  }
 };
 </script>

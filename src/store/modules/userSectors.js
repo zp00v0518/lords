@@ -8,7 +8,7 @@ const userSectors = {
   },
   mutations: {
     SET_SECTORS(state, sectors) {
-      state.sectors = sectors
+      state.sectors = sectors;
       // Vue.set(state, "sectors", [...sectors]);
     },
     SET_CURRENT_SECTOR(state, sectorIndex) {
@@ -40,7 +40,7 @@ const userSectors = {
       const id = state.state.sectors[currIndex]._id;
       const index = sectors.findIndex(i => i._id === id);
       if (index !== currIndex) {
-      state.commit("SET_CURRENT_SECTOR", index);
+        state.commit("SET_CURRENT_SECTOR", index);
       }
       state.commit("SET_SECTORS", sectors);
       // for (let i = 0; i < sectors.length; i++) {

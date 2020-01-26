@@ -11,7 +11,7 @@
     <component
       :is="name"
       :townRaceName="townRaceName"
-      :currentTown="curTown"
+      :currentSector="curTown"
       :gloss="gloss"
       :buildingData="buildingData"
       @close="closeBuilding"
@@ -27,7 +27,7 @@ export default {
   props: {
     name: String,
     townRaceName: String,
-    currentTown: null,
+    currentSector: null,
     buildingData: null
   },
   components: {
@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      curTown: this.currentTown
+      curTown: this.currentSector
     };
   },
   created() {
@@ -47,7 +47,7 @@ export default {
     }
   },
   watch: {
-    currentTown: {
+    currentSector: {
       deep: true,
       handler(e) {
         this.curTown = e;

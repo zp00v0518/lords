@@ -19,7 +19,7 @@ export default {
   name: "Hall",
   props: {
     townRaceName: String,
-    currentTown: null,
+    currentSector: { type: Object, default: ()=> ({})},
     gloss: null
   },
   data() {

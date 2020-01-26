@@ -42,9 +42,11 @@
 
 <script>
 import ArmyLine from "../ArmyLine";
+import { currentSector } from "../../mixins";
 
 export default {
   name: "HeroesInTown",
+  mixins: [currentSector],
   components: { ArmyLine },
   props: {
     heroesList: { type: Array, default: () => [] }
