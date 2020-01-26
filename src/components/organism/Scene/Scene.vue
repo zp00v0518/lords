@@ -23,19 +23,34 @@
     <div class="scene__buttons" @click="changeScene">
       <button
         type="button"
-        :class="['scene__buttons__item', {'scene__buttons__item--active': scenes.region}]"
+        :class="[
+          'scene__buttons__item',
+          { 'scene__buttons__item--active': scenes.region }
+        ]"
         data-flag="region"
-      >Регион</button>
+      >
+        Регион
+      </button>
       <button
         type="button"
-        :class="['scene__buttons__item', {'scene__buttons__item--active': scenes.town}]"
+        :class="[
+          'scene__buttons__item',
+          { 'scene__buttons__item--active': scenes.town }
+        ]"
         data-flag="town"
-      >Город</button>
+      >
+        Город
+      </button>
       <button
         type="button"
-        :class="['scene__buttons__item', {'scene__buttons__item--active': scenes.globalMap}]"
+        :class="[
+          'scene__buttons__item',
+          { 'scene__buttons__item--active': scenes.globalMap }
+        ]"
         data-flag="globalMap"
-      >Карта</button>
+      >
+        Карта
+      </button>
     </div>
     <DialogWindow></DialogWindow>
   </section>
@@ -71,7 +86,7 @@ export default {
       return styles.height + "px";
     },
     readyToDraw() {
-      return this.$store.state.userSectors.currentSector;
+      return this.$store.state.userSectors.currentSector !== null;
     }
   },
   methods: {
@@ -90,6 +105,6 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import "scene.scss";
 </style>

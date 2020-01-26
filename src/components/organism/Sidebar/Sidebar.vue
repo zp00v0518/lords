@@ -1,11 +1,11 @@
 <template>
   <section class="sidebar">
     <Town
-      v-for="(sector, index) in sectors"
+      v-for="(sector, index) in sectorsState"
       :indexTown="index"
       :key="index"
       :sector="sector"
-      >{{ forUpdate(sector) }}</Town
+      ></Town
     >
   </section>
 </template>
@@ -18,28 +18,11 @@ export default {
   components: {
     Town
   },
-  data() {
-    return {
-      sectors: []
-    };
-  },
   computed: {
     sectorsState() {
-      return this.$store.state.userSectors;
+      return this.$store.state.userSectors.sectors;
     }
   },
-  watch: {
-    "sectorsState.sectors": {
-      deep: true,
-      immediate: true,
-      handler(e) {
-        this.sectors = e;
-      }
-    }
-  },
-  methods: {
-    forUpdate() {}
-  }
 };
 </script>
 

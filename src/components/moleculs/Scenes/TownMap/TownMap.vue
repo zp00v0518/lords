@@ -63,10 +63,11 @@ export default {
   },
   computed: {
     currentTown() {
-      return this.$store.state.userSectors.currentSector;
+      return this.currentSector;
+      // return this.$store.state.userSectors.currentSector;
     },
     raceTownIndex() {
-      return this.currentTown.town.race;
+      return this.currentSector.town.race;
     },
     townRaceName() {
       return this.races.typeList[this.raceTownIndex];
@@ -74,6 +75,7 @@ export default {
   },
   watch: {
     currentTown: function() {
+      console.log(123)
       if (this.count === 0 && this.ctx) {
         this.count++;
         this.arrDrawImg = formCurrentImageList.call(
