@@ -97,7 +97,6 @@ export default {
   name: "Barraks",
   props: {
     townRaceName: String,
-    currentTown: null,
     gloss: null,
     buildingData: null
   },
@@ -142,10 +141,10 @@ export default {
       return newCost;
     },
     army() {
-      return this.currentTown.town.army.units;
+      return this.currentSector.town.army.units;
     },
     storage() {
-      return this.currentTown.town.storage;
+      return this.currentSector.town.storage;
     },
     raceData() {
       const { globalConfig } = this;
@@ -171,9 +170,6 @@ export default {
     sumUnits() {
       return this.buildingData.work.nowValue;
     },
-    currentSector() {
-      return this.$store.state.userSectors.currentSector;
-    }
   },
   methods: {
     buyUnits() {

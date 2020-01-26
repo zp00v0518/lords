@@ -8,11 +8,12 @@ const userSectors = {
   },
   mutations: {
     SET_SECTORS(state, sectors) {
-      Vue.delete(state, 'sectors')
-      Vue.set(state, "sectors", [...sectors]);
+      state.sectors = sectors
+      // Vue.set(state, "sectors", [...sectors]);
     },
-    SET_CURRENT_SECTOR(state, sector) {
-      Vue.set(state, "currentSector", sector);
+    SET_CURRENT_SECTOR(state, sectorIndex) {
+      state.currentSector = sectorIndex;
+      // Vue.set(state, "currentSector", sector);
     },
     CHANGE_STORAGE(state, payload) {
       state.sectors[payload.sectorIndex].town.storage = payload.storage;
@@ -37,15 +38,17 @@ const userSectors = {
     SET_SECTORS_WITH_CURRENT_SECTOR(state, sectors) {
       const currIndex = state.state.currentSector;
       const id = state.state.sectors[currIndex]._id;
-      const index = sectors.findIndex(i => i._id === id)
+      const index = sectors.findIndex(i => i._id === id);
+      if (index !== currIndex) {
       state.commit("SET_CURRENT_SECTOR", index);
+      }
+      state.commit("SET_SECTORS", sectors);
       // for (let i = 0; i < sectors.length; i++) {
       //   if (sectors[i]._id === id) {
       //     state.commit("SET_CURRENT_SECTOR", sectors[i]);
       //     break;
       //   }
       // }
-      state.commit("SET_SECTORS", sectors);
     }
   }
 };

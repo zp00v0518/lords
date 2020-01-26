@@ -1,7 +1,7 @@
 <template>
   <div class="townmap">
     <canvas
-      v-show="currentTown"
+      v-show="currentSector"
       ref="scene"
       :width="widthScene"
       :height="heightScene"
@@ -13,7 +13,6 @@
       :name="component.name"
       @close="component.is = false"
       :townRaceName="townRaceName"
-      :currentTown="currentTown"
       :buildingData="component.buildingData"
     ></Building>
   </div>
@@ -62,10 +61,6 @@ export default {
     // document.body.appendChild(this.helperCtx.canvas);
   },
   computed: {
-    currentTown() {
-      return this.currentSector;
-      // return this.$store.state.userSectors.currentSector;
-    },
     raceTownIndex() {
       return this.currentSector.town.race;
     },
@@ -74,13 +69,12 @@ export default {
     }
   },
   watch: {
-    currentTown: function() {
-      console.log(123)
+    currentSector: function() {
       if (this.count === 0 && this.ctx) {
         this.count++;
         this.arrDrawImg = formCurrentImageList.call(
           this,
-          this.currentTown,
+          this.currentSector,
           this.townRaceName,
           this.$store.state.globalConfig
         );
@@ -88,7 +82,7 @@ export default {
       } else {
         this.arrDrawImg = formCurrentImageList.call(
           this,
-          this.currentTown,
+          this.currentSector,
           this.townRaceName,
           this.$store.state.globalConfig
         );
