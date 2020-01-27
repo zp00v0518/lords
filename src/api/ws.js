@@ -1,7 +1,8 @@
 import modules from "./modules";
-
+let stateCount = 0;
 class WS {
   init(wsAddr, store) {
+    window.stateCount = stateCount;
     this.connectionToWs(wsAddr);
     this.store = store || null;
     this.incoming = {
@@ -77,6 +78,7 @@ class WS {
     location.reload();
   }
   controlState(eventData) {
+    window.stateCount++;
     this.store.dispatch("SET_SECTORS_WITH_CURRENT_SECTOR", eventData.sectors);
     this.store.commit("SET_EVENTS", eventData.eventsList);
     this.store.commit("SET_HEROES_LIST", eventData.heroesList);

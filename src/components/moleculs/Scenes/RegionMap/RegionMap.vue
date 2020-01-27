@@ -24,9 +24,11 @@ import {
   handlerMousemoveOnMap
 } from "../utils";
 import TooltipRegion from "../../TooltipRegion";
+import {currentSector} from "../../../mixins"
 
 export default {
   name: "RegionMap",
+  mixins: [currentSector],
   components: {
     TooltipRegion
   },
@@ -59,8 +61,9 @@ export default {
     //   this.drawMap();
     //   this.setBorderIsoMap();
     // },
-    "$store.state.userSectors.currentSector.region": function() {
-      this.currentMap = this.$store.state.userSectors.currentSector.region;
+    "currentSector.region": function(e) {
+      this.currentMap = e;
+      // this.currentMap = this.$store.state.userSectors.currentSector.region;
       this.drawMap();
       this.setBorderIsoMap();
     }

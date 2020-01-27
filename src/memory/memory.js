@@ -4,9 +4,9 @@ function memory() {
   setInterval(() => {
     const a = performance.memory.totalJSHeapSize;
     const z = Math.round((a - d) / (1024 * 8));
-    console.log(`${z} Кбайт`);
+    console.log(`${z} Кбайт  на ${window.stateCount} запросов`);
     d = a;
-  }, 2000);
+  }, 30000);
 }
 const start = performance.memory.totalJSHeapSize;
 const startTime = Date.now();
