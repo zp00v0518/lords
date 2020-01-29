@@ -23,7 +23,7 @@
     "template_func": "^1.0.11",
     "vue": "^2.6.10",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
+    "vuex": "^3.1.2",
     "ws": "^6.1.0"
   },
   "devDependencies": {
