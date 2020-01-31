@@ -7,8 +7,16 @@
         class="hall__row__item"
         @click="handlerClick($event, item)"
       >
-        <canvas :ref="'canvas'+item" :data-building="item" class="hall__row__item-icon"></canvas>
-        <div :class="['hall__row__item-footer', {[checkPrepare(item)]: true}]">{{houses[item].name}}</div>
+        <canvas
+          :ref="'canvas' + item"
+          :data-building="item"
+          class="hall__row__item-icon"
+        ></canvas>
+        <div
+          :class="['hall__row__item-footer', { [checkPrepare(item)]: true }]"
+        >
+          {{ houses[item].name }}
+        </div>
       </div>
     </div>
   </section>
@@ -19,7 +27,7 @@ export default {
   name: "Hall",
   props: {
     townRaceName: String,
-    currentSector: { type: Object, default: ()=> ({})},
+    currentSector: { type: Object, default: () => ({}) },
     gloss: null
   },
   data() {
@@ -106,7 +114,7 @@ export default {
     const fileName = townRaceName + "tiles";
     // eslint-disable-next-line
     const img = sourceLoader.sources.towns[townRaceName][fileName];
-    console.log(fileName)
+    console.log(fileName);
     Object.keys(this.$refs).forEach(key => {
       const el = this.$refs[key][0];
       const ctx = el.getContext("2d");
@@ -144,7 +152,7 @@ const tumb = {
 };
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 .hall {
   &__wrap {
     color: white;

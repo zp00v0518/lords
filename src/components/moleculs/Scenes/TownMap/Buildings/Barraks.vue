@@ -99,7 +99,7 @@ export default {
     townRaceName: String,
     gloss: null,
     buildingData: null,
-    currentSector: { type: Object, default: ()=> ({})}
+    currentSector: { type: Object, default: () => ({}) }
   },
   data() {
     return {
@@ -111,7 +111,7 @@ export default {
   },
   created() {
     this.maxRange = this.available;
-    console.log(this.currentSector)
+    console.log(this.currentSector);
   },
   computed: {
     available() {
@@ -171,7 +171,7 @@ export default {
     },
     sumUnits() {
       return this.buildingData.work.nowValue;
-    },
+    }
   },
   methods: {
     buyUnits() {
