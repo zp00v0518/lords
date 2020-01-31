@@ -1,12 +1,14 @@
 <script>
 import { getTimeString } from "../../modules";
 import glossary from "../../../../../mixins/glossary.vue";
+import { currentSector } from "../../../../../mixins";
+
 import fromBackend from "../../../../../../fromBackend";
 const checkSource = fromBackend.checkSource;
 
 export default {
   name: "UpgradeRegion",
-  mixins: [glossary],
+  mixins: [glossary, currentSector],
   props: {
     data: Object
   },
@@ -19,11 +21,6 @@ export default {
   created() {
     this.building = this.data.building;
     this.$emit("set-height", { width: "80%", height: "80%" });
-  },
-  computed: {
-    currentSector() {
-      return this.$store.state.userSectors.currentSector;
-    }
   },
   methods: {
     getTimeString,

@@ -1,5 +1,8 @@
 <template>
-  <div class="timeline" :style="{width: widthScene+'px', height:heightScene+'px'}">
+  <div
+    class="timeline"
+    :style="{ width: widthScene + 'px', height: heightScene + 'px' }"
+  >
     <canvas ref="scene" :width="widthScene" :height="heightScene"></canvas>
     <!-- <div
       class="event"
@@ -11,7 +14,7 @@
       v-for="(sectorEvent, index) in sectorsEventsPosition"
       :key="index"
       :data="sectorEvent"
-      :styles="{left: sectorEvent.position + 'px', zIndex: 100 - index}"
+      :styles="{ left: sectorEvent.position + 'px', zIndex: 100 - index }"
     ></ViewSectorEvents>
   </div>
 </template>
@@ -42,8 +45,9 @@ export default {
   },
   created() {},
   watch: {
-    "$store.state.timeline.eventsList": function() {
-      this.eventsList = this.$store.state.timeline.eventsList;
+    "$store.state.timeline.eventsList": function(e) {
+      const { deepClone } = this;
+      this.eventsList = deepClone(e);
     }
   },
   computed: {
@@ -118,7 +122,7 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import "timeline.scss";
 
 .event {
