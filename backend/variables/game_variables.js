@@ -20,7 +20,7 @@ const gameVariables = {
   // в данный момент 1 сутки
   serverList: config.db.collections.servers,
   timer: {
-    controlState: time.minute / 240,
+    controlState: time.minute / 10,
     saveDataDB: time.minute / 3, // 1 минута - интервал считывания данных и записи их в БД
     perTime: time.hour / 2 // расчетное время прироста игровых ресурсов
   },

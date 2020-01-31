@@ -80,8 +80,9 @@ export default {
     },
     mergeArmy(index, way) {
       const hero = this.list[index];
-      const sectorIndex = this.$store.state.userSectors.sectors.indexOf(
-        this.currentSector
+      const { $store, currentSector } = this;
+      const sectorIndex = $store.state.userSectors.sectors.findIndex(
+        i => i._id === currentSector._id
       );
       const message = {
         type: "mergeArmy",

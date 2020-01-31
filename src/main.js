@@ -11,8 +11,8 @@ import Ws from "./api/ws";
 import config from "../backend/config/config";
 import upperFirstSymbol from "./components/mixins/upperFirstSymbol";
 import globalConfig from "./components/mixins/globalConfig";
-import memory from './memory';
-memory()
+// import memory from './memory';
+// memory()
 const region = require("../backend/region/Region");
 const variables = require("../backend/variables/game_variables");
 
