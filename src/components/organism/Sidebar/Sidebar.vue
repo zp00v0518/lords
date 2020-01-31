@@ -21,8 +21,8 @@ export default {
   },
   data() {
     return {
-      sectorsState: this.$store.state.userSectors.sectors,
-    }
+      sectorsState: this.$store.state.userSectors.sectors
+    };
   },
   // computed: {
   //   sectorsState() {
@@ -30,7 +30,7 @@ export default {
   //   }
   // },
   watch: {
-    currentSector: function(){
+    currentSector: function() {
       this.sectorsState = this.$store.state.userSectors.sectors;
     }
   }
