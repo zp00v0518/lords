@@ -1,3 +1,5 @@
+import { deepClone } from "../../utils";
+
 const globalMap = {
   state: {
     currentMap: [],
@@ -5,7 +7,7 @@ const globalMap = {
   },
   mutations: {
     SET_CURRENTMAP(state, payload) {
-      state.currentMap = payload.currentMap;
+      state.currentMap = deepClone(payload.currentMap);
     },
     CHANGE__ZOOM(state) {
       state.zoom = state.zoom === 1 ? 2 : 1;

@@ -13,8 +13,7 @@ function deepClone(elem) {
         result[key] = item;
       } else {
         if (Array.isArray(item)) {
-          result[key] = [];
-          cloneArray(item, result[key]);
+          result[key] = cloneArray(item, result[key]);
         } else {
           result[key] = {};
           cloneObj(item, result[key]);

@@ -78,7 +78,8 @@ export default {
   },
   watch: {
     "$store.state.globalMap.currentMap": function() {
-      this.currentMap = this.$store.state.globalMap.currentMap;
+      const {deepClone, $store} = this;
+      this.currentMap = deepClone($store.state.globalMap.currentMap);
       this.drawMap();
       this.setBorderIsoMap();
     }

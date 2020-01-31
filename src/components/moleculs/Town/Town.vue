@@ -61,7 +61,8 @@ export default {
   },
   computed: {
     army() {
-      return this.sector.town.army.units;
+      const { deepClone, sector } = this;
+      return deepClone(sector.town.army.units);
     },
     races() {
       return this.globalConfig.races;
@@ -70,7 +71,8 @@ export default {
       return this.globalConfig.listBuildings.storage.name;
     },
     storage() {
-      return this.sector.town[this.typeStorage];
+      const { deepClone, sector } = this;
+      return deepClone(sector.town[this.typeStorage]);
     },
     maxValue() {
       const lvl = this.storage.lvl;

@@ -68,7 +68,8 @@ export default {
     heroesList: {
       deep: true,
       handler(e) {
-        this.list = e;
+        const { deepClone } = this;
+        this.list = deepClone(e);
       }
     }
   },

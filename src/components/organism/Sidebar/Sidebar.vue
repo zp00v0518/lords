@@ -31,7 +31,8 @@ export default {
   // },
   watch: {
     currentSector: function() {
-      this.sectorsState = this.$store.state.userSectors.sectors;
+      const { deepClone, $store } = this;
+      this.sectorsState = deepClone($store.state.userSectors.sectors);
     }
   }
 };

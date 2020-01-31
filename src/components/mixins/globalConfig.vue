@@ -1,4 +1,5 @@
 <script>
+import { deepClone } from "../../utils";
 export default {
   computed: {
     globalConfig() {
@@ -13,6 +14,9 @@ export default {
     //   const sectors = userSectors.sectors;
     //   return sectors[index];
     // }
+  },
+  methods: {
+    deepClone
   }
 };
 </script>

@@ -1,4 +1,5 @@
 import Vue from "vue";
+import { deepClone } from "../../utils";
 
 const userSectors = {
   state: {
@@ -8,7 +9,8 @@ const userSectors = {
   },
   mutations: {
     SET_SECTORS(state, sectors) {
-      state.sectors = sectors;
+      state.sectors = deepClone(sectors);
+      // state.sectors = sectors;
       // Vue.set(state, "sectors", [...sectors]);
     },
     SET_CURRENT_SECTOR(state, sectorIndex) {
@@ -23,7 +25,7 @@ const userSectors = {
       const { sectorIndex, army } = payload;
       const sector = state.sectors[sectorIndex];
       if (sector) {
-        sector.town.army.units = army;
+        sector.town.army.units = deepClone(army);
       } else {
         console.log("Сектор не найден");
       }
