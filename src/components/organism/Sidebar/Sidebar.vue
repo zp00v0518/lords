@@ -5,24 +5,36 @@
       :indexTown="index"
       :key="index"
       :sector="sector"
-      ></Town
-    >
+    ></Town>
   </section>
 </template>
 
 <script>
 import Town from "../../moleculs/Town";
+import { currentSector } from "../../mixins";
 
 export default {
   name: "Sidebar",
+  mixins: [currentSector],
   components: {
     Town
   },
-  computed: {
-    sectorsState() {
-      return this.$store.state.userSectors.sectors;
-    }
+  data() {
+    return {
+      sectorsState: this.$store.state.userSectors.sectors
+    };
   },
+  // computed: {
+  //   sectorsState() {
+  //     return this.$store.state.userSectors.sectors;
+  //   }
+  // },
+  watch: {
+    currentSector: function() {
+      const { deepClone, $store } = this;
+      this.sectorsState = deepClone($store.state.userSectors.sectors);
+    }
+  }
 };
 </script>
 

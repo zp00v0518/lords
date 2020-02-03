@@ -27,6 +27,7 @@ class WS {
       // this.store.dispatch('getData')
     };
     this.wsInstance.onmessage = event => {
+      this.store.commit("INCREMENT");
       const data = JSON.parse(event.data);
       console.log(`Входящий запрос: ${data.type}`);
       if (data.status === true) {

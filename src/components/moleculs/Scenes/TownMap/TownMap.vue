@@ -30,7 +30,6 @@ import {
 import Building from "./Building";
 import { currentSector } from "../../../mixins";
 
-
 export default {
   name: "TownMap",
   mixins: [currentSector],
@@ -60,7 +59,7 @@ export default {
     };
   },
   created() {
-    console.log(this.currentSector)
+    console.log(this.currentSector);
     this.helperCtx.canvas.width = parseFloat(this.widthScene);
     this.helperCtx.canvas.height = parseFloat(this.heightScene);
     // document.body.appendChild(this.helperCtx.canvas);

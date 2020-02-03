@@ -64,12 +64,14 @@ export default {
         this.data.storage
       );
       if (isSources) {
+        const { $store, currentSector } = this;
+        const sectorIndex = $store.state.userSectors.sectors.findIndex(
+          i => i._id === currentSector._id
+        );
         const message = {
           type: "upgradeBuilding",
           data: {
-            sectorIndex: this.$store.state.userSectors.sectors.indexOf(
-              this.currentSector
-            ),
+            sectorIndex,
             persent: +this.rangeValue,
             building: {
               type: this.build_from_db.type || this.build_from_db.class

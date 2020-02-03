@@ -50,20 +50,15 @@ export default {
     };
   },
   created() {
-    // this.currentMap = this.$store.state.regionMap.currentRegion;
+    this.currentMap = this.$store.state.regionMap.currentRegion;
     if (this.$store.state.userSectors.currentSector) {
       this.currentMap = this.$store.state.userSectors.currentSector.region;
     }
   },
   watch: {
-    // "$store.state.regionMap.currentRegion": function() {
-    //   this.currentMap = this.$store.state.regionMap.currentRegion;
-    //   this.drawMap();
-    //   this.setBorderIsoMap();
-    // },
     "currentSector.region": function(e) {
-      this.currentMap = e;
-      // this.currentMap = this.$store.state.userSectors.currentSector.region;
+      const { deepClone } = this;
+      this.currentMap = deepClone(e);
       this.drawMap();
       this.setBorderIsoMap();
     }
@@ -73,7 +68,6 @@ export default {
       const widthParse = parseInt(this.widthScene) / 2;
       const intermediate = widthParse / (this.currentMap.length / 2);
       return intermediate;
-      // return intermediate / (this.currentMap.length / 2) + intermediate;
     },
     isoCoords() {
       const x = 0;

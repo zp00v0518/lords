@@ -99,7 +99,7 @@ export default {
     townRaceName: String,
     gloss: null,
     buildingData: null,
-    currentSector: { type: Object, default: ()=> ({})}
+    currentSector: { type: Object, default: () => ({}) }
   },
   data() {
     return {
@@ -111,7 +111,7 @@ export default {
   },
   created() {
     this.maxRange = this.available;
-    console.log(this.currentSector)
+    console.log(this.currentSector);
   },
   computed: {
     available() {
@@ -171,7 +171,7 @@ export default {
     },
     sumUnits() {
       return this.buildingData.work.nowValue;
-    },
+    }
   },
   methods: {
     buyUnits() {
@@ -183,14 +183,16 @@ export default {
         alert("В городе нет места для юнита");
         return;
       }
+      const { $store, currentSector } = this;
+      const sectorIndex = $store.state.userSectors.sectors.findIndex(
+        i => i._id === currentSector._id
+      );
       const message = {
         type: "buyUnits",
         data: {
           hiring: +hiring,
           unitName: unit.name,
-          sectorIndex: this.$store.state.userSectors.sectors.indexOf(
-            this.currentSector
-          )
+          sectorIndex
         }
       };
       this.$ws.sendMessage(message);

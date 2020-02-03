@@ -15,8 +15,7 @@ function getChangesMemory() {
   const a = performance.memory.totalJSHeapSize;
   const z = Math.round((a - start) / (1024 * 8));
   const now = Date.now();
-  console.log(`${z} Кбайт  за ${((now - startTime) / 60000)} мин`);
-
+  console.log(`${z} Кбайт  за ${(now - startTime) / 60000} мин`);
 }
 
 export default memory;

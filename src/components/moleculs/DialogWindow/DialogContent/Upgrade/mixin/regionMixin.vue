@@ -48,12 +48,14 @@ export default {
           this.currentSector.town[storageName].sources
         )
       ) {
+        const { $store, currentSector } = this;
+        const sectorIndex = $store.state.userSectors.sectors.findIndex(
+          i => i._id === currentSector._id
+        );
         const message = {
           type: "upgradeRegion",
           data: {
-            sectorIndex: this.$store.state.userSectors.sectors.indexOf(
-              this.currentSector
-            ),
+            sectorIndex,
             persent: +this.rangeValue,
             building: {
               type: this.building.type,
