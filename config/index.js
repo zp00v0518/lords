@@ -47,12 +47,12 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../frontEnd/dist/index.html'),
-    // index: path.resolve(__dirname, '../frontEnd/game.html'), // подключить при билде
+    // index: path.resolve(__dirname, '../frontEnd/dist/index.html'),
+    index: path.resolve(__dirname, '../frontEnd/game.html'), // подключить при билде
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../frontEnd/dist'),
-    // assetsRoot: path.resolve(__dirname, '../frontEnd'), // подключить при билде
+    // assetsRoot: path.resolve(__dirname, '../frontEnd/dist'),
+    assetsRoot: path.resolve(__dirname, '../frontEnd'), // подключить при билде
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
 
@@ -62,7 +62,7 @@ module.exports = {
 
     productionSourceMap: false,
     // https://webpack.js.org/configuration/devtool/#production
-    devtool: '#source-map',
+    // devtool: '#source-map',
 
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
