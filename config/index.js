@@ -51,8 +51,8 @@ module.exports = {
     index: path.resolve(__dirname, '../frontEnd/game.html'), // подключить при билде
 
     // Paths
-    // assetsRoot: path.resolve(__dirname, '../frontEnd/dist'),
-    assetsRoot: path.resolve(__dirname, '../frontEnd'), // подключить при билде
+    assetsRoot: path.resolve(__dirname, '../frontEnd/dist'),
+    assetsRoot_build: path.resolve(__dirname, '../frontEnd'), // подключить при билде
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
 
