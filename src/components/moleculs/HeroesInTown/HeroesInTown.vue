@@ -85,6 +85,7 @@ export default {
       this.$store.commit("SET_ACTIVE_HERO_ID", id);
     },
     getHeroesAvatar(hero) {
+      if (!hero) return;
       const { races } = this.globalConfig;
       return races.heroes.getHeroImg(hero.race, hero.type);
     },

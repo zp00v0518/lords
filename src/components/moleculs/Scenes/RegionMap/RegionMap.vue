@@ -65,7 +65,7 @@ export default {
       this.currentMap = deepClone(e);
       this.drawMap();
       this.setBorderIsoMap();
-    },
+    }
   },
   computed: {
     tileWidth() {
@@ -84,30 +84,32 @@ export default {
   },
   methods: {
     handlerClick() {
-      if (!this.cursorOnScene || this.currentTile.type === 1) return;
+      const {currentTile} = this;
+      if (!this.cursorOnScene || currentTile.type === 1) return;
       if (this.currentTile.type === 0) {
-        console.log(this.currentTile);
-        const nameRegion = this.$region.typeList[this.currentTile.type];
+        if (currentTile.army && currentTile.army.length === 0) return;
+        console.log(currentTile);
+        // const nameRegion = this.$region.typeList[currentTile.type];
         const payload = {
           title: "svxzv",
           data: {
-            x: this.currentTile.x,
-            y: this.currentTile.y
+            defenseArmy: currentTile.army,
+            target: 'monster'
           },
           type: "dialogBattle"
         };
         this.$store.commit("DIALOG_SHOW", payload);
         return;
       }
-      const nameRegion = this.$region.typeList[this.currentTile.type];
-      const building = this.currentTile.sector;
+      const nameRegion = this.$region.typeList[currentTile.type];
+      const building = currentTile.sector;
       const typeBuilding = building.type;
       const payload = {
         title: this.gloss[nameRegion].type[typeBuilding].name.txt,
         data: {
           building,
-          x: this.currentTile.x,
-          y: this.currentTile.y
+          x: currentTile.x,
+          y: currentTile.y
         },
         type: "upgradeRegion"
       };
