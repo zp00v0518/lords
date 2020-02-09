@@ -1,6 +1,7 @@
 const heroes = {
   state: {
-    heroesList: []
+    heroesList: [],
+    activeHeroId: ""
   },
   mutations: {
     SET_HEROES_LIST(state, allheroes) {
@@ -14,9 +15,12 @@ const heroes = {
       } else {
         console.log("Герой не найден");
       }
+    },
+    SET_ACTIVE_HERO_ID(state, id) {
+      console.log(id)
+      state.activeHeroId = id;
     }
   },
-  actions: {},
   getters: {
     getHeroesFromTown: state => townId => {
       if (!townId) return [];

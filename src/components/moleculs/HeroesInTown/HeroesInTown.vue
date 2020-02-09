@@ -4,6 +4,8 @@
       v-for="(hero, index) in list"
       :key="index"
       class="heroes-in-town__item"
+      :class="{ 'heroes-in-town__item--active': hero._id === activeHeroId }"
+      @click="setActiveHero(hero)"
     >
       <div class="heroes-in-town__item--img">
         <img :src="getHeroesAvatar(hero)" alt="heroavatar" />
@@ -62,6 +64,9 @@ export default {
       const { currentSector } = this;
       const army_in_town = currentSector.town.army.units;
       return army_in_town.length === 0;
+    },
+    activeHeroId() {
+      return this.$store.state.heroes.activeHeroId;
     }
   },
   watch: {
@@ -74,6 +79,11 @@ export default {
     }
   },
   methods: {
+    setActiveHero(hero) {
+      const id = hero._id;
+      if (this.activeHeroId === id) return;
+      this.$store.commit("SET_ACTIVE_HERO_ID", id);
+    },
     getHeroesAvatar(hero) {
       const { races } = this.globalConfig;
       return races.heroes.getHeroImg(hero.race, hero.type);
@@ -126,6 +136,7 @@ export default {
   width: 100%;
   &__item {
     display: flex;
+    padding-bottom: 10px;
     &--img {
       flex-basis: 17%;
       padding: 3px;
@@ -165,6 +176,9 @@ export default {
           }
         }
       }
+    }
+    &--active {
+      background-color: rgb(100, 100, 100);
     }
   }
 }

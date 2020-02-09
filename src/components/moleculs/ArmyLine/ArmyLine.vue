@@ -58,6 +58,7 @@ export default {
     }
     &--count {
       font-size: 10px;
+      min-height: 11px;
       @include center;
     }
   }
