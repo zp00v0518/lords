@@ -4,8 +4,12 @@
       <div
         class="dialog-battle__header__item dialog-battle__header__item--attack"
       >
-        <div>info</div>
-        <div>
+        <div class="dialog-battle__header__item__info">
+          <div class="dialog-battle__header__item__info--name">
+            {{ activeHero ? activeHero.name : "" }}
+          </div>
+        </div>
+        <div class="dialog-battle__header__item__ava">
           <img :src="getHeroesAvatar(activeHero)" alt="" />
         </div>
       </div>
@@ -13,8 +17,14 @@
       <div
         class="dialog-battle__header__item dialog-battle__header__item--defense"
       >
-        <div>info</div>
         <div>
+          <div class="dialog-battle__header__item__info">
+            <div class="dialog-battle__header__item__info--name">
+              {{ target === "monster" && defArmy[0] ? defArmy[0].name : '' }}
+            </div>
+          </div>
+        </div>
+        <div class="dialog-battle__header__item__ava">
           <img :src="getDefenderAvatar()" alt="" />
         </div>
       </div>
@@ -45,7 +55,8 @@ export default {
   },
   data() {
     return {
-      defArmy: []
+      defArmy: [],
+      target: this.data.target,
     };
   },
   created() {
@@ -62,9 +73,9 @@ export default {
       console.log("goBattle");
     },
     sortDefenseArmy(army) {
-      if (army.length < 2) return;
-      const { Army } = this.globalConfig.all;
       const arr = deepClone(army);
+      if (arr.length < 2) return arr;
+      const { Army } = this.globalConfig.all;
       arr.sort((a, b) => {
         const unitA = Army.getUnitInfo(a.race, a.name);
         const unitB = Army.getUnitInfo(b.race, b.name);
@@ -97,8 +108,33 @@ export default {
   &__header {
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 5px;
     &__item {
       display: flex;
+      margin: 0 10px;
+      flex-basis: 50%;
+      &__ava {
+        width: 50px;
+        height: 50px;
+        & > img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      &__info{
+        padding: 0 10px;
+        &--name{
+          text-transform: capitalize;
+        }
+      }
+      &--attack{
+        justify-content: flex-end;
+      }
+      &--defense{
+        justify-content: flex-end;
+        flex-direction: row-reverse;
+      }
     }
   }
   &__confirm {
