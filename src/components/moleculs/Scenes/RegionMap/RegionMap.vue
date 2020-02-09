@@ -1,6 +1,10 @@
 <template>
   <div class="regionmap">
-    <TooltipRegion v-show="showTooltip" :mouseCoords="mouseCoords" :tile="currentTile"></TooltipRegion>
+    <TooltipRegion
+      v-show="showTooltip"
+      :mouseCoords="mouseCoords"
+      :tile="currentTile"
+    ></TooltipRegion>
     <canvas
       ref="scene"
       :width="widthScene"
@@ -24,7 +28,7 @@ import {
   handlerMousemoveOnMap
 } from "../utils";
 import TooltipRegion from "../../TooltipRegion";
-import {currentSector} from "../../../mixins"
+import { currentSector } from "../../../mixins";
 
 export default {
   name: "RegionMap",
@@ -80,11 +84,15 @@ export default {
   },
   methods: {
     handlerClick() {
-      if (
-        !this.cursorOnScene ||
-        this.currentTile.type === 1 ||
-        this.currentTile.type === 0
-      ) {
+      if (!this.cursorOnScene || this.currentTile.type === 1) return;
+      if (this.currentTile.type === 0) {
+        console.log(this.currentTile);
+        const payload = {
+          title: "svxzv",
+          data: {},
+          type: "dialogBattle"
+        };
+        this.$store.commit("DIALOG_SHOW", payload);
         return;
       }
       const nameRegion = this.$region.typeList[this.currentTile.type];
@@ -118,6 +126,6 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 @import "regionMap.scss";
 </style>

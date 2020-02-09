@@ -99,8 +99,8 @@ export default {
     }
   },
   mounted() {
-    // this.scenes.region = true;
-    this.scenes.town = true;
+    this.scenes.region = true;
+    // this.scenes.town = true;
   }
 };
 </script>
