@@ -20,7 +20,7 @@
         <div>
           <div class="dialog-battle__header__item__info">
             <div class="dialog-battle__header__item__info--name">
-              {{ target === "monster" && defArmy[0] ? defArmy[0].name : '' }}
+              {{ target === "monster" && defArmy[0] ? defArmy[0].name : "" }}
             </div>
           </div>
         </div>
@@ -57,10 +57,11 @@ export default {
     return {
       defArmy: [],
       target: this.data.target,
+      atackArmy: []
     };
   },
   created() {
-    this.defArmy = this.sortDefenseArmy(this.data.defenseArmy);
+    this.defArmy = this.sortDefenseArmy(this.data.defenseArmy || []);
   },
   computed: {
     activeHero() {
@@ -68,18 +69,31 @@ export default {
       return heroesList.find(i => i._id === activeHeroId);
     }
   },
+  watch: {
+    activeHero: {
+      immediate: true,
+      handler(e) {
+        this.atackArmy = e && e.army ? deepClone(e.army) : [];
+        this.setForceStack(atackArmy);
+      }
+    }
+  },
   methods: {
     goBattle() {
       console.log("goBattle");
     },
+    setForceStack(army) {
+      const { Army } = this.globalConfig.all;
+      army.forEach(a => {
+        a.force = Army.getUnitInfo(a.race, a.name).hp * a.count;
+      });
+    },
     sortDefenseArmy(army) {
       const arr = deepClone(army);
+      this.setForceStack(arr);
       if (arr.length < 2) return arr;
-      const { Army } = this.globalConfig.all;
       arr.sort((a, b) => {
-        const unitA = Army.getUnitInfo(a.race, a.name);
-        const unitB = Army.getUnitInfo(b.race, b.name);
-        return unitB.hp * b.count - unitA.hp * a.count;
+        return b.force - a.force;
       });
       return arr;
     },
@@ -122,16 +136,16 @@ export default {
           height: 100%;
         }
       }
-      &__info{
+      &__info {
         padding: 0 10px;
-        &--name{
+        &--name {
           text-transform: capitalize;
         }
       }
-      &--attack{
+      &--attack {
         justify-content: flex-end;
       }
-      &--defense{
+      &--defense {
         justify-content: flex-end;
         flex-direction: row-reverse;
       }
