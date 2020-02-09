@@ -65,7 +65,7 @@ export default {
       this.currentMap = deepClone(e);
       this.drawMap();
       this.setBorderIsoMap();
-    }
+    },
   },
   computed: {
     tileWidth() {
@@ -87,9 +87,13 @@ export default {
       if (!this.cursorOnScene || this.currentTile.type === 1) return;
       if (this.currentTile.type === 0) {
         console.log(this.currentTile);
+        const nameRegion = this.$region.typeList[this.currentTile.type];
         const payload = {
           title: "svxzv",
-          data: {},
+          data: {
+            x: this.currentTile.x,
+            y: this.currentTile.y
+          },
           type: "dialogBattle"
         };
         this.$store.commit("DIALOG_SHOW", payload);

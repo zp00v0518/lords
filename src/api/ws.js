@@ -54,7 +54,7 @@ class WS {
     this.store.commit("START_MESSAGES", eventData);
     this.store.commit("SET_CURRENTMAP", eventData);
     this.store.dispatch("SET_DATA_CONNECTION", eventData.sectors);
-    // this.store.commit("SET_CURRENT_REGION", eventData.sectors[0]);
+    this.store.commit("SET_CURRENT_REGION", eventData.sectors[0].region);
     this.store.commit("SET_DICTIONARY", eventData.dictionary);
     this.store.commit("SET_EVENTS", eventData.eventsList);
     this.store.commit("SET_HEROES_LIST", eventData.heroesList);
