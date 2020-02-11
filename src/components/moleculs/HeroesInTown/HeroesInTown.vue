@@ -107,6 +107,7 @@ export default {
             payload.heroId = hero._id;
             payload.army = data.hero.army;
             this.$store.commit("UPDATE_HERO_ARMY", payload);
+            this.$store.commit("FORCE_UPDATE_HEROES_LIST");
           }
           if (data.town) {
             payload.sectorIndex = sectorIndex;

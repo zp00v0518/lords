@@ -27,8 +27,8 @@
     </div>
 
     <div class="dialog-battle__content">
-      <ArmyBattleLine :army="defArmy" class="dialog-battle__content__item"/>
-      <ArmyBattleLine :army="defArmy" position="right" class="dialog-battle__content__item"/>
+      <ArmyBattleLine :army="atackArmy" class="dialog-battle__content__item" />
+      <ArmyBattleLine :army="defArmy" position="right" class="dialog-battle__content__item" />
     </div>
 
     <div class="dialog-battle__confirm">
@@ -123,6 +123,7 @@ export default {
       display: flex;
       margin: 0 10px;
       flex-basis: 50%;
+      min-width: 50%;
       &__ava {
         width: 50px;
         height: 50px;
@@ -146,9 +147,9 @@ export default {
       }
     }
   }
-  &__content{
+  &__content {
     display: flex;
-    &__item{
+    &__item {
       flex-basis: 50%;
       margin: 0 10px;
     }

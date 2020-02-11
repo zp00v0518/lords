@@ -41,6 +41,7 @@ export default {
 </script>
 
 <style lang="scss">
+$baseMargin: 3px;
 .battle-army-line {
   display: flex;
   flex-direction: column;
@@ -48,8 +49,17 @@ export default {
     display: flex;
     min-height: 36px;
     justify-content: flex-end;
+    margin: $baseMargin 0;
     &--right {
       flex-direction: row-reverse;
+    }
+    &__stack {
+      margin: 0 $baseMargin * 2;
+			font-size: 12px;
+			line-height: 1.4em;
+			&--count{
+				font-weight: bold;
+			}
     }
   }
 }
