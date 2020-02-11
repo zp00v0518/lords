@@ -1,55 +1,50 @@
 <template>
   <div class="dialog-battle">
     <div class="dialog-battle__header">
-      <div
-        class="dialog-battle__header__item dialog-battle__header__item--attack"
-      >
+      <div class="dialog-battle__header__item dialog-battle__header__item--attack">
         <div class="dialog-battle__header__item__info">
-          <div class="dialog-battle__header__item__info--name">
-            {{ activeHero ? activeHero.name : "" }}
-          </div>
+          <div
+            class="dialog-battle__header__item__info--name"
+          >{{ activeHero ? activeHero.name : "" }}</div>
         </div>
         <div class="dialog-battle__header__item__ava">
-          <img :src="getHeroesAvatar(activeHero)" alt="" />
+          <img :src="getHeroesAvatar(activeHero)" alt />
         </div>
       </div>
 
-      <div
-        class="dialog-battle__header__item dialog-battle__header__item--defense"
-      >
+      <div class="dialog-battle__header__item dialog-battle__header__item--defense">
         <div>
           <div class="dialog-battle__header__item__info">
-            <div class="dialog-battle__header__item__info--name">
-              {{ target === "monster" && defArmy[0] ? defArmy[0].name : "" }}
-            </div>
+            <div
+              class="dialog-battle__header__item__info--name"
+            >{{ target === "monster" && defArmy[0] ? defArmy[0].name : "" }}</div>
           </div>
         </div>
         <div class="dialog-battle__header__item__ava">
-          <img :src="getDefenderAvatar()" alt="" />
+          <img :src="getDefenderAvatar()" alt />
         </div>
       </div>
     </div>
 
+    <div class="dialog-battle__content">
+      <ArmyBattleLine :army="defArmy" class="dialog-battle__content__item"/>
+      <ArmyBattleLine :army="defArmy" position="right" class="dialog-battle__content__item"/>
+    </div>
+
     <div class="dialog-battle__confirm">
-      <GuiBtn
-        type="buy"
-        class="dialog-battle__confirm--btn"
-        @click="goBattle"
-      />
-      <GuiBtn
-        type="cancel"
-        class="dialog-battle__confirm--btn"
-        @click="$emit('close')"
-      />
+      <GuiBtn type="ok" class="dialog-battle__confirm--btn" @click="goBattle" />
+      <GuiBtn type="cancel" class="dialog-battle__confirm--btn" @click="$emit('close')" />
     </div>
   </div>
 </template>
 
 <script>
 import { deepClone } from "../../../../../utils";
+import { ArmyBattleLine } from "../../../ArmyLine";
 
 export default {
   name: "DialogBattle",
+  components: { ArmyBattleLine },
   props: {
     data: { type: Object, default: () => ({}) }
   },
@@ -149,6 +144,13 @@ export default {
         justify-content: flex-end;
         flex-direction: row-reverse;
       }
+    }
+  }
+  &__content{
+    display: flex;
+    &__item{
+      flex-basis: 50%;
+      margin: 0 10px;
     }
   }
   &__confirm {
