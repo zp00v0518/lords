@@ -1,17 +1,22 @@
 <template>
-  <div class="battle-army-line">
+  <div class="battle-army-line" drag-container @mouseup="handlerMouseUp">
     <div
       v-for="index in 7"
       class="battle-army-line__item"
       :class="`battle-army-line__item--${position}`"
       :key="index"
+      drag-item
     >
       <template v-if="army[index-1]">
         <div class="battle-army-line__item__stack">
           <div class="battle-army-line__item__stack--count">{{army[index-1].count}}</div>
           <div class="battle-army-line__item__stack--power">{{army[index-1].force}}</div>
         </div>
-        <div class="battle-army-line__item--avatar">
+        <div
+          class="battle-army-line__item--avatar"
+          @dragstart.prevent
+          @mousedown="handlerMouseDown($event, {itemIndex: index -1, allValues: army}, handlerDragStart)"
+        >
           <img :src="getUnitAvatar(army[index-1])" alt />
         </div>
         <div class="battle-army-line__item--type"></div>
@@ -22,14 +27,14 @@
 </template>
 
 <script>
+import dragMixin from "./dragMixin";
+
 export default {
   name: "ArmyBattleLine",
+  mixins: [dragMixin],
   props: {
     army: { type: Array, default: () => [] },
     position: { type: String, default: "left" }
-  },
-  created() {
-    console.log(this.army);
   },
   methods: {
     getUnitAvatar(unit) {
@@ -55,11 +60,11 @@ $baseMargin: 3px;
     }
     &__stack {
       margin: 0 $baseMargin * 2;
-			font-size: 12px;
-			line-height: 1.4em;
-			&--count{
-				font-weight: bold;
-			}
+      font-size: 12px;
+      line-height: 1.4em;
+      &--count {
+        font-weight: bold;
+      }
     }
   }
 }
