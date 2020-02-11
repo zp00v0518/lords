@@ -74,7 +74,7 @@ export default {
       immediate: true,
       handler(e) {
         this.atackArmy = e && e.army ? deepClone(e.army) : [];
-        this.setForceStack(atackArmy);
+        this.setForceStack(this.atackArmy);
       }
     }
   },

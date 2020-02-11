@@ -26,24 +26,17 @@
       </div>
       <div class="heroes-in-town__item__content">
         <div class="heroes-in-town__item__content__info">
-          <div class="heroes-in-town__item__content__info--name">
-            {{ hero.name }}
-          </div>
-          <div class="heroes-in-town__item__content__info--lvl">
-            lvl: {{ hero.lvl }}
-          </div>
+          <div class="heroes-in-town__item__content__info--name">{{ hero.name }}</div>
+          <div class="heroes-in-town__item__content__info--lvl">lvl: {{ hero.lvl }}</div>
         </div>
-        <ArmyLine
-          class="heroes-in-town__item__content__army"
-          :army="hero.army"
-        />
+        <ArmyLine class="heroes-in-town__item__content__army" :army="hero.army" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ArmyLine from "../ArmyLine";
+import { ArmyLine } from "../ArmyLine";
 import { currentSector } from "../../mixins";
 
 export default {
