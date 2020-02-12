@@ -8,23 +8,16 @@ export default {
   },
   methods: {
     handlerDragStart(event, dataTransfer) {
-      const { offsetX, offsetY } = event;
       this.dataTransfer = dataTransfer;
-      this.dataTransfer.offsetX = offsetX;
-      this.dataTransfer.offsetY = offsetY;
       const drag_item = event.target.closest("[drag-item]");
       this.dataTransfer.drag_item = drag_item;
+      this.setOffsetCoords(event, drag_item);
       const drag_container = drag_item.closest("[drag-container]");
       this.dataTransfer.drag_container = drag_container;
       this.dataTransfer.containerStyle = drag_container.getBoundingClientRect();
       const drag_item_clone = drag_item.cloneNode("deep");
       this.dataTransfer.drag_item_clone = drag_item_clone;
-      drag_item_clone.style.cursor = "grabbing";
-      drag_item_clone.style.opacity = "0.7";
-      drag_item_clone.style.backgroundColor = "white";
-      drag_item_clone.style.position = "fixed";
-      drag_item_clone.style.transitionDuration = "unset";
-      drag_item_clone.style.zIndex = 9999;
+      this.setStartStyles(drag_item_clone);
       this.setPositionElem(drag_item_clone, event);
       document.body.appendChild(drag_item_clone);
       document.addEventListener("mousemove", this.handlerMouseMove);
@@ -33,12 +26,53 @@ export default {
         e.preventDefault();
       });
     },
+    setOffsetCoords(event, dragitem) {
+      const { clientX, clientY } = event;
+      const style = dragitem.getBoundingClientRect();
+      console.log(clientX, clientY);
+      console.log(style)
+      this.dataTransfer.offsetX = clientX - style.left;
+      this.dataTransfer.offsetY = clientY - style.top;
+      // this.dataTransfer.offsetY = offsetY;
+    },
     handlerMouseMove(event) {
       const { dataTransfer } = this;
       this.setPositionElem(dataTransfer.drag_item_clone, event);
       if (!this.checkDragInContainer(event)) {
         this.stopDrag();
         return;
+      }
+      this.moveDragElement();
+    },
+    setStartStyles(cloneElem) {
+      cloneElem.style.cursor = "grabbing";
+      cloneElem.style.opacity = "0.7";
+      cloneElem.style.backgroundColor = "white";
+      cloneElem.style.position = "fixed";
+      cloneElem.style.transitionDuration = "unset";
+      cloneElem.style.zIndex = 9999;
+    },
+    moveDragElement() {
+      const { dataTransfer } = this;
+      const { way, drag_item, drag_item_clone, drag_container } = dataTransfer;
+      const styles = drag_item_clone.getBoundingClientRect();
+      if (way === "down") {
+        const nextElem = drag_item.nextElementSibling;
+        if (nextElem) {
+          const topNext = nextElem.getBoundingClientRect().top;
+          if (topNext + styles.height / 2 < styles.bottom) {
+            drag_container.insertBefore(drag_item, nextElem.nextElementSibling);
+          }
+        }
+      }
+      if (way === "up") {
+        const nextElem = drag_item.previousElementSibling;
+        if (nextElem) {
+          const bottomNext = nextElem.getBoundingClientRect().bottom;
+          if (bottomNext - styles.height / 2 > styles.top) {
+            drag_container.insertBefore(drag_item, nextElem);
+          }
+        }
       }
     },
     checkDragInContainer(mouseEvent) {
@@ -53,10 +87,31 @@ export default {
       const { dataTransfer } = this;
       elem.style.top = clientY - dataTransfer.offsetY + "px";
       elem.style.left = clientX - dataTransfer.offsetX + "px";
+      this.setWay(mouseEvent);
+    },
+    setWay(mouseEvent) {
+      const { clientY } = mouseEvent;
+      const { dataTransfer } = this;
+      const { prevY, way } = dataTransfer;
+      if (way === undefined) {
+        dataTransfer.prevY = clientY;
+        dataTransfer.way = "";
+        return;
+      }
+      if (prevY < clientY) {
+        dataTransfer.way = "down";
+        dataTransfer.prevY = clientY;
+      }
+      if (prevY > clientY) {
+        dataTransfer.way = "up";
+        dataTransfer.prevY = clientY;
+      }
     },
     stopDrag() {
       document.removeEventListener("mousemove", this.handlerMouseMove);
       document.removeEventListener("mouseup", this.stopDrag);
+      const { drag_item_clone } = this.dataTransfer;
+      document.body.removeChild(drag_item_clone);
     },
     handlerMouseDown(event, { itemIndex, allValue }, callback) {
       if (this.timerId) {
