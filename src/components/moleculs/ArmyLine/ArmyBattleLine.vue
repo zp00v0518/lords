@@ -7,17 +7,17 @@
       :key="index"
       drag-item
     >
-      <template v-if="army[index-1]">
+      <template v-if="curArmy[index-1]">
         <div class="battle-army-line__item__stack">
-          <div class="battle-army-line__item__stack--count">{{army[index-1].count}}</div>
-          <div class="battle-army-line__item__stack--power">{{army[index-1].force}}</div>
+          <div class="battle-army-line__item__stack--count">{{curArmy[index-1].count}}</div>
+          <div class="battle-army-line__item__stack--power">{{curArmy[index-1].force}}</div>
         </div>
         <div
           class="battle-army-line__item--avatar"
           @dragstart.prevent
-          @mousedown="handlerMouseDown($event, {itemIndex: index -1, allValues: army}, handlerDragStart)"
+          @mousedown="handlerMouseDown($event, {itemIndex: index -1, allValue: curArmy}, handlerDragStart)"
         >
-          <img :src="getUnitAvatar(army[index-1])" alt />
+          <img :src="getUnitAvatar(curArmy[index-1])" alt />
         </div>
         <div class="battle-army-line__item--type"></div>
       </template>
@@ -35,6 +35,12 @@ export default {
   props: {
     army: { type: Array, default: () => [] },
     position: { type: String, default: "left" }
+  },
+  computed: {
+    curArmy() {
+      console.log(123)
+      return JSON.parse(JSON.stringify(this.army));
+    }
   },
   methods: {
     getUnitAvatar(unit) {

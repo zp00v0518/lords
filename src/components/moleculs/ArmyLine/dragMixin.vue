@@ -17,7 +17,7 @@ export default {
       this.dataTransfer.containerStyle = drag_container.getBoundingClientRect();
       const drag_item_clone = drag_item.cloneNode("deep");
       this.dataTransfer.drag_item_clone = drag_item_clone;
-      this.setStartStyles(drag_item_clone);
+      this.setStartStyles(drag_item_clone, drag_item);
       this.setPositionElem(drag_item_clone, event);
       document.body.appendChild(drag_item_clone);
       document.addEventListener("mousemove", this.handlerMouseMove);
@@ -29,11 +29,8 @@ export default {
     setOffsetCoords(event, dragitem) {
       const { clientX, clientY } = event;
       const style = dragitem.getBoundingClientRect();
-      console.log(clientX, clientY);
-      console.log(style)
       this.dataTransfer.offsetX = clientX - style.left;
       this.dataTransfer.offsetY = clientY - style.top;
-      // this.dataTransfer.offsetY = offsetY;
     },
     handlerMouseMove(event) {
       const { dataTransfer } = this;
@@ -44,7 +41,9 @@ export default {
       }
       this.moveDragElement();
     },
-    setStartStyles(cloneElem) {
+    setStartStyles(cloneElem, baseElem) {
+      const baseStyles = getComputedStyle(baseElem);
+      cloneElem.style.width = baseStyles.width;
       cloneElem.style.cursor = "grabbing";
       cloneElem.style.opacity = "0.7";
       cloneElem.style.backgroundColor = "white";
@@ -110,8 +109,22 @@ export default {
     stopDrag() {
       document.removeEventListener("mousemove", this.handlerMouseMove);
       document.removeEventListener("mouseup", this.stopDrag);
-      const { drag_item_clone } = this.dataTransfer;
+      const {
+        drag_item_clone,
+        drag_item,
+        drag_container,
+        itemIndex,
+        allValue
+      } = this.dataTransfer;
       document.body.removeChild(drag_item_clone);
+      const newIndex = Array.from(drag_container.children).indexOf(drag_item);
+      console.log(`newIndex:${newIndex} itemIndex:${itemIndex}`);
+      // const arr = JSON.parse(JSON.stringify(allValue));
+      const arr = allValue;
+      arr.length = drag_container.children.length;
+      const removeItem = arr.splice(itemIndex, 1);
+      arr.splice(newIndex, 0, removeItem[0]);
+      return arr;
     },
     handlerMouseDown(event, { itemIndex, allValue }, callback) {
       if (this.timerId) {
