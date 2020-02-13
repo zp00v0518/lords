@@ -118,13 +118,17 @@ export default {
       } = this.dataTransfer;
       document.body.removeChild(drag_item_clone);
       const newIndex = Array.from(drag_container.children).indexOf(drag_item);
-      console.log(`newIndex:${newIndex} itemIndex:${itemIndex}`);
-      // const arr = JSON.parse(JSON.stringify(allValue));
-      const arr = allValue;
+      const arr = JSON.parse(JSON.stringify(allValue));
       arr.length = drag_container.children.length;
+      Array.from(drag_container.children).forEach((i, index) => {
+        const item = arr[index];
+        if (!item) {
+          arr[index] = "";
+        }
+      });
       const removeItem = arr.splice(itemIndex, 1);
       arr.splice(newIndex, 0, removeItem[0]);
-      return arr;
+      this.$emit("drag-finish", { result: arr.filter(i => i) });
     },
     handlerMouseDown(event, { itemIndex, allValue }, callback) {
       if (this.timerId) {

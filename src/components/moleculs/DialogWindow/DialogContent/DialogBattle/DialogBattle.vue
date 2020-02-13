@@ -27,7 +27,12 @@
     </div>
 
     <div class="dialog-battle__content">
-      <ArmyBattleLine :army="atackArmy" class="dialog-battle__content__item" />
+      <ArmyBattleLine
+        :army="atackArmy"
+        class="dialog-battle__content__item"
+        @drag-finish="dragResult = $event.result"
+        is_drag
+      />
       <ArmyBattleLine :army="defArmy" position="right" class="dialog-battle__content__item" />
     </div>
 
@@ -52,7 +57,8 @@ export default {
     return {
       defArmy: [],
       target: this.data.target,
-      atackArmy: []
+      atackArmy: [],
+      dragResult: null
     };
   },
   created() {
@@ -75,7 +81,11 @@ export default {
   },
   methods: {
     goBattle() {
-      console.log("goBattle");
+      const result = this.dragResult
+        ? this.dragResult
+        : deepClone(this.atackArmy);
+      console.log(result);
+      this.$emit('close');
     },
     setForceStack(army) {
       const { Army } = this.globalConfig.all;

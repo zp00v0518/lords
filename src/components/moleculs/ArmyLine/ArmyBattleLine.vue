@@ -1,5 +1,5 @@
 <template>
-  <div class="battle-army-line" drag-container @mouseup="handlerMouseUp">
+  <div class="battle-army-line" drag-container @mouseup="is_drag ? handlerMouseUp : {}">
     <div
       v-for="index in 7"
       class="battle-army-line__item"
@@ -15,7 +15,7 @@
         <div
           class="battle-army-line__item--avatar"
           @dragstart.prevent
-          @mousedown="handlerMouseDown($event, {itemIndex: index -1, allValue: curArmy}, handlerDragStart)"
+          @mousedown="is_drag ? handlerMouseDown($event, {itemIndex: index -1, allValue: curArmy}, handlerDragStart) : {}"
         >
           <img :src="getUnitAvatar(curArmy[index-1])" alt />
         </div>
@@ -34,13 +34,13 @@ export default {
   mixins: [dragMixin],
   props: {
     army: { type: Array, default: () => [] },
-    position: { type: String, default: "left" }
+    position: { type: String, default: "left" },
+    is_drag: { type: Boolean, default: false }
   },
-  computed: {
-    curArmy() {
-      console.log(123)
-      return JSON.parse(JSON.stringify(this.army));
-    }
+  data() {
+    return {
+      curArmy: JSON.parse(JSON.stringify(this.army))
+    };
   },
   methods: {
     getUnitAvatar(unit) {
