@@ -46,9 +46,11 @@
 <script>
 import { deepClone } from "../../../../../utils";
 import { ArmyBattleLine } from "../../../ArmyLine";
+import { currentSector } from "../../../../mixins";
 
 export default {
   name: "DialogBattle",
+  mixins: [currentSector],
   components: { ArmyBattleLine },
   props: {
     data: { type: Object, default: () => ({}) }
@@ -84,8 +86,28 @@ export default {
       const result = this.dragResult
         ? this.dragResult
         : deepClone(this.atackArmy);
-      console.log(result);
-      this.$emit('close');
+      const { $store, currentSector, activeHero, target } = this;
+
+      if (!result || result.length === 0 || activeHero.army.length === 0) {
+        this.$emit("close");
+        return;
+      }
+      const sectorIndex = $store.state.userSectors.sectors.findIndex(
+        i => i._id === currentSector._id
+      );
+      console.log(result)
+      const message = {
+        type: "battle",
+        data: {
+          sectorIndex,
+          attackHeroId: activeHero._id,
+          target,
+          coords: {}
+        }
+      };
+      // this.$ws.sendMessage(message);
+      console.log(message);
+      this.$emit("close");
     },
     setForceStack(army) {
       const { Army } = this.globalConfig.all;
