@@ -1,3 +1,4 @@
-import ArmyLine from './ArmyLine';
+import ArmyLine from "./ArmyLine";
+import ArmyBattleLine from "./ArmyBattleLine";
 
-export default ArmyLine;
+export { ArmyLine, ArmyBattleLine };

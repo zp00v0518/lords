@@ -15,15 +15,11 @@
           </div>
           <div class="storage_wrap">
             <div class="storage_item">
-              <div class="storage_resource_sum">
-                {{ maxValue.baseResource }}
-              </div>
+              <div class="storage_resource_sum">{{ maxValue.baseResource }}</div>
               <div class="storage_resource_max">max</div>
             </div>
             <div class="storage_item">
-              <div class="storage_resource_sum">
-                {{ maxValue.unicResource }}
-              </div>
+              <div class="storage_resource_sum">{{ maxValue.unicResource }}</div>
               <div class="storage_resource_max">max</div>
             </div>
           </div>
@@ -43,7 +39,7 @@
 
 <script>
 import modules from "./module";
-import ArmyLine from "../ArmyLine";
+import { ArmyLine } from "../ArmyLine";
 import HeroesInTown from "../HeroesInTown";
 
 export default {

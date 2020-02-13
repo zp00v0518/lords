@@ -4,6 +4,8 @@
       v-for="(hero, index) in list"
       :key="index"
       class="heroes-in-town__item"
+      :class="{ 'heroes-in-town__item--active': hero._id === activeHeroId }"
+      @click="setActiveHero(hero)"
     >
       <div class="heroes-in-town__item--img">
         <img :src="getHeroesAvatar(hero)" alt="heroavatar" />
@@ -24,24 +26,17 @@
       </div>
       <div class="heroes-in-town__item__content">
         <div class="heroes-in-town__item__content__info">
-          <div class="heroes-in-town__item__content__info--name">
-            {{ hero.name }}
-          </div>
-          <div class="heroes-in-town__item__content__info--lvl">
-            lvl: {{ hero.lvl }}
-          </div>
+          <div class="heroes-in-town__item__content__info--name">{{ hero.name }}</div>
+          <div class="heroes-in-town__item__content__info--lvl">lvl: {{ hero.lvl }}</div>
         </div>
-        <ArmyLine
-          class="heroes-in-town__item__content__army"
-          :army="hero.army"
-        />
+        <ArmyLine class="heroes-in-town__item__content__army" :army="hero.army" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ArmyLine from "../ArmyLine";
+import { ArmyLine } from "../ArmyLine";
 import { currentSector } from "../../mixins";
 
 export default {
@@ -62,6 +57,9 @@ export default {
       const { currentSector } = this;
       const army_in_town = currentSector.town.army.units;
       return army_in_town.length === 0;
+    },
+    activeHeroId() {
+      return this.$store.state.heroes.activeHeroId;
     }
   },
   watch: {
@@ -74,7 +72,13 @@ export default {
     }
   },
   methods: {
+    setActiveHero(hero) {
+      const id = hero._id;
+      if (this.activeHeroId === id) return;
+      this.$store.commit("SET_ACTIVE_HERO_ID", id);
+    },
     getHeroesAvatar(hero) {
+      if (!hero) return;
       const { races } = this.globalConfig;
       return races.heroes.getHeroImg(hero.race, hero.type);
     },
@@ -103,6 +107,7 @@ export default {
             payload.heroId = hero._id;
             payload.army = data.hero.army;
             this.$store.commit("UPDATE_HERO_ARMY", payload);
+            this.$store.commit("FORCE_UPDATE_HEROES_LIST");
           }
           if (data.town) {
             payload.sectorIndex = sectorIndex;
@@ -126,6 +131,7 @@ export default {
   width: 100%;
   &__item {
     display: flex;
+    padding-bottom: 10px;
     &--img {
       flex-basis: 17%;
       padding: 3px;
@@ -165,6 +171,9 @@ export default {
           }
         }
       }
+    }
+    &--active {
+      background-color: rgb(100, 100, 100);
     }
   }
 }

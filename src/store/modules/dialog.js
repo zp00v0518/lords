@@ -2,14 +2,14 @@ const dialog = {
   state: {
     show: false,
     data: {},
-    title: '',
-    component: ''
+    title: "",
+    component: ""
   },
   mutations: {
     DIALOG_CLOSE(state) {
       state.show = false;
-      state.title = '';
-      state.component = '';
+      state.title = "";
+      state.component = "";
       state.data = {};
     },
     DIALOG_SHOW(state, payload) {
@@ -22,8 +22,8 @@ const dialog = {
   },
   actions: {
     DIALOG_SHOW({ commit }, payload) {
-      commit('DIALOG_CLOSE');
-      commit('DIALOG_SHOW', payload);
+      commit("DIALOG_CLOSE");
+      commit("DIALOG_SHOW", payload);
     }
   }
 };
@@ -31,7 +31,8 @@ const dialog = {
 export default dialog;
 
 const typeDialog = {
-  upgradeRegion: 'UpgradeRegion',
-  upgradeBuilding: 'UpgradeBuilding',
-  message: 'Message'
+  upgradeRegion: "UpgradeRegion",
+  upgradeBuilding: "UpgradeBuilding",
+  message: "Message",
+  dialogBattle: "DialogBattle"
 };

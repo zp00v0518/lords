@@ -9,13 +9,13 @@ function createGreenDragon(unitInfo, up = 0) {
     [type_resources.gold]: 700,
     [type_resources.crystal]: 1
   };
-  let hp = 70;
+  let hp = 200;
   let lvl = 7;
   if (up) {
     cost[type_resources.gold] = 750;
     cost[type_resources.crystal] = 2;
     // lvl += 0.5;
-    hp = 75;
+    hp = 300;
   }
   return createUnit({
     unitInfo,

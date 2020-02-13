@@ -9,6 +9,7 @@
         @set-height="setHeight"
         :is="$store.state.dialog.component"
         :data="$store.state.dialog.data"
+        @close="closeDialogWindow()"
       ></components>
     </div>
   </section>
