@@ -77,7 +77,6 @@ export default {
       immediate: true,
       handler(e) {
         this.atackArmy = e && e.army ? deepClone(e.army) : [];
-        this.setForceStack(this.atackArmy);
       }
     }
   },
@@ -95,7 +94,7 @@ export default {
       const sectorIndex = $store.state.userSectors.sectors.findIndex(
         i => i._id === currentSector._id
       );
-      console.log(result)
+      console.log(result);
       const message = {
         type: "battle",
         data: {
@@ -109,18 +108,12 @@ export default {
       console.log(message);
       this.$emit("close");
     },
-    setForceStack(army) {
-      const { Army } = this.globalConfig.all;
-      army.forEach(a => {
-        a.force = Army.getUnitInfo(a.race, a.name).hp * a.count;
-      });
-    },
     sortDefenseArmy(army) {
+      const { Army } = this.globalConfig.all;
       const arr = deepClone(army);
-      this.setForceStack(arr);
       if (arr.length < 2) return arr;
       arr.sort((a, b) => {
-        return b.force - a.force;
+        return Army.getForceStack(b) - Army.getForceStack(a);
       });
       return arr;
     },
