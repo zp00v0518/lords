@@ -17,7 +17,7 @@
           <div class="dialog-battle__header__item__info">
             <div
               class="dialog-battle__header__item__info--name"
-            >{{ target === "monster" && defArmy[0] ? defArmy[0].name : "" }}</div>
+            >{{ target === "region" && defArmy[0] ? defArmy[0].name : "" }}</div>
           </div>
         </div>
         <div class="dialog-battle__header__item__ava">
@@ -96,16 +96,19 @@ export default {
       );
       console.log(result);
       const message = {
-        type: "battle",
+        type: "battleRequest",
         data: {
           sectorIndex,
           attackHeroId: activeHero._id,
           target,
-          coords: {}
+          tileId: this.data.tile.id,
+          army: result.map(i => {
+            const { race, name, count } = i;
+            return { race, name, count };
+          })
         }
       };
-      // this.$ws.sendMessage(message);
-      console.log(message);
+      this.$ws.sendMessage(message);
       this.$emit("close");
     },
     sortDefenseArmy(army) {
@@ -124,7 +127,7 @@ export default {
     },
     getDefenderAvatar() {
       const { Army } = this.globalConfig.all;
-      if (this.data.target === "monster") {
+      if (this.data.target === "region") {
         const { defArmy } = this;
         if (defArmy.length === 0) return "";
         return Army.getIconUnit({ unit: defArmy[0] });

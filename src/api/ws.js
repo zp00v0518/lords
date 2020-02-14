@@ -40,7 +40,7 @@ class WS {
           // eslint-disable-next-line
           location = data.redirectUrl;
         } else {
-          // console.log(data);
+          console.log(data);
         }
       }
     };
@@ -108,5 +108,6 @@ class WS {
   }
   upgradeBuilding = modules.upgradeBuilding;
   buyUnits = modules.buyUnits;
+  battleRequest = modules.battleRequest;
 }
 export default WS;

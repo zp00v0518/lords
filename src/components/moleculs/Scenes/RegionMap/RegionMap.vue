@@ -94,7 +94,8 @@ export default {
           title: "svxzv",
           data: {
             defenseArmy: currentTile.army,
-            target: 'monster'
+            target: 'region',
+            tile: currentTile
           },
           type: "dialogBattle"
         };

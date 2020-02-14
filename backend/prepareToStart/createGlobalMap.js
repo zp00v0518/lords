@@ -11,11 +11,11 @@ const insertDB = new insert();
 const numSectionGlobalMap = gameVariable.numSectionGlobalMap;
 const numSectionRegionMap = gameVariable.numSectionRegionMap;
 const GlobalMap = [];
-const coordsMine = []; //возможные координаты шахт на regionMap
+const coordsMine = []; // возможные координаты шахт на regionMap
 const Region = require('../region/Region');
 
 getPositionMine();
-//создает перечень возможных координат шахт для regionMap
+// создает перечень возможных координат шахт для regionMap
 function getPositionMine() {
   for (let i = 1; i < 4; i++) {
     for (let h = 1; h < 4; h++) {
@@ -31,7 +31,7 @@ function getPositionMine() {
   }
 }
 
-//возвращает массив координат, где будут находится шахты
+// возвращает массив координат, где будут находится шахты
 function getArrPosition() {
   let positionArr = [];
   while (positionArr.length < 4) {
@@ -47,7 +47,7 @@ function getArrPosition() {
 function createRegionMap() {
   var regionMap = [];
   var countSection = 0;
-  //создаю сетку региона
+  // создаю сетку региона
   for (let i = 0; i < numSectionRegionMap; i++) {
     let row = [];
     regionMap.push(row);
@@ -58,14 +58,14 @@ function createRegionMap() {
       section.y = h;
       section.type = Region.typeList.indexOf('forest'); //индекс леса
       section.sector = {};
-      //центр всегда является замком
+      // центр всегда является замком
       if (i == 2 && h == 2) {
         section.type = Region.typeList.indexOf('town'); //индекс замка
       }
       regionMap[i][h] = section;
     }
   }
-  //определаю положение шахт на карте
+  // определаю положение шахт на карте
   var d = getArrPosition();
   for (let k = 0; k < d.length; k++) {
     let index = d[k];
@@ -77,7 +77,7 @@ function createRegionMap() {
   return regionMap;
 }
 
-//конструктор региона
+// конструктор региона
 function createRegion() {
   var Region = {};
   Region = createRegionMap();
