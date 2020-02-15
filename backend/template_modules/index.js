@@ -6,6 +6,7 @@ const getCollectionName = require("./getCollectionName.js");
 const checkSchema = require("./checkSchema.js");
 const getParsePathToImg = require("./getParsePathToImg.js");
 const deepClone = require("./deepClone");
+const formatIdToCoords = require("./formatIdToCoords");
 
 module.exports = {
   fileReader,
@@ -15,5 +16,6 @@ module.exports = {
   getCollectionName,
   checkSchema,
   getParsePathToImg,
-  deepClone
+  deepClone,
+  formatIdToCoords
 };
