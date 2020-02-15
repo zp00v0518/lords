@@ -56,11 +56,11 @@ function createRegionMap() {
       section.id = countSection++;
       section.x = i;
       section.y = h;
-      section.type = Region.typeList.indexOf('forest'); //индекс леса
+      section.type = Region.types.forest.id // индекс леса
       section.sector = {};
       // центр всегда является замком
       if (i == 2 && h == 2) {
-        section.type = Region.typeList.indexOf('town'); //индекс замка
+        section.type = Region.types.town.id; // индекс замка
       }
       regionMap[i][h] = section;
     }
@@ -71,7 +71,7 @@ function createRegionMap() {
     let index = d[k];
     let x = coordsMine[index].x;
     let y = coordsMine[index].y;
-    regionMap[x][y].type = Region.typeList.indexOf('mine'); //индекс шахты
+    regionMap[x][y].type = Region.types.mine.id; // индекс шахты
     regionMap[x][y].sector = createMine(x, y);
   }
   return regionMap;

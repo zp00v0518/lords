@@ -28,11 +28,11 @@ function handlerBattleRequest(message, info) {
     gameVariables.numSectionRegionMap
 	);
 	const {region} = sector;
-	
+	const tile = region[coords.x][coords.y];
 
   message.data.hero = hero;
   message.data.coords = coords;
-  message.data.sector = sector;
+  message.data.tile = tile;
 
   ws.send(JSON.stringify(message));
 }
