@@ -1,15 +1,27 @@
 const { checkSchema } = require("../../template_modules");
 const { redirectMessage } = require("../../wsServer");
+const verification = require("../../wsServer/baseVerificationHandler");
 
 function handlerBattleRequest(message, info) {
   const data = message.data;
   const { ws } = info.player;
   if (!checkSchema(data, schema)) {
     redirectMessage(ws);
-
-    // ws.send(JSON.stringify(message));
     return;
   }
+  const sector = info.player.sectors[data.sectorIndex];
+  if (!sector) {
+    redirectMessage(ws);
+    return;
+  }
+  const { attackHeroId } = data;
+  const heroVerif = verification.hero(attackHeroId, sector, info);
+  if (!heroVerif.is) {
+    redirectMessage(ws);
+  }
+  const { hero } = heroVerif;
+  message.data.hero = hero;
+
   ws.send(JSON.stringify(message));
 }
 
