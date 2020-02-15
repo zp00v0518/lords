@@ -18,14 +18,19 @@ class WS {
       buyUnits: eventData => this.buyUnits(eventData)
     };
     this.outgoing = {};
+    this.timerId = null;
   }
   connectionToWs(wsAddr) {
+    if (this.timerId) {
+      clearTimeout(this.timerId);
+    }
     this.wsInstance = new WebSocket(wsAddr);
     this.wsInstance.onopen = () => {
       console.log(`WebSocket open in ${wsAddr}`);
       this.is = true;
       // this.store.dispatch('getData')
     };
+
     this.wsInstance.onmessage = event => {
       this.store.commit("INCREMENT");
       const data = JSON.parse(event.data);
@@ -43,6 +48,11 @@ class WS {
           console.log(data);
         }
       }
+    };
+    this.wsInstance.onclose = e => {
+      this.timerId = setTimeout(() => {
+        this.connectionToWs(wsAddr);
+      }, 5000);
     };
   }
   moveGlobalMap(eventData) {
