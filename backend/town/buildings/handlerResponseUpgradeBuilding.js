@@ -81,7 +81,7 @@ function handlerResponseUpgradeBuilding(message, info) {
 module.exports = handlerResponseUpgradeBuilding;
 
 const schema = {
-  building: { type: "object" },
+  building: { type: "object" }, // здесь может отвалится схема. Нужно добавить поле fields
   type: { type: "string", regExp: /^[a-z_0-9]{4,9}$/gi },
   persent: { type: "number", min: 70, max: 130 },
   sectorIndex: { type: "number", min: 0 }

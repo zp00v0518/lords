@@ -83,7 +83,7 @@ function handlerMergeArmy(message, info) {
 }
 
 const schema = {
-  id: { type: "string", regExp: /.{13,}/g },
+  id: { type: "string", regExp: /^.{13,}\b/g },
   way: { type: "string", regExp: /^in$|^out$/g },
   sectorIndex: { type: "number", min: 0 }
 };

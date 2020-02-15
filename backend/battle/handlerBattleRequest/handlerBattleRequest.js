@@ -17,7 +17,7 @@ function handlerBattleRequest(message, info) {
 module.exports = handlerBattleRequest;
 
 const schema = {
-  attackHeroId: { type: "string", regExp: /.{13,}/g },
-  target: { type: "string", regExp: /.{10,}/g },
+  attackHeroId: { type: "string", regExp: /^.{13,}\b/g },
+  target: { type: "string", regExp: /^.{10,}\b/g },
   sectorIndex: { type: "number", min: 0 }
 };
