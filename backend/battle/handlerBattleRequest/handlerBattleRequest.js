@@ -1,6 +1,7 @@
 const { checkSchema, formatIdToCoords } = require("../../template_modules");
 const { redirectMessage } = require("../../wsServer");
 const verification = require("../../wsServer/baseVerificationHandler");
+const { Region } = require("../../region");
 
 function handlerBattleRequest(message, info) {
   const data = message.data;
@@ -21,17 +22,31 @@ function handlerBattleRequest(message, info) {
   }
 
   const { hero } = heroVerif;
-  const attackArmy = data.army;
-  const hero_army = hero.army;
   const coords = formatIdToCoords(
     data.tileId,
+    // eslint-disable-next-line
     gameVariables.numSectionRegionMap
-	);
-	const {region} = sector;
-	const tile = region[coords.x][coords.y];
+  );
+  const { region } = sector;
+  const tile = region[coords.x][coords.y];
+  if (tile.type !== Region.types.forest.id) {
+    redirectMessage(ws);
+    return;
+  }
+  if (!tile.army || tile.army.length === 0) {
+    redirectMessage(ws);
+    return;
+  }
+  const attackArmyForBattle = createArmyForBattle(data.army, hero.army);
+  if (!attackArmyForBattle.is) {
+    redirectMessage(ws);
+    return;
+	}
+	
+	
 
   message.data.hero = hero;
-  message.data.coords = coords;
+  message.data.attackArmyForBattle = attackArmyForBattle.army;
   message.data.tile = tile;
 
   ws.send(JSON.stringify(message));
@@ -46,6 +61,7 @@ const schema = {
   tileId: {
     type: "number",
     min: 0,
+    // eslint-disable-next-line
     max: Math.pow(gameVariables.numSectionRegionMap, 2)
   },
   army: {
@@ -73,7 +89,7 @@ function createArmyForBattle(attackArmy, heroArmy) {
     return true;
   });
   if (flag) {
-    template.result = JSON.parse(JSON.stringify(result));
+    template.army = JSON.parse(JSON.stringify(result));
     template.is = true;
   }
   return template;
