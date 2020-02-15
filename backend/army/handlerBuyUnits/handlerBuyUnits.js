@@ -2,7 +2,7 @@
 const { checkSchema } = require("../../template_modules");
 const { redirectMessage } = require("../../wsServer");
 const { Race } = require("../../race");
-const { Army, createStackItemTemplate } = require("./../army");
+const { Army } = require("./../army");
 const { checkSource } = require("../../resources");
 const checkUnitInBarraks = require("./../checkUnitInBarraks");
 const { deleteSource } = require("../../resources");
