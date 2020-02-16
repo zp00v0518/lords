@@ -3,6 +3,7 @@ const { redirectMessage } = require("../../wsServer");
 const verification = require("../../wsServer/baseVerificationHandler");
 const { Region } = require("../../region");
 const createEventBattle = require("./createEventBattle");
+const { setEventInGame } = require("../../events");
 
 function handlerBattleRequest(message, info) {
   const data = message.data;
@@ -54,20 +55,13 @@ function handlerBattleRequest(message, info) {
   }
 
   const event = createEventBattle({
-    info,
     startCoords: { x: townSector.x, y: townSector.y },
     endCoords: coords,
-    army: attackArmyForBattle
+    army: attackArmyForBattle,
+    initSector: sector
   });
-
-  message.data.hero = hero;
-  message.data.attackArmyForBattle = attackArmyForBattle.army;
-  message.data.tile = tile;
-  message.data.info = info;
-  message.data.townSector = townSector;
-  message.data.event = event;
-
-  ws.send(JSON.stringify(message));
+  setEventInGame(event, info.server);
+  // ws.send(JSON.stringify(message));
 }
 
 module.exports = handlerBattleRequest;

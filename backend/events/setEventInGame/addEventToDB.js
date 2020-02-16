@@ -1,4 +1,4 @@
-const { insertDB } = require("../tube.js");
+const { insertDB } = require("../../workWithMongoDB");
 const insert = new insertDB();
 
 function addEventToDB(data, serverName, callback = function() {}) {
@@ -29,22 +29,22 @@ function addEventToDB(data, serverName, callback = function() {}) {
 
 module.exports = addEventToDB;
 
-const schema = {
-  type: String,
-  target: {
-    user: "ObjectId",
-    sector: "ObjectId",
-    x: "coordX",
-    y: "coordY"
-  },
-  init: {
-    user: "ObjectId",
-    sector: "ObjectId",
-    x: "coordX",
-    y: "coordY"
-  },
-  start: Date,
-  end: Date,
-  data: Object,
-  status: Boolean
-};
+// const schema = {
+//   type: String,
+//   target: {
+//     user: "ObjectId",
+//     sector: "ObjectId",
+//     x: "coordX",
+//     y: "coordY"
+//   },
+//   init: {
+//     user: "ObjectId",
+//     sector: "ObjectId",
+//     x: "coordX",
+//     y: "coordY"
+//   },
+//   start: Date,
+//   end: Date,
+//   data: Object,
+//   status: Boolean
+// };

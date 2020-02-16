@@ -1,13 +1,24 @@
 const { Heroes } = require("../../heroes");
 const { Event } = require("../../events");
 
-function createEventBattle({ info, startCoords, endCoords, army, goal }) {
-  const serverName = info.server;
-  const init = info.player.user._id;
-  const target = goal === undefined ? init : "";
+function createEventBattle({
+  startCoords,
+  endCoords,
+  army,
+  initSector,
+  targetSector
+}) {
   const time = Heroes.getTimeMove(startCoords, endCoords);
   const start = new Date().getTime();
   const end = start + time;
+  const init = {
+    sector: initSector._id,
+    race: initSector.town.race,
+    user: initSector.userId,
+    x: initSector.x,
+    y: initSector.y
+  };
+  const target = targetSector === undefined ? init : "";
   const data = {
     startCoords,
     endCoords,
@@ -16,9 +27,9 @@ function createEventBattle({ info, startCoords, endCoords, army, goal }) {
   return {
     data: JSON.parse(JSON.stringify(data)),
     target,
-    serverName,
     start,
     end,
+    init,
     type: Event.types.battle
   };
 }

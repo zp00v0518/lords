@@ -1,4 +1,4 @@
-const addEventToDB = require("../../events/addEventToDB");
+const { addEventToDB } = require("../../events");
 
 function setEventForHiringUnit({
   sector,

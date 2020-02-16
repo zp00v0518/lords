@@ -94,8 +94,6 @@ export default {
       const sectorIndex = $store.state.userSectors.sectors.findIndex(
         i => i._id === currentSector._id
       );
-       const { races } = this.globalConfig;
-      races.heroes.getTimeMove({a:''}, {b:2});
       const message = {
         type: "battleRequest",
         data: {

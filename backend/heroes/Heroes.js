@@ -55,9 +55,9 @@ const Heroes = {
     return result;
   },
   getTimeMove(start, end, time = this.heroMove) {
-    console.log(arguments)
     const length = getLengthBeetweenTwoPoint(start.x, start.y, end.x, end.y);
-    return length * (time / gameVariables.time.speedGame);
+    const result = length * (time / gameVariables.time.speedGame);
+    return +result.toFixed();
   }
 };
 module.exports = Heroes;
