@@ -2,6 +2,7 @@ const { checkSchema, formatIdToCoords } = require("../../template_modules");
 const { redirectMessage } = require("../../wsServer");
 const verification = require("../../wsServer/baseVerificationHandler");
 const { Region } = require("../../region");
+const createEventBattle = require("./createEventBattle");
 
 function handlerBattleRequest(message, info) {
   const data = message.data;
@@ -41,13 +42,30 @@ function handlerBattleRequest(message, info) {
   if (!attackArmyForBattle.is) {
     redirectMessage(ws);
     return;
-	}
-	
-	
+  }
+  let townSector = {};
+  for (let i = 0; i < region.length; i++) {
+    const row = region[i];
+    const f = row.find(item => item.type === Region.types.town.id);
+    if (f) {
+      townSector = f;
+      break;
+    }
+  }
+
+  const event = createEventBattle({
+    info,
+    startCoords: { x: townSector.x, y: townSector.y },
+    endCoords: coords,
+    army: attackArmyForBattle
+  });
 
   message.data.hero = hero;
   message.data.attackArmyForBattle = attackArmyForBattle.army;
   message.data.tile = tile;
+  message.data.info = info;
+  message.data.townSector = townSector;
+  message.data.event = event;
 
   ws.send(JSON.stringify(message));
 }

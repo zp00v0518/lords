@@ -1,8 +1,11 @@
 const types = require("./types");
 const rampart = require("./rampart");
+const gameVariables = require("../variables/game_variables.js");
+const { getLengthBeetweenTwoPoint } = require("../template_modules/phisicFunc");
 
 const Heroes = {
   types,
+  heroMove: gameVariables.timer.heroMove,
   races: {
     rampart
   },
@@ -50,6 +53,11 @@ const Heroes = {
       return item.type === type;
     });
     return result;
+  },
+  getTimeMove(start, end, time = this.heroMove) {
+    console.log(arguments)
+    const length = getLengthBeetweenTwoPoint(start.x, start.y, end.x, end.y);
+    return length * (time / gameVariables.time.speedGame);
   }
 };
 module.exports = Heroes;

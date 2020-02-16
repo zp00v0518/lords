@@ -1,4 +1,4 @@
-const Mine = gameVariables.mine;
+// const Mine = gameVariables.mine;
 const tube = require('../tube.js');
 
 function setUpgradeChange( cell, persent = 100,  sector, info,  callback = function() {}) {

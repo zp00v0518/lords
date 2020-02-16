@@ -1,7 +1,6 @@
 const gameVariables = require("./game_variables");
 global.gameVariables = gameVariables;
 const {config, GlobalMap} = require("../tube");
-
 const UserOnline = {};
 
 const appStatistic = {
