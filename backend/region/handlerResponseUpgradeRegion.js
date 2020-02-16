@@ -7,7 +7,8 @@ const {
   setUpgradeChange
 } = require("../tube.js");
 const regionLength = gameVariables.numSectionRegionMap;
-const mine = gameVariables.mine;
+const mine = require('./mine/Mine');
+// const mine = gameVariables.mine;
 
 function handlerResponseUpgradeRegion(message, info) {
   const data = message.data;

@@ -1,9 +1,9 @@
 const config = require("../config/config.js");
-const Mine = require("../region/mine/Mine.js");
+// const Mine = require("../region/mine/Mine.js");
 // const Region = require("../region/Region.js");
 // const Race = require("../race/Race.js");
 // const Town = require("../town/Town.js");
-const resources = require("../resources/Resources.js");
+// const resources = require("../resources/Resources.js");
 const schema = require("../workWithMongoDB/schema.js");
 const time = config.time;
 
@@ -29,12 +29,12 @@ const gameVariables = {
     upgrade_town: 1.5,
     upgrade_mine: 1.5
   },
-  mine: Mine,
+  // mine: Mine,
   // region: Region,
   // race: Race,
   time,
   // town: Town,
-  resources,
+  // resources,
   classInstance: schema.document.class
 };
 
