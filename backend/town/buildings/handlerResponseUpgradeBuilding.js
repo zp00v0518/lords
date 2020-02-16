@@ -1,6 +1,6 @@
 const { checkSchema, redirectMessage, gloss } = require("../../tube");
 const { Race } = require("../../race");
-const { checkSource, deleteSource } = require("../../resources");
+const { checkSource, deleteSource, Resources } = require("../../resources");
 const Town = require("../Town");
 const setUpUpgradeChange_building = require("./setUpUpgradeChange_building");
 
@@ -53,7 +53,8 @@ function handlerResponseUpgradeBuilding(message, info) {
     gloss
   };
   if (checkSource(price_for_upgrade, storage.sources)) {
-    const time_in_gold = gameVariables.resources.getInGold(price);
+    const time_in_gold = Resources.getInGold(price);
+    // const time_in_gold = gameVariables.resources.getInGold(price);
     const sec = gameVariables.time.sec;
     const seconds = sec / gameVariables.time.speedGame;
     const time_for_upgrade = Town.getTimeForUpgrade(
@@ -81,7 +82,7 @@ function handlerResponseUpgradeBuilding(message, info) {
 module.exports = handlerResponseUpgradeBuilding;
 
 const schema = {
-  building: { type: "object" },
+  building: { type: "object" }, // здесь может отвалится схема. Нужно добавить поле fields
   type: { type: "string", regExp: /^[a-z_0-9]{4,9}$/gi },
   persent: { type: "number", min: 70, max: 130 },
   sectorIndex: { type: "number", min: 0 }

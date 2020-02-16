@@ -1,9 +1,9 @@
 const config = require("../config/config.js");
-const Mine = require("../region/mine/Mine.js");
-const Region = require("../region/Region.js");
-const Race = require("../race/Race.js");
-const Town = require("../town/Town.js");
-const resources = require("../resources/Resources.js");
+// const Mine = require("../region/mine/Mine.js");
+// const Region = require("../region/Region.js");
+// const Race = require("../race/Race.js");
+// const Town = require("../town/Town.js");
+// const resources = require("../resources/Resources.js");
 const schema = require("../workWithMongoDB/schema.js");
 const time = config.time;
 
@@ -22,18 +22,19 @@ const gameVariables = {
   timer: {
     controlState: time.minute / 12,
     saveDataDB: time.minute / 3, // 1 минута - интервал считывания данных и записи их в БД
-    perTime: time.hour / 2 // расчетное время прироста игровых ресурсов
+    perTime: time.hour, // расчетное время прироста игровых ресурсов
+    heroMove: time.minute * 20
   },
   indexes: {
     upgrade_town: 1.5,
     upgrade_mine: 1.5
   },
-  mine: Mine,
-  region: Region,
-  race: Race,
+  // mine: Mine,
+  // region: Region,
+  // race: Race,
   time,
-  town: Town,
-  resources,
+  // town: Town,
+  // resources,
   classInstance: schema.document.class
 };
 

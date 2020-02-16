@@ -18,14 +18,19 @@ class WS {
       buyUnits: eventData => this.buyUnits(eventData)
     };
     this.outgoing = {};
+    this.timerId = null;
   }
   connectionToWs(wsAddr) {
+    if (this.timerId) {
+      clearTimeout(this.timerId);
+    }
     this.wsInstance = new WebSocket(wsAddr);
     this.wsInstance.onopen = () => {
       console.log(`WebSocket open in ${wsAddr}`);
       this.is = true;
       // this.store.dispatch('getData')
     };
+
     this.wsInstance.onmessage = event => {
       this.store.commit("INCREMENT");
       const data = JSON.parse(event.data);
@@ -40,9 +45,14 @@ class WS {
           // eslint-disable-next-line
           location = data.redirectUrl;
         } else {
-          // console.log(data);
+          console.log(data);
         }
       }
+    };
+    this.wsInstance.onclose = e => {
+      this.timerId = setTimeout(() => {
+        this.connectionToWs(wsAddr);
+      }, 5000);
     };
   }
   moveGlobalMap(eventData) {
@@ -108,5 +118,6 @@ class WS {
   }
   upgradeBuilding = modules.upgradeBuilding;
   buyUnits = modules.buyUnits;
+  battleRequest = modules.battleRequest;
 }
 export default WS;

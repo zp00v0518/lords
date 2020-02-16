@@ -1,6 +1,7 @@
 const Event = {
   types:{
-    hiringUnits: 'hiringUnits'
+    hiringUnits: 'hiringUnits',
+    battle: 'battle'
   }
 }
 

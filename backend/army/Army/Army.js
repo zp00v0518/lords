@@ -47,6 +47,7 @@ const Army = {
     return result;
   },
   getOneUnitFromRace(race_name, unit_name) {
+    if (!race_name || !unit_name) return false;
     const units = this.getUnitsFromRace(race_name);
     return units.find(i => i.name === unit_name);
   },
@@ -58,11 +59,17 @@ const Army = {
     }, {});
   },
   getUnitInfo(raceName, unitName) {
+    if (!raceName || !unitName) return false;
     return this.race[raceName][unitName];
   },
   getIconUnit({ unit, iconType = "ico", ext = ".gif" }) {
     const { race, name } = unit;
     return `img/units/${race}/${iconType}/${name}${ext}`;
+  },
+  getForceStack(stack) {
+    const { race, name, count } = stack;
+    if (!race || !name || !count) return 0;
+    return this.getUnitInfo(race, name).hp * count;
   },
   mergeTwoArmy(target = [], second = []) {
     const { army_length } = this;

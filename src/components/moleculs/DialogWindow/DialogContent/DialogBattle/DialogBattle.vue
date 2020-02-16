@@ -17,7 +17,7 @@
           <div class="dialog-battle__header__item__info">
             <div
               class="dialog-battle__header__item__info--name"
-            >{{ target === "monster" && defArmy[0] ? defArmy[0].name : "" }}</div>
+            >{{ target === "region" && defArmy[0] ? defArmy[0].name : "" }}</div>
           </div>
         </div>
         <div class="dialog-battle__header__item__ava">
@@ -46,9 +46,11 @@
 <script>
 import { deepClone } from "../../../../../utils";
 import { ArmyBattleLine } from "../../../ArmyLine";
+import { currentSector } from "../../../../mixins";
 
 export default {
   name: "DialogBattle",
+  mixins: [currentSector],
   components: { ArmyBattleLine },
   props: {
     data: { type: Object, default: () => ({}) }
@@ -75,7 +77,6 @@ export default {
       immediate: true,
       handler(e) {
         this.atackArmy = e && e.army ? deepClone(e.army) : [];
-        this.setForceStack(this.atackArmy);
       }
     }
   },
@@ -84,21 +85,37 @@ export default {
       const result = this.dragResult
         ? this.dragResult
         : deepClone(this.atackArmy);
-      console.log(result);
-      this.$emit('close');
-    },
-    setForceStack(army) {
-      const { Army } = this.globalConfig.all;
-      army.forEach(a => {
-        a.force = Army.getUnitInfo(a.race, a.name).hp * a.count;
-      });
+      const { $store, currentSector, activeHero, target } = this;
+
+      if (!result || result.length === 0 || activeHero.army.length === 0) {
+        this.$emit("close");
+        return;
+      }
+      const sectorIndex = $store.state.userSectors.sectors.findIndex(
+        i => i._id === currentSector._id
+      );
+      const message = {
+        type: "battleRequest",
+        data: {
+          sectorIndex,
+          attackHeroId: activeHero._id,
+          target,
+          tileId: this.data.tile.id,
+          army: result.map(i => {
+            const { race, name, count } = i;
+            return { race, name, count };
+          })
+        }
+      };
+      this.$ws.sendMessage(message);
+      this.$emit("close");
     },
     sortDefenseArmy(army) {
+      const { Army } = this.globalConfig.all;
       const arr = deepClone(army);
-      this.setForceStack(arr);
       if (arr.length < 2) return arr;
       arr.sort((a, b) => {
-        return b.force - a.force;
+        return Army.getForceStack(b) - Army.getForceStack(a);
       });
       return arr;
     },
@@ -109,7 +126,7 @@ export default {
     },
     getDefenderAvatar() {
       const { Army } = this.globalConfig.all;
-      if (this.data.target === "monster") {
+      if (this.data.target === "region") {
         const { defArmy } = this;
         if (defArmy.length === 0) return "";
         return Army.getIconUnit({ unit: defArmy[0] });

@@ -7,7 +7,8 @@ const {
   setUpgradeChange
 } = require("../tube.js");
 const regionLength = gameVariables.numSectionRegionMap;
-const mine = gameVariables.mine;
+const mine = require('./mine/Mine');
+// const mine = gameVariables.mine;
 
 function handlerResponseUpgradeRegion(message, info) {
   const data = message.data;
@@ -68,10 +69,14 @@ function handlerResponseUpgradeRegion(message, info) {
 module.exports = handlerResponseUpgradeRegion;
 
 const schema = {
-  building: { type: "object" },
-  type: { type: "string", regExp: /^[a-z]{2,7}$/gi },
-  x: { type: "number", min: 0, max: regionLength },
-  y: { type: "number", min: 0, max: regionLength },
+  building: {
+    type: "object",
+    fields: {
+      type: { type: "string", length: [2, 7] },
+      x: { type: "number", min: 0, max: regionLength },
+      y: { type: "number", min: 0, max: regionLength }
+    }
+  },
   persent: { type: "number", min: 70, max: 130 },
   sectorIndex: { type: "number", min: 0 }
 };

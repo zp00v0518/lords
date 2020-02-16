@@ -9,5 +9,5 @@ module.exports = {
   findInDB,
   updateDB,
   insertDB,
-  saveDataInDB,
+  saveDataInDB
 };

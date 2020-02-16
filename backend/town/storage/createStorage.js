@@ -1,9 +1,11 @@
-const tube = require('../../tube.js');
-const Town = require('../Town.js');
-const Resources = gameVariables.resources;
-const workSection = require('..//buildings/workSection');
+const tube = require("../../tube.js");
+const Town = require("../Town.js");
+// const Resources = gameVariables.resources;
+const { Resources } = require("../../resources");
+const { Mine } = require("../../region/mine");
+const workSection = require("..//buildings/workSection");
 
-function createStorage(listMine = gameVariables.mine.typeList, lvl = 1) {
+function createStorage(listMine = Mine.typeList, lvl = 1) {
   const { upgradeSection } = tube;
   //listMine - массив типов шахт;
   const storage = {
@@ -30,7 +32,7 @@ function createStorage(listMine = gameVariables.mine.typeList, lvl = 1) {
       nowValue: 0
     };
     storage.sources[type] = obj;
-    if (type === 'gold') {
+    if (type === "gold") {
       storage.sources.gold.nowValue = 50000;
       storage.sources.gold.addValue = 2000;
       storage.sources.gold.lastCalc = new Date();

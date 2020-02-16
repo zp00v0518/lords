@@ -1,4 +1,5 @@
-const Mine = gameVariables.mine;
+// const Mine = gameVariables.mine;
+const Mine = require("../mine/Mine");
 const { updateDB } = require('../../tube.js');
 const update = new updateDB();
 
