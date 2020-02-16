@@ -36,7 +36,7 @@ export default {
       races: this.$store.state.globalConfig.races,
       listBuildings: null,
       checkSource: this.$store.state.globalConfig.all.checkSource,
-      sources: this.currentTown.town.storage.sources,
+      sources: this.currentSector.town.storage.sources,
       houses: {}
     };
   },
@@ -83,7 +83,7 @@ export default {
     },
     checkPrepare(name) {
       let flag;
-      const currBuilding = this.currentTown.town[name];
+      const currBuilding = this.currentSector.town[name];
       let nextLvl = currBuilding ? currBuilding.lvl + 1 : 1;
       let nextBuilding = this.buildings[name].lvl[nextLvl];
       const maxLvl = nextBuilding === undefined;
@@ -114,7 +114,6 @@ export default {
     const fileName = townRaceName + "tiles";
     // eslint-disable-next-line
     const img = sourceLoader.sources.towns[townRaceName][fileName];
-    console.log(fileName);
     Object.keys(this.$refs).forEach(key => {
       const el = this.$refs[key][0];
       const ctx = el.getContext("2d");
