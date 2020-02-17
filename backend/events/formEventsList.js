@@ -1,4 +1,4 @@
-const tube = require('../tube.js');
+const tube = require("../tube.js");
 const find = new tube.findInDB();
 
 function formEventsList(user, serverName, callback = () => {}) {
@@ -7,11 +7,8 @@ function formEventsList(user, serverName, callback = () => {}) {
     const findOptions = {
       collectionName: serverName,
       query: {
-        $or: [
-          { 'target.user': user._id },
-          { 'init.user': user._id }
-        ],
-        class: 'event',
+        $or: [{ "target.user": user._id }, { "init.user": user._id }],
+        class: "event",
         status: true
       },
       sort: { end: 1 }

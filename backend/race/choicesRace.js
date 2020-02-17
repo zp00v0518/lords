@@ -4,11 +4,11 @@ const {
   addNewUserToGlobalMap,
   getInfoForStartGame,
   setUserOnline
-} = require('../user');
-const { redirectMessage } = require('../wsServer/defaultMessages');
-const { getCollectionName, checkSchema } = require('../template_modules');
-const { Heroes } = require('../heroes');
-const { addHeroToDB, addHeroToTown, addTownToHero } = require('../heroes/db');
+} = require("../user");
+const { redirectMessage } = require("../wsServer/defaultMessages");
+const { getCollectionName, checkSchema } = require("../template_modules");
+const { Heroes } = require("../heroes");
+const { addHeroToDB, addHeroToTown, addTownToHero } = require("../heroes/db");
 
 function choicesRace(message, { userCookies, ws }) {
   if (!checkSchema(message, schema)) {
@@ -16,7 +16,7 @@ function choicesRace(message, { userCookies, ws }) {
     return;
   }
   const { url, race, heroes } = message;
-  const serverName = getCollectionName(url.split('/')[1]);
+  const serverName = getCollectionName(url.split("/")[1]);
 
   if (!serverName || !Heroes.checkHeroesInRace(race, heroes)) {
     redirectMessage(ws);
@@ -83,7 +83,7 @@ function choicesRace(message, { userCookies, ws }) {
 module.exports = choicesRace;
 
 const schema = {
-  race: { type: 'string' },
-  url: { type: 'string', regExp: /^\/{1}[^\/]/gi },
-  heroes: { type: 'string' }
+  race: { type: "string" },
+  url: { type: "string", regExp: /^\/{1}[^\/]/gi },
+  heroes: { type: "string" }
 };

@@ -24,6 +24,7 @@ function checkString(value, shema) {
     shema.regExp.lastIndex = 0;
     return z;
   }
+  return true;
 }
 function checkNumber(value, shema) {
   const min = shema.min !== undefined ? value >= shema.min : true;
