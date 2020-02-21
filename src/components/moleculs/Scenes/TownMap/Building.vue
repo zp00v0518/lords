@@ -81,7 +81,7 @@ export default {
     left: 0;
     // background-color: rgba(255, 255, 255, 1);
     background-color: rgba(0, 0, 0, 0.9);
-    z-index: 1000;
+    z-index: 100;
   }
   &__header {
     display: flex;

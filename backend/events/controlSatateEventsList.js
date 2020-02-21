@@ -5,7 +5,6 @@ const addValueToStorage = require("../town/storage/addValueToStorage.js");
 const finishEvent = require("./finishEvent");
 const { updateDB } = require("../workWithMongoDB");
 const eventType = require("./Event").types;
-
 const update = new updateDB();
 
 function controlSatateEventsList(eventsList = []) {

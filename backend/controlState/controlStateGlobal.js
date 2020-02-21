@@ -1,6 +1,7 @@
 const serverList = gameVariables.serverList;
 const { calcStorageNowValue, controlSatateEventsList } = require("../tube.js");
 const { globalCalcUnit } = require("../army");
+const controlEvent = require('../events/controlEvent');
 const template = require("template_func");
 const log = new template.Log(__filename);
 
@@ -13,7 +14,8 @@ function controlStateGlobal(param) {
         const userInOnline = UserOnline[userServer][key];
         const sectors = userInOnline.sectors;
         const ws = userInOnline.ws;
-        controlSatateEventsList(userInOnline.eventsList);
+        // controlSatateEventsList(userInOnline.eventsList);
+        controlEvent(userServer);
         sectors.forEach(sector => {
           calcStorageNowValue(sector.town.storage);
           globalCalcUnit(sector.town);

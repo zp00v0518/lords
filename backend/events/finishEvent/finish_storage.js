@@ -1,5 +1,3 @@
-// const race = require('../../race').Race;
-// const listBuildings = require('../../town/Town').listBuildings;
 const Resources = require('../../resources/Resources');
 const getParamsForFinish = require('./getParamsForFinish');
 
