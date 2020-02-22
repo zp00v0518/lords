@@ -73,10 +73,9 @@ const { createStorage, calcStorageNowValue} = require("./town/storage");
 module.exports.createStorage = createStorage;
 module.exports.calcStorageNowValue = calcStorageNowValue;
 
-const { setUpgradeChange, checkUpgrade, updateStateRegion } = require("./region");
+const { setUpgradeChange, checkUpgrade } = require("./region");
 module.exports.setUpgradeChange = setUpgradeChange;
 module.exports.checkUpgrade = checkUpgrade;
-module.exports.updateStateRegion = updateStateRegion;
 
 const { upfateStateSector }  = require('./sector');
 module.exports.upfateStateSector = upfateStateSector;
