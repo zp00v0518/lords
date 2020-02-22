@@ -6,7 +6,7 @@ function recursiveLoop(index, arr = [], executeFn, callback = () => {}) {
   const event = arr[index];
   executeFn(event).then(() => {
     index++;
-    recursiveLoop(index, arr, callback);
+    recursiveLoop(index, arr, executeFn, callback);
   });
 }
 

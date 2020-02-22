@@ -23,7 +23,7 @@ function getInfoForStartGame(user, server, callback = function() {}) {
           return callback(infoForStartGame);
         } else {
           getHeroesFromDB(server, { userId: user._id }).then(resultFindHero => {
-            formEventsList(user, server).then(eventsList => {
+            formEventsList(user._id, server).then(eventsList => {
               //  нужно для того, чтобы в UserOnline.sectors хранились ссылки на обекты из GlobalMap
               const currentSectors = findSectors.map(sector => {
                 return GlobalMap[server][sector.x][sector.y];

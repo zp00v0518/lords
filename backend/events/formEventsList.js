@@ -1,13 +1,12 @@
-const tube = require("../tube.js");
-const find = new tube.findInDB();
+const { findInDB } = require("../workWithMongoDB");
+const find = new findInDB();
 
-function formEventsList(user, serverName, callback = () => {}) {
-  const { controlSatateEventsList } = tube;
+function formEventsList(userId, serverName, callback = () => {}) {
   return new Promise((resolve, reject) => {
     const findOptions = {
       collectionName: serverName,
       query: {
-        $or: [{ "target.user": user._id }, { "init.user": user._id }],
+        $or: [{ "target.user": userId }, { "init.user": userId }],
         class: "event",
         status: true
       },
@@ -21,7 +20,6 @@ function formEventsList(user, serverName, callback = () => {}) {
           callback(null, result.result);
           return resolve(result.result);
         } else {
-          controlSatateEventsList(result.result);
           callback(null, result.result);
           return resolve(result.result);
         }

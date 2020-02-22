@@ -1,7 +1,7 @@
 const serverList = gameVariables.serverList;
-const { calcStorageNowValue, controlSatateEventsList } = require("../tube.js");
+const { calcStorageNowValue } = require("../tube.js");
 const { globalCalcUnit } = require("../army");
-const controlEvent = require('../events/controlEvent');
+const { formEventsList, controlStateEventsList } = require("../events");
 const template = require("template_func");
 const log = new template.Log(__filename);
 
@@ -14,21 +14,24 @@ function controlStateGlobal(param) {
         const userInOnline = UserOnline[userServer][key];
         const sectors = userInOnline.sectors;
         const ws = userInOnline.ws;
-        // controlSatateEventsList(userInOnline.eventsList);
-        controlEvent(userServer);
         sectors.forEach(sector => {
           calcStorageNowValue(sector.town.storage);
           globalCalcUnit(sector.town);
         });
-        const response = {
-          type: "controlState",
-          status: true,
-          sectors: sectors,
-          eventsList: userInOnline.eventsList,
-          heroesList: userInOnline.heroesList
-        };
-        // log.log(ws.readyState)
-        ws.send(JSON.stringify(response));
+        controlStateEventsList(userServer).then(res => {
+          formEventsList(userInOnline.user._id, userServer).then(listEvents => {
+            const response = {
+              type: "controlState",
+              status: true,
+              sectors: sectors,
+              eventsList: listEvents,
+              heroesList: userInOnline.heroesList
+            };
+            if (ws.readyState === 1) {
+              ws.send(JSON.stringify(response));
+            }
+          });
+        });
       });
     });
   }

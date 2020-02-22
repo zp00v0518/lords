@@ -5,18 +5,19 @@ const addValueToStorage = require("../town/storage/addValueToStorage.js");
 const finishEvent = require("./finishEvent");
 const { updateDB } = require("../workWithMongoDB");
 const eventType = require("./Event").types;
+const {recursiveLoop} = require('../template_modules');
 const update = new updateDB();
 
-function newControl(eventsList = [], callback = () => {}) {
+function controlStateEventsLoop(eventsList = [], callback = () => {}) {
   return new Promise((resolve, reject) => {
     if (eventsList.length === 0) {
       callback();
       return resolve();
     }
-    controlIteration(0, eventsList, (err, result) => {
+    recursiveLoop(0, eventsList, iterationImplenetation, (err, result) => {
       if (err) {
         callback();
-        return reject();
+        return reject(err);
       }
       callback(result);
       return resolve(result);
@@ -24,21 +25,21 @@ function newControl(eventsList = [], callback = () => {}) {
   });
 }
 
-module.exports = newControl;
+module.exports = controlStateEventsLoop;
 
-function controlIteration(index, arr, callback) {
-  if (index === arr.length) {
-    callback(null, arr);
-    return;
-  }
-  const event = arr[index];
-  iterationImplenetation(event).then(() => {
-    index++;
-    controlIteration(index, arr, callback);
-  });
-}
+// function controlIteration(index, arr, callback) {
+//   if (index === arr.length) {
+//     callback(null, arr);
+//     return;
+//   }
+//   const event = arr[index];
+//   iterationImplenetation(event).then(() => {
+//     index++;
+//     controlIteration(index, arr, callback);
+//   });
+// }
 
-function iterationImplenetation(event) {
+function iterationImplenetation(event, callback = () => {}) {
   return new Promise((resolve, reject) => {
     const now = new Date();
     const end = new Date(event.end);
