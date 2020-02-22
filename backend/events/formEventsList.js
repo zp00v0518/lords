@@ -17,9 +17,10 @@ function formEventsList(userId, serverName, callback = () => {}) {
       .then(result => {
         const now = new Date().getTime;
         if (result.result.length === 0 || result.result[0].end > now) {
-          const sortEventList = result.result.sort((a, b) => {
-            return a.end - b.end;
-          });
+          const sortEventList = result.result;
+          // const sortEventList = result.result.sort((a, b) => {
+          //   return a.end - b.end;
+          // });
           callback(null, sortEventList);
           return resolve(sortEventList);
         } else {

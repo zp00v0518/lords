@@ -1,4 +1,4 @@
-const { updateDB } = require("../workWithMongoDB");
+const { updateDB } = require("../../workWithMongoDB");
 const update = new updateDB();
 
 // обновляет состояние города в БД (не Региона или его-то другого. ТОлько города)

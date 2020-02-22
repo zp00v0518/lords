@@ -1,9 +1,11 @@
-const createTown = require('./createTown.js');
-const updateStateTown = require('./updateStateTown.js');
-const upgradeSection = require('./upgradeSection.js');
+const createTown = require("./createTown.js");
+const upgradeSection = require("./upgradeSection.js");
+const globalControlStateInTown = require("./globalControlStateInTown");
+const DB = require("./DB");
 
 module.exports = {
+  ...DB,
   createTown,
-  updateStateTown,
-  upgradeSection
+  upgradeSection,
+  globalControlStateInTown
 };

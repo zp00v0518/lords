@@ -1,14 +1,19 @@
-const { getRandomNumber } = require('template_func');
-const tube = require('../tube.js');
+const { getRandomNumber } = require("template_func");
+const tube = require("../tube.js");
+const { createTown } = require("../town");
 const { GlobalMap, config, updateDB } = tube;
 const update = new updateDB();
 
-//добавляю нового Игрока на глобальную карту
+// добавляю нового Игрока на глобальную карту
 function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
-  const { createTown } = tube;
+  // const { createTown } = tube;
   return new Promise((resolve, reject) => {
-    checkUserPosition(serverName, (x, y) => {
-      const newTown = createTown({ status: 'new', name: 'New Castle' });
+    checkUserPosition(serverName, (x, y, sectorId) => {
+      const newTown = createTown({
+        status: "new",
+        name: "New Castle",
+        sectorId
+      });
       const optionsForUpdateBD = {
         collectionName: serverName,
         filtr: {
@@ -40,7 +45,7 @@ function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
   });
 }
 
-//получения случайного региона и проверка на занятость другим игроком или памятником
+// получения случайного региона и проверка на занятость другим игроком или памятником
 function checkUserPosition(serverName, callback) {
   var x = getRandomNumber(gameVariables.numSectionGlobalMap - 1);
   var y = getRandomNumber(gameVariables.numSectionGlobalMap - 1);
@@ -48,7 +53,7 @@ function checkUserPosition(serverName, callback) {
   if (region.type !== 0) {
     return checkUserPosition(serverName, callback);
   } else {
-    return callback(x, y);
+    return callback(x, y, region._id);
   }
 }
 module.exports = addNewUserToGlobalMap;
