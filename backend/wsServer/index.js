@@ -1,3 +1,4 @@
-const defaultMessages = require('./defaultMessages.js');
+const defaultMessages = require("./defaultMessages.js");
+const sendWSMessage = require("./sendWSMessage");
 
-module.exports = { ...defaultMessages };
+module.exports = { ...defaultMessages, sendWSMessage };

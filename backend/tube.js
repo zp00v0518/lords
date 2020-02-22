@@ -73,10 +73,9 @@ const { createStorage, calcStorageNowValue} = require("./town/storage");
 module.exports.createStorage = createStorage;
 module.exports.calcStorageNowValue = calcStorageNowValue;
 
-const { setUpgradeChange, checkUpgrade, updateStateRegion } = require("./region");
+const { setUpgradeChange, checkUpgrade } = require("./region");
 module.exports.setUpgradeChange = setUpgradeChange;
 module.exports.checkUpgrade = checkUpgrade;
-module.exports.updateStateRegion = updateStateRegion;
 
 const { upfateStateSector }  = require('./sector');
 module.exports.upfateStateSector = upfateStateSector;
@@ -85,10 +84,9 @@ const { Mine, createMine } = require("./region/mine");
 module.exports.Mine = Mine;
 module.exports.createMine = createMine;
 
-const { addEventToDB, formEventsList, controlSatateEventsList} = require('./events');
+const { addEventToDB, formEventsList } = require('./events');
 module.exports.addEventToDB = addEventToDB;
 module.exports.formEventsList = formEventsList;
-module.exports.controlSatateEventsList = controlSatateEventsList;
 
 const {checkSource, deleteSource} = require('./resources');
 module.exports.checkSource = checkSource;

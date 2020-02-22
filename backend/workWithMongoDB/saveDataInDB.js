@@ -1,5 +1,4 @@
 const tube = require('../tube.js');
-// const updateStateRegion = require("../tube.js").updateStateRegion;
 const serverList = gameVariables.serverList;
 
 function saveDataInDB(param) {

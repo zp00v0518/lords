@@ -7,6 +7,7 @@ const checkSchema = require("./checkSchema.js");
 const getParsePathToImg = require("./getParsePathToImg.js");
 const deepClone = require("./deepClone");
 const formatIdToCoords = require("./formatIdToCoords");
+const recursiveLoop = require("./recursiveLoop");
 
 module.exports = {
   fileReader,
@@ -17,5 +18,6 @@ module.exports = {
   checkSchema,
   getParsePathToImg,
   deepClone,
-  formatIdToCoords
+  formatIdToCoords,
+  recursiveLoop
 };

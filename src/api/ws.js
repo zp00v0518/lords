@@ -52,7 +52,7 @@ class WS {
     this.wsInstance.onclose = e => {
       this.timerId = setTimeout(() => {
         this.connectionToWs(wsAddr);
-      }, 5000);
+      }, 7000);
     };
   }
   moveGlobalMap(eventData) {

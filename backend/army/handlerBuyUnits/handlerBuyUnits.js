@@ -7,6 +7,8 @@ const { checkSource } = require("../../resources");
 const checkUnitInBarraks = require("./../checkUnitInBarraks");
 const { deleteSource } = require("../../resources");
 const setEventForHiringUnit = require("./setEventForHiringUnit");
+const { sendWSMessage } = require("../../wsServer");
+const { formEventsList } = require("../../events");
 
 function handlerBuyUnits(message, info) {
   const data = message.data;
@@ -53,19 +55,24 @@ function handlerBuyUnits(message, info) {
   if (!checkUnitInBarraks(barrak, hiring)) {
     response.buy.is = false;
     response.buy.status = "not_enough_army";
-    ws.send(JSON.stringify(response));
+    sendWSMessage(ws, response);
     return;
   }
   const timeHiring = Army.getBaseHiringTime(unitInfo.hp, hiring);
   setEventForHiringUnit({ sector, info, unitName, count: hiring, timeHiring })
     .then(() => {
       storage = deleteSource(totalCost, storage);
+      const userId = info.player.user._id;
+      const serverName = info.server;
       barrak.work.nowValue -= hiring;
-      ws.send(JSON.stringify(response));
+      formEventsList(userId, serverName).then(listEvents => {
+        response.eventsList = listEvents;
+        sendWSMessage(ws, response);
+      });
     })
     .catch(err => {
       response.error = err;
-      ws.send(JSON.stringify(response));
+      sendWSMessage(ws, response);
     });
 }
 

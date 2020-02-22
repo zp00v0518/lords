@@ -7,8 +7,9 @@ const {
   setUpgradeChange
 } = require("../tube.js");
 const regionLength = gameVariables.numSectionRegionMap;
-const mine = require('./mine/Mine');
-// const mine = gameVariables.mine;
+const mine = require("./mine/Mine");
+const { sendWSMessage } = require("../wsServer");
+const { formEventsList } = require("../events");
 
 function handlerResponseUpgradeRegion(message, info) {
   const data = message.data;
@@ -36,13 +37,13 @@ function handlerResponseUpgradeRegion(message, info) {
   const lang = info.player.user.lang;
   if (building.upgrade.is) {
     response.message = gloss.dialog.isUpgrade[lang];
-    ws.send(JSON.stringify(response));
+    sendWSMessage(ws, response);
     return;
   }
   const needResources = mine.getResourcesForUpgrade(building.lvl, data.persent);
   if (!needResources) {
     response.message = gloss.dialog.maxLvl[lang];
-    ws.send(JSON.stringify(response));
+    sendWSMessage(ws, response);
     return;
   }
   const storageName = gameVariables.classInstance.storage;
@@ -51,18 +52,21 @@ function handlerResponseUpgradeRegion(message, info) {
     const cell = sector.region[data.building.x][data.building.y];
     setUpgradeChange(cell, data.persent, sector, info)
       .then(result => {
+        const userId = info.player.user._id;
+        const serverName = info.server;
         response.storage = deleteSource(needResources, storage);
-        response.upgrade = true;
-        response.message = gloss.dialog.upgradeDone[lang];
-        response.sectorIndex = data.sectorIndex;
-        response.eventsList = info.player.eventsList;
-        ws.send(JSON.stringify(response));
-        return;
+        formEventsList(userId, serverName).then(listEvents => {
+          response.upgrade = true;
+          response.message = gloss.dialog.upgradeDone[lang];
+          response.sectorIndex = data.sectorIndex;
+          response.eventsList = listEvents;
+          sendWSMessage(ws, response);
+        });
       })
       .catch(err => console.log(err));
   } else {
     response.message = gloss.dialog.notResources[lang];
-    ws.send(JSON.stringify(response));
+    sendWSMessage(ws, response);
   }
 }
 

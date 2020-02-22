@@ -3,11 +3,12 @@ const { Race } = require("../../race");
 const { checkSource, deleteSource, Resources } = require("../../resources");
 const Town = require("../Town");
 const setUpUpgradeChange_building = require("./setUpUpgradeChange_building");
+const { sendWSMessage } = require("../../wsServer");
+const { formEventsList } = require("../../events");
 
 function handlerResponseUpgradeBuilding(message, info) {
   const data = message.data;
   const ws = info.player.ws;
-
   if (!checkSchema(data, schema)) {
     redirectMessage(ws);
     return;
@@ -37,7 +38,7 @@ function handlerResponseUpgradeBuilding(message, info) {
   const lang = info.player.user.lang;
   if (!build_for_upgrade) {
     response.message = gloss.dialog.maxLvl[lang];
-    ws.send(JSON.stringify(response));
+    sendWSMessage(ws, response);
     return;
   }
   const price = build_for_upgrade.price;
@@ -64,26 +65,34 @@ function handlerResponseUpgradeBuilding(message, info) {
     setUpUpgradeChange_building({ building, time_for_upgrade, sector, info })
       .then(result => {
         response.storage = deleteSource(price_for_upgrade, storage);
-        response.upgrade = true;
-        response.message = gloss.dialog.upgradeDone[lang];
-        response.sectorIndex = data.sectorIndex;
-        response.eventsList = info.player.eventsList;
-        ws.send(JSON.stringify(response));
+        const userId = info.player.user._id;
+        const serverName = info.server;
+        formEventsList(userId, serverName).then(listEvents => {
+          response.upgrade = true;
+          response.message = gloss.dialog.upgradeDone[lang];
+          response.sectorIndex = data.sectorIndex;
+          response.eventsList = listEvents;
+          sendWSMessage(ws, response);
+        });
       })
       .catch(err => console.log(err));
     qwer.time_for_upgrade = time_for_upgrade;
     // ws.send(JSON.stringify(qwer));
   } else {
     response.message = gloss.dialog.notResources[lang];
-    ws.send(JSON.stringify(response));
+    sendWSMessage(ws, response);
   }
 }
 
 module.exports = handlerResponseUpgradeBuilding;
 
 const schema = {
-  building: { type: "object" }, // здесь может отвалится схема. Нужно добавить поле fields
-  type: { type: "string", regExp: /^[a-z_0-9]{4,9}$/gi },
+  building: {
+    type: "object",
+    fields: {
+      type: { type: "string", regExp: /^[a-z_0-9]{4,9}$/gi }
+    }
+  },
   persent: { type: "number", min: 70, max: 130 },
   sectorIndex: { type: "number", min: 0 }
 };
