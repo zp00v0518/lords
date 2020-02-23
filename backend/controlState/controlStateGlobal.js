@@ -17,6 +17,7 @@ function controlStateGlobal(param) {
               listEvents => {
                 getUsersTownFromDB(userInOnline.user._id, userServer).then(
                   listSectors => {
+                    userInOnline.sectors = JSON.parse(JSON.stringify(listSectors));
                     const response = {
                       type: "controlState",
                       status: true,

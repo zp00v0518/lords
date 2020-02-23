@@ -7,18 +7,19 @@ function updateStateTown(
   ops = { upsert: false },
   callback = function() {}
 ) {
-  return new Promise((reslove, reject) => {
+  return new Promise((resolve, reject) => {
     const optionsForUpdate = {
       collectionName: sector.serverName,
       filtr: { _id: sector._id },
-      updateDoc: { $set: { town: sector.town } },
+      updateDoc: sector,
+      // updateDoc: { $set: { town: sector.town } },
       ops: ops
     };
     update
-      .one(optionsForUpdate)
+      .replaceOne(optionsForUpdate)
       .then(result => {
         callback(result.result);
-        return reslove(result.result);
+        return resolve(result.result);
       })
       .catch(err => {
         callback(err);

@@ -37,8 +37,33 @@ function updateDB() {
       );
     });
   };
+  this.replaceOne = function(options, callback = function() {}) {
+    return new Promise((resolve, reject) => {
+      if (!options.collectionName || !options.filtr || !options.updateDoc) {
+        log.log(
+          "Обновить БД не представляется возможным, т.к. не переданы все необходимые параметры"
+        );
+      }
+      let collection = mongo.open(options.collectionName);
+      let ops = options.ops || null;
+      collection.replaceOne(
+        options.filtr,
+        options.updateDoc,
+        ops,
+        (err, result) => {
+          if (err) {
+            reject(err);
+            return callback(err);
+          }
+          resolve(result);
+          return callback(null, result);
+        }
+      );
+    });
+  };
+
   this.fields = function(options, callback = function() {}) {
-    return new Promise((reslove, reject) => {
+    return new Promise((resolve, reject) => {
       if (!options.collectionName || !options.filtr || !options.updateDoc) {
         log.log(
           "Обновить БД не представляется возможным, т.к. не переданы все необходимые параметры"
@@ -52,11 +77,11 @@ function updateDB() {
         ops,
         (err, result) => {
           if (err) {
-            reject(err);
-            return callback(err);
+            callback(err);
+            return reject(err);
           }
-          resolve(result);
-          return callback(null, result);
+          callback(null, result);
+          return resolve(result);
         }
       );
     });
