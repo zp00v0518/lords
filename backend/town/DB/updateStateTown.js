@@ -1,5 +1,8 @@
+const ObjectId = require("mongodb").ObjectID;
 const { updateDB } = require("../../workWithMongoDB");
 const update = new updateDB();
+
+let count = 0;
 
 // обновляет состояние города в БД (не Региона или его-то другого. ТОлько города)
 function updateStateTown(
@@ -7,10 +10,12 @@ function updateStateTown(
   ops = { upsert: false },
   callback = function() {}
 ) {
-  return new Promise((reslove, reject) => {
+  return new Promise((resolve, reject) => {
+    console.log(count++);
     const optionsForUpdate = {
       collectionName: sector.serverName,
-      filtr: { _id: sector._id },
+      filtr: { _id: ObjectId(sector._id) },
+      // updateDoc: sector,
       updateDoc: { $set: { town: sector.town } },
       ops: ops
     };
@@ -18,7 +23,7 @@ function updateStateTown(
       .one(optionsForUpdate)
       .then(result => {
         callback(result.result);
-        return reslove(result.result);
+        return resolve(result.result);
       })
       .catch(err => {
         callback(err);

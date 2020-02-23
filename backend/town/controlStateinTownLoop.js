@@ -1,7 +1,7 @@
 const { recursiveLoop } = require("../template_modules");
 const { globalCalcUnit } = require("../army");
 const { calcStorageNowValue } = require("./storage");
-const updateStateTown = require("./updateStateTown");
+const {updateStateTown} = require("./DB");
 
 function controlStateinTownLoop(sectorsList = [], callback = () => {}) {
   return new Promise((resolve, reject) => {

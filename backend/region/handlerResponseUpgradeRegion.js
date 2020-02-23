@@ -10,6 +10,7 @@ const regionLength = gameVariables.numSectionRegionMap;
 const mine = require("./mine/Mine");
 const { sendWSMessage } = require("../wsServer");
 const { formEventsList } = require("../events");
+const { updateStateTown } = require("../town");
 
 function handlerResponseUpgradeRegion(message, info) {
   const data = message.data;
@@ -55,12 +56,14 @@ function handlerResponseUpgradeRegion(message, info) {
         const userId = info.player.user._id;
         const serverName = info.server;
         response.storage = deleteSource(needResources, storage);
-        formEventsList(userId, serverName).then(listEvents => {
-          response.upgrade = true;
-          response.message = gloss.dialog.upgradeDone[lang];
-          response.sectorIndex = data.sectorIndex;
-          response.eventsList = listEvents;
-          sendWSMessage(ws, response);
+        updateStateTown(sector).then(() => {
+          formEventsList(userId, serverName).then(listEvents => {
+            response.upgrade = true;
+            response.message = gloss.dialog.upgradeDone[lang];
+            response.sectorIndex = data.sectorIndex;
+            response.eventsList = listEvents;
+            sendWSMessage(ws, response);
+          });
         });
       })
       .catch(err => console.log(err));

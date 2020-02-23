@@ -2,7 +2,6 @@ const { calcStorageNowValue } = require("../town/storage");
 const { getOneTownFromDB } = require("../town");
 const fixingResultUpgradeMine = require("../region/mine/fixingResultUpgradeMine.js");
 const fixingResultUpgrade_building = require("../town/buildings/fixingResultUpgrade_building");
-const addValueToStorage = require("../town/storage/addValueToStorage.js");
 const finishEvent = require("./finishEvent");
 const { updateDB } = require("../workWithMongoDB");
 const eventType = require("./Event").types;
@@ -60,15 +59,9 @@ function iterationImplenetation(event, callback = () => {}) {
         const mineX = event.data.x;
         const mineY = event.data.y;
         const mine = sector.region[mineX][mineY].sector;
-        // const previosValue = mine.work.addValue;
         calcStorageNowValue(storage, event.end);
         fixingResultUpgradeMine(mine, event, sector)
           .then(result => {
-            // addValueToStorage(
-            //   mine.type,
-            //   mine.work.addValue - previosValue,
-            //   storage
-            // );
             callback(null, result);
             return resolve(result);
           })

@@ -4,6 +4,7 @@ const { globalControlStateInTown, getUsersTownFromDB } = require("../town");
 const { sendWSMessage } = require("../wsServer");
 
 function controlStateGlobal(param) {
+  console.log("**************")
   if (param.target === "all") {
     serverList.forEach(item => {
       const userServer = item.collectionName;
