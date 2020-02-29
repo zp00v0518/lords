@@ -4,7 +4,7 @@ const mine = require('./mine/Mine');
 const { sendWSMessage } = require('../wsServer');
 const { formEventsList } = require('../events');
 const { updateStateRegion } = require('../region');
-const { getOneTownFromDB } = require('../town');
+const { getOneTownFromDB, updateStateTown } = require('../town');
 
 function handlerResponseUpgradeRegion(message, info) {
   const data = message.data;
@@ -53,12 +53,14 @@ function handlerResponseUpgradeRegion(message, info) {
           const serverName = info.server;
           response.storage = deleteSource(needResources, storage);
           updateStateRegion(sector).then(() => {
-            formEventsList(userId, serverName).then(listEvents => {
-              response.upgrade = true;
-              response.message = gloss.dialog.upgradeDone[lang];
-              response.sectorIndex = data.sectorIndex;
-              response.eventsList = listEvents;
-              sendWSMessage(ws, response);
+            updateStateTown(sector).then(() => {
+              formEventsList(userId, serverName).then(listEvents => {
+                response.upgrade = true;
+                response.message = gloss.dialog.upgradeDone[lang];
+                response.sectorIndex = data.sectorIndex;
+                response.eventsList = listEvents;
+                sendWSMessage(ws, response);
+              });
             });
           });
         })
@@ -78,9 +80,9 @@ const schema = {
     fields: {
       type: { type: 'string', length: [2, 7] },
       x: { type: 'number', min: 0, max: regionLength },
-      y: { type: 'number', min: 0, max: regionLength },
-    },
+      y: { type: 'number', min: 0, max: regionLength }
+    }
   },
   persent: { type: 'number', min: 70, max: 130 },
-  sectorIndex: { type: 'number', min: 0 },
+  sectorIndex: { type: 'number', min: 0 }
 };

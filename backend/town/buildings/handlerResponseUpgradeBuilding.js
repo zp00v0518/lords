@@ -5,7 +5,7 @@ const Town = require('../Town');
 const setUpUpgradeChange_building = require('./setUpUpgradeChange_building');
 const { sendWSMessage } = require('../../wsServer');
 const { formEventsList } = require('../../events');
-const { getOneTownFromDB } = require('../../town');
+const { getOneTownFromDB, updateStateTown } = require('../../town');
 
 function handlerResponseUpgradeBuilding(message, info) {
   const data = message.data;
@@ -20,8 +20,8 @@ function handlerResponseUpgradeBuilding(message, info) {
     redirectMessage(ws);
     return;
   }
-  
-  getOneTownFromDB(curSector._id, curSector.serverName).res(res => {
+
+  getOneTownFromDB(curSector._id, curSector.serverName).then(res => {
     const sector = res;
     const typeBuilding = data.building.type;
     const raceName = Race.typeList[sector.town.race];
@@ -37,7 +37,7 @@ function handlerResponseUpgradeBuilding(message, info) {
       type: 'upgradeBuilding',
       status: true,
       upgrade: false,
-      message: '',
+      message: ''
     };
     const lang = info.player.user.lang;
     if (!build_for_upgrade) {
@@ -56,16 +56,18 @@ function handlerResponseUpgradeBuilding(message, info) {
       const seconds = sec / gameVariables.time.speedGame;
       const time_for_upgrade = Town.getTimeForUpgrade(time_in_gold * seconds, persent);
       setUpUpgradeChange_building({ building, time_for_upgrade, sector, info })
-        .then(result => {
+        .then(() => {
           response.storage = deleteSource(price_for_upgrade, storage);
           const userId = info.player.user._id;
           const serverName = info.server;
-          formEventsList(userId, serverName).then(listEvents => {
-            response.upgrade = true;
-            response.message = gloss.dialog.upgradeDone[lang];
-            response.sectorIndex = data.sectorIndex;
-            response.eventsList = listEvents;
-            sendWSMessage(ws, response);
+          updateStateTown(sector).then(() => {
+            formEventsList(userId, serverName).then(listEvents => {
+              response.upgrade = true;
+              response.message = gloss.dialog.upgradeDone[lang];
+              response.sectorIndex = data.sectorIndex;
+              response.eventsList = listEvents;
+              sendWSMessage(ws, response);
+            });
           });
         })
         .catch(err => console.log(err));
@@ -82,9 +84,9 @@ const schema = {
   building: {
     type: 'object',
     fields: {
-      type: { type: 'string', regExp: /^[a-z_0-9]{4,9}$/gi },
-    },
+      type: { type: 'string', regExp: /^[a-z_0-9]{4,9}$/gi }
+    }
   },
   persent: { type: 'number', min: 70, max: 130 },
-  sectorIndex: { type: 'number', min: 0 },
+  sectorIndex: { type: 'number', min: 0 }
 };

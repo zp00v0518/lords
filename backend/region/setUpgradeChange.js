@@ -1,8 +1,7 @@
 // const Mine = gameVariables.mine;
-const tube = require('../tube.js');
+const { addEventToDB } = require('../events');
 
 function setUpgradeChange(cell, persent = 100, sector, info, callback = function() {}) {
-  const { addEventToDB } = tube;
   return new Promise((resolve, reject) => {
     const building = cell.sector;
     const lvl = building.lvl;
@@ -16,22 +15,22 @@ function setUpgradeChange(cell, persent = 100, sector, info, callback = function
         user: info.player.user._id,
         race: sector.town.race,
         x: sector.x,
-        y: sector.y,
+        y: sector.y
       },
       init: {
         sector: sector._id,
         user: info.player.user._id,
         race: sector.town.race,
         x: sector.x,
-        y: sector.y,
+        y: sector.y
       },
       type: 'upgradeRegion',
       start: new Date().getTime(),
       end: building.upgrade.date,
-      data: building,
+      data: building
     };
     addEventToDB(dataForDB, info.server)
-      .then(result => {
+      .then(() => {
         callback(null);
         return resolve();
       })
