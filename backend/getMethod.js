@@ -2,14 +2,7 @@ const url = require('url');
 const path = require('path');
 const Cookies = require('cookies');
 const template = require('template_func');
-const {
-  fileReader,
-  mimeType,
-  sendResponse,
-  config,
-  findUserInDB,
-  addCollectionsToUser
-} = require('./tube.js');
+const { fileReader, mimeType, sendResponse, config, findUserInDB, addCollectionsToUser } = require('./tube.js');
 const log = new template.Log(__filename);
 const { getCollectionName } = require('./template_modules');
 
@@ -21,7 +14,7 @@ function getMethod(req, res, startPath) {
   let sessionCookies = cookies.get('session');
   let pathName = urlParse.path;
   let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  //блок проверяющий статические файлы
+  // блок проверяющий статические файлы
   let regPath = /.*js.*|.*img.*|.*style.*|.*ico.*|.*css.*/gi;
   let check = regPath.test(pathName);
   if (check) {
@@ -42,13 +35,13 @@ function getMethod(req, res, startPath) {
       sendResponse(res, data, mimeType[ext]);
       return;
     });
-    //если userCookies есть, ищем совпадение в БД
+    // если userCookies есть, ищем совпадение в БД
   } else if (userCookies) {
     findUserInDB(userCookies).then(resultFinUser => {
       if (resultFinUser) {
         const checkServerName = getCollectionName(pathName.split('/')[1]);
         if (!checkServerName) {
-          //отправляем пользователя в личный кабинет
+          // отправляем пользователя в личный кабинет
           pathName = config.listFile.html.cabinet + '.html';
         } else if (!resultFinUser.collections.includes(checkServerName)) {
           addCollectionsToUser(resultFinUser._id, checkServerName);

@@ -1,5 +1,5 @@
 const { checkSource, checkSchema, redirectMessage, gloss, deleteSource, setUpgradeChange } = require('../tube.js');
-const regionLength = gameVariables.numSectionRegionMap;
+const regionLength = global.gameVariables.numSectionRegionMap;
 const mine = require('./mine/Mine');
 const { sendWSMessage } = require('../wsServer');
 const { formEventsList } = require('../events');
@@ -43,12 +43,12 @@ function handlerResponseUpgradeRegion(message, info) {
       sendWSMessage(ws, response);
       return;
     }
-    const storageName = gameVariables.classInstance.storage;
+    const storageName = global.gameVariables.classInstance.storage;
     const storage = sector.town[storageName];
     if (checkSource(needResources, storage.sources)) {
       const cell = sector.region[data.building.x][data.building.y];
       setUpgradeChange(cell, data.persent, sector, info)
-        .then(result => {
+        .then(() => {
           const userId = info.player.user._id;
           const serverName = info.server;
           response.storage = deleteSource(needResources, storage);

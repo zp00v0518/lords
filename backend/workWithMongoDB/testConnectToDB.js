@@ -1,11 +1,11 @@
 // const connectMongoDB = require("./connectMongoDB.js");
-const findInDB = require("./findInDB.js");
+const findInDB = require('./findInDB.js');
 // const insertInDB = new find();
 const find = new findInDB();
 
 function testing() {
   const options = {
-    collectionName: "server_1"
+    collectionName: 'server_1'
   };
   find
     .all(options)

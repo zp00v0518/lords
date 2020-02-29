@@ -1,4 +1,4 @@
-const serverList = gameVariables.serverList;
+const serverList = global.gameVariables.serverList;
 const { formEventsList, controlStateEventsList } = require("../events");
 const { globalControlStateInTown, getUsersTownFromDB } = require("../town");
 const { sendWSMessage } = require("../wsServer");
@@ -7,9 +7,9 @@ function controlStateGlobal(param) {
   if (param.target === "all") {
     serverList.forEach(item => {
       const userServer = item.collectionName;
-      Object.keys(UserOnline[userServer]).forEach(key => {
+      Object.keys(global.UserOnline[userServer]).forEach(key => {
         if (key === "count") return;
-        const userInOnline = UserOnline[userServer][key];
+        const userInOnline = global.UserOnline[userServer][key];
         const ws = userInOnline.ws;
         globalControlStateInTown(userServer).then(resultStateSectors => {
           controlStateEventsList(userServer).then(res => {

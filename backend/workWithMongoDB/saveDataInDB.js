@@ -1,14 +1,12 @@
 const tube = require('../tube.js');
-const serverList = gameVariables.serverList;
+const serverList = global.gameVariables.serverList;
 
 function saveDataInDB(param) {
-  if (param.target == 'all') {
+  if (param.target === 'all') {
     for (let i = 0; i < serverList.length; i++) {
       const serverName = serverList[i].collectionName;
-      if (UserOnline[serverName].count > 0) {
-        const arr = Object.keys(UserOnline[serverName]).filter(
-          item => item !== 'count'
-        );
+      if (global.UserOnline[serverName].count > 0) {
+        const arr = Object.keys(global.UserOnline[serverName]).filter(item => item !== 'count');
         // в данном месте возможно падение сервера, если в момент обновления БД пользователь уйдет в оффлайн
         // в таком случае ключ пользователя будет в рекурсивном массиве, а в списке UserOnline он уже будет недоступен
         recursiveTwo(0, 0, arr, serverName, () => {
