@@ -1,6 +1,5 @@
 const { findUserInGlobalMap } = require('./findUser.js');
 const { getHeroesFromDB } = require('../heroes/db');
-// const addNewUserToGlobalMap = require('./addNewUserToGlobalMap.js');
 const { formEventsList } = require('../events');
 
 function getInfoForStartGame(user, server, callback = function() {}) {

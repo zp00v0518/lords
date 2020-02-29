@@ -1,17 +1,13 @@
 require('../variables/global_variables.js');
 const allHandler = require('./allHandler.js');
 const chat = require('../chat/chat.js');
-// const getLangDictionary = require('../dictionary/getLangDictionary');
 const {
   config,
   findUserInDB,
   getInfoForStartGame,
-  // getGlobalMapSector,
-  // calcStorageNowValue
 } = require('../tube.js');
 const WS = require('ws');
 const watcher = require('../liveReload/watchFs.js');
-// const { Race } = require('../race');
 const Cookies = require('cookies');
 const { tryJsonParse } = require('template_func');
 const { setUserOnline } = require('../user');

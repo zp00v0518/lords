@@ -1,7 +1,13 @@
 // const Mine = gameVariables.mine;
-const tube = require('../tube.js');
+const tube = require("../tube.js");
 
-function setUpgradeChange( cell, persent = 100,  sector, info,  callback = function() {}) {
+function setUpgradeChange(
+  cell,
+  persent = 100,
+  sector,
+  info,
+  callback = function() {}
+) {
   const { addEventToDB } = tube;
   return new Promise((resolve, reject) => {
     const building = cell.sector;
@@ -28,7 +34,7 @@ function setUpgradeChange( cell, persent = 100,  sector, info,  callback = funct
         x: sector.x,
         y: sector.y
       },
-      type: 'upgradeRegion',
+      type: "upgradeRegion",
       start: new Date().getTime(),
       end: building.upgrade.date,
       data: building

@@ -1,16 +1,9 @@
-const {
-  checkSource,
-  checkSchema,
-  redirectMessage,
-  gloss,
-  deleteSource,
-  setUpgradeChange
-} = require("../tube.js");
+const { checkSource, checkSchema, redirectMessage, gloss, deleteSource, setUpgradeChange } = require('../tube.js');
 const regionLength = gameVariables.numSectionRegionMap;
-const mine = require("./mine/Mine");
-const { sendWSMessage } = require("../wsServer");
-const { formEventsList } = require("../events");
-const { updateStateTown } = require("../town");
+const mine = require('./mine/Mine');
+const { sendWSMessage } = require('../wsServer');
+const { formEventsList } = require('../events');
+const { updateStateRegion } = require('../region');
 
 function handlerResponseUpgradeRegion(message, info) {
   const data = message.data;
@@ -30,10 +23,10 @@ function handlerResponseUpgradeRegion(message, info) {
     return;
   }
   const response = {
-    type: "upgradeBuilding",
+    type: 'upgradeBuilding',
     status: true,
     upgrade: false,
-    message: ""
+    message: '',
   };
   const lang = info.player.user.lang;
   if (building.upgrade.is) {
@@ -56,7 +49,7 @@ function handlerResponseUpgradeRegion(message, info) {
         const userId = info.player.user._id;
         const serverName = info.server;
         response.storage = deleteSource(needResources, storage);
-        updateStateTown(sector).then(() => {
+        updateStateRegion(sector).then(() => {
           formEventsList(userId, serverName).then(listEvents => {
             response.upgrade = true;
             response.message = gloss.dialog.upgradeDone[lang];
@@ -77,13 +70,13 @@ module.exports = handlerResponseUpgradeRegion;
 
 const schema = {
   building: {
-    type: "object",
+    type: 'object',
     fields: {
-      type: { type: "string", length: [2, 7] },
-      x: { type: "number", min: 0, max: regionLength },
-      y: { type: "number", min: 0, max: regionLength }
-    }
+      type: { type: 'string', length: [2, 7] },
+      x: { type: 'number', min: 0, max: regionLength },
+      y: { type: 'number', min: 0, max: regionLength },
+    },
   },
-  persent: { type: "number", min: 70, max: 130 },
-  sectorIndex: { type: "number", min: 0 }
+  persent: { type: 'number', min: 70, max: 130 },
+  sectorIndex: { type: 'number', min: 0 },
 };

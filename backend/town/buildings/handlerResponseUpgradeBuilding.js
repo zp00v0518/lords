@@ -45,14 +45,6 @@ function handlerResponseUpgradeBuilding(message, info) {
   const storage = sector.town.storage;
   const persent = data.persent;
   const price_for_upgrade = Town.getResourcesForUpgrade(price, persent);
-  const qwer = {
-    message,
-    info,
-    building,
-    race,
-    sector,
-    gloss
-  };
   if (checkSource(price_for_upgrade, storage.sources)) {
     const time_in_gold = Resources.getInGold(price);
     // const time_in_gold = gameVariables.resources.getInGold(price);
@@ -76,8 +68,6 @@ function handlerResponseUpgradeBuilding(message, info) {
         });
       })
       .catch(err => console.log(err));
-    qwer.time_for_upgrade = time_for_upgrade;
-    // ws.send(JSON.stringify(qwer));
   } else {
     response.message = gloss.dialog.notResources[lang];
     sendWSMessage(ws, response);

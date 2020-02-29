@@ -5,7 +5,7 @@ const update = new updateDB();
 let count = 0;
 
 // обновляет состояние города в БД (не Региона или его-то другого. ТОлько города)
-function updateStateTown(
+function updateStateRegion(
   sector,
   ops = { upsert: false },
   callback = function() {}
@@ -16,7 +16,7 @@ function updateStateTown(
       collectionName: sector.serverName,
       filtr: { _id: ObjectId(sector._id) },
       // updateDoc: sector,
-      updateDoc: { $set: { town: sector.town } },
+      updateDoc: { $set: { region: sector.region } },
       ops: ops
     };
     update
@@ -32,4 +32,4 @@ function updateStateTown(
   });
 }
 
-module.exports = updateStateTown;
+module.exports = updateStateRegion;
