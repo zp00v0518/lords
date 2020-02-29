@@ -1,11 +1,11 @@
-const { calcStorageNowValue } = require("../town/storage");
-const { getOneTownFromDB } = require("../town");
-const fixingResultUpgradeMine = require("../region/mine/fixingResultUpgradeMine.js");
-const fixingResultUpgrade_building = require("../town/buildings/fixingResultUpgrade_building");
-const finishEvent = require("./finishEvent");
-const { updateDB } = require("../workWithMongoDB");
-const eventType = require("./Event").types;
-const { recursiveLoop } = require("../template_modules");
+const { calcStorageNowValue } = require('../town/storage');
+const { getOneTownFromDB, updateStateTown } = require('../town');
+const fixingResultUpgradeMine = require('../region/mine/fixingResultUpgradeMine.js');
+const fixingResultUpgrade_building = require('../town/buildings/fixingResultUpgrade_building');
+const finishEvent = require('./finishEvent');
+const { updateDB } = require('../workWithMongoDB');
+const eventType = require('./Event').types;
+const { recursiveLoop } = require('../template_modules');
 const update = new updateDB();
 
 function controlStateEventsLoop(eventsList = [], callback = () => {}) {
@@ -77,11 +77,11 @@ function iterationImplenetation(event, callback = () => {}) {
           updateDoc: { $set: { status: false } },
           filtr: { _id: event._id }
         };
-        if (typeBuilding === "storage") {
+        if (typeBuilding === 'storage') {
           finishEvent[typeBuilding](sector.town.storage, event);
-        } else if (typeBuilding === "hall") {
+        } else if (typeBuilding === 'hall') {
           finishEvent[typeBuilding](sector.town[typeBuilding], event, sector);
-        } else if (typeBuilding.indexOf("barraks") !== -1) {
+        } else if (typeBuilding.indexOf('barraks') !== -1) {
           finishEvent[typeBuilding](sector.town[typeBuilding], event, sector);
         } else if (townUpgrade.work.static) {
           fixingResultUpgrade_building(townUpgrade, event)
@@ -97,8 +97,10 @@ function iterationImplenetation(event, callback = () => {}) {
         update
           .one(optionsForUpdate)
           .then(result => {
-            callback(null, result);
-            return resolve(result);
+            updateStateTown(sector).then(() => {
+              callback(null, result);
+              return resolve(result);
+            });
           })
           .catch(err => {
             callback(err);
