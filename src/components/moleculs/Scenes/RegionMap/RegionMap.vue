@@ -61,13 +61,20 @@ export default {
       this.currentMap = deepClone(e);
       this.drawMap();
       this.setBorderIsoMap();
-    },
-    '$store.state.timeline.eventsList': function(e) {
-      const { deepClone } = this;
-      this.eventsList = deepClone(e);
     }
   },
   computed: {
+    eventList() {
+      const list = this.$store.state.timeline.eventsList;
+      const { Battle, Event } = this.$store.state.globalConfig.all;
+      const { deepClone } = this;
+      const b_types = Battle.types;
+      const e_types = Event.types;
+      const d = list.filter(item => {
+        return item.type === e_types.battle && item.data.typeBattle === b_types.region.name;
+      });
+      return deepClone(d);
+    },
     tileWidth() {
       const widthParse = parseInt(this.widthScene) / 2;
       const intermediate = widthParse / (this.currentMap.length / 2);
@@ -123,7 +130,10 @@ export default {
     drawHoverLine,
     setBorderIsoMap,
     hideTooltip,
-    handlerMousemoveOnMap
+    handlerMousemoveOnMap,
+    drawHeroMoveLine(event){
+      
+    }
   },
   mounted() {
     this.ctx = this.$refs.scene.getContext('2d');
