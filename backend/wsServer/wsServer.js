@@ -1,18 +1,13 @@
 require('../variables/global_variables.js');
 const allHandler = require('./allHandler.js');
 const chat = require('../chat/chat.js');
-const {
-  config,
-  findUserInDB,
-  getInfoForStartGame,
-} = require('../tube.js');
+const { config, findUserInDB, getInfoForStartGame } = require('../tube.js');
 const WS = require('ws');
 const watcher = require('../liveReload/watchFs.js');
 const Cookies = require('cookies');
 const { tryJsonParse } = require('template_func');
 const { setUserOnline } = require('../user');
-const getCollectionName = srcRequire('/template_modules/getCollectionName');
-
+const { getCollectionName } = require('../template_modules');
 
 class WsServer {
   init(port) {
@@ -61,7 +56,6 @@ wsServer.on('connection', (ws, req) => {
           return;
         }
         setUserOnline(user, server, infoForStartGame, ws);
-        return;
       });
     } else {
       const message = {

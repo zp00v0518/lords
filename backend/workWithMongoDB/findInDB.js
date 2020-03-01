@@ -31,7 +31,6 @@ function findInDB() {
       let needFields = options.needFields || null;
       let query = options.query || null;
       let comment = options.comment || null;
-
       collection
         .find(query, {
           projection: needFields,

@@ -1,4 +1,6 @@
-const { findInDB, config } = require("../tube.js");
+// const { findInDB, config } = require('../tube.js');
+const config = require('../config');
+const { findInDB } = require('../workWithMongoDB');
 
 const find = new findInDB();
 
@@ -6,7 +8,7 @@ function findUserInGlobalMap(userId, serverName, callback = function() {}) {
   return new Promise((resolve, reject) => {
     const options = {
       collectionName: serverName,
-      query: { userId: userId, class: config.schema.document.class.map}
+      query: { userId: userId, class: config.schema.document.class.map }
     };
     find
       .all(options)

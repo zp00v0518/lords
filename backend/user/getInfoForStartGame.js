@@ -3,7 +3,6 @@ const { getHeroesFromDB } = require('../heroes/db');
 const { formEventsList } = require('../events');
 
 function getInfoForStartGame(user, server, callback = function() {}) {
-  // const { formEventsList} = tube;
   return new Promise((resolve, reject) => {
     findUserInGlobalMap(user._id, server)
       .then(findResult => {
@@ -25,7 +24,8 @@ function getInfoForStartGame(user, server, callback = function() {}) {
             formEventsList(user._id, server).then(eventsList => {
               //  нужно для того, чтобы в UserOnline.sectors хранились ссылки на обекты из GlobalMap
               const currentSectors = findSectors.map(sector => {
-                return GlobalMap[server][sector.x][sector.y];
+                // return GlobalMap[server][sector.x][sector.y];
+                return sector;
               });
               infoForStartGame.sectors = currentSectors;
               infoForStartGame.eventsList = eventsList;
