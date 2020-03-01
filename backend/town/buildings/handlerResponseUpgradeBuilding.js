@@ -52,8 +52,8 @@ function handlerResponseUpgradeBuilding(message, info) {
     if (checkSource(price_for_upgrade, storage.sources)) {
       const time_in_gold = Resources.getInGold(price);
       // const time_in_gold = gameVariables.resources.getInGold(price);
-      const sec = gameVariables.time.sec;
-      const seconds = sec / gameVariables.time.speedGame;
+      const sec = global.gameVariables.time.sec;
+      const seconds = sec / global.gameVariables.time.speedGame;
       const time_for_upgrade = Town.getTimeForUpgrade(time_in_gold * seconds, persent);
       setUpUpgradeChange_building({ building, time_for_upgrade, sector, info })
         .then(() => {

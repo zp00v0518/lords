@@ -49,7 +49,7 @@ function iterationImplenetation(event, callback = () => {}) {
     const serverName = event.serverName;
     const x = event.target.x;
     const y = event.target.y;
-    let sector = GlobalMap[serverName][x][y];
+    let sector = global.GlobalMap[serverName][x][y];
     const sectorId = sector._id;
     getOneTownFromDB(sectorId, serverName).then(res => {
       if (!res) return resolve();
