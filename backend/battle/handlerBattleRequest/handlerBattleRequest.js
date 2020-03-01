@@ -49,7 +49,6 @@ function handlerBattleRequest(message, info) {
     let townSector = {};
     for (let i = 0; i < region.length; i++) {
       const row = region[i];
-      console.log(Region.types.town.id)
       const f = row.find(item => item.type === Region.types.town.id);
       if (f) {
         townSector = f;
