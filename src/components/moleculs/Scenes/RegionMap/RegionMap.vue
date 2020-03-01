@@ -61,6 +61,12 @@ export default {
       this.currentMap = deepClone(e);
       this.drawMap();
       this.setBorderIsoMap();
+    },
+    eventList: {
+      deep: true,
+      handler() {
+        this.drawMap();
+      }
     }
   },
   computed: {
@@ -131,8 +137,27 @@ export default {
     setBorderIsoMap,
     hideTooltip,
     handlerMousemoveOnMap,
-    drawHeroMoveLine(event){
-      
+    drawAnotherObjects() {
+      this.drawMoveHero();
+    },
+    drawMoveHero() {
+      const { ctx, eventList, currentMap } = this;
+      eventList.forEach(event => {
+        const { data } = event;
+        const { startCoords, endCoords } = data;
+        const startTile = currentMap[startCoords.x][startCoords.y];
+        const endTile = currentMap[endCoords.x][endCoords.y];
+        ctx.beginPath();
+        ctx.lineWidth = 10;
+        ctx.setLineDash([2, 50]);
+        ctx.lineCap = 'round';
+        ctx.moveTo(startTile.centerX, startTile.centerY);
+        ctx.lineTo(endTile.centerX, endTile.centerY);
+        ctx.stroke();
+        ctx.closePath();
+      });
+      ctx.lineWidth = 1;
+      ctx.setLineDash([]);
     }
   },
   mounted() {

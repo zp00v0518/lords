@@ -55,7 +55,7 @@ function handlerBattleRequest(message, info) {
         break;
       }
     }
-    console.log(hero)
+    // console.log(hero)
     const event = createEventBattle({
       startCoords: { x: townSector.x, y: townSector.y },
       endCoords: coords,

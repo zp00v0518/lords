@@ -107,7 +107,7 @@ function iterationImplenetation(event, callback = () => {}) {
             return reject(err);
           });
       } else if (type === eventType.battle) {
-        console.log(new Date(event.end))
+        // console.log(new Date(event.end))
       }
     });
   });

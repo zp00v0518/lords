@@ -39,7 +39,9 @@ function drawMap() {
     ctx.closePath();
     // drawCircle(centerX,centerY,ctx)
   }
+  this.drawAnotherObjects && this.drawAnotherObjects();
 }
+
 const colors = {
   0: 'green',
   1: 'blue',
