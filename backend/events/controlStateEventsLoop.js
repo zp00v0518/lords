@@ -27,18 +27,6 @@ function controlStateEventsLoop(eventsList = [], callback = () => {}) {
 
 module.exports = controlStateEventsLoop;
 
-// function controlIteration(index, arr, callback) {
-//   if (index === arr.length) {
-//     callback(null, arr);
-//     return;
-//   }
-//   const event = arr[index];
-//   iterationImplenetation(event).then(() => {
-//     index++;
-//     controlIteration(index, arr, callback);
-//   });
-// }
-
 function iterationImplenetation(event, callback = () => {}) {
   return new Promise((resolve, reject) => {
     const now = new Date();
@@ -118,6 +106,8 @@ function iterationImplenetation(event, callback = () => {}) {
             callback(err);
             return reject(err);
           });
+      } else if (type === eventType.battle) {
+        console.log(new Date(event.end))
       }
     });
   });

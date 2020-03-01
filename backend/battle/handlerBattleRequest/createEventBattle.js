@@ -2,7 +2,7 @@ const { Heroes } = require('../../heroes');
 const { Event } = require('../../events');
 const Battle = require('../Battle');
 
-function createEventBattle({ startCoords, endCoords, army, initSector, targetSector }) {
+function createEventBattle({ startCoords, endCoords, army, initSector, targetSector, initHero }) {
   const time = Heroes.getTimeMove(startCoords, endCoords);
   const start = new Date().getTime();
   const end = start + time;
@@ -22,7 +22,8 @@ function createEventBattle({ startCoords, endCoords, army, initSector, targetSec
     startCoords,
     endCoords,
     army,
-    typeBattle
+    typeBattle,
+    initHero: initHero._id
   };
   return {
     // data: JSON.parse(JSON.stringify(data)),

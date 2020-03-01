@@ -1,10 +1,6 @@
 <template>
   <div class="regionmap">
-    <TooltipRegion
-      v-show="showTooltip"
-      :mouseCoords="mouseCoords"
-      :tile="currentTile"
-    ></TooltipRegion>
+    <TooltipRegion v-show="showTooltip" :mouseCoords="mouseCoords" :tile="currentTile"></TooltipRegion>
     <canvas
       ref="scene"
       :width="widthScene"
@@ -26,17 +22,17 @@ import {
   setBorderIsoMap,
   hideTooltip,
   handlerMousemoveOnMap
-} from "../utils";
-import TooltipRegion from "../../TooltipRegion";
-import { currentSector } from "../../../mixins";
+} from '../utils';
+import TooltipRegion from '../../TooltipRegion';
+import { currentSector } from '../../../mixins';
 
 export default {
-  name: "RegionMap",
+  name: 'RegionMap',
   mixins: [currentSector],
   components: {
     TooltipRegion
   },
-  props: ["widthScene", "heightScene"],
+  props: ['widthScene', 'heightScene'],
   data() {
     return {
       showTooltip: false,
@@ -60,11 +56,15 @@ export default {
     }
   },
   watch: {
-    "currentSector.region": function(e) {
+    'currentSector.region': function(e) {
       const { deepClone } = this;
       this.currentMap = deepClone(e);
       this.drawMap();
       this.setBorderIsoMap();
+    },
+    '$store.state.timeline.eventsList': function(e) {
+      const { deepClone } = this;
+      this.eventsList = deepClone(e);
     }
   },
   computed: {
@@ -84,22 +84,22 @@ export default {
   },
   methods: {
     handlerClick() {
-      const {currentTile} = this;
+      const { currentTile } = this;
       if (!this.cursorOnScene || currentTile.type === 1) return;
       if (this.currentTile.type === 0) {
         if (currentTile.army && currentTile.army.length === 0) return;
         console.log(currentTile);
         // const nameRegion = this.$region.typeList[currentTile.type];
         const payload = {
-          title: "svxzv",
+          title: 'svxzv',
           data: {
             defenseArmy: currentTile.army,
             target: 'region',
             tile: currentTile
           },
-          type: "dialogBattle"
+          type: 'dialogBattle'
         };
-        this.$store.commit("DIALOG_SHOW", payload);
+        this.$store.commit('DIALOG_SHOW', payload);
         return;
       }
       const nameRegion = this.$region.typeList[currentTile.type];
@@ -112,9 +112,9 @@ export default {
           x: currentTile.x,
           y: currentTile.y
         },
-        type: "upgradeRegion"
+        type: 'upgradeRegion'
       };
-      this.$store.commit("DIALOG_SHOW", payload);
+      this.$store.commit('DIALOG_SHOW', payload);
     },
     drawMap,
     getCursorPositionOnScene,
@@ -126,7 +126,7 @@ export default {
     handlerMousemoveOnMap
   },
   mounted() {
-    this.ctx = this.$refs.scene.getContext("2d");
+    this.ctx = this.$refs.scene.getContext('2d');
     this.drawMap();
     this.setBorderIsoMap();
   }
@@ -134,5 +134,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "regionMap.scss";
+@import 'regionMap.scss';
 </style>

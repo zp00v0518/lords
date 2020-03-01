@@ -4,12 +4,6 @@
     :style="{ width: widthScene + 'px', height: heightScene + 'px' }"
   >
     <canvas ref="scene" :width="widthScene" :height="heightScene"></canvas>
-    <!-- <div
-      class="event"
-      v-for="(eventItem, index) in eventsList"
-      :key="index"
-      :style="{left: getPosition(eventItem)}"
-    ></div>-->
     <ViewSectorEvents
       v-for="(sectorEvent, index) in sectorsEventsPosition"
       :key="index"

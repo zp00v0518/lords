@@ -55,15 +55,16 @@ function handlerBattleRequest(message, info) {
         break;
       }
     }
-
+    console.log(hero)
     const event = createEventBattle({
       startCoords: { x: townSector.x, y: townSector.y },
       endCoords: coords,
       army: attackArmyForBattle,
-      initSector: sector
+      initSector: sector,
+      initHero: hero
     });
+    setEventInGame(event, info.server);
     sendWSMessage(ws, event);
-    // setEventInGame(event, info.server);
   });
 }
 
