@@ -5,6 +5,8 @@ const { Region } = require('../../region');
 const createEventBattle = require('./createEventBattle');
 const { setEventInGame } = require('../../events');
 const { getOneTownFromDB } = require('../../town');
+const { sendWSMessage } = require('../../wsServer');
+const { gameVariables } = global;
 
 function handlerBattleRequest(message, info) {
   const data = message.data;
@@ -47,6 +49,7 @@ function handlerBattleRequest(message, info) {
     let townSector = {};
     for (let i = 0; i < region.length; i++) {
       const row = region[i];
+      console.log(Region.types.town.id)
       const f = row.find(item => item.type === Region.types.town.id);
       if (f) {
         townSector = f;
@@ -60,7 +63,8 @@ function handlerBattleRequest(message, info) {
       army: attackArmyForBattle,
       initSector: sector
     });
-    setEventInGame(event, info.server);
+    sendWSMessage(ws, event);
+    // setEventInGame(event, info.server);
   });
 }
 
