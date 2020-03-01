@@ -35,11 +35,6 @@ function setEventForHiringUnit({
     };
     addEventToDB(dataForDB, info.server)
       .then(result => {
-        // const addEvent = result.ops[0];
-        // info.player.eventsList.push(addEvent);
-        // info.player.eventsList.sort((a, b) => {
-        //   return a.end - b.end;
-        // });
         callback(null);
         return resolve();
       })

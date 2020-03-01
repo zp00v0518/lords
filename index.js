@@ -51,6 +51,6 @@ setInterval(() => {
   controlStateGlobal({ target: 'all' });
 }, gameVariables.timer.controlState);
 
-setInterval(() => {
-  saveDataInDB({ target: 'all' });
-}, gameVariables.timer.saveDataDB);
+// setInterval(() => {
+//   saveDataInDB({ target: 'all' });
+// }, gameVariables.timer.saveDataDB);

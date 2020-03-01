@@ -42,6 +42,10 @@ function createTown(options) {
     lvl: options.lvl || 0,
     race: indexRace
   };
+  const sectorId = options.sectorId;
+  if (sectorId) {
+    town.sectorId = sectorId;
+  }
   for (let i = 0; i < 7; i++) {
     const barraks = createBarraks({});
     const key = barraks.class + `_${i + 1}`;

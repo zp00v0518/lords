@@ -1,5 +1,5 @@
-const connectMongoDB = require("./connectMongoDB.js");
-const config = require("../config/config.js");
+const connectMongoDB = require('./connectMongoDB.js');
+const config = require('../config/config.js');
 const mongo = new connectMongoDB();
 mongo.connect({ dbName: config.db.name });
 
@@ -12,18 +12,14 @@ function findInDB() {
       let skip = options.skip || null;
       let comment = options.comment || null;
 
-      collection.findOne(
-        query,
-        { projection: needFields, skip: skip },
-        (err, findResult) => {
-          if (err) {
-            reject(err);
-            throw err;
-          }
-          resolve(findResult);
-          return callback(findResult);
+      collection.findOne(query, { projection: needFields, skip: skip }, (err, findResult) => {
+        if (err) {
+          reject(err);
+          throw err;
         }
-      );
+        resolve(findResult);
+        return callback(findResult);
+      });
     });
   };
   this.all = function(options, callback = function() {}) {
@@ -35,7 +31,6 @@ function findInDB() {
       let needFields = options.needFields || null;
       let query = options.query || null;
       let comment = options.comment || null;
-
       collection
         .find(query, {
           projection: needFields,

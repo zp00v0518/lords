@@ -1,4 +1,6 @@
 const { addEventToDB } = require("../../events");
+const { updateStateTown } = require("../DB");
+
 function setUpUpgradeChange_building({
   building = {},
   time_for_upgrade = 0,
@@ -32,13 +34,10 @@ function setUpUpgradeChange_building({
     dataForDB.data.nextLvl = dataForDB.data.lvl + 1;
     addEventToDB(dataForDB, info.server)
       .then(result => {
-        // const addEvent = result.ops[0];
-        // info.player.eventsList.push(addEvent);
-        // info.player.eventsList.sort((a, b) => {
-        //   return a.end - b.end;
-        // });
-        callback(null);
-        return resolve();
+        updateStateTown(sector).then(() => {
+          callback(null);
+          return resolve();
+        });
       })
       .catch(err => {
         callback(err);

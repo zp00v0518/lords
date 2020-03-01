@@ -11,26 +11,24 @@ function setUserOnline(user, server, info_for_game, ws) {
   };
   startMessage.chat.unshift(chat.template);
 
-  User = user;
-  UserOnline[server][User._id] = {};
-  UserOnline[server][User._id].ws = ws;
-  UserOnline[server].count++;
-  UserOnline[server][User._id].user = User;
+  const User = user;
+  global.UserOnline[server][User._id] = {};
+  global.UserOnline[server][User._id].ws = ws;
+  global.UserOnline[server].count++;
+  global.UserOnline[server][User._id].user = User;
   info_for_game.sectors.forEach(item => {
-    GlobalMap[server][item.x][item.y] = item;
+    global.GlobalMap[server][item.x][item.y] = item;
     calcStorageNowValue(item.town.storage);
   });
-  UserOnline[server][User._id].sectors = info_for_game.sectors;
-  UserOnline[server][User._id].eventsList = info_for_game.eventsList;
-   UserOnline[server][User._id].heroesList = info_for_game.heroesList;
-  UserOnline[server][User._id].user.globalMap = {};
-  UserOnline[server][User._id].user.globalMap.zoom = 1;
-  UserOnline[server][User._id].user.globalMap.centerMap = {};
-  UserOnline[server][User._id].user.globalMap.centerMap.x =
-    info_for_game.sectors[0].x;
-  UserOnline[server][User._id].user.globalMap.centerMap.y =
-    info_for_game.sectors[0].y;
-  getGlobalMapSector(UserOnline[server][User._id].user, server, currentMap => {
+  global.UserOnline[server][User._id].sectors = info_for_game.sectors;
+  global.UserOnline[server][User._id].eventsList = info_for_game.eventsList;
+  global.UserOnline[server][User._id].heroesList = info_for_game.heroesList;
+  global.UserOnline[server][User._id].user.globalMap = {};
+  global.UserOnline[server][User._id].user.globalMap.zoom = 1;
+  global.UserOnline[server][User._id].user.globalMap.centerMap = {};
+  global.UserOnline[server][User._id].user.globalMap.centerMap.x = info_for_game.sectors[0].x;
+  global.UserOnline[server][User._id].user.globalMap.centerMap.y = info_for_game.sectors[0].y;
+  getGlobalMapSector(global.UserOnline[server][User._id].user, server, currentMap => {
     startMessage.eventsList = info_for_game.eventsList;
     startMessage.currentMap = currentMap;
     startMessage.sectors = info_for_game.sectors;

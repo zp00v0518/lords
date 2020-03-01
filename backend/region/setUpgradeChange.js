@@ -1,16 +1,12 @@
 // const Mine = gameVariables.mine;
-const tube = require('../tube.js');
+const { addEventToDB } = require('../events');
 
-function setUpgradeChange( cell, persent = 100,  sector, info,  callback = function() {}) {
-  const { addEventToDB } = tube;
+function setUpgradeChange(cell, persent = 100, sector, info, callback = function() {}) {
   return new Promise((resolve, reject) => {
     const building = cell.sector;
     const lvl = building.lvl;
     const classInstance = building.class;
-    const timeUpgrade = gameVariables[classInstance].getTimeUpgrade(
-      lvl,
-      persent
-    );
+    const timeUpgrade = gameVariables[classInstance].getTimeUpgrade(lvl, persent);
     building.upgrade.is = true;
     building.upgrade.date = new Date().getTime() + timeUpgrade;
     const dataForDB = {
@@ -34,12 +30,7 @@ function setUpgradeChange( cell, persent = 100,  sector, info,  callback = funct
       data: building
     };
     addEventToDB(dataForDB, info.server)
-      .then(result => {
-        // const addEvent = result.ops[0];
-        // info.player.eventsList.push(addEvent);
-        // info.player.eventsList.sort((a,b) => {
-        //   return a.end - b.end;
-        // })
+      .then(() => {
         callback(null);
         return resolve();
       })
