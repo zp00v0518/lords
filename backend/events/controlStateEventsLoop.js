@@ -109,8 +109,10 @@ function iterationImplenetation(event, callback = () => {}) {
       } else if (type === eventType.hiringUnits) {
         finishEvent[type](event, sector)
           .then(result => {
-            callback(null, result);
-            return resolve(result);
+            updateStateTown(sector).then(() => {
+              callback(null, result);
+              return resolve(result);
+            });
           })
           .catch(err => {
             callback(err);

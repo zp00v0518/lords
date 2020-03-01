@@ -9,7 +9,7 @@ const { deleteSource } = require('../../resources');
 const setEventForHiringUnit = require('./setEventForHiringUnit');
 const { sendWSMessage } = require('../../wsServer');
 const { formEventsList } = require('../../events');
-const { getOneTownFromDB } = require('../../town');
+const { getOneTownFromDB, updateStateTown } = require('../../town');
 
 function handlerBuyUnits(message, info) {
   const data = message.data;
@@ -68,9 +68,11 @@ function handlerBuyUnits(message, info) {
         const userId = info.player.user._id;
         const serverName = info.server;
         barrak.work.nowValue -= hiring;
-        formEventsList(userId, serverName).then(listEvents => {
-          response.eventsList = listEvents;
-          sendWSMessage(ws, response);
+        updateStateTown(sector).then(() => {
+          formEventsList(userId, serverName).then(listEvents => {
+            response.eventsList = listEvents;
+            sendWSMessage(ws, response);
+          });
         });
       });
     })
