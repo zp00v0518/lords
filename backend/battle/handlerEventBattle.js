@@ -2,7 +2,8 @@ const template = require('template_func');
 const log = new template.Log(__filename);
 const { updateDB } = require('../workWithMongoDB');
 const update = new updateDB();
-const { addEventToDB, createBackToTownEvent } = require('../events');
+const { createBackToTownEvent } = require('../events/createEvents');
+const { addEventToDB } = require('../events/setEventInGame');
 
 function handlerEventBattle(event, targetSector) {
   console.log('handlerEventBattleInTown');

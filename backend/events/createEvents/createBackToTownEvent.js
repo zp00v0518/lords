@@ -14,6 +14,7 @@ function createBackToTownEvent(prevEvent, result = {}) {
     startCoords,
     endCoords,
     initHero: data.initHero,
+    typeBattle: data.typeBattle,
     result
   };
   const template = {
@@ -24,6 +25,7 @@ function createBackToTownEvent(prevEvent, result = {}) {
     init,
     type: eventsTypes.backToTown
   };
+  console.log(template)
   return template;
 }
 

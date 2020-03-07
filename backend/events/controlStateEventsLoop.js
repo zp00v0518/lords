@@ -109,6 +109,8 @@ function iterationImplenetation(event, callback = () => {}) {
           });
       } else if (type === eventType.battle) {
         eventsHandler[type](event, sector);
+      } else if (type === eventType.backToTown) {
+        eventsHandler[type](event, sector);
       }
     });
   });

@@ -78,7 +78,9 @@ export default {
       const b_types = Battle.types;
       const e_types = Event.types;
       const d = list.filter(item => {
-        return item.type === e_types.battle && item.data.typeBattle === b_types.region.name;
+        if (item.data.typeBattle === b_types.region.name) {
+          return item.type === e_types.battle || item.type === e_types.backToTown;
+        }
       });
       return deepClone(d);
     },
