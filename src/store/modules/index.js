@@ -9,8 +9,10 @@ import globalConfig from './globalConfig/globalConfig';
 import heroes from './heroes';
 import gameSources from './gameSources';
 import stat from './stat';
+import settings from './settings';
 
 export default {
+  settings,
   chat,
   globalMap,
   regionMap,

@@ -5,6 +5,7 @@ const fixingResultUpgrade_building = require('../town/buildings/fixingResultUpgr
 const finishEvent = require('./finishEvent');
 const { updateDB } = require('../workWithMongoDB');
 const eventType = require('./Event').types;
+const eventsHandler = require('./eventsHandler');
 const { recursiveLoop } = require('../template_modules');
 const update = new updateDB();
 
@@ -107,7 +108,7 @@ function iterationImplenetation(event, callback = () => {}) {
             return reject(err);
           });
       } else if (type === eventType.battle) {
-        // console.log(new Date(event.end))
+        eventsHandler[type](event, sector);
       }
     });
   });

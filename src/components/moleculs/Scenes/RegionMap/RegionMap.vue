@@ -82,6 +82,9 @@ export default {
       });
       return deepClone(d);
     },
+    settings() {
+      return this.$store.state.settings;
+    },
     tileWidth() {
       const widthParse = parseInt(this.widthScene) / 2;
       const intermediate = widthParse / (this.currentMap.length / 2);
@@ -142,8 +145,8 @@ export default {
       this.drawMoveHero();
     },
     drawMoveHero() {
-      const { ctx, eventList, currentMap, tileWidth } = this;
-      ctx.fillStyle = 'black';
+      const { ctx, eventList, currentMap, tileWidth, settings } = this;
+      ctx.fillStyle = settings.baseColor;
       eventList.forEach(event => {
         const { data } = event;
         const { startCoords, endCoords } = data;
@@ -172,12 +175,16 @@ export default {
       return length * dif;
     },
     drawHeroOnMap(ctx, coords) {
+      const heightFlag = 20;
       ctx.beginPath();
       ctx.strokeStyle = 'black';
       ctx.lineWidth = 2;
       ctx.moveTo(coords.x, coords.y);
-      ctx.lineTo(coords.x, coords.y - 20);
+      ctx.lineTo(coords.x, coords.y - heightFlag);
+      ctx.lineTo(coords.x + heightFlag / 2, coords.y - heightFlag + heightFlag / 4);
+      ctx.lineTo(coords.x, coords.y - heightFlag / 2);
       ctx.stroke();
+      ctx.fill();
       ctx.closePath();
     }
   },
