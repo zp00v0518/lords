@@ -25,6 +25,7 @@ import {
 } from '../utils';
 import TooltipRegion from '../../TooltipRegion';
 import { currentSector } from '../../../mixins';
+import { algebra } from '../../../../utils';
 
 export default {
   name: 'RegionMap',
@@ -141,23 +142,43 @@ export default {
       this.drawMoveHero();
     },
     drawMoveHero() {
-      const { ctx, eventList, currentMap } = this;
+      const { ctx, eventList, currentMap, tileWidth } = this;
+      ctx.fillStyle = 'black';
       eventList.forEach(event => {
         const { data } = event;
         const { startCoords, endCoords } = data;
         const startTile = currentMap[startCoords.x][startCoords.y];
         const endTile = currentMap[endCoords.x][endCoords.y];
-        ctx.beginPath();
-        ctx.lineWidth = 10;
-        ctx.setLineDash([2, 50]);
-        ctx.lineCap = 'round';
-        ctx.moveTo(startTile.centerX, startTile.centerY);
-        ctx.lineTo(endTile.centerX, endTile.centerY);
-        ctx.stroke();
-        ctx.closePath();
+        const baseCoords = [startTile.centerX, startTile.centerY, endTile.centerX, endTile.centerY];
+        const fullLength = algebra.getStraightLength(...baseCoords);
+        const heroLength = this.getLengthHeroOnStraight(fullLength, event.start, event.end);
+        const step = tileWidth / 4;
+        for (let i = 0; i < fullLength + 1; i += step) {
+          const coords = algebra.getPointOnStraight(...baseCoords, i);
+          ctx.beginPath();
+          const r = i > heroLength ? 2 : 4;
+          ctx.arc(coords.x, coords.y, r, 0, 2 * Math.PI);
+          ctx.fill();
+          ctx.closePath();
+        }
+        const heroCoords = algebra.getPointOnStraight(...baseCoords, heroLength);
+        this.drawHeroOnMap(ctx, heroCoords);
       });
-      ctx.lineWidth = 1;
-      ctx.setLineDash([]);
+    },
+    getLengthHeroOnStraight(length, startTime, endTime) {
+      const fullTime = endTime - startTime;
+      const passTime = Date.now() - startTime;
+      const dif = passTime / fullTime;
+      return length * dif;
+    },
+    drawHeroOnMap(ctx, coords) {
+      ctx.beginPath();
+      ctx.strokeStyle = 'black';
+      ctx.lineWidth = 2;
+      ctx.moveTo(coords.x, coords.y);
+      ctx.lineTo(coords.x, coords.y - 20);
+      ctx.stroke();
+      ctx.closePath();
     }
   },
   mounted() {
