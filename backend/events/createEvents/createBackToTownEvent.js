@@ -25,7 +25,6 @@ function createBackToTownEvent(prevEvent, result = {}) {
     init,
     type: eventsTypes.backToTown
   };
-  console.log(template)
   return template;
 }
 

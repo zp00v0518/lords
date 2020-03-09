@@ -156,7 +156,8 @@ export default {
         const endTile = currentMap[endCoords.x][endCoords.y];
         const baseCoords = [startTile.centerX, startTile.centerY, endTile.centerX, endTile.centerY];
         const fullLength = algebra.getStraightLength(...baseCoords);
-        const heroLength = this.getLengthHeroOnStraight(fullLength, event.start, event.end);
+        let heroLength = this.getLengthHeroOnStraight(fullLength, event.start, event.end);
+        if (heroLength > fullLength) heroLength = fullLength;
         const step = tileWidth / 4;
         for (let i = 0; i < fullLength + 1; i += step) {
           const coords = algebra.getPointOnStraight(...baseCoords, i);

@@ -6,7 +6,6 @@ const { createBackToTownEvent } = require('../events/createEvents');
 const { addEventToDB } = require('../events/setEventInGame');
 
 function handlerEventBattle(event, targetSector) {
-  console.log('handlerEventBattleInTown');
   const optionsForUpdate = {
     collectionName: event.serverName,
     filtr: { _id: event._id },
