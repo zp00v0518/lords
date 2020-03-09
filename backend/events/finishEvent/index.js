@@ -4,6 +4,7 @@ const finishStorage = require('./finish_storage');
 const finishHall = require('./finish_hall');
 const finishBarraks = require('./finish_barraks');
 const finish_hiring_units = require('./finish_hiring_units');
+const finishEventGlobal = require('./finishEventGlobal');
 
 module.exports = {
   [buildings.storage.name]: finishStorage,
@@ -16,4 +17,5 @@ module.exports = {
   [buildings.barraks_6.name]: finishBarraks,
   [buildings.barraks_7.name]: finishBarraks,
   [eventType.hiringUnits]: finish_hiring_units,
+  finishEventGlobal
 };

@@ -8,6 +8,7 @@ const Cookies = require('cookies');
 const { tryJsonParse } = require('template_func');
 const { setUserOnline } = require('../user');
 const { getCollectionName } = require('../template_modules');
+const { UserOnline } = global;
 
 class WsServer {
   init(port) {

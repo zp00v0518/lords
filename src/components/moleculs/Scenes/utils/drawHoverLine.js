@@ -11,6 +11,7 @@ function drawHoverLine(rombIndex) {
   let centerY = obj.centerY;
   var step = 0;
   ctx.strokeStyle = "yellow";
+  ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.moveTo(centerX, centerY - halfHeight + step);
   ctx.lineTo(centerX + step - tileHeight, centerY);

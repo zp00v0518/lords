@@ -1,7 +1,5 @@
 const config = require("../config/config.js");
 const Mine = require("../region/mine/Mine.js");
-// const Region = require("../region/Region.js");
-// const Race = require("../race/Race.js");
 const Town = require("../town/Town.js");
 const resources = require("../resources/Resources.js");
 const schema = require("../workWithMongoDB/schema.js");
@@ -17,21 +15,18 @@ const gameVariables = {
   numSectionRegionMap: 5, // количество ячеек на карте РЕГИОНА, по одной оси
   viewSectionGlobalMapNow: 11, // количество ячеек на Глобальной карте, по одной оси
   stepMoveGlobalMap: 2, // кол-во ячеек, на которорое происходит сдвиг карты при передвижении
-  // в данный момент 1 сутки
   serverList: config.db.collections.servers,
   timer: {
     controlState: time.minute / 10,
     saveDataDB: time.minute / 3, // 1 минута - интервал считывания данных и записи их в БД
-    perTime: time.hour, // расчетное время прироста игровых ресурсов
-    heroMove: time.minute * 20
+    perTime: time.hour / time.speedGame, // расчетное время прироста игровых ресурсов
+    heroMove: time.minute * 50 / time.speedGame
   },
   indexes: {
     upgrade_town: 1.5,
     upgrade_mine: 1.5
   },
   mine: Mine, // используется на фронте при улучшении строений в регионе
-  // region: Region,
-  // race: Race,
   time,
   town: Town, // используется на фронте при улучшении зданий
   resources, // используется на фронте при улучшении зданий

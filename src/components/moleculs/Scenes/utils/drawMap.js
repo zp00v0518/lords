@@ -1,7 +1,7 @@
 function drawMap() {
   let mapArr = this.currentMap;
   let ctx = this.ctx;
-  ctx.clearRect(0, 0, this.widthScene, this.heightScene);
+  ctx.clearRect(0, 0, parseFloat(this.widthScene), parseFloat(this.heightScene));
   let tileWidth = this.tileWidth;
   let tileHeight = tileWidth / 2;
   let halfHeight = tileHeight / 2;
@@ -28,6 +28,7 @@ function drawMap() {
     ctx.beginPath();
     ctx.fillStyle = colors[grid];
     ctx.strokeStyle = 'black';
+    ctx.lineWidth = 1;
     ctx.moveTo(centerX, centerY - halfHeight + step);
     ctx.lineTo(centerX + step - tileHeight, centerY);
     ctx.lineTo(centerX, centerY + halfHeight - step);
@@ -39,7 +40,9 @@ function drawMap() {
     ctx.closePath();
     // drawCircle(centerX,centerY,ctx)
   }
+  this.drawAnotherObjects && this.drawAnotherObjects();
 }
+
 const colors = {
   0: 'green',
   1: 'blue',

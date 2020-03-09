@@ -5,6 +5,8 @@ const { Region } = require('../../region');
 const createEventBattle = require('./createEventBattle');
 const { setEventInGame } = require('../../events');
 const { getOneTownFromDB } = require('../../town');
+const { sendWSMessage } = require('../../wsServer');
+const { gameVariables } = global;
 
 function handlerBattleRequest(message, info) {
   const data = message.data;
@@ -53,14 +55,16 @@ function handlerBattleRequest(message, info) {
         break;
       }
     }
-
+    // console.log(hero)
     const event = createEventBattle({
       startCoords: { x: townSector.x, y: townSector.y },
       endCoords: coords,
       army: attackArmyForBattle,
-      initSector: sector
+      initSector: sector,
+      initHero: hero
     });
     setEventInGame(event, info.server);
+    sendWSMessage(ws, event);
   });
 }
 

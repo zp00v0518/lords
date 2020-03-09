@@ -1,4 +1,5 @@
-const { updateDB } = require("../../tube.js");
+// const { updateDB } = require("../../tube.js");
+const { updateDB } = require("../../workWithMongoDB");
 const update = new updateDB();
 
 function fixingResultUpgrade_building(

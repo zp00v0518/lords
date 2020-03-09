@@ -5,6 +5,7 @@ function handlerMousemoveOnGlobalMap(event) {
     const lineX = this.currentMap[rombIndex.x];
     if (lineX && lineX[rombIndex.y] && this.currentTile !== lineX[rombIndex.y]) {
       this.drawMap();
+      this.drawHoverLine(rombIndex);
       this.currentTile = this.currentMap[rombIndex.x][rombIndex.y];
       this.showTooltip = true;
       this.ctx.canvas.style.cursor = "pointer";

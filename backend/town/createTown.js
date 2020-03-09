@@ -1,15 +1,9 @@
-const tube = require("../tube.js");
-const Region = require("../region/Region");
-const Race = require("../race/Race");
-const {
-  createBarraks,
-  createFort,
-  createGuild,
-  createMarket,
-  createTavern,
-  createHall
-} = require("./buildings");
-const { Army, createArmy } = require("../army/Army");
+const tube = require('../tube.js');
+const Region = require('../region/Region');
+const Race = require('../race/Race');
+const { createBarraks, createFort, createGuild, createMarket, createTavern, createHall } = require('./buildings');
+const { Army, createArmy } = require('../army/Army');
+const { gameVariables } = global;
 let listMine = [];
 let townCount = 0;
 
@@ -31,7 +25,7 @@ function createTown(options) {
     },
     class: gameVariables.classInstance.town,
     id: townCount++,
-    name: options.name || "New Castle",
+    name: options.name || 'New Castle',
     [storage.class]: storage,
     [hall.class]: hall,
     [fort.class]: fort,
@@ -52,8 +46,8 @@ function createTown(options) {
     town[key] = barraks;
     town[key].type = key;
   }
-  //если замок первый, то создается регион со стандартными шахтами и их положением
-  if (options.status === "new") {
+  // если замок первый, то создается регион со стандартными шахтами и их положением
+  if (options.status === 'new') {
     town.regionMap = createRegionMap(1);
   }
   return town;
@@ -76,7 +70,7 @@ function createRegionMap(townIndex = 1) {
   ];
   const range_power_army = Army.army_range.base.map(i => i * townIndex);
 
-  //создаю сетку региона
+  // создаю сетку региона
   for (let i = 0; i < numSectionRegionMap; i++) {
     let row = [];
     regionMap.push(row);
@@ -93,8 +87,8 @@ function createRegionMap(townIndex = 1) {
       const army = createArmy({ range_power_army, units });
       section.army = army;
       // центр всегда является замком
-      if (i == 2 && h == 2) {
-        section.type = Region.types.town; // индекс замка
+      if (i === 2 && h === 2) {
+        section.type = Region.types.town.id; // индекс замка
       }
       regionMap[i][h] = section;
     }

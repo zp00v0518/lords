@@ -5,6 +5,7 @@ const fixingResultUpgrade_building = require('../town/buildings/fixingResultUpgr
 const finishEvent = require('./finishEvent');
 const { updateDB } = require('../workWithMongoDB');
 const eventType = require('./Event').types;
+const eventsHandler = require('./eventsHandler');
 const { recursiveLoop } = require('../template_modules');
 const update = new updateDB();
 
@@ -26,18 +27,6 @@ function controlStateEventsLoop(eventsList = [], callback = () => {}) {
 }
 
 module.exports = controlStateEventsLoop;
-
-// function controlIteration(index, arr, callback) {
-//   if (index === arr.length) {
-//     callback(null, arr);
-//     return;
-//   }
-//   const event = arr[index];
-//   iterationImplenetation(event).then(() => {
-//     index++;
-//     controlIteration(index, arr, callback);
-//   });
-// }
 
 function iterationImplenetation(event, callback = () => {}) {
   return new Promise((resolve, reject) => {
@@ -118,6 +107,10 @@ function iterationImplenetation(event, callback = () => {}) {
             callback(err);
             return reject(err);
           });
+      } else if (type === eventType.battle) {
+        eventsHandler[type](event, sector);
+      } else if (type === eventType.backToTown) {
+        eventsHandler[type](event, sector);
       }
     });
   });

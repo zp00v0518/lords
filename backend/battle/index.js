@@ -1,3 +1,4 @@
-const handlerBattleRequest = require("./handlerBattleRequest");
+const Battle = require('./Battle');
+const handlerEventBattle = require('./handlerEventBattle');
 
-module.exports = { handlerBattleRequest };
+module.exports = { Battle, handlerEventBattle };

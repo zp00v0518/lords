@@ -10,7 +10,6 @@ const {
   getMethod,
   postMethod,
   controlStateGlobal,
-  saveDataInDB
 } = require('./backend/tube.js');
 
 const template = require('template_func');
@@ -50,7 +49,3 @@ server.on('request', (req, res) => {
 setInterval(() => {
   controlStateGlobal({ target: 'all' });
 }, gameVariables.timer.controlState);
-
-// setInterval(() => {
-//   saveDataInDB({ target: 'all' });
-// }, gameVariables.timer.saveDataDB);
