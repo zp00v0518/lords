@@ -1,13 +1,17 @@
-const types = require("./types");
-const rampart = require("./rampart");
-const gameVariables = require("../variables/game_variables.js");
-const { getLengthBeetweenTwoPoint } = require("../template_modules/phisicFunc");
+const types = require('./types');
+const rampart = require('./rampart');
+const gameVariables = require('../variables/game_variables.js');
+const { getLengthBeetweenTwoPoint } = require('../template_modules/phisicFunc');
 
 const Heroes = {
   types,
   heroMove: gameVariables.timer.heroMove,
   races: {
     rampart
+  },
+  coeff: {
+    attack: 0.5,
+    def: 0.5
   },
   getHeroes(race_name) {
     const { races } = this;
@@ -29,7 +33,7 @@ const Heroes = {
     const allHeroes = this.getHeroes(race_name);
     return allHeroes.find(item => item.type === type);
   },
-  getHeroImg(race_name, type, type_img = "ava") {
+  getHeroImg(race_name, type, type_img = 'ava') {
     if (!window) {
       console.log(`${this.getHeroImg.name}: this method for only frontend`);
       return;
@@ -42,7 +46,7 @@ const Heroes = {
   },
   checkHeroesInRace(race_name, type) {
     if (race_name === undefined || type === undefined) {
-      console.log("checkHeroesInRace: inncorrect arguments");
+      console.log('checkHeroesInRace: inncorrect arguments');
       return false;
     }
     const { races } = this;
