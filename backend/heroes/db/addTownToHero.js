@@ -8,7 +8,7 @@ function addTownToHero(serverName, townId, heroId, callback = function() {}) {
     };
     const updateDoc = {
       $set: {
-        townId,
+        townId
       }
     };
     updated

@@ -1,23 +1,18 @@
 const { getParsePathToImg } = require('../../template_modules');
+const basePath = 'frontEnd/img/for_canvas/heroes/rampart/';
 
 const images = {
   kir: {
-    ava: getParsePathToImg('frontEnd/img/for_canvas/heroes/rampart/kir.png'),
-    ico: getParsePathToImg(
-      'frontEnd/img/for_canvas/heroes/rampart/small/kir.png'
-    )
+    ava: getParsePathToImg(basePath + 'kir.png'),
+    ico: getParsePathToImg(basePath + 'small/kir.png')
   },
   klency: {
-    ava: getParsePathToImg('frontEnd/img/for_canvas/heroes/rampart/klency.png'),
-    ico: getParsePathToImg(
-      'frontEnd/img/for_canvas/heroes/rampart/small/klency.png'
-    )
+    ava: getParsePathToImg(basePath + 'klency.png'),
+    ico: getParsePathToImg(basePath + 'small/klency.png')
   },
   elezar: {
-    ava: getParsePathToImg('frontEnd/img/for_canvas/heroes/rampart/elezar.png'),
-    ico: getParsePathToImg(
-      'frontEnd/img/for_canvas/heroes/rampart/small/elezar.png'
-    )
+    ava: getParsePathToImg(basePath + 'elezar.png'),
+    ico: getParsePathToImg(basePath + 'small/elezar.png')
   }
 };
 

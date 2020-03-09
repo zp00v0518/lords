@@ -114,9 +114,7 @@ export default {
       const { Army } = this.globalConfig.all;
       const arr = deepClone(army);
       if (arr.length < 2) return arr;
-      arr.sort((a, b) => {
-        return Army.getForceStack(b) - Army.getForceStack(a);
-      });
+      Army.sortDefenseArmy(arr);
       return arr;
     },
     getHeroesAvatar(hero) {

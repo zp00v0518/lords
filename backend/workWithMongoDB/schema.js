@@ -23,7 +23,7 @@ const hero = {
   type: String,
   race: String,
   stat: {
-    attack: Number,
+    atack: Number,
     def: Number,
     magic: Number
   },

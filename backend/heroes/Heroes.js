@@ -9,8 +9,12 @@ const Heroes = {
   races: {
     rampart
   },
+  role: {
+    atack: 'atack',
+    def: 'def'
+  },
   coeff: {
-    attack: 0.5,
+    atack: 0.5,
     def: 0.5
   },
   getHeroes(race_name) {
@@ -62,6 +66,14 @@ const Heroes = {
     const length = getLengthBeetweenTwoPoint(start.x, start.y, end.x, end.y);
     const result = length * (time / gameVariables.time.speedGame);
     return +result.toFixed();
+  },
+  getHeroBonus(hero, unit, role = this.role.atack) {
+    if (!hero) return 0;
+    if (role === this.role.atack) {
+      return hero.stat.atack * this.coeff.atack;
+    } else if (role === this.role.def) {
+      return hero.stat.def * this.coeff.def;
+    }
   }
 };
 module.exports = Heroes;
