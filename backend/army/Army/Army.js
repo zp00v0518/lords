@@ -58,7 +58,7 @@ const Army = {
       return result;
     }, {});
   },
-  getUnitInfo(raceName, unitName) {
+  getUnitInfo(unitName, raceName) {
     if (!raceName || !unitName) return false;
     return this.race[raceName][unitName];
   },
@@ -69,7 +69,7 @@ const Army = {
   getForceStack(stack) {
     const { race, name, count } = stack;
     if (!race || !name || !count) return 0;
-    return this.getUnitInfo(race, name).hp * count;
+    return this.getUnitInfo(name, race).hp * count;
   },
   mergeTwoArmy(target = [], second = []) {
     const { army_length } = this;
@@ -112,6 +112,11 @@ const Army = {
   },
   getBaseHiringTime(hp, count) {
     return hp * count * time.hiring;
+  },
+  getLostCountUnits(unit, cof, lostForce) {
+    const unitInfo = this.getUnitInfo(unit.name, unit.race);
+    const realLost = lostForce - (lostForce / 100) * cof;
+    return Math.floor(realLost / unitInfo.hp);
   }
 };
 

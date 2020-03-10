@@ -41,7 +41,7 @@ function handlerBuyUnits(message, info) {
         return;
       }
       const raceName = Race.typeList[town.race];
-      const unitInfo = Army.getUnitInfo(raceName, unitName);
+      const unitInfo = Army.getUnitInfo(unitName, raceName);
       if (!unitInfo) {
         redirectMessage(ws);
         return;

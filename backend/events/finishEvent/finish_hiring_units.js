@@ -1,6 +1,6 @@
-const { Race } = require("../../race");
-const { Army, createStackItemTemplate } = require("../../army");
-const { updateDB } = require("../../workWithMongoDB");
+const { Race } = require('../../race');
+const { Army, createStackItemTemplate } = require('../../army');
+const { updateDB } = require('../../workWithMongoDB');
 const update = new updateDB();
 
 function finish_hiring_units(eventData, sector, callback = () => {}) {
@@ -8,11 +8,8 @@ function finish_hiring_units(eventData, sector, callback = () => {}) {
     const { data, serverName } = eventData;
     const { unitName, count, unitRace } = data;
     const raceName = Race.typeList[unitRace];
-    const unitInfo = Army.getUnitInfo(raceName, unitName);
-    const stackItemTemplate = Object.assign(
-      createStackItemTemplate(),
-      unitInfo
-    );
+    const unitInfo = Army.getUnitInfo(unitName, raceName);
+    const stackItemTemplate = Object.assign(createStackItemTemplate(), unitInfo);
     stackItemTemplate.count = count;
     const army_in_town = sector.town.army.units;
     Army.mergeTwoArmy(army_in_town, [stackItemTemplate]);
