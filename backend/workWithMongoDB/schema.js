@@ -1,21 +1,21 @@
 const document = {
   class: {
-    map: 'map',
-    letter: 'letter',
+    army: 'army',
     art: 'art',
-    hero: 'hero',
+    barraks: 'barraks',
     clan: 'clan',
-    storage: 'storage',
-    hall: 'hall',
-    market: 'market',
+    event: 'event',
     fort: 'fort',
     guild: 'guild',
-    tavern: 'tavern',
-    army: 'army',
+    hall: 'hall',
+    hero: 'hero',
+    letter: 'letter',
     mine: 'mine',
+    map: 'map',
+    market: 'market',
+    storage: 'storage',
+    tavern: 'tavern',
     town: 'town',
-    event: 'event',
-    barraks: 'barraks'
   }
 };
 const hero = {

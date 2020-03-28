@@ -3,6 +3,9 @@ const Battle = {
     region: {
       name: 'region'
     }
+  },
+  units: {
+    lostIndex: 0.3
   }
 };
 

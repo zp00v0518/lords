@@ -60,9 +60,6 @@ const { setUpgradeChange, checkUpgrade } = require('./region');
 module.exports.setUpgradeChange = setUpgradeChange;
 module.exports.checkUpgrade = checkUpgrade;
 
-const { upfateStateSector } = require('./sector');
-module.exports.upfateStateSector = upfateStateSector;
-
 const { Mine, createMine } = require('./region/mine');
 module.exports.Mine = Mine;
 module.exports.createMine = createMine;

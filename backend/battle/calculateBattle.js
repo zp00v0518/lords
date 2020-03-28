@@ -8,6 +8,11 @@ function calculateBattle(atackHero, aArmy, dArmy, defHero) {
   Army.sortDefenseArmy(defArmy);
   let defArmyCount = 0;
   const roundList = [];
+  const battleResult = {
+    roundList,
+    atackArmy,
+    defArmy
+  }
 
   atackArmy.forEach(atackStack => {
     for (; atackStack.count > 0; ) {
@@ -20,7 +25,8 @@ function calculateBattle(atackHero, aArmy, dArmy, defHero) {
       if (defStack.count <= 0) defArmyCount++;
     }
   });
-  return roundList;
+  battleResult.atackWin = atackArmy[atackArmy.length -1].count > 0;
+  return battleResult;
 }
 function calculateRound(atackStack, defStack, atackHero, defHero) {
   const atackUnitType = Army.getUnitInfo(atackStack.name, atackStack.race).type;

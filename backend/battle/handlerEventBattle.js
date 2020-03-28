@@ -4,38 +4,42 @@ const { updateDB } = require('../workWithMongoDB');
 const update = new updateDB();
 const { createBackToTownEvent } = require('../events/createEvents');
 const { addEventToDB } = require('../events/setEventInGame');
-const { getHeroesFromDB } = require('../heroes/db');
+const { getHeroesFromDB, updateHeroInDB } = require('../heroes/db');
 const Battle = require('./Battle');
 const calculateBattle = require('./calculateBattle');
+const setUnitsAfterBattle = require('./setUnitsAfterBattle');
 
 function handlerEventBattle(event, targetSector) {
-  console.log('handlerEventBattle')
   const { data, serverName } = event;
   if (data.typeBattle === Battle.types.region.name) {
     getHeroesFromDB(serverName, { heroId: data.initHero }).then(hero => {
       const { endCoords } = data;
       const defArmy = targetSector.region[endCoords.x][endCoords.y].army;
       const attackArmy = data.army.army;
-      const battleList = calculateBattle(hero, attackArmy, defArmy);
-      console.log(battleList);
+      const battleResult = calculateBattle(hero, attackArmy, defArmy);
+      console.log(attackArmy);
+      // передаю не армию героя, а армию из Eventa
+      setUnitsAfterBattle(battleResult, attackArmy);
+      updateHeroInDB(serverName, hero._id, { army: attackArmy }).then(() => {
+        const optionsForUpdate = {
+          collectionName: event.serverName,
+          filtr: { _id: event._id },
+          updateDoc: { $set: { status: false } }
+        };
+        update
+          .one(optionsForUpdate)
+          .then(result => {
+            const backEvent = createBackToTownEvent(event);
+            addEventToDB(backEvent, event.serverName).then(() => {
+              console.log('new event add to db');
+            });
+          })
+          .catch(err => {
+            log.log(err);
+          });
+      });
     });
   }
-  const optionsForUpdate = {
-    collectionName: event.serverName,
-    filtr: { _id: event._id },
-    updateDoc: { $set: { status: false } }
-  };
-  update
-    .one(optionsForUpdate)
-    .then(result => {
-      const backEvent = createBackToTownEvent(event);
-      addEventToDB(backEvent, event.serverName).then(() => {
-        console.log('new event add to db');
-      });
-    })
-    .catch(err => {
-      log.log(err);
-    });
 }
 
 module.exports = handlerEventBattle;

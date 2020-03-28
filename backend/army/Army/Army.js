@@ -78,11 +78,11 @@ const Army = {
     const { atackHero, defHero } = ops;
     if (atackHero) {
       const atackHeroBonus = Heroes.getHeroBonus(atackHero);
-      return hp + (hp * atackHeroBonus);
+      return hp + hp * atackHeroBonus;
     }
     if (defHero) {
       const defHeroBonus = Heroes.getHeroBonus(defHero, Heroes.role.def);
-      return hp + (hp * defHeroBonus);
+      return hp + hp * defHeroBonus;
     }
     return hp;
   },
