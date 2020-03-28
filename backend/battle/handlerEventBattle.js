@@ -16,7 +16,8 @@ function handlerEventBattle(event, targetSector) {
       const { endCoords } = data;
       const defArmy = targetSector.region[endCoords.x][endCoords.y].army;
       const attackArmy = data.army.army;
-      calculateBattle(hero, attackArmy, defArmy);
+      const battleList = calculateBattle(hero, attackArmy, defArmy);
+      console.log(battleList);
     });
   }
   const optionsForUpdate = {

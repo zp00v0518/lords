@@ -14,8 +14,8 @@ const Heroes = {
     def: 'def'
   },
   coeff: {
-    atack: 0.5,
-    def: 0.5
+    atack: 0.05,
+    def: 0.05
   },
   getHeroes(race_name) {
     const { races } = this;
@@ -67,7 +67,7 @@ const Heroes = {
     const result = length * (time / gameVariables.time.speedGame);
     return +result.toFixed();
   },
-  getHeroBonus(hero, unit, role = this.role.atack) {
+  getHeroBonus(hero, role = this.role.atack) {
     if (!hero) return 0;
     if (role === this.role.atack) {
       return hero.stat.atack * this.coeff.atack;

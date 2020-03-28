@@ -5,6 +5,7 @@ const schema = require('../../workWithMongoDB/schema');
 const type = schema.document.class;
 const createStackItemTemplate = require('./createStackItemTemplate');
 const time = require('../../config/config').time;
+const { Heroes } = require('../../heroes');
 
 const Army = {
   army_length: 7,
@@ -66,10 +67,24 @@ const Army = {
     const { race, name } = unit;
     return `img/units/${race}/${iconType}/${name}${ext}`;
   },
-  getForceStack(stack) {
+  getForceStack(stack, ops = {}) {
     const { race, name, count } = stack;
     if (!race || !name || !count) return 0;
-    return this.getUnitInfo(name, race).hp * count;
+    const hp = this.getActualUnitHP(stack, ops);
+    return hp * count;
+  },
+  getActualUnitHP(unit, ops = {}) {
+    const hp = this.getUnitInfo(unit.name, unit.race).hp;
+    const { atackHero, defHero } = ops;
+    if (atackHero) {
+      const atackHeroBonus = Heroes.getHeroBonus(atackHero);
+      return hp + (hp * atackHeroBonus);
+    }
+    if (defHero) {
+      const defHeroBonus = Heroes.getHeroBonus(defHero, Heroes.role.def);
+      return hp + (hp * defHeroBonus);
+    }
+    return hp;
   },
   mergeTwoArmy(target = [], second = []) {
     const { army_length } = this;
