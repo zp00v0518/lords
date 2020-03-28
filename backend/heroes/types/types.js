@@ -4,7 +4,7 @@ class TypesHeroes {
   constructor(type, stat, progress) {
     this.type = type;
     this.stat = {
-      attack: stat[0] || 0,
+      atack: stat[0] || 0,
       def: stat[1] || 0,
       magic: stat[2] || 0
     };

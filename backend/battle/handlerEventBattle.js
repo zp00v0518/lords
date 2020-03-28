@@ -15,12 +15,12 @@ function handlerEventBattle(event, targetSector) {
     getHeroesFromDB(serverName, { heroId: data.initHero }).then(hero => {
       const { endCoords } = data;
       const defArmy = targetSector.region[endCoords.x][endCoords.y].army;
-      const attackArmy = data.army.army;
-      const battleResult = calculateBattle(hero, attackArmy, defArmy);
-      console.log(attackArmy);
+      let atackArmy = data.army.army;
+      const battleResult = calculateBattle(hero, atackArmy, defArmy);
       // передаю не армию героя, а армию из Eventa
-      setUnitsAfterBattle(battleResult, attackArmy);
-      updateHeroInDB(serverName, hero._id, { army: attackArmy }).then(() => {
+      setUnitsAfterBattle(battleResult, atackArmy);
+      atackArmy = atackArmy.filter(i => i.count > 0);
+      updateHeroInDB(serverName, hero._id, { army: atackArmy, active: true }).then(() => {
         const optionsForUpdate = {
           collectionName: event.serverName,
           filtr: { _id: event._id },

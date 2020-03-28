@@ -4,7 +4,8 @@ function createHeroes({ type, img, name, race }) {
   const heroes = {
     name,
     img,
-    race
+    race,
+    active: true
   };
   Object.assign(heroes, types[type]);
   return heroes;
