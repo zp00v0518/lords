@@ -94,7 +94,7 @@ export default {
     }
     &-close {
       width: 20px;
-      color: red;
+      color: $main-red;
       font-size: 18px;
       cursor: pointer;
     }

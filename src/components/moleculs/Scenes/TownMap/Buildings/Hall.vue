@@ -198,7 +198,7 @@ const tumb = {
           background-color: green;
         }
         &.no-prepare {
-          background-color: red;
+          background-color: $main-red;
         }
         &.max-lvl {
           background-color: yellow;
