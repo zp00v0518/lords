@@ -27,7 +27,7 @@ export default {
         type: 'updateArmyOnRegion',
         data: {
           sectorIndex,
-          armySize: this.armySize
+          armySize: num
         }
       };
       this.$ws.sendMessage(message);

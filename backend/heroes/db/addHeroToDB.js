@@ -8,16 +8,16 @@ const insert = new insertDB();
 function addHeroToDB({ server, race, type, userId, callback = function() {} }) {
   return new Promise((resolve, reject) => {
     const template = createTemplateHero(race, type);
-    (template.userId = userId),
-      insert.one({ collectionName: server, doc: template }).then(result => {
-        if (result.insertedCount === 0) {
-          callback(true);
-          return reject(insertedHero);
-        }
-        const insertedHero = result.ops[0];
-        callback(null, insertedHero);
-        return resolve(insertedHero);
-      });
+    template.userId = userId;
+    insert.one({ collectionName: server, doc: template }).then(result => {
+      if (result.insertedCount === 0) {
+        callback(true);
+        return reject();
+      }
+      const insertedHero = result.ops[0];
+      callback(null, insertedHero);
+      return resolve(insertedHero);
+    });
   });
 }
 

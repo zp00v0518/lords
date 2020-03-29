@@ -1,3 +1,3 @@
 const updateArmyOnRegion = require('./updateArmyOnRegion');
 
-module.exports = { updateArmyOnRegion };
+module.exports = updateArmyOnRegion;
