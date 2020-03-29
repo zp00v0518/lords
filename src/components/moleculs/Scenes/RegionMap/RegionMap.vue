@@ -104,13 +104,13 @@ export default {
   methods: {
     handlerClick() {
       const { currentTile } = this;
-      if (!this.cursorOnScene || currentTile.type === 1) return;
+      if (!this.cursorOnScene || currentTile.type === 1 || currentTile.type === 3) return;
       if (this.currentTile.type === 0) {
         if (currentTile.army && currentTile.army.length === 0) return;
         console.log(currentTile);
         // const nameRegion = this.$region.typeList[currentTile.type];
         const payload = {
-          title: 'svxzv',
+          title: 'Настройка битвы',
           data: {
             defenseArmy: currentTile.army,
             target: 'region',

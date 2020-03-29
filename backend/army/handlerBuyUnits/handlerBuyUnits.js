@@ -1,13 +1,12 @@
 // const { checkSchema, redirectMessage, gloss } = require('../../tube');
 const { checkSchema } = require('../../template_modules');
-const { redirectMessage } = require('../../wsServer');
+const { redirectMessage, sendWSMessage } = require('../../wsServer');
 const { Race } = require('../../race');
 const { Army } = require('./../army');
 const { checkSource } = require('../../resources');
 const checkUnitInBarraks = require('./../checkUnitInBarraks');
 const { deleteSource } = require('../../resources');
 const setEventForHiringUnit = require('./setEventForHiringUnit');
-const { sendWSMessage } = require('../../wsServer');
 const { formEventsList } = require('../../events');
 const { getOneTownFromDB, updateStateTown } = require('../../town');
 
