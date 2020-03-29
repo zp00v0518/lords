@@ -8,19 +8,26 @@ const { getHeroesFromDB, updateHeroInDB } = require('../heroes/db');
 const Battle = require('./Battle');
 const calculateBattle = require('./calculateBattle');
 const setUnitsAfterBattle = require('./setUnitsAfterBattle');
+const { Region, updateStateRegion } = require('../region');
 
 function handlerEventBattle(event, targetSector) {
   const { data, serverName } = event;
   if (data.typeBattle === Battle.types.region.name) {
     getHeroesFromDB(serverName, { heroId: data.initHero }).then(hero => {
       const { endCoords } = data;
-      const defArmy = targetSector.region[endCoords.x][endCoords.y].army;
+      const tile = targetSector.region[endCoords.x][endCoords.y];
+      const defArmy = tile.army;
       let atackArmy = data.army.army;
       const battleResult = calculateBattle(hero, atackArmy, defArmy);
       // передаю не армию героя, а армию из Eventa
       setUnitsAfterBattle(battleResult, atackArmy);
       atackArmy = atackArmy.filter(i => i.count > 0);
       updateHeroInDB(serverName, hero._id, { army: atackArmy, active: true }).then(() => {
+        if (battleResult.atackWin) {
+          tile.army = [];
+          tile.type = Region.types.empty.id
+          updateStateRegion(targetSector);
+        }
         const optionsForUpdate = {
           collectionName: event.serverName,
           filtr: { _id: event._id },
@@ -31,7 +38,7 @@ function handlerEventBattle(event, targetSector) {
           .then(result => {
             const backEvent = createBackToTownEvent(event);
             addEventToDB(backEvent, event.serverName).then(() => {
-              console.log('new event add to db');
+              // console.log('new event add to db');
             });
           })
           .catch(err => {
