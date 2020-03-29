@@ -27,7 +27,7 @@ function drawMap() {
     // console.log(`centerX:${centerX} centerY:${centerY}`)
     ctx.beginPath();
     ctx.fillStyle = colors[grid];
-    ctx.strokeStyle = 'black';
+    ctx.strokeStyle = 'rgba(0,0,0,0.6)';
     ctx.lineWidth = 1;
     ctx.moveTo(centerX, centerY - halfHeight + step);
     ctx.lineTo(centerX + step - tileHeight, centerY);
@@ -44,10 +44,10 @@ function drawMap() {
 }
 
 const colors = {
-  0: 'green',
+  0: 'rgba(26,128,0,0.7)', // green
   1: 'blue',
   2: 'brown',
-  3: 'black'
+  3: 'rgba(0,0,0,0.4)'
 };
 
 export default drawMap;

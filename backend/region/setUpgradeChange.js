@@ -1,5 +1,5 @@
 // const Mine = gameVariables.mine;
-const { addEventToDB } = require('../events');
+const { addEventToDB } = require('../events/setEventInGame');
 
 function setUpgradeChange(cell, persent = 100, sector, info, callback = function() {}) {
   return new Promise((resolve, reject) => {

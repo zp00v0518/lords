@@ -18,7 +18,7 @@ function handlerResponseUpgradeRegion(message, info) {
     redirectMessage(ws);
     return;
   }
-  getOneTownFromDB(curSector._id, curSector.serverName).then(res => {
+  getOneTownFromDB(curSector.serverName, curSector._id).then(res => {
     const sector = res;
     const building = sector.region[data.building.x][data.building.y].sector;
     if (building.type !== data.building.type) {

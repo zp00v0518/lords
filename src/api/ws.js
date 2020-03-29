@@ -15,7 +15,8 @@ class WS {
       consoles: eventData => this.consoles(eventData),
       setEvents: eventData => this.setEvents(eventData),
       choicesRace: eventData => this.choicesRace(eventData),
-      buyUnits: eventData => this.buyUnits(eventData)
+      buyUnits: eventData => this.buyUnits(eventData),
+      updateArmyOnRegion: eventData => this.updateArmyOnRegion(eventData)
     };
     this.outgoing = {};
     this.timerId = null;
@@ -119,5 +120,6 @@ class WS {
   upgradeBuilding = modules.upgradeBuilding;
   buyUnits = modules.buyUnits;
   battleRequest = modules.battleRequest;
+  updateArmyOnRegion = modules.updateArmyOnRegion;
 }
 export default WS;

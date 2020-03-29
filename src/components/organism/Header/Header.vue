@@ -1,20 +1,41 @@
 <template>
-    <header class="header">
-
-    </header>
+  <header class="header">
+    <div class="header__update_region">
+      <input type="number" v-model="armySize" />
+      <button @click="updateArmyOnRegion">Обновить регион</button>
+    </div>
+  </header>
 </template>
 
 <script>
+import { currentSector } from '../../mixins';
+
 export default {
-  name: "Header",
+  name: 'Header',
+  mixins: [currentSector],
   data() {
-    return {};
+    return {
+      armySize: 2500
+    };
   },
-  computed: {},
-  methods: {}
+  methods: {
+    updateArmyOnRegion() {
+      const num = parseFloat(this.armySize);
+      if (Number.isNaN(num)) return;
+      const sectorIndex = this.$store.state.userSectors.sectors.findIndex(i => i._id === this.currentSector._id);
+      const message = {
+        type: 'updateArmyOnRegion',
+        data: {
+          sectorIndex,
+          armySize: num
+        }
+      };
+      this.$ws.sendMessage(message);
+    }
+  }
 };
 </script>
 
 <style lang='scss' scoped>
-@import "header.scss";
+@import 'header.scss';
 </style>

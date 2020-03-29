@@ -5,7 +5,7 @@
   @include short_answer;
 }
 .no {
-  @include short_answer(red, white);
+  @include short_answer($main-red, white);
 }
 .ok {
   @include short_answer;

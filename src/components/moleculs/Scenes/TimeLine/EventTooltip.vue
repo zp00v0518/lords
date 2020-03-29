@@ -66,7 +66,7 @@ export default {
 <style lang="scss" scoped>
 .event__tooltip {
   position: absolute;
-  border: 1px solid red;
+  border: 1px solid $main-red;
   left: 200%;
   top: 0;
   z-index: 120;

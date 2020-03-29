@@ -21,7 +21,7 @@ function handlerResponseUpgradeBuilding(message, info) {
     return;
   }
 
-  getOneTownFromDB(curSector._id, curSector.serverName).then(res => {
+  getOneTownFromDB(curSector.serverName, curSector._id).then(res => {
     const sector = res;
     const typeBuilding = data.building.type;
     const raceName = Race.typeList[sector.town.race];

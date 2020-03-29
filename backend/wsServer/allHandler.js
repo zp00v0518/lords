@@ -6,5 +6,6 @@ module.exports = {
   choicesRace: require('../race/choicesRace'),
   buyUnits: require('../army/handlerBuyUnits'),
   mergeArmy: require('../army/handlerMergeArmy'),
+  updateArmyOnRegion: require('../army/handlerUpdateArmyOnRegion'),
   battleRequest: require('../battle/handlerBattleRequest')
 };

@@ -18,7 +18,7 @@ function createKentavr(unitInfo, up = 0) {
 
   return createUnit({
     unitInfo,
-    type: army_types.kon,
+    type: army_types.pex,
     hp,
     cost,
     lvl,

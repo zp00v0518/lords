@@ -2,8 +2,6 @@ const ObjectId = require("mongodb").ObjectID;
 const { updateDB } = require("../../workWithMongoDB");
 const update = new updateDB();
 
-let count = 0;
-
 // обновляет состояние города в БД (не Региона или его-то другого. ТОлько города)
 function updateStateRegion(
   sector,

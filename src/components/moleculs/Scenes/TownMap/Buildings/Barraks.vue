@@ -243,7 +243,7 @@ export default {
       border: 1px solid;
       cursor: pointer;
       &.hoverItem {
-        border: 3px solid red;
+        border: 3px solid $main-red;
       }
     }
     &__unit {
@@ -305,7 +305,7 @@ export default {
       @include center;
       color: white;
       &.isNotCost {
-        color: red;
+        color: $main-red;
       }
     }
   }

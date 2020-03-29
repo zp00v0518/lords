@@ -1,23 +1,23 @@
-const { Heroes } = require("../../heroes");
-const { document } = require("../../workWithMongoDB/schema");
-const { insertDB } = require("../../workWithMongoDB");
-const { Army, createArmy } = require("../../army/Army");
+const { Heroes } = require('../../heroes');
+const { document } = require('../../workWithMongoDB/schema');
+const { insertDB } = require('../../workWithMongoDB');
+const { Army, createArmy } = require('../../army/Army');
 
 const insert = new insertDB();
 
 function addHeroToDB({ server, race, type, userId, callback = function() {} }) {
   return new Promise((resolve, reject) => {
     const template = createTemplateHero(race, type);
-    (template.userId = userId),
-      insert.one({ collectionName: server, doc: template }).then(result => {
-        if (result.insertedCount === 0) {
-          reject(insertedHero);
-          return callback(true);
-        }
-        const insertedHero = result.ops[0];
-        resolve(insertedHero);
-        return callback(null, insertedHero);
-      });
+    template.userId = userId;
+    insert.one({ collectionName: server, doc: template }).then(result => {
+      if (result.insertedCount === 0) {
+        callback(true);
+        return reject();
+      }
+      const insertedHero = result.ops[0];
+      callback(null, insertedHero);
+      return resolve(insertedHero);
+    });
   });
 }
 

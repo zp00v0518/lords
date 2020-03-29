@@ -2,7 +2,7 @@ const ObjectId = require("mongodb").ObjectID;
 const { findInDB } = require("../../workWithMongoDB");
 const find = new findInDB();
 
-function getOneTownFromDB(sectorId, serverName, callback = () => {}) {
+function getOneTownFromDB(serverName, sectorId, callback = () => {}) {
   return new Promise((resolve, reject) => {
     const findOptions = {
       collectionName: serverName,
