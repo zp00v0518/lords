@@ -25,9 +25,7 @@ export default {
         return { x: 0, y: 0 };
       }
     },
-    tile: {
-      type: Object
-    }
+    tile: { type: Object }
   },
   data() {
     return {
