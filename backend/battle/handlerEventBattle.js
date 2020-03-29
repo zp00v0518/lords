@@ -19,6 +19,7 @@ function handlerEventBattle(event, targetSector) {
       const defArmy = tile.army;
       let atackArmy = data.army.army;
       const battleResult = calculateBattle(hero, atackArmy, defArmy);
+      console.log(battleResult);
       // передаю не армию героя, а армию из Eventa
       setUnitsAfterBattle(battleResult, atackArmy);
       atackArmy = atackArmy.filter(i => i.count > 0);

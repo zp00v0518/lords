@@ -24,7 +24,7 @@ function handlerMergeArmy(message, info) {
     redirectMessage(ws);
     return;
   }
-  getOneTownFromDB(curSector.serverName, curSector._id )
+  getOneTownFromDB(curSector.serverName, curSector._id)
     .then(res => {
       const sector = res;
       const heroId = data.id;
