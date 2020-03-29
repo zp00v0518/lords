@@ -21,7 +21,7 @@ function handlerBattleRequest(message, info) {
     return;
   }
 
-  getOneTownFromDB(curSector._id, curSector.serverName).then(res => {
+  getOneTownFromDB(curSector.serverName, curSector._id).then(res => {
     const sector = res;
     const { attackHeroId } = data;
     const heroVerif = verification.hero(attackHeroId, sector, info);

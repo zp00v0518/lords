@@ -18,7 +18,7 @@ function updateArmyOnRegion(message, info) {
     redirectMessage(ws);
     return;
 	}
-	getOneTownFromDB(curSector._id, curSector.serverName)
+	getOneTownFromDB(curSector.serverName, curSector._id )
   sendWSMessage(ws, response);
 }
 

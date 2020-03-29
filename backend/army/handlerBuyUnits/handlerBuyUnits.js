@@ -27,7 +27,7 @@ function handlerBuyUnits(message, info) {
     return;
   }
 
-  getOneTownFromDB(curSector._id, curSector.serverName)
+  getOneTownFromDB(curSector.serverName, curSector._id )
     .then(res => {
       const sector = res;
       const { town } = sector;

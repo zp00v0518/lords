@@ -40,7 +40,7 @@ function iterationImplenetation(event, callback = () => {}) {
     const y = event.target.y;
     let sector = global.GlobalMap[serverName][x][y];
     const sectorId = sector._id;
-    getOneTownFromDB(sectorId, serverName).then(res => {
+    getOneTownFromDB(serverName, sectorId).then(res => {
       if (!res) return resolve();
       sector = res;
       if (type === eventType.upgradeRegion) {
