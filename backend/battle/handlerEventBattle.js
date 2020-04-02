@@ -22,7 +22,7 @@ function handlerEventBattle(event, targetSector) {
       // передаю не армию героя, а армию из Eventa
       setUnitsAfterBattle(battleResult, atackArmy);
       atackArmy = atackArmy.filter(i => i.count > 0);
-      updateHeroInDB(serverName, hero._id, { army: atackArmy, active: true }).then(() => {
+      updateHeroInDB(serverName, hero._id, { army: atackArmy }).then(() => {
         if (battleResult.atackWin) {
           tile.army = [];
           tile.type = Region.types.empty.id
