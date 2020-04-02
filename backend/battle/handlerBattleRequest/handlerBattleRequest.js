@@ -6,6 +6,7 @@ const createEventBattle = require('./createEventBattle');
 const { setEventInGame } = require('../../events');
 const { getOneTownFromDB } = require('../../town');
 const { sendWSMessage } = require('../../wsServer');
+const { updateHeroInDB } = require('../../heroes/db');
 const { gameVariables } = global;
 
 function handlerBattleRequest(message, info) {
@@ -20,52 +21,67 @@ function handlerBattleRequest(message, info) {
     redirectMessage(ws);
     return;
   }
-
-  getOneTownFromDB(curSector.serverName, curSector._id).then(res => {
-    const sector = res;
-    const { attackHeroId } = data;
-    const heroVerif = verification.hero(attackHeroId, sector, info);
-    if (!heroVerif.is) {
+  const { serverName } = curSector;
+  getOneTownFromDB(serverName, curSector._id)
+    .then(res => {
+      const sector = res;
+      const { attackHeroId } = data;
+      verification.hero(attackHeroId, sector, info).then(heroVerif => {
+        if (!heroVerif.is) {
+          redirectMessage(ws);
+          return;
+        }
+        const { hero } = heroVerif;
+        if (!hero.active) {
+          redirectMessage(ws);
+          return;
+        }
+        const coords = formatIdToCoords(data.tileId, gameVariables.numSectionRegionMap);
+        const { region } = sector;
+        const tile = region[coords.x][coords.y];
+        if (tile.type !== Region.types.forest.id) {
+          redirectMessage(ws);
+          return;
+        }
+        if (!tile.army || tile.army.length === 0) {
+          redirectMessage(ws);
+          return;
+        }
+        const attackArmyForBattle = createArmyForBattle(data.army, hero.army);
+        if (!attackArmyForBattle.is) {
+          redirectMessage(ws);
+          return;
+        }
+        let townSector = {};
+        for (let i = 0; i < region.length; i++) {
+          const row = region[i];
+          const f = row.find(item => item.type === Region.types.town.id);
+          if (f) {
+            townSector = f;
+            break;
+          }
+        }
+        // console.log(hero)
+        const event = createEventBattle({
+          startCoords: { x: townSector.x, y: townSector.y },
+          endCoords: coords,
+          army: attackArmyForBattle,
+          initSector: sector,
+          initHero: hero
+        });
+        setEventInGame(event, info.server).then(() => {
+          const docUpdateHero = {
+            active: false
+          };
+          updateHeroInDB(serverName, attackHeroId, docUpdateHero).then(() => {
+            sendWSMessage(ws, event);
+          });
+        });
+      });
+    })
+    .catch(() => {
       redirectMessage(ws);
-    }
-
-    const { hero } = heroVerif;
-    const coords = formatIdToCoords(data.tileId, gameVariables.numSectionRegionMap);
-    const { region } = sector;
-    const tile = region[coords.x][coords.y];
-    if (tile.type !== Region.types.forest.id) {
-      redirectMessage(ws);
-      return;
-    }
-    if (!tile.army || tile.army.length === 0) {
-      redirectMessage(ws);
-      return;
-    }
-    const attackArmyForBattle = createArmyForBattle(data.army, hero.army);
-    if (!attackArmyForBattle.is) {
-      redirectMessage(ws);
-      return;
-    }
-    let townSector = {};
-    for (let i = 0; i < region.length; i++) {
-      const row = region[i];
-      const f = row.find(item => item.type === Region.types.town.id);
-      if (f) {
-        townSector = f;
-        break;
-      }
-    }
-    // console.log(hero)
-    const event = createEventBattle({
-      startCoords: { x: townSector.x, y: townSector.y },
-      endCoords: coords,
-      army: attackArmyForBattle,
-      initSector: sector,
-      initHero: hero
     });
-    setEventInGame(event, info.server);
-    sendWSMessage(ws, event);
-  });
 }
 
 module.exports = handlerBattleRequest;
