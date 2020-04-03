@@ -32,23 +32,24 @@
     </div>
 
     <div class="hero_in_castle_wrap">
-      <HeroesInTown :heroesList="heroesList" />
+      <HeroesInTown :heroesList="activeHeroes" />
+      <InActiveHeroes :heroesList="notActiveHeroes" />
     </div>
   </div>
 </template>
 
 <script>
-import modules from "./module";
-import { ArmyLine } from "../ArmyLine";
-import HeroesInTown from "../HeroesInTown";
+import modules from './module';
+import { ArmyLine } from '../ArmyLine';
+import { HeroesInTown, InActiveHeroes } from '../HeroesInTown';
 
 export default {
-  name: "Town",
-  components: { ...modules, ArmyLine, HeroesInTown },
-  props: ["sector"],
+  name: 'Town',
+  components: { ...modules, ArmyLine, HeroesInTown, InActiveHeroes },
+  props: ['sector'],
   data() {
     return {
-      name: "Default Name",
+      name: 'Default Name',
       townId: this.sector._id
     };
   },
@@ -82,13 +83,19 @@ export default {
     },
     heroesList() {
       return this.$store.getters.getHeroesFromTown(this.townId);
+    },
+    activeHeroes() {
+      return this.heroesList.filter(i => i.active);
+    },
+    notActiveHeroes() {
+      return this.heroesList.filter(i => !i.active);
     }
   }
 };
 </script>
 
 <style lang="scss">
-@import "town.scss";
+@import 'town.scss';
 .army_in_castle {
   &--wrap {
     display: flex;

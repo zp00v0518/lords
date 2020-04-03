@@ -1,4 +1,4 @@
-const livereload  = new WebSocket("ws://localhost:4001");
+const livereload  = new WebSocket(`ws://${location.hostname}:4001`);
 livereload.addEventListener("message", handlerMessage);
 
 

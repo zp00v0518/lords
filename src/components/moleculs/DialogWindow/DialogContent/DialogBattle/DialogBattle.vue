@@ -109,6 +109,7 @@ export default {
       };
       this.$ws.sendMessage(message);
       this.$emit("close");
+      this.$store.commit('SET_ACTIVE_HERO_ID', -1);
     },
     sortDefenseArmy(army) {
       const { Army } = this.globalConfig.all;

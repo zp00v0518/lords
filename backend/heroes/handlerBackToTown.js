@@ -1,8 +1,14 @@
 const { finishEventGlobal } = require('../events/finishEvent');
+const { updateHeroInDB } = require('../heroes/db');
+
 
 function handlerBackToTown(event, sector) {
-  finishEventGlobal(event).then(() => {
-    // console.log('handlerBackToTown');
+  const { serverName, data } = event;
+  const { initHero } = data;
+  updateHeroInDB(serverName, initHero, { active: true }).then(() => {
+    finishEventGlobal(event).then(() => {
+      // console.log('handlerBackToTown');
+    });
   });
 }
 
