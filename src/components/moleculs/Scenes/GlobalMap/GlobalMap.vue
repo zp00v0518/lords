@@ -7,6 +7,7 @@
       :height="heightScene"
       @mousemove="handlerMousemoveOnMap"
       @mouseleave="hideTooltip"
+      @click="handlerClickOnGlobalMap"
     ></canvas>
     <button
       id="left"
@@ -127,6 +128,9 @@ export default {
         zoom: this.zoom
       };
       this.$ws.sendMessage(message);
+    },
+    handlerClickOnGlobalMap(){
+      console.log(this.currentTile)
     }
   },
   mounted() {
