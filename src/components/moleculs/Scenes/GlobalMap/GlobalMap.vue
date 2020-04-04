@@ -49,15 +49,15 @@ import {
   setBorderIsoMap,
   hideTooltip,
   handlerMousemoveOnMap
-} from "../utils";
-import Tooltip from "../../Tooltip";
+} from '../utils';
+import Tooltip from '../../Tooltip';
 
 export default {
-  name: "GlobalMap",
+  name: 'GlobalMap',
   components: {
     Tooltip
   },
-  props: ["widthScene", "heightScene"],
+  props: ['widthScene', 'heightScene'],
   data() {
     return {
       showTooltip: false,
@@ -78,8 +78,8 @@ export default {
     this.currentMap = this.$store.state.globalMap.currentMap;
   },
   watch: {
-    "$store.state.globalMap.currentMap": function() {
-      const {deepClone, $store} = this;
+    '$store.state.globalMap.currentMap': function() {
+      const { deepClone, $store } = this;
       this.currentMap = deepClone($store.state.globalMap.currentMap);
       this.drawMap();
       this.setBorderIsoMap();
@@ -87,7 +87,7 @@ export default {
   },
   computed: {
     zoomText() {
-      return this.zoom === 1 ? "Zoom +" : "Zoom - ";
+      return this.zoom === 1 ? 'Zoom +' : 'Zoom - ';
     },
     zoom() {
       return this.$store.state.globalMap.zoom;
@@ -116,25 +116,25 @@ export default {
     handlerMousemoveOnMap,
     changeZoom(event) {
       // this.zoom = this.zoom === 1 ? 1.5 : 1;
-      this.$store.commit("CHANGE__ZOOM");
+      this.$store.commit('CHANGE__ZOOM');
       this.moveOnMap(event);
     },
     moveOnMap(event) {
       const target = event.target;
       const way = target.id;
       const message = {
-        type: "moveGlobalMap",
+        type: 'moveGlobalMap',
         way,
         zoom: this.zoom
       };
       this.$ws.sendMessage(message);
     },
-    handlerClickOnGlobalMap(){
-      console.log(this.currentTile)
+    handlerClickOnGlobalMap() {
+      // console.log(this.currentTile);
     }
   },
   mounted() {
-    this.ctx = this.$refs.scene.getContext("2d");
+    this.ctx = this.$refs.scene.getContext('2d');
     this.drawMap();
     this.setBorderIsoMap();
   }
@@ -142,5 +142,5 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-@import "globalMap.scss";
+@import 'globalMap.scss';
 </style>

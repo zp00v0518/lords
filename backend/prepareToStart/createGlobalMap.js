@@ -21,7 +21,7 @@ function getPositionMine() {
     for (let h = 1; h < 4; h++) {
       var f = {
         x: i,
-        y: h
+        y: h,
       };
       if (i == 2 && h == 2) {
         break;
@@ -56,7 +56,7 @@ function createRegionMap() {
       section.id = countSection++;
       section.x = i;
       section.y = h;
-      section.type = Region.types.forest.id // индекс леса
+      section.type = Region.types.forest.id; // индекс леса
       section.sector = {};
       // центр всегда является замком
       if (i == 2 && h == 2) {
@@ -72,7 +72,9 @@ function createRegionMap() {
     let x = coordsMine[index].x;
     let y = coordsMine[index].y;
     regionMap[x][y].type = Region.types.mine.id; // индекс шахты
-    regionMap[x][y].sector = createMine(x, y);
+    const mine = createMine(x, y);
+    mine.is_default = true;
+    regionMap[x][y].sector = mine;
   }
   return regionMap;
 }
@@ -86,7 +88,7 @@ function createRegion() {
 }
 
 function createGlobalMap() {
-  serverList.forEach(server => {
+  serverList.forEach((server) => {
     let countRegion = 0;
     const serverName = server.collectionName;
     GlobalMap[serverName] = [];
@@ -115,7 +117,7 @@ function createGlobalMap() {
 
 function recursiveOne(i, arr, serverName, callback) {
   if (i < arr.length) {
-    insertDB.one({ collectionName: serverName, doc: arr[i] }, result => {
+    insertDB.one({ collectionName: serverName, doc: arr[i] }, (result) => {
       console.log(result.ops);
       i++;
       recursiveOne(i, arr, serverName, callback);
@@ -151,8 +153,8 @@ function recursiveTree(a, h, i, serverList, callback) {
 }
 createGlobalMap();
 
-setTimeout(function() {
-  insertDB.mongo.db.dropDatabase(result => {
+setTimeout(function () {
+  insertDB.mongo.db.dropDatabase((result) => {
     console.log('База данных удалена');
     console.log('Создание новой...');
     recursiveTree(0, 0, 0, serverList, () => {
