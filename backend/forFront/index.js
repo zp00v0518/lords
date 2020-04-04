@@ -4,6 +4,7 @@ import Town from '../town/Town';
 import { Army } from '../army/Army';
 import Event from '../events/Event';
 import Battle from '../battle/Battle';
+import Region from '../region/Region';
 
 export default {
   checkSource,
@@ -11,5 +12,6 @@ export default {
   Town,
   Army,
   Event,
-  Battle
+  Battle,
+  Region
 };

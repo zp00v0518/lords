@@ -20,9 +20,6 @@ export default {
       eventsList: []
     };
   },
-  created() {
-    console.log(this.heroesList);
-  },
   watch: {
     '$store.state.timeline.eventsList': {
       immediate: true,
