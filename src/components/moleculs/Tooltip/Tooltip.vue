@@ -12,6 +12,7 @@
       <div class="tooltip__coords-x">X:{{tile.x}}</div>
       <div class="tooltip__coords-y">Y:{{tile.y}}</div>
     </div>
+    <div>sdfsdf</div>
   </div>
 </template>
 
