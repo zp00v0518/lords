@@ -5,6 +5,7 @@ const { Army } = require('../Army');
 const { updateDB } = require('../../workWithMongoDB');
 const update = new updateDB();
 const { getOneTownFromDB } = require('../../town');
+const { getHeroesFromDB } = require('../../heroes/db');
 
 // const { getHeroesFromDB } = require("../../heroes/db");
 
@@ -13,7 +14,7 @@ function handlerMergeArmy(message, info) {
   const { ws } = info.player;
   const response = {
     status: false,
-    type: message.type
+    type: message.type,
   };
   if (!checkSchema(data, schema)) {
     redirectMessage(ws);
@@ -24,63 +25,70 @@ function handlerMergeArmy(message, info) {
     redirectMessage(ws);
     return;
   }
-  getOneTownFromDB(curSector.serverName, curSector._id)
-    .then(res => {
+  const { serverName } = curSector;
+  getOneTownFromDB(serverName, curSector._id)
+    .then((res) => {
       const sector = res;
       const heroId = data.id;
       const heroes_in_town = sector.heroes;
-      if (!heroes_in_town || !heroes_in_town.some(i => i.toString() === heroId)) {
+      if (!heroes_in_town || !heroes_in_town.some((i) => i.toString() === heroId)) {
         redirectMessage(ws);
         return;
       }
-      const { heroesList } = info.player;
-      const hero = heroesList.find(i => i._id.toString() === heroId);
-      if (!hero) {
-        redirectMessage(ws);
-        return;
-      }
-      const army_hero = hero.army;
-      const army_in_town = sector.town.army.units;
-      const mergeWay = data.way;
-      if (mergeWay === 'in') {
-        Army.mergeTwoArmy(army_hero, army_in_town);
-      } else if (mergeWay === 'out') {
-        Army.mergeTwoArmy(army_in_town, army_hero);
-      } else {
-        redirectMessage(ws);
-        return;
-      }
-      const { server } = info;
-      const updateOps = {
-        collectionName: server,
-        filtr: {
-          _id: ObjectId(hero._id)
-        },
-        updateDoc: {
-          $set: { army: army_hero }
-        },
-        ops: { upsert: false }
-      };
-      update.one(updateOps).then(() => {
-        const sectrId = sector._id;
-        updateOps.filtr._id = sectrId;
-        updateOps.updateDoc = {
-          $set: { 'town.army.units': army_in_town }
+      getHeroesFromDB(serverName, { heroId }).then((hero) => {
+        if (!hero || !hero.active) {
+          redirectMessage(ws);
+          return;
+        }
+        const army_hero = hero.army;
+        const army_in_town = sector.town.army.units;
+        const mergeWay = data.way;
+        if (mergeWay === 'in') {
+          Army.mergeTwoArmy(army_hero, army_in_town);
+        } else if (mergeWay === 'out') {
+          Army.mergeTwoArmy(army_in_town, army_hero);
+        } else {
+          redirectMessage(ws);
+          return;
+        }
+        const { server } = info;
+        const updateOps = {
+          collectionName: server,
+          filtr: {
+            _id: ObjectId(hero._id),
+          },
+          updateDoc: {
+            $set: { army: army_hero },
+          },
+          ops: { upsert: false },
         };
         update.one(updateOps).then(() => {
-          response.data = {
-            town: {
-              army: army_in_town
-            },
-            hero: {
-              army: army_hero
-            }
+          const sectrId = sector._id;
+          updateOps.filtr._id = sectrId;
+          updateOps.updateDoc = {
+            $set: { 'town.army.units': army_in_town }
           };
-          ws.send(JSON.stringify(response));
+          update.one(updateOps).then(() => {
+            response.data = {
+              town: {
+                army: army_in_town,
+              },
+              hero: {
+                army: army_hero,
+              },
+            };
+            ws.send(JSON.stringify(response));
+          });
         });
       });
+      // const { heroesList } = info.player;
+      // const hero = heroesList.find((i) => i._id.toString() === heroId);
+      // if (!hero) {
+      //   redirectMessage(ws);
+      //   return;
+      // }
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       redirectMessage(ws);
     });
@@ -89,7 +97,7 @@ function handlerMergeArmy(message, info) {
 const schema = {
   id: { type: 'string', regExp: /^.{13,}\b/g },
   way: { type: 'string', regExp: /^in$|^out$/g },
-  sectorIndex: { type: 'number', min: 0 }
+  sectorIndex: { type: 'number', min: 0 },
 };
 
 module.exports = handlerMergeArmy;
