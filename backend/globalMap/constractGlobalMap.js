@@ -40,9 +40,8 @@ function constractGlobalMap() {
         'town.name': 1,
         'town.lvl': 1,
         'town.race': 1,
-        'town.sectorId': 1,
-        'town.regionMap': 1
-      },
+        'town.sectorId': 1
+      }
     };
     find.all(findOptions).then((result) => {
       const regionsArr = result.result;

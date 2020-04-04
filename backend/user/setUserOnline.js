@@ -17,7 +17,7 @@ function setUserOnline(user, server, info_for_game, ws) {
   global.UserOnline[server].count++;
   global.UserOnline[server][User._id].user = User;
   info_for_game.sectors.forEach(item => {
-    global.GlobalMap[server][item.x][item.y] = item;
+    // global.GlobalMap[server][item.x][item.y] = item;
     calcStorageNowValue(item.town.storage);
   });
   global.UserOnline[server][User._id].sectors = info_for_game.sectors;
