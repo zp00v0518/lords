@@ -11,7 +11,7 @@ const GlobalMap = {};
 const serverList = config.db.collections.servers;
 
 function constractGlobalMap() {
-  serverList.forEach(server => {
+  serverList.forEach((server) => {
     const serverName = server.collectionName;
     GlobalMap[serverName] = [];
     for (let i = 0; i < global.gameVariables.numSectionGlobalMap; i++) {
@@ -34,18 +34,25 @@ function constractGlobalMap() {
         y: 1,
         region: 1,
         nickName: 1,
-        userId: 1
-      }
+        userId: 1,
+        'town.id': 1,
+        'town.class': 1,
+        'town.name': 1,
+        'town.lvl': 1,
+        'town.race': 1,
+        'town.sectorId': 1,
+        'town.regionMap': 1
+      },
     };
-    find.all(findOptions).then(result => {
+    find.all(findOptions).then((result) => {
       const regionsArr = result.result;
-      regionsArr.forEach(item => {
+      regionsArr.forEach((item) => {
         const x = item.x;
         const y = item.y;
         GlobalMap[serverName][x][y] = item;
       });
       console.log(`Построение глобальной карты для ${serverName} завершено`);
-      controlStateEventsList(serverName).then(events => {
+      controlStateEventsList(serverName).then((events) => {
         console.log(`Игровые события на ${serverName} посчитаны`);
       });
     });
