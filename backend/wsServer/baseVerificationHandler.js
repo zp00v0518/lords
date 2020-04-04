@@ -1,16 +1,29 @@
+const { getHeroesFromDB } = require('../heroes/db');
+
+// проверка принадлежности героя к целевому городу
 function hero(id, sector, info) {
-  const { heroesList } = info.player;
-  const template = {
-    is: false
-  };
-  const hero = heroesList.find(i => i._id.toString() === id);
-  if (!hero) return template;
-  const heroes_in_town = sector.heroes;
-  if (!heroes_in_town || !heroes_in_town.some(i => i.toString() === id))
-    return template;
-  template.hero = JSON.parse(JSON.stringify(hero));
-  template.is = true;
-  return template;
+  return new Promise((resolve, reject) => {
+    const { heroesList } = info.player;
+    const template = {
+      is: false
+    };
+    const hero = heroesList.find(i => i._id.toString() === id);
+    if (!hero) {
+      resolve(template);
+    }
+    getHeroesFromDB(sector.serverName, { heroId: id })
+      .then(result => {
+        if (!result) {
+          resolve(template);
+        }
+        template.hero = JSON.parse(JSON.stringify(result));
+        template.is = true;
+        resolve(template);
+      })
+      .catch(() => {
+        reject(template);
+      });
+  });
 }
 
 module.exports = { hero };

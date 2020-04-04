@@ -1,7 +1,14 @@
-const addEventToDB = require("./addEventToDB");
+const addEventToDB = require('./addEventToDB');
 
 function setEventInGame(event, serverName) {
-  addEventToDB(event, serverName).then(result => {
+  return new Promise((resolve, reject) => {
+    addEventToDB(event, serverName)
+      .then(result => {
+        resolve(result);
+      })
+      .catch(err => {
+        reject(err);
+      });
   });
 }
 

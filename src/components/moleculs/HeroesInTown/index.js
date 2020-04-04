@@ -1,3 +1,4 @@
-import HeroesInTown from "./HeroesInTown";
+import HeroesInTown from './HeroesInTown';
+import InActiveHeroes from './InActiveHeroes';
 
-export default HeroesInTown;
+export { HeroesInTown, InActiveHeroes };

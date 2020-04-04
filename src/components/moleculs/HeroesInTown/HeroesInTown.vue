@@ -36,11 +36,11 @@
 </template>
 
 <script>
-import { ArmyLine } from "../ArmyLine";
-import { currentSector } from "../../mixins";
+import { ArmyLine } from '../ArmyLine';
+import { currentSector } from '../../mixins';
 
 export default {
-  name: "HeroesInTown",
+  name: 'HeroesInTown',
   mixins: [currentSector],
   components: { ArmyLine },
   props: {
@@ -75,7 +75,7 @@ export default {
     setActiveHero(hero) {
       const id = hero._id;
       if (this.activeHeroId === id) return;
-      this.$store.commit("SET_ACTIVE_HERO_ID", id);
+      this.$store.commit('SET_ACTIVE_HERO_ID', id);
     },
     getHeroesAvatar(hero) {
       if (!hero) return;
@@ -85,11 +85,9 @@ export default {
     mergeArmy(index, way) {
       const hero = this.list[index];
       const { $store, currentSector } = this;
-      const sectorIndex = $store.state.userSectors.sectors.findIndex(
-        i => i._id === currentSector._id
-      );
+      const sectorIndex = $store.state.userSectors.sectors.findIndex(i => i._id === currentSector._id);
       const message = {
-        type: "mergeArmy",
+        type: 'mergeArmy',
         data: {
           id: hero._id,
           way,
@@ -106,13 +104,13 @@ export default {
           if (data.hero) {
             payload.heroId = hero._id;
             payload.army = data.hero.army;
-            this.$store.commit("UPDATE_HERO_ARMY", payload);
-            this.$store.commit("FORCE_UPDATE_HEROES_LIST");
+            this.$store.commit('UPDATE_HERO_ARMY', payload);
+            this.$store.commit('FORCE_UPDATE_HEROES_LIST');
           }
           if (data.town) {
             payload.sectorIndex = sectorIndex;
             payload.army = data.town.army;
-            this.$store.commit("UPDATE_TOWN_ARMY", payload);
+            this.$store.commit('UPDATE_TOWN_ARMY', payload);
           }
         })
         .catch(err => {
