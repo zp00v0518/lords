@@ -20,10 +20,7 @@ function getTileCoordsOnMap() {
   const lineDown = Math.sqrt(q);
   const rombY = Math.floor(lineDown / l);
   // eslint-disable-next-line
-  return {
-    x: rombX,
-    y: rombY,
-  };
+  return { x: rombX, y: rombY };
 }
 
 module.exports = getTileCoordsOnMap;

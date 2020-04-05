@@ -1,7 +1,8 @@
 function drawMap() {
   let mapArr = this.currentMap;
   let ctx = this.ctx;
-  ctx.clearRect(0, 0, parseFloat(this.widthScene), parseFloat(this.heightScene));
+  const { canvas } = ctx;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   let tileWidth = this.tileWidth;
   let tileHeight = tileWidth / 2;
   let halfHeight = tileHeight / 2;
@@ -10,7 +11,7 @@ function drawMap() {
   let startY = this.isoCoords.y;
   let startCenterX = startX + tileHeight;
   let startCenterY = startY;
-
+  
   for (let i = 0; i < mapArr.length; i++) {
     for (let h = 0; h < mapArr[i].length; h++) {
       let centerX = startCenterX + 2 * halfHeight * (i + h);

@@ -10,7 +10,7 @@ function drawHoverLine(rombIndex) {
   let centerX = obj.centerX;
   let centerY = obj.centerY;
   var step = 0;
-  ctx.strokeStyle = "yellow";
+  ctx.strokeStyle = 'yellow';
   ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.moveTo(centerX, centerY - halfHeight + step);
