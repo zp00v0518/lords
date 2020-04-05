@@ -1,13 +1,21 @@
 <template>
   <div class="regionmap" ref="body">
-    <TooltipRegion v-show="showTooltip" :mouseCoords="mouseCoords" :tile="currentTile" :mode="mode"></TooltipRegion>
+    <TooltipRegion
+      v-show="showTooltip"
+      :mouseCoords="mouseCoords"
+      :tile="currentTile"
+      :mode="mode"
+      key="tooltip"
+    ></TooltipRegion>
     <canvas
       ref="scene"
-      :width="widthScene"
-      :height="heightScene"
+      id="qwer"
+      :width="sceneWidth"
+      :height="sceneHeight"
       @mousemove="handlerMousemoveOnMap"
       @mouseleave="hideTooltip"
       @click="handlerClick"
+      key="scene"
     ></canvas>
   </div>
 </template>
@@ -52,6 +60,8 @@ export default {
         right: { x: 0, y: 0 },
         bottom: { x: 0, y: 0 }
       },
+      sceneWidth: this.widthScene,
+      sceneHeight: this.heightScene,
       mouseCoords: { x: 0, y: 0 }
     };
   },
@@ -103,7 +113,8 @@ export default {
     tileWidth() {
       const { ctx } = this;
       if (!ctx) return 0;
-      const widthParse = ctx.canvas.width / 2;
+      // const widthParse = ctx.canvas.width / 2;
+      const widthParse = parseInt(this.sceneWidth) / 2;
       const intermediate = widthParse / (this.currentMap.length / 2);
       return intermediate;
     },
@@ -111,7 +122,8 @@ export default {
       const { ctx } = this;
       const x = 0;
       if (!ctx) return { x, y: 0 };
-      const y = ctx.canvas.height / 2;
+      const y = parseInt(this.sceneHeight) / 2;
+      // const y = ctx.canvas.height / 2;
       return { x, y };
     },
     gloss() {
@@ -124,8 +136,6 @@ export default {
       if (!this.cursorOnScene || currentTile.type === 1 || currentTile.type === 3) return;
       if (this.currentTile.type === 0) {
         if (currentTile.army && currentTile.army.length === 0) return;
-        console.log(currentTile);
-        // const nameRegion = this.$region.typeList[currentTile.type];
         const payload = {
           title: 'Настройка битвы',
           data: {
@@ -207,22 +217,24 @@ export default {
       ctx.fill();
       ctx.closePath();
     },
-    setSizeScene(ctx) {
+    setSizeScene() {
       const { body } = this.$refs;
       const styles = body.getBoundingClientRect();
       if (!this.widthScene) {
-        ctx.canvas.width = styles.width;
+        this.sceneWidth = styles.width + 'px';
       }
       if (!this.heightScene) {
-        ctx.canvas.height = styles.height;
+        this.sceneHeight = styles.height + 'px';
       }
     }
   },
   mounted() {
     this.ctx = this.$refs.scene.getContext('2d');
-    this.setSizeScene(this.ctx);
-    this.drawMap();
-    this.setBorderIsoMap();
+    this.$nextTick(() => {
+      this.setSizeScene();
+      this.setBorderIsoMap();
+      requestAnimationFrame(this.drawMap);
+    });
   }
 };
 </script>

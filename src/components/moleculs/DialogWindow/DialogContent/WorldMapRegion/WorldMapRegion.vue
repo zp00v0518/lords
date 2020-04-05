@@ -4,7 +4,8 @@
       <Icon class="dialog__close" name="circle-close" @click.native="closeDialogWindow"></Icon>
     </div>
     <div class="worldmap-region__body" ref="body">
-      <canvas ref="scene"></canvas>
+      <!-- <canvas ref="scene" @mousemove="handlerMousemoveOnMap"></canvas> -->
+      <RegionMap :regionMap="data.targetTile.region" mode="dialog"></RegionMap>
     </div>
   </div>
 </template>
@@ -12,7 +13,16 @@
 <script>
 import { closeMixin } from '../../dialogMixin';
 import RegionMap from '../../../Scenes/RegionMap/RegionMap';
-import { drawMap, setBorderIsoMap } from '../../../Scenes/utils';
+import {
+  drawMap,
+  setBorderIsoMap,
+  checkMouseCoordsOnMap,
+  handlerMousemoveOnMap,
+  getCursorPositionOnScene,
+  hideTooltip,
+  getTileCoordsOnMap,
+  drawHoverLine
+} from '../../../Scenes/utils';
 
 export default {
   name: 'WorldMapRegion',
@@ -32,17 +42,23 @@ export default {
       ctx: null,
       isoCoords: { x: 0, y: 0 },
       tileWidth: 32,
-      currentMap: this.data.targetTile.region
+      currentMap: this.data.targetTile.region,
+      mouseCoords: { x: 0, y: 0 }
     };
   },
   created() {
-    console.log(this.data);
     this.$emit('set-height', { height: '99%', width: '99%' });
   },
   computed: {},
   methods: {
     drawMap,
     setBorderIsoMap,
+    checkMouseCoordsOnMap,
+    handlerMousemoveOnMap,
+    getCursorPositionOnScene,
+    hideTooltip,
+    getTileCoordsOnMap,
+    drawHoverLine,
     init() {
       this.ctx = this.$refs.scene.getContext('2d');
       this.setSizeScene();
@@ -66,7 +82,7 @@ export default {
     }
   },
   mounted() {
-    this.init();
+    // this.init();
   }
 };
 </script>
@@ -83,9 +99,12 @@ export default {
   &__body {
     flex-grow: 2;
     & canvas {
-      width: 100%;
-      height: 100%;
+      // width: 100%;
+      // height: 100%;
     }
+  }
+  &__tooltip {
+    position: absolute;
   }
 }
 </style>

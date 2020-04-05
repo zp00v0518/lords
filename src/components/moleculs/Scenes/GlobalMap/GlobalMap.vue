@@ -2,6 +2,7 @@
   <div class="globalmap">
     <Tooltip v-show="showTooltip" :mouseCoords="mouseCoords" :tile="currentTile"></Tooltip>
     <canvas
+    id="global"
       ref="scene"
       :width="widthScene"
       :height="heightScene"

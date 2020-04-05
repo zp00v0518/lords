@@ -11,7 +11,6 @@ function drawMap() {
   let startY = this.isoCoords.y;
   let startCenterX = startX + tileHeight;
   let startCenterY = startY;
-  
   for (let i = 0; i < mapArr.length; i++) {
     for (let h = 0; h < mapArr[i].length; h++) {
       let centerX = startCenterX + 2 * halfHeight * (i + h);
