@@ -1,6 +1,6 @@
 <template>
-  <div class="regionmap">
-    <TooltipRegion v-show="showTooltip" :mouseCoords="mouseCoords" :tile="currentTile"></TooltipRegion>
+  <div class="regionmap" ref="body">
+    <TooltipRegion v-show="showTooltip" :mouseCoords="mouseCoords" :tile="currentTile" :mode="mode"></TooltipRegion>
     <canvas
       ref="scene"
       :width="widthScene"
@@ -33,7 +33,12 @@ export default {
   components: {
     TooltipRegion
   },
-  props: ['widthScene', 'heightScene'],
+  props: {
+    widthScene: 0,
+    heightScene: 0,
+    regionMap: null,
+    mode: { type: String, default: 'global' }
+  },
   data() {
     return {
       showTooltip: false,
@@ -51,22 +56,30 @@ export default {
     };
   },
   created() {
-    this.currentMap = this.$store.state.regionMap.currentRegion;
-    if (this.$store.state.userSectors.currentSector) {
-      this.currentMap = this.$store.state.userSectors.currentSector.region;
+    if (!this.regionMap) {
+      this.currentMap = this.$store.state.regionMap.currentRegion;
+      if (this.$store.state.userSectors.currentSector) {
+        this.currentMap = this.$store.state.userSectors.currentSector.region;
+      }
+    } else {
+      this.currentMap = this.regionMap;
     }
   },
   watch: {
     'currentSector.region': function(e) {
-      const { deepClone } = this;
-      this.currentMap = deepClone(e);
-      this.drawMap();
-      this.setBorderIsoMap();
+      if (this.mode === 'global') {
+        const { deepClone } = this;
+        this.currentMap = deepClone(e);
+        this.drawMap();
+        this.setBorderIsoMap();
+      }
     },
     eventList: {
       deep: true,
       handler() {
-        this.drawMap();
+        if (this.mode === 'global') {
+          this.drawMap();
+        }
       }
     }
   },
@@ -88,13 +101,17 @@ export default {
       return this.$store.state.settings;
     },
     tileWidth() {
-      const widthParse = parseInt(this.widthScene) / 2;
+      const { ctx } = this;
+      if (!ctx) return 0;
+      const widthParse = ctx.canvas.width / 2;
       const intermediate = widthParse / (this.currentMap.length / 2);
       return intermediate;
     },
     isoCoords() {
+      const { ctx } = this;
       const x = 0;
-      const y = parseInt(this.heightScene) / 2;
+      if (!ctx) return { x, y: 0 };
+      const y = ctx.canvas.height / 2;
       return { x, y };
     },
     gloss() {
@@ -189,10 +206,21 @@ export default {
       ctx.stroke();
       ctx.fill();
       ctx.closePath();
+    },
+    setSizeScene(ctx) {
+      const { body } = this.$refs;
+      const styles = body.getBoundingClientRect();
+      if (!this.widthScene) {
+        ctx.canvas.width = styles.width;
+      }
+      if (!this.heightScene) {
+        ctx.canvas.height = styles.height;
+      }
     }
   },
   mounted() {
     this.ctx = this.$refs.scene.getContext('2d');
+    this.setSizeScene(this.ctx);
     this.drawMap();
     this.setBorderIsoMap();
   }
@@ -200,5 +228,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'regionMap.scss';
+.regionmap {
+  height: 100%;
+}
 </style>
