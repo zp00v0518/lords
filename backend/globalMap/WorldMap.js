@@ -13,4 +13,3 @@ const WorldMap = {
 };
 
 module.exports = WorldMap;
-

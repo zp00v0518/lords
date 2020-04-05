@@ -29,7 +29,7 @@ module.exports = {
     'semi': ["off"],
     "quotes": ["off"],
     "camelcase": "off",
-    "comma-dangle": ["error", "always-multiline"],
+    "comma-dangle": ["error", "never"],
 
   }
 }

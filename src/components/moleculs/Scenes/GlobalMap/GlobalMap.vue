@@ -130,12 +130,17 @@ export default {
       this.$ws.sendMessage(message);
     },
     handlerClickOnGlobalMap($event) {
-      console.log(this.currentTile);
-      const curX = this.currentSector.x;
-      const curY = this.currentSector.y;
-      const targetX = this.currentTile.x;
-      const targetY = this.currentTile.y;
-      console.log(curX, curY, targetX, targetY);
+      const tileTypes = this.globalConfig.all.WorldMap.types;
+      const { currentTile } = this;
+      if (currentTile.type === tileTypes.empty.id) {
+        const payload = {
+          data: {
+            targetTile: this.deepClone(currentTile)
+          },
+          type: 'worldMapRegion'
+        };
+        this.$store.commit('DIALOG_SHOW', payload);
+      }
     }
   },
   mounted() {
@@ -146,6 +151,6 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 @import 'globalMap.scss';
 </style>
