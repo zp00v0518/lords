@@ -1,37 +1,38 @@
-const { getRandomNumber } = require("template_func");
-const tube = require("../tube.js");
-const { createTown } = require("../town");
+const { getRandomNumber } = require('template_func');
+const tube = require('../tube.js');
+const { createTown } = require('../town');
 const { GlobalMap, config, updateDB } = tube;
+const WorldMap = require('../globalMap/WorldMap');
 const update = new updateDB();
 
 // добавляю нового Игрока на глобальную карту
-function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
+function addNewUserToGlobalMap(user, serverName, callback = function () {}) {
   // const { createTown } = tube;
   return new Promise((resolve, reject) => {
     checkUserPosition(serverName, (x, y, sectorId) => {
       const newTown = createTown({
-        status: "new",
-        name: "New Castle",
-        sectorId
+        status: 'new',
+        name: 'New Castle',
+        sectorId,
       });
       const optionsForUpdateBD = {
         collectionName: serverName,
         filtr: {
           x,
           y,
-          class: config.schema.document.class.map
+          class: config.schema.document.class.map,
         },
         updateDoc: {
           $set: {
             region: newTown.regionMap,
             userId: user._id,
-            type: 1,
+            type: WorldMap.types.town.id,
             nickName: user.nickName,
-            town: newTown
-          }
-        }
+            town: newTown,
+          },
+        },
       };
-      update.one(optionsForUpdateBD).then(result => {
+      update.one(optionsForUpdateBD).then((result) => {
         GlobalMap[serverName][x][y].region = newTown.regionMap;
         GlobalMap[serverName][x][y].userId = user._id;
         GlobalMap[serverName][x][y].type = 1;

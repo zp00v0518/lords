@@ -5,6 +5,7 @@ const schema = require('../workWithMongoDB/schema.js');
 const gameVariable = require('../variables/game_variables.js');
 const createMine = require('../region/mine/createMine.js');
 const config = require('../config/config.js');
+const WorldMap = require('../globalMap/WorldMap');
 const serverList = config.db.collections.servers;
 const insertDB = new insert();
 
@@ -100,14 +101,14 @@ function createGlobalMap() {
         sector.class = schema.document.class.map;
         sector.serverName = serverName;
         sector.id = countRegion++;
-        sector.type = 0;
+        sector.type = WorldMap.types.empty.id;
         sector.x = i;
         sector.y = h;
         sector.region = createRegion();
         // sector.listUpgrade = [];
         let persent = getRandomNumber(100);
         if (persent <= 2) {
-          sector.type = 2;
+          sector.type = WorldMap.types.empty.id;
         }
         row.push(sector);
       }

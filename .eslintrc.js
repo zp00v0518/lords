@@ -28,7 +28,8 @@ module.exports = {
     'space-before-function-paren': ["error", "never"],
     'semi': ["off"],
     "quotes": ["off"],
-    "camelcase": "off"
+    "camelcase": "off",
+    "comma-dangle": ["error", "always-multiline"],
 
   }
 }

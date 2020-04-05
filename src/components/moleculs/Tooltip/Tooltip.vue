@@ -62,7 +62,7 @@ export default {
     },
     getIcon(name) {
       const icons = this.gameSources.resources.small;
-      
+
       return icons[name] ? icons[name].src : '';
     }
   }

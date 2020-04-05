@@ -51,12 +51,12 @@ import {
   handlerMousemoveOnMap
 } from '../utils';
 import Tooltip from '../../Tooltip';
+import { currentSector } from '../../../mixins';
 
 export default {
   name: 'GlobalMap',
-  components: {
-    Tooltip
-  },
+  components: { Tooltip },
+  mixins: [currentSector],
   props: ['widthScene', 'heightScene'],
   data() {
     return {
@@ -129,8 +129,13 @@ export default {
       };
       this.$ws.sendMessage(message);
     },
-    handlerClickOnGlobalMap() {
-      // console.log(this.currentTile);
+    handlerClickOnGlobalMap($event) {
+      console.log(this.currentTile);
+      const curX = this.currentSector.x;
+      const curY = this.currentSector.y;
+      const targetX = this.currentTile.x;
+      const targetY = this.currentTile.y;
+      console.log(curX, curY, targetX, targetY);
     }
   },
   mounted() {
