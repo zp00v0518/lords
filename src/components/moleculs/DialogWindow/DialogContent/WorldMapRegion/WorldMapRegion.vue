@@ -1,11 +1,39 @@
 <template>
   <div class="worldmap-region">
     <div class="worldmap-region__title">
+      <div class="worldmap-region__title--txt">Построить город?</div>
       <Icon class="dialog__close" name="circle-close" @click.native="closeDialogWindow"></Icon>
     </div>
     <div class="worldmap-region__body" ref="body">
       <!-- <canvas ref="scene" @mousemove="handlerMousemoveOnMap"></canvas> -->
       <RegionMap :regionMap="data.targetTile.region" mode="dialog"></RegionMap>
+    </div>
+    <div class="worldmap-region__footer">
+      
+      <div class="worldmap-region__footer__price">
+        <div class="worldmap-region__footer__price--item">
+          <div
+            class="worldmap-region__footer__price__resource"
+          >
+            <div class="worldmap-region__footer__price__resource--icon">
+              <!-- <img :src="'img/resources/'+item.resource+'.gif'" /> -->
+            </div>
+            <div class="worldmap-region__footer__price__resource--sum">dsfgsdfg</div>
+          </div>
+        </div>
+        <div class="worldmap-region__footer__price--item">
+          <div class="worldmap-region__footer__price__resource">
+            <div class="text">dfgsdfg</div>
+            <div class="value">safgdsfg</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="worldmap-region__footer__gui">
+        <GuiBtn type="ok" class="worldmap-region__footer__gui--btn" />
+        <GuiBtn type="cancel" class="worldmap-region__footer__gui--btn" />
+      </div>
+
     </div>
   </div>
 </template>
@@ -95,6 +123,13 @@ export default {
   &__title {
     display: flex;
     justify-content: flex-end;
+    &--txt {
+      flex-grow: 2;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px;
+    }
   }
   &__body {
     flex-grow: 2;
@@ -105,6 +140,23 @@ export default {
   }
   &__tooltip {
     position: absolute;
+  }
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    height: 15%;
+    min-height: 100px;
+    &__price {
+      margin-bottom: 10px;
+      display: flex;
+    }
+    &__gui {
+      display: flex;
+      justify-content: center;
+      &--btn {
+        margin: 15px;
+      }
+    }
   }
 }
 </style>

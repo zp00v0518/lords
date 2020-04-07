@@ -9,12 +9,11 @@
     ></TooltipRegion>
     <canvas
       ref="scene"
-      id="qwer"
       :width="sceneWidth"
       :height="sceneHeight"
       @mousemove="handlerMousemoveOnMap"
       @mouseleave="hideTooltip"
-      @click="handlerClick"
+      @click="mode === 'dialog' ? {} : handlerClick"
       key="scene"
     ></canvas>
   </div>
