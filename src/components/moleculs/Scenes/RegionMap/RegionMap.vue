@@ -13,7 +13,7 @@
       :height="sceneHeight"
       @mousemove="handlerMousemoveOnMap"
       @mouseleave="hideTooltip"
-      @click="mode === 'dialog' ? {} : handlerClick"
+      @click="mode === 'dialog' ? {} : handlerClick()"
       key="scene"
     ></canvas>
   </div>

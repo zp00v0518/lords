@@ -9,12 +9,9 @@
       <RegionMap :regionMap="data.targetTile.region" mode="dialog"></RegionMap>
     </div>
     <div class="worldmap-region__footer">
-      
       <div class="worldmap-region__footer__price">
         <div class="worldmap-region__footer__price--item">
-          <div
-            class="worldmap-region__footer__price__resource"
-          >
+          <div class="worldmap-region__footer__price__resource">
             <div class="worldmap-region__footer__price__resource--icon">
               <!-- <img :src="'img/resources/'+item.resource+'.gif'" /> -->
             </div>
@@ -31,9 +28,8 @@
 
       <div class="worldmap-region__footer__gui">
         <GuiBtn type="ok" class="worldmap-region__footer__gui--btn" />
-        <GuiBtn type="cancel" class="worldmap-region__footer__gui--btn" />
+        <GuiBtn type="cancel" class="worldmap-region__footer__gui--btn" @click.native="getSourceForBuilding"/>
       </div>
-
     </div>
   </div>
 </template>
@@ -107,6 +103,10 @@ export default {
       const width = parseInt(ctx.canvas.width) / 2;
       const tileWidth = width / (currentMap.length / 2);
       return tileWidth;
+    },
+    getSourceForBuilding() {
+      const { Town } = this.globalConfig.all;
+      console.log(Town.getSourceForNewTown());
     }
   },
   mounted() {
