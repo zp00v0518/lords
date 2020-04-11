@@ -117,13 +117,13 @@ export default {
       return WorldMap.getTimeMoveOnMap(x1, y1, x2, y2);
     },
     buildNewTown() {
-      const { activeHero, createDisabled, $store, currentSector, data, globalConfig } = this;
+      const { activeHero, createDisabled, $store, currentSector, data } = this;
       if (createDisabled) return;
       const { targetTile } = data;
       const sectorIndex = $store.state.userSectors.sectors.findIndex(i => i._id === currentSector._id);
       if (sectorIndex === -1) return;
       const message = {
-        type: globalConfig.all.Event.types.buildNewTown,
+        type: 'buildNewTown',
         data: {
           sectorIndex,
           heroId: activeHero._id,
