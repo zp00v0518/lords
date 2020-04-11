@@ -29,8 +29,12 @@
       </div>
 
       <div class="worldmap-region__footer__gui">
-        <GuiBtn type="ok" class="worldmap-region__footer__gui--btn" :disabled="!activeHero" />
-        <GuiBtn type="cancel" class="worldmap-region__footer__gui--btn" @click="closeDialogWindow"/>
+        <GuiBtn
+          type="ok"
+          class="worldmap-region__footer__gui--btn"
+          :disabled="!activeHero || !heroInTown"
+        />
+        <GuiBtn type="cancel" class="worldmap-region__footer__gui--btn" @click="closeDialogWindow" />
       </div>
     </div>
   </div>
@@ -38,12 +42,14 @@
 
 <script>
 import { closeMixin } from '../../dialogMixin';
+import { currentSector } from '../../../../mixins';
+
 import RegionMap from '../../../Scenes/RegionMap/RegionMap';
 
 export default {
   name: 'WorldMapRegion',
   components: { RegionMap },
-  mixins: [closeMixin],
+  mixins: [closeMixin, currentSector],
   props: {
     data: { type: Object, required: true }
   },
@@ -52,21 +58,33 @@ export default {
       sources: {}
     };
   },
-
   created() {
     this.sources = this.getSourceForBuilding();
+    console.log(this.currentSector);
   },
   computed: {
     activeHero() {
       const { activeHeroId, heroesList } = this.$store.state.heroes;
       return heroesList.find(i => i._id === activeHeroId);
+    },
+    heroInTown() {
+      const { activeHero, currentSector } = this;
+      if (!activeHero) return false;
+      const { heroes } = currentSector;
+      return Array.isArray(heroes) && heroes.includes(activeHero._id);
+    }
+  },
+  watch: {
+    heroInTown: function(e) {
+      this.getTimeBuild();
     }
   },
   methods: {
     getSourceForBuilding() {
       const { Town } = this.globalConfig.all;
       return Town.getSourceForNewTown();
-    }
+    },
+    getTimeBuild() {}
   }
 };
 </script>
