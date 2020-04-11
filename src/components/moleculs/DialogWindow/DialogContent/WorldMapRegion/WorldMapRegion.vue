@@ -5,30 +5,32 @@
       <Icon class="dialog__close" name="circle-close" @click.native="closeDialogWindow"></Icon>
     </div>
     <div class="worldmap-region__body" ref="body">
-      <!-- <canvas ref="scene" @mousemove="handlerMousemoveOnMap"></canvas> -->
       <RegionMap :regionMap="data.targetTile.region" mode="dialog"></RegionMap>
     </div>
     <div class="worldmap-region__footer">
       <div class="worldmap-region__footer__price">
         <div class="worldmap-region__footer__price--item">
-          <div class="worldmap-region__footer__price__resource">
+          <div
+            class="worldmap-region__footer__price__resource"
+            v-for="(value, name) in sources"
+            :key="name"
+          >
             <div class="worldmap-region__footer__price__resource--icon">
-              <!-- <img :src="'img/resources/'+item.resource+'.gif'" /> -->
+              <img :src="'img/resources/'+name+'.gif'" />
             </div>
-            <div class="worldmap-region__footer__price__resource--sum">dsfgsdfg</div>
+            <div class="worldmap-region__footer__price__resource--sum">{{value}}</div>
           </div>
         </div>
         <div class="worldmap-region__footer__price--item">
           <div class="worldmap-region__footer__price__resource">
-            <div class="text">dfgsdfg</div>
-            <div class="value">safgdsfg</div>
+            <div class="text">Выберите героя</div>
           </div>
         </div>
       </div>
 
       <div class="worldmap-region__footer__gui">
-        <GuiBtn type="ok" class="worldmap-region__footer__gui--btn" />
-        <GuiBtn type="cancel" class="worldmap-region__footer__gui--btn" @click.native="getSourceForBuilding"/>
+        <GuiBtn type="ok" class="worldmap-region__footer__gui--btn" :disabled="!activeHero" />
+        <GuiBtn type="cancel" class="worldmap-region__footer__gui--btn" @click="closeDialogWindow"/>
       </div>
     </div>
   </div>
@@ -37,16 +39,6 @@
 <script>
 import { closeMixin } from '../../dialogMixin';
 import RegionMap from '../../../Scenes/RegionMap/RegionMap';
-import {
-  drawMap,
-  setBorderIsoMap,
-  checkMouseCoordsOnMap,
-  handlerMousemoveOnMap,
-  getCursorPositionOnScene,
-  hideTooltip,
-  getTileCoordsOnMap,
-  drawHoverLine
-} from '../../../Scenes/utils';
 
 export default {
   name: 'WorldMapRegion',
@@ -57,60 +49,24 @@ export default {
   },
   data() {
     return {
-      borderIsoMap: {
-        left: { x: 0, y: 0 },
-        top: { x: 0, y: 0 },
-        right: { x: 0, y: 0 },
-        bottom: { x: 0, y: 0 }
-      },
-      ctx: null,
-      isoCoords: { x: 0, y: 0 },
-      tileWidth: 32,
-      currentMap: this.data.targetTile.region,
-      mouseCoords: { x: 0, y: 0 }
+      sources: {}
     };
   },
+
   created() {
-    this.$emit('set-height', { height: '99%', width: '99%' });
+    this.sources = this.getSourceForBuilding();
   },
-  computed: {},
-  methods: {
-    drawMap,
-    setBorderIsoMap,
-    checkMouseCoordsOnMap,
-    handlerMousemoveOnMap,
-    getCursorPositionOnScene,
-    hideTooltip,
-    getTileCoordsOnMap,
-    drawHoverLine,
-    init() {
-      this.ctx = this.$refs.scene.getContext('2d');
-      this.setSizeScene();
-      this.isoCoords.y = this.ctx.canvas.height / 2;
-      this.tileWidth = this.getTileWidth();
-      this.setBorderIsoMap();
-      this.drawMap();
-    },
-    setSizeScene() {
-      const { ctx, $refs } = this;
-      const { body } = $refs;
-      const styles = body.getBoundingClientRect();
-      ctx.canvas.width = styles.width;
-      ctx.canvas.height = styles.height;
-    },
-    getTileWidth() {
-      const { ctx, currentMap } = this;
-      const width = parseInt(ctx.canvas.width) / 2;
-      const tileWidth = width / (currentMap.length / 2);
-      return tileWidth;
-    },
-    getSourceForBuilding() {
-      const { Town } = this.globalConfig.all;
-      console.log(Town.getSourceForNewTown());
+  computed: {
+    activeHero() {
+      const { activeHeroId, heroesList } = this.$store.state.heroes;
+      return heroesList.find(i => i._id === activeHeroId);
     }
   },
-  mounted() {
-    // this.init();
+  methods: {
+    getSourceForBuilding() {
+      const { Town } = this.globalConfig.all;
+      return Town.getSourceForNewTown();
+    }
   }
 };
 </script>
@@ -132,11 +88,8 @@ export default {
     }
   }
   &__body {
+    height: 60%;
     flex-grow: 2;
-    & canvas {
-      // width: 100%;
-      // height: 100%;
-    }
   }
   &__tooltip {
     position: absolute;
@@ -144,17 +97,28 @@ export default {
   &__footer {
     display: flex;
     flex-direction: column;
-    height: 15%;
+    height: 30%;
     min-height: 100px;
+    padding: 10px;
     &__price {
       margin-bottom: 10px;
       display: flex;
+      &--item {
+        width: 45%;
+        margin: 10px;
+        @include center;
+      }
+      &__resource {
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+      }
     }
     &__gui {
       display: flex;
       justify-content: center;
       &--btn {
-        margin: 15px;
+        margin: 15px 20px;
       }
     }
   }
