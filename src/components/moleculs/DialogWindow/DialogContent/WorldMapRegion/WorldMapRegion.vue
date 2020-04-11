@@ -60,7 +60,7 @@ export default {
   },
   data() {
     return {
-      sources: {},
+      sources: null,
       timeText: 1234
     };
   },
@@ -79,7 +79,16 @@ export default {
       return Array.isArray(heroes) && heroes.includes(activeHero._id);
     },
     createDisabled() {
-      return !this.activeHero || !this.heroInTown;
+      return !this.activeHero || !this.haveSources || !this.heroInTown;
+    },
+    haveSources() {
+      const { sources, globalConfig, currentSector } = this;
+      if (!sources) return false;
+      const storage = currentSector.town && currentSector.town.storage && currentSector.town.storage.sources;
+      if (!storage) return false;
+      const { Resources } = globalConfig.all;
+      const flag = Resources.checkSource(sources, storage);
+      return flag;
     }
   },
   watch: {
