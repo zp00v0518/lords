@@ -46,7 +46,7 @@ class WS {
           // eslint-disable-next-line
           location = data.redirectUrl;
         } else {
-          // console.log(data);
+          console.log(data);
         }
       }
     };

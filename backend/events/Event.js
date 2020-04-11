@@ -4,7 +4,8 @@ const Event = {
     battle: 'battle',
     upgradeRegion: 'upgradeRegion',
     upgradeTown: 'upgradeTown',
-    backToTown: 'backToTown'
+    backToTown: 'backToTown',
+    buildNewTown: 'buildNewTown'
   }
 };
 

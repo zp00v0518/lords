@@ -32,7 +32,12 @@
       </div>
 
       <div class="worldmap-region__footer__gui">
-        <GuiBtn type="ok" class="worldmap-region__footer__gui--btn" :disabled="createDisabled" />
+        <GuiBtn
+          type="ok"
+          class="worldmap-region__footer__gui--btn"
+          @click="buildNewTown"
+          :disabled="createDisabled"
+        />
         <GuiBtn type="cancel" class="worldmap-region__footer__gui--btn" @click="closeDialogWindow" />
       </div>
     </div>
@@ -110,6 +115,23 @@ export default {
       const x2 = targetTile.x;
       const y2 = targetTile.y;
       return WorldMap.getTimeMoveOnMap(x1, y1, x2, y2);
+    },
+    buildNewTown() {
+      const { activeHero, createDisabled, $store, currentSector, data, globalConfig } = this;
+      if (createDisabled) return;
+      const { targetTile } = data;
+      const sectorIndex = $store.state.userSectors.sectors.findIndex(i => i._id === currentSector._id);
+      if (sectorIndex === -1) return;
+      const message = {
+        type: globalConfig.all.Event.types.buildNewTown,
+        data: {
+          sectorIndex,
+          heroId: activeHero._id,
+          targetSector: targetTile._id
+        }
+      };
+      this.$ws.sendMessage(message);
+      this.closeDialogWindow();
     }
   }
 };
