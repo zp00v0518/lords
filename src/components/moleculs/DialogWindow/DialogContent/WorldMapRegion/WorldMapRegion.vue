@@ -1,7 +1,9 @@
 <template>
   <div class="worldmap-region">
     <div class="worldmap-region__title">
-      <div class="worldmap-region__title--txt">Построить город?</div>
+      <div
+        class="worldmap-region__title--txt"
+      >{{upperFirstSymbol(gloss.dialog.questions.createNewTown.txt)}}</div>
       <Icon class="dialog__close" name="circle-close" @click.native="closeDialogWindow"></Icon>
     </div>
     <div class="worldmap-region__body" ref="body">
@@ -23,17 +25,14 @@
         </div>
         <div class="worldmap-region__footer__price--item">
           <div class="worldmap-region__footer__price__resource">
-            <div class="text">Выберите героя</div>
+            <div class="text">{{ upperFirstSymbol(gloss.date.time.txt) }}</div>
+            <div class="value">{{ timeText }}</div>
           </div>
         </div>
       </div>
 
       <div class="worldmap-region__footer__gui">
-        <GuiBtn
-          type="ok"
-          class="worldmap-region__footer__gui--btn"
-          :disabled="!activeHero || !heroInTown"
-        />
+        <GuiBtn type="ok" class="worldmap-region__footer__gui--btn" :disabled="createDisabled" />
         <GuiBtn type="cancel" class="worldmap-region__footer__gui--btn" @click="closeDialogWindow" />
       </div>
     </div>
@@ -42,20 +41,21 @@
 
 <script>
 import { closeMixin } from '../../dialogMixin';
-import { currentSector } from '../../../../mixins';
+import { currentSector, glossary } from '../../../../mixins';
 
 import RegionMap from '../../../Scenes/RegionMap/RegionMap';
 
 export default {
   name: 'WorldMapRegion',
   components: { RegionMap },
-  mixins: [closeMixin, currentSector],
+  mixins: [closeMixin, currentSector, glossary],
   props: {
     data: { type: Object, required: true }
   },
   data() {
     return {
-      sources: {}
+      sources: {},
+      timeText: 1234
     };
   },
   created() {
@@ -72,11 +72,17 @@ export default {
       if (!activeHero) return false;
       const { heroes } = currentSector;
       return Array.isArray(heroes) && heroes.includes(activeHero._id);
+    },
+    createDisabled() {
+      return !this.activeHero || !this.heroInTown;
     }
   },
   watch: {
-    heroInTown: function(e) {
-      this.getTimeBuild();
+    createDisabled: {
+      immediate: true,
+      handler(e) {
+        this.setTimeText();
+      }
     }
   },
   methods: {
@@ -84,7 +90,17 @@ export default {
       const { Town } = this.globalConfig.all;
       return Town.getSourceForNewTown();
     },
-    getTimeBuild() {}
+    setTimeText() {
+      const { createDisabled, gloss, upperFirstSymbol } = this;
+      if (createDisabled) {
+        this.timeText = upperFirstSymbol(gloss.dialog.chooseHero.txt);
+        return;
+      }
+      const { data, currentSector } = this;
+      const { targetTile } = data;
+      console.log(targetTile);
+      this.timeText = 222;
+    }
   }
 };
 </script>
@@ -129,6 +145,7 @@ export default {
       &__resource {
         display: flex;
         flex-direction: column;
+        align-items: center;
         margin: 10px;
       }
     }

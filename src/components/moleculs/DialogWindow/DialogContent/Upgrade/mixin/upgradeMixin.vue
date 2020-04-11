@@ -1,7 +1,6 @@
 <script>
 import { getTimeString } from "../../modules";
-import glossary from "../../../../../mixins/glossary.vue";
-import { currentSector } from "../../../../../mixins";
+import { currentSector, glossary } from "../../../../../mixins";
 
 import fromBackend from "../../../../../../fromBackend";
 const checkSource = fromBackend.checkSource;

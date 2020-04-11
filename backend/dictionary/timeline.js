@@ -5,7 +5,7 @@ const timeLine = {
   upgrade: {
     ru: 'улучшение'
   },
-  hiring:{
+  hiring: {
     ru: 'найм'
   }
 };

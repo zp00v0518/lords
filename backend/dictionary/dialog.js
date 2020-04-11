@@ -17,9 +17,12 @@ const dialog = {
   questions: {
     upgrade: {
       ru: 'Вы хотите улучшить это здание?'
+    },
+    createNewTown: {
+      ru: 'построить новый город?'
     }
   },
-  full_army_in_town:{
+  full_army_in_town: {
     ru: 'В городе нет места для юнита'
   },
   answer: {
@@ -29,6 +32,9 @@ const dialog = {
     no: {
       ru: 'нет'
     }
+  },
+  chooseHero: {
+    ru: 'выберите героя'
   }
 };
 
