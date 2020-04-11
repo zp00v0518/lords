@@ -42,6 +42,7 @@
 <script>
 import { closeMixin } from '../../dialogMixin';
 import { currentSector, glossary } from '../../../../mixins';
+import { getAsTimeString } from '../../../../../utils';
 
 import RegionMap from '../../../Scenes/RegionMap/RegionMap';
 
@@ -60,7 +61,6 @@ export default {
   },
   created() {
     this.sources = this.getSourceForBuilding();
-    console.log(this.currentSector);
   },
   computed: {
     activeHero() {
@@ -86,6 +86,7 @@ export default {
     }
   },
   methods: {
+    getAsTimeString,
     getSourceForBuilding() {
       const { Town } = this.globalConfig.all;
       return Town.getSourceForNewTown();
@@ -96,10 +97,19 @@ export default {
         this.timeText = upperFirstSymbol(gloss.dialog.chooseHero.txt);
         return;
       }
+      const time = this.getMoveTime();
+      const str = this.getAsTimeString(time);
+      this.timeText = str;
+    },
+    getMoveTime() {
+      const { WorldMap } = this.globalConfig.all;
       const { data, currentSector } = this;
       const { targetTile } = data;
-      console.log(targetTile);
-      this.timeText = 222;
+      const x1 = currentSector.x;
+      const y1 = currentSector.y;
+      const x2 = targetTile.x;
+      const y2 = targetTile.y;
+      return WorldMap.getTimeMoveOnMap(x1, y1, x2, y2);
     }
   }
 };

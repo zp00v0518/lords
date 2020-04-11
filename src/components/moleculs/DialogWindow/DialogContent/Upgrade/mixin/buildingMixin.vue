@@ -28,7 +28,7 @@ export default {
       const index = this.$var.indexes.upgrade_town;
       const rangeValue = this.rangeValue;
       return {
-        time: this.getTimeString(
+        time: this.getAsTimeString(
           town.getTimeForUpgrade(seconds, rangeValue, index)
         ),
         source: town.getResourcesForUpgrade(

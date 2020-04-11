@@ -1,5 +1,5 @@
 <script>
-import { getTimeString } from "../../modules";
+import { getAsTimeString } from "../../../../../../utils";
 import { currentSector, glossary } from "../../../../../mixins";
 
 import fromBackend from "../../../../../../fromBackend";
@@ -22,7 +22,7 @@ export default {
     this.$emit("set-height", { width: "80%", height: "80%" });
   },
   methods: {
-    getTimeString,
+    getAsTimeString,
     checkSource,
     closeDialogWindow() {
       this.$store.commit("DIALOG_CLOSE");

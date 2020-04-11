@@ -11,7 +11,7 @@ export default {
   computed: {
     upgrade() {
       return {
-        time: this.getTimeString(
+        time: this.getAsTimeString(
           this.$var.mine.getTimeUpgrade(this.building.lvl, this.rangeValue)
         ),
         source: this.$var.mine.getResourcesForUpgrade(

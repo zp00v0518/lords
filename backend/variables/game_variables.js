@@ -5,6 +5,8 @@ const resources = require("../resources/Resources.js");
 const schema = require("../workWithMongoDB/schema.js");
 const time = config.time;
 
+// используется ТАКЖЕ!!!! на фронте при улучшении строений в регионе!!!!!!!!
+
 const gameVariables = {
   numSectionGlobalMap: 30, // количество ячеек на ГЛОБАЛЬНОЙ карте, по одной оси
   // при изменении кол-ва ячеек, нужно поменять кол-во отображаемых ячеек на 1-й оси
@@ -28,7 +30,7 @@ const gameVariables = {
     upgrade_mine: 1.5
   },
   mine: Mine, // используется на фронте при улучшении строений в регионе
-  time,
+  time, // используется на фронте при улучшении строений в регионе
   town: Town, // используется на фронте при улучшении зданий
   resources, // используется на фронте при улучшении зданий
   classInstance: schema.document.class
