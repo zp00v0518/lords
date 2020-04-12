@@ -124,10 +124,10 @@ export default {
       const y = parseInt(this.sceneHeight) / 2;
       // const y = ctx.canvas.height / 2;
       return { x, y };
-    },
-    gloss() {
-      return this.$store.state.local.dictionary;
     }
+    // gloss() {
+    //   return this.$store.state.local.dictionary;
+    // }
   },
   methods: {
     handlerClick() {

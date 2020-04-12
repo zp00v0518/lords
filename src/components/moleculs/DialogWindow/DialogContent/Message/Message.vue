@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import glossary from "@/components/mixins/glossary.vue";
+// import glossary from "@/components/mixins/glossary.vue";
 
 export default {
   name: "Message",
-  mixins: [glossary],
+  // mixins: [glossary],
   props: {
     data: Object
   },

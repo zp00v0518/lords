@@ -3,7 +3,7 @@
     <div v-for="hero in heroesList" :key="hero._id" class="hero-inactive__item">
       <div class="hero-inactive__item__ava">
         <img :src="getHeroesAvatar(hero)" />
-        <div class="hero-inactive__item__tooltip">{{hero.event.type}}</div>
+        <div class="hero-inactive__item__tooltip">{{hero.event && hero.event.type}}</div>
       </div>
     </div>
   </div>

@@ -3,7 +3,7 @@
     <div class="worldmap-region__title">
       <div
         class="worldmap-region__title--txt"
-      >{{upperFirstSymbol(gloss.dialog.questions.createNewTown.txt)}}</div>
+      >{{upperFirstSymbol(gloss.dialog.questions.buildNewTown.txt)}}</div>
       <Icon class="dialog__close" name="circle-close" @click.native="closeDialogWindow"></Icon>
     </div>
     <div class="worldmap-region__body" ref="body">
@@ -46,7 +46,7 @@
 
 <script>
 import { closeMixin } from '../../dialogMixin';
-import { currentSector, glossary } from '../../../../mixins';
+import { currentSector } from '../../../../mixins';
 import { getAsTimeString } from '../../../../../utils';
 
 import RegionMap from '../../../Scenes/RegionMap/RegionMap';
@@ -54,7 +54,7 @@ import RegionMap from '../../../Scenes/RegionMap/RegionMap';
 export default {
   name: 'WorldMapRegion',
   components: { RegionMap },
-  mixins: [closeMixin, currentSector, glossary],
+  mixins: [closeMixin, currentSector],
   props: {
     data: { type: Object, required: true }
   },
@@ -122,7 +122,7 @@ export default {
       return WorldMap.getTimeMoveOnMap(currentSector, targetTile);
     },
     buildNewTown() {
-      const { activeHero, createDisabled, $store, currentSector, data } = this;
+      const { activeHero, createDisabled, $store, currentSector, data, gloss } = this;
       if (createDisabled) return;
       const { targetTile } = data;
       const sectorIndex = $store.state.userSectors.sectors.findIndex(i => i._id === currentSector._id);
@@ -135,8 +135,17 @@ export default {
           targetSector: targetTile._id
         }
       };
-      this.$ws.sendMessage(message);
       this.closeDialogWindow();
+      this.$ws.get(message).then(res => {
+        const txt = gloss.eventLang.eventResult[res.type][res.status].txt;
+        const message = {
+          type: 'message',
+          data: {
+            txt
+          }
+        };
+        this.$store.commit('DIALOG_SHOW', message);
+      });
     }
   }
 };

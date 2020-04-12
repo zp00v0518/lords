@@ -50,10 +50,10 @@ export default {
     type() {
       if (!this.tile.sector.type) return;
       return this.tile.sector.type;
-    },
-    gloss() {
-      return this.$store.state.local.dictionary;
     }
+    // gloss() {
+    //   return this.$store.state.local.dictionary;
+    // }
   },
   watch: {
     tile: function() {

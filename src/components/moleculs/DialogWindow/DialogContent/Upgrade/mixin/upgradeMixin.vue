@@ -1,13 +1,13 @@
 <script>
 import { getAsTimeString } from "../../../../../../utils";
-import { currentSector, glossary } from "../../../../../mixins";
+import { currentSector } from "../../../../../mixins";
 
 import fromBackend from "../../../../../../fromBackend";
 const checkSource = fromBackend.checkSource;
 
 export default {
   name: "UpgradeRegion",
-  mixins: [glossary, currentSector],
+  mixins: [currentSector],
   props: {
     data: Object
   },

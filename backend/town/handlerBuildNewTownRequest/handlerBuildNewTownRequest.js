@@ -49,7 +49,6 @@ async function handlerBuildNewTownRequest(message, info) {
       redirectMessage(ws);
       return;
     }
-
     // необходимость получения героя из БД под вопросом
     const hero = await getHeroesFromDB(serverName, { heroId });
     if (!hero.active) {
@@ -61,7 +60,7 @@ async function handlerBuildNewTownRequest(message, info) {
     await updateStateTown(sector);
     await updateHeroInDB(serverName, hero._id, { active: false });
     response.status = true;
-    sendWSMessage(ws);
+    sendWSMessage(ws, response);
   } catch (err) {
     console.log(err);
     redirectMessage(ws);

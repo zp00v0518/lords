@@ -18,7 +18,7 @@ const dialog = {
     upgrade: {
       ru: 'Вы хотите улучшить это здание?'
     },
-    createNewTown: {
+    buildNewTown: {
       ru: 'построить новый город?'
     }
   },

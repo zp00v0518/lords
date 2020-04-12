@@ -11,6 +11,7 @@ import Ws from "./api/ws";
 import config from "../backend/config/config";
 import upperFirstSymbol from "./components/mixins/upperFirstSymbol";
 import globalConfig from "./components/mixins/globalConfig";
+import gloss from "./components/mixins/glossary";
 // import memory from './memory';
 // memory()
 const region = require("../backend/region/Region");
@@ -31,6 +32,7 @@ Vue.prototype.$var = variables;
 
 Vue.mixin(upperFirstSymbol);
 Vue.mixin(globalConfig);
+Vue.mixin(gloss);
 
 /* eslint-disable no-new */
 

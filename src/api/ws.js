@@ -1,4 +1,4 @@
-import modules from "./modules";
+import modules from './modules';
 let stateCount = 0;
 class WS {
   init(wsAddr, store) {
@@ -33,7 +33,7 @@ class WS {
     };
 
     this.wsInstance.onmessage = event => {
-      this.store.commit("INCREMENT");
+      this.store.commit('INCREMENT');
       const data = JSON.parse(event.data);
       console.log(`Входящий запрос: ${data.type}`);
       if (data.status === true) {
@@ -57,46 +57,46 @@ class WS {
     };
   }
   moveGlobalMap(eventData) {
-    this.store.commit("SET_CURRENTMAP", eventData);
+    this.store.commit('SET_CURRENTMAP', eventData);
   }
   startMessages(eventData) {
     console.log(eventData);
-    this.store.commit("CHOICE_RASE", { status: false });
-    this.store.commit("START_MESSAGES", eventData);
-    this.store.commit("SET_CURRENTMAP", eventData);
-    this.store.dispatch("SET_DATA_CONNECTION", eventData.sectors);
-    this.store.commit("SET_CURRENT_REGION", eventData.sectors[0].region);
-    this.store.commit("SET_DICTIONARY", eventData.dictionary);
-    this.store.commit("SET_EVENTS", eventData.eventsList);
-    this.store.commit("SET_HEROES_LIST", eventData.heroesList);
+    this.store.commit('CHOICE_RASE', { status: false });
+    this.store.commit('START_MESSAGES', eventData);
+    this.store.commit('SET_CURRENTMAP', eventData);
+    this.store.dispatch('SET_DATA_CONNECTION', eventData.sectors);
+    this.store.commit('SET_CURRENT_REGION', eventData.sectors[0].region);
+    this.store.commit('SET_DICTIONARY', eventData.dictionary);
+    this.store.commit('SET_EVENTS', eventData.eventsList);
+    this.store.commit('SET_HEROES_LIST', eventData.heroesList);
   }
   chatMessage(eventData) {
-    this.store.commit("UNSHIFT_MESSAGE", eventData);
+    this.store.commit('UNSHIFT_MESSAGE', eventData);
   }
   sendMessage(message) {
     this.wsInstance.send(JSON.stringify(message));
   }
   sendChatMessage(message) {
-    message.type = "chatMessage";
+    message.type = 'chatMessage';
     this.sendMessage(message);
   }
 
   choicesRace(message) {
-    this.store.commit("CHOICE_RASE", { status: true });
+    this.store.commit('CHOICE_RASE', { status: true });
   }
 
   reload() {
-    console.log("reload");
+    console.log('reload');
     location.reload();
   }
   controlState(eventData) {
     window.stateCount++;
-    this.store.dispatch("SET_SECTORS_WITH_CURRENT_SECTOR", eventData.sectors);
-    this.store.commit("SET_EVENTS", eventData.eventsList);
-    this.store.commit("SET_HEROES_LIST", eventData.heroesList);
+    this.store.dispatch('SET_SECTORS_WITH_CURRENT_SECTOR', eventData.sectors);
+    this.store.commit('SET_EVENTS', eventData.eventsList);
+    this.store.commit('SET_HEROES_LIST', eventData.heroesList);
   }
   setEvents(eventData) {
-    this.store.commit("SET_EVENTS", eventData.eventsList);
+    this.store.commit('SET_EVENTS', eventData.eventsList);
   }
 
   consoles(e) {
@@ -107,11 +107,11 @@ class WS {
     const { type } = e;
     return new Promise(resolve => {
       wsInstance.send(JSON.stringify(e));
-      wsInstance.addEventListener("message", handler);
+      wsInstance.addEventListener('message', handler);
       function handler(res) {
         const data = JSON.parse(res.data);
         if (data.type === type) {
-          wsInstance.removeEventListener("message", handler);
+          wsInstance.removeEventListener('message', handler);
           resolve(data);
         }
       }
