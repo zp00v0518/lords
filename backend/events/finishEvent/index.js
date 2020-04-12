@@ -4,7 +4,7 @@ const finishStorage = require('./finish_storage');
 const finishHall = require('./finish_hall');
 const finishBarraks = require('./finish_barraks');
 const finish_hiring_units = require('./finish_hiring_units');
-const finishEventGlobal = require('./finishEventGlobal');
+const {finishEventGlobal} = require('../db');
 
 module.exports = {
   [buildings.storage.name]: finishStorage,

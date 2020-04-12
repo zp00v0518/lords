@@ -111,6 +111,8 @@ function iterationImplenetation(event, callback = () => {}) {
         eventsHandler[type](event, sector);
       } else if (type === eventType.backToTown) {
         eventsHandler[type](event, sector);
+      } else if (type === eventType.buildNewTown) {
+        eventsHandler[type](event);
       }
     });
   });
