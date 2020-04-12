@@ -1,6 +1,6 @@
 const { checkSchema } = require('../../template_modules');
 const { redirectMessage, sendWSMessage } = require('../../wsServer');
-const { getHeroesFromDB } = require('../../heroes/db');
+const { getHeroesFromDB, updateHeroInDB } = require('../../heroes/db');
 const { Resources, deleteSource } = require('../../resources');
 const { Town, updateStateTown, getOneTownFromDB } = require('../../town');
 const setEventForBuildNewTown = require('./setEventForBuildNewTown');
@@ -22,8 +22,7 @@ async function handlerBuildNewTownRequest(message, info) {
 
   const response = {
     status: false,
-    type: message.type,
-    data: {}
+    type: message.type
   };
   try {
     const targetSector = await getOneTownFromDB(serverName, data.targetSector);
@@ -57,15 +56,12 @@ async function handlerBuildNewTownRequest(message, info) {
       redirectMessage(ws);
       return;
     }
-    const event = await setEventForBuildNewTown(sector, targetSector, hero);
+    await setEventForBuildNewTown(sector, targetSector, hero);
     storage = deleteSource(sourseForBuild, storage);
-    const updateTownResult = await updateStateTown(sector);
-    response.data.targetSector = targetSector;
-    response.data.hero = hero;
-    response.data.sector = sector;
-    response.data.sourseForBuild = sourseForBuild;
-    response.data.event = event;
-    sendWSMessage(ws, response);
+    await updateStateTown(sector);
+    await updateHeroInDB(serverName, hero._id, { active: false });
+    response.status = true;
+    sendWSMessage(ws);
   } catch (err) {
     console.log(err);
     redirectMessage(ws);

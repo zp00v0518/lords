@@ -20,7 +20,10 @@ function createBuildNewTownEvent(sector, targetSector, hero) {
   template.type = Event.types.buildNewTown;
   const moveTime = WorldMap.getTimeMoveOnMap(init, target);
   template.end = template.start + moveTime;
-  template.data = {};
+  const data = {
+    heroId: hero._id
+  };
+  template.data = data;
   return template;
 }
 
