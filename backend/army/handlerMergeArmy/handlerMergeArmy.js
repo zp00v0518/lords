@@ -14,7 +14,7 @@ function handlerMergeArmy(message, info) {
   const { ws } = info.player;
   const response = {
     status: false,
-    type: message.type,
+    type: message.type
   };
   if (!checkSchema(data, schema)) {
     redirectMessage(ws);
@@ -27,15 +27,15 @@ function handlerMergeArmy(message, info) {
   }
   const { serverName } = curSector;
   getOneTownFromDB(serverName, curSector._id)
-    .then((res) => {
+    .then(res => {
       const sector = res;
       const heroId = data.id;
       const heroes_in_town = sector.heroes;
-      if (!heroes_in_town || !heroes_in_town.some((i) => i.toString() === heroId)) {
+      if (!heroes_in_town || !heroes_in_town.some(i => i.toString() === heroId)) {
         redirectMessage(ws);
         return;
       }
-      getHeroesFromDB(serverName, { heroId }).then((hero) => {
+      getHeroesFromDB(serverName, { heroId }).then(hero => {
         if (!hero || !hero.active) {
           redirectMessage(ws);
           return;
@@ -55,12 +55,12 @@ function handlerMergeArmy(message, info) {
         const updateOps = {
           collectionName: server,
           filtr: {
-            _id: ObjectId(hero._id),
+            _id: ObjectId(hero._id)
           },
           updateDoc: {
-            $set: { army: army_hero },
+            $set: { army: army_hero }
           },
-          ops: { upsert: false },
+          ops: { upsert: false }
         };
         update.one(updateOps).then(() => {
           const sectrId = sector._id;
@@ -71,11 +71,11 @@ function handlerMergeArmy(message, info) {
           update.one(updateOps).then(() => {
             response.data = {
               town: {
-                army: army_in_town,
+                army: army_in_town
               },
               hero: {
-                army: army_hero,
-              },
+                army: army_hero
+              }
             };
             ws.send(JSON.stringify(response));
           });
@@ -88,7 +88,7 @@ function handlerMergeArmy(message, info) {
       //   return;
       // }
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       redirectMessage(ws);
     });
@@ -97,7 +97,7 @@ function handlerMergeArmy(message, info) {
 const schema = {
   id: { type: 'string', regExp: /^.{13,}\b/g },
   way: { type: 'string', regExp: /^in$|^out$/g },
-  sectorIndex: { type: 'number', min: 0 },
+  sectorIndex: { type: 'number', min: 0 }
 };
 
 module.exports = handlerMergeArmy;

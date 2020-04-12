@@ -1,7 +1,8 @@
 const { checkSchema } = require('../../template_modules');
 const { redirectMessage, sendWSMessage } = require('../../wsServer');
-const { getOneTownFromDB } = require('../../town');
-
+const { getHeroesFromDB } = require('../../heroes/db');
+const { Resources, deleteSource } = require('../../resources');
+const { Town, updateStateTown, getOneTownFromDB } = require('../../town');
 
 function handlerBuildNewTownRequest(message, info) {
   const data = message.data;
@@ -10,22 +11,68 @@ function handlerBuildNewTownRequest(message, info) {
     redirectMessage(ws);
     return;
   }
-  const curSector = info.player.sectors[data.sectorIndex];
+  const allSectors = info.player.sectors;
+  const curSector = allSectors[data.sectorIndex];
   if (!curSector) {
     redirectMessage(ws);
     return;
-	}
-	const { serverName } = curSector;
-	const response = {
-    status: false,
-		type: message.type,
-		data: {},
-  };
-	getOneTownFromDB(serverName, data.targetSector).then(targetSector => {
-		response.data.targetSector = targetSector;
+  }
+  const { serverName } = curSector;
 
-		sendWSMessage(ws, response);
-	})
+  const response = {
+    status: false,
+    type: message.type,
+    data: {}
+  };
+
+  getOneTownFromDB(serverName, data.targetSector)
+    .then(targetSector => {
+      if (!targetSector || targetSector.town) {
+        redirectMessage(ws);
+      }
+
+      getOneTownFromDB(serverName, curSector._id).then(sector => {
+        if (!sector) {
+          redirectMessage(ws);
+          return;
+        }
+        const sourseForBuild = Town.getSourceForNewTown(allSectors.length + 1);
+        let storage = sector.town.storage;
+        const haveSource = Resources.checkSource(sourseForBuild, storage.sources);
+        if (!haveSource) {
+          redirectMessage(ws);
+          return;
+        }
+
+        const { heroId } = data;
+        const heroes_in_town = sector.heroes;
+        if (!heroes_in_town || !heroes_in_town.some(i => i.toString() === heroId)) {
+          redirectMessage(ws);
+          return;
+        }
+
+        // необходимость получения героя из БД под вопросом
+        getHeroesFromDB(serverName, { heroId }).then(hero => {
+          if (!hero.active) {
+            redirectMessage(ws);
+            return;
+          }
+          
+          storage = deleteSource(sourseForBuild, storage);
+          updateStateTown(sector).then(() => {
+            response.data.targetSector = targetSector;
+            response.data.hero = hero;
+            response.data.sector = sector;
+            response.data.sourseForBuild = sourseForBuild;
+            sendWSMessage(ws, response);
+          });
+        });
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      redirectMessage(ws);
+    });
 }
 
 const schema = {

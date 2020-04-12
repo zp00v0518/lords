@@ -1,4 +1,4 @@
-// const Mine = gameVariables.mine;
+const gameVariables = require('../variables/game_variables');
 const { addEventToDB } = require('../events/setEventInGame');
 
 function setUpgradeChange(cell, persent = 100, sector, info, callback = function() {}) {

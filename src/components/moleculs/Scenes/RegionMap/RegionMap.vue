@@ -173,6 +173,7 @@ export default {
       this.drawMoveHero();
     },
     drawMoveHero() {
+      if (this.mode !== 'global') return;
       const { ctx, eventList, currentMap, tileWidth, settings } = this;
       ctx.fillStyle = settings.baseColor;
       eventList.forEach(event => {
