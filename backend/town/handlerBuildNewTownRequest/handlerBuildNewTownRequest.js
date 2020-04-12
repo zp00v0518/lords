@@ -3,6 +3,7 @@ const { redirectMessage, sendWSMessage } = require('../../wsServer');
 const { getHeroesFromDB } = require('../../heroes/db');
 const { Resources, deleteSource } = require('../../resources');
 const { Town, updateStateTown, getOneTownFromDB } = require('../../town');
+const setEventForBuildNewTown = require('./setEventForBuildNewTown');
 
 function handlerBuildNewTownRequest(message, info) {
   const data = message.data;
@@ -57,14 +58,17 @@ function handlerBuildNewTownRequest(message, info) {
             redirectMessage(ws);
             return;
           }
-          
-          storage = deleteSource(sourseForBuild, storage);
-          updateStateTown(sector).then(() => {
-            response.data.targetSector = targetSector;
-            response.data.hero = hero;
-            response.data.sector = sector;
-            response.data.sourseForBuild = sourseForBuild;
-            sendWSMessage(ws, response);
+          setEventForBuildNewTown(sector, targetSector, hero).then(event => {
+
+            storage = deleteSource(sourseForBuild, storage);
+            updateStateTown(sector).then(() => {
+              response.data.targetSector = targetSector;
+              response.data.hero = hero;
+              response.data.sector = sector;
+              response.data.sourseForBuild = sourseForBuild;
+              response.data.event = event;
+              sendWSMessage(ws, response);
+            });
           });
         });
       });

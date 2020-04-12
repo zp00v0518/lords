@@ -119,11 +119,7 @@ export default {
       const { WorldMap } = this.globalConfig.all;
       const { data, currentSector } = this;
       const { targetTile } = data;
-      const x1 = currentSector.x;
-      const y1 = currentSector.y;
-      const x2 = targetTile.x;
-      const y2 = targetTile.y;
-      return WorldMap.getTimeMoveOnMap(x1, y1, x2, y2);
+      return WorldMap.getTimeMoveOnMap(currentSector, targetTile);
     },
     buildNewTown() {
       const { activeHero, createDisabled, $store, currentSector, data } = this;

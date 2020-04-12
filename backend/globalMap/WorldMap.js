@@ -18,7 +18,11 @@ class WorldMap {
     this.numSectionGlobalMap = vars.numSectionGlobalMap;
     this.heroMoveOnGlobalMap = vars.timer.heroMoveOnGlobalMap;
   }
-  getTimeMoveOnMap(x1, y1, x2, y2, options = {}) {
+  getTimeMoveOnMap(init, target, options = {}) {
+    const x1 = init.x;
+    const y1 = init.y;
+    const x2 = target.x;
+    const y2 = target.y;
     const distance = this.getDistanceOnMap(x1, y1, x2, y2);
     return Math.round(distance * this.heroMoveOnGlobalMap);
   }
