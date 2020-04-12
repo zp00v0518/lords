@@ -1,8 +1,10 @@
 const createBuildNewTownEvent = require('./createBuildNewTownEvent');
+const {addEventToDB} = require('../../events');
 
 async function setEventForBuildNewTown(sector, targetSector, hero) {
-  const event = createBuildNewTownEvent(sector, targetSector, hero);
-  return event;
+  const ev = createBuildNewTownEvent(sector, targetSector, hero);
+  const result = await addEventToDB(ev, sector.serverName);
+  return result;
 }
 
 module.exports = setEventForBuildNewTown;
