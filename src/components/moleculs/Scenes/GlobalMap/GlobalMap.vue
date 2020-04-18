@@ -132,6 +132,7 @@ export default {
     drawMoveHero() {
       if (this.mode && this.mode !== 'global') return;
       const { ctx, eventList, currentMap, tileWidth, settings } = this;
+      // console.log(currentMap[0][0])
       ctx.fillStyle = settings.baseColor;
       eventList.forEach(event => {
         const { data } = event;
@@ -142,6 +143,8 @@ export default {
         const height = width / 2;
         const startTile = algebra.getNearCoords(currentMap[0][0], startCoords, sizeMap, { width, height });
         const endTile = algebra.getNearCoords(currentMap[0][0], endCoords, sizeMap, { width, height });
+
+        // console.log(startTile, endTile)
         const baseCoords = [startTile.centerX, startTile.centerY, endTile.centerX, endTile.centerY];
         const fullLength = algebra.getStraightLength(...baseCoords);
         let heroLength = this.getLengthHeroOnStraight(fullLength, event.start, event.end);
@@ -149,13 +152,8 @@ export default {
         const step = tileWidth / 4;
         for (let i = 0; i < fullLength + 1; i += step) {
           const coords = algebra.getPointOnStraight(...baseCoords, i);
-          const iso = this.borderIsoMap;
-          const path = new Path2D();
-          path.moveTo(iso.left.x, iso.left.y);
-          path.lineTo(iso.top.x, iso.top.y);
-          path.lineTo(iso.right.x, iso.right.y);
-          path.lineTo(iso.bottom.x, iso.bottom.y);
-          const isPoint = ctx.isPointInPath(path, coords.x, coords.y);
+          const {viewportPath} = this;
+          const isPoint = ctx.isPointInPath(viewportPath, coords.x, coords.y);
           if (!isPoint) continue;
           ctx.beginPath();
           const r = i > heroLength ? 2 : 4;

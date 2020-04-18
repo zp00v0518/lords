@@ -24,7 +24,8 @@ export default {
         right: { x: 0, y: 0 },
         bottom: { x: 0, y: 0 }
       },
-      mouseCoords: { x: 0, y: 0 }
+      mouseCoords: { x: 0, y: 0 },
+      viewportPath: new Path2D()
     };
   },
   methods: {
