@@ -53,11 +53,13 @@ import {
 } from '../utils';
 import Tooltip from '../../Tooltip';
 import { currentSector } from '../../../mixins';
+import drawHeroMixin from '../mixins/drawHeroMixin';
+import { algebra } from '../../../../utils';
 
 export default {
   name: 'GlobalMap',
   components: { Tooltip },
-  mixins: [currentSector],
+  mixins: [currentSector, drawHeroMixin],
   props: ['widthScene', 'heightScene'],
   data() {
     return {
@@ -104,6 +106,17 @@ export default {
       const x = parseInt(this.widthScene) / 2 - d; // от середины карты вычитываем половину длины всех ячеек
       const y = parseInt(this.heightScene) / 2;
       return { x, y };
+    },
+    eventList() {
+      const list = this.$store.state.timeline.eventsList;
+      const { Event } = this.$store.state.globalConfig.all;
+      const { deepClone } = this;
+      const e_types = Event.types;
+      console.log();
+      const d = list.filter(item => {
+        return item.type === e_types.buildNewTown;
+      });
+      return deepClone(d);
     }
   },
   methods: {
@@ -115,6 +128,9 @@ export default {
     setBorderIsoMap,
     hideTooltip,
     handlerMousemoveOnMap,
+    drawAnotherObjects() {
+      this.drawMoveHero();
+    },
     changeZoom(event) {
       // this.zoom = this.zoom === 1 ? 1.5 : 1;
       this.$store.commit('CHANGE__ZOOM');
@@ -142,6 +158,37 @@ export default {
         };
         this.$store.commit('DIALOG_SHOW', payload);
       }
+    },
+    drawMoveHero() {
+      if (this.mode && this.mode !== 'global') return;
+      const { ctx, eventList, currentMap, tileWidth, settings, getTileByCoords } = this;
+      ctx.fillStyle = settings.baseColor;
+      eventList.forEach(event => {
+        const { data } = event;
+        const { startCoords, endCoords } = data;
+        const startTile = getTileByCoords(currentMap, startCoords.x, startCoords.y);
+        const endTile = getTileByCoords(currentMap, endCoords.x, endCoords.y);
+        if (!startTile || !endTile) {
+          console.log(startCoords, endCoords)
+          console.log(startTile, endTile)
+          return;
+        }
+        const baseCoords = [startTile.centerX, startTile.centerY, endTile.centerX, endTile.centerY];
+        const fullLength = algebra.getStraightLength(...baseCoords);
+        let heroLength = this.getLengthHeroOnStraight(fullLength, event.start, event.end);
+        if (heroLength > fullLength) heroLength = fullLength;
+        const step = tileWidth / 4;
+        for (let i = 0; i < fullLength + 1; i += step) {
+          const coords = algebra.getPointOnStraight(...baseCoords, i);
+          ctx.beginPath();
+          const r = i > heroLength ? 2 : 4;
+          ctx.arc(coords.x, coords.y, r, 0, 2 * Math.PI);
+          ctx.fill();
+          ctx.closePath();
+        }
+        const heroCoords = algebra.getPointOnStraight(...baseCoords, heroLength);
+        this.drawHeroOnMap(ctx, heroCoords);
+      });
     }
   },
   mounted() {

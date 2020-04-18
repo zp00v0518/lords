@@ -1,4 +1,4 @@
-const addEventToDB = require('./addEventToDB');
+const { addEventToDB } = require('../db');
 
 function setEventInGame(event, serverName) {
   return new Promise((resolve, reject) => {

@@ -58,7 +58,8 @@ async function handlerBuildNewTownRequest(message, info) {
     await setEventForBuildNewTown(sector, targetSector, hero);
     storage = deleteSource(sourseForBuild, storage);
     await updateStateTown(sector);
-    await updateHeroInDB(serverName, hero._id, { active: false });
+    await updateHeroInDB(serverName, hero._id);
+    // await updateHeroInDB(serverName, hero._id, { active: false });
     response.status = true;
     sendWSMessage(ws, response);
   } catch (err) {

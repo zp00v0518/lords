@@ -32,11 +32,12 @@ import {
 } from '../utils';
 import TooltipRegion from '../../TooltipRegion';
 import { currentSector } from '../../../mixins';
+import drawHeroMixin from '../mixins/drawHeroMixin';
 import { algebra } from '../../../../utils';
 
 export default {
   name: 'RegionMap',
-  mixins: [currentSector],
+  mixins: [currentSector, drawHeroMixin],
   components: {
     TooltipRegion
   },
@@ -106,13 +107,9 @@ export default {
       });
       return deepClone(d);
     },
-    settings() {
-      return this.$store.state.settings;
-    },
     tileWidth() {
       const { ctx } = this;
       if (!ctx) return 0;
-      // const widthParse = ctx.canvas.width / 2;
       const widthParse = parseInt(this.sceneWidth) / 2;
       const intermediate = widthParse / (this.currentMap.length / 2);
       return intermediate;
@@ -122,12 +119,8 @@ export default {
       const x = 0;
       if (!ctx) return { x, y: 0 };
       const y = parseInt(this.sceneHeight) / 2;
-      // const y = ctx.canvas.height / 2;
       return { x, y };
     }
-    // gloss() {
-    //   return this.$store.state.local.dictionary;
-    // }
   },
   methods: {
     handlerClick() {
@@ -172,15 +165,25 @@ export default {
     drawAnotherObjects() {
       this.drawMoveHero();
     },
+    setSizeScene() {
+      const { body } = this.$refs;
+      const styles = body.getBoundingClientRect();
+      if (!this.widthScene) {
+        this.sceneWidth = styles.width + 'px';
+      }
+      if (!this.heightScene) {
+        this.sceneHeight = styles.height + 'px';
+      }
+    },
     drawMoveHero() {
-      if (this.mode !== 'global') return;
-      const { ctx, eventList, currentMap, tileWidth, settings } = this;
+      if (this.mode && this.mode !== 'global') return;
+      const { ctx, eventList, currentMap, tileWidth, settings, getTileByCoords } = this;
       ctx.fillStyle = settings.baseColor;
       eventList.forEach(event => {
         const { data } = event;
         const { startCoords, endCoords } = data;
-        const startTile = currentMap[startCoords.x][startCoords.y];
-        const endTile = currentMap[endCoords.x][endCoords.y];
+        const startTile = getTileByCoords(currentMap, startCoords.x, startCoords.y);
+        const endTile = getTileByCoords(currentMap, endCoords.x, endCoords.y);
         const baseCoords = [startTile.centerX, startTile.centerY, endTile.centerX, endTile.centerY];
         const fullLength = algebra.getStraightLength(...baseCoords);
         let heroLength = this.getLengthHeroOnStraight(fullLength, event.start, event.end);
@@ -197,35 +200,6 @@ export default {
         const heroCoords = algebra.getPointOnStraight(...baseCoords, heroLength);
         this.drawHeroOnMap(ctx, heroCoords);
       });
-    },
-    getLengthHeroOnStraight(length, startTime, endTime) {
-      const fullTime = endTime - startTime;
-      const passTime = Date.now() - startTime;
-      const dif = passTime / fullTime;
-      return length * dif;
-    },
-    drawHeroOnMap(ctx, coords) {
-      const heightFlag = 20;
-      ctx.beginPath();
-      ctx.strokeStyle = 'black';
-      ctx.lineWidth = 2;
-      ctx.moveTo(coords.x, coords.y);
-      ctx.lineTo(coords.x, coords.y - heightFlag);
-      ctx.lineTo(coords.x + heightFlag / 2, coords.y - heightFlag + heightFlag / 4);
-      ctx.lineTo(coords.x, coords.y - heightFlag / 2);
-      ctx.stroke();
-      ctx.fill();
-      ctx.closePath();
-    },
-    setSizeScene() {
-      const { body } = this.$refs;
-      const styles = body.getBoundingClientRect();
-      if (!this.widthScene) {
-        this.sceneWidth = styles.width + 'px';
-      }
-      if (!this.heightScene) {
-        this.sceneHeight = styles.height + 'px';
-      }
     }
   },
   mounted() {

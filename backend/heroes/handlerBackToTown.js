@@ -1,4 +1,4 @@
-const { finishEventGlobal } = require('../events');
+const finishEventGlobal = require('../events/db/finishEventGlobal');
 const { updateHeroInDB } = require('../heroes/db');
 
 function handlerBackToTown(event, sector) {

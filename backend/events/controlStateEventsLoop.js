@@ -28,8 +28,9 @@ function controlStateEventsLoop(eventsList = [], callback = () => {}) {
 
 module.exports = controlStateEventsLoop;
 
+// есть ошибка в имплементации - не все обработчики вызывают resolve;
 function iterationImplenetation(event, callback = () => {}) {
-  return new Promise((resolve, reject) => {
+  return new Promise(async function(resolve, reject) {
     const now = new Date();
     const end = new Date(event.end);
     if (end > now) return resolve();
@@ -40,16 +41,39 @@ function iterationImplenetation(event, callback = () => {}) {
     const y = event.target.y;
     let sector = global.GlobalMap[serverName][x][y];
     const sectorId = sector._id;
-    getOneTownFromDB(serverName, sectorId).then(res => {
-      if (!res) return resolve();
-      sector = res;
-      if (type === eventType.upgradeRegion) {
-        const storage = sector.town.storage;
-        const mineX = event.data.x;
-        const mineY = event.data.y;
-        const mine = sector.region[mineX][mineY].sector;
-        calcStorageNowValue(storage, event.end);
-        fixingResultUpgradeMine(mine, event, sector)
+    sector = await getOneTownFromDB(serverName, sectorId);
+    if (!sector) return resolve();
+    if (type === eventType.upgradeRegion) {
+      const storage = sector.town.storage;
+      const mineX = event.data.x;
+      const mineY = event.data.y;
+      const mine = sector.region[mineX][mineY].sector;
+      calcStorageNowValue(storage, event.end);
+      fixingResultUpgradeMine(mine, event, sector)
+        .then(result => {
+          callback(null, result);
+          return resolve(result);
+        })
+        .catch(err => {
+          callback(err);
+          return reject(err);
+        });
+    } else if (type === eventType.upgradeTown) {
+      let typeBuilding = event.data.type;
+      const townUpgrade = sector.town[typeBuilding];
+      const optionsForUpdate = {
+        collectionName: serverName,
+        updateDoc: { $set: { status: false } },
+        filtr: { _id: event._id }
+      };
+      if (typeBuilding === 'storage') {
+        finishEvent[typeBuilding](sector.town.storage, event);
+      } else if (typeBuilding === 'hall') {
+        finishEvent[typeBuilding](sector.town[typeBuilding], event, sector);
+      } else if (typeBuilding.indexOf('barraks') !== -1) {
+        finishEvent[typeBuilding](sector.town[typeBuilding], event, sector);
+      } else if (townUpgrade.work.static) {
+        fixingResultUpgrade_building(townUpgrade, event)
           .then(result => {
             callback(null, result);
             return resolve(result);
@@ -58,62 +82,38 @@ function iterationImplenetation(event, callback = () => {}) {
             callback(err);
             return reject(err);
           });
-      } else if (type === eventType.upgradeTown) {
-        let typeBuilding = event.data.type;
-        const townUpgrade = sector.town[typeBuilding];
-        const optionsForUpdate = {
-          collectionName: serverName,
-          updateDoc: { $set: { status: false } },
-          filtr: { _id: event._id }
-        };
-        if (typeBuilding === 'storage') {
-          finishEvent[typeBuilding](sector.town.storage, event);
-        } else if (typeBuilding === 'hall') {
-          finishEvent[typeBuilding](sector.town[typeBuilding], event, sector);
-        } else if (typeBuilding.indexOf('barraks') !== -1) {
-          finishEvent[typeBuilding](sector.town[typeBuilding], event, sector);
-        } else if (townUpgrade.work.static) {
-          fixingResultUpgrade_building(townUpgrade, event)
-            .then(result => {
-              callback(null, result);
-              return resolve(result);
-            })
-            .catch(err => {
-              callback(err);
-              return reject(err);
-            });
-        }
-        update
-          .one(optionsForUpdate)
-          .then(result => {
-            updateStateTown(sector).then(() => {
-              callback(null, result);
-              return resolve(result);
-            });
-          })
-          .catch(err => {
-            callback(err);
-            return reject(err);
-          });
-      } else if (type === eventType.hiringUnits) {
-        finishEvent[type](event, sector)
-          .then(result => {
-            updateStateTown(sector).then(() => {
-              callback(null, result);
-              return resolve(result);
-            });
-          })
-          .catch(err => {
-            callback(err);
-            return reject(err);
-          });
-      } else if (type === eventType.battle) {
-        eventsHandler[type](event, sector);
-      } else if (type === eventType.backToTown) {
-        eventsHandler[type](event, sector);
-      } else if (type === eventType.buildNewTown) {
-        eventsHandler[type](event);
       }
-    });
+      update
+        .one(optionsForUpdate)
+        .then(result => {
+          updateStateTown(sector).then(() => {
+            callback(null, result);
+            return resolve(result);
+          });
+        })
+        .catch(err => {
+          callback(err);
+          return reject(err);
+        });
+    } else if (type === eventType.hiringUnits) {
+      finishEvent[type](event, sector)
+        .then(result => {
+          updateStateTown(sector).then(() => {
+            callback(null, result);
+            return resolve(result);
+          });
+        })
+        .catch(err => {
+          callback(err);
+          return reject(err);
+        });
+    } else if (type === eventType.battle) {
+      eventsHandler[type](event, sector);
+    } else if (type === eventType.backToTown) {
+      eventsHandler[type](event, sector);
+    } else if (type === eventType.buildNewTown) {
+      await eventsHandler[type](event);
+      resolve();
+    }
   });
 }

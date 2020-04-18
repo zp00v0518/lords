@@ -1,11 +1,10 @@
-const { insertDB } = require("../../workWithMongoDB");
+const { insertDB } = require('../../workWithMongoDB');
 const insert = new insertDB();
 
-//  НЕ ИСПОЛЬЗОВАТЬ!!! Использование этого метода переехало в папку DB
 function addEventToDB(data, serverName, callback = function() {}) {
   return new Promise((resolve, reject) => {
     const doc = {
-      class: "event",
+      class: 'event',
       target: data.target,
       init: data.init,
       start: data.start,
