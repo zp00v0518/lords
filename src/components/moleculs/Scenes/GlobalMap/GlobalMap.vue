@@ -166,12 +166,27 @@ export default {
       eventList.forEach(event => {
         const { data } = event;
         const { startCoords, endCoords } = data;
-        const startTile = getTileByCoords(currentMap, startCoords.x, startCoords.y);
-        const endTile = getTileByCoords(currentMap, endCoords.x, endCoords.y);
-        if (!startTile || !endTile) {
+        let startTile = getTileByCoords(currentMap, startCoords.x, startCoords.y);
+        let endTile = getTileByCoords(currentMap, endCoords.x, endCoords.y);
+        if (!startTile && !endTile) return;
+        if (startTile && endTile) {
           console.log(startCoords, endCoords)
-          console.log(startTile, endTile)
-          return;
+        };
+        const WorldMap = this.globalConfig.all.WorldMap;
+        const sizeMap = WorldMap.numSectionGlobalMap;
+        if (!startTile) {
+          startTile = algebra.getNearCoords(endTile, startCoords, sizeMap, {
+            width: this.tileWidth,
+            height: this.tileWidth / 2
+          });
+        }
+        if (!endTile) {
+          console.log(endCoords);
+          endTile = algebra.getNearCoords(startTile, endCoords, sizeMap, {
+            width: this.tileWidth,
+            height: this.tileWidth / 2
+          });
+          console.log(this.tileWidth, endTile );
         }
         const baseCoords = [startTile.centerX, startTile.centerY, endTile.centerX, endTile.centerY];
         const fullLength = algebra.getStraightLength(...baseCoords);
