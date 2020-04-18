@@ -20,24 +20,15 @@
 </template>
 
 <script>
-import {
-  drawMap,
-  getCursorPositionOnScene,
-  checkMouseCoordsOnMap,
-  getTileCoordsOnMap,
-  drawHoverLine,
-  setBorderIsoMap,
-  hideTooltip,
-  handlerMousemoveOnMap
-} from '../utils';
 import TooltipRegion from '../../TooltipRegion';
 import { currentSector } from '../../../mixins';
 import drawHeroMixin from '../mixins/drawHeroMixin';
+import baseMixins from '../mixins/baseMixins';
 import { algebra } from '../../../../utils';
 
 export default {
   name: 'RegionMap',
-  mixins: [currentSector, drawHeroMixin],
+  mixins: [currentSector, drawHeroMixin, baseMixins],
   components: {
     TooltipRegion
   },
@@ -49,20 +40,8 @@ export default {
   },
   data() {
     return {
-      showTooltip: false,
-      ctx: null,
-      cursorOnScene: false,
-      currentMap: [],
-      currentTile: {},
-      borderIsoMap: {
-        left: { x: 0, y: 0 },
-        top: { x: 0, y: 0 },
-        right: { x: 0, y: 0 },
-        bottom: { x: 0, y: 0 }
-      },
       sceneWidth: this.widthScene,
-      sceneHeight: this.heightScene,
-      mouseCoords: { x: 0, y: 0 }
+      sceneHeight: this.heightScene
     };
   },
   created() {
@@ -81,7 +60,7 @@ export default {
         const { deepClone } = this;
         this.currentMap = deepClone(e);
         this.drawMap();
-        this.setBorderIsoMap();
+        // this.setBorderIsoMap();
       }
     },
     eventList: {
@@ -154,14 +133,6 @@ export default {
       };
       this.$store.commit('DIALOG_SHOW', payload);
     },
-    drawMap,
-    getCursorPositionOnScene,
-    checkMouseCoordsOnMap,
-    getTileCoordsOnMap,
-    drawHoverLine,
-    setBorderIsoMap,
-    hideTooltip,
-    handlerMousemoveOnMap,
     drawAnotherObjects() {
       this.drawMoveHero();
     },

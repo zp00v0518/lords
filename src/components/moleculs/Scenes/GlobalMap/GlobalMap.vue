@@ -41,41 +41,19 @@
 </template>
 
 <script>
-import {
-  drawMap,
-  getCursorPositionOnScene,
-  checkMouseCoordsOnMap,
-  getTileCoordsOnMap,
-  drawHoverLine,
-  setBorderIsoMap,
-  hideTooltip,
-  handlerMousemoveOnMap
-} from '../utils';
 import Tooltip from '../../Tooltip';
 import { currentSector } from '../../../mixins';
 import drawHeroMixin from '../mixins/drawHeroMixin';
+import baseMixins from '../mixins/baseMixins';
 import { algebra } from '../../../../utils';
 
 export default {
   name: 'GlobalMap',
   components: { Tooltip },
-  mixins: [currentSector, drawHeroMixin],
+  mixins: [currentSector, drawHeroMixin, baseMixins],
   props: ['widthScene', 'heightScene'],
   data() {
-    return {
-      showTooltip: false,
-      cursorOnScene: false,
-      ctx: null,
-      currentMap: [],
-      currentTile: {},
-      borderIsoMap: {
-        left: { x: 0, y: 0 },
-        top: { x: 0, y: 0 },
-        right: { x: 0, y: 0 },
-        bottom: { x: 0, y: 0 }
-      },
-      mouseCoords: { x: 0, y: 0 }
-    };
+    return {};
   },
   created() {
     this.currentMap = this.$store.state.globalMap.currentMap;
@@ -85,7 +63,7 @@ export default {
       const { deepClone, $store } = this;
       this.currentMap = deepClone($store.state.globalMap.currentMap);
       this.drawMap();
-      this.setBorderIsoMap();
+      // this.setBorderIsoMap();
     }
   },
   computed: {
@@ -120,14 +98,6 @@ export default {
     }
   },
   methods: {
-    drawMap,
-    getCursorPositionOnScene,
-    checkMouseCoordsOnMap,
-    getTileCoordsOnMap,
-    drawHoverLine,
-    setBorderIsoMap,
-    hideTooltip,
-    handlerMousemoveOnMap,
     drawAnotherObjects() {
       this.drawMoveHero();
     },
@@ -161,31 +131,17 @@ export default {
     },
     drawMoveHero() {
       if (this.mode && this.mode !== 'global') return;
-      const { ctx, eventList, currentMap, tileWidth, settings, getTileByCoords } = this;
+      const { ctx, eventList, currentMap, tileWidth, settings } = this;
       ctx.fillStyle = settings.baseColor;
       eventList.forEach(event => {
         const { data } = event;
         const { startCoords, endCoords } = data;
-        let startTile = getTileByCoords(currentMap, startCoords.x, startCoords.y);
-        let endTile = getTileByCoords(currentMap, endCoords.x, endCoords.y);
-        if (!startTile && !endTile) return;
-        if (startTile && endTile) {
-          // console.log(startCoords, endCoords)
-        };
         const WorldMap = this.globalConfig.all.WorldMap;
         const sizeMap = WorldMap.numSectionGlobalMap;
-        if (!startTile) {
-          startTile = algebra.getNearCoords(endTile, startCoords, sizeMap, {
-            width: this.tileWidth,
-            height: this.tileWidth / 2
-          });
-        }
-        if (!endTile) {
-          endTile = algebra.getNearCoords(startTile, endCoords, sizeMap, {
-            width: this.tileWidth,
-            height: this.tileWidth / 2
-          });
-        }
+        const width = this.tileWidth;
+        const height = width / 2;
+        const startTile = algebra.getNearCoords(currentMap[0][0], startCoords, sizeMap, { width, height });
+        const endTile = algebra.getNearCoords(currentMap[0][0], endCoords, sizeMap, { width, height });
         const baseCoords = [startTile.centerX, startTile.centerY, endTile.centerX, endTile.centerY];
         const fullLength = algebra.getStraightLength(...baseCoords);
         let heroLength = this.getLengthHeroOnStraight(fullLength, event.start, event.end);
@@ -193,6 +149,14 @@ export default {
         const step = tileWidth / 4;
         for (let i = 0; i < fullLength + 1; i += step) {
           const coords = algebra.getPointOnStraight(...baseCoords, i);
+          const iso = this.borderIsoMap;
+          const path = new Path2D();
+          path.moveTo(iso.left.x, iso.left.y);
+          path.lineTo(iso.top.x, iso.top.y);
+          path.lineTo(iso.right.x, iso.right.y);
+          path.lineTo(iso.bottom.x, iso.bottom.y);
+          const isPoint = ctx.isPointInPath(path, coords.x, coords.y);
+          if (!isPoint) continue;
           ctx.beginPath();
           const r = i > heroLength ? 2 : 4;
           ctx.arc(coords.x, coords.y, r, 0, 2 * Math.PI);
