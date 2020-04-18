@@ -1,3 +1,5 @@
+// https://habr.com/ru/post/332922/ - одна из статей
+// https://www.youtube.com/watch?v=nls0dyTeEns&list=PLHcq_lDrZqm0pcMN36rKfFUnxQvasRGRP
 function drawMap() {
   let mapArr = this.currentMap;
   let ctx = this.ctx;
@@ -18,8 +20,15 @@ function drawMap() {
       this.currentMap[i][h].centerX = centerX;
       this.currentMap[i][h].centerY = centerY;
       drawRectAroundCenter(centerX, centerY, mapArr[i][h].type);
+      // drawCoords(this.currentMap[i][h]);
     }
   }
+  // function drawCoords(tile) {
+  //   const shit = tileHeight / 2;
+  //   const str = `x:${tile.x}  y:${tile.y}`;
+  //   ctx.fillStyle = 'black';
+  //   ctx.fillText(str, tile.centerX - shit, tile.centerY + shit / 6);
+  // }
   function drawRectAroundCenter(centerX, centerY, grid) {
     const step = 0;
     ctx.beginPath();

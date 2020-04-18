@@ -24,12 +24,18 @@ const allMirror = {
 };
 function getNearCoords(start, target, sizeMap, tile) {
   const minPath = getMinPath(start, target, sizeMap);
-  const screen = {
-    centerX: minPath.x * tile.width,
-    centerY: minPath.y * tile.height
-  };
-  minPath.centerX = start.centerX + screen.centerX;
-  minPath.centerY = start.centerY + screen.centerY;
+  const shiftX = minPath.x - start.x;
+  const shiftY = minPath.y - start.y;
+  const isoX = (shiftX + shiftY) / 2;
+  const isoY = (shiftX - shiftY) / 2;
+  minPath.centerX = start.centerX + isoX * tile.width;
+  minPath.centerY = start.centerY - isoY * tile.height;
+  // const screen = {
+  //   centerX: minPath.x * tile.width,
+  //   centerY: minPath.y * tile.height
+  // };
+  // minPath.centerX = start.centerX + screen.centerX;
+  // minPath.centerY = start.centerY + screen.centerY;
   return minPath;
 }
 

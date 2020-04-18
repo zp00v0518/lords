@@ -99,7 +99,8 @@ export default {
     }
   },
   mounted() {
-    this.scenes.globalMap = true;
+    this.scenes.region = true;
+    // this.scenes.globalMap = true;
     // this.scenes.town = true;
   }
 };
