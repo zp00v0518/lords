@@ -94,10 +94,8 @@ export default {
       return intermediate;
     },
     isoCoords() {
-      const { ctx } = this;
-      const x = 0;
-      if (!ctx) return { x, y: 0 };
-      const y = parseInt(this.sceneHeight) / 2;
+      const x = parseInt(this.widthScene) / 2;
+      const y = parseInt(this.heightScene) / 100 * 10;
       return { x, y };
     }
   },

@@ -76,13 +76,12 @@ export default {
     tileWidth() {
       const widthParse = parseInt(this.widthScene) / 2;
       const intermediate = widthParse / (this.currentMap.length / 2);
-      return intermediate * 1.4;
+      return intermediate * 1.2;
       // return intermediate / (this.currentMap.length / 2) + intermediate;
     },
     isoCoords() {
-      const d = (this.tileWidth * this.currentMap.length) / 2; // общая ширина всех ячеек /2
-      const x = parseInt(this.widthScene) / 2 - d; // от середины карты вычитываем половину длины всех ячеек
-      const y = parseInt(this.heightScene) / 2;
+      const x = parseInt(this.widthScene) / 2;
+      const y = (parseInt(this.heightScene) / 100) * 10;
       return { x, y };
     },
     eventList() {
@@ -152,7 +151,7 @@ export default {
         const step = tileWidth / 4;
         for (let i = 0; i < fullLength + 1; i += step) {
           const coords = algebra.getPointOnStraight(...baseCoords, i);
-          const {viewportPath} = this;
+          const { viewportPath } = this;
           const isPoint = ctx.isPointInPath(viewportPath, coords.x, coords.y);
           if (!isPoint) continue;
           ctx.beginPath();

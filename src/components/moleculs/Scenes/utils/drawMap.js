@@ -5,30 +5,29 @@ function drawMap() {
   let ctx = this.ctx;
   const { canvas } = ctx;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  let tileWidth = this.tileWidth;
-  let tileHeight = tileWidth / 2;
-  let halfHeight = tileHeight / 2;
+  const tileWidth = this.tileWidth;
+  const tileHeight = tileWidth / 2;
+  const halfHeight = tileHeight / 2;
   // сдвиг начала оси Х влево
-  let startX = this.isoCoords.x;
-  let startY = this.isoCoords.y;
-  let startCenterX = startX + tileHeight;
-  let startCenterY = startY;
-  for (let i = 0; i < mapArr.length; i++) {
-    for (let h = 0; h < mapArr[i].length; h++) {
-      let centerX = startCenterX + 2 * halfHeight * (i + h);
-      let centerY = startCenterY - halfHeight * (i - h);
-      this.currentMap[i][h].centerX = centerX;
-      this.currentMap[i][h].centerY = centerY;
-      drawRectAroundCenter(centerX, centerY, mapArr[i][h].type);
-      // drawCoords(this.currentMap[i][h]);
+  const startX = this.isoCoords.x;
+  const startY = this.isoCoords.y + halfHeight;
+  for (let x = 0; x < mapArr.length; x++) {
+    const row = mapArr[x];
+    for (let y = 0; y < row.length; y++) {
+      const centerX = getIsoX(x, y) * tileHeight + startX;
+      const centerY = getIsoY(x, y) * tileHeight + startY;
+      this.currentMap[x][y].centerX = centerX;
+      this.currentMap[x][y].centerY = centerY;
+      drawRectAroundCenter(centerX, centerY, mapArr[x][y].type);
+      drawCoords(this.currentMap[x][y]);
     }
   }
-  // function drawCoords(tile) {
-  //   const shit = tileHeight / 2;
-  //   const str = `x:${tile.x}  y:${tile.y}`;
-  //   ctx.fillStyle = 'black';
-  //   ctx.fillText(str, tile.centerX - shit, tile.centerY + shit / 6);
-  // }
+  function drawCoords(tile) {
+    const shit = tileHeight / 2;
+    const str = `x:${tile.x}  y:${tile.y}`;
+    ctx.fillStyle = 'black';
+    ctx.fillText(str, tile.centerX - shit, tile.centerY + shit / 6);
+  }
   function drawRectAroundCenter(centerX, centerY, grid) {
     const step = 0;
     ctx.beginPath();
@@ -53,5 +52,12 @@ const colors = {
   2: 'brown',
   3: 'rgba(0,0,0,0.4)'
 };
+
+function getIsoX(x, y) {
+  return x - y;
+}
+function getIsoY(x, y) {
+  return (x + y) / 2;
+}
 
 export default drawMap;
