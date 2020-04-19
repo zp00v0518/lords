@@ -1,5 +1,7 @@
 // https://habr.com/ru/post/332922/ - одна из статей
 // https://www.youtube.com/watch?v=nls0dyTeEns&list=PLHcq_lDrZqm0pcMN36rKfFUnxQvasRGRP
+import iso from './iso';
+
 function drawMap() {
   let mapArr = this.currentMap;
   let ctx = this.ctx;
@@ -14,8 +16,8 @@ function drawMap() {
   for (let x = 0; x < mapArr.length; x++) {
     const row = mapArr[x];
     for (let y = 0; y < row.length; y++) {
-      const centerX = getIsoX(x, y) * tileHeight + startX;
-      const centerY = getIsoY(x, y) * tileHeight + startY;
+      const centerX = iso.getIsoX(x, y) * tileHeight + startX;
+      const centerY = iso.getIsoY(x, y) * tileHeight + startY;
       this.currentMap[x][y].centerX = centerX;
       this.currentMap[x][y].centerY = centerY;
       drawRectAroundCenter(centerX, centerY, mapArr[x][y].type);
@@ -52,12 +54,5 @@ const colors = {
   2: 'brown',
   3: 'rgba(0,0,0,0.4)'
 };
-
-function getIsoX(x, y) {
-  return x - y;
-}
-function getIsoY(x, y) {
-  return (x + y) / 2;
-}
 
 export default drawMap;

@@ -46,6 +46,7 @@ import { currentSector } from '../../../mixins';
 import drawHeroMixin from '../mixins/drawHeroMixin';
 import baseMixins from '../mixins/baseMixins';
 import { algebra } from '../../../../utils';
+import { iso } from '../utils';
 
 export default {
   name: 'GlobalMap',
@@ -140,11 +141,11 @@ export default {
         const sizeMap = WorldMap.numSectionGlobalMap;
         const width = this.tileWidth;
         const height = width / 2;
-        const startTile = algebra.getNearCoords(currentMap[0][0], startCoords, sizeMap, { width, height });
-        const endTile = algebra.getNearCoords(currentMap[0][0], endCoords, sizeMap, { width, height });
-
-        // console.log(startTile, endTile)
-        const baseCoords = [startTile.centerX, startTile.centerY, endTile.centerX, endTile.centerY];
+        const endTile = algebra.getMinPath(startCoords, endCoords, sizeMap);
+        iso.addCenterPoints(currentMap[0][0], startCoords, height);
+        iso.addCenterPoints(currentMap[0][0], endTile, height);
+        console.log(startCoords, endCoords, endTile)
+        const baseCoords = [startCoords.centerX, startCoords.centerY, endTile.centerX, endTile.centerY];
         const fullLength = algebra.getStraightLength(...baseCoords);
         let heroLength = this.getLengthHeroOnStraight(fullLength, event.start, event.end);
         if (heroLength > fullLength) heroLength = fullLength;

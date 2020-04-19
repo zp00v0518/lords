@@ -22,16 +22,6 @@ const allMirror = {
   left: (x, y, size) => ({ x: x - size, y }),
   current: (x, y) => ({ x, y })
 };
-function getNearCoords(start, target, sizeMap, tile) {
-  const minPath = getMinPath(start, target, sizeMap);
-  const shiftX = minPath.x - start.x;
-  const shiftY = minPath.y - start.y;
-  const isoX = (shiftX + shiftY) / 2;
-  const isoY = (shiftX - shiftY) / 2;
-  minPath.centerX = start.centerX + isoX * tile.width;
-  minPath.centerY = start.centerY - isoY * tile.height;
-  return minPath;
-}
 
 function getMinPath(start, target, size) {
   const result = [];
@@ -52,4 +42,4 @@ function getMinPath(start, target, size) {
   const index = lengthArr.indexOf(min);
   return result[index];
 }
-export default { getPointOnStraight, getStraightLength, getNearCoords };
+export default { getPointOnStraight, getStraightLength, getMinPath };
