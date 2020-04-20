@@ -1,7 +1,7 @@
 const { getRandomNumber } = require('template_func');
 const tube = require('../tube.js');
-const { createTown } = require('../town');
-const { GlobalMap, config, updateDB } = tube;
+const createTown = require('../town/createTown');
+const { config, updateDB } = tube;
 const WorldMap = require('../globalMap/WorldMap');
 const update = new updateDB();
 

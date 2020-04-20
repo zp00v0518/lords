@@ -44,6 +44,7 @@ function constractGlobalMap() {
       }
     };
     find.all(findOptions).then((result) => {
+      console.time('start')
       const regionsArr = result.result;
       regionsArr.forEach((item) => {
         const x = item.x;
@@ -53,6 +54,7 @@ function constractGlobalMap() {
       console.log(`Построение глобальной карты для ${serverName} завершено`);
       controlStateEventsList(serverName).then((events) => {
         console.log(`Игровые события на ${serverName} посчитаны`);
+        console.timeEnd('start')
       });
     });
   });

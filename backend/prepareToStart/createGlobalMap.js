@@ -22,7 +22,7 @@ function getPositionMine() {
     for (let h = 1; h < 4; h++) {
       var f = {
         x: i,
-        y: h,
+        y: h
       };
       if (i == 2 && h == 2) {
         break;
@@ -89,7 +89,7 @@ function createRegion() {
 }
 
 function createGlobalMap() {
-  serverList.forEach((server) => {
+  serverList.forEach(server => {
     let countRegion = 0;
     const serverName = server.collectionName;
     GlobalMap[serverName] = [];
@@ -108,17 +108,18 @@ function createGlobalMap() {
         // sector.listUpgrade = [];
         let persent = getRandomNumber(100);
         if (persent <= 2) {
-          sector.type = WorldMap.types.empty.id;
+          sector.type = WorldMap.types.nishtyak.id;
         }
         row.push(sector);
       }
     }
   });
+  startInsertToDB();
 }
 
 function recursiveOne(i, arr, serverName, callback) {
   if (i < arr.length) {
-    insertDB.one({ collectionName: serverName, doc: arr[i] }, (result) => {
+    insertDB.one({ collectionName: serverName, doc: arr[i] }, result => {
       console.log(result.ops);
       i++;
       recursiveOne(i, arr, serverName, callback);
@@ -152,15 +153,20 @@ function recursiveTree(a, h, i, serverList, callback) {
     callback();
   }
 }
+console.time('qwe')
 createGlobalMap();
+console.timeEnd('qwe')
 
-setTimeout(function () {
-  insertDB.mongo.db.dropDatabase((result) => {
-    console.log('База данных удалена');
-    console.log('Создание новой...');
-    recursiveTree(0, 0, 0, serverList, () => {
-      console.log('done');
-      insertDB.close();
+function startInsertToDB() {
+  console.log(123)
+  setTimeout(function() {
+    insertDB.mongo.db.dropDatabase(result => {
+      console.log('База данных удалена');
+      console.log('Создание новой...');
+      recursiveTree(0, 0, 0, serverList, () => {
+        console.log('done');
+        insertDB.close();
+      });
     });
-  });
-}, 4000);
+  }, 4000);
+}
