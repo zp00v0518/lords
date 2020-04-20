@@ -55,8 +55,9 @@ async function handlerBuildNewTownRequest(message, info) {
       redirectMessage(ws);
       return;
     }
-    console.log(info)
-    await setEventForBuildNewTown(sector, targetSector, hero);
+    const {user} = info.player;
+    const race = user.collections[serverName].race;
+    await setEventForBuildNewTown(sector, targetSector, hero, race);
     storage = deleteSource(sourseForBuild, storage);
     await updateStateTown(sector);
     await updateHeroInDB(serverName, hero._id);

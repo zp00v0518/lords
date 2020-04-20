@@ -1,7 +1,7 @@
 const { getTemplateEvent, Event } = require('../../events');
 const { WorldMap } = require('../../globalMap');
 
-function createBuildNewTownEvent(sector, targetSector, hero) {
+function createBuildNewTownEvent(sector, targetSector, hero, race) {
   const template = getTemplateEvent();
   const startCoords = {
     x: sector.x,
@@ -29,7 +29,8 @@ function createBuildNewTownEvent(sector, targetSector, hero) {
   const data = {
     initHero: hero._id,
     startCoords,
-    endCoords
+    endCoords,
+    race
   };
   template.data = data;
   return template;
