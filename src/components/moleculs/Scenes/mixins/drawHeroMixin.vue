@@ -1,5 +1,4 @@
 <script>
-
 export default {
   computed: {
     settings() {
@@ -25,6 +24,9 @@ export default {
       return length * dif;
     },
     drawHeroOnMap(ctx, coords) {
+      const { viewportPath } = this;
+      const isPoint = ctx.isPointInPath(viewportPath, coords.x, coords.y);
+      if (!isPoint) return;
       const heightFlag = 20;
       ctx.beginPath();
       ctx.strokeStyle = 'black';

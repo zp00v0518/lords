@@ -21,15 +21,15 @@ function drawMap() {
       this.currentMap[x][y].centerX = centerX;
       this.currentMap[x][y].centerY = centerY;
       drawRectAroundCenter(centerX, centerY, mapArr[x][y].type);
-      drawCoords(this.currentMap[x][y]);
+      // drawCoords(this.currentMap[x][y]);
     }
   }
-  function drawCoords(tile) {
-    const shit = tileHeight / 2;
-    const str = `x:${tile.x}  y:${tile.y}`;
-    ctx.fillStyle = 'black';
-    ctx.fillText(str, tile.centerX - shit, tile.centerY + shit / 6);
-  }
+  // function drawCoords(tile) {
+  //   const shit = tileHeight / 2;
+  //   const str = `x:${tile.x}  y:${tile.y}`;
+  //   ctx.fillStyle = 'black';
+  //   ctx.fillText(str, tile.centerX - shit, tile.centerY + shit / 6);
+  // }
   function drawRectAroundCenter(centerX, centerY, grid) {
     const step = 0;
     ctx.beginPath();

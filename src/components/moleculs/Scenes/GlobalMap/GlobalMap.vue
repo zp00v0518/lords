@@ -65,6 +65,12 @@ export default {
       this.currentMap = deepClone($store.state.globalMap.currentMap);
       this.drawMap();
       // this.setBorderIsoMap();
+    },
+    eventList: {
+      deep: true,
+      handler() {
+        this.drawMap();
+      }
     }
   },
   computed: {
@@ -131,8 +137,7 @@ export default {
     },
     drawMoveHero() {
       if (this.mode && this.mode !== 'global') return;
-      const { ctx, eventList, currentMap, tileWidth, settings } = this;
-      // console.log(currentMap[0][0])
+      const { ctx, eventList, currentMap, tileWidth, settings, getTileByCoords } = this;
       ctx.fillStyle = settings.baseColor;
       eventList.forEach(event => {
         const { data } = event;
@@ -141,11 +146,21 @@ export default {
         const sizeMap = WorldMap.numSectionGlobalMap;
         const width = this.tileWidth;
         const height = width / 2;
-        const endTile = algebra.getMinPath(startCoords, endCoords, sizeMap);
-        iso.addCenterPoints(currentMap[0][0], startCoords, height);
-        iso.addCenterPoints(currentMap[0][0], endTile, height);
-        console.log(startCoords, endCoords, endTile)
-        const baseCoords = [startCoords.centerX, startCoords.centerY, endTile.centerX, endTile.centerY];
+        let startTile = getTileByCoords(currentMap, startCoords.x, startCoords.y);
+        let endTile = getTileByCoords(currentMap, endCoords.x, endCoords.y);
+        if (startTile && !endTile) {
+          endTile = algebra.getMinPath(startTile, endCoords, sizeMap);
+          iso.addCenterPoints(startTile, endTile, height);
+        } else if (!startTile && endTile) {
+          startTile = algebra.getMinPath(endTile, startCoords, sizeMap);
+          iso.addCenterPoints(endTile, startTile, height);
+        } else if (!startTile && !endTile) {
+          startTile = algebra.getMinPath(currentMap[0][0], startCoords, sizeMap);
+          endTile = algebra.getMinPath(startTile, endCoords, sizeMap);
+          iso.addCenterPoints(currentMap[0][0], startTile, height);
+          iso.addCenterPoints(startTile, endTile, height);
+        }
+        const baseCoords = [startTile.centerX, startTile.centerY, endTile.centerX, endTile.centerY];
         const fullLength = algebra.getStraightLength(...baseCoords);
         let heroLength = this.getLengthHeroOnStraight(fullLength, event.start, event.end);
         if (heroLength > fullLength) heroLength = fullLength;
