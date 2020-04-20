@@ -13,7 +13,7 @@ function createTown(options) {
   const indexRace = options.race || Number(0);
   const race = Race.typeList[indexRace];
   listMine = Race[race].mine.default;
-  const storage = createStorage();
+  const storage = createStorage({ status: options.status });
   const hall = createHall();
   const tavern = createTavern({});
   const market = createMarket({});
@@ -33,7 +33,7 @@ function createTown(options) {
     [guild.class]: guild,
     [market.class]: market,
     [tavern.class]: tavern,
-    regionMap: options.regionMap || null,
+    regionMap: null,
     lvl: options.lvl || 0,
     race: indexRace
   };
@@ -49,7 +49,7 @@ function createTown(options) {
     town[key].type = key;
   }
   // если замок первый, то создается регион со стандартными шахтами и их положением
-  if (options.status === 'new') {
+  if (options.status === 'first') {
     town.regionMap = createRegionMap(1);
   }
   return town;

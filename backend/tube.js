@@ -43,13 +43,11 @@ module.exports.findUserInDB = findUserInDB;
 module.exports.getInfoForStartGame = getInfoForStartGame;
 module.exports.addNewUserToGlobalMap = addNewUserToGlobalMap;
 
-const { createTown, upgradeSection, updateStateTown } = require('./town');
-module.exports.createTown = createTown;
+const { upgradeSection, updateStateTown } = require('./town');
 module.exports.updateStateTown = updateStateTown;
 module.exports.upgradeSection = upgradeSection;
 
-const { createStorage, calcStorageNowValue } = require('./town/storage');
-module.exports.createStorage = createStorage;
+const { calcStorageNowValue } = require('./town/storage');
 module.exports.calcStorageNowValue = calcStorageNowValue;
 
 const { setUpgradeChange, checkUpgrade } = require('./region');

@@ -1,11 +1,11 @@
-const tube = require("../../tube.js");
-const Town = require("../Town.js");
+const tube = require('../../tube.js');
+const Town = require('../Town.js');
 // const Resources = gameVariables.resources;
-const { Resources } = require("../../resources");
-const { Mine } = require("../../region/mine");
-const workSection = require("..//buildings/workSection");
+const { Resources } = require('../../resources');
+const { Mine } = require('../../region/mine');
+const workSection = require('..//buildings/workSection');
 
-function createStorage(listMine = Mine.typeList, lvl = 1) {
+function createStorage({ listMine = Mine.typeList, lvl = 1, status = 'not_first' }) {
   const { upgradeSection } = tube;
   //listMine - массив типов шахт;
   const storage = {
@@ -23,7 +23,7 @@ function createStorage(listMine = Mine.typeList, lvl = 1) {
     sources: {}
   };
   Object.assign(storage, Town.baseBuilding);
-  //создаются поля, которые соответствуют перечню шахт
+  // создаются поля, которые соответствуют перечню шахт
   for (let i = 0; i < listMine.length; i++) {
     const type = listMine[i];
     const obj = {
@@ -32,8 +32,8 @@ function createStorage(listMine = Mine.typeList, lvl = 1) {
       nowValue: 0
     };
     storage.sources[type] = obj;
-    if (type === "gold") {
-      storage.sources.gold.nowValue = 50000;
+    if (type === 'gold') {
+      storage.sources.gold.nowValue = status === 'first' ? 50000 : 0;
       storage.sources.gold.addValue = 2000;
       storage.sources.gold.lastCalc = new Date();
       storage.sources.gold.maxValue = Resources.maxValue.gold;

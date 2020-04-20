@@ -7,16 +7,19 @@ const update = new updateDB();
 
 // добавляю нового Игрока на глобальную карту
 function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
-  // const { createTown } = tube;
   return new Promise((resolve, reject) => {
     checkUserPosition(serverName, (x, y, sectorId) => {
       const race = user.collections[serverName].race;
       const newTown = createTown({
-        status: 'new',
+        status: 'first',
         name: 'New Castle',
         sectorId,
         race
       });
+      const { regionMap } = newTown;
+      // удаляю т.к в базе получается дублирование карты региона
+      delete newTown.regionMap;
+
       const optionsForUpdateBD = {
         collectionName: serverName,
         filtr: {
@@ -26,7 +29,7 @@ function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
         },
         updateDoc: {
           $set: {
-            region: newTown.regionMap,
+            region: regionMap,
             userId: user._id,
             type: WorldMap.types.town.id,
             nickName: user.nickName,
@@ -35,12 +38,11 @@ function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
         }
       };
       update.one(optionsForUpdateBD).then(result => {
-        GlobalMap[serverName][x][y].region = newTown.regionMap;
+        GlobalMap[serverName][x][y].region = regionMap;
         GlobalMap[serverName][x][y].userId = user._id;
         GlobalMap[serverName][x][y].type = 1;
         GlobalMap[serverName][x][y].nickName = user.nickName;
         GlobalMap[serverName][x][y].town = newTown;
-        delete newTown.regionMap;
         callback(null, GlobalMap[serverName][x][y]);
         return resolve(GlobalMap[serverName][x][y]);
       });
