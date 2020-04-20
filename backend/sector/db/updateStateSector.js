@@ -3,9 +3,8 @@ const { updateDB } = require('../../workWithMongoDB');
 const update = new updateDB();
 
 // обновляет состояние города в БД (не Региона или его-то другого. ТОлько города)
-function updateStateSector(sector, ops = { upsert: false }, callback = function() {}) {
+function updateStateSector(sector, docs, ops = { upsert: false }, callback = function() {}) {
   return new Promise((resolve, reject) => {
-    const { docs } = ops;
     if (!docs) {
       console.log(`В ${__dirname} не переданы документы для обновления`);
       return resolve(false);

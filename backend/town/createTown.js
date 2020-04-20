@@ -6,7 +6,6 @@ const { Army, createArmy } = require('../army/Army');
 const { gameVariables } = global;
 const createStorage = require('./storage/createStorage');
 let listMine = [];
-let townCount = 0;
 
 function createTown(options) {
   // const { createStorage } = tube;
@@ -25,7 +24,6 @@ function createTown(options) {
       units: []
     },
     class: gameVariables.classInstance.town,
-    id: townCount++,
     name: options.name || 'New Castle',
     [storage.class]: storage,
     [hall.class]: hall,
@@ -33,7 +31,6 @@ function createTown(options) {
     [guild.class]: guild,
     [market.class]: market,
     [tavern.class]: tavern,
-    regionMap: null,
     lvl: options.lvl || 0,
     race: indexRace
   };

@@ -21,7 +21,8 @@ const Army = {
   },
   army_range: {
     base: [1000, 2000],
-    hero: [1000, 1000]
+    hero: [1000, 1000],
+    coeff: 0.5
   },
   race: {
     [race_types.rampart]: rampart_units

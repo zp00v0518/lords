@@ -1,4 +1,4 @@
-const ev = require('../../events').Event;
+const ev = require('../../events/Event');
 const evTypes = ev.types;
 
 const eventLang = {

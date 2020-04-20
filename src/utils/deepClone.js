@@ -9,7 +9,7 @@ function deepClone(elem) {
   function cloneObj(obj, result) {
     Object.keys(obj).forEach(key => {
       const item = obj[key];
-      if (typeof item !== "object") {
+      if (typeof item !== "object" || item === null) {
         result[key] = item;
       } else {
         if (Array.isArray(item)) {

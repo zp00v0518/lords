@@ -1,3 +1,4 @@
 const updateUser = require('./updateUser');
+const getOneUserFromDB = require('./getOneUserFromDB');
 
-module.exports = { updateUser };
+module.exports = { updateUser, getOneUserFromDB };

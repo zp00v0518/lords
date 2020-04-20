@@ -1,5 +1,5 @@
 const { calcStorageNowValue } = require('../town/storage');
-const { getGlobalMapSector } = require('../globalMap');
+const  getGlobalMapSector = require('../globalMap/getGlobalMapSector');
 const getLangDictionary = require('../dictionary/getLangDictionary');
 const chat = require('../chat/chat');
 
