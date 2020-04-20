@@ -6,21 +6,23 @@ const WorldMap = require('../globalMap/WorldMap');
 const update = new updateDB();
 
 // добавляю нового Игрока на глобальную карту
-function addNewUserToGlobalMap(user, serverName, callback = function () {}) {
+function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
   // const { createTown } = tube;
   return new Promise((resolve, reject) => {
     checkUserPosition(serverName, (x, y, sectorId) => {
+      const race = user.collections[serverName].race;
       const newTown = createTown({
         status: 'new',
         name: 'New Castle',
         sectorId,
+        race
       });
       const optionsForUpdateBD = {
         collectionName: serverName,
         filtr: {
           x,
           y,
-          class: config.schema.document.class.map,
+          class: config.schema.document.class.map
         },
         updateDoc: {
           $set: {
@@ -28,11 +30,11 @@ function addNewUserToGlobalMap(user, serverName, callback = function () {}) {
             userId: user._id,
             type: WorldMap.types.town.id,
             nickName: user.nickName,
-            town: newTown,
-          },
-        },
+            town: newTown
+          }
+        }
       };
-      update.one(optionsForUpdateBD).then((result) => {
+      update.one(optionsForUpdateBD).then(result => {
         GlobalMap[serverName][x][y].region = newTown.regionMap;
         GlobalMap[serverName][x][y].userId = user._id;
         GlobalMap[serverName][x][y].type = 1;

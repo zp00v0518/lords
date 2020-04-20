@@ -3,11 +3,13 @@ const {
   findUserInGlobalMap,
   addNewUserToGlobalMap,
   getInfoForStartGame,
-  setUserOnline
+  setUserOnline,
+  updateUser
 } = require("../user");
 const { redirectMessage } = require("../wsServer/defaultMessages");
 const { getCollectionName, checkSchema } = require("../template_modules");
 const { Heroes } = require("../heroes");
+const Race = require('./Race');
 const { addHeroToDB, addHeroToTown, addTownToHero } = require("../heroes/db");
 
 function choicesRace(message, { userCookies, ws }) {
@@ -34,10 +36,16 @@ function choicesRace(message, { userCookies, ws }) {
         redirectMessage(ws);
         return;
       }
+      const raceIndex = Race.typeList.indexOf(race)
+      user.collections[serverName].race = raceIndex;
       addHeroToDB({ server: serverName, race, type: heroes, userId: user._id })
         .then(insertHero => {
           addNewUserToGlobalMap(user, serverName)
-            .then(insertTown => {
+            .then(async insertTown => {
+              const updUser = {
+                [`collections.${serverName}.race`]: raceIndex
+              }
+              await updateUser(user._id, updUser);
               addHeroToTown(serverName, insertTown._id, insertHero._id)
                 .then(() => {
                   addTownToHero(serverName, insertTown._id, insertHero._id)

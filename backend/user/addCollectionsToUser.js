@@ -1,16 +1,20 @@
-const { updateDB, config } = srcRequire("tube");
+// const { updateDB, config } = srcRequire('tube');
+const { updateDB } = require('../workWithMongoDB');
+const config = require('../config');
 const update = new updateDB();
 
 //добавляет коллекцию в массив коллекций
-function addCollectionsToUser(userId, serverName, callback = function() {}) {
+function addCollectionsToUser(user, serverName, callback = function() {}) {
   return new Promise((resolve, reject) => {
+    const obj = createStatUserGame({ name: serverName });
+    const key = `collections.${serverName}`;
     const optionsForUpdateBD = {
       collectionName: config.db.collections.users,
       filtr: {
-        _id: userId
+        _id: user._id
       },
       updateDoc: {
-        $push: { collections: serverName }
+        $set: { [key]: obj }
       }
     };
     update
@@ -24,6 +28,15 @@ function addCollectionsToUser(userId, serverName, callback = function() {}) {
         return callback;
       });
   });
+}
+
+function createStatUserGame(ops) {
+  return {
+    name: ops.name || '',
+    race: ops.race || '',
+    alians: {},
+    rate: {}
+  };
 }
 
 module.exports = addCollectionsToUser;

@@ -2,7 +2,8 @@ const url = require('url');
 const path = require('path');
 const Cookies = require('cookies');
 const template = require('template_func');
-const { fileReader, mimeType, sendResponse, config, findUserInDB, addCollectionsToUser } = require('./tube.js');
+const { fileReader, mimeType, sendResponse, config, findUserInDB } = require('./tube.js');
+const { addCollectionsToUser } = require('./user');
 const log = new template.Log(__filename);
 const { getCollectionName } = require('./template_modules');
 
@@ -21,8 +22,11 @@ function getMethod(req, res, startPath) {
     const ext = path.parse(pathName).ext;
     const pathJoin = path.join(startPath, config.basePathToFiles, pathName);
     fileReader(pathJoin, (err, data) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
       sendResponse(res, data, mimeType[ext]);
-      return;
     });
     return;
   }
@@ -32,19 +36,22 @@ function getMethod(req, res, startPath) {
     var pathJoin = path.join(startPath, config.basePathToFiles, pathName);
     var ext = path.parse(pathName).ext;
     fileReader(pathJoin, (err, data) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
       sendResponse(res, data, mimeType[ext]);
-      return;
     });
     // если userCookies есть, ищем совпадение в БД
   } else if (userCookies) {
     findUserInDB(userCookies).then(resultFinUser => {
       if (resultFinUser) {
-        const checkServerName = getCollectionName(pathName.split('/')[1]);
-        if (!checkServerName) {
+        const serverName = getCollectionName(pathName.split('/')[1]);
+        if (!serverName) {
           // отправляем пользователя в личный кабинет
           pathName = config.listFile.html.cabinet + '.html';
-        } else if (!resultFinUser.collections.includes(checkServerName)) {
-          addCollectionsToUser(resultFinUser._id, checkServerName);
+        } else if (!Object.values(resultFinUser.collections).find(i => i.name === serverName)) {
+          addCollectionsToUser(resultFinUser, serverName);
           pathName = config.listFile.html.game + '.html';
         } else {
           pathName = config.listFile.html.game + '.html';
@@ -57,8 +64,11 @@ function getMethod(req, res, startPath) {
       const pathJoin = path.join(startPath, config.basePathToFiles, pathName);
       const ext = path.parse(pathName).ext;
       fileReader(pathJoin, (err, data) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
         sendResponse(res, data, mimeType[ext]);
-        return;
       });
     });
   }

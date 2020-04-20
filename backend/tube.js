@@ -34,9 +34,7 @@ const {
   findUserInGlobalMap,
   findUserInDB,
   getInfoForStartGame,
-  addNewUserToGlobalMap,
-  updateUser,
-  addCollectionsToUser
+  addNewUserToGlobalMap
 } = require('./user');
 module.exports.userCreate = userCreate;
 module.exports.getInfoForUserPage = getInfoForUserPage;
@@ -44,8 +42,6 @@ module.exports.findUserInGlobalMap = findUserInGlobalMap;
 module.exports.findUserInDB = findUserInDB;
 module.exports.getInfoForStartGame = getInfoForStartGame;
 module.exports.addNewUserToGlobalMap = addNewUserToGlobalMap;
-module.exports.updateUser = updateUser;
-module.exports.addCollectionsToUser = addCollectionsToUser;
 
 const { createTown, upgradeSection, updateStateTown } = require('./town');
 module.exports.createTown = createTown;
