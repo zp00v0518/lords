@@ -97,7 +97,6 @@ export default {
   name: "Barraks",
   props: {
     townRaceName: String,
-    gloss: null,
     buildingData: null,
     currentSector: { type: Object, default: () => ({}) }
   },

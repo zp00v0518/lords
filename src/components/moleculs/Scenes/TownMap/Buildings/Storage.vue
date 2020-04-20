@@ -8,7 +8,6 @@ export default {
   props: {
     townRaceName: String,
     currentTown: null,
-    gloss: null
   },
   created() {},
   data() {
