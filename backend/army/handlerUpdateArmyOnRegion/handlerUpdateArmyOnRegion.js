@@ -5,8 +5,9 @@ const Race = require('../../race/Race');
 const regionTypes = require('../../region/Region').types;
 const { updateStateRegion } = require('../../region');
 const { createArmy } = require('../Army');
+const changeArmyOnRegion = require('../changeArmyOnRegion');
 
-function updateArmyOnRegion(message, info) {
+function handlerUpdateArmyOnRegion(message, info) {
   const data = message.data;
   const { ws } = info.player;
   const response = {
@@ -28,17 +29,7 @@ function updateArmyOnRegion(message, info) {
       const { armySize } = data;
       const persent = armySize * 0.3;
       const range_power_army = [armySize - persent, armySize + persent];
-      region.forEach(sectorRow => {
-        sectorRow.forEach(tile => {
-          if (tile.type === regionTypes.forest.id || tile.type === regionTypes.empty.id) {
-            const armyRace = Race.getRandom();
-            const units = Object.values(Race[armyRace.name].units);
-            const army = createArmy({ range_power_army, units });
-            tile.army = army;
-            tile.type = regionTypes.forest.id;
-          }
-        });
-      });
+      changeArmyOnRegion(region, range_power_army);
       updateStateRegion(sector).then(() => {
         response.status = true;
         sendWSMessage(ws, response);
@@ -54,4 +45,4 @@ const schema = {
   sectorIndex: { type: 'number', min: 0 },
   armySize: { type: 'number', min: 500, max: 999999 }
 };
-module.exports = updateArmyOnRegion;
+module.exports = handlerUpdateArmyOnRegion;

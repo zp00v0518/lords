@@ -1,3 +1,3 @@
-const updateArmyOnRegion = require('./updateArmyOnRegion');
+const handlerUpdateArmyOnRegion = require('./handlerUpdateArmyOnRegion');
 
-module.exports = updateArmyOnRegion;
+module.exports = handlerUpdateArmyOnRegion;
