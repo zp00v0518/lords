@@ -55,6 +55,7 @@ async function handlerBuildNewTownRequest(message, info) {
       redirectMessage(ws);
       return;
     }
+    console.log(info)
     await setEventForBuildNewTown(sector, targetSector, hero);
     storage = deleteSource(sourseForBuild, storage);
     await updateStateTown(sector);

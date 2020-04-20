@@ -22,7 +22,7 @@ function createTown(options) {
   const town = {
     army: {
       def: false,
-      units: [],
+      units: []
     },
     class: gameVariables.classInstance.town,
     id: townCount++,
@@ -33,14 +33,15 @@ function createTown(options) {
     [guild.class]: guild,
     [market.class]: market,
     [tavern.class]: tavern,
-    regionMap: null,
+    regionMap: options.regionMap || null,
     lvl: options.lvl || 0,
-    race: indexRace,
+    race: indexRace
   };
-  const sectorId = options.sectorId;
-  if (sectorId) {
-    town.sectorId = sectorId;
-  }
+  town.sectorId = options.sectorId || '';
+  // const sectorId = options.sectorId;
+  // if (sectorId) {
+  //   town.sectorId = options.sectorId;
+  // }
   for (let i = 0; i < 7; i++) {
     const barraks = createBarraks({});
     const key = barraks.class + `_${i + 1}`;
@@ -67,9 +68,9 @@ function createRegionMap(townIndex = 1) {
     // для разработки добавил и остальные шахты
     { x: 2, y: 0 },
     { x: 4, y: 2 },
-    { x: 2, y: 4 },
+    { x: 2, y: 4 }
   ];
-  const range_power_army = Army.army_range.base.map((i) => i * townIndex);
+  const range_power_army = Army.army_range.base.map(i => i * townIndex);
 
   // создаю сетку региона
   for (let i = 0; i < numSectionRegionMap; i++) {
