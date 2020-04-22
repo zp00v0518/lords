@@ -2,10 +2,11 @@ const { getOneTownFromDB } = require('../DB');
 const { finishEventGlobal } = require('../../events/db');
 const createTown = require('../createTown');
 const WorldMap = require('../../globalMap/WorldMap');
-const {getArmyRange, changeArmyOnRegion} = require('../../army');
-const {updateStateSector} = require('../../sector');
-const {getUsersTownFromDB} = require('../../town/DB');
-const {getOneUserFromDB} = require('../../user');
+const { getArmyRange, changeArmyOnRegion } = require('../../army');
+const { updateStateSector } = require('../../sector');
+const { getUsersTownFromDB } = require('../../town/DB');
+const { getOneUserFromDB } = require('../../user');
+const { transferHeroBetweenTown, getHeroesFromDB } = require('../../heroes/db');
 
 async function handlerBuildNewTown(event) {
   const { serverName, target, init, data } = event;
@@ -17,9 +18,13 @@ async function handlerBuildNewTown(event) {
   }
   const { race } = data;
   const user = await getOneUserFromDB(init.user);
+  const hero = await getHeroesFromDB(serverName, { heroId: data.initHero });
+  if (!user || !hero) {
+    finishEventGlobal(event);
+    return;
+  }
   const newTown = createTown({ race, sectorId: targetSector._id });
   const userTowns = await getUsersTownFromDB(init.user, serverName);
-  console.log(userTowns)
   const armyRange = getArmyRange(userTowns.length + 1);
   const region = targetSector.region;
   changeArmyOnRegion(region, armyRange);
@@ -29,13 +34,10 @@ async function handlerBuildNewTown(event) {
     nickName: user.nickName,
     type: WorldMap.types.town.id,
     userId: user._id
-  }
-  const resultUpdate = await updateStateSector(targetSector, newDocs);
-  console.log(resultUpdate);
-  console.log(user)
-  console.log(newTown);
+  };
+  await updateStateSector(targetSector, newDocs);
+  transferHeroBetweenTown(serverName, hero._id, init.sector, target.sector)
   finishEventGlobal(event);
-  // console.log(targetSector)
   return;
 }
 
