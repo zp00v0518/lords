@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       name: 'Default Name',
-      townId: this.sector._id
+      sectorId: this.sector._id
     };
   },
   created() {
@@ -85,7 +85,7 @@ export default {
       return this.races.typeList[typeTown];
     },
     heroesList() {
-      return this.$store.getters.getHeroesFromTown(this.townId);
+      return this.$store.getters.getHeroesFromTown(this.sectorId);
     },
     activeHeroes() {
       return this.heroesList.filter(i => i.active);

@@ -24,7 +24,7 @@ function createTown(options) {
       units: []
     },
     class: gameVariables.classInstance.town,
-    name: options.name || 'New Castle' + '_' + Math.floor(Math.random() * 1123),
+    name: options.name || 'New Castle' + '_' + Math.floor(Math.random() * 999),
     [storage.class]: storage,
     [hall.class]: hall,
     [fort.class]: fort,

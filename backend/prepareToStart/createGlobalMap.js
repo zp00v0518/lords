@@ -120,7 +120,7 @@ function createGlobalMap() {
 function recursiveOne(i, arr, serverName, callback) {
   if (i < arr.length) {
     insertDB.one({ collectionName: serverName, doc: arr[i] }, result => {
-      console.log(result.ops);
+      console.log(result.ops[0].id);
       i++;
       recursiveOne(i, arr, serverName, callback);
     });
@@ -153,12 +153,9 @@ function recursiveTree(a, h, i, serverList, callback) {
     callback();
   }
 }
-console.time('qwe')
 createGlobalMap();
-console.timeEnd('qwe')
 
 function startInsertToDB() {
-  console.log(123)
   setTimeout(function() {
     insertDB.mongo.db.dropDatabase(result => {
       console.log('База данных удалена');
