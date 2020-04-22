@@ -1,7 +1,7 @@
 <template>
   <div class="castle_item_wrap">
     <div class="castle_interface">
-      <div class="castle_icon"></div>
+      <div class="castle_icon" @click="handlerClickIcon"></div>
       <div class="castle_other">
         <div class="castle_name">{{ name }}</div>
         <div class="resource_wrap">
@@ -46,7 +46,10 @@ import { HeroesInTown, InActiveHeroes } from '../HeroesInTown';
 export default {
   name: 'Town',
   components: { ...modules, ArmyLine, HeroesInTown, InActiveHeroes },
-  props: ['sector'],
+  props: {
+    sector: null,
+    indexTown: null
+  },
   data() {
     return {
       name: 'Default Name',
@@ -89,6 +92,11 @@ export default {
     },
     notActiveHeroes() {
       return this.heroesList.filter(i => !i.active);
+    }
+  },
+  methods: {
+    handlerClickIcon() {
+      this.$store.commit("SET_CURRENT_SECTOR", this.indexTown);
     }
   }
 };

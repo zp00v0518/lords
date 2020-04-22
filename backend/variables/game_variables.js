@@ -15,7 +15,7 @@ const gameVariables = {
     return gameVariables.numSectionGlobalMap - 1;
   }, // максимальный индекс для массива карты
   numSectionRegionMap: 5, // количество ячеек на карте РЕГИОНА, по одной оси
-  viewSectionGlobalMapNow: 9, // количество ячеек на Глобальной карте, по одной оси
+  viewSectionGlobalMapNow: 15, // количество ячеек на Глобальной карте, по одной оси
   stepMoveGlobalMap: 2, // кол-во ячеек, на которорое происходит сдвиг карты при передвижении
   serverList: config.db.collections.servers,
   timer: {
