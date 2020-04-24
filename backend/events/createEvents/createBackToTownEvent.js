@@ -8,7 +8,7 @@ function createBackToTownEvent(prevEvent, result = {}) {
   const time = Heroes.getTimeMove(startCoords, endCoords);
   const start = new Date().getTime();
   const end = start + time;
-  const init = prevEvent.init;
+  const init = prevEvent.target;
   const target = prevEvent.init;
   const newData = {
     startCoords,

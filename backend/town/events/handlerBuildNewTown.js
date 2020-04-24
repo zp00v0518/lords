@@ -8,12 +8,16 @@ const { getUsersTownFromDB } = require('../../town/DB');
 const { getOneUserFromDB } = require('../../user');
 const { transferHeroBetweenTown, getHeroesFromDB } = require('../../heroes/db');
 const { getOneSectorForGlobalMap } = require('../../globalMap/db');
+const { createBackToTownEvent } = require('../../events/createEvents');
+const { addEventToDB } = require('../../events/db');
 
 async function handlerBuildNewTown(event) {
   const { serverName, target, init, data } = event;
   const targetSector = await getOneTownFromDB(serverName, target.sector);
   if (!targetSector || targetSector.town) {
     // здесь надо повернуть героя назад (backTotown)
+    const backToTownEvent = createBackToTownEvent(event);
+    await addEventToDB(backToTownEvent, serverName);
     finishEventGlobal(event);
     return;
   }

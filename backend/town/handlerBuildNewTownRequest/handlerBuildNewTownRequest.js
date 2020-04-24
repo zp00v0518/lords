@@ -26,9 +26,10 @@ async function handlerBuildNewTownRequest(message, info) {
   };
   try {
     const targetSector = await getOneTownFromDB(serverName, data.targetSector);
-    if (!targetSector || targetSector.town) {
-      redirectMessage(ws);
-    }
+    // if (!targetSector || targetSector.town) {
+    //   redirectMessage(ws);
+    //   return;
+    // }
 
     const sector = await getOneTownFromDB(serverName, curSector._id);
     if (!sector) {

@@ -60,9 +60,9 @@ const Town = {
   },
   getSourceForNewTown(count) {
     const base = {
-      [typeSource.gold]: 10000,
-      [typeSource.wood]: 10,
-      [typeSource.ore]: 10
+      [typeSource.gold]: 100,
+      [typeSource.wood]: 0,
+      [typeSource.ore]: 0
     };
     return base;
   }
