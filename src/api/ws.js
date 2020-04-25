@@ -69,6 +69,7 @@ class WS {
     this.store.commit('SET_DICTIONARY', eventData.dictionary);
     this.store.commit('SET_EVENTS', eventData.eventsList);
     this.store.commit('SET_HEROES_LIST', eventData.heroesList);
+    this.store.commit('SET_USER_ID', eventData.user.id);
   }
   chatMessage(eventData) {
     this.store.commit('UNSHIFT_MESSAGE', eventData);

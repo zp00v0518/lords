@@ -24,8 +24,9 @@ export default {
     '$store.state.timeline.eventsList': {
       immediate: true,
       handler(list) {
-        const { deepClone } = this;
-        const arr = list.filter(i => i.data.initHero);
+        const { deepClone, globalConfig } = this;
+        const mode = globalConfig.all.Event.mode;
+        const arr = list.filter(i => i.mode !== mode.global && i.data.initHero);
         this.eventsList = deepClone(arr);
         this.addEventOnHero();
       }

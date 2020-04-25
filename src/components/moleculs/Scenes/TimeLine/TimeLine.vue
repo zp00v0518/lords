@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="timeline"
-    :style="{ width: widthScene + 'px', height: heightScene + 'px' }"
-  >
+  <div class="timeline" :style="{ width: widthScene + 'px', height: heightScene + 'px' }">
     <canvas ref="scene" :width="widthScene" :height="heightScene"></canvas>
     <ViewSectorEvents
       v-for="(sectorEvent, index) in sectorsEventsPosition"
@@ -14,34 +11,30 @@
 </template>
 
 <script>
-import ViewSectorEvents from "./ViewSectorEvents";
-import {
-  formBreakpoint,
-  drawBreakpointTime,
-  drawDefaultTime,
-  getPositionEvent,
-  drawEventPoint
-} from "./utils";
+import ViewSectorEvents from './ViewSectorEvents';
+import { formBreakpoint, drawBreakpointTime, drawDefaultTime, getPositionEvent, drawEventPoint } from './utils';
 
 export default {
-  name: "TimeLine",
+  name: 'TimeLine',
   components: { ViewSectorEvents },
-  props: ["widthScene", "heightScene"],
+  props: ['widthScene', 'heightScene'],
   data() {
     return {
       ctx: {},
       breakpoint: [],
-      timerId: "",
-      timerId_2: "",
-      timeEvent: "",
+      timerId: '',
+      timerId_2: '',
+      timeEvent: '',
       eventsList: []
     };
   },
   created() {},
   watch: {
-    "$store.state.timeline.eventsList": function(e) {
-      const { deepClone } = this;
-      this.eventsList = deepClone(e);
+    '$store.state.timeline.eventsList': function(ev) {
+      const { deepClone, $store } = this;
+      const userId = $store.state.user.id;
+      const arr = ev.filter(i => i.init.user === userId || i.target.user === userId);
+      this.eventsList = deepClone(arr);
     }
   },
   computed: {
@@ -92,21 +85,18 @@ export default {
     getPosition(eventItem) {
       const now = new Date().getTime();
       const position = this.getPositionEvent(now, eventItem.end);
-      return position + "px";
+      return position + 'px';
     }
   },
   mounted() {
-    this.ctx = this.$refs.scene.getContext("2d");
-    this.breakpoint = this.formBreakpoint(
-      this.breakpoint,
-      parseFloat(this.widthScene - 5)
-    );
+    this.ctx = this.$refs.scene.getContext('2d');
+    this.breakpoint = this.formBreakpoint(this.breakpoint, parseFloat(this.widthScene - 5));
     this.drawLoop();
     this.timerId = setInterval(() => {
       this.drawLoop();
     }, 1000 * 15);
     this.timerId_2 = setInterval(() => {
-      this.$store.commit("UPDATE_EVENTS");
+      this.$store.commit('UPDATE_EVENTS');
     }, 1000 * 15);
   },
   beforeDestroy() {
@@ -117,7 +107,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "timeline.scss";
+@import 'timeline.scss';
 
 .event {
   width: 15px;

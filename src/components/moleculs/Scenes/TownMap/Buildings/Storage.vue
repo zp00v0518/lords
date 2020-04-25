@@ -4,10 +4,10 @@
 
 <script>
 export default {
-  name: "Stroage",
+  name: 'Stroage',
   props: {
     townRaceName: String,
-    currentTown: null,
+    currentTown: null
   },
   created() {},
   data() {

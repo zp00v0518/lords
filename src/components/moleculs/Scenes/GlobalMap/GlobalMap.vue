@@ -140,8 +140,9 @@ export default {
       const { ctx, eventList, currentMap, tileWidth, settings, getTileByCoords } = this;
       ctx.fillStyle = settings.baseColor;
       eventList.forEach(event => {
-        const { data } = event;
-        const { startCoords, endCoords } = data;
+        const { target, init } = event;
+        const startCoords = {x: init.x, y: init.y};
+        const endCoords = {x: target.x, y: target.y};
         const WorldMap = this.globalConfig.all.WorldMap;
         const sizeMap = WorldMap.numSectionGlobalMap;
         const width = this.tileWidth;

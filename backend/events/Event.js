@@ -6,6 +6,10 @@ const Event = {
     upgradeTown: 'upgradeTown',
     backToTown: 'backToTown',
     buildNewTown: 'buildNewTown'
+  },
+  mode: {
+    global: 'global',
+    region: 'region'
   }
 };
 

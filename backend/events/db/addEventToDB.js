@@ -12,6 +12,7 @@ function addEventToDB(data, serverName, callback = function() {}) {
       data: data.data,
       type: data.type,
       status: true,
+      mode: data.mode || '',
       serverName
     };
     insert

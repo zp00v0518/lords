@@ -3,6 +3,7 @@ const { WorldMap } = require('../../globalMap');
 
 function createBuildNewTownEvent(sector, targetSector, hero, race) {
   const template = getTemplateEvent();
+  template.mode = Event.mode.global;
   const startCoords = {
     x: sector.x,
     y: sector.y
