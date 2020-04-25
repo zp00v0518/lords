@@ -10,28 +10,28 @@ function moveGlobalMap(message, info, callback = function() {}) {
   let nowX = user.globalMap.centerMap.x;
   let nowY = user.globalMap.centerMap.y;
   if (way === 'right') {
-  // if (way === 'top') {
+    // if (way === 'top') {
     const newPosition = nowX + step;
     user.globalMap.centerMap.x = newPosition;
     if (newPosition > GlobalMap[server].length - 1) {
       user.globalMap.centerMap.x = newPosition - GlobalMap[server].length;
     }
   } else if (way === 'left') {
-  // } else if (way === 'bottom') {
+    // } else if (way === 'bottom') {
     const newPosition = nowX - step;
     user.globalMap.centerMap.x = newPosition;
     if (newPosition < 0) {
       user.globalMap.centerMap.x = GlobalMap[server].length - Math.abs(newPosition);
     }
   } else if (way === 'top') {
-  // } else if (way === 'left') {
+    // } else if (way === 'left') {
     const newPosition = nowY - step;
     user.globalMap.centerMap.y = newPosition;
     if (newPosition < 0) {
       user.globalMap.centerMap.y = GlobalMap[server].length - Math.abs(newPosition);
     }
   } else if (way === 'bottom') {
-  // } else if (way === 'right') {
+    // } else if (way === 'right') {
     const newPosition = nowY + step;
     user.globalMap.centerMap.y = newPosition;
     if (newPosition > GlobalMap[server].length - 1) {
@@ -39,15 +39,23 @@ function moveGlobalMap(message, info, callback = function() {}) {
     }
   }
   // console.log(`X:${user.globalMap.centerMap.x}  Y:${user.globalMap.centerMap.y}`)
-  getGlobalMapSector(user, server, result => {
-    const response = {
-      type: message.type,
-      status: true,
-      currentMap: result
-    };
-    ws.send(JSON.stringify(response));
-    return;
-  });
+  // getGlobalMapSector(user, server, result => {
+  //   const response = {
+  //     type: message.type,
+  //     status: true,
+  //     currentMap: result
+  //   };
+  //   ws.send(JSON.stringify(response));
+  //   return;
+  // });
+  const result = getGlobalMapSector(user, server);
+  const response = {
+    type: message.type,
+    status: true,
+    currentMap: result
+  };
+  ws.send(JSON.stringify(response));
+  return;
 }
 
 module.exports = moveGlobalMap;

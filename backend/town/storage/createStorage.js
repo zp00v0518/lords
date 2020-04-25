@@ -29,8 +29,8 @@ function createStorage({ listMine = Mine.typeList, lvl = 1, status = 'not_first'
     const obj = {
       lastCalc: 0,
       addValue: 0,
-      nowValue: 0
-      // nowValue: status === 'first' ? 20 : 20
+      // nowValue: 0
+      nowValue: status === 'first' ? 20 : 0
     };
     storage.sources[type] = obj;
     if (type === 'gold') {
