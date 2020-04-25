@@ -127,7 +127,7 @@ const Army = {
     return army;
   },
   getBaseHiringTime(hp, count) {
-    return hp * count * time.hiring;
+    return hp * count * (time.hiring / time.speedGame);
   },
   getLostCountUnits(unit, cof, lostForce) {
     const unitInfo = this.getUnitInfo(unit.name, unit.race);
