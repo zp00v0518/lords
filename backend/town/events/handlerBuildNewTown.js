@@ -6,7 +6,7 @@ const { getArmyRange, changeArmyOnRegion } = require('../../army');
 const { updateStateSector } = require('../../sector');
 const { getUsersTownFromDB } = require('../../town/DB');
 const { getOneUserFromDB } = require('../../user');
-const { transferHeroBetweenTown, getHeroesFromDB } = require('../../heroes/db');
+const { transferHeroBetweenTown, getHeroesFromDB, heroActivate } = require('../../heroes/db');
 const { getOneSectorForGlobalMap } = require('../../globalMap/db');
 const { createBackToTownEvent } = require('../../events/createEvents');
 const { addEventToDB } = require('../../events/db');
@@ -41,11 +41,12 @@ async function handlerBuildNewTown(event) {
     userId: user._id
   };
   await updateStateSector(targetSector, newDocs);
-  transferHeroBetweenTown(serverName, hero._id, init.sector, target.sector);
+  await transferHeroBetweenTown(serverName, hero._id, init.sector, target.sector);
+  await heroActivate(serverName, hero._id);
 
   const newSector = await getOneSectorForGlobalMap(serverName, targetSector._id);
   global.GlobalMap[serverName][targetSector.x][targetSector.y] = newSector;
-
+  
   finishEventGlobal(event);
   return;
 }

@@ -5,6 +5,8 @@ const getHeroesFromDB = require('./getHeroesFromDB');
 const updateHeroInDB = require('./updateHeroInDB');
 const removeHeroFromTown = require('./removeHeroFromTown');
 const transferHeroBetweenTown = require('./transferHeroBetweenTown');
+const heroActivate = require('./heroActivate');
+const heroInActivate = require('./heroInActivate');
 
 module.exports = {
   addHeroToDB,
@@ -13,5 +15,7 @@ module.exports = {
   getHeroesFromDB,
   updateHeroInDB,
   removeHeroFromTown,
-  transferHeroBetweenTown
+  transferHeroBetweenTown,
+  heroActivate,
+  heroInActivate
 };

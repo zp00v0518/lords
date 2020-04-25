@@ -1,6 +1,6 @@
 const { checkSchema } = require('../../template_modules');
 const { redirectMessage, sendWSMessage } = require('../../wsServer');
-const { getHeroesFromDB, updateHeroInDB } = require('../../heroes/db');
+const { getHeroesFromDB, heroInActivate } = require('../../heroes/db');
 const { Resources, deleteSource } = require('../../resources');
 const { Town, updateStateTown, getOneTownFromDB } = require('../../town');
 const setEventForBuildNewTown = require('./setEventForBuildNewTown');
@@ -61,8 +61,7 @@ async function handlerBuildNewTownRequest(message, info) {
     await setEventForBuildNewTown(sector, targetSector, hero, race);
     storage = deleteSource(sourseForBuild, storage);
     await updateStateTown(sector);
-    await updateHeroInDB(serverName, hero._id);
-    // await updateHeroInDB(serverName, hero._id, { active: false });
+    await heroInActivate(serverName, hero._id);
     response.status = true;
     sendWSMessage(ws, response);
   } catch (err) {
