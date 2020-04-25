@@ -28,15 +28,14 @@ function setUserOnline(user, server, info_for_game, ws) {
   global.UserOnline[server][User._id].user.globalMap.centerMap = {};
   global.UserOnline[server][User._id].user.globalMap.centerMap.x = info_for_game.sectors[0].x;
   global.UserOnline[server][User._id].user.globalMap.centerMap.y = info_for_game.sectors[0].y;
-  getGlobalMapSector(global.UserOnline[server][User._id].user, server, currentMap => {
-    startMessage.eventsList = info_for_game.eventsList;
-    startMessage.currentMap = currentMap;
-    startMessage.sectors = info_for_game.sectors;
-    startMessage.heroesList = info_for_game.heroesList;
-    startMessage.dictionary = getLangDictionary(user.lang);
-    startMessage.user = { id: User._id };
-    ws.send(JSON.stringify(startMessage));
-  });
+  const currentMap = getGlobalMapSector(global.UserOnline[server][User._id].user, server);
+  startMessage.eventsList = info_for_game.eventsList;
+  startMessage.currentMap = currentMap;
+  startMessage.sectors = info_for_game.sectors;
+  startMessage.heroesList = info_for_game.heroesList;
+  startMessage.dictionary = getLangDictionary(user.lang);
+  startMessage.user = { id: User._id };
+  ws.send(JSON.stringify(startMessage));
 }
 
 module.exports = setUserOnline;

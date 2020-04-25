@@ -54,7 +54,9 @@ export default {
   mixins: [currentSector, drawHeroMixin, baseMixins],
   props: ['widthScene', 'heightScene'],
   data() {
-    return {};
+    return {
+      isDisabledMove: false
+    };
   },
   created() {
     this.currentMap = this.$store.state.globalMap.currentMap;
@@ -63,6 +65,7 @@ export default {
     '$store.state.globalMap.currentMap': function() {
       const { deepClone, $store } = this;
       this.currentMap = deepClone($store.state.globalMap.currentMap);
+      this.isDisabledMove = false;
       this.drawMap();
       // this.setBorderIsoMap();
     },
@@ -111,6 +114,8 @@ export default {
       this.moveOnMap(event);
     },
     moveOnMap(event) {
+      if (this.isDisabledMove) return;
+      this.isDisabledMove = true;
       const target = event.target;
       const way = target.id;
       const message = {
