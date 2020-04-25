@@ -58,13 +58,18 @@ const Town = {
     // persent = formPersent(persent);
     return (time / 100) * persent;
   },
-  getSourceForNewTown(count) {
+  getSourceForNewTown(count = 2) {
     const base = {
-      [typeSource.gold]: 100,
-      [typeSource.wood]: 0,
-      [typeSource.ore]: 0
+      [typeSource.gold]: 5000,
+      [typeSource.wood]: 5,
+      [typeSource.ore]: 5
     };
-    return base;
+    const result = {};
+    Object.keys(base).forEach(key => {
+      const value = base[key];
+      result[key] = value * count;
+    });
+    return result;
   }
 };
 

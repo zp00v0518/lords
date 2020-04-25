@@ -103,7 +103,8 @@ export default {
     getAsTimeString,
     getSourceForBuilding() {
       const { Town } = this.globalConfig.all;
-      return Town.getSourceForNewTown();
+      const { sectors } = this.$store.state.userSectors;
+      return Town.getSourceForNewTown(sectors.length + 1);
     },
     setTimeText() {
       const { createDisabled, gloss, upperFirstSymbol } = this;
