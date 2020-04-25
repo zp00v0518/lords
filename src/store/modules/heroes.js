@@ -27,9 +27,9 @@ const heroes = {
     }
   },
   getters: {
-    getHeroesFromTown: state => townId => {
-      if (!townId) return [];
-      return state.heroesList.filter(heroes => heroes.townId === townId);
+    getHeroesFromTown: state => sectorId => {
+      if (!sectorId) return [];
+      return state.heroesList.filter(heroes => heroes.townId === sectorId);
     }
   }
 };

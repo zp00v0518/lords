@@ -1,3 +1,5 @@
+const checkSource = require('./checkSource');
+
 const Resources = {
   typeList: ['gold', 'wood', 'ore', 'sulfur', 'crystal', 'mercury', 'gem'],
   baseResource: ['wood', 'ore'],
@@ -49,7 +51,8 @@ const Resources = {
       in_gold += value;
     });
     return in_gold;
-  }
+  },
+  checkSource
 };
 
 module.exports = Resources;

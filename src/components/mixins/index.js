@@ -1,3 +1,4 @@
 import currentSector from "./currentSector";
+import glossary from "./glossary";
 
-export { currentSector };
+export { currentSector, glossary };

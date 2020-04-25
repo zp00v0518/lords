@@ -1,5 +1,5 @@
 const { calcStorageNowValue } = require('../town/storage');
-const { getGlobalMapSector } = require('../globalMap');
+const getGlobalMapSector = require('../globalMap/getGlobalMapSector');
 const getLangDictionary = require('../dictionary/getLangDictionary');
 const chat = require('../chat/chat');
 
@@ -34,6 +34,7 @@ function setUserOnline(user, server, info_for_game, ws) {
     startMessage.sectors = info_for_game.sectors;
     startMessage.heroesList = info_for_game.heroesList;
     startMessage.dictionary = getLangDictionary(user.lang);
+    startMessage.user = { id: User._id };
     ws.send(JSON.stringify(startMessage));
   });
 }

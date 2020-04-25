@@ -21,7 +21,7 @@ module.exports = {
       session: 'session',
       servers: [
         { name: 'First', collectionName: 'server_1' },
-        { name: 'Second', collectionName: 'server_2' }
+        // { name: 'Second', collectionName: 'server_2' }
       ],
       map: 'globalMap',
       chat: 'chat'
@@ -36,7 +36,7 @@ module.exports = {
     day: 1000 * 60 * 60 * 24,
     week: 1000 * 60 * 60 * 24 * 7,
     month: 1000 * 60 * 60 * 24 * 31,
-    speedGame: 10, // делитель. Влияет на время улучшения строений. Чем больше, тем быстрее. Не может быть 0
+    speedGame: 5, // делитель. Влияет на время улучшения строений. Чем больше, тем быстрее. Не может быть 0
     hiring: 500
   },
   listFile: {

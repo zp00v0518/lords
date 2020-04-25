@@ -1,7 +1,7 @@
 <template>
   <div class="tooltip" :style="position">
     <template v-if="tile.type !== 2">
-      <div class="tooltip__army" v-if="tile.type === 0">
+      <div class="tooltip__army" v-if="tile.type === 0 && mode === 'global'">
         <div class="tooltip__army--header">{{ gloss.region.header.txt }}</div>
         <div class="tooltip__army--wrap">
           <div v-for="(unit, index) in tile.army" :key="index" class="tooltip__army__item">
@@ -35,9 +35,8 @@ export default {
         return { x: 0, y: 0 };
       }
     },
-    tile: {
-      type: Object
-    }
+    tile: { type: Object },
+    mode: { type: String }
   },
   data() {
     return {
@@ -51,10 +50,10 @@ export default {
     type() {
       if (!this.tile.sector.type) return;
       return this.tile.sector.type;
-    },
-    gloss() {
-      return this.$store.state.local.dictionary;
     }
+    // gloss() {
+    //   return this.$store.state.local.dictionary;
+    // }
   },
   watch: {
     tile: function() {

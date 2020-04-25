@@ -7,16 +7,10 @@
         class="hall__row__item"
         @click="handlerClick($event, item)"
       >
-        <canvas
-          :ref="'canvas' + item"
-          :data-building="item"
-          class="hall__row__item-icon"
-        ></canvas>
+        <canvas :ref="'canvas' + item" :data-building="item" class="hall__row__item-icon"></canvas>
         <div
           :class="['hall__row__item-footer', { [checkPrepare(item)]: true }]"
-        >
-          {{ houses[item].name }}
-        </div>
+        >{{ houses[item].name }}</div>
       </div>
     </div>
   </section>
@@ -24,11 +18,10 @@
 
 <script>
 export default {
-  name: "Hall",
+  name: 'Hall',
   props: {
     townRaceName: String,
-    currentSector: { type: Object, default: () => ({}) },
-    gloss: null
+    currentSector: { type: Object, default: () => ({}) }
   },
   data() {
     return {
@@ -57,19 +50,18 @@ export default {
   },
   methods: {
     handlerClick(event, nameBuilding) {
+      const {townRaceName} = this;
       const build = this.houses[nameBuilding];
-      const target = event.target.parentNode.querySelector(
-        ".hall__row__item-icon"
-      );
+      const target = event.target.parentNode.querySelector('.hall__row__item-icon');
       const coords = tumb[target.dataset.building];
-      const fileName = this.townRaceName + "tiles";
+      const fileName = townRaceName + 'tiles';
       // eslint-disable-next-line
-      const img = sourceLoader.sources.towns[this.townRaceName][fileName];
+      const img = sourceLoader.sources.towns[townRaceName][fileName];
       const payload = {
         title: build.name,
         data: {
           building: build,
-          raceName: this.townRaceName,
+          raceName: townRaceName,
           storage: this.sources,
           tumb: {
             coords,
@@ -77,59 +69,50 @@ export default {
             img
           }
         },
-        type: "upgradeBuilding"
+        type: 'upgradeBuilding'
       };
-      this.$store.commit("DIALOG_SHOW", payload);
+      this.$store.commit('DIALOG_SHOW', payload);
     },
     checkPrepare(name) {
+      const { currentSector, buildings, townRaceName, gloss } = this;
       let flag;
-      const currBuilding = this.currentSector.town[name];
+      const currBuilding = currentSector.town[name];
       let nextLvl = currBuilding ? currBuilding.lvl + 1 : 1;
-      let nextBuilding = this.buildings[name].lvl[nextLvl];
+      let nextBuilding = buildings[name].lvl[nextLvl];
       const maxLvl = nextBuilding === undefined;
       if (maxLvl) {
-        nextBuilding = this.buildings[name].lvl[nextLvl - 1];
+        nextBuilding = buildings[name].lvl[nextLvl - 1];
         nextLvl--;
       }
-      this.houses[name] = { ...this.buildings[name] };
-      this.houses[name].name = this.gloss[name].lvl[nextLvl].txt;
+      this.houses[name] = { ...buildings[name] };
+      this.houses[name].name = gloss.town.race[townRaceName][name].lvl[nextLvl].txt;
       this.houses[name].nextLvl = nextLvl;
       if (maxLvl) {
-        return "max-lvl";
+        return 'max-lvl';
       }
       const if_buildings = nextBuilding.if;
       flag = if_buildings.length === 0;
       flag = if_buildings.every(item => {
-        const next = this.buildings[item.building];
+        const next = buildings[item.building];
         return next.lvl[item.lvl].is;
       });
       if (flag) {
         flag = this.checkSource(nextBuilding.price, this.sources);
       }
-      return flag ? "prepare" : "no-prepare";
+      return flag ? 'prepare' : 'no-prepare';
     }
   },
   mounted() {
     const townRaceName = this.townRaceName;
-    const fileName = townRaceName + "tiles";
+    const fileName = townRaceName + 'tiles';
     // eslint-disable-next-line
     const img = sourceLoader.sources.towns[townRaceName][fileName];
     Object.keys(this.$refs).forEach(key => {
       const el = this.$refs[key][0];
-      const ctx = el.getContext("2d");
+      const ctx = el.getContext('2d');
       const building = el.dataset.building;
       const coords = tumb[building];
-      ctx.drawImage(
-        img,
-        coords.x,
-        coords.y,
-        150,
-        70,
-        0,
-        0,
-        el.width,
-        el.height
-      );
+      ctx.drawImage(img, coords.x, coords.y, 150, 70, 0, 0, el.width, el.height);
     });
   }
 };

@@ -85,7 +85,7 @@ wsServer.on('connection', (ws, req) => {
     }
     if (allHandler[mess.type]) {
       const baseInfo = {
-        player: UserOnline[server][User._id],
+        player: UserOnline[server][User._id], // often err
         server,
         userCookies
       };

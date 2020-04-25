@@ -25,8 +25,10 @@ export default {
     getImg(event) {
       if (this.disabled) return this.disabledImg;
       if (event === undefined) return this.upImg;
-      if (event.type === "mouseover") return this.overImg;
-      if (event.type === "mouseleave") return this.upImg;
+      if (event.type === 'mouseover') return this.overImg || this.upImg;
+      if (event.type === 'mouseleave') return this.upImg || this.upImg;
+      if (event.type === 'mousedown') return this.downImg || this.upImg;
+      return this.upImg;
     }
   }
 };

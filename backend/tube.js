@@ -34,9 +34,7 @@ const {
   findUserInGlobalMap,
   findUserInDB,
   getInfoForStartGame,
-  addNewUserToGlobalMap,
-  updateUser,
-  addCollectionsToUser
+  addNewUserToGlobalMap
 } = require('./user');
 module.exports.userCreate = userCreate;
 module.exports.getInfoForUserPage = getInfoForUserPage;
@@ -44,16 +42,12 @@ module.exports.findUserInGlobalMap = findUserInGlobalMap;
 module.exports.findUserInDB = findUserInDB;
 module.exports.getInfoForStartGame = getInfoForStartGame;
 module.exports.addNewUserToGlobalMap = addNewUserToGlobalMap;
-module.exports.updateUser = updateUser;
-module.exports.addCollectionsToUser = addCollectionsToUser;
 
-const { createTown, upgradeSection, updateStateTown } = require('./town');
-module.exports.createTown = createTown;
+const { upgradeSection, updateStateTown } = require('./town');
 module.exports.updateStateTown = updateStateTown;
 module.exports.upgradeSection = upgradeSection;
 
-const { createStorage, calcStorageNowValue } = require('./town/storage');
-module.exports.createStorage = createStorage;
+const { calcStorageNowValue } = require('./town/storage');
 module.exports.calcStorageNowValue = calcStorageNowValue;
 
 const { setUpgradeChange, checkUpgrade } = require('./region');
@@ -64,9 +58,8 @@ const { Mine, createMine } = require('./region/mine');
 module.exports.Mine = Mine;
 module.exports.createMine = createMine;
 
-const { addEventToDB, formEventsList } = require('./events');
+const { addEventToDB } = require('./events');
 module.exports.addEventToDB = addEventToDB;
-module.exports.formEventsList = formEventsList;
 
 const { checkSource, deleteSource } = require('./resources');
 module.exports.checkSource = checkSource;

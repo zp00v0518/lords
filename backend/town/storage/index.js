@@ -7,5 +7,5 @@ module.exports = {
   createStorage,
   upgradeSection,
   calcStorageNowValue,
-  addValueToStorage
+  addValueToStorage,
 };

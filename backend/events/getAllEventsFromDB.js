@@ -17,14 +17,8 @@ function getAllEventsFromDB({ serverName }, callback = () => {}) {
     find
       .all(findOptions)
       .then(result => {
-        // const now = new Date().getTime;
-        // if (result.result.length === 0 || result.result[0].end > now) {
         callback(null, result.result);
         return resolve(result.result);
-        // } else {
-        // callback(null, result.result);
-        // return resolve(result.result);
-        // }
       })
       .catch(err => {
         callback(err);

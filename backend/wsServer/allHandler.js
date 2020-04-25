@@ -7,5 +7,6 @@ module.exports = {
   buyUnits: require('../army/handlerBuyUnits'),
   mergeArmy: require('../army/handlerMergeArmy'),
   updateArmyOnRegion: require('../army/handlerUpdateArmyOnRegion'),
-  battleRequest: require('../battle/handlerBattleRequest')
+  battleRequest: require('../battle/handlerBattleRequest'),
+  buildNewTown: require('../town/handlerBuildNewTownRequest')
 };

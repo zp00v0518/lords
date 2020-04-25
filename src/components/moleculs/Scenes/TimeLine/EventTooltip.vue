@@ -13,11 +13,11 @@
 </template>
 
 <script>
-import glossary from "../../../mixins/glossary";
+// import glossary from "../../../mixins/glossary";
 
 export default {
   name: "EventTooltip",
-  mixins: [glossary],
+  // mixins: [glossary],
   components: {},
   props: ["dataEvent", "position"],
   data() {

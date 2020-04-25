@@ -38,7 +38,8 @@ function createTemplateHero(race, type) {
     exp: 0,
     skills: [],
     stat: hero.stat,
-    army
+    army,
+    active: true
   };
   return template;
 }

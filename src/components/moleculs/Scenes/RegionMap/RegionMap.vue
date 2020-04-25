@@ -1,72 +1,74 @@
 <template>
-  <div class="regionmap">
-    <TooltipRegion v-show="showTooltip" :mouseCoords="mouseCoords" :tile="currentTile"></TooltipRegion>
+  <div class="regionmap" ref="body">
+    <TooltipRegion
+      v-show="showTooltip"
+      :mouseCoords="mouseCoords"
+      :tile="currentTile"
+      :mode="mode"
+      key="tooltip"
+    ></TooltipRegion>
     <canvas
       ref="scene"
-      :width="widthScene"
-      :height="heightScene"
+      :width="sceneWidth"
+      :height="sceneHeight"
       @mousemove="handlerMousemoveOnMap"
       @mouseleave="hideTooltip"
-      @click="handlerClick"
+      @click="mode === 'dialog' ? {} : handlerClick()"
+      key="scene"
     ></canvas>
   </div>
 </template>
 
 <script>
-import {
-  drawMap,
-  getCursorPositionOnScene,
-  checkMouseCoordsOnMap,
-  getTileCoordsOnMap,
-  drawHoverLine,
-  setBorderIsoMap,
-  hideTooltip,
-  handlerMousemoveOnMap
-} from '../utils';
 import TooltipRegion from '../../TooltipRegion';
 import { currentSector } from '../../../mixins';
+import drawHeroMixin from '../mixins/drawHeroMixin';
+import baseMixins from '../mixins/baseMixins';
 import { algebra } from '../../../../utils';
 
 export default {
   name: 'RegionMap',
-  mixins: [currentSector],
+  mixins: [currentSector, drawHeroMixin, baseMixins],
   components: {
     TooltipRegion
   },
-  props: ['widthScene', 'heightScene'],
+  props: {
+    widthScene: 0,
+    heightScene: 0,
+    regionMap: null,
+    mode: { type: String, default: 'global' }
+  },
   data() {
     return {
-      showTooltip: false,
-      ctx: null,
-      cursorOnScene: false,
-      currentMap: [],
-      currentTile: {},
-      borderIsoMap: {
-        left: { x: 0, y: 0 },
-        top: { x: 0, y: 0 },
-        right: { x: 0, y: 0 },
-        bottom: { x: 0, y: 0 }
-      },
-      mouseCoords: { x: 0, y: 0 }
+      sceneWidth: this.widthScene,
+      sceneHeight: this.heightScene
     };
   },
   created() {
-    this.currentMap = this.$store.state.regionMap.currentRegion;
-    if (this.$store.state.userSectors.currentSector) {
-      this.currentMap = this.$store.state.userSectors.currentSector.region;
+    if (!this.regionMap) {
+      this.currentMap = this.$store.state.regionMap.currentRegion;
+      if (this.$store.state.userSectors.currentSector) {
+        this.currentMap = this.$store.state.userSectors.currentSector.region;
+      }
+    } else {
+      this.currentMap = this.regionMap;
     }
   },
   watch: {
     'currentSector.region': function(e) {
-      const { deepClone } = this;
-      this.currentMap = deepClone(e);
-      this.drawMap();
-      this.setBorderIsoMap();
+      if (this.mode === 'global') {
+        const { deepClone } = this;
+        this.currentMap = deepClone(e);
+        this.drawMap();
+        // this.setBorderIsoMap();
+      }
     },
     eventList: {
       deep: true,
       handler() {
-        this.drawMap();
+        if (this.mode === 'global') {
+          this.drawMap();
+        }
       }
     }
   },
@@ -78,27 +80,23 @@ export default {
       const b_types = Battle.types;
       const e_types = Event.types;
       const d = list.filter(item => {
-        if (item.data.typeBattle === b_types.region.name) {
+        if (item.data && item.data.typeBattle === b_types.region.name) {
           return item.type === e_types.battle || item.type === e_types.backToTown;
         }
       });
       return deepClone(d);
     },
-    settings() {
-      return this.$store.state.settings;
-    },
     tileWidth() {
-      const widthParse = parseInt(this.widthScene) / 2;
+      const { ctx } = this;
+      if (!ctx) return 0;
+      const widthParse = parseInt(this.sceneWidth) / 2;
       const intermediate = widthParse / (this.currentMap.length / 2);
       return intermediate;
     },
     isoCoords() {
-      const x = 0;
-      const y = parseInt(this.heightScene) / 2;
+      const x = parseInt(this.sceneWidth) / 2;
+      const y = parseInt(this.sceneHeight) / 100 * 10;
       return { x, y };
-    },
-    gloss() {
-      return this.$store.state.local.dictionary;
     }
   },
   methods: {
@@ -107,8 +105,6 @@ export default {
       if (!this.cursorOnScene || currentTile.type === 1 || currentTile.type === 3) return;
       if (this.currentTile.type === 0) {
         if (currentTile.army && currentTile.army.length === 0) return;
-        console.log(currentTile);
-        // const nameRegion = this.$region.typeList[currentTile.type];
         const payload = {
           title: 'Настройка битвы',
           data: {
@@ -135,25 +131,28 @@ export default {
       };
       this.$store.commit('DIALOG_SHOW', payload);
     },
-    drawMap,
-    getCursorPositionOnScene,
-    checkMouseCoordsOnMap,
-    getTileCoordsOnMap,
-    drawHoverLine,
-    setBorderIsoMap,
-    hideTooltip,
-    handlerMousemoveOnMap,
     drawAnotherObjects() {
       this.drawMoveHero();
     },
+    setSizeScene() {
+      const { body } = this.$refs;
+      const styles = body.getBoundingClientRect();
+      if (!this.widthScene) {
+        this.sceneWidth = styles.width + 'px';
+      }
+      if (!this.heightScene) {
+        this.sceneHeight = styles.height + 'px';
+      }
+    },
     drawMoveHero() {
-      const { ctx, eventList, currentMap, tileWidth, settings } = this;
+      if (this.mode && this.mode !== 'global') return;
+      const { ctx, eventList, currentMap, tileWidth, settings, getTileByCoords } = this;
       ctx.fillStyle = settings.baseColor;
       eventList.forEach(event => {
         const { data } = event;
         const { startCoords, endCoords } = data;
-        const startTile = currentMap[startCoords.x][startCoords.y];
-        const endTile = currentMap[endCoords.x][endCoords.y];
+        const startTile = getTileByCoords(currentMap, startCoords.x, startCoords.y);
+        const endTile = getTileByCoords(currentMap, endCoords.x, endCoords.y);
         const baseCoords = [startTile.centerX, startTile.centerY, endTile.centerX, endTile.centerY];
         const fullLength = algebra.getStraightLength(...baseCoords);
         let heroLength = this.getLengthHeroOnStraight(fullLength, event.start, event.end);
@@ -170,35 +169,21 @@ export default {
         const heroCoords = algebra.getPointOnStraight(...baseCoords, heroLength);
         this.drawHeroOnMap(ctx, heroCoords);
       });
-    },
-    getLengthHeroOnStraight(length, startTime, endTime) {
-      const fullTime = endTime - startTime;
-      const passTime = Date.now() - startTime;
-      const dif = passTime / fullTime;
-      return length * dif;
-    },
-    drawHeroOnMap(ctx, coords) {
-      const heightFlag = 20;
-      ctx.beginPath();
-      ctx.strokeStyle = 'black';
-      ctx.lineWidth = 2;
-      ctx.moveTo(coords.x, coords.y);
-      ctx.lineTo(coords.x, coords.y - heightFlag);
-      ctx.lineTo(coords.x + heightFlag / 2, coords.y - heightFlag + heightFlag / 4);
-      ctx.lineTo(coords.x, coords.y - heightFlag / 2);
-      ctx.stroke();
-      ctx.fill();
-      ctx.closePath();
     }
   },
   mounted() {
     this.ctx = this.$refs.scene.getContext('2d');
-    this.drawMap();
-    this.setBorderIsoMap();
+    this.$nextTick(() => {
+      this.setSizeScene();
+      this.setBorderIsoMap();
+      requestAnimationFrame(this.drawMap);
+    });
   }
 };
 </script>
 
-<style lang="scss" scoped>
-@import 'regionMap.scss';
+<style lang="scss">
+.regionmap {
+  height: 100%;
+}
 </style>

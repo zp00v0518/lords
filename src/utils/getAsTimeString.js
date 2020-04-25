@@ -1,4 +1,5 @@
-function getTimeString(time) {
+// использовать как метод, для доступа к this
+function getAsTimeString(time) {
   const timeList = this.$var.time;
   let string = "";
   if (time >= timeList.day) {
@@ -45,4 +46,4 @@ function getTimeString(time) {
   }
 }
 
-export default getTimeString;
+export default getAsTimeString;

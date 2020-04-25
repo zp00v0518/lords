@@ -16,20 +16,19 @@
 </template>
 
 <script>
-import DialogContent from "./DialogContent";
+import DialogContent from './DialogContent';
+import { closeMixin } from './dialogMixin';
 
 export default {
-  name: "DialogWindow",
+  name: 'DialogWindow',
+  mixins: [closeMixin],
   props: [],
   components: { ...DialogContent },
   data() {
     return {
-      height: "90%",
-      width: "90%"
+      height: '90%',
+      width: '90%'
     };
-  },
-  created() {
-    document.addEventListener("keyup", this.handlerKeyup);
   },
   computed: {
     title() {
@@ -37,24 +36,14 @@ export default {
     }
   },
   methods: {
-    handlerKeyup(event) {
-      if (event.key !== "Escape") return;
-      this.closeDialogWindow();
-    },
-    closeDialogWindow() {
-      this.$store.commit("DIALOG_CLOSE");
-    },
     setHeight(e) {
       this.height = e.height;
       this.width = e.width;
     }
-  },
-  beforeDestroy() {
-    document.removeEventListener("keyup", this.handlerKeyup);
   }
 };
 </script>
 
-<style lang='scss' scoped>
-@import "dialog_window.scss";
+<style lang='scss'>
+@import 'dialog_window.scss';
 </style>

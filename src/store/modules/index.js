@@ -10,6 +10,7 @@ import heroes from './heroes';
 import gameSources from './gameSources';
 import stat from './stat';
 import settings from './settings';
+import user from './user';
 
 export default {
   settings,
@@ -23,5 +24,6 @@ export default {
   globalConfig,
   heroes,
   gameSources,
-  stat
+  stat,
+  user
 };

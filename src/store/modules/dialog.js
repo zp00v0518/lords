@@ -34,5 +34,6 @@ const typeDialog = {
   upgradeRegion: "UpgradeRegion",
   upgradeBuilding: "UpgradeBuilding",
   message: "Message",
-  dialogBattle: "DialogBattle"
+  dialogBattle: "DialogBattle",
+  worldMapRegion: 'WorldMapRegion'
 };

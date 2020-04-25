@@ -1,19 +1,25 @@
-const { getRandomNumber } = require("template_func");
-const tube = require("../tube.js");
-const { createTown } = require("../town");
-const { GlobalMap, config, updateDB } = tube;
+const { getRandomNumber } = require('template_func');
+const tube = require('../tube.js');
+const createTown = require('../town/createTown');
+const { config, updateDB } = tube;
+const WorldMap = require('../globalMap/WorldMap');
 const update = new updateDB();
 
 // добавляю нового Игрока на глобальную карту
 function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
-  // const { createTown } = tube;
   return new Promise((resolve, reject) => {
     checkUserPosition(serverName, (x, y, sectorId) => {
+      const race = user.collections[serverName].race;
       const newTown = createTown({
-        status: "new",
-        name: "New Castle",
-        sectorId
+        status: 'first',
+        name: 'New Castle',
+        sectorId,
+        race
       });
+      const { regionMap } = newTown;
+      // удаляю т.к в базе получается дублирование карты региона
+      delete newTown.regionMap;
+
       const optionsForUpdateBD = {
         collectionName: serverName,
         filtr: {
@@ -23,21 +29,20 @@ function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
         },
         updateDoc: {
           $set: {
-            region: newTown.regionMap,
+            region: regionMap,
             userId: user._id,
-            type: 1,
+            type: WorldMap.types.town.id,
             nickName: user.nickName,
             town: newTown
           }
         }
       };
       update.one(optionsForUpdateBD).then(result => {
-        GlobalMap[serverName][x][y].region = newTown.regionMap;
+        GlobalMap[serverName][x][y].region = regionMap;
         GlobalMap[serverName][x][y].userId = user._id;
         GlobalMap[serverName][x][y].type = 1;
         GlobalMap[serverName][x][y].nickName = user.nickName;
         GlobalMap[serverName][x][y].town = newTown;
-        delete newTown.regionMap;
         callback(null, GlobalMap[serverName][x][y]);
         return resolve(GlobalMap[serverName][x][y]);
       });

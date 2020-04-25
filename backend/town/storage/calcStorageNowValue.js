@@ -1,3 +1,5 @@
+const gameVariables = require('../../variables/game_variables');
+
 function calcStorageNowValue(storage, timeEnd = new Date().getTime()) {
   const sources = storage.sources;
   const perTime = gameVariables.timer.perTime;

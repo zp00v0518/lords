@@ -1,6 +1,5 @@
 <script>
-import { getTimeString } from "../../modules";
-import glossary from "../../../../../mixins/glossary.vue";
+import { getAsTimeString } from "../../../../../../utils";
 import { currentSector } from "../../../../../mixins";
 
 import fromBackend from "../../../../../../fromBackend";
@@ -8,7 +7,7 @@ const checkSource = fromBackend.checkSource;
 
 export default {
   name: "UpgradeRegion",
-  mixins: [glossary, currentSector],
+  mixins: [currentSector],
   props: {
     data: Object
   },
@@ -23,7 +22,7 @@ export default {
     this.$emit("set-height", { width: "80%", height: "80%" });
   },
   methods: {
-    getTimeString,
+    getAsTimeString,
     checkSource,
     closeDialogWindow() {
       this.$store.commit("DIALOG_CLOSE");

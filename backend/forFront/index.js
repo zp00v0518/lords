@@ -5,6 +5,8 @@ import { Army } from '../army/Army';
 import Event from '../events/Event';
 import Battle from '../battle/Battle';
 import Region from '../region/Region';
+import WorldMap from '../globalMap/WorldMap';
+import Resources from '../resources/Resources'
 
 export default {
   checkSource,
@@ -13,5 +15,7 @@ export default {
   Army,
   Event,
   Battle,
-  Region
+  Region,
+  WorldMap,
+  Resources
 };

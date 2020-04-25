@@ -1,18 +1,21 @@
 function setBorderIsoMap() {
   const currentLength = this.currentMap.length;
-  const height = this.tileWidth / 2;
-  this.borderIsoMap.left.x = this.isoCoords.x;
-  this.borderIsoMap.left.y = this.isoCoords.y;
-  this.borderIsoMap.top.x =
-    this.borderIsoMap.left.x + (this.tileWidth * currentLength) / 2;
-  this.borderIsoMap.top.y =
-    this.borderIsoMap.left.y - (height * currentLength) / 2;
-  this.borderIsoMap.right.x =
-    this.borderIsoMap.left.x + this.tileWidth * currentLength;
-  this.borderIsoMap.right.y = this.borderIsoMap.left.y;
-  this.borderIsoMap.bottom.x = this.borderIsoMap.top.x;
-  this.borderIsoMap.bottom.y =
-    this.borderIsoMap.left.y + (height * currentLength) / 2;
+  const { borderIsoMap, isoCoords, tileWidth, viewportPath } = this;
+  const height = tileWidth / 2;
+  const startX = isoCoords.x;
+  const startY = isoCoords.y;
+  borderIsoMap.top.x = startX;
+  borderIsoMap.top.y = startY;
+  borderIsoMap.bottom.x = borderIsoMap.top.x;
+  borderIsoMap.bottom.y = borderIsoMap.top.y + height * currentLength;
+  borderIsoMap.right.x = borderIsoMap.top.x + (tileWidth * currentLength) / 2;
+  borderIsoMap.right.y = borderIsoMap.top.y + (height * currentLength) / 2;
+  borderIsoMap.left.y = borderIsoMap.right.y;
+  borderIsoMap.left.x = borderIsoMap.top.x - (tileWidth * currentLength) / 2;
+  viewportPath.moveTo(borderIsoMap.left.x, borderIsoMap.left.y);
+  viewportPath.lineTo(borderIsoMap.top.x, borderIsoMap.top.y);
+  viewportPath.lineTo(borderIsoMap.right.x, borderIsoMap.right.y);
+  viewportPath.lineTo(borderIsoMap.bottom.x, borderIsoMap.bottom.y);
 }
 
 export default setBorderIsoMap;

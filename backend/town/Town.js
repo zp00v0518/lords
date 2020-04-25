@@ -1,5 +1,6 @@
 const schema = require('../workWithMongoDB/schema');
 const type = schema.document.class;
+const typeSource = require('../resources/type_resources');
 
 const Town = {
   classInstance: schema.document.class.town,
@@ -56,6 +57,19 @@ const Town = {
     persent = 100 - (persent - 100);
     // persent = formPersent(persent);
     return (time / 100) * persent;
+  },
+  getSourceForNewTown(count = 2) {
+    const base = {
+      [typeSource.gold]: 5000,
+      [typeSource.wood]: 5,
+      [typeSource.ore]: 5
+    };
+    const result = {};
+    Object.keys(base).forEach(key => {
+      const value = base[key];
+      result[key] = value * count;
+    });
+    return result;
   }
 };
 

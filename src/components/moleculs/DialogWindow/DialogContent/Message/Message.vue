@@ -8,11 +8,11 @@
 </template>
 
 <script>
-import glossary from "@/components/mixins/glossary.vue";
+// import glossary from "@/components/mixins/glossary.vue";
 
 export default {
   name: "Message",
-  mixins: [glossary],
+  // mixins: [glossary],
   props: {
     data: Object
   },
@@ -30,6 +30,6 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 @import "message.scss";
 </style>

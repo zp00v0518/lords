@@ -1,13 +1,13 @@
 <template>
   <div class="tooltip" :style="position">
-    <template v-if="tile.type === 1">
+    <template v-if="tile.type === tileTypes.town.id">
       <div class="tooltip__header">
         <div class="tooltip__player">Player: {{tile.nickName}}</div>
         <div class="tooltip__town">Town: {{tile.town.name}}</div>
       </div>
     </template>
-    <div class="tooltip__header" v-if="tile.type === 0">Лес</div>
-    <div class="tooltip__header" v-if="tile.type === 2">Игровой объект</div>
+    <div class="tooltip__header" v-if="tile.type === tileTypes.empty.id">Лес</div>
+    <div class="tooltip__header" v-if="tile.type === tileTypes.nishtyak.id">Игровой объект</div>
     <div class="tooltip__coords">
       <div class="tooltip__coords-x">X:{{tile.x}}</div>
       <div class="tooltip__coords-y">Y:{{tile.y}}</div>
@@ -33,8 +33,12 @@ export default {
   data() {
     return {
       position: {},
-      listSource: []
+      listSource: [],
+      tileTypes: {}
     };
+  },
+  created() {
+    this.tileTypes = this.globalConfig.all.WorldMap.types;
   },
   watch: {
     tile: function() {
@@ -62,7 +66,6 @@ export default {
     },
     getIcon(name) {
       const icons = this.gameSources.resources.small;
-      
       return icons[name] ? icons[name].src : '';
     }
   }

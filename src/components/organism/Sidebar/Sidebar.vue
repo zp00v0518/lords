@@ -24,11 +24,6 @@ export default {
       sectorsState: this.$store.state.userSectors.sectors
     };
   },
-  // computed: {
-  //   sectorsState() {
-  //     return this.$store.state.userSectors.sectors;
-  //   }
-  // },
   watch: {
     currentSector: function() {
       const { deepClone, $store } = this;
@@ -38,6 +33,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "sidebar.scss";
 </style>

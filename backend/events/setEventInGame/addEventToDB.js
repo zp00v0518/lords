@@ -1,6 +1,7 @@
 const { insertDB } = require("../../workWithMongoDB");
 const insert = new insertDB();
 
+//  НЕ ИСПОЛЬЗОВАТЬ!!! Использование этого метода переехало в папку DB
 function addEventToDB(data, serverName, callback = function() {}) {
   return new Promise((resolve, reject) => {
     const doc = {

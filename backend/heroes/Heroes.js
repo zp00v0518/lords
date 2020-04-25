@@ -5,7 +5,7 @@ const { getLengthBeetweenTwoPoint } = require('../template_modules/phisicFunc');
 
 const Heroes = {
   types,
-  heroMove: gameVariables.timer.heroMove,
+  heroMoveOnRegion: gameVariables.timer.heroMoveOnRegion,
   races: {
     rampart
   },
@@ -62,9 +62,9 @@ const Heroes = {
     });
     return result;
   },
-  getTimeMove(start, end, time = this.heroMove) {
+  getTimeMove(start, end, time = this.heroMoveOnRegion) {
     const length = getLengthBeetweenTwoPoint(start.x, start.y, end.x, end.y);
-    const result = length * (time / gameVariables.time.speedGame);
+    const result = length * time;
     return +result.toFixed();
   },
   getHeroBonus(hero, role = this.role.atack) {

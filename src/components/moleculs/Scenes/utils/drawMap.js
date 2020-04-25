@@ -1,30 +1,37 @@
+// https://habr.com/ru/post/332922/ - одна из статей
+// https://www.youtube.com/watch?v=nls0dyTeEns&list=PLHcq_lDrZqm0pcMN36rKfFUnxQvasRGRP
+import iso from './iso';
+
 function drawMap() {
   let mapArr = this.currentMap;
   let ctx = this.ctx;
-  ctx.clearRect(0, 0, parseFloat(this.widthScene), parseFloat(this.heightScene));
-  let tileWidth = this.tileWidth;
-  let tileHeight = tileWidth / 2;
-  let halfHeight = tileHeight / 2;
-  // console.log(`tileWidth:${tileWidth} tileHeight:${tileHeight} halfHeight:${halfHeight}`)
+  const { canvas } = ctx;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const tileWidth = this.tileWidth;
+  const tileHeight = tileWidth / 2;
+  const halfHeight = tileHeight / 2;
   // сдвиг начала оси Х влево
-  let startX = this.isoCoords.x;
-  let startY = this.isoCoords.y;
-  let startCenterX = startX + tileHeight;
-  let startCenterY = startY;
-
-  for (let i = 0; i < mapArr.length; i++) {
-    for (let h = 0; h < mapArr[i].length; h++) {
-      let centerX = startCenterX + 2 * halfHeight * (i + h);
-      let centerY = startCenterY - halfHeight * (i - h);
-      this.currentMap[i][h].centerX = centerX;
-      // console.log(`tileWidth:${tileWidth} tileHeight:${tileHeight} halfHeight:${halfHeight}`)
-      this.currentMap[i][h].centerY = centerY;
-      drawRectAroundCenter(centerX, centerY, mapArr[i][h].type);
+  const startX = this.isoCoords.x;
+  const startY = this.isoCoords.y + halfHeight;
+  for (let x = 0; x < mapArr.length; x++) {
+    const row = mapArr[x];
+    for (let y = 0; y < row.length; y++) {
+      const centerX = iso.getIsoX(x, y) * tileHeight + startX;
+      const centerY = iso.getIsoY(x, y) * tileHeight + startY;
+      this.currentMap[x][y].centerX = centerX;
+      this.currentMap[x][y].centerY = centerY;
+      drawRectAroundCenter(centerX, centerY, mapArr[x][y].type);
+      // drawCoords(this.currentMap[x][y]);
     }
   }
+  // function drawCoords(tile) {
+  //   const shit = tileHeight / 2;
+  //   const str = `x:${tile.x}  y:${tile.y}`;
+  //   ctx.fillStyle = 'black';
+  //   ctx.fillText(str, tile.centerX - shit, tile.centerY + shit / 6);
+  // }
   function drawRectAroundCenter(centerX, centerY, grid) {
     const step = 0;
-    // console.log(`centerX:${centerX} centerY:${centerY}`)
     ctx.beginPath();
     ctx.fillStyle = colors[grid];
     ctx.strokeStyle = 'rgba(0,0,0,0.6)';
@@ -35,10 +42,8 @@ function drawMap() {
     ctx.lineTo(centerX + tileHeight - step, centerY);
     ctx.lineTo(centerX, centerY - halfHeight + step);
     ctx.stroke();
-
     ctx.fill();
     ctx.closePath();
-    // drawCircle(centerX,centerY,ctx)
   }
   this.drawAnotherObjects && this.drawAnotherObjects();
 }

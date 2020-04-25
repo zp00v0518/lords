@@ -2,6 +2,7 @@
   <div class="globalmap">
     <Tooltip v-show="showTooltip" :mouseCoords="mouseCoords" :tile="currentTile"></Tooltip>
     <canvas
+      id="global"
       ref="scene"
       :width="widthScene"
       :height="heightScene"
@@ -40,39 +41,20 @@
 </template>
 
 <script>
-import {
-  drawMap,
-  getCursorPositionOnScene,
-  checkMouseCoordsOnMap,
-  getTileCoordsOnMap,
-  drawHoverLine,
-  setBorderIsoMap,
-  hideTooltip,
-  handlerMousemoveOnMap
-} from '../utils';
 import Tooltip from '../../Tooltip';
+import { currentSector } from '../../../mixins';
+import drawHeroMixin from '../mixins/drawHeroMixin';
+import baseMixins from '../mixins/baseMixins';
+import { algebra } from '../../../../utils';
+import { iso } from '../utils';
 
 export default {
   name: 'GlobalMap',
-  components: {
-    Tooltip
-  },
+  components: { Tooltip },
+  mixins: [currentSector, drawHeroMixin, baseMixins],
   props: ['widthScene', 'heightScene'],
   data() {
-    return {
-      showTooltip: false,
-      cursorOnScene: false,
-      ctx: null,
-      currentMap: [],
-      currentTile: {},
-      borderIsoMap: {
-        left: { x: 0, y: 0 },
-        top: { x: 0, y: 0 },
-        right: { x: 0, y: 0 },
-        bottom: { x: 0, y: 0 }
-      },
-      mouseCoords: { x: 0, y: 0 }
-    };
+    return {};
   },
   created() {
     this.currentMap = this.$store.state.globalMap.currentMap;
@@ -82,7 +64,13 @@ export default {
       const { deepClone, $store } = this;
       this.currentMap = deepClone($store.state.globalMap.currentMap);
       this.drawMap();
-      this.setBorderIsoMap();
+      // this.setBorderIsoMap();
+    },
+    eventList: {
+      deep: true,
+      handler() {
+        this.drawMap();
+      }
     }
   },
   computed: {
@@ -95,25 +83,28 @@ export default {
     tileWidth() {
       const widthParse = parseInt(this.widthScene) / 2;
       const intermediate = widthParse / (this.currentMap.length / 2);
-      return intermediate * 1.4;
+      return intermediate * 1.2;
       // return intermediate / (this.currentMap.length / 2) + intermediate;
     },
     isoCoords() {
-      const d = (this.tileWidth * this.currentMap.length) / 2; // общая ширина всех ячеек /2
-      const x = parseInt(this.widthScene) / 2 - d; // от середины карты вычитываем половину длины всех ячеек
-      const y = parseInt(this.heightScene) / 2;
+      const x = parseInt(this.widthScene) / 2;
+      const y = (parseInt(this.heightScene) / 100) * 10;
       return { x, y };
+    },
+    eventList() {
+      const list = this.$store.state.timeline.eventsList;
+      const { Event } = this.$store.state.globalConfig.all;
+      const { deepClone } = this;
+      const d = list.filter(item => {
+        return item.mode === Event.mode.global;
+      });
+      return deepClone(d);
     }
   },
   methods: {
-    drawMap,
-    getCursorPositionOnScene,
-    checkMouseCoordsOnMap,
-    getTileCoordsOnMap,
-    drawHoverLine,
-    setBorderIsoMap,
-    hideTooltip,
-    handlerMousemoveOnMap,
+    drawAnotherObjects() {
+      this.drawMoveHero();
+    },
     changeZoom(event) {
       // this.zoom = this.zoom === 1 ? 1.5 : 1;
       this.$store.commit('CHANGE__ZOOM');
@@ -129,8 +120,64 @@ export default {
       };
       this.$ws.sendMessage(message);
     },
-    handlerClickOnGlobalMap() {
-      // console.log(this.currentTile);
+    handlerClickOnGlobalMap($event) {
+      const tileTypes = this.globalConfig.all.WorldMap.types;
+      const { currentTile } = this;
+      if (currentTile.type === tileTypes.empty.id) {
+        const payload = {
+          data: {
+            targetTile: this.deepClone(currentTile)
+          },
+          type: 'worldMapRegion'
+        };
+        this.$store.commit('DIALOG_SHOW', payload);
+      }
+    },
+    drawMoveHero() {
+      if (this.mode && this.mode !== 'global') return;
+      const { ctx, eventList, currentMap, tileWidth, settings, getTileByCoords } = this;
+      ctx.fillStyle = settings.baseColor;
+      eventList.forEach(event => {
+        const { target, init } = event;
+        const startCoords = {x: init.x, y: init.y};
+        const endCoords = {x: target.x, y: target.y};
+        const WorldMap = this.globalConfig.all.WorldMap;
+        const sizeMap = WorldMap.numSectionGlobalMap;
+        const width = this.tileWidth;
+        const height = width / 2;
+        let startTile = getTileByCoords(currentMap, startCoords.x, startCoords.y);
+        let endTile = getTileByCoords(currentMap, endCoords.x, endCoords.y);
+        if (startTile && !endTile) {
+          endTile = algebra.getMinPath(startTile, endCoords, sizeMap);
+          iso.addCenterPoints(startTile, endTile, height);
+        } else if (!startTile && endTile) {
+          startTile = algebra.getMinPath(endTile, startCoords, sizeMap);
+          iso.addCenterPoints(endTile, startTile, height);
+        } else if (!startTile && !endTile) {
+          startTile = algebra.getMinPath(currentMap[0][0], startCoords, sizeMap);
+          endTile = algebra.getMinPath(startTile, endCoords, sizeMap);
+          iso.addCenterPoints(currentMap[0][0], startTile, height);
+          iso.addCenterPoints(startTile, endTile, height);
+        }
+        const baseCoords = [startTile.centerX, startTile.centerY, endTile.centerX, endTile.centerY];
+        const fullLength = algebra.getStraightLength(...baseCoords);
+        let heroLength = this.getLengthHeroOnStraight(fullLength, event.start, event.end);
+        if (heroLength > fullLength) heroLength = fullLength;
+        const step = tileWidth / 4;
+        for (let i = 0; i < fullLength + 1; i += step) {
+          const coords = algebra.getPointOnStraight(...baseCoords, i);
+          const { viewportPath } = this;
+          const isPoint = ctx.isPointInPath(viewportPath, coords.x, coords.y);
+          if (!isPoint) continue;
+          ctx.beginPath();
+          const r = i > heroLength ? 2 : 4;
+          ctx.arc(coords.x, coords.y, r, 0, 2 * Math.PI);
+          ctx.fill();
+          ctx.closePath();
+        }
+        const heroCoords = algebra.getPointOnStraight(...baseCoords, heroLength);
+        this.drawHeroOnMap(ctx, heroCoords);
+      });
     }
   },
   mounted() {
@@ -141,6 +188,6 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 @import 'globalMap.scss';
 </style>

@@ -6,6 +6,7 @@ import drawHoverLine from './drawHoverLine';
 import setBorderIsoMap from './setBorderIsoMap';
 import hideTooltip from './hideTooltip';
 import handlerMousemoveOnMap from './handlerMousemoveOnMap';
+import iso from './iso';
 
 export {
   drawMap,
@@ -15,5 +16,6 @@ export {
   drawHoverLine,
   setBorderIsoMap,
   hideTooltip,
-  handlerMousemoveOnMap
+  handlerMousemoveOnMap,
+  iso
 };

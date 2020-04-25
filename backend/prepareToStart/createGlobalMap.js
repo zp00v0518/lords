@@ -5,6 +5,7 @@ const schema = require('../workWithMongoDB/schema.js');
 const gameVariable = require('../variables/game_variables.js');
 const createMine = require('../region/mine/createMine.js');
 const config = require('../config/config.js');
+const WorldMap = require('../globalMap/WorldMap');
 const serverList = config.db.collections.servers;
 const insertDB = new insert();
 
@@ -21,7 +22,7 @@ function getPositionMine() {
     for (let h = 1; h < 4; h++) {
       var f = {
         x: i,
-        y: h,
+        y: h
       };
       if (i == 2 && h == 2) {
         break;
@@ -88,7 +89,7 @@ function createRegion() {
 }
 
 function createGlobalMap() {
-  serverList.forEach((server) => {
+  serverList.forEach(server => {
     let countRegion = 0;
     const serverName = server.collectionName;
     GlobalMap[serverName] = [];
@@ -100,25 +101,26 @@ function createGlobalMap() {
         sector.class = schema.document.class.map;
         sector.serverName = serverName;
         sector.id = countRegion++;
-        sector.type = 0;
+        sector.type = WorldMap.types.empty.id;
         sector.x = i;
         sector.y = h;
         sector.region = createRegion();
         // sector.listUpgrade = [];
         let persent = getRandomNumber(100);
         if (persent <= 2) {
-          sector.type = 2;
+          sector.type = WorldMap.types.nishtyak.id;
         }
         row.push(sector);
       }
     }
   });
+  startInsertToDB();
 }
 
 function recursiveOne(i, arr, serverName, callback) {
   if (i < arr.length) {
-    insertDB.one({ collectionName: serverName, doc: arr[i] }, (result) => {
-      console.log(result.ops);
+    insertDB.one({ collectionName: serverName, doc: arr[i] }, result => {
+      console.log(result.ops[0].id);
       i++;
       recursiveOne(i, arr, serverName, callback);
     });
@@ -153,13 +155,15 @@ function recursiveTree(a, h, i, serverList, callback) {
 }
 createGlobalMap();
 
-setTimeout(function () {
-  insertDB.mongo.db.dropDatabase((result) => {
-    console.log('База данных удалена');
-    console.log('Создание новой...');
-    recursiveTree(0, 0, 0, serverList, () => {
-      console.log('done');
-      insertDB.close();
+function startInsertToDB() {
+  setTimeout(function() {
+    insertDB.mongo.db.dropDatabase(result => {
+      console.log('База данных удалена');
+      console.log('Создание новой...');
+      recursiveTree(0, 0, 0, serverList, () => {
+        console.log('done');
+        insertDB.close();
+      });
     });
-  });
-}, 4000);
+  }, 4000);
+}
