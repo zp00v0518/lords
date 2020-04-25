@@ -95,10 +95,8 @@ export default {
       const list = this.$store.state.timeline.eventsList;
       const { Event } = this.$store.state.globalConfig.all;
       const { deepClone } = this;
-      const e_types = Event.types;
-      console.log();
       const d = list.filter(item => {
-        return item.type === e_types.buildNewTown;
+        return item.mode === Event.mode.global;
       });
       return deepClone(d);
     }
