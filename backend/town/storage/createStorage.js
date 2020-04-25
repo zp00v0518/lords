@@ -29,11 +29,12 @@ function createStorage({ listMine = Mine.typeList, lvl = 1, status = 'not_first'
     const obj = {
       lastCalc: 0,
       addValue: 0,
-      nowValue: status === 'first' ? 20 : 20
+      nowValue: 0
+      // nowValue: status === 'first' ? 20 : 20
     };
     storage.sources[type] = obj;
     if (type === 'gold') {
-      storage.sources.gold.nowValue = status === 'first' ? 50000 : 50000;
+      storage.sources.gold.nowValue = status === 'first' ? 50000 : 5000;
       storage.sources.gold.addValue = 2000;
       storage.sources.gold.lastCalc = new Date();
       storage.sources.gold.maxValue = Resources.maxValue.gold;

@@ -23,7 +23,7 @@ const gameVariables = {
     saveDataDB: time.minute / 3, // 1 минута - интервал считывания данных и записи их в БД
     perTime: time.hour / time.speedGame, // расчетное время прироста игровых ресурсов
     heroMoveOnRegion: time.minute * 5 / time.speedGame,
-    heroMoveOnGlobalMap: time.minute * 3 / time.speedGame
+    heroMoveOnGlobalMap: time.minute * 15 / time.speedGame
   },
   indexes: {
     upgrade_town: 1.5,
