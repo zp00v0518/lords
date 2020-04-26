@@ -1,6 +1,6 @@
 <template>
   <div class="globalmap">
-    <Tooltip v-show="showTooltip" :mouseCoords="mouseCoords" :tile="currentTile"></Tooltip>
+    <Tooltip v-show="showTooltip && !popupTown.show" :mouseCoords="mouseCoords" :tile="currentTile"></Tooltip>
     <canvas
       id="global"
       ref="scene"
@@ -37,25 +37,37 @@
     <div class="zoom__wrap">
       <button id="zoom" class="zoom__btn" @click="changeZoom">{{zoomText}}</button>
     </div>
+    <PopupTown
+      v-if="popupTown.show"
+      @close-popup="popupTown.show = !popupTown.show"
+      :tileWidth="tileWidth"
+      :tile="popupTown.tile"
+    ></PopupTown>
   </div>
 </template>
 
 <script>
 import Tooltip from '../../Tooltip';
+import PopupTown from './modules/PopupTown';
 import { currentSector } from '../../../mixins';
 import drawHeroMixin from '../mixins/drawHeroMixin';
 import baseMixins from '../mixins/baseMixins';
 import { algebra } from '../../../../utils';
 import { iso } from '../utils';
+// import drawMoveHero from "./drawMoveHeroOnGlobalMap";
 
 export default {
   name: 'GlobalMap',
-  components: { Tooltip },
+  components: { Tooltip, PopupTown },
   mixins: [currentSector, drawHeroMixin, baseMixins],
   props: ['widthScene', 'heightScene'],
   data() {
     return {
-      isDisabledMove: false
+      isDisabledMove: false,
+      popupTown: {
+        show: false,
+        tile: null
+      }
     };
   },
   created() {
@@ -130,15 +142,24 @@ export default {
     },
     handlerClickOnGlobalMap($event) {
       const tileTypes = this.globalConfig.all.WorldMap.types;
-      const { currentTile } = this;
+      const { currentTile, $store, deepClone, currentSector } = this;
       if (currentTile.type === tileTypes.empty.id) {
         const payload = {
           data: {
-            targetTile: this.deepClone(currentTile)
+            targetTile: deepClone(currentTile)
           },
           type: 'worldMapRegion'
         };
-        this.$store.commit('DIALOG_SHOW', payload);
+        $store.commit('DIALOG_SHOW', payload);
+      } else if (currentTile.type === tileTypes.town.id) {
+        const { sectors } = $store.state.userSectors;
+        const to_be = sectors.find(i => i._id === currentTile._id);
+        if (to_be && to_be._id !== currentSector._id) {
+          this.popupTown.show = true;
+          this.popupTown.centerX = currentTile.centerX;
+          this.popupTown.centerY = currentTile.centerY;
+          this.popupTown.tile = deepClone(currentTile);
+        }
       }
     },
     drawMoveHero() {

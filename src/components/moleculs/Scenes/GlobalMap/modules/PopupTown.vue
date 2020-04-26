@@ -1,0 +1,70 @@
+<template>
+  <div class="popup-town" :style="getStyle" @click.stop="handlerClick">
+    <button class="popup-town__item">Отправить героя</button>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'PopupTown',
+  props: {
+    centerX: 0,
+    centerY: 0,
+    tileWidth: 0,
+    tile: null
+  },
+  beforeDestroy() {
+    document.removeEventListener('click', this.closePopup);
+    document.removeEventListener('keyup', this.handlerKeyup);
+  },
+  computed: {
+    getStyle() {
+      const { tileWidth, tile } = this;
+      const left = tile.centerX - tileWidth + 'px';
+      const top = tile.centerY - tileWidth - 10 + 'px';
+      return { left, top };
+    }
+  },
+  methods: {
+    closePopup() {
+      this.$emit('close-popup');
+    },
+    handlerKeyup(event) {
+      if (event.key !== 'Escape') return;
+      this.closePopup();
+    },
+    handlerClick() {
+      const { deepClone, tile, $store } = this;
+      const payload = {
+        data: {
+          targetTile: deepClone(tile)
+        },
+        type: 'heroTransferDialog'
+      };
+      $store.commit('DIALOG_SHOW', payload);
+      this.closePopup();
+      console.log(this.tile);
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      document.addEventListener('click', this.closePopup);
+      document.addEventListener('keyup', this.handlerKeyup);
+    }, 0);
+  }
+};
+</script>
+
+<style lang="scss">
+.popup-town {
+  position: absolute;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  &__item {
+    padding: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+}
+</style>
