@@ -81,8 +81,7 @@ export default {
         data: {
           heroId: activeHero._id,
           targetSector: targetTile._id
-        },
-        status: true
+        }
       };
       this.$ws.get(message).then(res => {
         console.log(res);

@@ -10,7 +10,8 @@ const Event = {
   },
   mode: {
     global: 'global',
-    region: 'region'
+    region: 'region',
+    hidden: 'hidden'
   }
 };
 
