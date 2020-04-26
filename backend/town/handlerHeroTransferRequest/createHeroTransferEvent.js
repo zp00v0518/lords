@@ -26,7 +26,7 @@ function createHeroTransferEvent(initSector, targetSector, hero) {
   };
   template.target = target;
   template.type = Event.types.heroTransfer;
-  const moveTime = WorldMap.getTimeMoveOnMap(init, target, hero);
+  const moveTime = WorldMap.getTimeMoveOnMap(init, target, {hero});
   template.end = template.start + moveTime;
   const data = {
     initHero: hero._id,

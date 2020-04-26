@@ -83,6 +83,7 @@ export default {
           targetSector: targetTile._id
         }
       };
+      this.$store.commit('SET_ACTIVE_HERO_ID', -1);
       this.$ws.get(message).then(res => {
         console.log(res);
         const txt = gloss.eventLang.eventResult[res.type][res.status].txt;

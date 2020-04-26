@@ -117,7 +117,7 @@ export default {
       const { Event } = this.$store.state.globalConfig.all;
       const { deepClone } = this;
       const d = list.filter(item => {
-        return item.mode === Event.mode.global;
+        return item.mode === Event.mode.global || item.mode === Event.mode.hidden;
       });
       return deepClone(d);
     }
