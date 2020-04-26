@@ -1,5 +1,5 @@
-const finishEventGlobal = require('./finishEventGlobal');
+const inActiveteEvent = require('./inActiveteEvent');
 const addEventToDB = require('./addEventToDB');
 const getGlobalModeEvents = require('./getGlobalModeEvents');
 
-module.exports = { finishEventGlobal, addEventToDB, getGlobalModeEvents };
+module.exports = { inActiveteEvent, addEventToDB, getGlobalModeEvents };

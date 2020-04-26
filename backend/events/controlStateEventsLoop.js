@@ -114,6 +114,9 @@ function iterationImplenetation(event, callback = () => {}) {
     } else if (type === eventType.buildNewTown) {
       await eventsHandler[type](event);
       resolve();
+    } else if (type === eventType.heroTransfer) {
+      await eventsHandler[type](event);
+      resolve();
     }
   });
 }
