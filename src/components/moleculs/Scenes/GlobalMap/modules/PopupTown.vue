@@ -8,10 +8,9 @@
 export default {
   name: 'PopupTown',
   props: {
-    centerX: 0,
-    centerY: 0,
     tileWidth: 0,
-    tile: null
+    tile: null,
+    initSector: null
   },
   beforeDestroy() {
     document.removeEventListener('click', this.closePopup);
@@ -34,16 +33,16 @@ export default {
       this.closePopup();
     },
     handlerClick() {
-      const { deepClone, tile, $store } = this;
+      const { deepClone, tile, $store, initSector } = this;
       const payload = {
         data: {
-          targetTile: deepClone(tile)
+          targetTile: deepClone(tile),
+          initSector: deepClone(initSector)
         },
         type: 'heroTransferDialog'
       };
       $store.commit('DIALOG_SHOW', payload);
       this.closePopup();
-      console.log(this.tile);
     }
   },
   mounted() {

@@ -1,7 +1,9 @@
 <template>
   <div class="hero-transfer">
     <div class="hero-transfer__title">
-      <div class="hero-transfer__title--txt">{{'ssdfsdfsdf'}}</div>
+      <div
+        class="hero-transfer__title--txt"
+      >{{upperFirstSymbol(gloss.dialog.questions.heroTransfer.txt)}}</div>
       <Icon class="dialog__close" name="circle-close" @click.native="closeDialogWindow"></Icon>
     </div>
     <div>
@@ -32,9 +34,12 @@ import { getAsTimeString } from '../../../../../utils';
 export default {
   name: 'HeroTransferDialog',
   mixins: [closeMixin, currentSector],
+  props: {
+    data: { type: Object, required: true }
+  },
   data() {
     return {
-      timeText: 1234
+      timeText: ''
     };
   },
   computed: {
@@ -43,13 +48,25 @@ export default {
       return heroesList.find(i => i._id === activeHeroId);
     },
     heroInTown() {
-      const { activeHero, currentSector } = this;
+      const { activeHero, data } = this;
       if (!activeHero) return false;
-      const { heroes } = currentSector;
+      const { initSector } = data;
+      const { heroes } = initSector;
       return Array.isArray(heroes) && heroes.includes(activeHero._id);
     },
     createDisabled() {
       return !this.activeHero || !this.heroInTown;
+    }
+  },
+  watch: {
+    createDisabled: {
+      immediate: true,
+      handler(e) {
+        this.setTimeText();
+      }
+    },
+    activeHero: function() {
+      this.setTimeText();
     }
   },
   methods: {
@@ -69,9 +86,9 @@ export default {
     },
     getMoveTime() {
       const { WorldMap } = this.globalConfig.all;
-      const { data, currentSector } = this;
-      const { targetTile } = data;
-      return WorldMap.getTimeMoveOnMap(currentSector, targetTile);
+      const { data, activeHero } = this;
+      const { targetTile, initSector } = data;
+      return WorldMap.getTimeMoveOnMap(initSector, targetTile, { hero: activeHero });
     }
   }
 };
