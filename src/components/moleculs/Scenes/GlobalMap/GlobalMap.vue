@@ -60,6 +60,10 @@ export default {
   },
   created() {
     this.currentMap = this.$store.state.globalMap.currentMap;
+    this.$bus.$on('rerender_global_map', this.drawMap);
+  },
+  beforeDestroy() {
+    this.$bus.$off('rerender_global_map', this.drawMap);
   },
   watch: {
     '$store.state.globalMap.currentMap': function() {
@@ -109,7 +113,6 @@ export default {
       this.drawMoveHero();
     },
     changeZoom(event) {
-      // this.zoom = this.zoom === 1 ? 1.5 : 1;
       this.$store.commit('CHANGE__ZOOM');
       this.moveOnMap(event);
     },
@@ -144,8 +147,8 @@ export default {
       ctx.fillStyle = settings.baseColor;
       eventList.forEach(event => {
         const { target, init } = event;
-        const startCoords = {x: init.x, y: init.y};
-        const endCoords = {x: target.x, y: target.y};
+        const startCoords = { x: init.x, y: init.y };
+        const endCoords = { x: target.x, y: target.y };
         const WorldMap = this.globalConfig.all.WorldMap;
         const sizeMap = WorldMap.numSectionGlobalMap;
         const width = this.tileWidth;
