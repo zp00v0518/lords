@@ -72,7 +72,29 @@ export default {
   methods: {
     getAsTimeString,
     sendHero() {
-      console.log(123);
+      const { activeHero, createDisabled, data, globalConfig, gloss } = this;
+      if (createDisabled) return;
+      const { targetTile } = data;
+      const evTypes = globalConfig.all.Event.types;
+      const message = {
+        type: evTypes.heroTransfer,
+        data: {
+          heroId: activeHero._id,
+          targetSector: targetTile._id
+        },
+        status: true
+      };
+      this.$ws.get(message).then(res => {
+        console.log(res);
+        const txt = gloss.eventLang.eventResult[res.type][res.status].txt;
+        const message = {
+          type: 'message',
+          data: {
+            txt
+          }
+        };
+        this.$store.commit('DIALOG_SHOW', message);
+      });
     },
     setTimeText() {
       const { createDisabled, gloss, upperFirstSymbol } = this;
