@@ -97,6 +97,7 @@ export default {
   methods: {
     handlerClickIcon() {
       this.$store.commit("SET_CURRENT_SECTOR", this.indexTown);
+      this.$bus.$emit('rerender_global_map');
     }
   }
 };

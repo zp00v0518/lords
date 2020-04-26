@@ -1,9 +1,9 @@
 function calcValueUnitInBarraks(barraks, timeEnd = new Date().getTime()) {
-  const addSource = gameVariables.timer.addSource;
+  const addUnits = gameVariables.timer.addUnits;
   const workInfo = barraks.work;
   if (workInfo.lastCalc !== 0) {
     const ost = timeEnd - workInfo.lastCalc;
-    const d = (workInfo.addValue / addSource) * ost;
+    const d = (workInfo.addValue / addUnits) * ost;
     workInfo.nowValue += d;
     workInfo.lastCalc = timeEnd;
   }

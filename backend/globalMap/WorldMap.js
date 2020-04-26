@@ -24,7 +24,11 @@ class WorldMap {
     const x2 = target.x;
     const y2 = target.y;
     const distance = this.getDistanceOnMap(x1, y1, x2, y2);
-    return Math.round(distance * this.heroMoveOnGlobalMap);
+    let time = distance * this.heroMoveOnGlobalMap;
+    if (options.hero && options.hero.army.length === 0) {
+      time = time / 4;
+    }
+    return Math.round(time);
   }
   getDistanceOnMap(x1, y1, x2, y2) {
     const size = this.numSectionGlobalMap;

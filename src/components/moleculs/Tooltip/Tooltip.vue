@@ -44,7 +44,7 @@ export default {
     tile: function() {
       const size = this.$el ? this.$el.getBoundingClientRect() : { height: 0 };
       const left = this.mouseCoords.x + 'px';
-      const top = this.mouseCoords.y - size.height - 50 + 'px';
+      const top = this.mouseCoords.y - size.height - 80 + 'px';
       this.position = { left, top };
       this.getListSource();
     }

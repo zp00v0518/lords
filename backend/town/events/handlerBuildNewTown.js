@@ -1,5 +1,5 @@
 const { getOneTownFromDB } = require('../DB');
-const { finishEventGlobal } = require('../../events/db');
+const { inActiveteEvent } = require('../../events/db');
 const createTown = require('../createTown');
 const WorldMap = require('../../globalMap/WorldMap');
 const { getArmyRange, changeArmyOnRegion } = require('../../army');
@@ -18,14 +18,14 @@ async function handlerBuildNewTown(event) {
     // здесь надо повернуть героя назад (backTotown)
     const backToTownEvent = createBackToTownEvent(event);
     await addEventToDB(backToTownEvent, serverName);
-    finishEventGlobal(event);
+    inActiveteEvent(event);
     return;
   }
   const { race } = data;
   const user = await getOneUserFromDB(init.user);
   const hero = await getHeroesFromDB(serverName, { heroId: data.initHero });
   if (!user || !hero) {
-    finishEventGlobal(event);
+    inActiveteEvent(event);
     return;
   }
   const newTown = createTown({ race, sectorId: targetSector._id });
@@ -47,7 +47,7 @@ async function handlerBuildNewTown(event) {
   const newSector = await getOneSectorForGlobalMap(serverName, targetSector._id);
   global.GlobalMap[serverName][targetSector.x][targetSector.y] = newSector;
   
-  finishEventGlobal(event);
+  inActiveteEvent(event);
   return;
 }
 

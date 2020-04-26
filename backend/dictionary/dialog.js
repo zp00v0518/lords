@@ -20,6 +20,9 @@ const dialog = {
     },
     buildNewTown: {
       ru: 'построить новый город?'
+    },
+    heroTransfer: {
+      ru: "отправить героя в этот город?"
     }
   },
   full_army_in_town: {

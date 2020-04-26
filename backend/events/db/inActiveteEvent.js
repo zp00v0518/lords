@@ -1,7 +1,7 @@
 const { updateDB } = require('../../workWithMongoDB');
 const update = new updateDB();
 
-function finishEventGlobal(event, callback = () => {}) {
+function inActiveteEvent(event, callback = () => {}) {
   return new Promise((resolve, reject) => {
     const data = {
       status: false
@@ -24,4 +24,4 @@ function finishEventGlobal(event, callback = () => {}) {
   });
 }
 
-module.exports = finishEventGlobal;
+module.exports = inActiveteEvent;

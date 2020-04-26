@@ -1,11 +1,11 @@
 import Message from './Message';
 import Upgrade from './Upgrade';
 import DialogBattle from './DialogBattle';
-import WorldMapRegion from './WorldMapRegion';
+import WorldMapDialog from './WorldMapDialog';
 
 export default {
   Message,
   DialogBattle,
-  WorldMapRegion,
+  ...WorldMapDialog,
   ...Upgrade
 };

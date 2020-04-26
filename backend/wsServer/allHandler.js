@@ -1,3 +1,5 @@
+const evTypes = require('../events/Event').types;
+
 module.exports = {
   chatMessage: require('../chat/handlerChatMessage.js'),
   moveGlobalMap: require('../globalMap/moveGlobalMap.js'),
@@ -8,5 +10,6 @@ module.exports = {
   mergeArmy: require('../army/handlerMergeArmy'),
   updateArmyOnRegion: require('../army/handlerUpdateArmyOnRegion'),
   battleRequest: require('../battle/handlerBattleRequest'),
-  buildNewTown: require('../town/handlerBuildNewTownRequest')
+  [evTypes.buildNewTown]: require('../town/handlerBuildNewTownRequest'),
+  [evTypes.heroTransfer]: require('../town/handlerHeroTransferRequest')
 };

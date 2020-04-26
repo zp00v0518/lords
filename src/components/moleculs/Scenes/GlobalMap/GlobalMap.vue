@@ -1,6 +1,6 @@
 <template>
   <div class="globalmap">
-    <Tooltip v-show="showTooltip" :mouseCoords="mouseCoords" :tile="currentTile"></Tooltip>
+    <Tooltip v-show="showTooltip && !popupTown.show" :mouseCoords="mouseCoords" :tile="currentTile"></Tooltip>
     <canvas
       id="global"
       ref="scene"
@@ -37,29 +37,47 @@
     <div class="zoom__wrap">
       <button id="zoom" class="zoom__btn" @click="changeZoom">{{zoomText}}</button>
     </div>
+    <PopupTown
+      v-if="popupTown.show"
+      @close-popup="popupTown.show = !popupTown.show"
+      :tileWidth="tileWidth"
+      :tile="popupTown.tile"
+      :initSector="popupTown.initSector"
+    ></PopupTown>
   </div>
 </template>
 
 <script>
 import Tooltip from '../../Tooltip';
+import PopupTown from './modules/PopupTown';
 import { currentSector } from '../../../mixins';
 import drawHeroMixin from '../mixins/drawHeroMixin';
 import baseMixins from '../mixins/baseMixins';
 import { algebra } from '../../../../utils';
 import { iso } from '../utils';
+// import drawMoveHero from "./drawMoveHeroOnGlobalMap";
 
 export default {
   name: 'GlobalMap',
-  components: { Tooltip },
+  components: { Tooltip, PopupTown },
   mixins: [currentSector, drawHeroMixin, baseMixins],
   props: ['widthScene', 'heightScene'],
   data() {
     return {
-      isDisabledMove: false
+      isDisabledMove: false,
+      popupTown: {
+        show: false,
+        tile: null,
+        initSector: null
+      }
     };
   },
   created() {
     this.currentMap = this.$store.state.globalMap.currentMap;
+    this.$bus.$on('rerender_global_map', this.drawMap);
+  },
+  beforeDestroy() {
+    this.$bus.$off('rerender_global_map', this.drawMap);
   },
   watch: {
     '$store.state.globalMap.currentMap': function() {
@@ -99,7 +117,7 @@ export default {
       const { Event } = this.$store.state.globalConfig.all;
       const { deepClone } = this;
       const d = list.filter(item => {
-        return item.mode === Event.mode.global;
+        return item.mode === Event.mode.global || item.mode === Event.mode.hidden;
       });
       return deepClone(d);
     }
@@ -109,7 +127,6 @@ export default {
       this.drawMoveHero();
     },
     changeZoom(event) {
-      // this.zoom = this.zoom === 1 ? 1.5 : 1;
       this.$store.commit('CHANGE__ZOOM');
       this.moveOnMap(event);
     },
@@ -127,15 +144,26 @@ export default {
     },
     handlerClickOnGlobalMap($event) {
       const tileTypes = this.globalConfig.all.WorldMap.types;
-      const { currentTile } = this;
+      const { currentTile, $store, deepClone, currentSector } = this;
       if (currentTile.type === tileTypes.empty.id) {
         const payload = {
           data: {
-            targetTile: this.deepClone(currentTile)
+            targetTile: deepClone(currentTile),
+            initSector: deepClone(currentSector)
           },
           type: 'worldMapRegion'
         };
-        this.$store.commit('DIALOG_SHOW', payload);
+        $store.commit('DIALOG_SHOW', payload);
+      } else if (currentTile.type === tileTypes.town.id) {
+        const { sectors } = $store.state.userSectors;
+        const to_be = sectors.find(i => i._id === currentTile._id);
+        if (to_be && to_be._id !== currentSector._id) {
+          this.popupTown.show = true;
+          this.popupTown.centerX = currentTile.centerX;
+          this.popupTown.centerY = currentTile.centerY;
+          this.popupTown.tile = deepClone(currentTile);
+          this.popupTown.initSector = deepClone(currentSector);
+        }
       }
     },
     drawMoveHero() {
@@ -144,8 +172,8 @@ export default {
       ctx.fillStyle = settings.baseColor;
       eventList.forEach(event => {
         const { target, init } = event;
-        const startCoords = {x: init.x, y: init.y};
-        const endCoords = {x: target.x, y: target.y};
+        const startCoords = { x: init.x, y: init.y };
+        const endCoords = { x: target.x, y: target.y };
         const WorldMap = this.globalConfig.all.WorldMap;
         const sizeMap = WorldMap.numSectionGlobalMap;
         const width = this.tileWidth;
