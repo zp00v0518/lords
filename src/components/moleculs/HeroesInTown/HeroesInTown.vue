@@ -37,14 +37,13 @@
 
 <script>
 import { ArmyLine } from '../ArmyLine';
-import { currentSector } from '../../mixins';
 
 export default {
   name: 'HeroesInTown',
-  mixins: [currentSector],
   components: { ArmyLine },
   props: {
-    heroesList: { type: Array, default: () => [] }
+    heroesList: { type: Array, default: () => [] },
+    sector: { type: Object, default: () => ({}) }
   },
   data() {
     return {
@@ -54,9 +53,7 @@ export default {
   },
   computed: {
     disabled_in() {
-      const { currentSector } = this;
-      const army_in_town = currentSector.town.army.units;
-      return army_in_town.length === 0;
+      return this.sector.town.army.units.length === 0
     },
     activeHeroId() {
       return this.$store.state.heroes.activeHeroId;
@@ -84,14 +81,11 @@ export default {
     },
     mergeArmy(index, way) {
       const hero = this.list[index];
-      const { $store, currentSector } = this;
-      const sectorIndex = $store.state.userSectors.sectors.findIndex(i => i._id === currentSector._id);
       const message = {
         type: 'mergeArmy',
         data: {
           id: hero._id,
-          way,
-          sectorIndex
+          way
         }
       };
       this.allDisabled = true;
@@ -108,9 +102,10 @@ export default {
             this.$store.commit('FORCE_UPDATE_HEROES_LIST');
           }
           if (data.town) {
-            payload.sectorIndex = sectorIndex;
+            payload.id = data.town.id;
             payload.army = data.town.army;
             this.$store.commit('UPDATE_TOWN_ARMY', payload);
+            this.$store.commit('FORCE_UPDATE_SECTORS_LIST');
           }
         })
         .catch(err => {

@@ -13,18 +13,22 @@ function formCurrentImageList(sector, townRaceName, allBuildings) {
     const d = sector.town[name];
     // отбираю строения, которые уже построены
     if (d.lvl !== 0) {
-      const lvl = d.lvl;
-      const obj = allBuildings.races.rampart.buildings[name].lvl[lvl];
-      obj.class = d.class;
-      obj.buildingData = d;
-      // const obj = buildings[name].lvl[lvl]; временно, для определения координат картинки
-      const imgInfo = obj.imgInfo;
-      const img = listImg[imgInfo.name];
-      imgInfo.img = img;
-      // передача this
-      prepareToDraw.call(self, imgInfo);
-      obj.is = true;
-      arr.push(obj);
+      try {
+        const lvl = d.lvl;
+        const obj = allBuildings.races.rampart.buildings[name].lvl[lvl];
+        obj.class = d.class;
+        obj.buildingData = d;
+        // const obj = buildings[name].lvl[lvl]; временно, для определения координат картинки
+        const imgInfo = obj.imgInfo;
+        const img = listImg[imgInfo.name];
+        imgInfo.img = img;
+        // передача this
+        prepareToDraw.call(self, imgInfo);
+        obj.is = true;
+        arr.push(obj);
+      } catch (err) {
+        console.log(err);
+      }
     }
   });
   buildings.default_img.forEach(item => {
@@ -50,17 +54,7 @@ function prepareToDraw(elem) {
   pic.width = (img.width / 2) * scale_X;
   pic.height = img.height * scale_Y;
   const picCtx = pic.getContext('2d');
-  picCtx.drawImage(
-    img,
-    0,
-    0,
-    img.width / 2,
-    img.height,
-    0,
-    0,
-    pic.width,
-    pic.height
-  );
+  picCtx.drawImage(img, 0, 0, img.width / 2, img.height, 0, 0, pic.width, pic.height);
   elem.picCtx = picCtx;
   try {
     elem.pixArr = picCtx.getImageData(0, 0, pic.width, pic.height);
