@@ -84,14 +84,14 @@ export default {
     },
     mergeArmy(index, way) {
       const hero = this.list[index];
-      const { $store, currentSector } = this;
-      const sectorIndex = $store.state.userSectors.sectors.findIndex(i => i._id === currentSector._id);
+      // const { $store, currentSector } = this;
+      // const sectorIndex = $store.state.userSectors.sectors.findIndex(i => i._id === currentSector._id);
       const message = {
         type: 'mergeArmy',
         data: {
           id: hero._id,
-          way,
-          sectorIndex
+          way
+          // sectorIndex
         }
       };
       this.allDisabled = true;
@@ -108,7 +108,7 @@ export default {
             this.$store.commit('FORCE_UPDATE_HEROES_LIST');
           }
           if (data.town) {
-            payload.sectorIndex = sectorIndex;
+            payload.id = data.town.id;
             payload.army = data.town.army;
             this.$store.commit('UPDATE_TOWN_ARMY', payload);
           }
