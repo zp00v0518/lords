@@ -32,7 +32,7 @@
     </div>
 
     <div class="hero_in_castle_wrap">
-      <HeroesInTown :heroesList="activeHeroes" />
+      <HeroesInTown :heroesList="activeHeroes" :sector="sector"/>
       <InActiveHeroes :heroesList="notActiveHeroes" />
     </div>
   </div>

@@ -66,6 +66,7 @@ async function handlerMergeArmy(message, info) {
       $set: { 'town.army.units': army_in_town }
     };
     await update.one(updateOps);
+    response.status = true;
     response.data = {
       town: {
         army: army_in_town,

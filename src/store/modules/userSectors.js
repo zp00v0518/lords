@@ -18,6 +18,9 @@ const userSectors = {
       state.sectors[payload.sectorIndex].town.storage = payload.storage;
       Vue.set(state, "sectors", [...state.sectors]);
     },
+    FORCE_UPDATE_SECTORS_LIST(state) {
+      state.sectors = deepClone(state.sectors);
+    },
     UPDATE_TOWN_ARMY(state, payload) {
       const { id, army } = payload;
       const sector = state.sectors.find(i => i._id === id);
