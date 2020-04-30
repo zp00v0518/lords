@@ -197,7 +197,7 @@ export default {
         let heroLength = this.getLengthHeroOnStraight(fullLength, event.start, event.end);
         if (heroLength > fullLength) heroLength = fullLength;
         const step = tileWidth / 4;
-        const color = this.$store.getters.getUserColor;
+        const color = init.color;
         ctx.fillStyle = color;
         for (let i = 0; i < fullLength + 1; i += step) {
           const coords = algebra.getPointOnStraight(...baseCoords, i);

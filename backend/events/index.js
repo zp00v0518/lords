@@ -4,6 +4,7 @@ const setEventInGame = require('./setEventInGame');
 const controlStateEventsList = require('./controlStateEventsList');
 const createEvents = require('./createEvents');
 const getTemplateEvent = require('./getTemplateEvent');
+const addColorsToEvents = require('./addColorsToEvents');
 const db = require('./db');
 
 module.exports = {
@@ -13,5 +14,6 @@ module.exports = {
   formEventsList,
   controlStateEventsList,
   Event,
-  getTemplateEvent
+  getTemplateEvent,
+  addColorsToEvents
 };
