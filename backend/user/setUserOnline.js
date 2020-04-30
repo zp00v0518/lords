@@ -34,7 +34,7 @@ function setUserOnline(user, server, info_for_game, ws) {
   startMessage.sectors = info_for_game.sectors;
   startMessage.heroesList = info_for_game.heroesList;
   startMessage.dictionary = getLangDictionary(user.lang);
-  startMessage.user = { id: User._id };
+  startMessage.user = { id: User._id, color: User.collections[server].color };
   ws.send(JSON.stringify(startMessage));
 }
 
