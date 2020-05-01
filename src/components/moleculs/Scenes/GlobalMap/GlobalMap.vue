@@ -55,7 +55,6 @@ import drawHeroMixin from '../mixins/drawHeroMixin';
 import baseMixins from '../mixins/baseMixins';
 import { algebra } from '../../../../utils';
 import { iso } from '../utils';
-// import drawMoveHero from "./drawMoveHeroOnGlobalMap";
 
 export default {
   name: 'GlobalMap',

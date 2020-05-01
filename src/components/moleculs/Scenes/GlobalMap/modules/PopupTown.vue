@@ -1,6 +1,13 @@
 <template>
-  <div class="popup-town" :style="getStyle" @click.stop="handlerClick">
-    <button class="popup-town__item">Отправить героя</button>
+  <div class="popup-town" :style="getStyle" @click.stop>
+    <button
+      class="popup-town__item"
+      @click.stop="handlerClick('heroTransferDialog')"
+    >{{upperFirstSymbol(gloss.popup.sendHero.btn.txt)}}</button>
+    <button
+      class="popup-town__item"
+      @click.stop="handlerClick('sendCaravan')"
+    >{{upperFirstSymbol(gloss.popup.sendСaravan.btn.txt)}}</button>
   </div>
 </template>
 
@@ -11,6 +18,9 @@ export default {
     tileWidth: 0,
     tile: null,
     initSector: null
+  },
+  created() {
+    console.log(this.gloss.popup);
   },
   beforeDestroy() {
     document.removeEventListener('click', this.closePopup);
@@ -32,14 +42,14 @@ export default {
       if (event.key !== 'Escape') return;
       this.closePopup();
     },
-    handlerClick() {
+    handlerClick(type) {
       const { deepClone, tile, $store, initSector } = this;
       const payload = {
         data: {
           targetTile: deepClone(tile),
           initSector: deepClone(initSector)
         },
-        type: 'heroTransferDialog'
+        type
       };
       $store.commit('DIALOG_SHOW', payload);
       this.closePopup();
