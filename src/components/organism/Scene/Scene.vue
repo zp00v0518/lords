@@ -1,5 +1,5 @@
 <template>
-  <section class="scene">
+  <section id="scenes" class="scene">
     <keep-alive>
       <GlobalMap
         v-if="scenes.globalMap"
@@ -100,8 +100,8 @@ export default {
   },
   mounted() {
     // this.scenes.region = true;
-    // this.scenes.globalMap = true;
-    this.scenes.town = true;
+    this.scenes.globalMap = true;
+    // this.scenes.town = true;
   }
 };
 </script>

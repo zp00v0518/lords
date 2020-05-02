@@ -37,5 +37,5 @@ const typeDialog = {
   dialogBattle: 'DialogBattle',
   worldMapRegion: 'WorldMapRegion',
   heroTransferDialog: 'HeroTransferDialog',
-  sendCaravan: 'SendCaravanDialog'
+  sendCaravan: 'Market'
 };

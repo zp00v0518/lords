@@ -8,16 +8,33 @@
       class="popup-town__item"
       @click.stop="handlerClick('sendCaravan')"
     >{{upperFirstSymbol(gloss.popup.sendСaravan.btn.txt)}}</button>
+    <TownBuilding
+      v-if="showMarket"
+      :name="'market'"
+      @close="showMarket= false"
+      :currentSector="currentSector"
+      class="qwer"
+    ></TownBuilding>
   </div>
 </template>
 
 <script>
+import TownBuilding from '../../TownMap/Building';
+import { currentSector } from '../../../../mixins';
+
 export default {
   name: 'PopupTown',
+  mixins: [currentSector],
+  components: { TownBuilding },
   props: {
     tileWidth: 0,
     tile: null,
     initSector: null
+  },
+  data() {
+    return {
+      showMarket: false
+    };
   },
   created() {
     console.log(this.gloss.popup);
@@ -44,6 +61,10 @@ export default {
     },
     handlerClick(type) {
       const { deepClone, tile, $store, initSector } = this;
+      if (type === 'sendCaravan') {
+        this.showMarket = true;
+        return;
+      }
       const payload = {
         data: {
           targetTile: deepClone(tile),
@@ -75,5 +96,8 @@ export default {
     cursor: pointer;
     font-weight: bold;
   }
+}
+.qwer{
+  color: red;
 }
 </style>
