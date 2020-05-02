@@ -1,5 +1,5 @@
 <template>
-  <section class="building__wrap" :style="styles">
+  <section class="building__wrap" :style="getStyles()">
     <div class="building__header">
       <div class="building__header-title">{{ name }}</div>
       <Icon class="building__header-close" name="circle-close" @click.native="closeBuilding"></Icon>
@@ -39,16 +39,6 @@ export default {
   computed: {
     gloss() {
       return this.$store.state.local.dictionary.town.race[this.townRaceName];
-    },
-    styles() {
-      const scenes = document.querySelector('#scenes');
-      const st = scenes.getBoundingClientRect();
-      return {
-        top: st.top + 'px',
-        left: st.left + 'px',
-        width: st.width + 'px',
-        height: st.height + 'px'
-      };
     }
   },
   watch: {
@@ -60,6 +50,16 @@ export default {
     }
   },
   methods: {
+    getStyles() {
+      const scenes = document.querySelector('#scenes');
+      const st = scenes.getBoundingClientRect();
+      return {
+        top: st.top + 'px',
+        left: st.left + 'px',
+        width: st.width + 'px',
+        height: st.height + 'px'
+      };
+    },
     closeBuilding() {
       this.$emit('close');
     },

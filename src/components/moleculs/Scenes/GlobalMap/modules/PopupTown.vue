@@ -12,8 +12,6 @@
       v-if="showMarket"
       :name="'market'"
       @close="showMarket= false"
-      :currentSector="currentSector"
-      class="qwer"
     ></TownBuilding>
   </div>
 </template>
@@ -35,9 +33,6 @@ export default {
     return {
       showMarket: false
     };
-  },
-  created() {
-    console.log(this.gloss.popup);
   },
   beforeDestroy() {
     document.removeEventListener('click', this.closePopup);
@@ -96,8 +91,5 @@ export default {
     cursor: pointer;
     font-weight: bold;
   }
-}
-.qwer{
-  color: red;
 }
 </style>

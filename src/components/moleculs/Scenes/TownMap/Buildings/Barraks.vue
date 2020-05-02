@@ -215,7 +215,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .barraks {
   width: 80%;
   height: 80%;
