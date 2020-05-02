@@ -7,8 +7,7 @@ function createCaravan() {
   };
   const { available } = Caravan;
   Object.keys(available).forEach(key => {
-    const name = available[key];
-    template[name] = 0;
+    template[key] = 0;
   });
   return template;
 }
