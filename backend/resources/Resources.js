@@ -1,9 +1,11 @@
 const checkSource = require('./checkSource');
+const types = require('./type_resources');
 
 const Resources = {
-  typeList: ['gold', 'wood', 'ore', 'sulfur', 'crystal', 'mercury', 'gem'],
-  baseResource: ['wood', 'ore'],
-  unicResource: ['sulfur', 'crystal', 'mercury', 'gem'],
+  types,
+  typeList: [types.gold, types.wood, types.ore, types.sulfur, types.crystal, types.mercury, types.gem],
+  baseResource: [types.wood, types.ore],
+  unicResource: [types.sulfur, types.crystal, types.mercury, types.gem],
   cost: {
     base: {
       gold: 1000,

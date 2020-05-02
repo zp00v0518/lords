@@ -16,8 +16,10 @@ const document = {
     storage: 'storage',
     tavern: 'tavern',
     town: 'town',
+    caravan: 'caravan'
   }
 };
+
 const hero = {
   lvl: Number,
   type: String,

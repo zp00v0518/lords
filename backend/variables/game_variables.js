@@ -24,7 +24,7 @@ const gameVariables = {
     addSource: time.day / time.speedGame, // расчетное время прироста игровых ресурсов
     addUnits: time.day / time.speedGame, // расчетное время прироста игровых ресурсов
     heroMoveOnRegion: time.minute * 5 / time.speedGame,
-    heroMoveOnGlobalMap: time.minute * 1 / time.speedGame
+    heroMoveOnGlobalMap: time.minute * 10 / time.speedGame
   },
   indexes: {
     upgrade_town: 1.5,
