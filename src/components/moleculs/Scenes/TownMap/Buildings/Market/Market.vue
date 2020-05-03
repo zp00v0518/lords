@@ -4,7 +4,7 @@
       <div class="market__tabs__item">Caravan</div>
     </div>
     <div class="market__content">
-      <Caravan :targetSector="targetSector"></Caravan>
+      <Caravan :targetSector="targetSector" @close="$emit('close')"></Caravan>
     </div>
   </div>
 </template>

@@ -48,6 +48,10 @@
         </div>
       </div>
     </div>
+    <div class="caravan__footer">
+      <GuiBtn type="ok" class="caravan__footer--btn" :disabled="disabledOk" @click="sendCaravan" />
+      <GuiBtn type="cancel" class="caravan__footer--btn" @click="$emit('close')" />
+    </div>
   </div>
 </template>
 
@@ -94,6 +98,15 @@ export default {
       if (coords.x === '' || coords.y === '') return '';
       const time = Caravan.getTimeMoveCaravanOnMap(currentSector, coords);
       return this.getAsTimeString(time);
+    },
+    disabledOk() {
+      const { coords, sendSources } = this;
+      const checkCoords = coords.x === '' || coords.y === '';
+      const res = Object.keys(sendSources).some(key => {
+        const item = sendSources[key];
+        return item > 0;
+      });
+      return checkCoords || !res;
     }
   },
   watch: {
@@ -162,6 +175,21 @@ export default {
       const checkValue = this.Caravan.checkAvailable(value, type, currentSector.town);
       this.sendSources[type] = checkValue;
       target.value = checkValue;
+    },
+    async sendCaravan() {
+      const { coords, sendSources, disabledOk, currentSector } = this;
+      if (disabledOk) return;
+      const message = {
+        type: 'sendCaravan',
+        data: {
+          initSector: currentSector._id,
+          targetSector: coords,
+          payload: sendSources
+        }
+      };
+      const response = await this.$ws.get(message);
+      console.log(response);
+      this.$emit('close');
     }
   }
 };
@@ -174,7 +202,7 @@ export default {
   &__init {
     display: flex;
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     &__ico {
       margin-right: 15px;
       width: 15%;
@@ -222,6 +250,7 @@ export default {
   &__target {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 100px;
     &__info {
       width: 15%;
       display: flex;
@@ -254,6 +283,15 @@ export default {
           }
         }
       }
+    }
+  }
+  &__footer {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    &--btn {
+      margin: 0 20px;
+      // width: 50px;
     }
   }
 }
