@@ -11,6 +11,7 @@ function fixingResultUpgrade_building(
     building.upgrade.is = false;
     building.lvl++;
     building.upgrade.date = 0;
+    building.work.is = true;
     if (eventItem) {
       const optionsForUpdate = {
         collectionName: eventItem.serverName,
