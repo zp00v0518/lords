@@ -7,26 +7,15 @@
         v-for="i in buildingData.lvl"
         :key="i"
       >
-        <img
-          :src="getImageUrl(i)"
-          class="barraks__icons__unit"
-          @click="hoverItem = i"
-        />
+        <img :src="getImageUrl(i)" class="barraks__icons__unit" @click="hoverItem = i" />
       </div>
     </div>
     <div class="barraks__cost">
       <div class="barraks__cost--base">
         <span class="barraks__cost--title">Стоимость</span>
         <div class="barraks__cost--wrap">
-          <div
-            class="barraks__cost--item"
-            v-for="(value, resource) in cost"
-            :key="resource"
-          >
-            <img
-              :src="`img/resources/${resource}.gif`"
-              class="barraks__cost--resource"
-            />
+          <div class="barraks__cost--item" v-for="(value, resource) in cost" :key="resource">
+            <img :src="`img/resources/${resource}.gif`" class="barraks__cost--resource" />
             <span class="barraks__cost--value">{{ value }}</span>
           </div>
         </div>
@@ -39,11 +28,7 @@
         </div>
         <div class="barraks__cost--hiring">
           <span class="barraks__cost--title">Нанять</span>
-          <span
-            class="barraks__cost--value"
-            :class="{ isNotCost: isNotCost }"
-            >{{ hiring }}</span
-          >
+          <span class="barraks__cost--value" :class="{ isNotCost: isNotCost }">{{ hiring }}</span>
         </div>
         <input
           class="barraks__cost--range"
@@ -58,52 +43,38 @@
       <div class="barraks__cost--total">
         <span class="barraks__cost--title">Тотал</span>
         <div class="barraks__cost--wrap">
-          <div
-            class="barraks__cost--item"
-            v-for="(value, resource) in totalCost"
-            :key="resource"
-          >
-            <img
-              :src="`img/resources/${resource}.gif`"
-              class="barraks__cost--resource"
-            />
+          <div class="barraks__cost--item" v-for="(value, resource) in totalCost" :key="resource">
+            <img :src="`img/resources/${resource}.gif`" class="barraks__cost--resource" />
             <span
               class="barraks__cost--value"
               :class="{ isNotCost: getIsNotCost(value, resource) }"
-              >{{ value }}</span
-            >
+            >{{ value }}</span>
           </div>
         </div>
       </div>
     </div>
     <div class="barraks__confirm">
-      <GuiBtn
-        type="buy"
-        class="barraks__confirm--btn"
-        :disabled="isCanBuy"
-        @click="buyUnits"
-      />
-      <GuiBtn
-        type="cancel"
-        class="barraks__confirm--btn"
-        @click="$emit('close')"
-      />
+      <GuiBtn type="buy" class="barraks__confirm--btn" :disabled="isCanBuy" @click="buyUnits" />
+      <GuiBtn type="cancel" class="barraks__confirm--btn" @click="$emit('close')" />
     </div>
   </section>
 </template>
 
 <script>
+import { currentSector } from '../../../../mixins';
+
 export default {
-  name: "Barraks",
+  name: 'Barraks',
+  mixins: [currentSector],
   props: {
     townRaceName: String,
-    buildingData: null,
-    currentSector: { type: Object, default: () => ({}) }
+    buildingData: null
+    // currentSector: { type: Object, default: () => ({}) }
   },
   data() {
     return {
-      baseUrl: "img/units/",
-      hiring: "0",
+      baseUrl: 'img/units/',
+      hiring: '0',
       hoverItem: 1,
       maxRange: 3000
     };
@@ -121,7 +92,7 @@ export default {
       return this.unit.cost;
     },
     isCanBuy() {
-      return this.hiring === "0" || this.isNotCost;
+      return this.hiring === '0' || this.isNotCost;
     },
     isNotCost() {
       const { totalCost, storage } = this;
@@ -165,7 +136,7 @@ export default {
         return this.raceData.units[unitName];
       }
       if (this.hoverItem === 2) {
-        return this.raceData.units[unitName + "_2"];
+        return this.raceData.units[unitName + '_2'];
       }
     },
     sumUnits() {
@@ -179,15 +150,13 @@ export default {
       const army_length = Object.values(army).length;
       const unit_in_town = Object.values(army).some(i => i.name === unit.name);
       if (army_length >= base_army_length && !unit_in_town) {
-        alert("В городе нет места для юнита");
+        alert('В городе нет места для юнита');
         return;
       }
       const { $store, currentSector } = this;
-      const sectorIndex = $store.state.userSectors.sectors.findIndex(
-        i => i._id === currentSector._id
-      );
+      const sectorIndex = $store.state.userSectors.sectors.findIndex(i => i._id === currentSector._id);
       const message = {
-        type: "buyUnits",
+        type: 'buyUnits',
         data: {
           hiring: +hiring,
           unitName: unit.name,
@@ -195,7 +164,7 @@ export default {
         }
       };
       this.$ws.sendMessage(message);
-      this.$emit("close");
+      this.$emit('close');
     },
     getImageUrl(index) {
       const { unitName } = this;
@@ -225,7 +194,7 @@ export default {
   align-items: center;
   align-self: center;
   margin-top: 10px;
-  background-image: url("../../../../../../frontEnd/img/main/background/panelbg.jpg");
+  background-image: url('../../../../../../frontEnd/img/main/background/panelbg.jpg');
   &__title {
     @include center;
     color: white;

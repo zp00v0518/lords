@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div class="caravan">
     <div class="caravan__init">
-      <img :src="images.caravan.ico.src" class="caravan__init__ico" />
+      <div class="caravan__init__ico">
+        <img :src="images.caravan.ico.src" />
+      </div>
       <div class="caravan__available">
         <div
           class="caravan__available__item"
@@ -20,22 +22,59 @@
       </div>
       <div class="caravan__available--notice">Max load</div>
     </div>
-    <div class="caravan__target"></div>
+    <div class="caravan__target">
+      <div class="caravan__target__info">
+        <img :src="gameSources.other.wait.src" class="caravan__target__info--ico" />
+        <div>{{timeMove}}</div>
+      </div>
+      <div class="caravan__target__choices">
+        <div class="caravan__target__choices__coords">
+          <span>Укажите координаты</span>
+          <div class="caravan__target__choices__coords__item">
+            X:
+            <input type="text" :value="coords.x" @input="changeCoords($event, 'x')" />
+          </div>
+          <div class="caravan__target__choices__coords__item">
+            Y:
+            <input type="text" :value="coords.y" @input="changeCoords($event, 'y')" />
+          </div>
+        </div>
+        <div class="caravan__target__choices__town">
+          <span>или выберите свой город</span>
+          <select v-model="selectedTown">
+            <option selected disabled value="-1">Выберите город</option>
+            <option v-for="item in choices" :value="item.value" :key="item.value">{{item.label}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { currentSector } from '../../../../../../mixins';
+import { getAsTimeString } from '../../../../../../../utils';
 
 export default {
   name: 'Caravan',
   mixins: [currentSector],
+  props: {
+    targetSector: { type: Object, default: () => ({}) }
+  },
   data() {
     return {
-      sendSources: {}
+      sendSources: {},
+      choices: [],
+      selectedTown: '-1',
+      coords: {
+        x: '',
+        y: ''
+      }
     };
   },
   created() {
+    this.createChoices();
+    this.checkFirstValue();
     Object.keys(this.Caravan.available).forEach(key => {
       this.$set(this.sendSources, key, 0);
     });
@@ -49,9 +88,73 @@ export default {
     },
     busy() {
       return this.currentSector.town.caravan;
+    },
+    timeMove() {
+      const { Caravan, currentSector, coords } = this;
+      if (coords.x === '' || coords.y === '') return '';
+      const time = Caravan.getTimeMoveCaravanOnMap(currentSector, coords);
+      return this.getAsTimeString(time);
+    }
+  },
+  watch: {
+    coords: {
+      deep: true,
+      handler(ev) {
+        const { choices } = this;
+        const val = choices.find(i => i.x === ev.x && i.y === ev.y);
+        if (val) {
+          this.selectedTown = val.value;
+        } else {
+          this.selectedTown = '-1';
+        }
+      }
+    },
+    selectedTown: function(ev) {
+      const val = this.choices.find(i => i.value === ev);
+      if (val) {
+        this.coords.x = val.x;
+        this.coords.y = val.y;
+      }
     }
   },
   methods: {
+    getAsTimeString,
+    changeCoords(ev, axis) {
+      const { coords, globalConfig } = this;
+      const { target } = ev;
+      if (target.value === '') {
+        coords[axis] = target.value;
+        return;
+      }
+      let value = ~~parseInt(target.value);
+      const { WorldMap } = globalConfig.all;
+      const maxSize = WorldMap.numSectionGlobalMap;
+      value = value >= maxSize ? maxSize : value;
+      coords[axis] = value;
+      target.value = value;
+    },
+    checkFirstValue() {
+      const { targetSector, choices } = this;
+      if (!targetSector._id) return;
+      this.coords.x = targetSector.x;
+      this.coords.y = targetSector.y;
+      const id = choices.find(i => i.value === targetSector._id);
+      this.selectedTown = id ? id.value : '-1';
+    },
+    createChoices() {
+      const { sectors } = this.$store.state.userSectors;
+      const { currentSector, choices } = this;
+      sectors.forEach((sector, index) => {
+        if (sector._id === currentSector._id) return;
+        const template = {
+          value: sector._id,
+          label: sector.town.name,
+          x: sector.x,
+          y: sector.y
+        };
+        choices.push(template);
+      });
+    },
     handlerInput(ev, type) {
       const { currentSector } = this;
       const { target } = ev;
@@ -66,18 +169,25 @@ export default {
 
 <style lang="scss">
 .caravan {
+  color: white;
+  letter-spacing: 0.1em;
   &__init {
     display: flex;
     justify-content: center;
+    margin-bottom: 40px;
     &__ico {
       margin-right: 15px;
-      width: 10%;
-      max-width: 40px;
+      width: 15%;
+      @include center;
+      img {
+        max-width: 40px;
+        max-height: 40px;
+      }
     }
   }
   &__available {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
     width: 80%;
     &__item {
@@ -107,6 +217,43 @@ export default {
       font-size: 12px;
       height: 100%;
       align-self: flex-end;
+    }
+  }
+  &__target {
+    display: flex;
+    justify-content: space-between;
+    &__info {
+      width: 15%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 15px;
+      font-size: 11px;
+      &--ico {
+        max-height: 50px;
+      }
+    }
+    &__choices {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 2;
+      &__coords {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        &__item {
+          max-width: 80px;
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          margin: 0 10px;
+          input {
+            width: 40px;
+            padding: 2px 5px;
+          }
+        }
+      }
     }
   }
 }

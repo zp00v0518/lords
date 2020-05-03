@@ -7,8 +7,8 @@
     <component
       :is="name"
       :townRaceName="townRaceName"
-      :currentSector="curTown"
       :buildingData="buildingData"
+      :targetSector="targetSector"
       @close="closeBuilding"
     ></component>
   </section>
@@ -22,16 +22,11 @@ export default {
   props: {
     name: String,
     townRaceName: { type: String, default: '' },
-    currentSector: null,
-    buildingData: { type: Object, default: () => ({}) }
+    buildingData: { type: Object, default: () => ({}) },
+    targetSector: null
   },
   components: {
     ...Buildings
-  },
-  data() {
-    return {
-      curTown: this.currentSector
-    };
   },
   created() {
     document.addEventListener('keyup', this.handlerKeyup);
@@ -39,14 +34,6 @@ export default {
   computed: {
     gloss() {
       return this.$store.state.local.dictionary.town.race[this.townRaceName];
-    }
-  },
-  watch: {
-    currentSector: {
-      deep: true,
-      handler(e) {
-        this.curTown = e;
-      }
     }
   },
   methods: {

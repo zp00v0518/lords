@@ -4,7 +4,7 @@
       <div class="market__tabs__item">Caravan</div>
     </div>
     <div class="market__content">
-      <Caravan></Caravan>
+      <Caravan :targetSector="targetSector"></Caravan>
     </div>
   </div>
 </template>
@@ -16,7 +16,10 @@ import modules from './modules';
 export default {
   name: 'Market',
   mixins: [currentSector],
-  components: { ...modules }
+  components: { ...modules },
+  props: {
+    targetSector: { type: Object, default: () => ({}) }
+  }
 };
 </script>
 

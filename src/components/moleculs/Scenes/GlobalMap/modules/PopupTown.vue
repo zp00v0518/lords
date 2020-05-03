@@ -9,7 +9,7 @@
       @click.stop="handlerClick('sendCaravan')"
       :disabled="disabledMarket"
     >{{upperFirstSymbol(gloss.popup.sendСaravan.btn.txt)}}</button>
-    <TownBuilding v-if="showMarket" :name="'market'" @close="showMarket= false"></TownBuilding>
+    <TownBuilding v-if="showMarket" :targetSector="targetSector" :name="'market'" @close="showMarket= false"></TownBuilding>
   </div>
 </template>
 
