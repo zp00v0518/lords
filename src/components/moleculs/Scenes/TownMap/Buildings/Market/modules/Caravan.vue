@@ -177,10 +177,11 @@ export default {
       target.value = checkValue;
     },
     async sendCaravan() {
-      const { coords, sendSources, disabledOk, currentSector } = this;
+      const { coords, sendSources, disabledOk, currentSector, globalConfig } = this;
+      const Ev = globalConfig.all.Event;
       if (disabledOk) return;
       const message = {
-        type: 'sendCaravan',
+        type: Ev.types.sendCaravan,
         data: {
           initSector: currentSector._id,
           targetSector: coords,

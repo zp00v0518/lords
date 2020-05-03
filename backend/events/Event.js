@@ -6,7 +6,8 @@ const Event = {
     upgradeTown: 'upgradeTown',
     backToTown: 'backToTown',
     buildNewTown: 'buildNewTown',
-    heroTransfer: 'heroTransfer'
+    heroTransfer: 'heroTransfer',
+    sendCaravan: 'sendCaravan'
   },
   mode: {
     global: 'global',

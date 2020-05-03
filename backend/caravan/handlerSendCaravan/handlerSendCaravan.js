@@ -1,0 +1,69 @@
+const { checkSchema } = require('../../template_modules');
+const { redirectMessage, sendWSMessage } = require('../../wsServer');
+const mapLength = require('../../variables/game_variables').numSectionGlobalMap;
+const resourcesTypes = require('../../resources/type_resources');
+const { getTownByCoords, getOneTownFromDB } = require('../../town/DB');
+const { Caravan } = require('../../caravan');
+
+async function handlerSendCaravan(message, info) {
+  const data = message.data;
+  const { ws } = info.player;
+  if (!checkSchema(data, schema)) {
+    redirectMessage(ws);
+    return;
+  }
+  const serverName = info.server;
+
+  const initSector = await getOneTownFromDB(serverName, data.initSector);
+  const targetSector = await getTownByCoords(serverName, data.targetSector.x, data.targetSector.y);
+  if (!initSector || !targetSector) {
+    redirectMessage(ws);
+    return;
+  }
+
+  const { payload } = data;
+  const initTown = initSector.town;
+  // одновременная проверка на вместимость каравана и наличие ресурсов на складе
+  const flag = Object.keys(initTown.storage.sources).every(type => {
+    const sendValue = payload[type];
+    const checkValue = Caravan.checkAvailable(sendValue, type, initTown);
+    return sendValue === checkValue;
+  });
+  if (!flag) {
+    redirectMessage(ws);
+    return;
+	}
+	const response = {
+    status: false,
+    info,
+    type: message.type,
+    initSector,
+    targetSector,
+    flag
+  };
+  sendWSMessage(ws, response);
+}
+
+const schema = {
+  initSector: { type: 'string', regExp: /^.{13,}\b/g },
+  targetSector: {
+    type: 'object',
+    fields: {
+      x: { type: 'number', min: 0, max: mapLength },
+      y: { type: 'number', min: 0, max: mapLength }
+    }
+  },
+  payload: {
+    type: 'object',
+    fields: {
+      [resourcesTypes.gold]: { type: 'number', min: 0, max: 999999 },
+      [resourcesTypes.wood]: { type: 'number', min: 0, max: 99 },
+      [resourcesTypes.ore]: { type: 'number', min: 0, max: 99 },
+      [resourcesTypes.sulfur]: { type: 'number', min: 0, max: 99 },
+      [resourcesTypes.crystal]: { type: 'number', min: 0, max: 99 },
+      [resourcesTypes.mercury]: { type: 'number', min: 0, max: 99 },
+      [resourcesTypes.gem]: { type: 'number', min: 0, max: 99 }
+    }
+  }
+};
+module.exports = handlerSendCaravan;
