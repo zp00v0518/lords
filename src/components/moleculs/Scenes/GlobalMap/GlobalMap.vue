@@ -41,8 +41,7 @@
       v-if="popupTown.show"
       @close-popup="popupTown.show = !popupTown.show"
       :tileWidth="tileWidth"
-      :tile="popupTown.tile"
-      :initSector="popupTown.initSector"
+      :targetSector="popupTown.targetSector"
     ></PopupTown>
   </div>
 </template>
@@ -66,8 +65,7 @@ export default {
       isDisabledMove: false,
       popupTown: {
         show: false,
-        tile: null,
-        initSector: null
+        targetSector: null
       }
     };
   },
@@ -158,10 +156,7 @@ export default {
         const to_be = sectors.find(i => i._id === currentTile._id);
         if (to_be && to_be._id !== currentSector._id) {
           this.popupTown.show = true;
-          this.popupTown.centerX = currentTile.centerX;
-          this.popupTown.centerY = currentTile.centerY;
-          this.popupTown.tile = deepClone(currentTile);
-          this.popupTown.initSector = deepClone(currentSector);
+          this.popupTown.targetSector = deepClone(currentTile);
         }
       }
     },
