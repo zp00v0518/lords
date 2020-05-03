@@ -2,8 +2,13 @@ const { checkSchema } = require('../../template_modules');
 const { redirectMessage, sendWSMessage } = require('../../wsServer');
 const mapLength = require('../../variables/game_variables').numSectionGlobalMap;
 const resourcesTypes = require('../../resources/type_resources');
-const { getTownByCoords, getOneTownFromDB } = require('../../town/DB');
+const { getTownByCoords, getOneTownFromDB, updateStateTown } = require('../../town/DB');
 const { Caravan } = require('../../caravan');
+// const {createCaravanEvent} = require('../../events/createEvents');
+const { setEventInGame, createCaravanEvent } = require('../../events');
+const { deleteSource } = require('../../resources');
+const addBusyCaravan = require('../addBusyCaravan');
+const getInfoForStartGame = require('../../user/getInfoForStartGame');
 
 async function handlerSendCaravan(message, info) {
   const data = message.data;
@@ -32,14 +37,17 @@ async function handlerSendCaravan(message, info) {
   if (!flag) {
     redirectMessage(ws);
     return;
-	}
-	const response = {
-    status: false,
-    info,
+  }
+  const caravanEvent = createCaravanEvent(initSector, targetSector, payload);
+  await setEventInGame(caravanEvent, serverName);
+  deleteSource(payload, initTown.storage);
+  addBusyCaravan(initTown.caravan, payload);
+  await updateStateTown(initSector);
+  const infoForgame = await getInfoForStartGame({ _id: initSector.userId }, serverName);
+  const response = {
+    status: true,
     type: message.type,
-    initSector,
-    targetSector,
-    flag
+    infoForgame
   };
   sendWSMessage(ws, response);
 }
