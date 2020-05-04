@@ -10,7 +10,7 @@ const { deleteSource } = require('../../resources');
 const addBusyCaravan = require('../addBusyCaravan');
 const getInfoForStartGame = require('../../user/getInfoForStartGame');
 
-async function handlerSendCaravan(message, info) {
+async function handlerSendCaravanRequest(message, info) {
   const data = message.data;
   const { ws } = info.player;
   if (!checkSchema(data, schema)) {
@@ -74,4 +74,4 @@ const schema = {
     }
   }
 };
-module.exports = handlerSendCaravan;
+module.exports = handlerSendCaravanRequest;
