@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="header__update_region">
+    <div class="header__update_region" v-if="NODE_ENV === 'development'">
       <input type="number" v-model="armySize" />
       <button @click="updateArmyOnRegion">Обновить регион</button>
     </div>
@@ -15,8 +15,12 @@ export default {
   mixins: [currentSector],
   data() {
     return {
-      armySize: 2500
+      armySize: 2500,
+      NODE_ENV: ''
     };
+  },
+  created() {
+    this.NODE_ENV = process.env.NODE_ENV;
   },
   methods: {
     updateArmyOnRegion() {

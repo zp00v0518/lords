@@ -8,13 +8,11 @@ import App from "./App";
 import router from "./router";
 import store from "./store";
 import Ws from "./api/ws";
-import config from "../backend/config/config";
 import upperFirstSymbol from "./components/mixins/upperFirstSymbol";
 import globalConfig from "./components/mixins/globalConfig";
 import gloss from "./components/mixins/glossary";
 // import memory from './memory';
 // memory()
-const region = require("../backend/region/Region");
 const variables = require("../backend/variables/game_variables");
 
 const bus = new Vue();
@@ -25,7 +23,6 @@ Vue.prototype.$ws.init(
   `ws://${location.hostname}:${process.env.WSPORT}${location.pathname}`,
   store
 );
-Vue.prototype.$region = region;
 Vue.prototype.$bus = bus;
 Vue.prototype.$lang = store.state.local.lang;
 Vue.prototype.$var = variables;
