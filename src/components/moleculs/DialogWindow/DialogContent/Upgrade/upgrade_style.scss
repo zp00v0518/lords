@@ -1,3 +1,4 @@
+$basePadding: 15px;
 .upgrade {
   display: flex;
   flex-direction: column;
@@ -8,6 +9,7 @@
     min-height: 50px;
     border: 1px solid $main-red;
     display: flex;
+    padding: $basePadding;
 
     &--icon {
       width: 50px;
@@ -27,10 +29,11 @@
     justify-content: center;
     align-items: center;
     height: 30px;
-    padding: 5px;
+    padding: $basePadding;
   }
   &__info {
     &--wrap {
+      padding: $basePadding;
       flex-grow: 5;
       display: flex;
       flex-direction: column;
@@ -103,6 +106,7 @@
   &__answer {
     @include center;
     height: 50px;
+    padding: $basePadding / 2;
 
     &__item {
       text-transform: uppercase;

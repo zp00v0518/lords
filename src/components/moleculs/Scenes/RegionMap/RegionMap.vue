@@ -101,7 +101,7 @@ export default {
   },
   methods: {
     handlerClick() {
-      const { currentTile } = this;
+      const { currentTile, globalConfig } = this;
       if (!this.cursorOnScene || currentTile.type === 1 || currentTile.type === 3) return;
       if (this.currentTile.type === 0) {
         if (currentTile.army && currentTile.army.length === 0) return;
@@ -117,7 +117,7 @@ export default {
         this.$store.commit('DIALOG_SHOW', payload);
         return;
       }
-      const nameRegion = this.$region.typeList[currentTile.type];
+      const nameRegion = globalConfig.all.Region.typeList[currentTile.type];
       const building = currentTile.sector;
       const typeBuilding = building.type;
       const payload = {

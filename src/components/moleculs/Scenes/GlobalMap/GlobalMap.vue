@@ -117,6 +117,9 @@ export default {
         return item.mode === Event.mode.global || item.mode === Event.mode.hidden;
       });
       return deepClone(d);
+    },
+    curUser() {
+      return this.$store.state.user.user;
     }
   },
   methods: {
@@ -162,7 +165,7 @@ export default {
     },
     drawMoveHero() {
       if (this.mode && this.mode !== 'global') return;
-      const { ctx, eventList, currentMap, tileWidth, settings, getTileByCoords } = this;
+      const { ctx, eventList, currentMap, tileWidth, settings, getTileByCoords, curUser } = this;
       ctx.fillStyle = settings.baseColor;
       eventList.forEach(event => {
         const { target, init } = event;
@@ -192,7 +195,8 @@ export default {
         if (heroLength > fullLength) heroLength = fullLength;
         const step = tileWidth / 4;
         const color = init.color;
-        ctx.fillStyle = color;
+        // console.log(`%c ${color}`, `background: ${color}`);
+        ctx.fillStyle = color || curUser.color;
         for (let i = 0; i < fullLength + 1; i += step) {
           const coords = algebra.getPointOnStraight(...baseCoords, i);
           const { viewportPath } = this;

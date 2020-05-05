@@ -1,3 +1,4 @@
+require('dotenv').config();
 require('./backend/config/srcRequire.js');
 require('./backend/variables/global_variables.js');
 require('./backend/wsServer/wsServer.js');

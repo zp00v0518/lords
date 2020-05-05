@@ -57,7 +57,7 @@ export default {
   },
   watch: {
     tile: function() {
-      this.nameSector = this.$region.typeList[this.tile.type];
+      this.nameSector = this.globalConfig.all.Region.typeList[this.tile.type];
       // const size = this.$el ? this.$el.getBoundingClientRect() : { height: 0 };
       const left = this.mouseCoords.x + 'px';
       const top = this.mouseCoords.y - 200 + 'px';
