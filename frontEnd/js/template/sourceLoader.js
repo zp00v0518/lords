@@ -10,9 +10,7 @@ var sourceLoader = {
     var loaded = function(event) {
       sourceLoader.loadedNum++;
       //определяет % загруженных файлов и выводит это на экран
-      var persent = Math.round(
-        (100 / sourceLoader.sourceNum) * sourceLoader.loadedNum
-      );
+      var persent = Math.round((100 / sourceLoader.sourceNum) * sourceLoader.loadedNum);
       var loadedBlock = document.getElementById('loadedBlock');
       loadedBlock.style.width = persent + '%';
     };
@@ -43,6 +41,7 @@ var sourceLoader = {
     }
   },
   allOnLoad: function(callback = function() {}) {
+    console.log(sourceLoader.loadedNum, sourceLoader.sourceNum);
     if (sourceLoader.loadedNum === sourceLoader.sourceNum) {
       callback();
     } else {
