@@ -1,6 +1,6 @@
 <template>
   <div class="castle_item_wrap">
-    <div class="castle_interface">
+    <div class="castle_interface" :class="{'active_castle': activeTown}">
       <div class="castle_icon" @click="handlerClickIcon"></div>
       <div class="castle_other">
         <div class="castle_name">{{ name }}</div>
@@ -32,7 +32,7 @@
     </div>
 
     <div class="hero_in_castle_wrap">
-      <HeroesInTown :heroesList="activeHeroes" :sector="sector"/>
+      <HeroesInTown :heroesList="activeHeroes" :sector="sector" />
       <InActiveHeroes :heroesList="notActiveHeroes" />
     </div>
   </div>
@@ -67,6 +67,9 @@ export default {
     races() {
       return this.globalConfig.races;
     },
+    activeTown() {
+      return this.$store.state.userSectors.currentSector === this.indexTown;
+    },
     typeStorage() {
       return this.globalConfig.listBuildings.storage.name;
     },
@@ -96,7 +99,7 @@ export default {
   },
   methods: {
     handlerClickIcon() {
-      this.$store.commit("SET_CURRENT_SECTOR", this.indexTown);
+      this.$store.commit('SET_CURRENT_SECTOR', this.indexTown);
       this.$bus.$emit('rerender_global_map');
     }
   }

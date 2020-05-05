@@ -8,7 +8,7 @@ const time = config.time;
 // используется ТАКЖЕ!!!! на фронте при улучшении строений в регионе!!!!!!!!
 
 const gameVariables = {
-  numSectionGlobalMap: 400, // количество ячеек на ГЛОБАЛЬНОЙ карте, по одной оси
+  numSectionGlobalMap: 100, // количество ячеек на ГЛОБАЛЬНОЙ карте, по одной оси
   // при изменении кол-ва ячеек, нужно поменять кол-во отображаемых ячеек на 1-й оси
   // как здесь, так и на клиенте
   getMaxIndexMap: function() {
@@ -24,7 +24,7 @@ const gameVariables = {
     addSource: time.day / time.speedGame, // расчетное время прироста игровых ресурсов
     addUnits: time.day / time.speedGame, // расчетное время прироста игровых ресурсов
     heroMoveOnRegion: time.minute * 5 / time.speedGame,
-    heroMoveOnGlobalMap: time.minute * 1 / time.speedGame
+    heroMoveOnGlobalMap: time.minute * 10 / time.speedGame
   },
   indexes: {
     upgrade_town: 1.5,

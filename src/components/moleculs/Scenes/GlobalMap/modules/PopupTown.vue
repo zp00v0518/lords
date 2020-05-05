@@ -1,16 +1,34 @@
 <template>
-  <div class="popup-town" :style="getStyle" @click.stop="handlerClick">
-    <button class="popup-town__item">Отправить героя</button>
+  <div class="popup-town" :style="getStyle" @click.stop>
+    <button
+      class="popup-town__item"
+      @click.stop="handlerClick('heroTransferDialog')"
+    >{{upperFirstSymbol(gloss.popup.sendHero.btn.txt)}}</button>
+    <button
+      class="popup-town__item"
+      @click.stop="handlerClick('sendCaravan')"
+      :disabled="disabledMarket"
+    >{{upperFirstSymbol(gloss.popup.sendСaravan.btn.txt)}}</button>
+    <TownBuilding v-if="showMarket" :targetSector="targetSector" :name="'market'" @close="showMarket= false"></TownBuilding>
   </div>
 </template>
 
 <script>
+import TownBuilding from '../../TownMap/Building';
+import { currentSector } from '../../../../mixins';
+
 export default {
   name: 'PopupTown',
+  mixins: [currentSector],
+  components: { TownBuilding },
   props: {
     tileWidth: 0,
-    tile: null,
-    initSector: null
+    targetSector: null
+  },
+  data() {
+    return {
+      showMarket: false
+    };
   },
   beforeDestroy() {
     document.removeEventListener('click', this.closePopup);
@@ -18,10 +36,14 @@ export default {
   },
   computed: {
     getStyle() {
-      const { tileWidth, tile } = this;
-      const left = tile.centerX - tileWidth + 'px';
-      const top = tile.centerY - tileWidth - 10 + 'px';
+      const { tileWidth, targetSector } = this;
+      const left = targetSector.centerX - tileWidth + 'px';
+      const top = targetSector.centerY - tileWidth - 10 + 'px';
       return { left, top };
+    },
+    disabledMarket() {
+      const { town } = this.currentSector;
+      return !town.market || !town.market.work.is;
     }
   },
   methods: {
@@ -32,14 +54,18 @@ export default {
       if (event.key !== 'Escape') return;
       this.closePopup();
     },
-    handlerClick() {
-      const { deepClone, tile, $store, initSector } = this;
+    handlerClick(type) {
+      const { deepClone, targetSector, $store, currentSector } = this;
+      if (type === 'sendCaravan') {
+        this.showMarket = true;
+        return;
+      }
       const payload = {
         data: {
-          targetTile: deepClone(tile),
-          initSector: deepClone(initSector)
+          targetTile: deepClone(targetSector),
+          initSector: deepClone(currentSector)
         },
-        type: 'heroTransferDialog'
+        type
       };
       $store.commit('DIALOG_SHOW', payload);
       this.closePopup();

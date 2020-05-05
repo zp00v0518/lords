@@ -1,11 +1,10 @@
 const { checkSchema, formatIdToCoords } = require('../../template_modules');
-const { redirectMessage } = require('../../wsServer');
+const { redirectMessage, sendWSMessage } = require('../../wsServer');
 const verification = require('../../wsServer/baseVerificationHandler');
 const { Region } = require('../../region');
 const createEventBattle = require('./createEventBattle');
 const { setEventInGame } = require('../../events');
 const { getOneTownFromDB } = require('../../town');
-const { sendWSMessage } = require('../../wsServer');
 const { updateHeroInDB } = require('../../heroes/db');
 const { gameVariables } = global;
 

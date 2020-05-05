@@ -1,6 +1,6 @@
-const gameVariables = require("./game_variables");
+const gameVariables = require('./game_variables');
 global.gameVariables = gameVariables;
-const {config, GlobalMap} = require("../tube");
+const { config, GlobalMap } = require('../tube');
 const UserOnline = {};
 
 const appStatistic = {
@@ -13,19 +13,19 @@ config.db.collections.servers.forEach(server => {
   const serverName = server.collectionName;
   UserOnline[serverName] = {};
   UserOnline[serverName].count = 0;
-})
+});
 
 global.UserOnline = UserOnline;
 global.appStatistic = appStatistic;
 
-function setGlobalMap(){
+function setGlobalMap() {
   if (!GlobalMap) {
     setGlobalMap();
-  }else {
+  } else {
     global.GlobalMap = GlobalMap;
   }
 }
 
-setTimeout(function(){
+setTimeout(function() {
   setGlobalMap();
-},500)
+}, 500);

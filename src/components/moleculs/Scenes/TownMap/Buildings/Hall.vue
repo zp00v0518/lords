@@ -17,11 +17,13 @@
 </template>
 
 <script>
+import { currentSector } from '../../../../mixins';
+
 export default {
   name: 'Hall',
+  mixins: [currentSector],
   props: {
-    townRaceName: String,
-    currentSector: { type: Object, default: () => ({}) }
+    townRaceName: String
   },
   data() {
     return {
@@ -29,7 +31,6 @@ export default {
       races: this.$store.state.globalConfig.races,
       listBuildings: null,
       checkSource: this.$store.state.globalConfig.all.checkSource,
-      sources: this.currentSector.town.storage.sources,
       houses: {}
     };
   },
@@ -44,13 +45,16 @@ export default {
     ];
   },
   computed: {
+    sources() {
+      return this.currentSector.town.storage.sources;
+    },
     buildings() {
       return this.$store.state.globalConfig.races[this.townRaceName].buildings;
     }
   },
   methods: {
     handlerClick(event, nameBuilding) {
-      const {townRaceName} = this;
+      const { townRaceName } = this;
       const build = this.houses[nameBuilding];
       const target = event.target.parentNode.querySelector('.hall__row__item-icon');
       const coords = tumb[target.dataset.building];

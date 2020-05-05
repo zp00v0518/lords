@@ -30,6 +30,7 @@ class WorldMap {
     }
     return Math.round(time);
   }
+  // аналог getShortDistanceOnMap
   getDistanceOnMap(x1, y1, x2, y2) {
     const size = this.numSectionGlobalMap;
     const clamp = v => (v > size / 2 ? size - v : v);

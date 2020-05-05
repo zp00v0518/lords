@@ -5,6 +5,7 @@ const { createBarraks, createFort, createGuild, createMarket, createTavern, crea
 const { Army, createArmy } = require('../army/Army');
 const { gameVariables } = global;
 const createStorage = require('./storage/createStorage');
+const { createCaravan } = require('../caravan');
 let listMine = [];
 
 function createTown(options) {
@@ -18,6 +19,7 @@ function createTown(options) {
   const market = createMarket({});
   const guild = createGuild({});
   const fort = createFort({});
+  const caravan = createCaravan();
   const town = {
     army: {
       def: false,
@@ -31,6 +33,7 @@ function createTown(options) {
     [guild.class]: guild,
     [market.class]: market,
     [tavern.class]: tavern,
+    [caravan.class]: caravan,
     lvl: options.lvl || 0,
     race: indexRace
   };
@@ -61,11 +64,11 @@ function createRegionMap(townIndex = 1) {
     { x: 1, y: 1 },
     { x: 3, y: 1 },
     { x: 3, y: 3 },
-    { x: 1, y: 3 },
+    { x: 1, y: 3 }
     // для разработки добавил и остальные шахты
-    { x: 2, y: 0 },
-    { x: 4, y: 2 },
-    { x: 2, y: 4 }
+    // { x: 2, y: 0 },
+    // { x: 4, y: 2 },
+    // { x: 2, y: 4 }
   ];
   const range_power_army = Army.army_range.base.map(i => i * townIndex);
 

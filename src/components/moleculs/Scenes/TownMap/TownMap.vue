@@ -13,7 +13,6 @@
       :name="component.name"
       @close="component.is = false"
       :townRaceName="townRaceName"
-      :currentSector="currentSector"
       :buildingData="component.buildingData"
     ></Building>
   </div>

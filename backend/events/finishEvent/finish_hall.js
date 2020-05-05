@@ -1,6 +1,6 @@
 const getParamsForFinish = require('./getParamsForFinish');
 const calcStorageNowValue = require('../../town/storage/calcStorageNowValue');
-const addValueToStorage = require('../../town/storage/addValueToStorage');
+const upValueInStorage = require('../../town/storage/upValueInStorage');
 
 function finishHall(hall, eventData, sector) {
   const { buildingInfo, nextLvl } = getParamsForFinish(eventData);
@@ -14,7 +14,7 @@ function finishHall(hall, eventData, sector) {
     : 0;
   const effect = nextBuilding.effect.gold;
   const different = effect - prevValue;
-  addValueToStorage('gold', different, storage);
+  upValueInStorage('gold', different, storage);
   // gold.addValue += different;
   hall.upgrade.is = false;
 }

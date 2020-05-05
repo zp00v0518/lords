@@ -6,7 +6,8 @@ import Event from '../events/Event';
 import Battle from '../battle/Battle';
 import Region from '../region/Region';
 import WorldMap from '../globalMap/WorldMap';
-import Resources from '../resources/Resources'
+import Resources from '../resources/Resources';
+import Caravan from '../caravan/Caravan';
 
 export default {
   checkSource,
@@ -17,5 +18,6 @@ export default {
   Battle,
   Region,
   WorldMap,
-  Resources
+  Resources,
+  Caravan
 };

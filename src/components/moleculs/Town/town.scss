@@ -6,11 +6,11 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
 }
 .castle_item_wrap .castle_interface {
   width: 100%;
@@ -22,21 +22,24 @@
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  &.active_castle {
+    background-color: $popup-bg;
+  }
 }
 .castle_item_wrap .castle_interface .castle_icon {
   width: 27%;
   height: 100%;
   // border: 1px solid #000000;
-  background-image: url("../../../../frontEnd/img/towns/icon/rampart.png"); 
+  background-image: url('../../../../frontEnd/img/towns/icon/rampart.png');
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-position: -5px -10px;
-  cursor: pointer; 
+  cursor: pointer;
 }
 .castle_item_wrap .castle_interface .castle_other {
   width: 75%;
@@ -47,11 +50,11 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
 }
 .castle_item_wrap .castle_interface .castle_other .castle_name {
   width: 100%;
@@ -67,11 +70,11 @@
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 .castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap {
   width: 88%;
@@ -81,30 +84,30 @@
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 .castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .resource_item {
   width: 20%;
   -webkit-box-flex: 3;
-      -ms-flex-positive: 3;
-          flex-grow: 3;
+  -ms-flex-positive: 3;
+  flex-grow: 3;
   height: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
 }
 .castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .resource_item .resource_icon {
   width: 40px;
@@ -121,21 +124,35 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
   padding-left: 4px;
 }
-.castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .resource_item .resource_sum_wrap .resource_sum {
+.castle_item_wrap
+  .castle_interface
+  .castle_other
+  .resource_wrap
+  .resource_item_wrap
+  .resource_item
+  .resource_sum_wrap
+  .resource_sum {
   width: 100%;
   height: 40%;
   text-align: left;
   font-size: 12px;
   font-weight: 600;
 }
-.castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .resource_item .resource_sum_wrap .resource_count {
+.castle_item_wrap
+  .castle_interface
+  .castle_other
+  .resource_wrap
+  .resource_item_wrap
+  .resource_item
+  .resource_sum_wrap
+  .resource_count {
   width: 100%;
   height: 50%;
   text-align: left;
@@ -145,25 +162,25 @@
   width: 50%;
 }
 .castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .gold .resource_icon {
-  background-image: url("../../../../frontEnd/img/resources/gold.gif");
+  background-image: url('../../../../frontEnd/img/resources/gold.gif');
 }
 .castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .wood .resource_icon {
-  background-image: url("../../../../frontEnd/img/resources/wood.gif");
+  background-image: url('../../../../frontEnd/img/resources/wood.gif');
 }
 .castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .ore .resource_icon {
-  background-image: url("../../../../frontEnd/img/resources/ore.gif");
+  background-image: url('../../../../frontEnd/img/resources/ore.gif');
 }
 .castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .sulfur .resource_icon {
-  background-image: url("../../../../frontEnd/img/resources/sulfur.gif");
+  background-image: url('../../../../frontEnd/img/resources/sulfur.gif');
 }
 .castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .crystal .resource_icon {
-  background-image: url("../../../../frontEnd/img/resources/crystal.gif");
+  background-image: url('../../../../frontEnd/img/resources/crystal.gif');
 }
 .castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .mercury .resource_icon {
-  background-image: url("../../../../frontEnd/img/resources/mercury.gif");
+  background-image: url('../../../../frontEnd/img/resources/mercury.gif');
 }
 .castle_item_wrap .castle_interface .castle_other .resource_wrap .resource_item_wrap .gem .resource_icon {
-  background-image: url("../../../../frontEnd/img/resources/gem.gif");
+  background-image: url('../../../../frontEnd/img/resources/gem.gif');
 }
 .castle_item_wrap .castle_interface .castle_other .resource_wrap .storage_wrap {
   width: 12%;
@@ -175,11 +192,11 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 .castle_item_wrap .castle_interface .castle_other .resource_wrap .storage_wrap .storage_item {
   width: 100%;
@@ -189,11 +206,11 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
   font-size: 12px;
   font-weight: 600;
 }

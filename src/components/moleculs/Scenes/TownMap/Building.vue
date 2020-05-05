@@ -1,85 +1,72 @@
 <template>
-  <section class="building__wrap">
+  <section class="building__wrap" :style="getStyles()">
     <div class="building__header">
       <div class="building__header-title">{{ name }}</div>
-      <Icon
-        class="building__header-close"
-        name="circle-close"
-        @click.native="closeBuilding"
-      ></Icon>
+      <Icon class="building__header-close" name="circle-close" @click.native="closeBuilding"></Icon>
     </div>
     <component
       :is="name"
       :townRaceName="townRaceName"
-      :currentSector="curTown"
-      :gloss="gloss"
       :buildingData="buildingData"
+      :targetSector="targetSector"
       @close="closeBuilding"
     ></component>
   </section>
 </template>
 
 <script>
-import Buildings from "./Buildings";
+import Buildings from './Buildings';
 
 export default {
-  name: "Building",
+  name: 'Building',
   props: {
     name: String,
-    townRaceName: String,
-    currentSector: null,
-    buildingData: null
+    townRaceName: { type: String, default: '' },
+    buildingData: { type: Object, default: () => ({}) },
+    targetSector: null
   },
   components: {
     ...Buildings
   },
-  data() {
-    return {
-      curTown: this.currentSector
-    };
-  },
   created() {
-    document.addEventListener("keyup", this.handlerKeyup);
+    document.addEventListener('keyup', this.handlerKeyup);
   },
   computed: {
     gloss() {
       return this.$store.state.local.dictionary.town.race[this.townRaceName];
     }
   },
-  watch: {
-    currentSector: {
-      deep: true,
-      handler(e) {
-        this.curTown = e;
-      }
-    }
-  },
   methods: {
+    getStyles() {
+      const scenes = document.querySelector('#scenes');
+      const st = scenes.getBoundingClientRect();
+      return {
+        top: st.top + 'px',
+        left: st.left + 'px',
+        width: st.width + 'px',
+        height: st.height + 'px'
+      };
+    },
     closeBuilding() {
-      this.$emit("close");
+      this.$emit('close');
     },
     handlerKeyup(event) {
-      if (event.key !== "Escape") return;
+      if (event.key !== 'Escape') return;
       this.closeBuilding();
     }
   },
   beforeDestroy() {
-    document.removeEventListener("ketup", this.handlerKeyup);
+    document.removeEventListener('ketup', this.handlerKeyup);
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .building {
   &__wrap {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    // background-color: rgba(255, 255, 255, 1);
+    position: fixed;
     background-color: rgba(0, 0, 0, 0.9);
     z-index: 100;
   }

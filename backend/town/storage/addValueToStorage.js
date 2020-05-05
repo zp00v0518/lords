@@ -1,10 +1,7 @@
-function addValueToStorage(typeSource, value, storage) {
-  if (storage.sources[typeSource].lastCalc === 0) {
-    storage.sources[typeSource].lastCalc = new Date().getTime();
-    storage.sources[typeSource].addValue += value;
-  } else {
-    storage.sources[typeSource].addValue += value;
-  }
+function addValueToStorage(value, type, sources) {
+  if (!sources[type] === undefined) return;
+  const { maxValue, nowValue } = sources[type];
+  sources[type].nowValue = nowValue + value > maxValue ? maxValue : nowValue + value;
 }
 
 module.exports = addValueToStorage;

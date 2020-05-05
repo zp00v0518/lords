@@ -6,5 +6,6 @@ const dialog = require('./dialog');
 const town = require('./town/town');
 const region = require('./region/region');
 const eventLang = require('./eventLang');
+const worldMap = require('./worldMap');
 
-module.exports = { timeLine, mine, date, general, dialog, town, region, ...eventLang };
+module.exports = { timeLine, mine, date, general, dialog, town, region, ...eventLang, ...worldMap };
