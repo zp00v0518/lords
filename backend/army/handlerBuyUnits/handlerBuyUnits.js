@@ -2,7 +2,7 @@
 const { checkSchema } = require('../../template_modules');
 const { redirectMessage, sendWSMessage } = require('../../wsServer');
 const { Race } = require('../../race');
-const Army = require('../army/Army.js');
+const Army = require('../Army/Army.js');
 const { checkSource } = require('../../resources');
 const checkUnitInBarraks = require('./../checkUnitInBarraks');
 const { deleteSource } = require('../../resources');
