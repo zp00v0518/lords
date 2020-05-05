@@ -10,7 +10,7 @@ module.exports = {
     ready_to_work: false
   },
   frontEnd: {
-    watchFolder: path.resolve(__dirname, '../../frontEnd'),
+    watchFolder: path.resolve(__dirname, '../../frontend'),
     folder: 'frontEnd'
   },
   db: {
@@ -20,7 +20,7 @@ module.exports = {
       users: 'users',
       session: 'session',
       servers: [
-        { name: 'First', collectionName: 'server_1' },
+        { name: 'First', collectionName: 'server_1' }
         // { name: 'Second', collectionName: 'server_2' }
       ],
       map: 'globalMap',
@@ -28,7 +28,7 @@ module.exports = {
     }
   },
   cookieSize: 100,
-  basePathToFiles: 'frontEnd', // папка, в которой находятся файлы для клиента
+  basePathToFiles: 'frontend', // папка, в которой находятся файлы для клиента
   time: {
     sec: 1000,
     minute: 1000 * 60,
