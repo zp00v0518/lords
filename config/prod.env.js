@@ -1,5 +1,5 @@
 'use strict'
-const config = require('../backEnd/config/config');
+const config = require('../backend/config/config');
 
 module.exports = {
   NODE_ENV: '"production"',
