@@ -1,6 +1,6 @@
 const Race = require('../race/Race');
 const regionTypes = require('../region/Region').types;
-const { createArmy } = require('../Army');
+const { createArmy } = require('../army');
 
 function changeArmyOnRegion(region, range) {
   region.forEach(sectorRow => {
