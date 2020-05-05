@@ -19,10 +19,12 @@ function getPath(nextPath){
   })
 }
 const normStr = path.normalize('frontEnd\\');
+console.log(normStr);
 
 getPath('./frontEnd/'+startPath);
 arrPath = arrPath.map(item => {
-  console.log(item.replace(normStr, ""));
-  return item.replace(normStr, "")
+  const f = path.normalize(item);
+  console.log(f.replace(normStr, ""));
+  return f.replace(normStr, "")
 })
 fs.writeFileSync("./frontEnd/js/list_img_for_canvas.js", `const list_img_for_canvas = ${JSON.stringify(arrPath)}`, 'utf-8')
