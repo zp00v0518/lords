@@ -18,9 +18,10 @@ var sourceLoader = {
       const img = new Image();
       img.onload = loaded;
       img.src = src;
-      /* тут какая-то смешанная старая с новой логика 
+      /* тут какая-то смешанная старая с новой логика
       формирования объекта со всеми загруженными картинками */
-      const newPath = src.replace('img\\for_canvas\\', '');
+      let newPath = src.replace('img\\for_canvas\\', '');
+      newPath = newPath.replace('img/for_canvas/', ''); // это для путей сформированных в Linux
       let d = newPath.split('/');
       if (d.length === 1) {
         d = newPath.split('\\');
