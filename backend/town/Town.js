@@ -60,9 +60,9 @@ const Town = {
   },
   getSourceForNewTown(count = 2) {
     const base = {
-      [typeSource.gold]: 50,
-      [typeSource.wood]: 0,
-      [typeSource.ore]: 0
+      [typeSource.gold]: 5000,
+      [typeSource.wood]: 5,
+      [typeSource.ore]: 5
     };
     const result = {};
     Object.keys(base).forEach(key => {
