@@ -90,6 +90,8 @@ function iterationImplenetation(event, callback = () => {}) {
         resolve();
       } else if (type === eventType.sendCaravan) {
         await eventsHandler[type](event);
+      } else if (type === eventType.caravanBackToTown) {
+        await eventsHandler[type](event);
       }
     } catch (err) {
       console.log(err);
