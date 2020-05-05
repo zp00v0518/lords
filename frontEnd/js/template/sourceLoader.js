@@ -41,7 +41,6 @@ var sourceLoader = {
     }
   },
   allOnLoad: function(callback = function() {}) {
-    console.log(sourceLoader.loadedNum, sourceLoader.sourceNum);
     if (sourceLoader.loadedNum === sourceLoader.sourceNum) {
       callback();
     } else {

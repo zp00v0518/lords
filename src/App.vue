@@ -18,7 +18,6 @@ export default {
   },
   created() {
     document.addEventListener('allLoad', this.handlerAllLoad);
-    console.log(this.choicesHeroes, this.isReady, this.allLoad);
   },
   data() {
     return {
