@@ -2,7 +2,7 @@
 const Mine = require("../mine/Mine");
 const { updateDB } = require("../../tube.js");
 const update = new updateDB();
-const { addValueToStorage } = require("../../town/storage");
+const { upValueInStorage } = require("../../town/storage");
 
 function fixingResultUpgradeMine(mine, eventItem, sector, callback = () => {}) {
   return new Promise((resolve, reject) => {
@@ -23,7 +23,7 @@ function fixingResultUpgradeMine(mine, eventItem, sector, callback = () => {}) {
         .one(optionsForUpdate)
         .then(result => {
           const dif = mine.work.addValue - previosValue;
-          addValueToStorage(mine.type, dif, storage);
+          upValueInStorage(mine.type, dif, storage);
           optionsForUpdate.filtr = { _id: sector._id };
           optionsForUpdate.updateDoc = sector;
           update.replaceOne(optionsForUpdate).then(resultReplace => {

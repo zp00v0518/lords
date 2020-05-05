@@ -1,4 +1,4 @@
-function addValueToStorage(typeSource, value, storage) {
+function upValueInStorage(typeSource, value, storage) {
   if (storage.sources[typeSource].lastCalc === 0) {
     storage.sources[typeSource].lastCalc = new Date().getTime();
     storage.sources[typeSource].addValue += value;
@@ -7,4 +7,4 @@ function addValueToStorage(typeSource, value, storage) {
   }
 }
 
-module.exports = addValueToStorage;
+module.exports = upValueInStorage;

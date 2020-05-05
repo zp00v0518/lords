@@ -50,9 +50,8 @@ module.exports.upgradeSection = upgradeSection;
 const { calcStorageNowValue } = require('./town/storage');
 module.exports.calcStorageNowValue = calcStorageNowValue;
 
-const { setUpgradeChange, checkUpgrade } = require('./region');
+const { setUpgradeChange } = require('./region');
 module.exports.setUpgradeChange = setUpgradeChange;
-module.exports.checkUpgrade = checkUpgrade;
 
 const { Mine, createMine } = require('./region/mine');
 module.exports.Mine = Mine;

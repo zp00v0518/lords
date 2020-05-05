@@ -16,13 +16,16 @@ function createCaravanEvent(initSector, targetSector, payload, options) {
   };
   const start = Date.now();
   const end = start + Caravan.getTimeMoveCaravanOnMap(initSector, targetSector);
+  const data = {
+    payload
+  };
   return {
     init,
     target,
     type: Ev.types.sendCaravan,
     start,
     end,
-    data: payload
+    data
   };
 }
 
