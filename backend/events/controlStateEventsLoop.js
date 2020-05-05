@@ -79,7 +79,7 @@ function iterationImplenetation(event, callback = () => {}) {
         callback(null, resultFinishEvent);
         return resolve(resultFinishEvent);
       } else if (type === eventType.battle) {
-        eventsHandler[type](event, sector);
+        await eventsHandler[type](event, sector);
       } else if (type === eventType.backToTown) {
         eventsHandler[type](event, sector);
       } else if (type === eventType.buildNewTown) {
@@ -88,6 +88,8 @@ function iterationImplenetation(event, callback = () => {}) {
       } else if (type === eventType.heroTransfer) {
         await eventsHandler[type](event);
         resolve();
+      } else if (type === eventType.sendCaravan) {
+        await eventsHandler[type](event);
       }
     } catch (err) {
       console.log(err);

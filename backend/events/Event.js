@@ -7,7 +7,8 @@ const Event = {
     backToTown: 'backToTown',
     buildNewTown: 'buildNewTown',
     heroTransfer: 'heroTransfer',
-    sendCaravan: 'sendCaravan'
+    sendCaravan: 'sendCaravan',
+    caravanBackToTown: 'caravanBackToTown'
   },
   mode: {
     global: 'global',

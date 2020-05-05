@@ -1,6 +1,7 @@
-const { getOneTownFromDB } = require('../../town/DB');
-const { updateStateSector } = require('../../sector/db');
+const { getOneTownFromDB, updateStateTown } = require('../../town/DB');
 const addResourceToStorageFromCaravan = require('../addResourceToStorageFromCaravan');
+const createCaravanBackToTownEvent = require('./createCaravanBackToTownEvent');
+const { inActiveteEvent, addEventToDB } = require('../../events/db');
 
 async function handlerSendCaravanEvent(event) {
   const { serverName, init, target, data } = event;
@@ -10,8 +11,12 @@ async function handlerSendCaravanEvent(event) {
     return false;
   }
   const { payload } = data;
-  const storage = targetSector.town.storage;
-  addResourceToStorageFromCaravan(payload);
+  const { sources } = targetSector.town.storage;
+  addResourceToStorageFromCaravan(payload, sources);
+  await updateStateTown(targetSector);
+  const newEvent = createCaravanBackToTownEvent(event);
+  await inActiveteEvent(event);
+  await addEventToDB(newEvent, serverName);
 }
 
 module.exports = handlerSendCaravanEvent;
