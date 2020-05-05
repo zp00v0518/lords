@@ -9,7 +9,8 @@
      height: 80%;
      @include center;
      border-bottom: 1px solid;
-     padding-right: 20px;
+     padding: 15px;
+     text-align: center;
    }
    &__answer{
     padding: 5px;
