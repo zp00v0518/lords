@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "cookies": "^0.7.3",
+    "dotenv": "^8.2.0",
     "mongodb": "^3.1.9",
     "node-sass": "^4.10.0",
     "path-parse": "^1.0.6",

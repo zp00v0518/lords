@@ -4,8 +4,8 @@ const schema = require('../workWithMongoDB/schema');
 module.exports = {
   server: {
     port: {
-      http: 4000,
-      ws: 4001
+      http: process.env.PORT || 4000,
+      ws: +process.env.PORT + 1 || 4001
     },
     ready_to_work: false
   },
