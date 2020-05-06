@@ -107,7 +107,10 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'timeLine.scss';
+.timeline {
+  position: relative;
+  border-bottom: 1px solid black;
+}
 
 .event {
   width: 15px;

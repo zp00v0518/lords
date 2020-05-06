@@ -4,6 +4,7 @@
     <canvas
       id="global"
       ref="scene"
+      class="scene__canvas"
       :width="widthScene"
       :height="heightScene"
       @mousemove="handlerMousemoveOnMap"
@@ -222,5 +223,47 @@ export default {
 </script>
 
 <style lang='scss'>
-@import 'globalMap.scss';
+.globalmap {
+  position: relative;
+  &__move {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #000000;
+    padding: 5px;
+    position: absolute;
+    cursor: pointer;
+    font-weight: 600;
+
+    &-bottom {
+      bottom: 70px;
+      left: 80px;
+    }
+
+    &-left {
+      top: 80px;
+      left: 90px;
+    }
+
+    &-top {
+      right: 80px;
+      top: 80px;
+    }
+
+    &-right {
+      bottom: 70px;
+      right: 60px;
+    }
+  }
+}
+.zoom {
+  &__wrap {
+    position: absolute;
+    bottom: 0;
+    right: 15%;
+    margin-bottom: 10px;
+  }
+  &__btn {
+    padding: 3px;
+  }
+}
 </style>

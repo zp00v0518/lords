@@ -10,6 +10,7 @@
           key="timeline"
         ></TimeLine>
         <Scene></Scene>
+        <div class="main__content__footer"></div>
       </div>
       <Sidebar></Sidebar>
     </div>
@@ -18,14 +19,14 @@
 </template>
 
 <script>
-import Chat from "../Chat";
-import Vheader from "../Header";
-import Sidebar from "../Sidebar";
-import Scene from "../Scene";
-import TimeLine from "../../moleculs/Scenes/TimeLine/TimeLine.vue";
+import Chat from '../Chat';
+import Vheader from '../Header';
+import Sidebar from '../Sidebar';
+import Scene from '../Scene';
+import TimeLine from '../../moleculs/Scenes/TimeLine/TimeLine.vue';
 
 export default {
-  name: "Main",
+  name: 'Main',
   components: {
     Chat,
     Vheader,
@@ -35,8 +36,8 @@ export default {
   },
   data() {
     return {
-      widthTimeLine: "",
-      heightTimeLine: ""
+      widthTimeLine: '',
+      heightTimeLine: ''
     };
   },
   computed: {
@@ -46,8 +47,8 @@ export default {
       width = (width / 100) * 80;
       height = (height / 100) * 85;
       const mainSize = {
-        width: width + "px",
-        height: height + "px"
+        width: width + 'px',
+        height: height + 'px'
       };
       return mainSize;
     },
@@ -59,12 +60,12 @@ export default {
     }
   },
   watch: {
-    "$store.state.chat.is": function() {
+    '$store.state.chat.is': function() {
       const isChat = this.$store.state.chat.is;
       if (isChat) {
-        this.$el.style.marginRight = "14%";
+        this.$el.style.marginRight = '14%';
       } else {
-        this.$el.style.marginRight = "0";
+        this.$el.style.marginRight = '0';
       }
     }
   },
@@ -78,6 +79,38 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-@import "main.scss";
+<style lang='scss'>
+.main {
+  position: relative;
+  width: 60%;
+  height: 80%;
+  min-height: 200px;
+  min-width: 350px;
+  margin-right: 14%;
+  // @include border(black);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $main-bg;
+  // background-image: url('../../../../frontEnd/img/main/background/panelcoloredbg.jpg');
+
+  &__content {
+    width: 100%;
+    height: 85%;
+    flex-grow: 5;
+    display: flex;
+    justify-content: space-between;
+    &__footer {
+      // border-top: 1px solid;
+      height: 60px;
+    }
+  }
+  &__scenes {
+    // border: 1px solid blue;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-between;
+  }
+}
 </style>

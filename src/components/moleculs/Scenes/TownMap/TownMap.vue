@@ -3,6 +3,7 @@
     <canvas
       v-show="currentSector"
       ref="scene"
+      class="scene__canvas"
       :width="widthScene"
       :height="heightScene"
       @mousemove="handlerMouseMove"

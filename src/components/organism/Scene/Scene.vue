@@ -1,6 +1,6 @@
 <template>
   <section id="scenes" class="scene">
-    <keep-alive>
+    <template>
       <GlobalMap
         v-if="scenes.globalMap"
         :widthScene="widthScene"
@@ -19,7 +19,7 @@
         :heightScene="heightScene"
         key="townMap"
       ></TownMap>
-    </keep-alive>
+    </template>
     <div class="scene__buttons" @click="changeScene">
       <button
         type="button"
@@ -28,9 +28,7 @@
           { 'scene__buttons__item--active': scenes.region }
         ]"
         data-flag="region"
-      >
-        Регион
-      </button>
+      >Регион</button>
       <button
         type="button"
         :class="[
@@ -38,9 +36,7 @@
           { 'scene__buttons__item--active': scenes.town }
         ]"
         data-flag="town"
-      >
-        Город
-      </button>
+      >Город</button>
       <button
         type="button"
         :class="[
@@ -48,20 +44,18 @@
           { 'scene__buttons__item--active': scenes.globalMap }
         ]"
         data-flag="globalMap"
-      >
-        Карта
-      </button>
+      >Карта</button>
     </div>
     <DialogWindow></DialogWindow>
   </section>
 </template>
 
 <script>
-import Scenes from "../../moleculs/Scenes";
-import DialogWindow from "../../moleculs/DialogWindow";
+import Scenes from '../../moleculs/Scenes';
+import DialogWindow from '../../moleculs/DialogWindow';
 
 export default {
-  name: "Scene",
+  name: 'Scene',
   components: {
     DialogWindow,
     ...Scenes
@@ -79,11 +73,12 @@ export default {
   computed: {
     widthScene() {
       const styles = this.$el.getBoundingClientRect();
-      return styles.width + "px";
+      return styles.width + 'px';
     },
     heightScene() {
       const styles = this.$el.getBoundingClientRect();
-      return styles.height + "px";
+      console.log(styles);
+      return styles.height + 'px';
     },
     readyToDraw() {
       return this.$store.state.userSectors.currentSector !== null;
@@ -100,12 +95,38 @@ export default {
   },
   mounted() {
     // this.scenes.region = true;
-    this.scenes.globalMap = true;
-    // this.scenes.town = true;
+    // this.scenes.globalMap = true;
+    this.scenes.town = true;
   }
 };
 </script>
 
-<style lang="scss" scoped>
-@import "scene.scss";
+<style lang="scss">
+$widthScene: 500px;
+.scene {
+  flex-grow: 5;
+  position: relative;
+  &__canvas {
+    border-bottom: 1px solid;
+  }
+  &__buttons {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &__item {
+      cursor: pointer;
+      padding: 8px;
+      border: none;
+      border-radius: 3px;
+      &--active {
+        font-weight: 700;
+        background-color: transparent;
+        outline: none;
+      }
+    }
+  }
+}
 </style>

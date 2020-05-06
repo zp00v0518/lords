@@ -15,6 +15,7 @@
       @mouseleave="hideTooltip"
       @click="mode === 'dialog' ? {} : handlerClick()"
       key="scene"
+      class="scene__canvas"
     ></canvas>
   </div>
 </template>
