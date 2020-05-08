@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     getPersent(width) {
-      if (width < 800) return 100;
+      if (width < 800) return 98;
       if (width < 1280) return 85;
       return 75;
     },
@@ -109,7 +109,6 @@ export default {
       checkFullPage();
       const chat = $refs.chat.$el;
       const { isFullpage } = this;
-      console.log(isFullpage);
       if (isChat && !isFullpage) {
         const styles = chat.getBoundingClientRect();
         const baseMargin = parseFloat(getComputedStyle($el).marginRight);

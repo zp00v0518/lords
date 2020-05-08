@@ -1,18 +1,21 @@
-<template>
+ <template>
   <header class="header">
     <div class="header__update_region" v-if="NODE_ENV === 'development'">
       <input type="number" v-model="armySize" />
       <button @click="updateArmyOnRegion">Обновить регион</button>
     </div>
+    <ChatSmall v-show="showChat"/>
   </header>
 </template>
 
 <script>
 import { currentSector } from '../../mixins';
+import ChatSmall from '../Chat/ChatSmall';
 
 export default {
   name: 'Header',
   mixins: [currentSector],
+  components: { ChatSmall },
   data() {
     return {
       armySize: 2500,
@@ -21,6 +24,11 @@ export default {
   },
   created() {
     this.NODE_ENV = process.env.NODE_ENV;
+  },
+  computed: {
+    showChat() {
+      return !this.$store.state.chat.is;
+    }
   },
   methods: {
     updateArmyOnRegion() {
@@ -47,7 +55,7 @@ export default {
   min-height: 50px;
   border-bottom: 1px solid black;
   display: flex;
-  // justify-content: flex-end;
+  justify-content: space-between;
   &__update_region {
     max-width: 200px;
     display: flex;

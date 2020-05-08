@@ -1,5 +1,5 @@
 <template>
-  <section class="chat__wrap" :style="chatStyles">
+  <section class="chat__wrap" :style="chatStyles" :class="{'chat__wrap--visible': showChat}">
     <div v-show="showChat" class="chat" :class="{chat__closed: !showChat}">
       <div class="chat__header">
         <div @click="closeChat" class="chat__close">x</div>
@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-    <ChatSmall v-if="!showChat" :isFullpage="isFullpage"></ChatSmall>
+    <!-- <ChatSmall v-if="!showChat" :isFullpage="isFullpage"></ChatSmall> -->
   </section>
 </template>
 

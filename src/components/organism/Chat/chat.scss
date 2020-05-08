@@ -8,6 +8,10 @@
   left: 100%;
   right: 0;
   display: flex;
+  z-index: -1;
+  &.chat__wrap--visible{
+    z-index: 1;
+  }
 }
 .chat {
   @include border(black);
@@ -135,8 +139,8 @@
   @include border(black);
   @include center;
   // transition: none;
-  position: absolute;
-  transform: translateX(-100%);
+  // position: fixed;
+  // transform: translateX(-100%);
 
   &:hover {
     background-color: blue;
