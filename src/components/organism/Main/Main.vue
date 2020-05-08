@@ -1,20 +1,23 @@
 <template>
-  <main class="main" :style="{width: mainSize.width, height: mainSize.height}">
+  <main
+    class="main"
+    :style="{width: mainSize.width, height: mainSize.height, maxWidth:mainSize.width, minWidth:mainSize.width }"
+  >
     <Vheader></Vheader>
     <div class="main__content">
       <div class="main__scenes" ref="scenes">
         <TimeLine
-          v-if="heightScene"
-          :widthScene="widthScene"
-          :heightScene="heightScene"
+          v-if="timeLineHeight"
+          :widthScene="timeLineWidth"
+          :heightScene="timeLineHeight"
           key="timeline"
         ></TimeLine>
-        <Scene></Scene>
+        <Scene ref="scene"></Scene>
         <div class="main__content__footer"></div>
       </div>
       <Sidebar></Sidebar>
     </div>
-    <chat></chat>
+    <chat ref="chat"></chat>
   </main>
 </template>
 
@@ -37,44 +40,77 @@ export default {
   data() {
     return {
       widthTimeLine: '',
-      heightTimeLine: ''
+      heightTimeLine: '',
+      ratio: 0.6,
+      timeLineSize: {
+        width: '',
+        height: ''
+      }
     };
   },
   computed: {
     mainSize() {
-      let width = document.documentElement.clientWidth;
-      let height = document.documentElement.clientHeight;
-      width = (width / 100) * 80;
-      height = (height / 100) * 85;
+      const { ratio, getPersent } = this;
+      const screenWidth = document.documentElement.clientWidth;
+      const screenHeight = document.documentElement.clientHeight;
+      let width = (screenWidth / 100) * getPersent(screenWidth);
+      let height = width * ratio;
+      height = height > screenHeight ? screenHeight : height;
+      width = height / ratio;
       const mainSize = {
         width: width + 'px',
         height: height + 'px'
       };
       return mainSize;
     },
-    widthScene() {
-      return this.widthTimeLine;
+    timeLineWidth() {
+      return this.timeLineSize.width;
     },
-    heightScene() {
-      return this.heightTimeLine;
+    timeLineHeight() {
+      return this.timeLineSize.height;
     }
   },
   watch: {
     '$store.state.chat.is': function() {
       const isChat = this.$store.state.chat.is;
       if (isChat) {
-        this.$el.style.marginRight = '14%';
+        this.setRightMargin();
       } else {
-        this.$el.style.marginRight = '0';
+        this.$el.style.marginRight = this.getMiddleMargin();
       }
     }
   },
+  methods: {
+    getPersent(width) {
+      if (width < 800) return 100;
+      if (width < 1280) return 90;
+      return 80;
+    },
+    setTimelineSize() {
+      const { $refs } = this;
+      if (!$refs.scenes) return;
+      const styles = $refs.scenes.getBoundingClientRect();
+      let height = (styles.height / 100) * 10;
+      height = height > 20 ? 20 : height;
+      this.timeLineSize.height = height;
+      this.timeLineSize.width = styles.width;
+    },
+    setRightMargin() {
+      const { $refs } = this;
+      const chat = $refs.chat.$el;
+      const styles = chat.getBoundingClientRect();
+      this.$el.style.marginRight = styles.width + 20 + 'px';
+    },
+    getMiddleMargin() {
+      const { $el } = this;
+      const style = $el.getBoundingClientRect();
+      const screenWidth = document.documentElement.clientWidth;
+      return (screenWidth - style.width) / 2 + 'px';
+    }
+  },
   mounted() {
-    const styles = this.$refs.scenes.getBoundingClientRect();
-    let height = (styles.height / 100) * 10;
-    height = height > 20 ? 20 : height;
-    this.heightTimeLine = height;
-    this.widthTimeLine = styles.width;
+    this.setTimelineSize();
+    this.setRightMargin();
   }
 };
 </script>
@@ -82,16 +118,17 @@ export default {
 <style lang='scss'>
 .main {
   position: relative;
-  width: 60%;
-  height: 80%;
   min-height: 200px;
-  min-width: 350px;
-  margin-right: 14%;
-  // @include border(black);
+  min-width: 320px;
+  // margin-right: 14%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: $main-bg;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  align-self: center;
   // background-image: url('../../../../frontEnd/img/main/background/panelcoloredbg.jpg');
 
   &__content {

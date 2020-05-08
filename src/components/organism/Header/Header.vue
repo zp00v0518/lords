@@ -40,6 +40,25 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-@import 'header.scss';
+<style lang='scss'>
+.header {
+  width: 100%;
+  height: 10%;
+  min-height: 50px;
+  border-bottom: 1px solid black;
+  display: flex;
+  // justify-content: flex-end;
+  &__update_region {
+    max-width: 200px;
+    display: flex;
+    height: 30px;
+    & > input {
+      width: 45%;
+    }
+    & > button {
+      cursor: pointer;
+      font-size: 12px;
+    }
+  }
+}
 </style>

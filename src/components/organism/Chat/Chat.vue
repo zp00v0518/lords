@@ -86,6 +86,6 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 @import "chat.scss";
 </style>

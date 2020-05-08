@@ -42,20 +42,6 @@ export default {
   }
 };
 </script>
-<style lang="sass" scoped>
+<style lang="sass">
 @import 'app.scss'
-</style>
-
-<style lang="scss">
-body {
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-}
-* {
-  // box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  transition: all 0.2s ease;
-}
 </style>
