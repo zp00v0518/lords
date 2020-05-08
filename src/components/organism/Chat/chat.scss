@@ -1,11 +1,9 @@
-@import "@/assets/variable.scss";
-@import "@/assets/mixins.scss";
-
 .chat__wrap {
   position: absolute;
   top: 0;
-  width: 20%;
-  min-width: 150px;
+  width: 20vw;
+  min-width: 270px;
+  max-width: 300px;
   height: 100%;
   left: 100%;
   right: 0;
@@ -137,6 +135,10 @@
   @include border(black);
   display: flex;
   transition: none;
+  position: relative;
+  transform: translateX(-100%);
+  justify-content: center;
+  align-items: center;
 
   &:hover {
     background-color: blue;

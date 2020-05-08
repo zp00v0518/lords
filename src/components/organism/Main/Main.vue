@@ -68,15 +68,15 @@ export default {
     },
     timeLineHeight() {
       return this.timeLineSize.height;
+    },
+    isChat() {
+      return this.$store.state.chat.is;
     }
   },
   watch: {
-    '$store.state.chat.is': function() {
-      const isChat = this.$store.state.chat.is;
-      if (isChat) {
+    isChat: {
+      handler(ev) {
         this.setRightMargin();
-      } else {
-        this.$el.style.marginRight = this.getMiddleMargin();
       }
     }
   },
@@ -96,10 +96,14 @@ export default {
       this.timeLineSize.width = styles.width;
     },
     setRightMargin() {
-      const { $refs } = this;
+      const { $refs, isChat } = this;
       const chat = $refs.chat.$el;
-      const styles = chat.getBoundingClientRect();
-      this.$el.style.marginRight = styles.width + 20 + 'px';
+      if (isChat) {
+        const styles = chat.getBoundingClientRect();
+        this.$el.style.marginRight = styles.width + 20 + 'px';
+      } else {
+        this.$el.style.marginRight = this.getMiddleMargin();
+      }
     },
     getMiddleMargin() {
       const { $el } = this;
