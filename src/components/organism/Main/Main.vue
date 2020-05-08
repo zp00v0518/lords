@@ -17,7 +17,7 @@
       </div>
       <Sidebar></Sidebar>
     </div>
-    <chat ref="chat"></chat>
+    <chat ref="chat" :isFullpage="isFullpage"></chat>
   </main>
 </template>
 
@@ -45,7 +45,8 @@ export default {
       timeLineSize: {
         width: '',
         height: ''
-      }
+      },
+      isFullpage: false
     };
   },
   computed: {
@@ -72,6 +73,14 @@ export default {
     isChat() {
       return this.$store.state.chat.is;
     }
+    // isFullpage() {
+    //   const { $el, $refs } = this;
+    //   if (!$el || !$refs.chat.$el) return false;
+    //   const screenWidth = document.documentElement.clientWidth;
+    //   const mainStyle = $el.getBoundingClientRect();
+    //   const chatStyle = $refs.chat.$el.getBoundingClientRect();
+    //   return mainStyle.width + chatStyle.width >= screenWidth;
+    // }
   },
   watch: {
     isChat: {
@@ -83,8 +92,8 @@ export default {
   methods: {
     getPersent(width) {
       if (width < 800) return 100;
-      if (width < 1280) return 90;
-      return 80;
+      if (width < 1280) return 85;
+      return 75;
     },
     setTimelineSize() {
       const { $refs } = this;
@@ -96,13 +105,19 @@ export default {
       this.timeLineSize.width = styles.width;
     },
     setRightMargin() {
-      const { $refs, isChat } = this;
+      const { $refs, isChat, $el, checkFullPage } = this;
+      checkFullPage();
       const chat = $refs.chat.$el;
-      if (isChat) {
+      const { isFullpage } = this;
+      console.log(isFullpage);
+      if (isChat && !isFullpage) {
         const styles = chat.getBoundingClientRect();
-        this.$el.style.marginRight = styles.width + 20 + 'px';
+        const baseMargin = parseFloat(getComputedStyle($el).marginRight);
+        $el.style.marginRight = baseMargin + styles.width / 2 + 'px';
+      } else if (isChat && isFullpage) {
+        $el.style.marginRight = this.getMiddleMargin();
       } else {
-        this.$el.style.marginRight = this.getMiddleMargin();
+        $el.style.marginRight = this.getMiddleMargin();
       }
     },
     getMiddleMargin() {
@@ -110,6 +125,15 @@ export default {
       const style = $el.getBoundingClientRect();
       const screenWidth = document.documentElement.clientWidth;
       return (screenWidth - style.width) / 2 + 'px';
+    },
+    checkFullPage() {
+      const { $el, $refs } = this;
+      if (!$el || !$refs.chat.$el) return false;
+      const screenWidth = document.documentElement.clientWidth;
+      const mainStyle = $el.getBoundingClientRect();
+      const chatStyle = $refs.chat.$el.getBoundingClientRect();
+      this.isFullpage = mainStyle.width + chatStyle.width >= screenWidth;
+      return this.isFullpage;
     }
   },
   mounted() {
@@ -124,7 +148,6 @@ export default {
   position: relative;
   min-height: 200px;
   min-width: 320px;
-  // margin-right: 14%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -132,6 +155,7 @@ export default {
   margin-top: auto;
   margin-bottom: auto;
   margin-left: auto;
+  // margin-right: auto;
   align-self: center;
   // background-image: url('../../../../frontEnd/img/main/background/panelcoloredbg.jpg');
 

@@ -1,7 +1,7 @@
 .chat__wrap {
   position: absolute;
   top: 0;
-  width: 20vw;
+  width: 20%;
   min-width: 270px;
   max-width: 300px;
   height: 100%;
@@ -133,12 +133,10 @@
   width: 20px;
   height: 20px;
   @include border(black);
-  display: flex;
-  transition: none;
-  position: relative;
+  @include center;
+  // transition: none;
+  position: absolute;
   transform: translateX(-100%);
-  justify-content: center;
-  align-items: center;
 
   &:hover {
     background-color: blue;

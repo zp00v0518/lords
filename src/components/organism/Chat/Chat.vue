@@ -1,5 +1,5 @@
 <template>
-  <section class="chat__wrap">
+  <section class="chat__wrap" :style="chatStyles">
     <div v-show="showChat" class="chat" :class="{chat__closed: !showChat}">
       <div class="chat__header">
         <div @click="closeChat" class="chat__close">x</div>
@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-    <ChatSmall v-if="!showChat"></ChatSmall>
+    <ChatSmall v-if="!showChat" :isFullpage="isFullpage"></ChatSmall>
   </section>
 </template>
 
@@ -35,14 +35,14 @@
 import ChatSmall from './ChatSmall';
 export default {
   name: 'Chat',
-  components: {
-    ChatSmall
+  components: { ChatSmall },
+  props: {
+    isFullpage: { type: Boolean, default: false }
   },
   data() {
     return {
       showChat: false,
       messageForSend: {
-        // qwqw: "",
         text: '',
         chanel: '',
         privat: ''
@@ -53,6 +53,14 @@ export default {
   computed: {
     messages() {
       return this.$store.state.chat.messages;
+    },
+    chatStyles() {
+      const { isFullpage } = this;
+      if (isFullpage) {
+        return {
+          transform: 'translateX(-100%)'
+        };
+      }
     }
   },
   watch: {
@@ -83,5 +91,5 @@ export default {
 </script>
 
 <style lang='scss'>
-@import 'chat.scss';
+// @import 'chat.scss';
 </style>
