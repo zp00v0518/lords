@@ -6,8 +6,10 @@ const { fileReader, mimeType, sendResponse, config, findUserInDB } = require('./
 const { addCollectionsToUser } = require('./user');
 const log = new template.Log(__filename);
 const { getCollectionName } = require('./template_modules');
+const MODE = process.env.MODE;
+const listFile = config.listFile[MODE] || config.listFile.html;
 
-function getMethod(req, res, startPath) {
+async function getMethod(req, res, startPath) {
   // log.log("**********getMethod work*********");
   let urlParse = url.parse(req.url, true);
   let cookies = new Cookies(req, res);
@@ -32,7 +34,7 @@ function getMethod(req, res, startPath) {
   }
   // если userCookies, то переходим на страницу авторизации
   if (!userCookies) {
-    pathName = config.listFile.html.login + '.html';
+    pathName = listFile.login + '.html';
     var pathJoin = path.join(startPath, config.basePathToFiles, pathName);
     var ext = path.parse(pathName).ext;
     fileReader(pathJoin, (err, data) => {
@@ -44,32 +46,31 @@ function getMethod(req, res, startPath) {
     });
     // если userCookies есть, ищем совпадение в БД
   } else if (userCookies) {
-    findUserInDB(userCookies).then(resultFinUser => {
-      if (resultFinUser) {
-        const serverName = getCollectionName(pathName.split('/')[1]);
-        if (!serverName) {
-          // отправляем пользователя в личный кабинет
-          pathName = config.listFile.html.cabinet + '.html';
-        } else if (!Object.values(resultFinUser.collections).find(i => i.name === serverName)) {
-          addCollectionsToUser(resultFinUser, serverName);
-          pathName = config.listFile.html.game + '.html';
-        } else {
-          pathName = config.listFile.html.game + '.html';
-        }
+    const resultFinUser = await findUserInDB(userCookies);
+    if (resultFinUser) {
+      const serverName = getCollectionName(pathName.split('/')[1]);
+      if (!serverName) {
+        // отправляем пользователя в личный кабинет
+        pathName = listFile.cabinet + '.html';
+      } else if (!Object.values(resultFinUser.collections).find(i => i.name === serverName)) {
+        addCollectionsToUser(resultFinUser, serverName);
+        pathName = listFile.game + '.html';
       } else {
-        pathName = config.listFile.html.login + '.html';
+        pathName = listFile.game + '.html';
       }
+    } else {
+      pathName = listFile.login + '.html';
+    }
 
-      // pathName = config.listFile.html.cabinet + ".html";
-      const pathJoin = path.join(startPath, config.basePathToFiles, pathName);
-      const ext = path.parse(pathName).ext;
-      fileReader(pathJoin, (err, data) => {
-        if (err) {
-          console.log(err);
-          return;
-        }
-        sendResponse(res, data, mimeType[ext]);
-      });
+    // pathName = config.listFile.html.cabinet + ".html";
+    const pathJoin = path.join(startPath, config.basePathToFiles, pathName);
+    const ext = path.parse(pathName).ext;
+    fileReader(pathJoin, (err, data) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      sendResponse(res, data, mimeType[ext]);
     });
   }
 }

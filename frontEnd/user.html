@@ -1,48 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>User</title>
-    <script src="js/template/templateFunc.js"></script>
-    <script src="js/liveReload.js"></script>
-    <link rel="stylesheet" href="style/user/header.css" />
-    <script src="js/developer.js"></script>
-    <script src="js/user/userPage.js"></script>
-    <style>
-      body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-    </style>
-  </head>
-  <body>
-    <input id="dev" type="text" style="width:400px; margin-bottom: 100px;" />
 
-    <header><span id="userName" class="userName"></span></header>
-    <main>
-      <div id="choiseServer" class="choice_server">
-        <a href="First">
-          <button type="button" data-server="server_1">Server #1</button>
-          </a>
-          <!-- <a href="Second">
-            <button type="button" data-server="server_2">Server #2</button>
-            </a> -->
-      </div>
-    </main>
-    <footer></footer>
+<head>
+  <meta charset="UTF-8" />
+  <title>User</title>
+  <script src="js/template/templateFunc.js"></script>
+  <!-- <link rel="stylesheet" href="style/user/header.css" /> -->
+  <script src="js/user/userPage.js"></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+    }
+    .choice_server {
+      margin-top: 15%;
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+    }
+    .choice_server__title {
+      padding: 10px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .choice_server__main {
+      display: flex;
+      justify-content: center;
+    }
+    .choice_server__main__item {
+      padding: 8px;
+      min-width: 110px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
 
-    <!-- <script>
-	const serverList = document.getElementById('choiseServer');
-		serverList.addEventListener('click', choiseServer);
+<body>
+  <header><span id="userName" class="userName"></span></header>
+  <main id="choiseServer" class="choice_server">
+    <div class="choice_server__title">Выберите сервер</div>
+    <div class="choice_server__main">
+      <a href="First" >
+        <button class="choice_server__main__item" type="button" data-server="server_1">Server #1</button>
+      </a>
+      <!-- <a href="Second">
+        <button type="button" data-server="server_2">Server #2</button>
+        </a> -->
+    </div>
+  </main>
+  <footer></footer>
+</body>
 
-		function choiseServer (event) {
-			const target = event.target;
-			const server = target.dataset.server;
-			sendAjaxRequest('choiseServer', server, result => {
-				console.log(result)
-			})
-		}
-	</script> -->
-  </body>
 </html>

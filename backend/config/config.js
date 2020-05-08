@@ -40,6 +40,12 @@ module.exports = {
     hiring: 500
   },
   listFile: {
+    DEV: {
+      login: 'login_dev',
+      cabinet: 'user',
+      err: '404',
+      game: 'game'
+    },
     html: {
       login: 'login',
       cabinet: 'user',
