@@ -6,7 +6,7 @@
   <title>User</title>
   <script src="js/template/templateFunc.js"></script>
   <script src="js/liveReload.js"></script>
-  <link rel="stylesheet" href="style/user/header.css" />
+  <!-- <link rel="stylesheet" href="style/user/header.css" /> -->
   <script src="js/developer.js"></script>
   <script src="js/user/userPage.js"></script>
   <style>
@@ -14,7 +14,33 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      /* justify-content: center; */
+      width: 100vw;
+      height: 100vh;
     }
+    .choice_server {
+      margin-top: 15%;
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+    }
+    .choice_server__title {
+      padding: 10px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .choice_server__main {
+      display: flex;
+      justify-content: center;
+    }
+    .choice_server__main__item {
+      padding: 8px;
+      min-width: 110px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
   </style>
 </head>
 
@@ -22,14 +48,15 @@
   <input id="dev" type="text" style="width:400px; margin-bottom: 100px;" />
 
   <header><span id="userName" class="userName"></span></header>
-  <main>
-    <div id="choiseServer" class="choice_server">
-      <a href="First">
-        <button type="button" data-server="server_1">Server #1</button>
+  <main id="choiseServer" class="choice_server">
+    <div class="choice_server__title">Выберите сервер</div>
+    <div class="choice_server__main">
+      <a href="First" >
+        <button class="choice_server__main__item" type="button" data-server="server_1">Server #1</button>
       </a>
       <!-- <a href="Second">
-            <button type="button" data-server="server_2">Server #2</button>
-            </a> -->
+        <button type="button" data-server="server_2">Server #2</button>
+        </a> -->
     </div>
   </main>
   <footer></footer>

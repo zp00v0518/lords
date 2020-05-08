@@ -42,7 +42,7 @@ module.exports = {
   listFile: {
     DEV: {
       login: 'login_dev',
-      cabinet: 'user',
+      cabinet: 'user_dev',
       err: '404',
       game: 'game'
     },
