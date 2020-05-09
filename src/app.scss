@@ -25,3 +25,12 @@ body {
   background-image: url('../frontEnd/img/main/background/panelbg.jpg');
   // background-image: url('../frontEnd/img/main/background/mainmenubg.jpg')1
 }
+
+::-webkit-scrollbar {
+  width: 5px; /* ширина scrollbar'a */
+  background: transparent; /* опционально */
+}
+::-webkit-scrollbar-thumb {
+  background-color: #656363;
+  border-radius: 6px;
+}

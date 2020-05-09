@@ -46,24 +46,32 @@ export default {
         width: '',
         height: ''
       },
-      isFullpage: false
+      isFullpage: false,
+      mainSize: {
+        width: '',
+        height: ''
+      }
     };
   },
+  created() {
+    this.setMainSize();
+    window.addEventListener('resize', this.setMainSize);
+  },
   computed: {
-    mainSize() {
-      const { ratio, getPersent } = this;
-      const screenWidth = document.documentElement.clientWidth;
-      const screenHeight = document.documentElement.clientHeight;
-      let width = (screenWidth / 100) * getPersent(screenWidth);
-      let height = width * ratio;
-      height = height > screenHeight ? screenHeight : height;
-      width = height / ratio;
-      const mainSize = {
-        width: width + 'px',
-        height: height + 'px'
-      };
-      return mainSize;
-    },
+    // mainSize() {
+    //   const { ratio, getPersent } = this;
+    //   const screenWidth = document.documentElement.clientWidth;
+    //   const screenHeight = document.documentElement.clientHeight;
+    //   let width = (screenWidth / 100) * getPersent(screenWidth);
+    //   let height = width * ratio;
+    //   height = height > screenHeight ? screenHeight : height;
+    //   width = height / ratio;
+    //   const mainSize = {
+    //     width: width + 'px',
+    //     height: height + 'px'
+    //   };
+    //   return mainSize;
+    // },
     timeLineWidth() {
       return this.timeLineSize.width;
     },
@@ -73,14 +81,6 @@ export default {
     isChat() {
       return this.$store.state.chat.is;
     }
-    // isFullpage() {
-    //   const { $el, $refs } = this;
-    //   if (!$el || !$refs.chat.$el) return false;
-    //   const screenWidth = document.documentElement.clientWidth;
-    //   const mainStyle = $el.getBoundingClientRect();
-    //   const chatStyle = $refs.chat.$el.getBoundingClientRect();
-    //   return mainStyle.width + chatStyle.width >= screenWidth;
-    // }
   },
   watch: {
     isChat: {
@@ -92,6 +92,7 @@ export default {
   methods: {
     getPersent(width) {
       if (width < 800) return 98;
+      if (width < 1024) return 90;
       if (width < 1280) return 85;
       return 75;
     },
@@ -133,6 +134,17 @@ export default {
       const chatStyle = $refs.chat.$el.getBoundingClientRect();
       this.isFullpage = mainStyle.width + chatStyle.width >= screenWidth;
       return this.isFullpage;
+    },
+    setMainSize() {
+      const { ratio, getPersent } = this;
+      const screenWidth = document.documentElement.clientWidth;
+      const screenHeight = document.documentElement.clientHeight;
+      let width = (screenWidth / 100) * getPersent(screenWidth);
+      let height = width * ratio;
+      height = height > screenHeight ? screenHeight : height;
+      width = height / ratio;
+      this.mainSize.width = width + 'px';
+      this.mainSize.height = height + 'px';
     }
   },
   mounted() {
