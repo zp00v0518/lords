@@ -4,7 +4,6 @@ function setBorderIsoMap() {
   const height = tileWidth / 2;
   const startX = isoCoords.x;
   const startY = isoCoords.y;
-  console.log(startX, startY)
   borderIsoMap.top.x = startX;
   borderIsoMap.top.y = startY;
   borderIsoMap.bottom.x = borderIsoMap.top.x;

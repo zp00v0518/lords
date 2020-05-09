@@ -23,26 +23,20 @@
     <div class="scene__buttons" @click="changeScene">
       <button
         type="button"
-        :class="[
-          'scene__buttons__item',
-          { 'scene__buttons__item--active': scenes.region }
-        ]"
+        class="scene__buttons__item"
+        :class="{ 'scene__buttons__item--active': scenes.region }"
         data-flag="region"
       >Регион</button>
       <button
         type="button"
-        :class="[
-          'scene__buttons__item',
-          { 'scene__buttons__item--active': scenes.town }
-        ]"
+        class="scene__buttons__item"
+        :class="{ 'scene__buttons__item--active': scenes.town }"
         data-flag="town"
       >Город</button>
       <button
         type="button"
-        :class="[
-          'scene__buttons__item',
-          { 'scene__buttons__item--active': scenes.globalMap }
-        ]"
+        class="scene__buttons__item"
+        :class="{ 'scene__buttons__item--active': scenes.globalMap }"
         data-flag="globalMap"
       >Карта</button>
     </div>
@@ -77,7 +71,6 @@ export default {
     },
     heightScene() {
       const styles = this.$el.getBoundingClientRect();
-      console.log(styles);
       return styles.height + 'px';
     },
     readyToDraw() {
@@ -94,8 +87,8 @@ export default {
     }
   },
   mounted() {
-    this.scenes.region = true;
-    // this.scenes.globalMap = true;
+    // this.scenes.region = true;
+    this.scenes.globalMap = true;
     // this.scenes.town = true;
   }
 };
@@ -125,6 +118,10 @@ $widthScene: 500px;
         font-weight: 700;
         background-color: transparent;
         outline: none;
+      }
+      @media (max-width: $tablet-small){
+        padding: 5px;
+        font-size: 10px;
       }
     }
   }

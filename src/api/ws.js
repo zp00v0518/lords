@@ -27,7 +27,7 @@ class WS {
     }
     this.wsInstance = new WebSocket(wsAddr);
     this.wsInstance.onopen = () => {
-      console.log(`WebSocket open in ${wsAddr}`);
+      // console.log(`WebSocket open in ${wsAddr}`);
       this.is = true;
       // this.store.dispatch('getData')
     };

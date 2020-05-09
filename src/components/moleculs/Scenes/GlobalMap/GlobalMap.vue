@@ -212,6 +212,10 @@ export default {
         const heroCoords = algebra.getPointOnStraight(...baseCoords, heroLength);
         this.drawHeroOnMap(ctx, heroCoords);
       });
+    },
+    getMoveBtnPositions() {
+      const { borderIsoMap } = this;
+      console.log(borderIsoMap);
     }
   },
   mounted() {
@@ -260,10 +264,16 @@ export default {
     position: absolute;
     bottom: 0;
     right: 15%;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    @media (max-width: $tablet-small) {
+      right: 5%;
+    }
   }
   &__btn {
     padding: 3px;
+    @media (max-width: $tablet-small) {
+      font-size: 10px;
+    }
   }
 }
 </style>
