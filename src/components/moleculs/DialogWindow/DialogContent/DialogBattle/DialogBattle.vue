@@ -135,7 +135,7 @@ export default {
 .dialog-battle {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 75%;
   &__header {
     display: flex;
     justify-content: center;
@@ -178,7 +178,7 @@ export default {
     display: flex;
     flex-grow: 2;
     margin-bottom: 20px;
-    max-height: 80%;
+    max-height: 75%;
     &__item {
       flex-basis: 50%;
       margin: 0 10px;
