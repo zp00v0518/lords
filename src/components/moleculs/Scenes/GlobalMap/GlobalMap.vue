@@ -102,7 +102,7 @@ export default {
     tileWidth() {
       const widthParse = parseInt(this.widthScene) / 2;
       const intermediate = widthParse / (this.currentMap.length / 2);
-      return intermediate * 1.2;
+      return intermediate * 0.9;
       // return intermediate / (this.currentMap.length / 2) + intermediate;
     },
     isoCoords() {

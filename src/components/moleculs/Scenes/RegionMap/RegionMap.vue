@@ -92,7 +92,7 @@ export default {
       if (!ctx) return 0;
       const widthParse = parseInt(this.sceneWidth) / 2;
       const intermediate = widthParse / (this.currentMap.length / 2);
-      return intermediate;
+      return intermediate * 0.9;
     },
     isoCoords() {
       const x = parseInt(this.sceneWidth) / 2;
