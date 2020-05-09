@@ -75,7 +75,7 @@ function drawGameImage(ctx, tile, tileWidth, $store, curSector) {
     // const scaleWidth = tileWidth / img.width;
     // const scaleHeight = tileHeight / img.height;
     // const x = centerX - (img.width * scaleWidth) / 2;
-    // const y = centerY - ((img.height * scaleHeight) / 2)- tileHeight / 4;
+    // const y = centerY - (img.height * scaleHeight) / 2 - tileHeight / 4;
     // ctx.drawImage(img, x, y, img.width * scaleWidth, img.height * scaleHeight);
   }
 }
