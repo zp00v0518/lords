@@ -47,12 +47,7 @@ export default {
   },
   created() {
     if (!this.regionMap) {
-      this.currentMap = this.$store.state.regionMap.currentRegion;
-      if (this.$store.state.userSectors.currentSector) {
-        this.currentMap = this.$store.state.userSectors.currentSector.region;
-      }
-    } else {
-      this.currentMap = this.regionMap;
+      this.currentMap = this.currentSector.region;
     }
   },
   watch: {
