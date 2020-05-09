@@ -88,15 +88,18 @@ export default {
       return deepClone(d);
     },
     tileWidth() {
-      const { ctx } = this;
+      const { ctx, mode } = this;
       if (!ctx) return 0;
       const widthParse = parseInt(this.sceneWidth) / 2;
       const intermediate = widthParse / (this.currentMap.length / 2);
+      if (mode !== 'global') {
+        return intermediate * 0.6;
+      }
       return intermediate * 0.9;
     },
     isoCoords() {
       const x = parseInt(this.sceneWidth) / 2;
-      const y = parseInt(this.sceneHeight) / 100 * 10;
+      const y = (parseInt(this.sceneHeight) / 100) * 10;
       return { x, y };
     }
   },
