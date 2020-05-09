@@ -15,22 +15,26 @@
       id="left"
       class="globalmap__move globalmap__move-left"
       type="button"
+      :style="moveBtnCoords.left"
       @click="moveOnMap"
     >left</button>
     <button
       id="top"
+      :style="moveBtnCoords.top"
       class="globalmap__move globalmap__move-top"
       type="button"
       @click="moveOnMap"
     >top</button>
     <button
       id="right"
+      :style="moveBtnCoords.right"
       class="globalmap__move globalmap__move-right"
       type="button"
       @click="moveOnMap"
     >right</button>
     <button
       id="bottom"
+      :style="moveBtnCoords.bottom"
       class="globalmap__move globalmap__move-bottom"
       type="button"
       @click="moveOnMap"
@@ -67,6 +71,12 @@ export default {
       popupTown: {
         show: false,
         targetSector: null
+      },
+      moveBtnCoords: {
+        left: { top: 0, left: 0 },
+        right: { top: 0, left: 0 },
+        top: { top: 0, left: 0 },
+        bottom: { top: 0, left: 0 }
       }
     };
   },
@@ -214,14 +224,35 @@ export default {
       });
     },
     getMoveBtnPositions() {
-      const { borderIsoMap } = this;
-      console.log(borderIsoMap);
+      const { borderIsoMap, moveBtnCoords } = this;
+      const { top, left, right, bottom } = borderIsoMap;
+      let coords = addPXToCoords(algebra.getPointOnStraight(top.x, top.y, left.x, left.y, '50%'));
+      moveBtnCoords.left.left = coords.x;
+      moveBtnCoords.left.top = coords.y;
+      coords = addPXToCoords(algebra.getPointOnStraight(top.x, top.y, right.x, right.y, '50%'));
+      moveBtnCoords.top.left = coords.x;
+      moveBtnCoords.top.top = coords.y;
+      coords = addPXToCoords(algebra.getPointOnStraight(right.x, right.y, bottom.x, bottom.y, '50%'));
+      moveBtnCoords.right.left = coords.x;
+      moveBtnCoords.right.top = coords.y;
+      coords = addPXToCoords(algebra.getPointOnStraight(bottom.x, bottom.y, left.x, left.y, '50%'));
+      moveBtnCoords.bottom.left = coords.x;
+      moveBtnCoords.bottom.top = coords.y;
+
+      function addPXToCoords(obj) {
+        Object.keys(obj).forEach(key => {
+          const value = obj[key];
+          obj[key] = value + 'px';
+        });
+        return obj;
+      }
     }
   },
   mounted() {
     this.ctx = this.$refs.scene.getContext('2d');
     this.drawMap();
     this.setBorderIsoMap();
+    this.getMoveBtnPositions();
   }
 };
 </script>
@@ -232,30 +263,35 @@ export default {
   &__move {
     margin: 0;
     padding: 0;
-    border: 1px solid #000000;
-    padding: 5px;
+    border: none;
+    padding: 8px;
     position: absolute;
     cursor: pointer;
     font-weight: 600;
-
+    min-width: 50px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    @media (max-width: $tablet) {
+      min-width: unset;
+      padding: 5px;
+    }
+    @media (max-width: $tablet-small) {
+      font-size: 10px;
+    }
     &-bottom {
-      bottom: 70px;
-      left: 80px;
+      transform: translateX(-100%) translateY(15%);
     }
 
     &-left {
-      top: 80px;
-      left: 90px;
+      transform: translateX(-120%) translateY(-120%);
     }
 
     &-top {
-      right: 80px;
-      top: 80px;
+      transform: translateX(25%) translateY(-100%);
     }
 
     &-right {
-      bottom: 70px;
-      right: 60px;
+      transform: translateX(-10%) translateY(28%);
     }
   }
 }

@@ -5,7 +5,11 @@ function getStraightLength(x1, y1, x2, y2) {
 
 function getPointOnStraight(x1, y1, x2, y2, r) {
   const len = getStraightLength(x1, y1, x2, y2);
-  const k = r / len;
+  let modR = r;
+  if (typeof modR === 'string' && modR.includes('%')) {
+    modR = (len / 100) * parseFloat(modR);
+  }
+  const k = modR / len;
   const x = x1 + (x2 - x1) * k;
   const y = y1 + (y2 - y1) * k;
   return { x, y };
