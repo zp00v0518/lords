@@ -1,37 +1,22 @@
 // const { updateDB } = require("../../tube.js");
-const { updateDB } = require("../../workWithMongoDB");
-const update = new updateDB();
+const { inActiveteEvent } = require('../../events/db');
+const { updateStateTown } = require('../DB');
 
-function fixingResultUpgrade_building(
-  building,
-  eventItem,
-  callback = () => {}
-) {
-  return new Promise((resolve, reject) => {
-    building.upgrade.is = false;
-    building.lvl++;
-    building.upgrade.date = 0;
-    building.work.is = true;
+async function fixingResultUpgrade_building(eventItem, sector) {
+  let typeBuilding = eventItem.data.type;
+  const building = sector.town[typeBuilding];
+  building.upgrade.is = false;
+  building.lvl++;
+  building.upgrade.date = 0;
+  building.work.is = true;
+  try {
     if (eventItem) {
-      const optionsForUpdate = {
-        collectionName: eventItem.serverName,
-        filtr: { _id: eventItem._id },
-        updateDoc: { $set: { status: false } }
-      };
-      update
-        .one(optionsForUpdate)
-        .then(result => {
-          callback(null, result);
-          return resolve(result);
-        })
-        .catch(err => {
-          callback(err);
-          return reject(err);
-        });
+      await inActiveteEvent(eventItem);
     }
-    callback(null);
-    return resolve();
-  });
+    await updateStateTown(sector);
+  } catch (err) {
+    console.log(__filename, err);
+  }
 }
 
 module.exports = fixingResultUpgrade_building;
