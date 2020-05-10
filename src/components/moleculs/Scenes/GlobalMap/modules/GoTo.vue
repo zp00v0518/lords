@@ -15,7 +15,7 @@
         </label>
       </div>
     </div>
-    <button class="goto__btn">Go</button>
+    <button class="goto__btn" @click="goToCoords">Go</button>
   </div>
 </template>
 
@@ -42,6 +42,16 @@ export default {
       value = value >= maxSize ? maxSize : value;
       this[axis] = value;
       target.value = value;
+    },
+    async goToCoords() {
+      const { x, y, globalConfig } = this;
+      const Ev = globalConfig.all.Event;
+      const message = {
+        type: Ev.types.goToCoords,
+        data: { x, y }
+      };
+      const response = await this.$ws.get(message);
+      console.log(response);
     }
   }
 };
