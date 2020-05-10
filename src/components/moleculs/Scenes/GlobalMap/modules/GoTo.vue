@@ -5,13 +5,13 @@
       <div class="goto__content__item">
         <label>
           X:
-          <input type="text" value="0" />
+          <input type="text" :value="x" @input="changeCoords($event, 'x')" />
         </label>
       </div>
       <div class="goto__content__item">
         <label>
           Y:
-          <input type="text" value="0" />
+          <input type="text" :value="y" @input="changeCoords($event, 'y')" />
         </label>
       </div>
     </div>
@@ -21,7 +21,29 @@
 
 <script>
 export default {
-  name: 'GoTo'
+  name: 'GoTo',
+  data() {
+    return {
+      x: 0,
+      y: 0
+    };
+  },
+  methods: {
+    changeCoords(ev, axis) {
+      const { globalConfig } = this;
+      const { target } = ev;
+      if (target.value === '') {
+        this[axis] = target.value;
+        return;
+      }
+      let value = ~~parseInt(target.value);
+      const { WorldMap } = globalConfig.all;
+      const maxSize = WorldMap.numSectionGlobalMap;
+      value = value >= maxSize ? maxSize : value;
+      this[axis] = value;
+      target.value = value;
+    }
+  }
 };
 </script>
 
@@ -33,10 +55,10 @@ export default {
   transform: translateY(91%);
   display: flex;
   flex-direction: column;
-  &__title{
+  &__title {
     text-align: center;
   }
-  &__content{
+  &__content {
     display: flex;
     justify-content: space-around;
     &__item {
@@ -45,11 +67,11 @@ export default {
       input {
         max-width: 35px;
         height: 12px;
-        font-weight: 12px;
+        font-size: 11px;
       }
     }
   }
-  &__btn{
+  &__btn {
     cursor: pointer;
     max-width: 50%;
     align-self: center;
