@@ -1,4 +1,4 @@
-const army_types = require('../Army/army_types');
+const army_types = require('../army/army_types');
 const baseBonus = 25;
 
 const Bonus = {
