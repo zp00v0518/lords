@@ -19,7 +19,7 @@ export default {
   },
   created() {
     this.building = this.data.building;
-    this.$emit("set-height", { width: "80%", height: "80%" });
+    this.$emit("set-height", { width: "90%", height: "90%" });
   },
   methods: {
     getAsTimeString,

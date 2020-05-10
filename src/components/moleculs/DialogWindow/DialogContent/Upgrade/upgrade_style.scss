@@ -6,10 +6,13 @@ $basePadding: 15px;
   flex-grow: 5;
 
   &__header {
-    min-height: 50px;
+    // min-height: 50px;
     border: 1px solid $main-red;
     display: flex;
     padding: $basePadding;
+    @media (max-width: $tablet) {
+      padding: 5px;
+    }
 
     &--icon {
       width: 50px;
@@ -21,19 +24,18 @@ $basePadding: 15px;
       }
     }
     &--txt {
-      padding: 10px;
+      // padding: 10px;
     }
   }
   &__question {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 30px;
-    padding: $basePadding;
+    padding: 10px;
   }
   &__info {
     &--wrap {
-      padding: $basePadding;
+      padding: 0 $basePadding;
       flex-grow: 5;
       display: flex;
       flex-direction: column;
@@ -94,6 +96,7 @@ $basePadding: 15px;
       width: 100%;
       text-align: center;
       padding: 10px;
+      padding-bottom: 0;
     }
     &--item {
       width: 100%;
@@ -104,14 +107,18 @@ $basePadding: 15px;
   }
 
   &__answer {
-    @include center;
-    height: 50px;
+    display: flex;
+    justify-content: center;
     padding: $basePadding / 2;
+    height: 10%;
 
     &__item {
       text-transform: uppercase;
       margin-left: 20px;
       margin-right: 20px;
+    }
+    &--btn {
+      margin: 0 10px;
     }
   }
 }

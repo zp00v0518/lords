@@ -51,7 +51,7 @@
     <div class="upgrade__info--txt">{{ gloss.dialog.maxLvl.txt }}</div>
   </template>
   <div class="upgrade__answer">
-    <div class="upgrade__answer__item yes" @click="upgradeBuilding">
+    <!-- <div class="upgrade__answer__item yes" @click="upgradeBuilding">
       {{ gloss.dialog.answer.yes.txt }}
     </div>
     <div
@@ -60,6 +60,8 @@
       @click="closeDialogWindow"
     >
       {{ gloss.dialog.answer.no.txt }}
-    </div>
+    </div> -->
+    <GuiBtn type="ok" class="upgrade__answer--btn" @click="upgradeBuilding" />
+      <GuiBtn type="cancel" class="upgrade__answer--btn" @click="closeDialogWindow" />
   </div>
 </div>

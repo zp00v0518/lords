@@ -39,7 +39,7 @@ export default {
       ctx: null,
       helperCtx: document.createElement('canvas').getContext('2d'),
       races: this.$store.state.globalConfig.races,
-      count: 0,
+      // count: 0,
       WIDTH: 800,
       HEIGHT: 374,
       scale_X: 1, // масштаб, по отношени. к базовым размерам
@@ -69,10 +69,11 @@ export default {
   watch: {
     currentSector: function() {
       this.arrDrawImg = this.createArrDrawImg();
-      if (this.count === 0 && this.ctx) {
-        this.count++;
-        this.drawTown(this.arrDrawImg);
-      }
+      this.drawTown(this.arrDrawImg);
+      // if (this.count === 0 && this.ctx) {
+      //   this.count++;
+      //   this.drawTown(this.arrDrawImg);
+      // }
     }
   },
   methods: {
