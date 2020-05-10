@@ -1,10 +1,13 @@
  <template>
   <header class="header">
-    <div class="header__update_region" v-if="NODE_ENV === 'development'">
-      <input type="number" v-model="armySize" />
-      <button @click="updateArmyOnRegion">Обновить регион</button>
-    </div>
-    <ChatSmall v-show="showChat"/>
+    <template>
+      <div class="header__update_region" v-if="NODE_ENV === 'development'">
+        <input type="number" v-model="armySize" />
+        <button @click="updateArmyOnRegion">Обновить регион</button>
+      </div>
+      <div v-else></div>
+    </template>
+    <ChatSmall v-show="showChat" />
   </header>
 </template>
 

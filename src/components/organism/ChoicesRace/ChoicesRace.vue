@@ -81,6 +81,10 @@ export default {
 .choices-race {
   align-self: center;
   margin-top: 100px;
+  &__title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
   &__content {
     display: flex;
     flex-direction: column;
