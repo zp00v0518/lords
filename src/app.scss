@@ -1,14 +1,36 @@
 @import '@/assets/variable.scss';
 @import '@/assets/mixins.scss';
 
-#app{
-  @include center;
+* {
+  margin: 0;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+#app {
+  flex-direction: column;
   height: 100%;
   width: 100%;
   box-sizing: border-box;
+  max-height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  // flex-direction: column;
   // background-image: url('../frontEnd/img/main/background/fon.jpg');
   background-image: url('../frontEnd/img/main/background/panelbg.jpg');
   // background-image: url('../frontEnd/img/main/background/mainmenubg.jpg')1
-  // display: flex;
-  // justify-content: center;
+}
+
+::-webkit-scrollbar {
+  width: 5px; /* ширина scrollbar'a */
+  background: transparent; /* опционально */
+}
+::-webkit-scrollbar-thumb {
+  background-color: #656363;
+  border-radius: 6px;
 }

@@ -44,12 +44,12 @@
 </template>
 
 <script>
-import { deepClone } from "../../../../../utils";
-import { ArmyBattleLine } from "../../../ArmyLine";
-import { currentSector } from "../../../../mixins";
+import { deepClone } from '../../../../../utils';
+import { ArmyBattleLine } from '../../../ArmyLine';
+import { currentSector } from '../../../../mixins';
 
 export default {
-  name: "DialogBattle",
+  name: 'DialogBattle',
   mixins: [currentSector],
   components: { ArmyBattleLine },
   props: {
@@ -82,20 +82,16 @@ export default {
   },
   methods: {
     goBattle() {
-      const result = this.dragResult
-        ? this.dragResult
-        : deepClone(this.atackArmy);
+      const result = this.dragResult ? this.dragResult : deepClone(this.atackArmy);
       const { $store, currentSector, activeHero, target } = this;
 
       if (!result || result.length === 0 || activeHero.army.length === 0) {
-        this.$emit("close");
+        this.$emit('close');
         return;
       }
-      const sectorIndex = $store.state.userSectors.sectors.findIndex(
-        i => i._id === currentSector._id
-      );
+      const sectorIndex = $store.state.userSectors.sectors.findIndex(i => i._id === currentSector._id);
       const message = {
-        type: "battleRequest",
+        type: 'battleRequest',
         data: {
           sectorIndex,
           attackHeroId: activeHero._id,
@@ -108,7 +104,7 @@ export default {
         }
       };
       this.$ws.sendMessage(message);
-      this.$emit("close");
+      this.$emit('close');
       this.$store.commit('SET_ACTIVE_HERO_ID', -1);
     },
     sortDefenseArmy(army) {
@@ -125,9 +121,9 @@ export default {
     },
     getDefenderAvatar() {
       const { Army } = this.globalConfig.all;
-      if (this.data.target === "region") {
+      if (this.data.target === 'region') {
         const { defArmy } = this;
-        if (defArmy.length === 0) return "";
+        if (defArmy.length === 0) return '';
         return Army.getIconUnit({ unit: defArmy[0] });
       }
     }
@@ -139,22 +135,27 @@ export default {
 .dialog-battle {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  height: 75%;
   &__header {
     display: flex;
     justify-content: center;
+    max-height: 20%;
     margin-bottom: 20px;
     margin-top: 5px;
+    @media (max-width: $tablet) {
+      margin-bottom: 10px;
+      max-height: 8%;
+    }
+
     &__item {
       display: flex;
       margin: 0 10px;
       flex-basis: 50%;
       min-width: 50%;
       &__ava {
-        width: 50px;
-        height: 50px;
+        max-width: 50px;
+        max-height: 50px;
         & > img {
-          width: 100%;
           height: 100%;
         }
       }
@@ -175,6 +176,9 @@ export default {
   }
   &__content {
     display: flex;
+    flex-grow: 2;
+    margin-bottom: 20px;
+    max-height: 75%;
     &__item {
       flex-basis: 50%;
       margin: 0 10px;
@@ -183,7 +187,8 @@ export default {
   &__confirm {
     display: flex;
     justify-content: center;
-    height: 40px;
+    max-height: 40px;
+    height: 20%;
     &--btn {
       margin: 0 10px;
     }

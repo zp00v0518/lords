@@ -5,12 +5,16 @@
   <meta charset="UTF-8" />
   <title>User</title>
   <script src="js/template/templateFunc.js"></script>
+  <script src="js/liveReload.js"></script>
   <!-- <link rel="stylesheet" href="style/user/header.css" /> -->
+  <script src="js/developer.js"></script>
   <script src="js/user/userPage.js"></script>
   <style>
     body {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      /* justify-content: center; */
       width: 100vw;
       height: 100vh;
     }
@@ -37,9 +41,12 @@
       cursor: pointer;
     }
   </style>
+  </style>
 </head>
 
 <body>
+  <input id="dev" type="text" style="width:400px; margin-bottom: 100px;" />
+
   <header><span id="userName" class="userName"></span></header>
   <main id="choiseServer" class="choice_server">
     <div class="choice_server__title">Выберите сервер</div>
@@ -53,6 +60,19 @@
     </div>
   </main>
   <footer></footer>
+
+  <!-- <script>
+	const serverList = document.getElementById('choiseServer');
+		serverList.addEventListener('click', choiseServer);
+
+		function choiseServer (event) {
+			const target = event.target;
+			const server = target.dataset.server;
+			sendAjaxRequest('choiseServer', server, result => {
+				console.log(result)
+			})
+		}
+	</script> -->
 </body>
 
 </html>

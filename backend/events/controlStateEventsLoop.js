@@ -65,7 +65,7 @@ function iterationImplenetation(event, callback = () => {}) {
         } else if (typeBuilding.indexOf('barraks') !== -1) {
           finishEvent[typeBuilding](sector.town[typeBuilding], event, sector);
         } else if (townUpgrade.work.static) {
-          const resultUpgradeBuilding = await fixingResultUpgrade_building(townUpgrade, event);
+          const resultUpgradeBuilding = await fixingResultUpgrade_building(event, sector);
           callback(null, resultUpgradeBuilding);
           return resolve(resultUpgradeBuilding);
         }

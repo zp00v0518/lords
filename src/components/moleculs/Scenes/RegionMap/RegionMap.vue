@@ -15,6 +15,7 @@
       @mouseleave="hideTooltip"
       @click="mode === 'dialog' ? {} : handlerClick()"
       key="scene"
+      class="scene__canvas"
     ></canvas>
   </div>
 </template>
@@ -46,12 +47,7 @@ export default {
   },
   created() {
     if (!this.regionMap) {
-      this.currentMap = this.$store.state.regionMap.currentRegion;
-      if (this.$store.state.userSectors.currentSector) {
-        this.currentMap = this.$store.state.userSectors.currentSector.region;
-      }
-    } else {
-      this.currentMap = this.regionMap;
+      this.currentMap = this.currentSector.region;
     }
   },
   watch: {
@@ -87,15 +83,18 @@ export default {
       return deepClone(d);
     },
     tileWidth() {
-      const { ctx } = this;
+      const { ctx, mode } = this;
       if (!ctx) return 0;
       const widthParse = parseInt(this.sceneWidth) / 2;
       const intermediate = widthParse / (this.currentMap.length / 2);
-      return intermediate;
+      if (mode !== 'global') {
+        return intermediate * 0.6;
+      }
+      return intermediate * 0.9;
     },
     isoCoords() {
       const x = parseInt(this.sceneWidth) / 2;
-      const y = parseInt(this.sceneHeight) / 100 * 10;
+      const y = (parseInt(this.sceneHeight) / 100) * 10;
       return { x, y };
     }
   },

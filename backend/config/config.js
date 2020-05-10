@@ -36,10 +36,16 @@ module.exports = {
     day: 1000 * 60 * 60 * 24,
     week: 1000 * 60 * 60 * 24 * 7,
     month: 1000 * 60 * 60 * 24 * 31,
-    speedGame: 2, // делитель. Влияет на время улучшения строений. Чем больше, тем быстрее. Не может быть 0
+    speedGame: process.env.SPEED || 1, // делитель. Влияет на время улучшения строений. Чем больше, тем быстрее. Не может быть 0
     hiring: 500
   },
   listFile: {
+    DEV: {
+      login: 'login_dev',
+      cabinet: 'user_dev',
+      err: '404',
+      game: 'game_dev'
+    },
     html: {
       login: 'login',
       cabinet: 'user',

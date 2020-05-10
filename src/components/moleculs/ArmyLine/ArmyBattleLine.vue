@@ -1,23 +1,23 @@
 <template>
   <div class="battle-army-line" drag-container @mouseup="is_drag ? handlerMouseUp : {}">
     <div
-      v-for="index in 7"
+      v-for="(item, index) in curArmy"
       class="battle-army-line__item"
       :class="`battle-army-line__item--${position}`"
       :key="index"
       drag-item
     >
-      <template v-if="curArmy[index-1]">
+      <template v-if="item">
         <div class="battle-army-line__item__stack">
-          <div class="battle-army-line__item__stack--count">{{curArmy[index-1].count}}</div>
-          <div class="battle-army-line__item__stack--power">{{getForceStack(curArmy[index-1])}}</div>
+          <div class="battle-army-line__item__stack--count">{{item.count}}</div>
+          <div class="battle-army-line__item__stack--power">{{getForceStack(item)}}</div>
         </div>
         <div
           class="battle-army-line__item--avatar"
           @dragstart.prevent
           @mousedown="is_drag ? handlerMouseDown($event, {itemIndex: index -1, allValue: curArmy}, handlerDragStart) : {}"
         >
-          <img :src="getUnitAvatar(curArmy[index-1])" alt />
+          <img :src="getUnitAvatar(item)" alt />
         </div>
         <div class="battle-army-line__item--type"></div>
       </template>
@@ -78,7 +78,7 @@ $baseMargin: 3px;
   flex-direction: column;
   &__item {
     display: flex;
-    min-height: 36px;
+    max-height: calc(100% / 8);
     justify-content: flex-end;
     margin: $baseMargin 0;
     &--right {
@@ -88,8 +88,19 @@ $baseMargin: 3px;
       margin: 0 $baseMargin * 2;
       font-size: 12px;
       line-height: 1.4em;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
       &--count {
         font-weight: bold;
+        margin-right: 10px;
+      }
+    }
+    &--avatar{
+      margin-right: 10px;
+      img{
+        max-height: 100%;
+        max-width: 100%;
       }
     }
   }

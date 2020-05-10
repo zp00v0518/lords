@@ -160,7 +160,7 @@ const tumb = {
     display: flex;
     justify-content: center;
     height: 20%;
-    margin: 10px 0px;
+    margin: 1% 0px;
     &__item {
       margin: 0 3%;
       width: 20%;

@@ -1,4 +1,5 @@
 //создает коллекцию globalMap в БД
+require('dotenv').config();// парсит ENV файл
 const { getRandomNumber } = require('template_func');
 const insert = require('../workWithMongoDB/insertDB.js');
 const schema = require('../workWithMongoDB/schema.js');

@@ -3,6 +3,7 @@
     <canvas
       v-show="currentSector"
       ref="scene"
+      class="scene__canvas"
       :width="widthScene"
       :height="heightScene"
       @mousemove="handlerMouseMove"
@@ -19,30 +20,26 @@
 </template>
 
 <script>
-import Tooltip from "../../Tooltip";
-import { getCursorPositionOnScene } from "../utils";
-import {
-  formCurrentImageList,
-  drawTown,
-  checkElemUnderMouse
-} from "./utils_town";
-import Building from "./Building";
-import { currentSector } from "../../../mixins";
+import Tooltip from '../../Tooltip';
+import { getCursorPositionOnScene } from '../utils';
+import { formCurrentImageList, drawTown, checkElemUnderMouse } from './utils_town';
+import Building from './Building';
+import { currentSector } from '../../../mixins';
 
 export default {
-  name: "TownMap",
+  name: 'TownMap',
   mixins: [currentSector],
   components: {
     Tooltip,
     Building
   },
-  props: ["widthScene", "heightScene"],
+  props: ['widthScene', 'heightScene'],
   data() {
     return {
       ctx: null,
-      helperCtx: document.createElement("canvas").getContext("2d"),
+      helperCtx: document.createElement('canvas').getContext('2d'),
       races: this.$store.state.globalConfig.races,
-      count: 0,
+      // count: 0,
       WIDTH: 800,
       HEIGHT: 374,
       scale_X: 1, // масштаб, по отношени. к базовым размерам
@@ -52,7 +49,7 @@ export default {
       hover: null,
       component: {
         is: false,
-        name: "",
+        name: '',
         buildingData: {}
       }
     };
@@ -60,7 +57,6 @@ export default {
   created() {
     this.helperCtx.canvas.width = parseFloat(this.widthScene);
     this.helperCtx.canvas.height = parseFloat(this.heightScene);
-    // document.body.appendChild(this.helperCtx.canvas);
   },
   computed: {
     raceTownIndex() {
@@ -72,23 +68,12 @@ export default {
   },
   watch: {
     currentSector: function() {
-      if (this.count === 0 && this.ctx) {
-        this.count++;
-        this.arrDrawImg = formCurrentImageList.call(
-          this,
-          this.currentSector,
-          this.townRaceName,
-          this.$store.state.globalConfig
-        );
-        this.drawTown(this.arrDrawImg);
-      } else {
-        this.arrDrawImg = formCurrentImageList.call(
-          this,
-          this.currentSector,
-          this.townRaceName,
-          this.$store.state.globalConfig
-        );
-      }
+      this.arrDrawImg = this.createArrDrawImg();
+      this.drawTown(this.arrDrawImg);
+      // if (this.count === 0 && this.ctx) {
+      //   this.count++;
+      //   this.drawTown(this.arrDrawImg);
+      // }
     }
   },
   methods: {
@@ -105,26 +90,26 @@ export default {
         this.scale_Y
       );
       this.drawTown(this.arrDrawImg);
-      this.ctx.canvas.style.cursor = this.hover ? "pointer" : "default";
+      this.ctx.canvas.style.cursor = this.hover ? 'pointer' : 'default';
     },
     handlerClick(event) {
-      // const mouseCoords = this.getCursorPositionOnScene(event);
       if (this.hover) {
         this.component.name = this.hover.class;
         this.component.buildingData = this.hover.buildingData;
         this.component.is = true;
       }
-      // this.ctx.beginPath();
-      // this.ctx.arc(mouseCoords.x, mouseCoords.y, 2, 0, 2 * Math.PI);
-      // this.ctx.fill();
-      // this.ctx.closePath();
+    },
+    createArrDrawImg() {
+      const { currentSector, townRaceName, $store } = this;
+      return formCurrentImageList.call(this, currentSector, townRaceName, $store.state.globalConfig);
     }
   },
   mounted() {
-    this.ctx = this.$refs.scene.getContext("2d");
+    this.ctx = this.$refs.scene.getContext('2d');
     this.scale_X = this.ctx.canvas.width / this.WIDTH;
     this.scale_Y = this.ctx.canvas.height / this.HEIGHT;
-    this.drawTown();
+    this.arrDrawImg = this.createArrDrawImg();
+    this.drawTown(this.arrDrawImg);
   }
 };
 </script>

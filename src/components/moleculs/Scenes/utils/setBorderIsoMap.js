@@ -1,5 +1,6 @@
 function setBorderIsoMap() {
-  const currentLength = this.currentMap.length;
+  const { currentMap } = this;
+  const currentLength = currentMap.length;
   const { borderIsoMap, isoCoords, tileWidth, viewportPath } = this;
   const height = tileWidth / 2;
   const startX = isoCoords.x;

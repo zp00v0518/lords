@@ -4,6 +4,7 @@
     <canvas
       id="global"
       ref="scene"
+      class="scene__canvas"
       :width="widthScene"
       :height="heightScene"
       @mousemove="handlerMousemoveOnMap"
@@ -14,22 +15,26 @@
       id="left"
       class="globalmap__move globalmap__move-left"
       type="button"
+      :style="moveBtnCoords.left"
       @click="moveOnMap"
     >left</button>
     <button
       id="top"
+      :style="moveBtnCoords.top"
       class="globalmap__move globalmap__move-top"
       type="button"
       @click="moveOnMap"
     >top</button>
     <button
       id="right"
+      :style="moveBtnCoords.right"
       class="globalmap__move globalmap__move-right"
       type="button"
       @click="moveOnMap"
     >right</button>
     <button
       id="bottom"
+      :style="moveBtnCoords.bottom"
       class="globalmap__move globalmap__move-bottom"
       type="button"
       @click="moveOnMap"
@@ -66,6 +71,12 @@ export default {
       popupTown: {
         show: false,
         targetSector: null
+      },
+      moveBtnCoords: {
+        left: { top: 0, left: 0 },
+        right: { top: 0, left: 0 },
+        top: { top: 0, left: 0 },
+        bottom: { top: 0, left: 0 }
       }
     };
   },
@@ -101,7 +112,7 @@ export default {
     tileWidth() {
       const widthParse = parseInt(this.widthScene) / 2;
       const intermediate = widthParse / (this.currentMap.length / 2);
-      return intermediate * 1.2;
+      return intermediate * 0.9;
       // return intermediate / (this.currentMap.length / 2) + intermediate;
     },
     isoCoords() {
@@ -211,16 +222,94 @@ export default {
         const heroCoords = algebra.getPointOnStraight(...baseCoords, heroLength);
         this.drawHeroOnMap(ctx, heroCoords);
       });
+    },
+    getMoveBtnPositions() {
+      const { borderIsoMap, moveBtnCoords } = this;
+      const { top, left, right, bottom } = borderIsoMap;
+      let coords = addPXToCoords(algebra.getPointOnStraight(top.x, top.y, left.x, left.y, '50%'));
+      moveBtnCoords.left.left = coords.x;
+      moveBtnCoords.left.top = coords.y;
+      coords = addPXToCoords(algebra.getPointOnStraight(top.x, top.y, right.x, right.y, '50%'));
+      moveBtnCoords.top.left = coords.x;
+      moveBtnCoords.top.top = coords.y;
+      coords = addPXToCoords(algebra.getPointOnStraight(right.x, right.y, bottom.x, bottom.y, '50%'));
+      moveBtnCoords.right.left = coords.x;
+      moveBtnCoords.right.top = coords.y;
+      coords = addPXToCoords(algebra.getPointOnStraight(bottom.x, bottom.y, left.x, left.y, '50%'));
+      moveBtnCoords.bottom.left = coords.x;
+      moveBtnCoords.bottom.top = coords.y;
+
+      function addPXToCoords(obj) {
+        Object.keys(obj).forEach(key => {
+          const value = obj[key];
+          obj[key] = value + 'px';
+        });
+        return obj;
+      }
     }
   },
   mounted() {
     this.ctx = this.$refs.scene.getContext('2d');
     this.drawMap();
     this.setBorderIsoMap();
+    this.getMoveBtnPositions();
   }
 };
 </script>
 
 <style lang='scss'>
-@import 'globalMap.scss';
+.globalmap {
+  position: relative;
+  &__move {
+    margin: 0;
+    padding: 0;
+    border: none;
+    padding: 8px;
+    position: absolute;
+    cursor: pointer;
+    font-weight: 600;
+    min-width: 50px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    @media (max-width: $tablet) {
+      min-width: unset;
+      padding: 5px;
+    }
+    @media (max-width: $tablet-small) {
+      font-size: 10px;
+    }
+    &-bottom {
+      transform: translateX(-100%) translateY(15%);
+    }
+
+    &-left {
+      transform: translateX(-120%) translateY(-120%);
+    }
+
+    &-top {
+      transform: translateX(25%) translateY(-100%);
+    }
+
+    &-right {
+      transform: translateX(-10%) translateY(28%);
+    }
+  }
+}
+.zoom {
+  &__wrap {
+    position: absolute;
+    bottom: 0;
+    right: 15%;
+    margin-bottom: 15px;
+    @media (max-width: $tablet-small) {
+      right: 5%;
+    }
+  }
+  &__btn {
+    padding: 3px;
+    @media (max-width: $tablet-small) {
+      font-size: 10px;
+    }
+  }
+}
 </style>
