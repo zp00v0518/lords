@@ -1,7 +1,7 @@
 const ObjectId = require('mongodb').ObjectID;
 const { checkSchema } = require('../../template_modules');
 const { redirectMessage } = require('../../wsServer');
-const { Army } = require('../Army');
+const { Army } = require('../baseArmy');
 const { updateDB } = require('../../workWithMongoDB');
 const update = new updateDB();
 const { getTownByHero } = require('../../town');
