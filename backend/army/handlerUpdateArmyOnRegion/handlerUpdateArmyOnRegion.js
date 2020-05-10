@@ -4,7 +4,7 @@ const { getOneTownFromDB } = require('../../town');
 const Race = require('../../race/Race');
 const regionTypes = require('../../region/Region').types;
 const { updateStateRegion } = require('../../region');
-const { createArmy } = require('../Army');
+const { createArmy } = require('../baseArmy');
 const changeArmyOnRegion = require('../changeArmyOnRegion');
 
 function handlerUpdateArmyOnRegion(message, info) {

@@ -1,4 +1,4 @@
-const { Army } = require("../army/army");
+const { Army } = require("./baseArmy");
 const calcValueUnitInBarraks = require("./calcValueUnitInBarraks");
 
 function globalCalcUnit(town) {
