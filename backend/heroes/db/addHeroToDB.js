@@ -1,7 +1,7 @@
 const { Heroes } = require('../../heroes');
 const { document } = require('../../workWithMongoDB/schema');
 const { insertDB } = require('../../workWithMongoDB');
-const { Army, createArmy } = require('../../army/Army');
+const { Army, createArmy } = require('../../army/army');
 
 const insert = new insertDB();
 
