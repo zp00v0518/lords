@@ -79,7 +79,7 @@ export default {
 
 <style lang="scss">
 .choices-race {
-  align-self: flex-start;
+  align-self: center;
   margin-top: 100px;
   &__content {
     display: flex;

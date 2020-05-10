@@ -44,7 +44,7 @@ module.exports = {
       login: 'login_dev',
       cabinet: 'user_dev',
       err: '404',
-      game: 'game'
+      game: 'game_dev'
     },
     html: {
       login: 'login',

@@ -3,6 +3,7 @@ node_modules/
 frontEnd/dist/
 frontEnd/static/
 frontEnd/app.js
+frontEnd/game.html
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
