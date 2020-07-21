@@ -51,7 +51,7 @@ export default {
         data: { x, y }
       };
       const response = await this.$ws.get(message);
-      console.log(response);
+      this.$store.commit('SET_CURRENTMAP', response);
     }
   }
 };
