@@ -8,7 +8,8 @@ const Event = {
     buildNewTown: 'buildNewTown',
     heroTransfer: 'heroTransfer',
     sendCaravan: 'sendCaravan',
-    caravanBackToTown: 'caravanBackToTown'
+    caravanBackToTown: 'caravanBackToTown',
+    goToCoords: 'goToCoords'
   },
   mode: {
     global: 'global',

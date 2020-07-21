@@ -12,5 +12,6 @@ module.exports = {
   battleRequest: require('../battle/handlerBattleRequest'),
   [evTypes.buildNewTown]: require('../town/handlerBuildNewTownRequest'),
   [evTypes.heroTransfer]: require('../town/handlerHeroTransferRequest'),
-  [evTypes.sendCaravan]: require('../caravan/handlerSendCaravanRequest')
+  [evTypes.sendCaravan]: require('../caravan/handlerSendCaravanRequest'),
+  [evTypes.goToCoords]: require('../globalMap/handlerGoToCoordsRequest')
 };

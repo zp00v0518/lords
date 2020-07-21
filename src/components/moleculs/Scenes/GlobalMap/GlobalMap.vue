@@ -48,12 +48,14 @@
       :tileWidth="tileWidth"
       :targetSector="popupTown.targetSector"
     ></PopupTown>
+    <GoTo />
   </div>
 </template>
 
 <script>
 import Tooltip from '../../Tooltip';
 import PopupTown from './modules/PopupTown';
+import GoTo from './modules/GoTo';
 import { currentSector } from '../../../mixins';
 import drawHeroMixin from '../mixins/drawHeroMixin';
 import baseMixins from '../mixins/baseMixins';
@@ -62,7 +64,7 @@ import { iso } from '../utils';
 
 export default {
   name: 'GlobalMap',
-  components: { Tooltip, PopupTown },
+  components: { Tooltip, PopupTown, GoTo },
   mixins: [currentSector, drawHeroMixin, baseMixins],
   props: ['widthScene', 'heightScene'],
   data() {
