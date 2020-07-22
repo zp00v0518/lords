@@ -148,7 +148,8 @@ export default {
       const { ctx, eventList, currentMap, tileWidth, settings, getTileByCoords } = this;
       ctx.fillStyle = settings.baseColor;
       eventList.forEach(event => {
-        const { data } = event;
+        const { data, target } = event;
+        if (target.sector !== this.currentSector._id) return;
         const { startCoords, endCoords } = data;
         const startTile = getTileByCoords(currentMap, startCoords.x, startCoords.y);
         const endTile = getTileByCoords(currentMap, endCoords.x, endCoords.y);
