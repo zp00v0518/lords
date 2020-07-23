@@ -1,4 +1,4 @@
-import checkSource from '../resources/checkSource.js';
+// import checkSource from '../resources/checkSource.js';
 import Race from '../race/Race';
 import Town from '../town/Town';
 import { Army } from '../army/baseArmy';
@@ -10,7 +10,7 @@ import Resources from '../resources/Resources';
 import Caravan from '../caravan/Caravan';
 
 export default {
-  checkSource,
+  // checkSource,
   Race,
   Town,
   Army,

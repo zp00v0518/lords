@@ -3,21 +3,16 @@ export default {
   data() {
     return {
       info: {
-        url: "img/resources/" + this.data.building.type + ".gif",
-        text: ["Lorem ipsum dolor sit amet.", "2 Lorem ipsum dolor sit amet."]
+        url: 'img/resources/' + this.data.building.type + '.gif',
+        text: ['Lorem ipsum dolor sit amet.', '2 Lorem ipsum dolor sit amet.']
       }
     };
   },
   computed: {
     upgrade() {
       return {
-        time: this.getAsTimeString(
-          this.$var.mine.getTimeUpgrade(this.building.lvl, this.rangeValue)
-        ),
-        source: this.$var.mine.getResourcesForUpgrade(
-          this.building.lvl,
-          this.rangeValue
-        )
+        time: this.getAsTimeString(this.$var.mine.getTimeUpgrade(this.building.lvl, this.rangeValue)),
+        source: this.$var.mine.getResourcesForUpgrade(this.building.lvl, this.rangeValue)
       };
     },
     checkMaxLvl() {
@@ -30,30 +25,23 @@ export default {
   methods: {
     upgradeBuilding() {
       if (this.checkMaxLvl) {
-        this.$store.commit("DIALOG_CLOSE");
+        this.$store.commit('DIALOG_CLOSE');
         return;
       }
       if (this.building.upgrade.is) {
         const dialog = {
           data: { txt: this.gloss.dialog.isUpgrade.txt },
-          type: "message"
+          type: 'message'
         };
-        this.$store.dispatch("DIALOG_SHOW", dialog);
+        this.$store.dispatch('DIALOG_SHOW', dialog);
         return;
       }
       const storageName = this.$var.classInstance.storage;
-      if (
-        this.checkSource(
-          this.upgrade.source,
-          this.currentSector.town[storageName].sources
-        )
-      ) {
+      if (this.Resources.checkSource(this.upgrade.source, this.currentSector.town[storageName].sources)) {
         const { $store, currentSector } = this;
-        const sectorIndex = $store.state.userSectors.sectors.findIndex(
-          i => i._id === currentSector._id
-        );
+        const sectorIndex = $store.state.userSectors.sectors.findIndex(i => i._id === currentSector._id);
         const message = {
-          type: "upgradeRegion",
+          type: 'upgradeRegion',
           data: {
             sectorIndex,
             persent: +this.rangeValue,
@@ -65,13 +53,13 @@ export default {
           }
         };
         this.$ws.sendMessage(message);
-        this.$store.commit("DIALOG_CLOSE");
+        this.$store.commit('DIALOG_CLOSE');
       } else {
         const dialog = {
           data: { txt: this.gloss.dialog.notResources.txt },
-          type: "message"
+          type: 'message'
         };
-        this.$store.dispatch("DIALOG_SHOW", dialog);
+        this.$store.dispatch('DIALOG_SHOW', dialog);
       }
     }
   }
