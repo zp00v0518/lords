@@ -3,8 +3,8 @@ export default {
   data() {
     return {
       info: {
-        url: "",
-        text: ["Lorem ipsum dolor sit amet.", "2 Lorem ipsum dolor sit amet."]
+        url: '',
+        text: ['Lorem ipsum dolor sit amet.', '2 Lorem ipsum dolor sit amet.']
       },
       in_gold: 0,
       building: this.data.building,
@@ -28,14 +28,8 @@ export default {
       const index = this.$var.indexes.upgrade_town;
       const rangeValue = this.rangeValue;
       return {
-        time: this.getAsTimeString(
-          town.getTimeForUpgrade(seconds, rangeValue, index)
-        ),
-        source: town.getResourcesForUpgrade(
-          this.nextBuilding.price,
-          rangeValue,
-          index
-        )
+        time: this.getAsTimeString(town.getTimeForUpgrade(seconds, rangeValue, index)),
+        source: town.getResourcesForUpgrade(this.nextBuilding.price, rangeValue, index)
       };
     },
     checkMaxLvl() {
@@ -48,28 +42,23 @@ export default {
   methods: {
     upgradeBuilding() {
       if (this.checkMaxLvl) {
-        this.$store.commit("DIALOG_CLOSE");
+        this.$store.commit('DIALOG_CLOSE');
         return;
       }
       if (this.build_from_db.upgrade.is) {
         const dialog = {
           data: { txt: this.gloss.dialog.isUpgrade.txt },
-          type: "message"
+          type: 'message'
         };
-        this.$store.dispatch("DIALOG_SHOW", dialog);
+        this.$store.dispatch('DIALOG_SHOW', dialog);
         return;
       }
-      const isSources = this.checkSource(
-        this.upgrade.source,
-        this.data.storage
-      );
+      const isSources = this.Resources.checkSource(this.upgrade.source, this.data.storage);
       if (isSources) {
         const { $store, currentSector } = this;
-        const sectorIndex = $store.state.userSectors.sectors.findIndex(
-          i => i._id === currentSector._id
-        );
+        const sectorIndex = $store.state.userSectors.sectors.findIndex(i => i._id === currentSector._id);
         const message = {
-          type: "upgradeBuilding",
+          type: 'upgradeBuilding',
           data: {
             sectorIndex,
             persent: +this.rangeValue,
@@ -79,13 +68,13 @@ export default {
           }
         };
         this.$ws.sendMessage(message);
-        this.$store.commit("DIALOG_CLOSE");
+        this.$store.commit('DIALOG_CLOSE');
       } else {
         const dialog = {
           data: { txt: this.gloss.dialog.notResources.txt },
-          type: "message"
+          type: 'message'
         };
-        this.$store.dispatch("DIALOG_SHOW", dialog);
+        this.$store.dispatch('DIALOG_SHOW', dialog);
       }
     },
     darwTumb() {
@@ -93,20 +82,10 @@ export default {
       const elem = this.data.tumb.elem.cloneNode();
       const img = this.data.tumb.img;
       const coords = this.data.tumb.coords;
-      elem.style.width = "70%";
-      elem.style.height = "70%";
-      const ctx = elem.getContext("2d");
-      ctx.drawImage(
-        img,
-        coords.x,
-        coords.y,
-        150,
-        70,
-        0,
-        0,
-        elem.width,
-        elem.height
-      );
+      elem.style.width = '70%';
+      elem.style.height = '70%';
+      const ctx = elem.getContext('2d');
+      ctx.drawImage(img, coords.x, coords.y, 150, 70, 0, 0, elem.width, elem.height);
       ref.parentNode.replaceChild(elem, ref);
     }
   },

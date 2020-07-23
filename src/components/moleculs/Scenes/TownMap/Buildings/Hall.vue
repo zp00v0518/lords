@@ -30,7 +30,7 @@ export default {
       rowsIndex: [],
       races: this.$store.state.globalConfig.races,
       listBuildings: null,
-      checkSource: this.$store.state.globalConfig.all.checkSource,
+      // checkSource: this.$store.state.globalConfig.all.Resources.checkSource,
       houses: {}
     };
   },
@@ -50,6 +50,9 @@ export default {
     },
     buildings() {
       return this.$store.state.globalConfig.races[this.townRaceName].buildings;
+    },
+    Resources() {
+      return this.$store.state.globalConfig.all.Resources;
     }
   },
   methods: {
@@ -101,7 +104,7 @@ export default {
         return next.lvl[item.lvl].is;
       });
       if (flag) {
-        flag = this.checkSource(nextBuilding.price, this.sources);
+        flag = this.Resources.checkSource(nextBuilding.price, this.sources);
       }
       return flag ? 'prepare' : 'no-prepare';
     }

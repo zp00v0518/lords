@@ -1,6 +1,6 @@
 const { checkSchema, redirectMessage, gloss } = require('../../tube');
 const { Race } = require('../../race');
-const { checkSource, deleteSource, Resources } = require('../../resources');
+const { deleteSource, Resources } = require('../../resources');
 const Town = require('../Town');
 const setUpUpgradeChange_building = require('./setUpUpgradeChange_building');
 const { sendWSMessage } = require('../../wsServer');
@@ -49,7 +49,7 @@ function handlerResponseUpgradeBuilding(message, info) {
     const storage = sector.town.storage;
     const persent = data.persent;
     const price_for_upgrade = Town.getResourcesForUpgrade(price, persent);
-    if (checkSource(price_for_upgrade, storage.sources)) {
+    if (Resources.checkSource(price_for_upgrade, storage.sources)) {
       const time_in_gold = Resources.getInGold(price);
       // const time_in_gold = gameVariables.resources.getInGold(price);
       const sec = global.gameVariables.time.sec;
