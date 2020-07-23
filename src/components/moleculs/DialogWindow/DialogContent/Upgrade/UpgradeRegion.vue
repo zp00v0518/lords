@@ -11,5 +11,5 @@ export default {
 </script>
 
 <style lang='scss'>
-// @import "upgrade_style.scss";
+@import "upgrade_style.scss";
 </style>

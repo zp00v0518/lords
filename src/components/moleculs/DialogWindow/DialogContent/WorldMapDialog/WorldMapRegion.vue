@@ -122,7 +122,7 @@ export default {
       const { targetTile } = data;
       return WorldMap.getTimeMoveOnMap(currentSector, targetTile);
     },
-    buildNewTown() {
+    async buildNewTown() {
       const { activeHero, createDisabled, $store, currentSector, data, gloss, globalConfig } = this;
       if (createDisabled) return;
       const { targetTile } = data;
@@ -138,16 +138,16 @@ export default {
         }
       };
       this.closeDialogWindow();
-      this.$ws.get(message).then(res => {
-        const txt = gloss.eventLang.eventResult[res.type][res.status].txt;
-        const message = {
-          type: 'message',
-          data: {
-            txt
-          }
-        };
-        this.$store.commit('DIALOG_SHOW', message);
-      });
+      const res = await this.$ws.get(message);
+      console.log(res);
+      const txt = gloss.eventLang.eventResult[res.type][res.status].txt;
+      const alert = {
+        type: 'message',
+        data: {
+          txt
+        }
+      };
+      this.$store.commit('DIALOG_SHOW', alert);
     }
   }
 };
