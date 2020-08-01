@@ -1,6 +1,3 @@
-const { Log } = require("template_func");
-const log = new Log(__filename);
-
 function userCreate(userData) {
   const user = {};
   user.id = userData.id;
@@ -14,7 +11,6 @@ function userCreate(userData) {
   };
   user.cookie = "";
   user.session = [];
-  // user.collections = [];
   user.collections = {};
   return user;
 }

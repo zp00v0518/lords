@@ -11,7 +11,8 @@
     "build": "node build/build.js",
     "base": "node backend/prepareToStart/createGlobalMap.js",
     "serv": "supervisor --inspect --watch backend index.js",
-    "test": "mocha backend/**/**/**/**/*.test.js"
+    "test": "mocha backend/**/**/**/**/*.test.js",
+    "demo": "npm run base && node backend/prepareToStart/demo.js"
   },
   "dependencies": {
     "cookies": "^0.7.3",
