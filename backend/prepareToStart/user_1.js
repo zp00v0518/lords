@@ -5,4 +5,5 @@ const user_1 = {
   nickName: 'admin'
 };
 
-module.exports = user_1;
+const collections = { server_1: { name: 'server_1', race: 0, alians: {}, rate: {}, color: '#FFE4E1' } };
+module.exports = { user_1, collections };

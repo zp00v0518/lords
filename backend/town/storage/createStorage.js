@@ -1,12 +1,14 @@
-const tube = require('../../tube.js');
+// const tube = require('../../tube.js');
+const gameVariables = require('../../variables/game_variables');
 const Town = require('../Town.js');
+const upgradeSection = require('../upgradeSection');
 // const Resources = gameVariables.resources;
 const { Resources } = require('../../resources');
 const { Mine } = require('../../region/mine');
 const workSection = require('..//buildings/workSection');
 
 function createStorage({ listMine = Mine.typeList, lvl = 1, status = 'not_first' }) {
-  const { upgradeSection } = tube;
+  // const { upgradeSection } = tube;
   //listMine - массив типов шахт;
   const storage = {
     // type: Town.listBuilding[0], // надо будет удалить

@@ -1,14 +1,16 @@
-const tube = require('../tube.js');
+// const tube = require('../tube.js');
 const Region = require('../region/Region');
+const { createMine } = require('../region/mine');
 const Race = require('../race/Race');
 const { createBarraks, createFort, createGuild, createMarket, createTavern, createHall } = require('./buildings');
 const { Army, createArmy } = require('../army/baseArmy');
-const { gameVariables } = global;
+// const { gameVariables } = global;
+const gameVariables = require('../variables/game_variables');
 const createStorage = require('./storage/createStorage');
 const { createCaravan } = require('../caravan');
 let listMine = [];
 
-function createTown(options) {
+function createTown(options = {}) {
   // const { createStorage } = tube;
   const indexRace = options.race || Number(0);
   const race = Race.typeList[indexRace];
@@ -57,7 +59,7 @@ function createTown(options) {
 
 function createRegionMap(townIndex = 1) {
   const numSectionRegionMap = gameVariables.numSectionRegionMap;
-  const { createMine } = tube;
+  // const { createMine } = tube;
   const regionMap = [];
   let countSection = 0;
   const coordsMine = [
