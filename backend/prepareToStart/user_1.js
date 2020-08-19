@@ -1,6 +1,6 @@
 const user_1 = {
   id: 1,
-  pass: 'admin',
+  pass: 'test',
   email: 'admin@gmail.com',
   nickName: 'admin'
 };

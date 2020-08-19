@@ -12,9 +12,9 @@ const userCreate = require('../user/userCreate');
 const createTown = require('../town/createTown');
 const WorldMap = require('../globalMap/WorldMap');
 const demoUser = require('./user_1');
-
-const user_1 = userCreate(demoUser.user_1);
-user_1.collections = demoUser.collections;
+const demoUser_2 = require('./user_2');
+const xCoords = [];
+const yCoords = [];
 
 async function insertDemoUserToDB(user) {
   const options = {
@@ -27,8 +27,8 @@ async function insertDemoUserToDB(user) {
 }
 
 async function addDemoUserToDB(user, _id) {
-  const x = getRandomNumber(gameVariables.numSectionGlobalMap - 1);
-  const y = getRandomNumber(gameVariables.numSectionGlobalMap - 1);
+  const x = getRandomCoords('x');
+  const y = getRandomCoords('y');
   const serverName = user.collections.server_1.name;
   const sectorId = await getSectorId(x, y, serverName);
   const newTown = createTown({ status: 'first' });
@@ -62,8 +62,13 @@ function startCreate() {
       startCreate();
     }, 100);
   } else {
-    setTimeout(async() => {
+    setTimeout(async () => {
+      const user_1 = userCreate(demoUser.user_1);
+      user_1.collections = demoUser.collections;
+      const user_2 = userCreate(demoUser_2.user_2);
+      user_2.collections = demoUser_2.collections;
       await insertDemoUserToDB(user_1);
+      await insertDemoUserToDB(user_2);
       insertDB.close();
       findinDB.close();
       updateDB.close();
@@ -81,6 +86,18 @@ async function getSectorId(x, y, collectionName) {
   };
   const sector = await findinDB.one(ops);
   return sector._id;
+}
+
+function getRandomCoords(axis) {
+  const coord = getRandomNumber(gameVariables.numSectionGlobalMap - 1);
+  const arr = axis === 'x' ? xCoords : yCoords;
+  const includes = arr.includes(coord);
+  if (includes) {
+    getRandomCoords(axis);
+  } else {
+    arr.push(coord);
+    return coord;
+  }
 }
 
 startCreate();

@@ -5,7 +5,7 @@ const log = new Log(__filename);
 const find = new findInDB();
 const insert = new insertDB();
 
-function checkLogin(req, requestData, callback = function() {}) {
+async function checkLogin(req, requestData, callback = function() {}) {
   // log.log('Start Work')
   const userData = requestData.data;
   return new Promise((resolve, reject) => {
@@ -93,9 +93,12 @@ function checkLogin(req, requestData, callback = function() {}) {
           headers.platform = userData.platform;
           headers.ip = ip;
           headers.user_id = findResult._id;
+          const userCookies = findResult.cookie ? findResult.cookie : setCookieUser(findResult._id);
+          console.log(userCookies);
           sessionCreate(headers)
             .then(resultSessionCreate => {
-              checkLoginResult.userCookies = findResult.cookie;
+              console.log(findResult);
+              checkLoginResult.userCookies = userCookies;
               checkLoginResult.sessionCookies = resultSessionCreate.cookie;
               checkLoginResult.userId = headers.user_id;
               checkLoginResult.status = 'authOk';
