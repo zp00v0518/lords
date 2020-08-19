@@ -94,10 +94,8 @@ async function checkLogin(req, requestData, callback = function() {}) {
           headers.ip = ip;
           headers.user_id = findResult._id;
           const userCookies = findResult.cookie ? findResult.cookie : setCookieUser(findResult._id);
-          console.log(userCookies);
           sessionCreate(headers)
             .then(resultSessionCreate => {
-              console.log(findResult);
               checkLoginResult.userCookies = userCookies;
               checkLoginResult.sessionCookies = resultSessionCreate.cookie;
               checkLoginResult.userId = headers.user_id;

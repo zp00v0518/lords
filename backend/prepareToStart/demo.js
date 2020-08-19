@@ -11,6 +11,7 @@ const config = require('../config');
 const userCreate = require('../user/userCreate');
 const createTown = require('../town/createTown');
 const WorldMap = require('../globalMap/WorldMap');
+const setDemoTownState = require('./setDemoTownState');
 const demoUser = require('./user_1');
 const demoUser_2 = require('./user_2');
 const xCoords = [];
@@ -35,6 +36,9 @@ async function addDemoUserToDB(user, _id) {
   newTown.sectorId = sectorId;
   const { regionMap } = newTown;
   delete newTown.regionMap;
+  if (user.town) {
+    setDemoTownState(user.town, newTown);
+  }
   const optionsForAdd = {
     collectionName: serverName,
     filtr: {
