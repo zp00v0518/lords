@@ -1,16 +1,13 @@
 const url = require('url');
 const path = require('path');
 const Cookies = require('cookies');
-const template = require('template_func');
 const { fileReader, mimeType, sendResponse, config, findUserInDB } = require('./tube.js');
 const { addCollectionsToUser } = require('./user');
-const log = new template.Log(__filename);
 const { getCollectionName } = require('./template_modules');
 const MODE = process.env.MODE;
 const listFile = config.listFile[MODE] || config.listFile.html;
 
 async function getMethod(req, res, startPath) {
-  // log.log("**********getMethod work*********");
   let urlParse = url.parse(req.url, true);
   let cookies = new Cookies(req, res);
   let userCookies = cookies.get('user');

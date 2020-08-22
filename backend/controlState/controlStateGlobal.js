@@ -1,4 +1,4 @@
-const serverList = global.gameVariables.serverList;
+const serverList = global.gameVariables ? global.gameVariables.serverList : [];
 const { formEventsList, controlStateEventsList } = require('../events');
 const { globalControlStateInTown, getUsersTownFromDB } = require('../town');
 const { sendWSMessage } = require('../wsServer');

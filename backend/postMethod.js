@@ -22,7 +22,7 @@ function postMethod(req, res, startPath) {
         if (pathName === "/login") {
           login(req, res, requestData, cookies);
         } else if (pathName === "/dev") {
-          //получает значение любой глобальной переменной. Сделано в целях разработки
+          // получает значение любой глобальной переменной. Сделано в целях разработки
           const target = getVariable(JSON.parse(data));
           if (target) {
             const result = template.stringCircular(target);
