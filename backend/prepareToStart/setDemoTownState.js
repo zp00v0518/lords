@@ -1,7 +1,14 @@
-function setDemoTownState(demoTown, baseTown) {
-  Object.keys(demoTown).forEach(key => {
-    baseTown[key] = demoTown[key];
-  });
+const createTown = require('../town/createTown');
+
+function setDemoTownState(demoUser) {
+  const newTown = createTown({ status: 'first' });
+  delete newTown.regionMap;
+  if (demoUser.town) {
+    Object.keys(demoUser.town).forEach(key => {
+      newTown[key] = demoUser.town[key];
+    });
+  }
+  return newTown;
 }
 
 module.exports = setDemoTownState;

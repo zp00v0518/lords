@@ -32,13 +32,9 @@ async function addDemoUserToDB(user, _id, demoUser) {
   const y = getRandomCoords('y');
   const serverName = user.collections.server_1.name;
   const sectorId = await getSectorId(x, y, serverName);
-  const newTown = createTown({ status: 'first' });
+  const newTown = setDemoTownState(demoUser);
   newTown.sectorId = sectorId;
   const { regionMap } = newTown;
-  delete newTown.regionMap;
-  if (demoUser.town) {
-    setDemoTownState(demoUser.town, newTown);
-  }
   const optionsForAdd = {
     collectionName: serverName,
     filtr: {
