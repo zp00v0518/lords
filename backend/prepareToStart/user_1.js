@@ -7,6 +7,13 @@ const user_1 = {
 
 const collections = { server_1: { name: 'server_1', race: 0, alians: {}, rate: {}, color: '#FFE4E1' } };
 const town = {
+  army: {
+    def: false,
+    units: [
+      { race: 'rampart', name: 'kentavr_2', lvl: 1, count: 22, up: 1 },
+      { race: 'rampart', name: 'gnom', lvl: 2, count: 33, up: 0 }
+    ]
+  },
   market: {
     upgrade: { is: false, date: 0, bonus: 0 },
     lvl: 1,
@@ -17,8 +24,8 @@ const town = {
     nextLvl: 1
   },
   barraks_1: {
-    upgrade: { is: false, date: 1597860029534, bonus: 0 },
-    lvl: 1,
+    upgrade: { is: false, date: 1598119535054, bonus: 0 },
+    lvl: 2,
     class: 'barraks',
     parent: 'town',
     type: 'barraks_1',
@@ -27,11 +34,11 @@ const town = {
       date: '2020-08-19T17:53:45.774Z',
       bonus: 0,
       addValue: 12,
-      lastCalc: 1597863338522,
-      nowValue: 9.177588888888893,
+      lastCalc: 1598120134539,
+      nowValue: 700.4998583333339,
       static: false
     },
-    nextLvl: 1
+    nextLvl: 2
   },
   barraks_2: {
     upgrade: { is: false, date: 1597860032618, bonus: 0 },
@@ -44,8 +51,42 @@ const town = {
       date: '2020-08-19T17:53:45.774Z',
       bonus: 0,
       addValue: 10,
-      lastCalc: 1597863338522,
-      nowValue: 7.6479768518518485,
+      lastCalc: 1598120134539,
+      nowValue: 569.0832013888893,
+      static: false
+    },
+    nextLvl: 1
+  },
+  barraks_3: {
+    upgrade: { is: false, date: 1598119554016, bonus: 0 },
+    lvl: 1,
+    class: 'barraks',
+    parent: 'town',
+    type: 'barraks_3',
+    work: {
+      is: true,
+      date: '2020-08-22T18:02:03.062Z',
+      bonus: 0,
+      addValue: 8,
+      lastCalc: 1598120134539,
+      nowValue: 1.0680314814814813,
+      static: false
+    },
+    nextLvl: 1
+  },
+  barraks_4: {
+    upgrade: { is: false, date: 1598119631419, bonus: 0 },
+    lvl: 1,
+    class: 'barraks',
+    parent: 'town',
+    type: 'barraks_4',
+    work: {
+      is: true,
+      date: '2020-08-22T18:02:03.062Z',
+      bonus: 0,
+      addValue: 6,
+      lastCalc: 1598120134539,
+      nowValue: 0.6925083333333334,
       static: false
     },
     nextLvl: 1

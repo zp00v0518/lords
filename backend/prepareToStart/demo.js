@@ -17,17 +17,17 @@ const demoUser_2 = require('./user_2');
 const xCoords = [];
 const yCoords = [];
 
-async function insertDemoUserToDB(user) {
+async function insertDemoUserToDB(user, demoUser) {
   const options = {
     collectionName: config.db.collections.users,
     doc: user
   };
   const insertUser = await insertDB.one(options);
   console.log('...insert Demo User');
-  await addDemoUserToDB(user, insertUser.ops[0]._id);
+  await addDemoUserToDB(user, insertUser.ops[0]._id, demoUser);
 }
 
-async function addDemoUserToDB(user, _id) {
+async function addDemoUserToDB(user, _id, demoUser) {
   const x = getRandomCoords('x');
   const y = getRandomCoords('y');
   const serverName = user.collections.server_1.name;
@@ -36,8 +36,8 @@ async function addDemoUserToDB(user, _id) {
   newTown.sectorId = sectorId;
   const { regionMap } = newTown;
   delete newTown.regionMap;
-  if (user.town) {
-    setDemoTownState(user.town, newTown);
+  if (demoUser.town) {
+    setDemoTownState(demoUser.town, newTown);
   }
   const optionsForAdd = {
     collectionName: serverName,
@@ -71,8 +71,8 @@ function startCreate() {
       user_1.collections = demoUser.collections;
       const user_2 = userCreate(demoUser_2.user_2);
       user_2.collections = demoUser_2.collections;
-      await insertDemoUserToDB(user_1);
-      await insertDemoUserToDB(user_2);
+      await insertDemoUserToDB(user_1, demoUser);
+      await insertDemoUserToDB(user_2, demoUser_2);
       insertDB.close();
       findinDB.close();
       updateDB.close();
