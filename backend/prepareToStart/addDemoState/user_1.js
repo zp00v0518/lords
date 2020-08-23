@@ -35,7 +35,7 @@ const town = {
       bonus: 0,
       addValue: 12,
       lastCalc: 1598120134539,
-      nowValue: 700.4998583333339,
+      nowValue: 200.4998583333339,
       static: false
     },
     nextLvl: 2
@@ -52,7 +52,7 @@ const town = {
       bonus: 0,
       addValue: 10,
       lastCalc: 1598120134539,
-      nowValue: 569.0832013888893,
+      nowValue: 169.0832013888893,
       static: false
     },
     nextLvl: 1
