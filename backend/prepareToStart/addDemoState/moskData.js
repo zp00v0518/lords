@@ -525,3 +525,24 @@ const z = {
   userId: '5f416acf5f18600a4ced725a',
   heroes: ['5f416ad65f18600a4ced725c']
 };
+
+const hero = {
+  _id: '5f42264a7053450eec117015',
+  name: 'Kirr',
+  lvl: 0,
+  type: 'warrior',
+  race: 'rampart',
+  class: 'hero',
+  created: 1598170698582,
+  exp: 0,
+  skills: [],
+  stat: { atack: 3, def: 2, magic: 0 },
+  army: [
+    { race: 'rampart', name: 'kentavr', lvl: 1, count: 16, up: 0 },
+    { race: 'rampart', name: 'gnom', lvl: 2, count: 26, up: 0 },
+    { race: 'rampart', name: 'elf', lvl: 3, count: 11, up: 0 }
+  ],
+  active: true,
+  userId: '5f4226457053450eec117013',
+  townId: '5f4225f1bb1ecf31407a5ea1'
+};

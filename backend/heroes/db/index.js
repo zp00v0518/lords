@@ -7,6 +7,7 @@ const removeHeroFromTown = require('./removeHeroFromTown');
 const transferHeroBetweenTown = require('./transferHeroBetweenTown');
 const heroActivate = require('./heroActivate');
 const heroInActivate = require('./heroInActivate');
+const addCrossTownAndHero = require('./addCrossTownAndHero');
 
 module.exports = {
   addHeroToDB,
@@ -17,5 +18,6 @@ module.exports = {
   removeHeroFromTown,
   transferHeroBetweenTown,
   heroActivate,
-  heroInActivate
+  heroInActivate,
+  addCrossTownAndHero
 };
