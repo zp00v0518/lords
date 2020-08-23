@@ -80,10 +80,10 @@ function startCreate() {
     setTimeout(async () => {
       const user_1 = userCreate(demoUser.user_1);
       user_1.collections = demoUser.collections;
-      // const user_2 = userCreate(demoUser_2.user_2);
-      // user_2.collections = demoUser_2.collections;
+      const user_2 = userCreate(demoUser_2.user_2);
+      user_2.collections = demoUser_2.collections;
       await insertDemoUserToDB(user_1, demoUser);
-      // await insertDemoUserToDB(user_2, demoUser_2);
+      await insertDemoUserToDB(user_2, demoUser_2);
       insertDB.close();
       findinDB.close();
       updateDB.close();
