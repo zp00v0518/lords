@@ -13,7 +13,7 @@
       :height="sceneHeight"
       @mousemove="handlerMousemoveOnMap"
       @mouseleave="hideTooltip"
-      @click="mode === 'dialog' ? {} : handlerClick()"
+      @click="handlerClick"
       key="scene"
       class="scene__canvas"
     ></canvas>
@@ -38,8 +38,8 @@ export default {
     heightScene: { default: 0 },
     regionMap: null,
     mode: { type: String, default: 'global' },
-    sectorInfo: {default: null},
-    customHoverFunc: {type: Function, default: null}
+    sectorInfo: { default: null },
+    customHoverFunc: { type: Function, default: null }
   },
   data() {
     return {
@@ -104,8 +104,13 @@ export default {
   },
   methods: {
     handlerClick() {
+      if (!this.cursorOnScene) return;
       const { currentTile, globalConfig } = this;
-      if (!this.cursorOnScene || currentTile.type === 1 || currentTile.type === 3) return;
+      if (this.mode === 'dialog') {
+        this.$emit('click', { target: currentTile });
+        return;
+      }
+      if (currentTile.type === 1 || currentTile.type === 3) return;
       if (this.currentTile.type === 0) {
         if (currentTile.army && currentTile.army.length === 0) return;
         const payload = {
