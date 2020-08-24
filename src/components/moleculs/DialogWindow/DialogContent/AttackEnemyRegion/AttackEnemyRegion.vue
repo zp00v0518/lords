@@ -6,7 +6,7 @@
       :sectorInfo="{raceIndex: -1}"
       :customHoverFunc="customHoverFunc"
       @click="handlerClick"
-			:specialTiles="selected"
+      :specialTiles="selected"
     />
     <OkCancelBlock @ok="handleOk" @cancel="closeDialogWindow" :disabled="disabled" />
   </div>
@@ -58,7 +58,13 @@ export default {
     },
     handlerClick(event) {
       this.isChoice = !this.isChoice;
-      if (!this.isChoice) this.selected = [];
+      if (!this.isChoice) {
+        this.disabled = true;
+        this.selected = [];
+      }
+      if (this.isChoice) {
+        this.disabled = false;
+      }
     },
     getSectorsForDraw(start, map) {
       const result = [];
@@ -85,16 +91,9 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-	position: relative;
   .regionmap {
-    // height: 70%;
-    // flex-grow: 2;
+    height: 70%;
+    flex-grow: 2;
   }
-	.okCancelBlock {
-		position: absolute;
-		bottom: 12px;
-		left: 50%;
-		transform: translateX(-50%);
-	}
 }
 </style>
