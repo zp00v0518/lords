@@ -96,27 +96,21 @@ wsServer.on('connection', (ws, req) => {
   });
 });
 
-let timer = null;
 function callbackForWatcher() {
   watcher(config.frontEnd.watchFolder, callbackForWatcher);
-  if (timer) {
-    clearTimeout(timer);
-  }
-  timer = setTimeout(() => {
-    Object.keys(UserOnline).forEach(server => {
-      if (UserOnline[server].count > 0) {
-        const message = {
-          status: true,
-          type: 'reload'
-        };
-        for (let user in UserOnline[server]) {
-          if (user !== 'count') {
-            UserOnline[server][user].ws.send(JSON.stringify(message));
-          }
+  Object.keys(UserOnline).forEach(server => {
+    if (UserOnline[server].count > 0) {
+      const message = {
+        status: true,
+        type: 'reload'
+      };
+      for (let user in UserOnline[server]) {
+        if (user !== 'count') {
+          UserOnline[server][user].ws.send(JSON.stringify(message));
         }
       }
-    });
-  }, 50);
+    }
+  });
 }
 if (process.env.MODE === 'DEV') {
   watcher(config.frontEnd.watchFolder, callbackForWatcher);

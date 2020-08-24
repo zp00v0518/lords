@@ -27,14 +27,12 @@ function drawMap() {
       if (currentSector.x === tile.x && currentSector.y === tile.y) {
         color = colors.center;
       }
-      // tile.drawOps = {
-      //   fillStyle: color,
-      //   strokeStyle: 'rgba(0,0,0,0.6)'
-      // }
-      drawRectAroundCenter(ctx, { x: centerX, y: centerY }, tileHeight, {
+      tile.drawOps = {
         fillStyle: color,
         strokeStyle: 'rgba(0,0,0,0.6)'
-      });
+      };
+      drawRectAroundCenter(ctx, tile, tileHeight);
+      tile.drawOps = {};
       drawGameImage(ctx, tile, tileWidth, $store, currentSector, sectorInfo);
     }
   }

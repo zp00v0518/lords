@@ -6,6 +6,7 @@
       :sectorInfo="{raceIndex: -1}"
       :customHoverFunc="customHoverFunc"
       @click="handlerClick"
+			:specialTiles="selected"
     />
     <OkCancelBlock @ok="handleOk" @cancel="closeDialogWindow" :disabled="disabled" />
   </div>
@@ -16,6 +17,7 @@ import RegionMap from '../../../Scenes/RegionMap/RegionMap';
 import OkCancelBlock from '../../../OkCancelBlock';
 import { closeMixin } from '../../dialogMixin';
 import drawRectAroundCenter from '../../../Scenes/utils/drawRectAroundCenter';
+import { deepClone } from '../../../../../utils';
 
 export default {
   name: 'AttackEnemyRegion',
@@ -45,8 +47,10 @@ export default {
         lineWidth: 3
       };
       this.selected = this.isChoice ? this.selected : this.getSectorsForDraw({ x: tile.x, y: tile.y }, map);
-      this.selected.forEach(i => {
-        drawRectAroundCenter(ctx, { x: i.centerX, y: i.centerY }, tileWidth / 2, styles);
+      this.selected.forEach(tileItem => {
+        tileItem.drawOps.strokeStyle = styles.strokeStyle;
+        tileItem.drawOps.lineWidth = styles.lineWidth;
+        drawRectAroundCenter(ctx, tileItem, tileWidth / 2);
       });
     },
     handleOk(e) {
@@ -54,21 +58,22 @@ export default {
     },
     handlerClick(event) {
       this.isChoice = !this.isChoice;
+      if (!this.isChoice) this.selected = [];
     },
     getSectorsForDraw(start, map) {
       const result = [];
       const startX = start.x;
       const startY = start.y;
-      result.push(map[startX][startY]);
+      result.push(deepClone(map[startX][startY]));
       const top = map[startX][startY - 1];
       const tileTypes = this.globalConfig.all.WorldMap.types;
-      if (top && top.type !== tileTypes.town.id) result.push(top);
+      if (top && top.type !== tileTypes.town.id) result.push(deepClone(top));
       const right = map[startX + 1] ? map[startX + 1][startY] : undefined;
-      if (right && right.type !== tileTypes.town.id) result.push(right);
+      if (right && right.type !== tileTypes.town.id) result.push(deepClone(right));
       const bottom = map[startX][startY + 1];
-      if (bottom && bottom.type !== tileTypes.town.id) result.push(bottom);
+      if (bottom && bottom.type !== tileTypes.town.id) result.push(deepClone(bottom));
       const left = map[startX - 1] ? map[startX - 1][startY] : undefined;
-      if (left && left.type !== tileTypes.town.id) result.push(left);
+      if (left && left.type !== tileTypes.town.id) result.push(deepClone(left));
       return result;
     }
   }
@@ -80,9 +85,16 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
+	position: relative;
   .regionmap {
-    height: 70%;
-    flex-grow: 2;
+    // height: 70%;
+    // flex-grow: 2;
   }
+	.okCancelBlock {
+		position: absolute;
+		bottom: 12px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 }
 </style>

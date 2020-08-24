@@ -12,7 +12,7 @@
       :width="sceneWidth"
       :height="sceneHeight"
       @mousemove="handlerMousemoveOnMap"
-      @mouseleave="hideTooltip"
+      @mouseleave="handlerMouseLeave"
       @click="handlerClick"
       key="scene"
       class="scene__canvas"
@@ -103,6 +103,9 @@ export default {
     }
   },
   methods: {
+    handlerMouseLeave() {
+      this.hideTooltip();
+    },
     handlerClick() {
       if (!this.cursorOnScene) return;
       const { currentTile, globalConfig } = this;

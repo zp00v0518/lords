@@ -18,9 +18,9 @@ function handlerMousemoveOnGlobalMap(event) {
     this.ctx.canvas.style.cursor = 'default';
     this.hideTooltip();
     this.drawMap();
-    // if (this.customHoverFunc) {
-    //   this.customHoverFunc(this.ctx, this.currentMap, this.tileWidth);
-    // }
+    if (this.customHoverFunc) {
+      this.customHoverFunc(this.ctx, this.currentMap, this.tileWidth);
+    }
   }
 }
 export default handlerMousemoveOnGlobalMap;
