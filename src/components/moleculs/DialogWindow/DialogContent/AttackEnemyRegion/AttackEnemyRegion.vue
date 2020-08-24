@@ -6,16 +6,18 @@
       :sectorInfo="{raceIndex: -1}"
       :customHoverFunc="customHoverFunc"
     />
-    <OkCancelBlock @ok="hnadlerOk" @cancel="handlerCancel" :disabled="disabled" />
+    <OkCancelBlock @ok="hnadlerOk" @cancel="closeDialogWindow" :disabled="disabled" />
   </div>
 </template>
 
 <script>
 import RegionMap from '../../../Scenes/RegionMap/RegionMap';
 import OkCancelBlock from '../../../OkCancelBlock';
+import { closeMixin } from '../../dialogMixin';
 
 export default {
   name: 'AttackEnemyRegion',
+  mixins: [closeMixin],
   components: { RegionMap, OkCancelBlock },
   props: {
     data: { type: Object, required: true }
@@ -26,11 +28,13 @@ export default {
     };
   },
   methods: {
-    customHoverFunc() {
+    customHoverFunc(ctx) {
+      const isCtx = ctx instanceof CanvasRenderingContext2D;
+      if (!isCtx) {
+        console.log('ctx arguments is not CanvasRenderingContext2D');
+        return;
+      }
       console.log(arguments);
-    },
-    handlerCancel(e) {
-      console.log(e);
     },
     hnadlerOk(e) {
       console.log(e);

@@ -1,6 +1,7 @@
 // https://habr.com/ru/post/332922/ - одна из статей
 // https://www.youtube.com/watch?v=nls0dyTeEns&list=PLHcq_lDrZqm0pcMN36rKfFUnxQvasRGRP
 import iso from './iso';
+import drawRectAroundCenter from './drawRectAroundCenter';
 
 function drawMap() {
   const { currentSector, $store, sectorInfo } = this;
@@ -26,24 +27,12 @@ function drawMap() {
       if (currentSector.x === tile.x && currentSector.y === tile.y) {
         color = colors.center;
       }
-      drawRectAroundCenter(centerX, centerY, color);
+      drawRectAroundCenter(ctx, { x: centerX, y: centerY }, tileHeight, {
+        fillStyle: color,
+        strokeStyle: 'rgba(0,0,0,0.6)'
+      });
       drawGameImage(ctx, tile, tileWidth, $store, currentSector, sectorInfo);
     }
-  }
-  function drawRectAroundCenter(centerX, centerY, color) {
-    const step = 0;
-    ctx.beginPath();
-    ctx.fillStyle = color;
-    ctx.strokeStyle = 'rgba(0,0,0,0.6)';
-    ctx.lineWidth = 1;
-    ctx.moveTo(centerX, centerY - halfHeight + step);
-    ctx.lineTo(centerX + step - tileHeight, centerY);
-    ctx.lineTo(centerX, centerY + halfHeight - step);
-    ctx.lineTo(centerX + tileHeight - step, centerY);
-    ctx.lineTo(centerX, centerY - halfHeight + step);
-    ctx.stroke();
-    ctx.fill();
-    ctx.closePath();
   }
   this.drawAnotherObjects && this.drawAnotherObjects();
 }

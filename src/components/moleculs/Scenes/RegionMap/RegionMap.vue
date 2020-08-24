@@ -38,7 +38,8 @@ export default {
     heightScene: { default: 0 },
     regionMap: null,
     mode: { type: String, default: 'global' },
-    sectorInfo: {default: null}
+    sectorInfo: {default: null},
+    customHoverFunc: {type: Function, default: null}
   },
   data() {
     return {
