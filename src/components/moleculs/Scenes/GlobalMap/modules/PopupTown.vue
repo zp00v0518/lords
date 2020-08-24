@@ -76,6 +76,9 @@ export default {
         this.showMarket = true;
         return;
       }
+      // if (type === 'attackEnemyRegion') {
+
+      // }
       const payload = {
         data: {
           targetTile: deepClone(targetSector),

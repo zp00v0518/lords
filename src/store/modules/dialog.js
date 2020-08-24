@@ -3,7 +3,8 @@ const dialog = {
     show: false,
     data: {},
     title: '',
-    component: ''
+    // component: '',
+    type: ''
   },
   mutations: {
     DIALOG_CLOSE(state) {
@@ -11,13 +12,15 @@ const dialog = {
       state.title = '';
       state.component = '';
       state.data = {};
+      state.type = '';
     },
     DIALOG_SHOW(state, payload) {
-      const type = payload.type;
+      // const type = payload.type;
       state.show = true;
       state.data = payload.data;
       state.title = payload.title;
-      state.component = typeDialog[type];
+      state.type = payload.type;
+      // state.component = typeDialog[type];
     }
   },
   actions: {
@@ -30,12 +33,13 @@ const dialog = {
 
 export default dialog;
 
-const typeDialog = {
-  upgradeRegion: 'UpgradeRegion',
-  upgradeBuilding: 'UpgradeBuilding',
-  message: 'Message',
-  dialogBattle: 'DialogBattle',
-  worldMapRegion: 'WorldMapRegion',
-  heroTransferDialog: 'HeroTransferDialog',
-  sendCaravan: 'Market'
-};
+// const typeDialog = {
+//   upgradeRegion: 'UpgradeRegion',
+//   upgradeBuilding: 'UpgradeBuilding',
+//   message: 'Message',
+//   dialogBattle: 'DialogBattle',
+//   worldMapRegion: 'WorldMapRegion',
+//   heroTransferDialog: 'HeroTransferDialog',
+//   sendCaravan: 'Market',
+//   attackEnemyRegion: "AttackEnemyRegion"
+// };

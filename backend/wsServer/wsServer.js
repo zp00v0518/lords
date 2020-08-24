@@ -116,7 +116,7 @@ function callbackForWatcher() {
         }
       }
     });
-  }, 100);
+  }, 50);
 }
 if (process.env.MODE === 'DEV') {
   watcher(config.frontEnd.watchFolder, callbackForWatcher);
