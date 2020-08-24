@@ -34,10 +34,11 @@ export default {
     TooltipRegion
   },
   props: {
-    widthScene: 0,
-    heightScene: 0,
+    widthScene: { default: 0 },
+    heightScene: { default: 0 },
     regionMap: null,
-    mode: { type: String, default: 'global' }
+    mode: { type: String, default: 'global' },
+    sectorInfo: {default: null}
   },
   data() {
     return {
@@ -48,6 +49,8 @@ export default {
   created() {
     if (!this.regionMap) {
       this.currentMap = this.currentSector.region;
+    } else {
+      this.currentMap = this.regionMap;
     }
   },
   watch: {
@@ -83,10 +86,10 @@ export default {
       return deepClone(d);
     },
     tileWidth() {
-      const { ctx, mode } = this;
+      const { ctx, mode, currentMap } = this;
       if (!ctx) return 0;
       const widthParse = parseInt(this.sceneWidth) / 2;
-      const intermediate = widthParse / (this.currentMap.length / 2);
+      const intermediate = currentMap.length === 0 ? 0 : widthParse / (currentMap.length / 2);
       if (mode !== 'global') {
         return intermediate * 0.6;
       }

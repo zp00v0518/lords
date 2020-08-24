@@ -1,15 +1,30 @@
 <template>
   <div class="popup-town" :style="getStyle" @click.stop>
-    <button
-      class="popup-town__item"
-      @click.stop="handlerClick('heroTransferDialog')"
-    >{{upperFirstSymbol(gloss.popup.sendHero.btn.txt)}}</button>
-    <button
-      class="popup-town__item"
-      @click.stop="handlerClick('sendCaravan')"
-      :disabled="disabledMarket"
-    >{{upperFirstSymbol(gloss.popup.sendСaravan.btn.txt)}}</button>
-    <TownBuilding v-if="showMarket" :targetSector="targetSector" :name="'market'" @close="showMarket= false"></TownBuilding>
+    <template v-if="isSelf">
+      <button
+        class="popup-town__item"
+        @click.stop="handlerClick('heroTransferDialog')"
+      >{{upperFirstSymbol(gloss.popup.sendHero.btn.txt)}}</button>
+      <button
+        class="popup-town__item"
+        @click.stop="handlerClick('sendCaravan')"
+        :disabled="disabledMarket"
+      >{{upperFirstSymbol(gloss.popup.sendСaravan.btn.txt)}}</button>
+      <TownBuilding
+        v-if="showMarket"
+        :targetSector="targetSector"
+        :name="'market'"
+        @close="showMarket= false"
+      />
+    </template>
+    <template v-else>
+      <div>
+        <button
+          class="popup-town__item"
+          @click.stop="handlerClick('attackEnemyRegion')"
+        >{{upperFirstSymbol(gloss.popup.attackEnemyRegion.btn.txt)}}</button>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -23,7 +38,8 @@ export default {
   components: { TownBuilding },
   props: {
     tileWidth: 0,
-    targetSector: null
+    targetSector: null,
+    isSelf: { type: Boolean, default: true }
   },
   data() {
     return {

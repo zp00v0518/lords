@@ -47,6 +47,7 @@
       @close-popup="popupTown.show = !popupTown.show"
       :tileWidth="tileWidth"
       :targetSector="popupTown.targetSector"
+      :isSelf="popupTown.isSelf"
     ></PopupTown>
     <GoTo />
   </div>
@@ -72,7 +73,8 @@ export default {
       isDisabledMove: false,
       popupTown: {
         show: false,
-        targetSector: null
+        targetSector: null,
+        isSelf: true
       },
       moveBtnCoords: {
         left: { top: 0, left: 0 },
@@ -158,6 +160,7 @@ export default {
     handlerClickOnGlobalMap($event) {
       const tileTypes = this.globalConfig.all.WorldMap.types;
       const { currentTile, $store, deepClone, currentSector } = this;
+      const { user } = $store.state;
       if (currentTile.type === tileTypes.empty.id) {
         const payload = {
           data: {
@@ -167,13 +170,19 @@ export default {
           type: 'worldMapRegion'
         };
         $store.commit('DIALOG_SHOW', payload);
-      } else if (currentTile.type === tileTypes.town.id) {
+      } else if (currentTile.type === tileTypes.town.id && currentTile.userId === user.id) {
         const { sectors } = $store.state.userSectors;
         const to_be = sectors.find(i => i._id === currentTile._id);
         if (to_be && to_be._id !== currentSector._id) {
           this.popupTown.show = true;
+          this.popupTown.isSelf = true;
           this.popupTown.targetSector = deepClone(currentTile);
         }
+      } else if (currentTile.type === tileTypes.town.id && currentTile.userId !== user.id) {
+        console.log(currentTile);
+        this.popupTown.show = true;
+        this.popupTown.isSelf = false;
+        this.popupTown.targetSector = deepClone(currentTile);
       }
     },
     drawMoveHero() {

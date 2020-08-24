@@ -11,6 +11,11 @@ const popup = {
     title: {
       ru: 'отправить караван'
     }
+  },
+  attackEnemyRegion: {
+    btn: {
+      ru: 'атаковать регион'
+    }
   }
 };
 

@@ -3,7 +3,7 @@
 import iso from './iso';
 
 function drawMap() {
-  const { currentSector, $store } = this;
+  const { currentSector, $store, sectorInfo } = this;
   let mapArr = this.currentMap;
   let ctx = this.ctx;
   const { canvas } = ctx;
@@ -27,7 +27,7 @@ function drawMap() {
         color = colors.center;
       }
       drawRectAroundCenter(centerX, centerY, color);
-      drawGameImage(ctx, tile, tileWidth, $store, currentSector);
+      drawGameImage(ctx, tile, tileWidth, $store, currentSector, sectorInfo);
     }
   }
   function drawRectAroundCenter(centerX, centerY, color) {
@@ -47,13 +47,17 @@ function drawMap() {
   }
   this.drawAnotherObjects && this.drawAnotherObjects();
 }
-function drawGameImage(ctx, tile, tileWidth, $store, curSector) {
+function drawGameImage(ctx, tile, tileWidth, $store, currentSector, sectorInfo) {
   const { globalConfig, gameSources } = $store.state;
   const { centerX, centerY } = tile;
-  const raceIndex = curSector.town.race;
-  const raceName = globalConfig.all.Race.typeList[raceIndex];
   const tileHeight = tileWidth / 2;
   if (tile.type === 1) {
+    let raceIndex = currentSector.town.race;
+    if (sectorInfo) {
+      if (sectorInfo.raceIndex === -1) return;
+      raceIndex = sectorInfo.raceIndex;
+    }
+    const raceName = globalConfig.all.Race.typeList[raceIndex];
     const img = gameSources.towns[raceName].ico[raceName];
     const scale = tileWidth / img.width;
     const imgSize = img.width * scale;
