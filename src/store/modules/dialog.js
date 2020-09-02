@@ -21,6 +21,9 @@ const dialog = {
       state.title = payload.title;
       state.type = payload.type;
       // state.component = typeDialog[type];
+    },
+    CHANGE_DIALOG_TITLE(state, title) {
+      state.title = title;
     }
   },
   actions: {

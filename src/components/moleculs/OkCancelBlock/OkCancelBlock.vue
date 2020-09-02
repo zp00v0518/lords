@@ -3,7 +3,7 @@
     <GuiBtn
       type="ok"
       class="okCancelBlock__item"
-      @click="$emit('ok', {value: $event})"
+      @click="$emit('ok', {$event})"
       :disabled="isDisabled"
     />
     <GuiBtn type="cancel" class="okCancelBlock__item" @click="$emit('cancel', {value: $event})" />

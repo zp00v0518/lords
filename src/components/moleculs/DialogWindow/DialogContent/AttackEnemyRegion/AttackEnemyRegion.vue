@@ -1,14 +1,19 @@
 <template>
   <div class="attackEnemyRegion">
-    <RegionMap
-      :regionMap="data.targetTile.region"
-      mode="dialog"
-      :sectorInfo="{raceIndex: -1}"
-      :customHoverFunc="customHoverFunc"
-      @click="handlerClick"
-      :specialTiles="selected"
-    />
-    <OkCancelBlock @ok="handleOk" @cancel="closeDialogWindow" :disabled="disabled" />
+    <template v-if="showRegonMap">
+      <RegionMap
+        :regionMap="data.targetTile.region"
+        mode="dialog"
+        :sectorInfo="{raceIndex: -1}"
+        :customHoverFunc="customHoverFunc"
+        @click="handlerClick"
+        :specialTiles="selected"
+      />
+      <OkCancelBlock @ok="handleOk" @cancel="closeDialogWindow" :disabled="disabled" />
+    </template>
+    <template v-else>
+        <DialogBattle :data="dataForDialogBattle" self_mode @close="closeDialogWindow" @go-battle="handlerGpBattle"></DialogBattle>
+    </template>
   </div>
 </template>
 
@@ -18,11 +23,13 @@ import OkCancelBlock from '../../../OkCancelBlock';
 import { closeMixin } from '../../dialogMixin';
 import drawRectAroundCenter from '../../../Scenes/utils/drawRectAroundCenter';
 import { deepClone } from '../../../../../utils';
+import DialogBattle from '../DialogBattle';
+import DialogWindow from '../../DialogWindow.vue';
 
 export default {
   name: 'AttackEnemyRegion',
   mixins: [closeMixin],
-  components: { RegionMap, OkCancelBlock },
+  components: { RegionMap, OkCancelBlock, DialogBattle, DialogWindow },
   props: {
     data: { type: Object, required: true }
   },
@@ -30,10 +37,16 @@ export default {
     return {
       disabled: true,
       selected: [],
-      isChoice: false
+      isChoice: false,
+      showRegonMap: true,
+      dataForDialogBattle: {}
     };
   },
   methods: {
+    handlerGpBattle(event) {
+      console.log(event);
+      this.closeDialogWindow();
+    },
     customHoverFunc(ctx, map, tileWidth, tile) {
       const isCtx = ctx instanceof CanvasRenderingContext2D;
       ctx.canvas.style.cursor = 'pointer';
@@ -54,7 +67,9 @@ export default {
       });
     },
     handleOk(e) {
-      console.log(e);
+      console.log(this.selected);
+      this.showRegonMap = false;
+      this.$store.commit('CHANGE_DIALOG_TITLE', 'payload');
     },
     handlerClick(event) {
       this.isChoice = !this.isChoice;

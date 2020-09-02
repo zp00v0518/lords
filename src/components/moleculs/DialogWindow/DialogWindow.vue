@@ -5,7 +5,7 @@
         <div class="dialog__title">{{title}}</div>
         <Icon class="dialog__close" name="circle-close" @click.native="closeDialogWindow"></Icon>
       </div>
-      <slot name="dialogMain">
+      <slot>
         <components
           @set-height="setHeight"
           :is="typeDialog[$store.state.dialog.type]"
@@ -37,7 +37,8 @@ export default {
   name: 'DialogWindow',
   mixins: [closeMixin],
   props: {
-    show: { type: Boolean, default: false }
+    show: { type: Boolean, default: false },
+    headerTitle: { type: String, default: '' }
   },
   components: { ...DialogContent, Market },
   data() {
@@ -49,7 +50,7 @@ export default {
   },
   computed: {
     title() {
-      return this.$store.state.dialog.title;
+      return this.headerTitle || this.$store.state.dialog.title;
     }
   },
   methods: {

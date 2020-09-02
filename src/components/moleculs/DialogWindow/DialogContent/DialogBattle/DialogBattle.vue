@@ -53,7 +53,8 @@ export default {
   mixins: [currentSector],
   components: { ArmyBattleLine },
   props: {
-    data: { type: Object, default: () => ({}) }
+    data: { type: Object, default: () => ({}) },
+    self_mode: { type: Boolean, default: false }
   },
   data() {
     return {
@@ -83,24 +84,29 @@ export default {
   methods: {
     goBattle() {
       const result = this.dragResult ? this.dragResult : deepClone(this.atackArmy);
-      const { $store, currentSector, activeHero, target } = this;
+      const { $store, currentSector, activeHero, target, data } = this;
 
       if (!result || result.length === 0 || activeHero.army.length === 0) {
         this.$emit('close');
         return;
       }
+      const army = result.map(i => {
+        const { race, name, count } = i;
+        return { race, name, count };
+      });
+      if (this.self_mode) {
+        this.$emit('go-battle', { army });
+        return;
+      }
       const sectorIndex = $store.state.userSectors.sectors.findIndex(i => i._id === currentSector._id);
       const message = {
-        type: 'battleRequest',
+        type: data.typeMessage || 'battleRequest',
         data: {
           sectorIndex,
           attackHeroId: activeHero._id,
           target,
           tileId: this.data.tile.id,
-          army: result.map(i => {
-            const { race, name, count } = i;
-            return { race, name, count };
-          })
+          army
         }
       };
       this.$ws.sendMessage(message);
@@ -135,7 +141,8 @@ export default {
 .dialog-battle {
   display: flex;
   flex-direction: column;
-  height: 75%;
+  height: 85%;
+  flex-grow: 2;
   &__header {
     display: flex;
     justify-content: center;
