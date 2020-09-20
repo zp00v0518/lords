@@ -12,7 +12,18 @@
       <OkCancelBlock @ok="handleOk" @cancel="closeDialogWindow" :disabled="disabled" />
     </template>
     <template v-else>
-        <DialogBattle :data="dataForDialogBattle" self_mode @close="closeDialogWindow" @go-battle="handlerGpBattle"></DialogBattle>
+      <DialogBattle
+        :data="dataForDialogBattle"
+        self_mode
+        @close="closeDialogWindow"
+        :disabled="!activeHero"
+        @go-battle="handlerGpBattle"
+      >
+        <div class="attackEnemyRegion__time">
+          <div class="text">{{ upperFirstSymbol(gloss.date.time.txt) }}:</div>
+          <div class="time">{{timeText}}</div>
+        </div>
+      </DialogBattle>
     </template>
   </div>
 </template>
@@ -22,13 +33,14 @@ import RegionMap from '../../../Scenes/RegionMap/RegionMap';
 import OkCancelBlock from '../../../OkCancelBlock';
 import { closeMixin } from '../../dialogMixin';
 import drawRectAroundCenter from '../../../Scenes/utils/drawRectAroundCenter';
-import { deepClone } from '../../../../../utils';
+import { deepClone, getAsTimeString } from '../../../../../utils';
 import DialogBattle from '../DialogBattle';
 import DialogWindow from '../../DialogWindow.vue';
+import { currentSector } from '../../../../mixins';
 
 export default {
   name: 'AttackEnemyRegion',
-  mixins: [closeMixin],
+  mixins: [closeMixin, currentSector],
   components: { RegionMap, OkCancelBlock, DialogBattle, DialogWindow },
   props: {
     data: { type: Object, required: true }
@@ -42,10 +54,39 @@ export default {
       dataForDialogBattle: {}
     };
   },
+  computed: {
+    activeHero() {
+      const { activeHeroId, heroesList } = this.$store.state.heroes;
+      return heroesList.find(i => i._id === activeHeroId);
+    },
+    timeText() {
+      const { data, currentSector, activeHero } = this;
+      if (!activeHero) return '';
+      const { WorldMap } = this.globalConfig.all;
+      const { targetTile } = data;
+      const time = WorldMap.getTimeMoveOnMap(currentSector, targetTile, { hero: activeHero });
+      return this.getAsTimeString(time);
+    }
+  },
   methods: {
+    getAsTimeString,
     handlerGpBattle(event) {
-      console.log(event);
+      const { $store, currentSector, activeHero, data } = this;
+      const sectorIndex = $store.state.userSectors.sectors.findIndex(i => i._id === currentSector._id);
+      const { x, y } = this.selected[0];
+      const message = {
+        type: data.typeMessage || 'attackEnemyRegion',
+        data: {
+          sectorIndex,
+          attackHeroId: activeHero._id,
+          tileId: this.data.targetTile.id,
+          target: { x, y }
+        }
+      };
+      console.log(message);
+      this.$ws.sendMessage(message);
       this.closeDialogWindow();
+      this.$store.commit('SET_ACTIVE_HERO_ID', -1);
     },
     customHoverFunc(ctx, map, tileWidth, tile) {
       const isCtx = ctx instanceof CanvasRenderingContext2D;
@@ -67,9 +108,8 @@ export default {
       });
     },
     handleOk(e) {
-      console.log(this.selected);
       this.showRegonMap = false;
-      this.$store.commit('CHANGE_DIALOG_TITLE', 'payload');
+      this.$store.commit('CHANGE_DIALOG_TITLE', 'asdasd');
     },
     handlerClick(event) {
       this.isChoice = !this.isChoice;
@@ -109,6 +149,15 @@ export default {
   .regionmap {
     height: 70%;
     flex-grow: 2;
+  }
+  &__time {
+    padding: 0px 0px 16px 0px;
+    display: flex;
+    justify-content: center;
+    .text {
+      margin-right: 12px;
+      font-weight: bold;
+    }
   }
 }
 </style>

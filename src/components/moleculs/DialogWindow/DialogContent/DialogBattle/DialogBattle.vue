@@ -35,9 +35,9 @@
       />
       <ArmyBattleLine :army="defArmy" position="right" class="dialog-battle__content__item" />
     </div>
-
+    <slot></slot>
     <div class="dialog-battle__confirm">
-      <GuiBtn type="ok" class="dialog-battle__confirm--btn" @click="goBattle" />
+      <GuiBtn type="ok" class="dialog-battle__confirm--btn" @click="goBattle" :disabled="disabled"/>
       <GuiBtn type="cancel" class="dialog-battle__confirm--btn" @click="$emit('close')" />
     </div>
   </div>
@@ -54,7 +54,8 @@ export default {
   components: { ArmyBattleLine },
   props: {
     data: { type: Object, default: () => ({}) },
-    self_mode: { type: Boolean, default: false }
+    self_mode: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false }
   },
   data() {
     return {
