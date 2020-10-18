@@ -7,6 +7,7 @@ const { setEventInGame } = require('../../events');
 const { getOneTownFromDB } = require('../../town');
 const { updateHeroInDB } = require('../../heroes/db');
 const { gameVariables } = global;
+const { createArmyForBattle } = require('../../army');
 
 function handlerBattleRequest(message, info) {
   const data = message.data;
@@ -93,7 +94,7 @@ const schema = {
     type: 'number',
     min: 0,
     // eslint-disable-next-line
-    max: Math.pow(gameVariables.numSectionRegionMap, 2)
+    max: Math.pow(gameVariables.numSectionRegionMap, 2) - 1
   },
   army: {
     type: 'array',
@@ -108,20 +109,20 @@ const schema = {
   }
 };
 
-function createArmyForBattle(attackArmy, heroArmy) {
-  const result = [];
-  const template = {
-    is: false
-  };
-  const flag = attackArmy.every(a => {
-    const d = heroArmy.find(x => a.name === x.name && a.race === x.race);
-    if (!d) return false;
-    result.push(d);
-    return true;
-  });
-  if (flag) {
-    template.army = JSON.parse(JSON.stringify(result));
-    template.is = true;
-  }
-  return template;
-}
+// function createArmyForBattle(attackArmy, heroArmy) {
+//   const result = [];
+//   const template = {
+//     is: false
+//   };
+//   const flag = attackArmy.every(a => {
+//     const d = heroArmy.find(x => a.name === x.name && a.race === x.race);
+//     if (!d) return false;
+//     result.push(d);
+//     return true;
+//   });
+//   if (flag) {
+//     template.army = JSON.parse(JSON.stringify(result));
+//     template.is = true;
+//   }
+//   return template;
+// }

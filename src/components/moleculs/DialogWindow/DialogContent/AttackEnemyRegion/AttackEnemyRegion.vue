@@ -71,19 +71,20 @@ export default {
   methods: {
     getAsTimeString,
     handlerGpBattle(event) {
-      const { $store, currentSector, activeHero, data } = this;
-      const sectorIndex = $store.state.userSectors.sectors.findIndex(i => i._id === currentSector._id);
-      const { x, y } = this.selected[0];
+      const { currentSector, activeHero, data, globalConfig } = this;
+      const { Event } = globalConfig.all;
+      const { id } = this.selected[0];
+      const { army } = event;
       const message = {
-        type: data.typeMessage || 'attackEnemyRegion',
+        type: data.typeMessage || Event.types.attackEnemyRegion,
         data: {
-          sectorIndex,
+          startSectorId: currentSector._id,
           attackHeroId: activeHero._id,
-          tileId: this.data.targetTile.id,
-          target: { x, y }
+          tileId: this.data.targetTile._id,
+          targetId: id,
+          army
         }
       };
-      console.log(message);
       this.$ws.sendMessage(message);
       this.closeDialogWindow();
       this.$store.commit('SET_ACTIVE_HERO_ID', -1);
