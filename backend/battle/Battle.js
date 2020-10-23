@@ -3,8 +3,8 @@ const Battle = {
     region: {
       name: 'region'
     },
-    globalMap: {
-      name: 'globalMap'
+    enemyRegion: {
+      name: 'enemyRegion'
     }
   },
   units: {

@@ -7,7 +7,7 @@ const { getHeroesFromDB, updateHeroInDB } = require('../../heroes/db');
 const createEventBattle = require('../handlerBattleRequest/createEventBattle');
 const { Event, setEventInGame } = require('../../events');
 
-async function handlerAttackEnemyRegion(message, info) {
+async function handlerAttackEnemyRegionRequest(message, info) {
   const { ws } = info.player;
   if (!ws) return;
   const data = message.data;
@@ -74,7 +74,7 @@ async function handlerAttackEnemyRegion(message, info) {
   
 }
 
-module.exports = handlerAttackEnemyRegion;
+module.exports = handlerAttackEnemyRegionRequest;
 
 const schema = {
   attackHeroId: { type: 'string', regExp: /^.{13,}\b/g },

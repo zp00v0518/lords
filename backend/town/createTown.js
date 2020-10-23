@@ -56,7 +56,7 @@ function createTown(options = {}) {
   }
   return town;
 }
-
+// TODO: выделить функцию в отдельный файл и поместить в папке, которая относится к региону
 function createRegionMap(townIndex = 1) {
   const numSectionRegionMap = gameVariables.numSectionRegionMap;
   // const { createMine } = tube;

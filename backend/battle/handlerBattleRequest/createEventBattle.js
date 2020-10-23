@@ -14,12 +14,12 @@ function createEventBattle({ startCoords, endCoords, army, initSector, targetSec
     y: initSector.y
   };
   let target = init;
-  const typeBattle = targetSector === undefined ? Battle.types.region.name : Battle.types.region.globalMap;
+  const typeBattle = targetSector === undefined ? Battle.types.region.name : Battle.types.enemyRegion.name;
   if (targetSector !== undefined) {
     target = {
       sector: targetSector._id,
       x: targetSector.x,
-      y: targetSector.y,
+      y: targetSector.y
     };
   }
   const data = {
