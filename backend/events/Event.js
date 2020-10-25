@@ -10,12 +10,14 @@ const Event = {
     sendCaravan: 'sendCaravan',
     caravanBackToTown: 'caravanBackToTown',
     goToCoords: 'goToCoords',
-    attackEnemyRegion: 'attackEnemyRegion'
+    attackEnemyRegion: 'attackEnemyRegion',
+    stopMine: 'stopMine'
   },
   mode: {
     global: 'global',
     region: 'region',
-    hidden: 'hidden'
+    hidden: 'hidden',
+    system: 'system'
   }
 };
 

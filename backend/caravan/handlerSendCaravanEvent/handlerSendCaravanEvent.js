@@ -11,8 +11,8 @@ async function handlerSendCaravanEvent(event) {
     return false;
   }
   const { payload } = data;
-  const { sources } = targetSector.town.storage;
-  addResourceToStorageFromCaravan(payload, sources);
+  const { storage } = targetSector.town;
+  addResourceToStorageFromCaravan(payload, storage);
   await updateStateTown(targetSector);
   const newEvent = createCaravanBackToTownEvent(event);
   await inActiveteEvent(event);

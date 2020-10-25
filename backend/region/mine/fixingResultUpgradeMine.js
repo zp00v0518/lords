@@ -9,6 +9,8 @@ function fixingResultUpgradeMine(mine, eventItem, sector, callback = () => {}) {
     // важно зафиксировать предыдущее число до всех вычеслений
     const previosValue = mine.work.addValue;
     mine.upgrade.is = false;
+    // TODO: здесь может быть баг, когда шахта не работает после атаки, но в это время закончится улучшение
+    mine.work.is = true;
     mine.lvl++;
     mine.work.addValue = mine.lvl * Mine.valueMining[mine.type];
     mine.upgrade.date = 0;

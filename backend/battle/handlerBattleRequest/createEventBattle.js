@@ -17,6 +17,7 @@ function createEventBattle({ startCoords, endCoords, army, initSector, targetSec
   const typeBattle = targetSector === undefined ? Battle.types.region.name : Battle.types.enemyRegion.name;
   if (targetSector !== undefined) {
     target = {
+      user: targetSector.userId,
       sector: targetSector._id,
       x: targetSector.x,
       y: targetSector.y

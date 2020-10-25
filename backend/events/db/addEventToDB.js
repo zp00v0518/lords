@@ -6,7 +6,7 @@ function addEventToDB(data, serverName, callback = function() {}) {
     const doc = {
       class: 'event',
       target: data.target,
-      init: data.init,
+      init: data.init || '',
       start: data.start,
       end: data.end,
       data: data.data,
