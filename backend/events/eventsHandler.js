@@ -4,6 +4,7 @@ const handlerBackToTown = require('../heroes/handlerBackToTown');
 const { handlerBuildNewTown, handlerHeroTransferEvent } = require('../town');
 const handlerSendCaravanEvent = require('../caravan/handlerSendCaravanEvent');
 const handlerCaravanBackToTownEvent = require('../caravan/handlerCaravanBackToTownEvent');
+const handlerStopMineEvent = require('../region/mine/handlerStopMineEvent');
 
 const eventsHandler = {
   [eventType.battle]: handlerEventBattle,
@@ -11,7 +12,8 @@ const eventsHandler = {
   [eventType.buildNewTown]: handlerBuildNewTown,
   [eventType.heroTransfer]: handlerHeroTransferEvent,
   [eventType.sendCaravan]: handlerSendCaravanEvent,
-  [eventType.caravanBackToTown]: handlerCaravanBackToTownEvent
+  [eventType.caravanBackToTown]: handlerCaravanBackToTownEvent,
+  [eventType.stopMine]: handlerStopMineEvent
 };
 
 module.exports = eventsHandler;

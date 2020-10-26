@@ -1,12 +1,13 @@
 const template = require('template_func');
 const console = new template.Log(__filename);
-const { getUsersTownFromDB } = require('../../town');
-const { getSectorsForAttack, Region } = require('../../region');
+const { getUsersTownFromDB, updateStateTown } = require('../../town');
+const { getSectorsForAttack, Region, updateStateRegion } = require('../../region');
 const { getLootResources } = require('../../region/mine');
 const { calcStorageNowValue, reduceGrowthResources } = require('../../town/storage');
-const { createBackToTownEvent, createStopMineEvent } = require('../../events/createEvents');
-const { addEventToDB, inActiveteEvent } = require('../../events/db');
-const resources = require('../../resources');
+const { createBackToTownEvent } = require('../../events/createEvents');
+const { addEventToDB, inActiveteEvent, getOneEventFromDb, updateEndEventInDb } = require('../../events/db');
+const { Event } = require('../../events');
+const createAndAddEventStopMine = require('./createAndAddEventStopMine');
 
 async function handlerAttackEnemyRegionEvent(event, defTown) {
   const { serverName, init, data } = event;
@@ -23,21 +24,43 @@ async function handlerAttackEnemyRegionEvent(event, defTown) {
   const storage = defTown.town.storage;
   calcStorageNowValue(storage);
   reduceGrowthResources(sectorsWithMine, storage);
+  await updateStateTown(defTown);
   const resultAttack = {
     loot: {
       resources: resourcesLoot
     }
   };
   const backToTownEvent = createBackToTownEvent(event, resultAttack);
+  const targetForEvent = {
+    user: event.target.user,
+    sector: defTown._id
+  };
   await addEventToDB(backToTownEvent, serverName);
   for (const mine of sectorsWithMine) {
-    const workSection = mine.sector.work;
-    const stopMineEvent = createStopMineEvent(serverName, event.target.user, workSection.date, {
-      x: mine.x,
-      y: mine.y
-    });
-    await addEventToDB(stopMineEvent, serverName);
+    if (!mine.events || mine.events.length === 0) {
+      await createAndAddEventStopMine(event, mine, targetForEvent);
+      // const workSection = mine.sector.work;
+      // const stopMineEvent = createStopMineEvent(serverName, workSection.date, targetForEvent, {
+      //   x: mine.x,
+      //   y: mine.y
+      // });
+      // const eventInDb = await addEventToDB(stopMineEvent, serverName);
+      // mine.events = [];
+      // mine.events.push(eventInDb.insertedId.toString());
+    } else {
+      for (const eventId of mine.events) {
+        console.log(eventId);
+        const eventFromDb = await getOneEventFromDb(serverName, eventId);
+        if (eventFromDb.type === Event.types.stopMine) {
+          const workSection = mine.sector.work;
+          await updateEndEventInDb(serverName, eventId, workSection.date);
+        } else {
+          await createAndAddEventStopMine(event, mine, targetForEvent);
+        }
+      }
+    }
   }
+  await updateStateRegion(defTown);
   await inActiveteEvent(event);
 }
 
