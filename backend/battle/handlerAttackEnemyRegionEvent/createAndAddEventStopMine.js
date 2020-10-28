@@ -11,7 +11,6 @@ async function createAndAddEventStopMine(baseEvent, mine, targetForEvent) {
     y: mine.y
   });
   const eventInDb = await addEventToDB(stopMineEvent, serverName);
-  console.log(eventInDb.ops[0]._id.toString());
   mine.events = [];
   mine.events.push(eventInDb.ops[0]._id.toString());
 }

@@ -3,6 +3,7 @@ const console = new template.Log(__filename);
 const upValueInStorage = require('../../town/storage/upValueInStorage');
 const { updateStateTown } = require('../../town/DB');
 const { inActiveteEvent } = require('../../events/db');
+const { updateStateRegion } = require('../../region/db');
 
 async function handlerStopMineEvent(event, sector) {
   const { data } = event;
@@ -15,6 +16,7 @@ async function handlerStopMineEvent(event, sector) {
   workSection.is = true;
   workSection.date = 0;
   await updateStateTown(sector);
+  await updateStateRegion(sector);
   await inActiveteEvent(event);
 }
 

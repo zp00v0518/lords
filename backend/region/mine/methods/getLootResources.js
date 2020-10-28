@@ -1,18 +1,24 @@
 const template = require('template_func');
 const console = new template.Log(__filename);
-const time = require('../../../config').time;
+const gameVariables = require('../../../variables/game_variables');
 
 function getLootResources(mines, coords) {
   const result = {};
   mines.forEach(mine => {
     const persent = mine.x === coords.x && mine.y === coords.y ? 100 : 25;
     const workBlock = mine.sector.work;
-    const growth_in_day = workBlock.addValue * 24 * time.speedGame;
-    const lootSize = (growth_in_day / 100) * persent;
-    const pauseTime = (time.day / 100 * persent) / time.speedGame;
-    result[mine.sector.type] = lootSize;
-    workBlock.is = false;
-    workBlock.date = Date.now() + pauseTime;
+    const addSource = gameVariables.timer.addSource;
+    const addValue = workBlock.addValue;
+    const baseLootSize = (addValue / 100) * persent;
+    const pauseTime = (addSource / 100) * persent;
+    const basePauseEnd = Date.now() + pauseTime;
+    if (basePauseEnd <= workBlock.date) {
+      result[mine.sector.type] = 0;
+      return;
+    }
+    const computedPersent = !workBlock.date ? persent : ((pauseTime - (workBlock.date - Date.now())) / pauseTime) * 100;
+    result[mine.sector.type] = (baseLootSize / 100) * computedPersent;
+    workBlock.date = basePauseEnd;
   });
   return result;
 }

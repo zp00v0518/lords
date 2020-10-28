@@ -6,7 +6,7 @@ const { getLootResources } = require('../../region/mine');
 const { calcStorageNowValue, reduceGrowthResources } = require('../../town/storage');
 const { createBackToTownEvent } = require('../../events/createEvents');
 const { addEventToDB, inActiveteEvent, getOneEventFromDb, updateEndEventInDb } = require('../../events/db');
-const { Event } = require('../../events');
+const Event = require('../../events/Event');
 const createAndAddEventStopMine = require('./createAndAddEventStopMine');
 
 async function handlerAttackEnemyRegionEvent(event, defTown) {
@@ -20,10 +20,16 @@ async function handlerAttackEnemyRegionEvent(event, defTown) {
   const targetSectors = getSectorsForAttack(coords, defTown.region);
   const mineId = Region.types.mine.id;
   const sectorsWithMine = targetSectors.filter(i => i.type === mineId);
-  const resourcesLoot = getLootResources(sectorsWithMine, coords);
   const storage = defTown.town.storage;
+  sectorsWithMine.forEach(mine => {
+    const workSection = mine.sector.work;
+    if (workSection.is) {
+      reduceGrowthResources(mine, storage);
+      workSection.is = false;
+    }
+  });
+  const resourcesLoot = getLootResources(sectorsWithMine, coords);
   calcStorageNowValue(storage);
-  reduceGrowthResources(sectorsWithMine, storage);
   await updateStateTown(defTown);
   const resultAttack = {
     loot: {
@@ -39,17 +45,8 @@ async function handlerAttackEnemyRegionEvent(event, defTown) {
   for (const mine of sectorsWithMine) {
     if (!mine.events || mine.events.length === 0) {
       await createAndAddEventStopMine(event, mine, targetForEvent);
-      // const workSection = mine.sector.work;
-      // const stopMineEvent = createStopMineEvent(serverName, workSection.date, targetForEvent, {
-      //   x: mine.x,
-      //   y: mine.y
-      // });
-      // const eventInDb = await addEventToDB(stopMineEvent, serverName);
-      // mine.events = [];
-      // mine.events.push(eventInDb.insertedId.toString());
     } else {
       for (const eventId of mine.events) {
-        console.log(eventId);
         const eventFromDb = await getOneEventFromDb(serverName, eventId);
         if (eventFromDb.type === Event.types.stopMine) {
           const workSection = mine.sector.work;
