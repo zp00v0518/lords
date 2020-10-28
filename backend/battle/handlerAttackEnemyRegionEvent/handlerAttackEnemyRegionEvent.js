@@ -36,7 +36,7 @@ async function handlerAttackEnemyRegionEvent(event, defTown) {
       resources: resourcesLoot
     }
   };
-  const backToTownEvent = createBackToTownEvent(event, resultAttack);
+  const backToTownEvent = createBackToTownEvent(event, resultAttack, false);
   const targetForEvent = {
     user: event.target.user,
     sector: defTown._id

@@ -3,7 +3,7 @@ const eventsTypes = ev.types;
 const { Heroes } = require('../../heroes');
 const WorldMap = require('../../globalMap/WorldMap');
 
-function createBackToTownEvent(prevEvent, result = {}) {
+function createBackToTownEvent(prevEvent, result = {}, initUser = true) {
   const { data } = prevEvent;
   const startCoords = data.endCoords;
   const endCoords = data.startCoords;
@@ -15,6 +15,9 @@ function createBackToTownEvent(prevEvent, result = {}) {
   const end = start + time;
   const init = prevEvent.target;
   const target = prevEvent.init;
+  if (!initUser) {
+    init.user = '';
+  }
   const newData = {
     startCoords,
     endCoords,
