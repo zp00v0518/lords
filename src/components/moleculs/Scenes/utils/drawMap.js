@@ -1,9 +1,10 @@
 // https://habr.com/ru/post/332922/ - одна из статей
 // https://www.youtube.com/watch?v=nls0dyTeEns&list=PLHcq_lDrZqm0pcMN36rKfFUnxQvasRGRP
 import iso from './iso';
+import drawRectAroundCenter from './drawRectAroundCenter';
 
 function drawMap() {
-  const { currentSector, $store } = this;
+  const { currentSector, $store, sectorInfo } = this;
   let mapArr = this.currentMap;
   let ctx = this.ctx;
   const { canvas } = ctx;
@@ -26,34 +27,28 @@ function drawMap() {
       if (currentSector.x === tile.x && currentSector.y === tile.y) {
         color = colors.center;
       }
-      drawRectAroundCenter(centerX, centerY, color);
-      drawGameImage(ctx, tile, tileWidth, $store, currentSector);
+      tile.drawOps = {
+        fillStyle: color,
+        strokeStyle: 'rgba(0,0,0,0.6)'
+      };
+      drawRectAroundCenter(ctx, tile, tileHeight);
+      tile.drawOps = {};
+      drawGameImage(ctx, tile, tileWidth, $store, currentSector, sectorInfo);
     }
-  }
-  function drawRectAroundCenter(centerX, centerY, color) {
-    const step = 0;
-    ctx.beginPath();
-    ctx.fillStyle = color;
-    ctx.strokeStyle = 'rgba(0,0,0,0.6)';
-    ctx.lineWidth = 1;
-    ctx.moveTo(centerX, centerY - halfHeight + step);
-    ctx.lineTo(centerX + step - tileHeight, centerY);
-    ctx.lineTo(centerX, centerY + halfHeight - step);
-    ctx.lineTo(centerX + tileHeight - step, centerY);
-    ctx.lineTo(centerX, centerY - halfHeight + step);
-    ctx.stroke();
-    ctx.fill();
-    ctx.closePath();
   }
   this.drawAnotherObjects && this.drawAnotherObjects();
 }
-function drawGameImage(ctx, tile, tileWidth, $store, curSector) {
+function drawGameImage(ctx, tile, tileWidth, $store, currentSector, sectorInfo) {
   const { globalConfig, gameSources } = $store.state;
   const { centerX, centerY } = tile;
-  const raceIndex = curSector.town.race;
-  const raceName = globalConfig.all.Race.typeList[raceIndex];
   const tileHeight = tileWidth / 2;
   if (tile.type === 1) {
+    let raceIndex = currentSector.town.race;
+    if (sectorInfo) {
+      if (sectorInfo.raceIndex === -1) return;
+      raceIndex = sectorInfo.raceIndex;
+    }
+    const raceName = globalConfig.all.Race.typeList[raceIndex];
     const img = gameSources.towns[raceName].ico[raceName];
     const scale = tileWidth / img.width;
     const imgSize = img.width * scale;

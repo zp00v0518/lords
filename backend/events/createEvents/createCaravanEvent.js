@@ -1,7 +1,7 @@
 const Ev = require('../Event');
 const Caravan = require('../../caravan/Caravan');
 
-function createCaravanEvent(initSector, targetSector, payload, options) {
+function createCaravanEvent(initSector, targetSector, payload) {
   const init = {
     sector: initSector._id,
     user: initSector.userId,

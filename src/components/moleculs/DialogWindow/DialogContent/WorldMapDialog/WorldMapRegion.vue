@@ -4,10 +4,10 @@
       <div
         class="worldmap-region__title--txt"
       >{{upperFirstSymbol(gloss.dialog.questions.buildNewTown.txt)}}</div>
-      <Icon class="dialog__close" name="circle-close" @click.native="closeDialogWindow"></Icon>
+      <Icon class="dialog__close" name="circle-close" @click.native="closeDialogWindow" />
     </div>
     <div class="worldmap-region__body" ref="body">
-      <RegionMap :regionMap="data.targetTile.region" mode="dialog"></RegionMap>
+      <RegionMap :regionMap="data.targetTile.region" mode="dialog" :sectorInfo="{raceIndex: -1}"/>
     </div>
     <div class="worldmap-region__footer">
       <div class="worldmap-region__footer__price">

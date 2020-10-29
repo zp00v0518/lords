@@ -1,11 +1,11 @@
-const user_2 = {
-  id: 3,
+const user_1 = {
+  id: 1,
   pass: 'test',
-  email: 'admin1@gmail.com',
-  nickName: 'admin1'
+  email: 'admin@gmail.com',
+  nickName: 'admin'
 };
 
-const collections = { server_1: { name: 'server_1', race: 0, alians: {}, rate: {}, color: '#FFFFFF' } };
+const collections = { server_1: { name: 'server_1', race: 0, alians: {}, rate: {}, color: '#FFE4E1' } };
 const town = {
   army: {
     def: false,
@@ -35,7 +35,7 @@ const town = {
       bonus: 0,
       addValue: 12,
       lastCalc: 1598120134539,
-      nowValue: 700.4998583333339,
+      nowValue: 200.4998583333339,
       static: false
     },
     nextLvl: 2
@@ -52,7 +52,7 @@ const town = {
       bonus: 0,
       addValue: 10,
       lastCalc: 1598120134539,
-      nowValue: 569.0832013888893,
+      nowValue: 169.0832013888893,
       static: false
     },
     nextLvl: 1
@@ -92,5 +92,4 @@ const town = {
     nextLvl: 1
   }
 };
-
-module.exports = { user_2, collections, town };
+module.exports = { user_1, collections, town };

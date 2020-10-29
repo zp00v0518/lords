@@ -9,12 +9,15 @@ const Event = {
     heroTransfer: 'heroTransfer',
     sendCaravan: 'sendCaravan',
     caravanBackToTown: 'caravanBackToTown',
-    goToCoords: 'goToCoords'
+    goToCoords: 'goToCoords',
+    attackEnemyRegion: 'attackEnemyRegion',
+    stopMine: 'stopMine'
   },
   mode: {
     global: 'global',
     region: 'region',
-    hidden: 'hidden'
+    hidden: 'hidden',
+    system: 'system'
   }
 };
 

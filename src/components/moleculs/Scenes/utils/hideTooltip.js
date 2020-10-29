@@ -1,6 +1,5 @@
 function hideTooltip() {
   this.showTooltip = false;
-  this.drawMap();
   this.currentTile = {};
 }
 

@@ -9,8 +9,9 @@ const Battle = require('./Battle');
 const calculateBattle = require('./calculateBattle');
 const setUnitsAfterBattle = require('./setUnitsAfterBattle');
 const { Region, updateStateRegion } = require('../region');
+const handlerAttackEnemyRegionEvent = require('./handlerAttackEnemyRegionEvent');
 
-function handlerEventBattle(event, targetSector) {
+async function handlerEventBattle(event, targetSector) {
   const { data, serverName } = event;
   if (data.typeBattle === Battle.types.region.name) {
     getHeroesFromDB(serverName, { heroId: data.initHero }).then(hero => {
@@ -25,7 +26,7 @@ function handlerEventBattle(event, targetSector) {
       updateHeroInDB(serverName, hero._id, { army: atackArmy }).then(() => {
         if (battleResult.atackWin) {
           tile.army = [];
-          tile.type = Region.types.empty.id
+          tile.type = Region.types.empty.id;
           updateStateRegion(targetSector);
         }
         const optionsForUpdate = {
@@ -46,6 +47,8 @@ function handlerEventBattle(event, targetSector) {
           });
       });
     });
+  } else if (data.typeBattle === Battle.types.enemyRegion.name) {
+    await handlerAttackEnemyRegionEvent(event, targetSector);
   }
 }
 

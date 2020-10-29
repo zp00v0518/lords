@@ -2,6 +2,9 @@ const Battle = {
   types: {
     region: {
       name: 'region'
+    },
+    enemyRegion: {
+      name: 'enemyRegion'
     }
   },
   units: {

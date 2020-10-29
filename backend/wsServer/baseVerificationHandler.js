@@ -16,6 +16,7 @@ function hero(id, sector, info) {
         if (!result) {
           resolve(template);
         }
+        // TODO: сделать более детальную верификацию. На данный момент, верификация будет пройдена, даже если герой будет не в целевом секторе
         template.hero = JSON.parse(JSON.stringify(result));
         template.is = true;
         resolve(template);

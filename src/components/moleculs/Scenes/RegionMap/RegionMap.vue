@@ -12,8 +12,8 @@
       :width="sceneWidth"
       :height="sceneHeight"
       @mousemove="handlerMousemoveOnMap"
-      @mouseleave="hideTooltip"
-      @click="mode === 'dialog' ? {} : handlerClick()"
+      @mouseleave="handlerMouseLeave"
+      @click="handlerClick"
       key="scene"
       class="scene__canvas"
     ></canvas>
@@ -34,10 +34,12 @@ export default {
     TooltipRegion
   },
   props: {
-    widthScene: 0,
-    heightScene: 0,
+    widthScene: { default: 0 },
+    heightScene: { default: 0 },
     regionMap: null,
-    mode: { type: String, default: 'global' }
+    mode: { type: String, default: 'global' },
+    sectorInfo: { default: null },
+    customHoverFunc: { type: Function, default: null }
   },
   data() {
     return {
@@ -48,6 +50,8 @@ export default {
   created() {
     if (!this.regionMap) {
       this.currentMap = this.currentSector.region;
+    } else {
+      this.currentMap = this.regionMap;
     }
   },
   watch: {
@@ -83,10 +87,10 @@ export default {
       return deepClone(d);
     },
     tileWidth() {
-      const { ctx, mode } = this;
+      const { ctx, mode, currentMap } = this;
       if (!ctx) return 0;
       const widthParse = parseInt(this.sceneWidth) / 2;
-      const intermediate = widthParse / (this.currentMap.length / 2);
+      const intermediate = currentMap.length === 0 ? 0 : widthParse / (currentMap.length / 2);
       if (mode !== 'global') {
         return intermediate * 0.6;
       }
@@ -99,9 +103,17 @@ export default {
     }
   },
   methods: {
+    handlerMouseLeave() {
+      this.hideTooltip();
+    },
     handlerClick() {
+      if (!this.cursorOnScene) return;
       const { currentTile, globalConfig } = this;
-      if (!this.cursorOnScene || currentTile.type === 1 || currentTile.type === 3) return;
+      if (this.mode === 'dialog') {
+        this.$emit('click', { target: currentTile });
+        return;
+      }
+      if (currentTile.type === 1 || currentTile.type === 3) return;
       if (this.currentTile.type === 0) {
         if (currentTile.army && currentTile.army.length === 0) return;
         const payload = {

@@ -5,10 +5,10 @@
         <div class="dialog__title">{{title}}</div>
         <Icon class="dialog__close" name="circle-close" @click.native="closeDialogWindow"></Icon>
       </div>
-      <slot name="dialogMain">
+      <slot>
         <components
           @set-height="setHeight"
-          :is="$store.state.dialog.component"
+          :is="typeDialog[$store.state.dialog.type]"
           :data="$store.state.dialog.data"
           @close="closeDialogWindow()"
         ></components>
@@ -22,22 +22,35 @@ import DialogContent from './DialogContent';
 import Market from '../Scenes/TownMap/Buildings/Market';
 import { closeMixin } from './dialogMixin';
 
+const typeDialog = {
+  upgradeRegion: 'UpgradeRegion',
+  upgradeBuilding: 'UpgradeBuilding',
+  message: 'Message',
+  dialogBattle: 'DialogBattle',
+  worldMapRegion: 'WorldMapRegion',
+  heroTransferDialog: 'HeroTransferDialog',
+  sendCaravan: 'Market',
+  attackEnemyRegion: 'AttackEnemyRegion'
+};
+
 export default {
   name: 'DialogWindow',
   mixins: [closeMixin],
   props: {
-    show: { type: Boolean, default: false }
+    show: { type: Boolean, default: false },
+    headerTitle: { type: String, default: '' }
   },
   components: { ...DialogContent, Market },
   data() {
     return {
       height: '90%',
-      width: '90%'
+      width: '90%',
+      typeDialog
     };
   },
   computed: {
     title() {
-      return this.$store.state.dialog.title;
+      return this.headerTitle || this.$store.state.dialog.title;
     }
   },
   methods: {

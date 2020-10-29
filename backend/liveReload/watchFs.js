@@ -12,7 +12,7 @@ function watchFs(pathWatch, callback) {
       } else {
         log.log('Имя файла отсутствует');
       }
-      callback();
+      callback(filename);
     }
   );
 }

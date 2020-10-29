@@ -1,3 +1,5 @@
+const template = require('template_func');
+const console = new template.Log(__filename);
 const { calcStorageNowValue } = require('../town/storage');
 const { getOneTownFromDB, updateStateTown } = require('../town');
 const fixingResultUpgradeMine = require('../region/mine/fixingResultUpgradeMine.js');
@@ -35,13 +37,17 @@ function iterationImplenetation(event, callback = () => {}) {
     const now = new Date();
     const end = new Date(event.end);
     if (end > now) return resolve();
-
     const type = event.type;
     const serverName = event.serverName;
-    const x = event.target.x;
-    const y = event.target.y;
-    let sector = global.GlobalMap[serverName][x][y];
-    const sectorId = sector._id;
+    const { target } = event;
+    const x = target.x;
+    const y = target.y;
+    let sectorId = target.sector;
+    let sector = {};
+    if (!sectorId) {
+      sector = global.GlobalMap[serverName][x][y];
+      sectorId = sector._id;
+    }
     try {
       sector = await getOneTownFromDB(serverName, sectorId);
       if (!sector) return resolve();
@@ -78,21 +84,25 @@ function iterationImplenetation(event, callback = () => {}) {
         await updateStateTown(sector);
         callback(null, resultFinishEvent);
         return resolve(resultFinishEvent);
-      } else if (type === eventType.battle) {
+      } else if (eventsHandler[type]) {
         await eventsHandler[type](event, sector);
-      } else if (type === eventType.backToTown) {
-        eventsHandler[type](event, sector);
-      } else if (type === eventType.buildNewTown) {
-        await eventsHandler[type](event);
         resolve();
-      } else if (type === eventType.heroTransfer) {
-        await eventsHandler[type](event);
-        resolve();
-      } else if (type === eventType.sendCaravan) {
-        await eventsHandler[type](event);
-      } else if (type === eventType.caravanBackToTown) {
-        await eventsHandler[type](event);
       }
+      // else if (type === eventType.battle) {
+      //   await eventsHandler[type](event, sector);
+      // } else if (type === eventType.backToTown) {
+      //   eventsHandler[type](event, sector);
+      // } else if (type === eventType.buildNewTown) {
+      //   await eventsHandler[type](event);
+      //   resolve();
+      // } else if (type === eventType.heroTransfer) {
+      //   await eventsHandler[type](event);
+      //   resolve();
+      // } else if (type === eventType.sendCaravan) {
+      //   await eventsHandler[type](event);
+      // } else if (type === eventType.caravanBackToTown) {
+      //   await eventsHandler[type](event);
+      // }
     } catch (err) {
       console.log(err);
       resolve();

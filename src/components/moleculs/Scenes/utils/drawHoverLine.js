@@ -1,26 +1,17 @@
+import drawRectAroundCenter from './drawRectAroundCenter';
+
 function drawHoverLine(rombIndex) {
   let x = rombIndex.x;
   let y = rombIndex.y;
-  let obj = this.currentMap[x][y];
-  if (!obj) return;
+  let tile = this.currentMap[x][y];
+  if (!tile) return;
   let ctx = this.ctx;
   let tileWidth = this.tileWidth;
   let tileHeight = tileWidth / 2;
-  let halfHeight = tileHeight / 2;
-  let centerX = obj.centerX;
-  let centerY = obj.centerY;
-  var step = 0;
-  ctx.strokeStyle = 'yellow';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(centerX, centerY - halfHeight + step);
-  ctx.lineTo(centerX + step - tileHeight, centerY);
-  ctx.lineTo(centerX, centerY + halfHeight - step);
-  ctx.lineTo(centerX + tileHeight - step, centerY);
-  ctx.lineTo(centerX, centerY - halfHeight + step);
-  ctx.stroke();
-  ctx.closePath();
+  tile.drawOps.strokeStyle = 'yellow';
+  tile.drawOps.lineWidth = 2;
+  drawRectAroundCenter(ctx, tile, tileHeight);
   return true;
 }
 
-module.exports = drawHoverLine;
+export default drawHoverLine;

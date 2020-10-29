@@ -1,13 +1,9 @@
-const ObjectId = require("mongodb").ObjectID;
-const { updateDB } = require("../../workWithMongoDB");
+const ObjectId = require('mongodb').ObjectID;
+const { updateDB } = require('../../workWithMongoDB');
 const update = new updateDB();
 
 // обновляет состояние города в БД (не Региона или его-то другого. ТОлько города)
-function updateStateRegion(
-  sector,
-  ops = { upsert: false },
-  callback = function() {}
-) {
+function updateStateRegion(sector, ops = { upsert: false }, callback = function() {}) {
   return new Promise((resolve, reject) => {
     // console.log(count++);
     const optionsForUpdate = {

@@ -10,7 +10,7 @@ module.exports = {
     ready_to_work: false
   },
   frontEnd: {
-    watchFolder: path.resolve(__dirname, '../../frontEnd'),
+    watchFolder: path.resolve(__dirname, '../../frontEnd/dist'),
     folder: 'frontEnd'
   },
   db: {
