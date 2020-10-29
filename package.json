@@ -17,7 +17,7 @@
   "dependencies": {
     "cookies": "^0.7.3",
     "dotenv": "^8.2.0",
-    "mongodb": "^3.1.9",
+    "mongodb": "^3.1.13",
     "node-sass": "^4.10.0",
     "path-parse": "^1.0.6",
     "sass-loader": "^7.1.0",
