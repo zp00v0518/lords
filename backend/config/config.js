@@ -1,5 +1,6 @@
 const path = require('path');
 const schema = require('../workWithMongoDB/schema');
+require('dotenv').config();
 
 module.exports = {
   server: {
