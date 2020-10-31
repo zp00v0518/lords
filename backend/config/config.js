@@ -1,8 +1,7 @@
 const path = require('path');
 const schema = require('../workWithMongoDB/schema');
-require('dotenv').config();
 
-module.exports = {
+const config = {
   server: {
     port: {
       http: process.env.PORT || 4000,
@@ -56,3 +55,5 @@ module.exports = {
   },
   schema
 };
+
+module.exports = config;

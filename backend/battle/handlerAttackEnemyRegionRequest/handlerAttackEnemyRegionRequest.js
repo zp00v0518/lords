@@ -62,7 +62,8 @@ async function handlerAttackEnemyRegionRequest(message, info) {
     army: attackArmyForBattle,
     initSector: curSector,
     initHero: hero,
-    targetSector: targetTown
+    targetSector: targetTown,
+    map: 'world'
   });
   event.mode = Event.mode.global;
   event.data.goal = {};
@@ -71,7 +72,6 @@ async function handlerAttackEnemyRegionRequest(message, info) {
   await setEventInGame(event, info.server);
   await updateHeroInDB(serverName, hero._id, { active: false });
   sendWSMessage(ws, event);
-  
 }
 
 module.exports = handlerAttackEnemyRegionRequest;

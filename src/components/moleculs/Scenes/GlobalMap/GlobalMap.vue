@@ -179,7 +179,6 @@ export default {
           this.popupTown.targetSector = deepClone(currentTile);
         }
       } else if (currentTile.type === tileTypes.town.id && currentTile.userId !== user.id) {
-        console.log(currentTile);
         this.popupTown.show = true;
         this.popupTown.isSelf = false;
         this.popupTown.targetSector = deepClone(currentTile);

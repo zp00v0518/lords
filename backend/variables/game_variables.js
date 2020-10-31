@@ -4,7 +4,6 @@ const Town = require("../town/Town.js");
 const resources = require("../resources/Resources.js");
 const schema = require("../workWithMongoDB/schema.js");
 const time = config.time;
-
 // используется ТАКЖЕ!!!! на фронте при улучшении строений в регионе!!!!!!!!
 
 const gameVariables = {

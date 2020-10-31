@@ -1,7 +1,10 @@
-'use strict'
+'use strict';
 const config = require('../backend/config/config');
+require('dotenv').config();
 
-module.exports = {
+const prodEnv = {
   NODE_ENV: '"production"',
   WSPORT: config.server.port.ws,
-}
+  SPEED: process.env.SPEED,
+};
+module.exports = prodEnv;
