@@ -6,5 +6,6 @@ const prodEnv = {
   NODE_ENV: '"production"',
   WSPORT: config.server.port.ws,
   SPEED: process.env.SPEED,
+  SIZE_MAP: process.env.SIZE_MAP,
 };
 module.exports = prodEnv;

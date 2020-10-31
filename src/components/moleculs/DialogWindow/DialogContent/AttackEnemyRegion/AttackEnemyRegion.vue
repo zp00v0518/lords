@@ -65,7 +65,6 @@ export default {
       const { WorldMap } = this.globalConfig.all;
       const { targetTile } = data;
       const time = WorldMap.getTimeMoveOnMap(currentSector, targetTile, { hero: activeHero });
-      console.log(time);
       return this.getAsTimeString(time);
     }
   },
