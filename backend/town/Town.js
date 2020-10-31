@@ -53,7 +53,7 @@ const Town = {
   },
   getTimeForUpgrade(time, persent = 100, index = 1.5) {
     persent = persent < 100 ? 100 + (persent - 100) * index : persent;
-    //переворачиваю значение, т.к при движении ползунка время должно уменьшаться, а стоимость расти
+    // переворачиваю значение, т.к при движении ползунка время должно уменьшаться, а стоимость расти
     persent = 100 - (persent - 100);
     // persent = formPersent(persent);
     return (time / 100) * persent;

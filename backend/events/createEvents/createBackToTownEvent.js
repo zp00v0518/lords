@@ -1,3 +1,5 @@
+const template = require('template_func');
+const console = new template.Log(__filename);
 const ev = require('../Event');
 const eventsTypes = ev.types;
 const { Heroes } = require('../../heroes');
