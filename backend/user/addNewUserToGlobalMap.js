@@ -1,14 +1,18 @@
-const { getRandomNumber } = require('template_func');
-const tube = require('../tube.js');
+const { getRandomNumber, Log } = require('template_func');
+const console = new Log(__filename);
 const createTown = require('../town/createTown');
-const { config, updateDB } = tube;
+const { getFirstWeightControl } = require('../zoneControl/methods');
+const { setValueInSectorById } = require('../zoneControl/db');
+const config = require('../config');
+const { updateDB } = require('../workWithMongoDB');
 const WorldMap = require('../globalMap/WorldMap');
 const update = new updateDB();
 
 // добавляю нового Игрока на глобальную карту
-function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
+// TODO: переделать на async/await
+function addNewUserToGlobalMap(user, serverName) {
   return new Promise((resolve, reject) => {
-    checkUserPosition(serverName, (x, y, sectorId) => {
+    checkUserPosition(serverName, async(x, y, sectorId) => {
       const race = user.collections[serverName].race;
       const newTown = createTown({
         status: 'first',
@@ -16,6 +20,9 @@ function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
         sectorId,
         race
       });
+      const weightControl = getFirstWeightControl(newTown);
+      console.log(weightControl);
+      await setValueInSectorById(serverName, sectorId, weightControl)
       const { regionMap } = newTown;
       // удаляю т.к в базе получается дублирование карты региона
       delete newTown.regionMap;
@@ -43,7 +50,6 @@ function addNewUserToGlobalMap(user, serverName, callback = function() {}) {
         GlobalMap[serverName][x][y].type = 1;
         GlobalMap[serverName][x][y].nickName = user.nickName;
         GlobalMap[serverName][x][y].town = newTown;
-        callback(null, GlobalMap[serverName][x][y]);
         return resolve(GlobalMap[serverName][x][y]);
       });
     });

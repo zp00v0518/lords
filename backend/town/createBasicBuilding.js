@@ -6,7 +6,7 @@ function createBasicBuilding(classBuilding, lvl = 0, parent = 'town') {
     lvl: lvl,
     class: classBuilding,
     parent,
-    type: classBuilding,
+    type: classBuilding
   };
   return basic;
 }
