@@ -1,7 +1,7 @@
 const { getRandomNumber, Log } = require('template_func');
 const console = new Log(__filename);
 const createTown = require('../town/createTown');
-const { getFirstWeightControl } = require('../zoneControl/methods');
+const { getFirstWeightControl, setZoneControl } = require('../zoneControl/methods');
 const { setValueInSectorById } = require('../zoneControl/db');
 const config = require('../config');
 const { updateDB } = require('../workWithMongoDB');
@@ -21,8 +21,8 @@ function addNewUserToGlobalMap(user, serverName) {
         race
       });
       const weightControl = getFirstWeightControl(newTown);
-      console.log(weightControl);
-      await setValueInSectorById(serverName, sectorId, weightControl)
+      await setValueInSectorById(serverName, sectorId, weightControl);
+      setZoneControl(serverName, weightControl, {x, y}, user)
       const { regionMap } = newTown;
       // удаляю т.к в базе получается дублирование карты региона
       delete newTown.regionMap;
