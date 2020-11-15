@@ -13,7 +13,10 @@ const needFields = {
   'town.name': 1,
   'town.lvl': 1,
   'town.race': 1,
-  'town.sectorId': 1
+  'town.sectorId': 1,
+  'control.power': 1,
+  'control.color': 1,
+  'control.userId': 1
 };
 
 module.exports = needFields;

@@ -24,6 +24,11 @@ function drawMap() {
       tile.centerX = centerX;
       tile.centerY = centerY;
       let color = colors[tile.type];
+      const centerMap = Math.floor(mapArr.length / 2);
+      color = tile.control && tile.control.color ? tile.control.color : color;
+      if (x === centerMap && y === centerMap) {
+        console.log(color, tile);
+      }
       if (currentSector.x === tile.x && currentSector.y === tile.y) {
         color = colors.center;
       }

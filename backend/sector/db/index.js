@@ -1,3 +1,4 @@
 const updateStateSector = require('./updateStateSector');
+const findSectorsByCoords = require('./findSectorsByCoords');
 
-module.exports = { updateStateSector };
+module.exports = { updateStateSector, findSectorsByCoords };

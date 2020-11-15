@@ -1,9 +1,12 @@
+const template = require('template_func');
+const console = new template.Log(__filename);
 const ObjectId = require('mongodb').ObjectID;
 const { updateDB } = require('../../workWithMongoDB');
 const update = new updateDB();
 
 // обновляет состояние города в БД (не Региона или его-то другого. ТОлько города)
 function updateStateSector(sector, docs, ops = { upsert: false }, callback = function() {}) {
+  console.log(docs);
   return new Promise((resolve, reject) => {
     if (!docs) {
       console.log(`В ${__dirname} не переданы документы для обновления`);

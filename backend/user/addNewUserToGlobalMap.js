@@ -22,7 +22,7 @@ function addNewUserToGlobalMap(user, serverName) {
       });
       const weightControl = getFirstWeightControl(newTown);
       await setValueInSectorById(serverName, sectorId, weightControl);
-      setZoneControl(serverName, weightControl, {x, y}, user)
+      await setZoneControl(serverName, weightControl, {x, y}, user)
       const { regionMap } = newTown;
       // удаляю т.к в базе получается дублирование карты региона
       delete newTown.regionMap;
