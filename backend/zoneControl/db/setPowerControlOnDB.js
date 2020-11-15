@@ -10,7 +10,6 @@ const powerKey = 'control.power';
 const colorKey = 'control.color';
 const idKey = 'control.userId';
 
-// TODO: остановился на формировании запроса за секторами
 async function setPowerControlOnDB(collectionName, arr, user) {
   const query = createQueryToDB(collectionName, arr, user);
   let updateResult = null;

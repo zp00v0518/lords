@@ -3,6 +3,7 @@ const getSectorOnMatrix = require('../../globalMap/getSectorOnMatrix');
 const setPowerControlOnDB = require('../db/setPowerControlOnDB');
 const setWeightForCell = require('./setWeightForCell');
 
+// TODO: создать метод, которым можнО ПОЛУЧИТЬ ДАННЫЕ ЮЗЕРА по координатам его города
 async function setZoneControl(serverName, power = 0, center, user) {
   const GlobalMap = require('../../globalMap/constractGlobalMap');
   const length = GlobalMap[serverName].length;

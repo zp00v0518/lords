@@ -36,7 +36,9 @@ function constractGlobalMap() {
       const y = item.y;
       GlobalMap[serverName][x][y] = item;
     });
-    console.log(`Построение глобальной карты для ${serverName} завершено`);
+    const str = `Построение глобальной карты для ${serverName} завершено`;
+    // console.log( '%c%s', 'color: green; font: 1.2rem/1 Tahoma;', str );
+    console.log(str);
     controlStateEventsList(serverName).then(events => {
       console.log(`Игровые события на ${serverName} посчитаны`);
       console.timeEnd('start');

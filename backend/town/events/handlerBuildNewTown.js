@@ -10,6 +10,8 @@ const { transferHeroBetweenTown, getHeroesFromDB, heroActivate } = require('../.
 const { getOneSectorForGlobalMap } = require('../../globalMap/db');
 const { createBackToTownEvent } = require('../../events/createEvents');
 const { addEventToDB } = require('../../events/db');
+const { getFirstWeightControl, setZoneControl } = require('../../zoneControl/methods');
+const { setValueInSectorById } = require('../../zoneControl/db');
 
 async function handlerBuildNewTown(event) {
   const { serverName, target, init, data } = event;
@@ -43,12 +45,13 @@ async function handlerBuildNewTown(event) {
   await updateStateSector(targetSector, newDocs);
   await transferHeroBetweenTown(serverName, hero._id, init.sector, target.sector);
   await heroActivate(serverName, hero._id);
-
   const newSector = await getOneSectorForGlobalMap(serverName, targetSector._id);
+
+  const weightControl = getFirstWeightControl(newTown);
+  await setValueInSectorById(serverName, targetSector._id, weightControl);
+  await setZoneControl(serverName, weightControl, { x: newSector.x, y: newSector.y }, user);
   global.GlobalMap[serverName][targetSector.x][targetSector.y] = newSector;
-  
   inActiveteEvent(event);
-  return;
 }
 
 module.exports = handlerBuildNewTown;
