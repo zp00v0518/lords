@@ -16,7 +16,7 @@ async function setValueInSectorById(serverName, sectorId, value) {
     }
   };
   const result = await update.one(optionsForUpdateBD);
- return result;
+  return result;
 }
 
 module.exports = setValueInSectorById;

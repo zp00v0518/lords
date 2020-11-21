@@ -3,7 +3,7 @@ const console = new template.Log(__filename);
 const Race = require('../../race/Race');
 const typeResources = require('../../resources/type_resources');
 
-function getControlWeight(building, raceIndex) {
+function getControlWeightFromBuilding(building, raceIndex) {
   const raceName = Race.typeList[raceIndex];
   const raceBuildings = Race[raceName].buildings;
   const target = raceBuildings[building.type];
@@ -12,4 +12,4 @@ function getControlWeight(building, raceIndex) {
   return gold.value;
 }
 
-module.exports = getControlWeight;
+module.exports = getControlWeightFromBuilding;

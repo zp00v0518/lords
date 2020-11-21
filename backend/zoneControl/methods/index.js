@@ -1,7 +1,15 @@
 const createZoneControlToDB = require('./createZoneControlToDB');
 const getFirstWeightControl = require('./getFirstWeightControl');
-const getControlWeight = require('./getControlWeight');
+const getControlWeightFromBuilding = require('./getControlWeightFromBuilding');
+const getControlWeightFromArmy = require('./getControlWeightFromArmy');
 const getRadiusZone = require('./getRadiusZone');
 const setZoneControl = require('./setZoneControl');
 
-module.exports = { createZoneControlToDB, getControlWeight, getFirstWeightControl, setZoneControl, getRadiusZone };
+module.exports = {
+  createZoneControlToDB,
+  getControlWeightFromBuilding,
+  getControlWeightFromArmy,
+  getFirstWeightControl,
+  setZoneControl,
+  getRadiusZone
+};

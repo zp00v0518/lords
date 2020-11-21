@@ -1,6 +1,6 @@
 const template = require('template_func');
 const console = new template.Log(__filename);
-const getControlWeight = require('./getControlWeight');
+const getControlWeightFromBuilding = require('./getControlWeightFromBuilding');
 const Town = require('../../town/Town');
 const listBuilding = Town.listBuildings;
 
@@ -10,7 +10,7 @@ function getFirstWeightControl(townElem) {
     const key = item.name;
     const building = townElem[key];
     if (!building || building.lvl === 0) return;
-    const weight = getControlWeight(building, townElem.race);
+    const weight = getControlWeightFromBuilding(building, townElem.race);
     result += weight;
   });
   return result;

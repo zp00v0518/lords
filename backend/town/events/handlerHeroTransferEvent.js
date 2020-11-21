@@ -1,6 +1,7 @@
 const { inActiveteEvent } = require('../../events/db');
 const { getOneTownFromDB } = require('../DB');
 const { transferHeroBetweenTown, getHeroesFromDB, heroActivate } = require('../../heroes/db');
+const { setControlWeightAfterTransferHero } = require('../../heroes/methods');
 const { getOneSectorForGlobalMap } = require('../../globalMap/db');
 
 async function handlerHeroTransferEvent(event) {
@@ -16,6 +17,7 @@ async function handlerHeroTransferEvent(event) {
     return;
   }
   await transferHeroBetweenTown(serverName, hero._id, init.sector, target.sector);
+  await setControlWeightAfterTransferHero(serverName, hero, init.sector, target.sector);
   await heroActivate(serverName, hero._id);
   const newSector = await getOneSectorForGlobalMap(serverName, targetSector._id);
   global.GlobalMap[serverName][targetSector.x][targetSector.y] = newSector;
