@@ -10,6 +10,7 @@ function finishBarraks(barraks, eventData) {
   barraks.work.addValue = effect;
   barraks.upgrade.is = false;
   barraks.work.is = true;
+  return barraks;
 }
 
 module.exports = finishBarraks;

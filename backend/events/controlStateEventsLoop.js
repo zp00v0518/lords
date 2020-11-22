@@ -10,6 +10,8 @@ const eventType = require('./Event').types;
 const eventsHandler = require('./eventsHandler');
 const { recursiveLoop } = require('../template_modules');
 const inActiveteEvent = require('./db/inActiveteEvent');
+const { getControlWeightFromBuilding } = require('../zoneControl/methods');
+const { setValueInSectorById } = require('../zoneControl/db');
 const update = new updateDB();
 
 function controlStateEventsLoop(eventsList = [], callback = () => {}) {
@@ -60,23 +62,30 @@ function iterationImplenetation(event, callback = () => {}) {
         const resultUpgradeMine = await fixingResultUpgradeMine(mine, event, sector);
         callback(null, resultUpgradeMine);
         return resolve(resultUpgradeMine);
+        // TODO: провести рефакторинг обработчика upgradeTown
       } else if (type === eventType.upgradeTown) {
         let typeBuilding = event.data.type;
         const townUpgrade = sector.town[typeBuilding];
+        let result = {};
 
         if (typeBuilding === 'storage') {
-          finishEvent[typeBuilding](sector.town.storage, event);
+          result = finishEvent[typeBuilding](sector.town.storage, event);
         } else if (typeBuilding === 'hall') {
-          finishEvent[typeBuilding](sector.town[typeBuilding], event, sector);
+          result = finishEvent[typeBuilding](sector.town[typeBuilding], event, sector);
         } else if (typeBuilding.indexOf('barraks') !== -1) {
-          finishEvent[typeBuilding](sector.town[typeBuilding], event, sector);
+          result = finishEvent[typeBuilding](sector.town[typeBuilding], event, sector);
         } else if (townUpgrade.work.static) {
-          const resultUpgradeBuilding = await fixingResultUpgrade_building(event, sector);
-          callback(null, resultUpgradeBuilding);
-          return resolve(resultUpgradeBuilding);
+          result = await fixingResultUpgrade_building(event, sector);
+          const weight = getControlWeightFromBuilding(result, sector.town.race);
+          await setValueInSectorById(serverName, sector._id, weight);
+          callback(null, result);
+          return resolve(result);
         }
         const resultInactiveteEvent = await inActiveteEvent(event);
+        const weight = getControlWeightFromBuilding(result, sector.town.race);
+        await setValueInSectorById(serverName, sector._id, weight);
         await updateStateTown(sector);
+
         callback(null, resultInactiveteEvent);
         return resolve(resultInactiveteEvent);
       } else if (type === eventType.hiringUnits) {
