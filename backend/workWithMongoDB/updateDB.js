@@ -47,22 +47,13 @@ function updateDB() {
     });
   };
 
-  this.fields = function(options, callback = function() {}) {
-    return new Promise((resolve, reject) => {
-      if (!options.collectionName || !options.filtr || !options.updateDoc) {
-        log.log('Обновить БД не представляется возможным, т.к. не переданы все необходимые параметры');
-      }
-      let collection = mongo.open(options.collectionName);
-      let ops = options.ops || null;
-      collection.update(options.filtr, options.updateDoc, ops, (err, result) => {
-        if (err) {
-          callback(err);
-          return reject(err);
-        }
-        callback(null, result);
-        return resolve(result);
-      });
-    });
+  this.updateMany = async function(options, extra = null) {
+    if (!options.collectionName || !options.filtr || !options.updateDoc) {
+      log.log('Обновить БД не представляется возможным, т.к. не переданы все необходимые параметры');
+    }
+    const collection = mongo.open(options.collectionName);
+    const result = await collection.updateMany(options.filtr, options.updateDoc, extra);
+    return result;
   };
   this.close = function() {
     mongo.close();

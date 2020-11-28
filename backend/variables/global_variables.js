@@ -1,6 +1,8 @@
 const gameVariables = require('./game_variables');
 global.gameVariables = gameVariables;
-const { config, GlobalMap } = require('../tube');
+const config = require('../config');
+// const GlobalMap = require('../globalMap/constractGlobalMap');
+const { GlobalMap } = require('../tube');
 const UserOnline = {};
 
 const appStatistic = {
