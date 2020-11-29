@@ -6,11 +6,11 @@ require('./get_files.js');
 require('./backend/tube.js');
 
 const http = require('http');
-const config = require('./backEnd/config');
 
 // если подключить эти модули не через tube, то идет двойное подключение к БД, двойной запуск constractGlobalMap. 
 // прям беда какая-то
 const {
+  config,
   getMethod,
   postMethod,
   controlStateGlobal,

@@ -4,6 +4,7 @@ const getControlWeightFromBuilding = require('./getControlWeightFromBuilding');
 const getControlWeightFromArmy = require('./getControlWeightFromArmy');
 const getRadiusZone = require('./getRadiusZone');
 const setZoneControl = require('./setZoneControl');
+const calculateMediumWeight = require('./calculateMediumWeight');
 
 module.exports = {
   createZoneControlToDB,
@@ -11,5 +12,6 @@ module.exports = {
   getControlWeightFromArmy,
   getFirstWeightControl,
   setZoneControl,
-  getRadiusZone
+  getRadiusZone,
+  calculateMediumWeight
 };
