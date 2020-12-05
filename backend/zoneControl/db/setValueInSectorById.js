@@ -1,8 +1,11 @@
 const ObjectId = require('mongodb').ObjectID;
 const { updateDB } = require('../../workWithMongoDB');
 const update = new updateDB();
+const getLastValueControl = require('./getLastValueControl');
 
 async function setValueInSectorById(serverName, sectorId, value) {
+  const lastValue = await getLastValueControl(serverName, sectorId);
+  const resultValue = lastValue + value;
   const key = Date.now();
   const optionsForUpdateBD = {
     collectionName: serverName,
@@ -11,7 +14,8 @@ async function setValueInSectorById(serverName, sectorId, value) {
     },
     updateDoc: {
       $set: {
-        [`control.values.${key}`]: value
+        [`control.values.${key}`]: resultValue,
+        [`control.lastValue`]: resultValue
       }
     }
   };

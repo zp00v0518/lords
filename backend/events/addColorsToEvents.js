@@ -3,8 +3,8 @@ const { getUsersById } = require('../user/db');
 
 async function addColorsToEvents(serverName, arr) {
   const arrUserId = arr.map(item => new ObjectId(item.init.user.id));
-  const result = await getUsersById(arrUserId);
-  const users = result.result;
+  const users = await getUsersById(arrUserId);
+  // const users = result.result;
   const obj = {};
   users.forEach(user => {
     const id = user._id;
