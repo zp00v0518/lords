@@ -22,7 +22,6 @@ async function removeOldContolValuesFromDB(serverName, sectorId, values) {
     updateDoc: { $unset: removeList }
   };
   const result = await update.one(optionsForUpdate);
-  console.log(result.result);
   return result.result;
 }
 

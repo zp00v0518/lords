@@ -2,6 +2,7 @@ const { updateDB } = require('../../workWithMongoDB');
 const update = new updateDB();
 
 async function clearAllBusySectors(serverName) {
+  clearInGlobalMap(serverName);
   const updateOptions = {
     collectionName: serverName,
     filtr: {
@@ -17,6 +18,17 @@ async function clearAllBusySectors(serverName) {
   };
   const result = await update.updateMany(updateOptions);
   return result.result;
+}
+function clearInGlobalMap(serverName) {
+  const GlobalMap = require('../../globalMap/constractGlobalMap');
+  const arr = GlobalMap[serverName];
+  arr.forEach(row => {
+    row.forEach(sector => {
+      if (sector.control) {
+        sector.control = {};
+      }
+    });
+  });
 }
 
 module.exports = clearAllBusySectors;

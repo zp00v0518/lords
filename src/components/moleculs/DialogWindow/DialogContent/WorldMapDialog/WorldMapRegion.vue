@@ -3,7 +3,7 @@
     <div class="worldmap-region__title">
       <div
         class="worldmap-region__title--txt"
-      >{{upperFirstSymbol(gloss.dialog.questions.buildNewTown.txt)}}</div>
+      >{{upperFirstSymbol(headerTxt)}}</div>
       <Icon class="dialog__close" name="circle-close" @click.native="closeDialogWindow" />
     </div>
     <div class="worldmap-region__body" ref="body">
@@ -36,7 +36,7 @@
           type="ok"
           class="worldmap-region__footer__gui--btn"
           @click="buildNewTown"
-          :disabled="createDisabled"
+          :disabled="createDisabled || isAlienZone"
         />
         <GuiBtn type="cancel" class="worldmap-region__footer__gui--btn" @click="closeDialogWindow" />
       </div>
@@ -68,6 +68,19 @@ export default {
     this.sources = this.getSourceForBuilding();
   },
   computed: {
+    headerTxt() {
+      const { isAlienZone, gloss } = this;
+      const can = gloss.dialog.questions.buildNewTown.txt;
+      const cannot = gloss.dialog.questions.buildNewTown.cannotBuild.txt;
+      return isAlienZone ? cannot : can;
+    },
+    isAlienZone() {
+      const { targetTile } = this.data;
+      const { control } = targetTile;
+      if (!control || !control.userId) return false;
+      const userId = this.$store.state.user.id;
+      return control.userId !== userId;
+    },
     activeHero() {
       const { activeHeroId, heroesList } = this.$store.state.heroes;
       return heroesList.find(i => i._id === activeHeroId);
@@ -139,8 +152,11 @@ export default {
       };
       this.closeDialogWindow();
       const res = await this.$ws.get(message);
-      console.log(res);
-      const txt = gloss.eventLang.eventResult[res.type][res.status].txt;
+      let txt = gloss.eventLang.eventResult[res.type][res.status].txt;
+      if (!res.status && res.code === 'notEmpty') {
+        const {questions} = gloss.dialog;
+        txt = questions.buildNewTown.cannotBuild.txt;
+      }
       const alert = {
         type: 'message',
         data: {

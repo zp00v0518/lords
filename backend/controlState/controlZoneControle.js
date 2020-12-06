@@ -12,11 +12,10 @@ async function controlZoneControle() {
     await clearAllBusySectors(serverName);
     const allSectors = await getAllTownsFromDB(serverName);
     const userList = await getUsersBySectorsArr(allSectors);
-    // TODO: остановился на формировании и записи в базу зоны контроля для конкретного города
-    // для этого мне нужно знать цвет юзера.
     allSectors.forEach(async sector => {
       const { control, _id } = sector;
-      const mediumWeight = calculateMediumWeight(control.values);
+      let mediumWeight = calculateMediumWeight(control.values);
+      mediumWeight = mediumWeight !== 0 ? mediumWeight : control.lastValue;
       await removeOldContolValuesFromDB(serverName, _id, control.values);
       const user = userList[sector.userId];
       const center = {

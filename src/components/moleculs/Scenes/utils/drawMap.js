@@ -29,6 +29,9 @@ function drawMap() {
       // if (x === centerMap && y === centerMap) {
       //   console.log(color, tile);
       // }
+      if (tile.type === 2) {
+        color = colors[tile.type];
+      }
       if (currentSector.x === tile.x && currentSector.y === tile.y) {
         color = colors.center;
       }
@@ -83,8 +86,9 @@ function drawGameImage(ctx, tile, tileWidth, $store, currentSector, sectorInfo) 
 const colors = {
   0: 'rgba(26,128,0,0.7)', // green
   1: 'blue',
-  2: 'brown',
-  // 2: 'rgba(26,128,0,0.7)',
+  // 2: 'brown',
+  // 2: 'grey',
+  2: 'rgba(0,0,0,0.5)',
   3: 'rgba(0,0,0,0.4)',
   center: 'white'
 };
