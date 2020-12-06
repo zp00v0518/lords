@@ -61,7 +61,7 @@ function checkUserPosition(serverName, callback) {
   var x = getRandomNumber(gameVariables.numSectionGlobalMap - 1);
   var y = getRandomNumber(gameVariables.numSectionGlobalMap - 1);
   var region = GlobalMap[serverName][x][y];
-  if (region.type !== 0) {
+  if (region.type !== 0 || (region.control && region.control.userId)) {
     return checkUserPosition(serverName, callback);
   } else {
     return callback(x, y, region._id);
