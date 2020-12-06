@@ -17,6 +17,7 @@ async function fixingResultUpgrade_building(eventItem, sector) {
   } catch (err) {
     console.log(__filename, err);
   }
+  return building;
 }
 
 module.exports = fixingResultUpgrade_building;

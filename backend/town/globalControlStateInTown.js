@@ -1,9 +1,9 @@
-const {getAllTownsFromDB} = require("./DB");
-const controlStateinTownLoop = require("./controlStateinTownLoop");
+const { getAllTownsFromDB } = require('./DB');
+const controlStateinTownLoop = require('./controlStateinTownLoop');
 
 function globalControlStateInTown(serverName, callback = () => {}) {
   return new Promise((resolve, reject) => {
-    getAllTownsFromDB({ serverName })
+    getAllTownsFromDB(serverName)
       .then(result => {
         controlStateinTownLoop(result).then(afterControl => {
           callback(null, afterControl);

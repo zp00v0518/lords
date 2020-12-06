@@ -1,3 +1,5 @@
+const template = require('template_func');
+const console = new template.Log(__filename);
 const { checkSchema } = require('../../template_modules');
 const { redirectMessage, sendWSMessage } = require('../../wsServer');
 const { getHeroesFromDB, heroInActivate } = require('../../heroes/db');
@@ -30,6 +32,13 @@ async function handlerBuildNewTownRequest(message, info) {
       redirectMessage(ws);
       return;
     }
+    const userId = info.player.user._id.toString();
+    const { control } = targetSector;
+    if (control && control.userId && control.userId !== userId) {
+      response.code = 'notEmpty'
+      sendWSMessage(ws, response);
+      return;
+    }
 
     const sector = await getOneTownFromDB(serverName, curSector._id);
     if (!sector) {
@@ -56,7 +65,7 @@ async function handlerBuildNewTownRequest(message, info) {
       redirectMessage(ws);
       return;
     }
-    const {user} = info.player;
+    const { user } = info.player;
     const race = user.collections[serverName].race;
     await setEventForBuildNewTown(sector, targetSector, hero, race);
     storage = deleteSource(sourseForBuild, storage);

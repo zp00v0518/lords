@@ -1,8 +1,8 @@
-const config = require("../config/config.js");
-const Mine = require("../region/mine/Mine.js");
-const Town = require("../town/Town.js");
-const resources = require("../resources/Resources.js");
-const schema = require("../workWithMongoDB/schema.js");
+const config = require('../config/config.js');
+const Mine = require('../region/mine/Mine.js');
+const Town = require('../town/Town.js');
+const resources = require('../resources/Resources.js');
+const schema = require('../workWithMongoDB/schema.js');
 const time = config.time;
 // используется ТАКЖЕ!!!! на фронте при улучшении строений в регионе!!!!!!!!
 
@@ -18,12 +18,13 @@ const gameVariables = {
   stepMoveGlobalMap: 2, // кол-во ячеек, на которорое происходит сдвиг карты при передвижении
   serverList: config.db.collections.servers,
   timer: {
+    zoneControle: time.minute / 5,
     controlState: time.minute / 10,
     saveDataDB: time.minute / 3, // 1 минута - интервал считывания данных и записи их в БД
     addSource: time.day / time.speedGame, // расчетное время прироста игровых ресурсов
     addUnits: time.day / time.speedGame, // расчетное время прироста игровых ресурсов
-    heroMoveOnRegion: time.minute * 5 / time.speedGame,
-    heroMoveOnGlobalMap: time.minute * 10 / time.speedGame
+    heroMoveOnRegion: (time.minute * 5) / time.speedGame,
+    heroMoveOnGlobalMap: (time.minute * 10) / time.speedGame
   },
   indexes: {
     upgrade_town: 1.5,

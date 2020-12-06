@@ -80,11 +80,6 @@ module.exports.redirectMessage = redirectMessage;
 const gloss = require('./dictionary');
 module.exports.gloss = gloss;
 
-const { controlStateGlobal } = require('./controlState');
+const { controlStateGlobal, controlZoneControle } = require('./controlState');
 module.exports.controlStateGlobal = controlStateGlobal;
-
-function moduleExports(modules) {
-  Object.keys(modules).forEach(key => {
-    module.exports[key] = modules[key];
-  });
-}
+module.exports.controlZoneControle = controlZoneControle;

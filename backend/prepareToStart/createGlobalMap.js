@@ -1,14 +1,15 @@
-//создает коллекцию globalMap в БД
-require('dotenv').config();// парсит ENV файл
+// создает коллекцию globalMap в БД
+require('dotenv').config(); // парсит ENV файл
 const { getRandomNumber } = require('template_func');
-const insert = require('../workWithMongoDB/insertDB.js');
+const Insert = require('../workWithMongoDB/insertDB.js');
 const schema = require('../workWithMongoDB/schema.js');
 const gameVariable = require('../variables/game_variables.js');
 const createMine = require('../region/mine/createMine.js');
 const config = require('../config/config.js');
 const WorldMap = require('../globalMap/WorldMap');
+const createZoneControlToDB = require('../zoneControl/methods/createZoneControlToDB')
 const serverList = config.db.collections.servers;
-const insertDB = new insert();
+const insertDB = new Insert();
 
 const numSectionGlobalMap = gameVariable.numSectionGlobalMap;
 const numSectionRegionMap = gameVariable.numSectionRegionMap;
@@ -25,7 +26,7 @@ function getPositionMine() {
         x: i,
         y: h
       };
-      if (i == 2 && h == 2) {
+      if (i === 2 && h === 2) {
         break;
       }
       coordsMine.push(f);
@@ -106,6 +107,7 @@ function createGlobalMap() {
         sector.x = i;
         sector.y = h;
         sector.region = createRegion();
+        sector.control = createZoneControlToDB();
         // sector.listUpgrade = [];
         let persent = getRandomNumber(100);
         if (persent <= 2) {

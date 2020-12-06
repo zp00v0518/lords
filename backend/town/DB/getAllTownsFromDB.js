@@ -1,25 +1,15 @@
-const { findInDB } = require("../../workWithMongoDB");
+const { findInDB } = require('../../workWithMongoDB');
 const find = new findInDB();
 
-function getAllTownsFromDB({ serverName }, callback = () => {}) {
-  return new Promise((resolve, reject) => {
-    const findOptions = {
-      collectionName: serverName,
-      query: {
-        town: { $exists: true }
-      }
-    };
-    find
-      .all(findOptions)
-      .then(result => {
-        callback(null, result.result);
-        return resolve(result.result);
-      })
-      .catch(err => {
-        callback(err);
-        return reject(err);
-      });
-  });
+async function getAllTownsFromDB(serverName) {
+  const findOptions = {
+    collectionName: serverName,
+    query: {
+      town: { $exists: true }
+    }
+  };
+  const result = await find.all(findOptions);
+  return result.result;
 }
 
 module.exports = getAllTownsFromDB;

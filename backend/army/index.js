@@ -1,9 +1,10 @@
-const globalCalcUnit = require("./globalCalcUnit");
-const calcValueUnitInBarraks = require("./calcValueUnitInBarraks");
-const checkUnitInBarraks = require("./checkUnitInBarraks");
-const changeArmyOnRegion = require("./changeArmyOnRegion");
-const army = require('./baseArmy')
-const createArmyForBattle = require('./createArmyForBattle')
+const globalCalcUnit = require('./globalCalcUnit');
+const calcValueUnitInBarraks = require('./calcValueUnitInBarraks');
+const checkUnitInBarraks = require('./checkUnitInBarraks');
+const changeArmyOnRegion = require('./changeArmyOnRegion');
+const army = require('./baseArmy');
+const createArmyForBattle = require('./createArmyForBattle');
+const methods = require('./methods');
 
 module.exports = {
   createArmyForBattle,
@@ -11,5 +12,6 @@ module.exports = {
   calcValueUnitInBarraks,
   checkUnitInBarraks,
   changeArmyOnRegion,
-  ...army
+  ...army,
+  ...methods
 };

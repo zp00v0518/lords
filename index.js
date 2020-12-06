@@ -1,16 +1,20 @@
 require('dotenv').config();
-require('./backend/config/srcRequire.js');
+// require('./backend/config/srcRequire.js');
 require('./backend/variables/global_variables.js');
 require('./backend/wsServer/wsServer.js');
 require('./get_files.js');
+require('./backend/tube.js');
 
 const http = require('http');
- 
+
+// если подключить эти модули не через tube, то идет двойное подключение к БД, двойной запуск constractGlobalMap. 
+// прям беда какая-то
 const {
   config,
   getMethod,
   postMethod,
   controlStateGlobal,
+  controlZoneControle
 } = require('./backend/tube.js');
 
 const template = require('template_func');
@@ -49,4 +53,8 @@ server.on('request', (req, res) => {
 
 setInterval(() => {
   controlStateGlobal({ target: 'all' });
-}, gameVariables.timer.controlState);
+}, global.gameVariables.timer.controlState);
+
+setInterval(() => {
+  controlZoneControle();
+}, global.gameVariables.timer.zoneControle);

@@ -23,12 +23,12 @@ function constractGlobalMap() {
         GlobalMap[serverName][i][h] = region;
       }
     }
+    console.time('start');
     const findOptions = {
       collectionName: serverName,
       query: { class: schema.document.class.map },
       needFields
     };
-    console.time('start');
     const result = await find.all(findOptions);
     const regionsArr = result.result;
     regionsArr.forEach(item => {
@@ -36,11 +36,12 @@ function constractGlobalMap() {
       const y = item.y;
       GlobalMap[serverName][x][y] = item;
     });
-    console.log(`Построение глобальной карты для ${serverName} завершено`);
-    controlStateEventsList(serverName).then(events => {
-      console.log(`Игровые события на ${serverName} посчитаны`);
-      console.timeEnd('start');
-    });
+    const str = `Построение глобальной карты для ${serverName} завершено`;
+    // console.log( '%c%s', 'color: green; font: 1.2rem/1 Tahoma;', str );
+    console.log(str);
+    await controlStateEventsList(serverName);
+    console.log(`Игровые события на ${serverName} посчитаны`);
+    console.timeEnd('start');
   });
   config.server.ready_to_work = true;
 }
@@ -48,7 +49,6 @@ function constractGlobalMap() {
 function returnGlobalMap() {
   return GlobalMap;
 }
-
 function startConstractMap() {
   const flag = config.db.check;
   if (flag) {

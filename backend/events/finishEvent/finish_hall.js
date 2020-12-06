@@ -17,6 +17,7 @@ function finishHall(hall, eventData, sector) {
   upValueInStorage('gold', different, storage);
   // gold.addValue += different;
   hall.upgrade.is = false;
+  return hall;
 }
 
 module.exports = finishHall;

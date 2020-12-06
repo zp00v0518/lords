@@ -12,14 +12,15 @@ function finishStorage(storage, eventData) {
     const item = inStorage[nameSource];
     if (Resources.unicResource.includes(nameSource)) {
       item.maxValue = maxValue.unicResource;
-      return;
+      return storage;
     } else if (Resources.baseResource.includes(nameSource)) {
       item.maxValue = maxValue.baseResource;
-      return;
+      return storage;
     } else {
       item.maxValue = maxValue.gold;
     }
   });
+  return storage;
 }
 
 module.exports = finishStorage;
