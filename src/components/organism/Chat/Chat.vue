@@ -8,15 +8,14 @@
         <div class="chat__form__channel-wrap">
           <input type="text" class="chat__form__input" />
           <select name id class="chat__form__select">
-            <option value="1">Общий</option>
-            <option value="1">Приватный</option>
-            <option value="1">Торговый</option>
+            <option :value="item.value" v-for="(item, index) in items" :key="index" class="chat__form__select__option">{{item.title}}</option>
           </select>
         </div>
         <textarea
           class="chat__form__message"
           @keyup.prevent.enter="sendMessage"
           v-model="messageForSend.text"
+          rows="5"
         ></textarea>
       </form>
       <div class="chat__messages">
@@ -46,7 +45,8 @@ export default {
         text: '',
         chanel: '',
         privat: ''
-      }
+      },
+      items: [{ value: 1, title: 'Общий' }, { value: 1, title: 'Торговый' }, { value: 1, title: 'Приватный' }]
     };
   },
   created() {},
@@ -73,10 +73,8 @@ export default {
       const date = new Date(time);
       let minutes = date.getMinutes();
       let hours = date.getHours();
-      // let seconds = date.getSeconds();
       minutes = minutes <= 9 ? '0' + minutes : minutes;
       hours = hours <= 9 ? '0' + hours : hours;
-      // seconds = seconds <= 9 ? "0" + seconds : seconds;
       return hours + ':' + minutes;
     },
     closeChat() {
@@ -89,7 +87,3 @@ export default {
   }
 };
 </script>
-
-<style lang='scss'>
-// @import 'chat.scss';
-</style>

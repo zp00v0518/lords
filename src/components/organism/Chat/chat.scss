@@ -1,3 +1,4 @@
+// $main-bg: white;
 .chat__wrap {
   position: absolute;
   top: 0;
@@ -9,13 +10,12 @@
   right: 0;
   display: flex;
   z-index: -1;
-  &.chat__wrap--visible{
+  &.chat__wrap--visible {
     z-index: 1;
   }
 }
 .chat {
   @include border(black);
-
   width: 100%;
   height: 100%;
   display: flex;
@@ -23,12 +23,11 @@
   font-size: 12px;
   background-color: $main-bg;
 
-    &__header {
+  &__header {
     display: flex;
     justify-content: flex-end;
     height: 5%;
     min-height: 30px;
-    // @include border();
   }
 
   &__close {
@@ -47,28 +46,16 @@
       color: white;
     }
   }
-//   &__closed {
-//     position: relative;
-//     transform: translateX(-100%);
-//     z-index: 0;
-//   }
-//   &__show {
-//     position: absolute;
-//     right: 0;
-//     transform: translateX(110%);
-//     cursor: pointer;
-//   }
 
   &__form {
     display: flex;
     flex-direction: column;
-    // border: 1px solid black;
     height: 15%;
     min-height: 60px;
     font-size: inherit;
 
     &__channel-wrap {
-      min-height: 20px;
+      min-height: 25px;
       display: flex;
       justify-content: space-between;
     }
@@ -78,24 +65,45 @@
       font-size: inherit;
       background-color: $main-bg;
       border: 1px solid black;
+      padding: 4px;
+      border-left: none;
+      border-right: none;
+      &:focus {
+        outline: none;
+      }
     }
     &__select {
       width: 45%;
       font-size: inherit;
       background-color: $main-bg;
-      border: 1px solid black;
+      @include border(black);
+      border-right: none;
+      cursor: pointer;
+      &:focus {
+        outline: none;
+      }
+      &__option {
+        cursor: pointer;
+        line-height: 1.5em;
+        min-height: 30px;
+      }
     }
     &__message {
-      // margin-top: 10px;
       min-height: 30px;
       font-size: inherit;
-      flex-grow: 2;
-      display: flex;
-      flex-direction: column;
       background-color: $main-bg;
-      border: 1px solid black;
-      border-left: none;
-      border-right: none;
+      padding: 4px;
+      resize: none;
+      line-height: 1.4em;
+      // @include border(black);
+      // border-top: none;
+      // border-left: none;
+      // border-right: none;
+      border-bottom: 1px solid black;
+
+      &:focus {
+        outline: none;
+      }
     }
   }
   &__messages {
@@ -120,7 +128,7 @@
         width: 50%;
         font-weight: 600;
       }
-      
+
       &__text {
         min-width: calc(100% - 20px);
         max-width: 100%;
@@ -138,9 +146,6 @@
   height: 20px;
   @include border(black);
   @include center;
-  // transition: none;
-  // position: fixed;
-  // transform: translateX(-100%);
 
   &:hover {
     background-color: blue;

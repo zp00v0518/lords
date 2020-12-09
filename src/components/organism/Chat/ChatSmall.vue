@@ -36,6 +36,13 @@ export default {
     showChat() {
       this.$store.commit('CHANGE_CHAT');
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.showChat();
+      }, 0);
+    });
   }
 };
 </script>
