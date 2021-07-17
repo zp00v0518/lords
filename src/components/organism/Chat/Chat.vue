@@ -6,9 +6,14 @@
       </div>
       <form class="chat__form">
         <div class="chat__form__channel-wrap">
-          <input type="text" class="chat__form__input" />
-          <select name id class="chat__form__select">
-            <option :value="item.value" v-for="(item, index) in items" :key="index" class="chat__form__select__option">{{item.title}}</option>
+          <input type="text" class="chat__form__input" v-model="messageForSend.privat" />
+          <select name id class="chat__form__select" v-model="messageForSend.channel">
+            <option
+              :value="item.value"
+              v-for="(item, index) in items"
+              :key="index"
+              class="chat__form__select__option"
+            >{{item.title}}</option>
           </select>
         </div>
         <textarea
@@ -38,18 +43,21 @@ export default {
   props: {
     isFullpage: { type: Boolean, default: false }
   },
+  created() {
+    this.messageForSend.channel = this.items[0].value;
+    console.log(123);
+  },
   data() {
     return {
       showChat: false,
       messageForSend: {
         text: '',
-        chanel: '',
+        channel: '',
         privat: ''
       },
-      items: [{ value: 1, title: 'Общий' }, { value: 1, title: 'Торговый' }, { value: 1, title: 'Приватный' }]
+      items: [{ value: 1, title: 'Общий' }, { value: 2, title: 'Торговый' }]
     };
   },
-  created() {},
   computed: {
     messages() {
       return this.$store.state.chat.messages;
@@ -80,7 +88,8 @@ export default {
     closeChat() {
       this.$store.commit('CHANGE_CHAT');
     },
-    sendMessage(event) {
+    sendMessage() {
+      console.log(JSON.parse(JSON.stringify(this.messageForSend)));
       this.$ws.sendChatMessage(this.messageForSend);
       this.messageForSend.text = '';
     }

@@ -7,6 +7,7 @@ function Mongo() {
     return this.collection;
   };
   this.close = function() {
+    console.log(this.client);
     this.client.close();
     console.log('Подключение к Монго закрыто');
   };

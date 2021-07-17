@@ -68,6 +68,7 @@
       padding: 4px;
       border-left: none;
       border-right: none;
+      cursor: default;
       &:focus {
         outline: none;
       }
@@ -95,6 +96,7 @@
       padding: 4px;
       resize: none;
       line-height: 1.4em;
+      cursor: default;
       // @include border(black);
       // border-top: none;
       // border-left: none;

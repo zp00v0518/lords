@@ -41,7 +41,7 @@ export default {
     this.$nextTick(() => {
       setTimeout(() => {
         this.showChat();
-      }, 0);
+      }, 100);
     });
   }
 };

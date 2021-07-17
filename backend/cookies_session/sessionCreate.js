@@ -1,6 +1,6 @@
-const { getRandomString, Log } = require("template_func");
-const { insertDB, config } = require("../tube.js");
-const userSessionUpdate = require("./userSessionUpdate.js");
+const { getRandomString, Log } = require('template_func');
+const { insertDB, config } = require('../tube.js');
+const userSessionUpdate = require('./userSessionUpdate.js');
 
 const log = new Log(__filename);
 const insert = new insertDB();
@@ -14,7 +14,7 @@ function sessionCreate(headers, callback = function() {}) {
         last: new Date()
       },
       ip: headers.ip,
-      agent: headers["user-agent"] || 0,
+      agent: headers['user-agent'] || 0,
       platform: headers.platform || 0,
       referer: headers.referer || 0,
       accept: headers.accept || 0,
