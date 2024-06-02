@@ -4,7 +4,7 @@ const mongo = new connectMongoDB();
 mongo.connect({ dbName: config.db.name });
 
 function findInDB() {
-  this.one = function(options, callback) {
+  this.one = function (options, callback) {
     return new Promise((resolve, reject) => {
       let collection = mongo.open(options.collectionName);
       let needFields = options.needFields || null;
@@ -21,10 +21,10 @@ function findInDB() {
       });
     });
   };
-  this.all = function(options, callback) {
+  this.all = function (options, callback) {
     return new Promise((resolve, reject) => {
       let collection = mongo.open(options.collectionName);
-      let sort = options.sort || 0;
+      let sort = options.sort || undefined;
       let limit = options.limit || 0;
       let skip = options.skip || 0;
       let needFields = options.needFields || null;
@@ -54,7 +54,7 @@ function findInDB() {
         });
     });
   };
-  this.count = function(options, callback = function() {}) {
+  this.count = function (options, callback = function () { }) {
     return new Promise((resolve, reject) => {
       let collection = mongo.open(options.collectionName);
       let query = options.query || null;
@@ -69,7 +69,7 @@ function findInDB() {
     });
   };
 
-  this.close = function() {
+  this.close = function () {
     mongo.close();
   };
 }
