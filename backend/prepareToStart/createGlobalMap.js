@@ -123,7 +123,7 @@ function createGlobalMap() {
 function recursiveOne(i, arr, serverName, callback) {
   if (i < arr.length) {
     insertDB.one({ collectionName: serverName, doc: arr[i] }, result => {
-      console.log(result.ops[0].id);
+      console.log(result.insertedId);
       i++;
       recursiveOne(i, arr, serverName, callback);
     });
@@ -159,14 +159,18 @@ function recursiveTree(a, h, i, serverList, callback) {
 createGlobalMap();
 
 function startInsertToDB() {
-  setTimeout(function() {
-    insertDB.mongo.db.dropDatabase(result => {
+  setTimeout(async () => {
+    const dropResult = await insertDB.mongo.db.dropDatabase()
+    if (dropResult) {
       console.log('База данных удалена');
       console.log('Создание новой...');
       recursiveTree(0, 0, 0, serverList, () => {
         console.log('done');
         insertDB.close();
       });
-    });
+    } else {
+      console.log('База данных не удалена');
+      insertDB.close();
+    }
   }, 4000);
 }

@@ -2,38 +2,31 @@ const mongoClient = require('mongodb').MongoClient;
 const config = require('../config/config.js');
 
 function Mongo() {
-  this.open = function(collectionName) {
+  this.open = function (collectionName) {
     this.collection = this.db.collection(collectionName); // often err  - часто возникает при hot-reload сервера, в тот момент, когда идет запрос с фронта
     return this.collection;
   };
-  this.close = function() {
+  this.close = function () {
     this.client.close();
     console.log('Подключение к Монго закрыто');
   };
-  this.connect = function(options = {}, callback = function() {}) {
-    return new Promise((resolve, reject) => {
-      let dbName = options.dbName || 'test';
-      this.url = options.url || 'mongodb://localhost:27017';
-      mongoClient.connect(
-        this.url,
-        { useNewUrlParser: true },
-        (err, client) => {
-          if (err) {
-            config.db.check = false;
-            reject(err);
-            throw err;
-          }
-          console.log('Подключение к Монго прошло успешно');
-          this.db = client.db(dbName);
-          this.client = client;
-          config.db.check = true;
-          resolve();
-          return callback();
-        }
-      );
-    });
+  this.connect = async function (options = {}) {
+    let dbName = options.dbName || 'test';
+    this.url = options.url || 'mongodb://localhost:27017';
+    this.client = new mongoClient(this.url);
+    try {
+      await this.client.connect();
+      console.log('Подключение к Монго прошло успешно');
+      this.db = this.client.db(dbName);
+      config.db.check = true;
+    } catch (err) {
+      console.error(err)
+      config.db.check = false;
+      return false
+    }
+    return true
   };
-  this.getCollections = function(callback = function() {}) {
+  this.getCollections = function (callback = function () { }) {
     return new Promise((resolve, reject) => {
       this.db
         .collections()

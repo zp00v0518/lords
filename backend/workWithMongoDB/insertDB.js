@@ -9,20 +9,17 @@ function insertDB() {
   // collectionName = String;
   // doc = Object;
   this.mongo = mongo;
-  this.one = function(options, callback = function() {}) {
-    return new Promise((resolve, reject) => {
-      let collection = mongo.open(options.collectionName);
-      collection.insertOne(options.doc, (err, result) => {
-        if (err) {
-          reject(err);
-          throw err;
-        }
-        resolve(result);
-        return callback(result);
-      });
-    });
+  this.one = async function (options, callback = function () { }) {
+    let collection = mongo.open(options.collectionName);
+    const insertResult = await collection.insertOne(options.doc);
+    if (insertResult.acknowledged) {
+      return callback(insertResult);
+    } else {
+      console.log('Вставка документа пройшла невдало')
+      return insertResult
+    }
   };
-  this.many = function(options, callback = function() {}) {
+  this.many = function (options, callback = function () { }) {
     return new Promise((resolve, reject) => {
       let collection = mongo.open(options.collectionName);
       let ops = options.options || null;
@@ -36,7 +33,7 @@ function insertDB() {
       });
     });
   };
-  this.close = function() {
+  this.close = function () {
     mongo.close();
   };
 }
