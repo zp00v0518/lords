@@ -17,8 +17,14 @@
     "start": "node start"
   },
   "dependencies": {
+    "cookies": "^0.9.1",
+    "dotenv": "^16.4.5",
+    "mongodb": "^6.7.0",
+    "path-parse": "^1.0.7",
+    "template_func": "^1.0.11",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "ws": "^8.17.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",
