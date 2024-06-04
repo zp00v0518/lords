@@ -5,7 +5,7 @@ const userSessionUpdate = require("./userSessionUpdate.js");
 const log = new Log(__filename);
 const insert = new insertDB();
 
-function sessionCreate(headers, callback = function() {}) {
+function sessionCreate(headers, callback = function () { }) {
   return new Promise((resolve, reject) => {
     const sessionCookie = getRandomString(config.cookieSize);
     var session = {
@@ -25,10 +25,10 @@ function sessionCreate(headers, callback = function() {}) {
       .one({ collectionName: config.db.collections.session, doc: session })
       .then(resultInsertSession => {
         //добавляю в нового пользователя ID новой сессии;
-        const idSession = resultInsertSession.ops[0]._id;
+        const idSession = resultInsertSession.insertedId;
         userSessionUpdate(headers.user_id, idSession);
-        resolve(resultInsertSession.ops[0]);
-        return callback(resultInsertSession.ops[0]);
+        resolve(resultInsertSession);
+        return callback(resultInsertSession);
       })
       .catch(err => {
         log.log(err);

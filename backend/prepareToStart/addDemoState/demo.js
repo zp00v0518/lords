@@ -26,7 +26,7 @@ async function insertDemoUserToDB(user, demoUser) {
   };
   const insertUser = await insertDB.one(options);
   console.log('...insert Demo User');
-  await addDemoUserToDB(user, insertUser.ops[0]._id, demoUser);
+  await addDemoUserToDB(user, insertUser.insertedId, demoUser);
 }
 
 async function addDemoUserToDB(user, _id, demoUser) {

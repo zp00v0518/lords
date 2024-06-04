@@ -5,7 +5,7 @@ const log = new Log(__filename);
 const find = new findInDB();
 const insert = new insertDB();
 
-async function checkLogin(req, requestData, callback = function() {}) {
+async function checkLogin(req, requestData, callback = function () { }) {
   // log.log('Start Work')
   const userData = requestData.data;
   return new Promise((resolve, reject) => {
@@ -40,7 +40,7 @@ async function checkLogin(req, requestData, callback = function() {}) {
               insert
                 .one({ collectionName: usersCollection, doc: user })
                 .then(insertUser => {
-                  const user_id = insertUser.ops[0]._id;
+                  const user_id = insertUser.insertedId;
                   // устанавливаю новому Пользователю куки и заношу в БД
                   const userCookies = setCookieUser(user_id);
                   // создаю сессию

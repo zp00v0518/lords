@@ -4,8 +4,13 @@ function sendResponse(
   contentType = "text/plain",
   status = 200
 ) {
-  response.writeHead(status, { "Content-Type": contentType });
-  response.end(data);
+  if (!response._closed) {
+    response.writeHead(status, { "Content-Type": contentType });
+    response.end(data);
+  } else {
+    console.log(contentType)
+  }
+
 }
 
 module.exports = sendResponse;

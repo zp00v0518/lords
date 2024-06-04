@@ -5,7 +5,7 @@ require('./backend/wsServer/wsServer.js');
 require('./get_files.js');
 require('./backend/tube.js');
 
-const http = require('http');
+const http = require('node:http');
 
 // если подключить эти модули не через tube, то идет двойное подключение к БД, двойной запуск constractGlobalMap. 
 // прям беда какая-то
@@ -25,7 +25,7 @@ class Server {
     this.server = http.createServer();
     this.server.listen(port, () => {
       log.log(new Date().toLocaleString());
-      console.log(`Сервер запущен по адресу http://loclahost:${port}`);
+      console.log(`Сервер запущен по адресу http://localhost:${port}`);
     });
   }
   on(event, callback) {
@@ -47,8 +47,8 @@ server.on('request', (req, res) => {
     }
   } else {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
-      res.end('Сервер не готов, поробуйте немного позже');
-    }
+    res.end('Сервер не готов, поробуйте немного позже');
+  }
 });
 
 setInterval(() => {
@@ -58,3 +58,5 @@ setInterval(() => {
 setInterval(() => {
   controlZoneControle();
 }, global.gameVariables.timer.zoneControle);
+
+

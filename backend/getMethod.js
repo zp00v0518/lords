@@ -1,5 +1,7 @@
-const url = require('url');
-const path = require('path');
+const url = require('node:url');
+const path = require('node:path');
+const http = require('node:http');
+
 const Cookies = require('cookies');
 const { fileReader, mimeType, sendResponse, config, findUserInDB } = require('./tube.js');
 const { addCollectionsToUser } = require('./user');

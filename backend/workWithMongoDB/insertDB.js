@@ -9,11 +9,11 @@ function insertDB() {
   // collectionName = String;
   // doc = Object;
   this.mongo = mongo;
-  this.one = async function (options, callback = function () { }) {
+  this.one = async function (options) {
     let collection = mongo.open(options.collectionName);
     const insertResult = await collection.insertOne(options.doc);
     if (insertResult.acknowledged) {
-      return callback(insertResult);
+      return insertResult;
     } else {
       console.log('Вставка документа пройшла невдало')
       return insertResult

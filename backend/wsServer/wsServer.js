@@ -67,7 +67,7 @@ wsServer.on('connection', (ws, req) => {
     }
   });
 
-  ws.on('close', function() {
+  ws.on('close', function () {
     if (User) {
       delete UserOnline[server][User._id];
       UserOnline[server].count--;
@@ -112,6 +112,6 @@ function callbackForWatcher() {
     }
   });
 }
-if (process.env.MODE === 'DEV') {
-  watcher(config.frontEnd.watchFolder, callbackForWatcher);
-}
+// if (process.env.MODE === 'DEV') {
+//   watcher(config.frontEnd.watchFolder, callbackForWatcher);
+// }

@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("node:fs");
 
 function fileReader(pathName, callback) {
   fs.readFile(pathName, (err, data) => {
