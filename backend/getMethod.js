@@ -2,6 +2,7 @@ const url = require('node:url');
 const path = require('node:path');
 const http = require('node:http');
 
+
 const Cookies = require('cookies');
 const { fileReader, mimeType, sendResponse, config, findUserInDB } = require('./tube.js');
 const { addCollectionsToUser } = require('./user');
@@ -20,12 +21,27 @@ async function getMethod(req, res, startPath) {
   let regPath = /.*js.*|.*img.*|.*style.*|.*ico.*|.*css.*/gi;
   let check = regPath.test(pathName);
   if (check) {
+    // жесткий костиль, на час переходу на нову ноду. 
+    // Стара логіка виддічі файлів, поки не працює. 
+    // Треба, попрацювати над логікою, або усі початкові сторінки по типу реєстрації вибору сервера та інші - перенести до глобального Vue
+    // const { servers } = config.db.collections
+    // const pathReferer = path.parse(req.headers?.referer || '/').base
+    let itogPath = config.basePathToFiles
+    if (pathName.includes('assets/')) {
+      itogPath = './dist'
+    }
     const ext = path.parse(pathName).ext;
-    const pathJoin = path.join(startPath, config.basePathToFiles, pathName);
+    const pathJoin = path.join(startPath, itogPath, pathName);
     fileReader(pathJoin, (err, data) => {
       if (err) {
         console.log(err);
         return;
+      }
+      if (res._closed) {
+        // console.log(req.headers)
+        // console.log(urlParse)
+        // console.log(`pathName: ${pathName} startPath:${startPath}`)
+        console.log(123)
       }
       sendResponse(res, data, mimeType[ext]);
     });

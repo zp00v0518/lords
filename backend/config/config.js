@@ -44,7 +44,8 @@ const config = {
       login: 'login_dev',
       cabinet: 'user_dev',
       err: '404',
-      game: 'game_dev'
+      // game: 'game_dev',
+      game: '../dist/index'
     },
     html: {
       login: 'login',
