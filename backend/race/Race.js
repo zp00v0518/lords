@@ -28,4 +28,5 @@ const Race = {
     return arr;
   }
 };
+
 module.exports = Race;

@@ -1,0 +1,12 @@
+@import "./variable.scss";
+@import "./mixins.scss";
+
+.yes {
+  @include short_answer;
+}
+.no {
+  @include short_answer($main-red, white);
+}
+.ok {
+  @include short_answer;
+}
