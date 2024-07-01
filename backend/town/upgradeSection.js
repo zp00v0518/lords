@@ -8,3 +8,5 @@ function UpgradeSection() {
 }
 
 module.exports = UpgradeSection;
+
+export default UpgradeSection

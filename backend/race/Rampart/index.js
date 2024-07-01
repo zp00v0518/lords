@@ -1,3 +1,4 @@
-const Rampart = require('./Rampart');
+import Rampart from './Rampart.js';
 
 module.exports = Rampart;
+export { Rampart };

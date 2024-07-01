@@ -1,8 +1,8 @@
-const { getRandomNumber } = require('template_func');
-const baseMine = require('../../variables/game_variables.js').mine;
+import { getRandomNumber } from 'template_func';
+import game_variables from '../../variables/game_variables.js';
+const baseMine = game_variables.mine
 
-const UpgradeSection = require('../../town/upgradeSection.js'); // такой способ пожключения выбран из-за того, что модуль "createMine"
-// используется при запуске файлов в "prepareToStart"
+import UpgradeSection from '../../town/upgradeSection.js';
 
 function Mine(type, x, y, lvl = 0) {
   this.parent = baseMine.parent;
@@ -32,3 +32,5 @@ function createMine(x, y, type) {
 }
 
 module.exports = createMine;
+
+export default createMine

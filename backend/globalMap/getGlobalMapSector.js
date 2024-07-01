@@ -1,4 +1,4 @@
-const getSectorOnMatrix = require('./getSectorOnMatrix');
+import getSectorOnMatrix from './getSectorOnMatrix.js';
 
 function getGlobalMapSector(user, server) {
   const result = [];
@@ -37,3 +37,5 @@ function getGlobalMapSector(user, server) {
 }
 
 module.exports = getGlobalMapSector;
+
+export default getGlobalMapSector

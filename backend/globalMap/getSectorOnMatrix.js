@@ -19,3 +19,5 @@ function getSectorOnMatrix(arrLength, rangeSize, center) {
 }
 
 module.exports = getSectorOnMatrix;
+
+export default getSectorOnMatrix

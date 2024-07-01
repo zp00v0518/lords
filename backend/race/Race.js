@@ -1,8 +1,9 @@
 // const mineTypeList = require("../region/mine/Mine.js").typeList;
-const Rampart = require("./Rampart");
-const types_races = require("./types_races");
-const { getRandomNumber } = require("template_func");
-const { Heroes } = require("../heroes");
+import { Rampart } from "./Rampart/index.js";
+import types_races from "./types_races.js";
+import { Heroes } from "../heroes/index.js";
+import template_func from 'template_func'
+const { getRandomNumber } = template_func;
 
 const Race = {
   types: types_races,
@@ -30,3 +31,5 @@ const Race = {
 };
 
 module.exports = Race;
+
+export default Race

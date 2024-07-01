@@ -1,9 +1,7 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-const upValueInStorage = require('../../town/storage/upValueInStorage');
-const { updateStateTown } = require('../../town/DB');
-const { inActiveteEvent } = require('../../events/db');
-const { updateStateRegion } = require('../../region/db');
+import upValueInStorage from '../../town/storage/upValueInStorage.js';
+import { updateStateTown } from '../../town/DB/index.js';
+import { inActiveteEvent } from '../../events/db/index.js';
+import { updateStateRegion } from '../../region/db/index.js';
 
 async function handlerStopMineEvent(event, sector) {
   const { data } = event;
@@ -21,3 +19,5 @@ async function handlerStopMineEvent(event, sector) {
 }
 
 module.exports = handlerStopMineEvent;
+
+export default handlerStopMineEvent

@@ -2,17 +2,17 @@
 // чтобы не обращаться постоянно в БД
 
 // const { findInDB } = require("../tube.js");
-const config = require('../config');
-const schema = require('../workWithMongoDB/schema');
-const { findInDB } = require('../workWithMongoDB');
-const { controlStateEventsList } = require('../events');
-const needFields = require('./db/needFields');
+import config from '../config/config.js';
+import schema from '../workWithMongoDB/schema.js';
+import { findInDB } from '../workWithMongoDB/index.js';
+import { controlStateEventsList } from '../events/index.js';
+import needFields from './db/needFields.js';
 const find = new findInDB();
 const GlobalMap = {};
 const serverList = config.db.collections.servers;
 
 function constractGlobalMap() {
-  serverList.forEach(async function(server) {
+  serverList.forEach(async function (server) {
     const serverName = server.collectionName;
     GlobalMap[serverName] = [];
     for (let i = 0; i < global.gameVariables.numSectionGlobalMap; i++) {
@@ -60,3 +60,4 @@ function startConstractMap() {
 startConstractMap();
 
 module.exports = returnGlobalMap();
+export default returnGlobalMap()

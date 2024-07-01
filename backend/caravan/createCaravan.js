@@ -1,5 +1,5 @@
-const schema = require('../workWithMongoDB/schema');
-const Caravan = require('./Caravan');
+import schema from "../../workWithMongoDB/schema.js";
+import Caravan from './Caravan.js';
 
 function createCaravan() {
   const template = {
@@ -13,3 +13,5 @@ function createCaravan() {
 }
 
 module.exports = createCaravan;
+
+export default createCaravan

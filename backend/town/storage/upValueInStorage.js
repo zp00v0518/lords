@@ -8,3 +8,5 @@ function upValueInStorage(typeSource, value, storage) {
 }
 
 module.exports = upValueInStorage;
+
+export default upValueInStorage

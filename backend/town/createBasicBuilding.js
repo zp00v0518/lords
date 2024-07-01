@@ -1,4 +1,4 @@
-const upgradeSection = require('./upgradeSection');
+import upgradeSection from './upgradeSection.js';
 
 function createBasicBuilding(classBuilding, lvl = 0, parent = 'town') {
   const basic = {
@@ -12,3 +12,5 @@ function createBasicBuilding(classBuilding, lvl = 0, parent = 'town') {
 }
 
 module.exports = createBasicBuilding;
+
+export default createBasicBuilding

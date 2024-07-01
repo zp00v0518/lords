@@ -1,8 +1,13 @@
-const checkSource = require('./checkSource.js');
-const deleteSource = require('./deleteSource.js');
-const Resources = require('./Resources.js');
+import checkSource from './checkSource.js';
+import deleteSource from './deleteSource.js';
+import Resources from './Resources.js';
 
 module.exports = {
+  checkSource,
+  deleteSource,
+  Resources
+};
+export {
   checkSource,
   deleteSource,
   Resources

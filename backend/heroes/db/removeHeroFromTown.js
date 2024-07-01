@@ -1,5 +1,6 @@
-const ObjectId = require('mongodb').ObjectID;
-const { updateDB } = require('../../workWithMongoDB');
+import mongodb from 'mongodb'
+import { updateDB } from '../../workWithMongoDB/index.js'
+const { ObjectId } = mongodb
 const updated = new updateDB();
 
 async function removeHeroFromTown(serverName, sectorId, heroId) {
@@ -14,3 +15,5 @@ async function removeHeroFromTown(serverName, sectorId, heroId) {
 }
 
 module.exports = removeHeroFromTown;
+
+export default removeHeroFromTown

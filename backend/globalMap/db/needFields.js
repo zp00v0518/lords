@@ -20,3 +20,5 @@ const needFields = {
 };
 
 module.exports = needFields;
+
+export default needFields

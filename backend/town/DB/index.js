@@ -1,11 +1,20 @@
-const getAllTownsFromDB = require('./getAllTownsFromDB');
-const updateStateTown = require('./updateStateTown');
-const getUsersTownFromDB = require('./getUsersTownFromDB');
-const getOneTownFromDB = require('./getOneTownFromDB');
-const getTownByHero = require('./getTownByHero');
-const getTownByCoords = require('./getTownByCoords');
+import getAllTownsFromDB from './getAllTownsFromDB.js';
+import updateStateTown from './updateStateTown.js';
+import getUsersTownFromDB from './getUsersTownFromDB.js';
+import getOneTownFromDB from './getOneTownFromDB.js';
+import getTownByHero from './getTownByHero.js';
+import getTownByCoords from './getTownByCoords.js';
 
 module.exports = {
+  getAllTownsFromDB,
+  updateStateTown,
+  getUsersTownFromDB,
+  getOneTownFromDB,
+  getTownByHero,
+  getTownByCoords
+};
+
+export default {
   getAllTownsFromDB,
   updateStateTown,
   getUsersTownFromDB,

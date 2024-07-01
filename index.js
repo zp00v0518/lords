@@ -17,14 +17,11 @@ import {
   controlZoneControle
 } from './backend/tube.js';
 
-import template from 'template_func';
-const log = new template.Log(__filename);
-
 class Server {
   init(port) {
     this.server = http.createServer();
     this.server.listen(port, () => {
-      log.log(new Date().toLocaleString());
+      console.log(new Date().toLocaleString());
       console.log(`Сервер запущен по адресу http://localhost:${port}`);
     });
   }

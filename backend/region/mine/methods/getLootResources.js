@@ -1,6 +1,4 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-const gameVariables = require('../../../variables/game_variables');
+import gameVariables from '../../../variables/game_variables,js';
 
 function getLootResources(mines, coords) {
   const result = {};
@@ -24,3 +22,5 @@ function getLootResources(mines, coords) {
 }
 
 module.exports = getLootResources;
+
+export default getLootResources

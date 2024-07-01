@@ -19,3 +19,5 @@ function workSection({ addValue = 0, static = true }) {
 }
 
 module.exports = workSection;
+
+export default workSection

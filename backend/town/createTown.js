@@ -1,13 +1,13 @@
 // const tube = require('../tube.js');
-const Region = require('../region/Region');
-const { createMine } = require('../region/mine');
-const Race = require('../race/Race');
-const { createBarraks, createFort, createGuild, createMarket, createTavern, createHall } = require('./buildings');
-const { Army, createArmy } = require('../army/baseArmy');
+import Region from '../region/Region.js';
+import { createMine } from '../region/mine/index.js';
+import Race from '../race/Race.js';
+import { createBarraks, createFort, createGuild, createMarket, createTavern, createHall } from './buildings/index.js';
+import { Army, createArmy } from '../army/baseArmy/index.js';
 // const { gameVariables } = global;
-const gameVariables = require('../variables/game_variables');
-const createStorage = require('./storage/createStorage');
-const { createCaravan } = require('../caravan');
+import gameVariables from '../variables/game_variables.js';
+import createStorage from './storage/createStorage.js';
+import { createCaravan } from '../caravan/index.js';
 let listMine = [];
 
 function createTown(options = {}) {
@@ -109,3 +109,5 @@ function createRegionMap(townIndex = 1) {
 }
 
 module.exports = createTown;
+
+export default createTown

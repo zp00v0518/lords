@@ -1,6 +1,6 @@
-const addHeroToTown = require('./addHeroToTown');
-const addTownToHero = require('./addTownToHero');
-const removeHeroFromTown = require('./removeHeroFromTown');
+import addHeroToTown from './addHeroToTown.js';
+import addTownToHero from './addTownToHero.js';
+import removeHeroFromTown from './removeHeroFromTown.js';
 
 async function transferHeroBetweenTown(serverName, heroId, initId, targetId) {
   let flag = await removeHeroFromTown(serverName, initId, heroId);
@@ -10,3 +10,5 @@ async function transferHeroBetweenTown(serverName, heroId, initId, targetId) {
 }
 
 module.exports = transferHeroBetweenTown;
+
+export default transferHeroBetweenTown

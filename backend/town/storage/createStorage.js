@@ -1,11 +1,11 @@
 // const tube = require('../../tube.js');
-const gameVariables = require('../../variables/game_variables');
-const Town = require('../Town.js');
-const upgradeSection = require('../upgradeSection');
+import gameVariables from '../../variables/game_variables.js';
+import Town from '../Town.js';
+import upgradeSection from '../upgradeSection.js';
 // const Resources = gameVariables.resources;
-const { Resources } = require('../../resources');
-const { Mine } = require('../../region/mine');
-const workSection = require('..//buildings/workSection');
+import { Resources } from '../../resources/index.js';
+import { Mine } from '../../region/mine/index.js';
+import workSection from '..//buildings/workSection.js';
 
 function createStorage({ listMine = Mine.typeList, lvl = 1, status = 'not_first' }) {
   // const { upgradeSection } = tube;
@@ -52,3 +52,5 @@ function createStorage({ listMine = Mine.typeList, lvl = 1, status = 'not_first'
 }
 
 module.exports = createStorage;
+
+export default createStorage

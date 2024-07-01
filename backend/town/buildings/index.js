@@ -1,11 +1,19 @@
-const createBarraks = require('./barraks/createBarraks');
-const createFort = require('./fort/createFort');
-const createGuild = require('./guild/createGuild');
-const createMarket = require('./market/createMarket');
-const createTavern = require('./tavern/createTavern');
-const createHall = require('./hall/createHall');
+import createBarraks from './barraks/createBarraks.js';
+import createFort from './fort/createFort.js';
+import createGuild from './guild/createGuild.js';
+import createMarket from './market/createMarket.js';
+import createTavern from './tavern/createTavern.js';
+import createHall from './hall/createHall.js';
 
 module.exports = {
+  createBarraks,
+  createFort,
+  createGuild,
+  createMarket,
+  createTavern,
+  createHall
+}
+export {
   createBarraks,
   createFort,
   createGuild,
