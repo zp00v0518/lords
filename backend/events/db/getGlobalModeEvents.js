@@ -1,6 +1,6 @@
-import { findInDB } from '../../workWithMongoDB/index.js';
+import findInDB from '../../workWithMongoDB/findInDB.js';
 const find = new findInDB();
-const ev = require('../Event');
+import ev from '../Event.js';
 
 async function getGlobalModeEvents(serverName, userId, status = true) {
   const findOptions = {

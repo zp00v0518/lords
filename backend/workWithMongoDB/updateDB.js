@@ -1,10 +1,7 @@
-import template from 'template_func';
-
 import connectMongoDB from './connectMongoDB.js';
 import config from '../config/config.js';
 const mongo = new connectMongoDB();
 mongo.connect({ dbName: config.db.name });
-const log = new template.Log(__filename);
 
 function updateDB() {
   // options  - объект с полями:
@@ -16,7 +13,7 @@ function updateDB() {
   this.one = function (options, callback = function () { }) {
     return new Promise((resolve, reject) => {
       if (!options.collectionName || !options.filtr || !options.updateDoc) {
-        log.log('Обновить БД не представляется возможным, т.к. не переданы все необходимые параметры');
+        console.log('Обновить БД не представляется возможным, т.к. не переданы все необходимые параметры');
       }
       let collection = mongo.open(options.collectionName);
       let ops = options.ops || null;
@@ -33,7 +30,7 @@ function updateDB() {
   this.replaceOne = function (options, callback = function () { }) {
     return new Promise((resolve, reject) => {
       if (!options.collectionName || !options.filtr || !options.updateDoc) {
-        log.log('Обновить БД не представляется возможным, т.к. не переданы все необходимые параметры');
+        console.log('Обновить БД не представляется возможным, т.к. не переданы все необходимые параметры');
       }
       let collection = mongo.open(options.collectionName);
       let ops = options.ops || null;
@@ -50,7 +47,7 @@ function updateDB() {
 
   this.updateMany = async function (options, extra = null) {
     if (!options.collectionName || !options.filtr || !options.updateDoc) {
-      log.log('Обновить БД не представляется возможным, т.к. не переданы все необходимые параметры');
+      console.log('Обновить БД не представляется возможным, т.к. не переданы все необходимые параметры');
     }
     const collection = mongo.open(options.collectionName);
     const result = await collection.updateMany(options.filtr, options.updateDoc, extra);

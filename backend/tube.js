@@ -68,10 +68,10 @@ import config from './config/config.js';
 // const login = require('./login/login.js');
 // module.exports.login = login;
 
-// const getMethod = require('./getMethod.js');
+import getMethod from './getMethod.js';
 // module.exports.getMethod = getMethod;
 
-// const postMethod = require('./postMethod.js');
+import postMethod from './postMethod.js';
 // module.exports.postMethod = postMethod;
 
 // const { reloadMessage, redirectMessage } = require('./wsServer');
@@ -87,4 +87,4 @@ import { controlStateGlobal, controlZoneControle } from './controlState/index.js
 // module.exports.controlZoneControle = controlZoneControle;
 
 // export { config, };
-export { config, controlStateGlobal, controlZoneControle };
+export { config, controlStateGlobal, controlZoneControle, getMethod, postMethod };

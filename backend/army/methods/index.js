@@ -1,3 +1,3 @@
-const getLostArmyAfterBattle = require('./getLostArmyAfterBattle');
+import getLostArmyAfterBattle from './getLostArmyAfterBattle.js';
 
-module.exports = { getLostArmyAfterBattle };
+export { getLostArmyAfterBattle };

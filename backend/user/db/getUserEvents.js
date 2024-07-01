@@ -1,4 +1,4 @@
-import { findInDB } from '../../workWithMongoDB/index.js';
+import findInDB from '../../workWithMongoDB/findInDB.js';
 const find = new findInDB();
 
 async function getUserEvents(serverName, userId, status = true) {

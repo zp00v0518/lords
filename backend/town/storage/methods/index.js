@@ -1,4 +1,4 @@
-const reduceGrowthResources = require('./reduceGrowthResources');
-const addLootResourcesToStorage = require('./addLootResourcesToStorage');
+import reduceGrowthResources from './reduceGrowthResources.js';
+import addLootResourcesToStorage from './addLootResourcesToStorage.js';
 
-module.exports = { reduceGrowthResources, addLootResourcesToStorage };
+export { reduceGrowthResources, addLootResourcesToStorage };

@@ -16,4 +16,4 @@ function createArmyForBattle(attackArmy, heroArmy) {
   return template;
 }
 
-module.exports = createArmyForBattle;
+export default createArmyForBattle;

@@ -1,4 +1,4 @@
-const upValueInStorage = require('../upValueInStorage');
+import upValueInStorage from '../upValueInStorage.js';
 
 function reduceGrowthResources(mine, storage) {
   const typeSource = mine.sector.type;
@@ -11,4 +11,4 @@ function reduceGrowthResources(mine, storage) {
   // });
 }
 
-module.exports = reduceGrowthResources;
+export default reduceGrowthResources;

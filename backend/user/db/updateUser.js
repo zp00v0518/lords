@@ -1,5 +1,5 @@
 import config from '../../config/index.js';
-import { updateDB } from '../../workWithMongoDB/index.js';
+import updateDB from '../../workWithMongoDB/updateDB.js';
 const update = new updateDB();
 
 function updateUser(userId, doc, callback = function () { }) {

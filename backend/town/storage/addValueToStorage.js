@@ -5,4 +5,4 @@ function addValueToStorage(value, type, storage) {
   sources[type].nowValue = nowValue + value > maxValue ? maxValue : nowValue + value;
 }
 
-module.exports = addValueToStorage;
+export default addValueToStorage;

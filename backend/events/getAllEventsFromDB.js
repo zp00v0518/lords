@@ -1,4 +1,4 @@
-import { findInDB } from "../workWithMongoDB/index.js";
+import findInDB from "../workWithMongoDB/findInDB.js";
 import { schema } from "../workWithMongoDB/index.js";
 const { document } = schema
 // eslint-disable-next-line

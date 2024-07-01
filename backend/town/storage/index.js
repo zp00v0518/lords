@@ -1,15 +1,16 @@
-const createStorage = require('./createStorage.js');
-const upgradeSection = require('../upgradeSection.js');
-const calcStorageNowValue = require('./calcStorageNowValue.js');
-const upValueInStorage = require('./upValueInStorage');
-const addValueToStorage = require('./addValueToStorage');
-const methods = require('./methods');
+import createStorage from './createStorage.js'
+import upgradeSection from '../upgradeSection.js'
+import calcStorageNowValue from './calcStorageNowValue.js'
+import upValueInStorage from './upValueInStorage.js'
+import addValueToStorage from './addValueToStorage.js'
+import { reduceGrowthResources, addLootResourcesToStorage } from './methods/index.js'
 
-module.exports = {
+export {
   createStorage,
   upgradeSection,
   calcStorageNowValue,
   upValueInStorage,
   addValueToStorage,
-  ...methods
-};
+  reduceGrowthResources,
+  addLootResourcesToStorage
+}

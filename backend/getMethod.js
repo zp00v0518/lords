@@ -1,9 +1,8 @@
-const url = require('node:url');
-const path = require('node:path');
-const http = require('node:http');
+import url from 'node:url';
+import path from 'node:path';
 
 
-const Cookies = require('cookies');
+import Cookies from 'cookies';
 const { fileReader, mimeType, sendResponse, config, findUserInDB } = require('./tube.js');
 const { addCollectionsToUser } = require('./user');
 const { getCollectionName } = require('./template_modules');
@@ -91,3 +90,5 @@ async function getMethod(req, res, startPath) {
 }
 
 module.exports = getMethod;
+
+export default getMethod

@@ -1,7 +1,7 @@
-const { getAllTownsFromDB } = require('./DB');
-const controlStateinTownLoop = require('./controlStateinTownLoop');
+import controlStateinTownLoop from './controlStateinTownLoop.js';
+import { getAllTownsFromDB } from './DB/index.js';
 
-function globalControlStateInTown(serverName, callback = () => {}) {
+function globalControlStateInTown(serverName, callback = () => { }) {
   return new Promise((resolve, reject) => {
     getAllTownsFromDB(serverName)
       .then(result => {
@@ -17,4 +17,4 @@ function globalControlStateInTown(serverName, callback = () => {}) {
   });
 }
 
-module.exports = globalControlStateInTown;
+export default globalControlStateInTown;

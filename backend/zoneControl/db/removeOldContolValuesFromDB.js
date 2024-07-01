@@ -1,8 +1,9 @@
 const template = require('template_func');
 const console = new template.Log(__filename);
 const ZoneControl = require('../ZoneControl');
-const ObjectId = require('mongodb').ObjectID;
-const { updateDB } = require('../../workWithMongoDB');
+import mongodb from 'mongodb';
+const { ObjectId } = mongodb
+import updateDB from '../../workWithMongoDB/updateDB.js';
 const update = new updateDB();
 
 async function removeOldContolValuesFromDB(serverName, sectorId, values) {

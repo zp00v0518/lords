@@ -1,6 +1,7 @@
-const Race = require('../race/Race');
-const regionTypes = require('../region/Region').types;
-const { createArmy } = require('./baseArmy');
+import Race from '../race/Race.js';
+import Region from '../region/Region.js';
+const regionTypes = Region.types;
+import { createArmy } from './baseArmy.js';
 
 function changeArmyOnRegion(region, range) {
   region.forEach(sectorRow => {
@@ -16,4 +17,4 @@ function changeArmyOnRegion(region, range) {
   });
 }
 
-module.exports = changeArmyOnRegion;
+export default changeArmyOnRegion;

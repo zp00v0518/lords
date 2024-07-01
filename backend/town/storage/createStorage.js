@@ -51,6 +51,4 @@ function createStorage({ listMine = Mine.typeList, lvl = 1, status = 'not_first'
   return storage;
 }
 
-module.exports = createStorage;
-
 export default createStorage

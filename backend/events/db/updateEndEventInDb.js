@@ -1,6 +1,6 @@
 import mongodb from 'mongodb';
 const { ObjectId } = mongodb;
-import { updateDB } from '../../workWithMongoDB/index.js';
+import updateDB from '../../workWithMongoDB/updateDB.js';
 const UpdateDB = updateDB
 const update = new UpdateDB();
 

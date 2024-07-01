@@ -1,11 +1,12 @@
-import template from 'template_func';
-const console = new template.Log(__filename);
 import mongodb from 'mongodb';
 
 const { ObjectId } = mongodb;
 
-import { updateDB } from '../../workWithMongoDB/index.js';
+import updateDB from '../../workWithMongoDB/updateDB.js';
 const update = new updateDB();
+
+import path from 'node:path';
+const __dirname = path.parse(import.meta.url).dir
 
 // обновляет состояние города в БД (не Региона или его-то другого. ТОлько города)
 async function updateStateSector(sector, docs, ops = { upsert: false }) {

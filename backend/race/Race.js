@@ -30,6 +30,4 @@ const Race = {
   }
 };
 
-module.exports = Race;
-
 export default Race

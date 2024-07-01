@@ -1,4 +1,4 @@
-import { updateDB } from '../../workWithMongoDB/index.js';
+import updateDB from '../../workWithMongoDB/updateDB.js';
 const update = new updateDB();
 
 function inActiveteEvent(event, callback = () => { }) {

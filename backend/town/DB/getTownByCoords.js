@@ -1,4 +1,4 @@
-const { findInDB } = require('../../workWithMongoDB');
+import findInDB from '../../workWithMongoDB/findInDB.js';
 const document = require('../../workWithMongoDB/schema').document;
 const find = new findInDB();
 

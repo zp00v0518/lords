@@ -1,5 +1,6 @@
-const ObjectId = require('mongodb').ObjectID;
-const { findInDB } = require('../../workWithMongoDB');
+import mongodb from 'mongodb';
+const { ObjectId } = mongodb
+import findInDB from '../../workWithMongoDB/findInDB.js';
 const document = require('../../workWithMongoDB/schema').document;
 const find = new findInDB();
 

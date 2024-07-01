@@ -1,7 +1,7 @@
 import mongodb from 'mongodb';
 const { ObjectId } = mongodb;
 import config from '../../config/index.js';
-import { findInDB } from '../../workWithMongoDB/index.js';
+import findInDB from '../../workWithMongoDB/findInDB.js';
 const find = new findInDB();
 
 async function getOneUserFromDB(userId) {

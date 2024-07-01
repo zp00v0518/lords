@@ -1,6 +1,7 @@
-const ObjectId = require('mongodb').ObjectID;
+import mongodb from 'mongodb';
+const { ObjectId } = mongodb
 const needFields = require('./needFields');
-const { findInDB } = require('../../workWithMongoDB');
+import findInDB from '../../workWithMongoDB/findInDB.js';
 const find = new findInDB();
 
 async function getOneSectorForGlobalMap(serverName, sectorId) {

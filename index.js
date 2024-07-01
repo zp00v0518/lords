@@ -6,16 +6,20 @@ import './get_files.js';
 // require('./backend/tube.js');
 
 import http from 'node:http';
+import config from './backend/config/config.js';
+
+import path from 'node:path';
+const __dirname = path.parse(import.meta.url).dir
 
 // если подключить эти модули не через tube, то идет двойное подключение к БД, двойной запуск constractGlobalMap. 
 // прям беда какая-то
-import {
-  config,
-  getMethod,
-  postMethod,
-  controlStateGlobal,
-  controlZoneControle
-} from './backend/tube.js';
+// import {
+//   getMethod,
+//   postMethod,
+//   controlStateGlobal,
+//   controlZoneControle
+// } from './backend/tube.js';
+
 
 class Server {
   init(port) {

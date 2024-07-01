@@ -1,4 +1,4 @@
-const addValueToStorage = require('../addValueToStorage');
+import addValueToStorage from '../addValueToStorage.js';
 
 function addLootResourcesToStorage(loot, storage) {
   Object.keys(loot).forEach(type => {
@@ -7,4 +7,4 @@ function addLootResourcesToStorage(loot, storage) {
   });
 }
 
-module.exports = addLootResourcesToStorage;
+export default addLootResourcesToStorage;

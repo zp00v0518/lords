@@ -1,4 +1,4 @@
-import { updateDB } from '../../workWithMongoDB/index.js';
+import updateDB from '../../workWithMongoDB/updateDB.js';
 const updated = new updateDB();
 
 function addTownToHero(serverName, townId, heroId, callback = function () { }) {

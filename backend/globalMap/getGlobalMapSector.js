@@ -36,6 +36,4 @@ function getGlobalMapSector(user, server) {
   return result;
 }
 
-module.exports = getGlobalMapSector;
-
 export default getGlobalMapSector

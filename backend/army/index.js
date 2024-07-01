@@ -1,17 +1,20 @@
-const globalCalcUnit = require('./globalCalcUnit');
-const calcValueUnitInBarraks = require('./calcValueUnitInBarraks');
-const checkUnitInBarraks = require('./checkUnitInBarraks');
-const changeArmyOnRegion = require('./changeArmyOnRegion');
-const army = require('./baseArmy');
-const createArmyForBattle = require('./createArmyForBattle');
-const methods = require('./methods');
+import globalCalcUnit from './globalCalcUnit.js'
+import calcValueUnitInBarraks from './calcValueUnitInBarraks.js'
+import checkUnitInBarraks from './checkUnitInBarraks.js'
+import changeArmyOnRegion from './changeArmyOnRegion.js'
+import { Army, createArmy, createStackItemTemplate, getArmyRange } from './baseArmy/index.js'
+import createArmyForBattle from './createArmyForBattle.js'
+import { getLostArmyAfterBattle } from './methods/index.js'
 
-module.exports = {
+export {
   createArmyForBattle,
   globalCalcUnit,
   calcValueUnitInBarraks,
   checkUnitInBarraks,
   changeArmyOnRegion,
-  ...army,
-  ...methods
-};
+  Army,
+  createArmy,
+  createStackItemTemplate,
+  getArmyRange,
+  getLostArmyAfterBattle
+}

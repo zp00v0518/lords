@@ -1,5 +1,3 @@
-import template from 'template_func';
-const console = new template.Log(__filename);
 import ConnectMongoDB from './connectMongoDB.js';
 import config from '../config/config.js';
 const mongo = new ConnectMongoDB();

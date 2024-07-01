@@ -1,9 +1,9 @@
-const { recursiveLoop } = require("../template_modules");
-const { globalCalcUnit } = require("../army");
-const { calcStorageNowValue } = require("./storage");
-const {updateStateTown} = require("./DB");
+import { recursiveLoop } from "../template_modules/index.js";
+import { globalCalcUnit } from "../army/index.js";
+import { calcStorageNowValue } from "./storage/index.js";
+import { updateStateTown } from "./DB/index.js";
 
-function controlStateinTownLoop(sectorsList = [], callback = () => {}) {
+function controlStateinTownLoop(sectorsList = [], callback = () => { }) {
   return new Promise((resolve, reject) => {
     if (sectorsList.length === 0) {
       callback();
@@ -20,7 +20,7 @@ function controlStateinTownLoop(sectorsList = [], callback = () => {}) {
   });
 }
 
-function iteration(sector, callback = () => {}) {
+function iteration(sector, callback = () => { }) {
   return new Promise((resolve, reject) => {
     calcStorageNowValue(sector.town.storage);
     globalCalcUnit(sector.town);
@@ -36,4 +36,4 @@ function iteration(sector, callback = () => {}) {
   });
 }
 
-module.exports = controlStateinTownLoop;
+export default controlStateinTownLoop;

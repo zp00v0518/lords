@@ -10,4 +10,4 @@ function calcValueUnitInBarraks(barraks, timeEnd = new Date().getTime()) {
   workInfo.lastCalc = timeEnd;
 }
 
-module.exports = calcValueUnitInBarraks;
+export default calcValueUnitInBarraks;

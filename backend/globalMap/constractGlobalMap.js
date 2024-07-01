@@ -4,7 +4,7 @@
 // const { findInDB } = require("../tube.js");
 import config from '../config/config.js';
 import schema from '../workWithMongoDB/schema.js';
-import { findInDB } from '../workWithMongoDB/index.js';
+import findInDB from "../workWithMongoDB/findInDB.js";
 import { controlStateEventsList } from '../events/index.js';
 import needFields from './db/needFields.js';
 const find = new findInDB();

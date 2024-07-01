@@ -1,4 +1,4 @@
-const { updateDB } = require('../../workWithMongoDB');
+import updateDB from '../../workWithMongoDB/updateDB.js';
 const update = new updateDB();
 
 async function clearAllBusySectors(serverName) {

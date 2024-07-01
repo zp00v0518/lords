@@ -5,15 +5,6 @@ import getOneTownFromDB from './getOneTownFromDB.js';
 import getTownByHero from './getTownByHero.js';
 import getTownByCoords from './getTownByCoords.js';
 
-module.exports = {
-  getAllTownsFromDB,
-  updateStateTown,
-  getUsersTownFromDB,
-  getOneTownFromDB,
-  getTownByHero,
-  getTownByCoords
-};
-
 export default {
   getAllTownsFromDB,
   updateStateTown,

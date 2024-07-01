@@ -1,8 +1,9 @@
-const ObjectId = require('mongodb').ObjectID;
+import mongodb from 'mongodb';
+const { ObjectId } = mongodb
 const { checkSchema } = require('../../template_modules');
 const { redirectMessage } = require('../../wsServer');
 const { Army } = require('../baseArmy');
-const { updateDB } = require('../../workWithMongoDB');
+import updateDB from '../../workWithMongoDB/updateDB.js';
 const update = new updateDB();
 const { getTownByHero } = require('../../town');
 const { getHeroesFromDB } = require('../../heroes/db');

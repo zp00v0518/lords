@@ -1,6 +1,4 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-const createStackItemTemplate = require('../baseArmy/createStackItemTemplate');
+import createStackItemTemplate from '../baseArmy/createStackItemTemplate.js';
 
 function getLostArmyAfterBattle(startArmy, lastArmy) {
   if (startArmy === lastArmy) {
@@ -18,4 +16,4 @@ function getLostArmyAfterBattle(startArmy, lastArmy) {
   return result;
 }
 
-module.exports = getLostArmyAfterBattle;
+export default getLostArmyAfterBattle;

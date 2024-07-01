@@ -9,6 +9,5 @@ function createStackItemTemplate(unit = {}) {
   };
   return template;
 }
-module.exports = createStackItemTemplate;
 
 export default createStackItemTemplate

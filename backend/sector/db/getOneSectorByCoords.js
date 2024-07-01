@@ -1,6 +1,5 @@
-import template from 'template_func';
-const console = new template.Log(__filename);
-import { findInDB, schema } from '../../workWithMongoDB/index.js';
+import { schema } from '../../workWithMongoDB/index.js';
+import findInDB from '../../workWithMongoDB/findInDB.js';
 const find = new findInDB();
 
 // TODO: метод не протестирован

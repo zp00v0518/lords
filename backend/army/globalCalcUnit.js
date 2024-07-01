@@ -1,5 +1,5 @@
-const { Army } = require("./baseArmy");
-const calcValueUnitInBarraks = require("./calcValueUnitInBarraks");
+import { Army } from "./baseArmy/index.js";
+import calcValueUnitInBarraks from "./calcValueUnitInBarraks.js";
 
 function globalCalcUnit(town) {
   const list = Army.armyBuildings;
@@ -11,4 +11,4 @@ function globalCalcUnit(town) {
   });
 }
 
-module.exports = globalCalcUnit;
+export default globalCalcUnit;

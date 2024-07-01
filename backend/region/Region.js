@@ -16,6 +16,4 @@ const Region = {
   },
 };
 
-module.exports = Region;
-
 export default Region

@@ -108,6 +108,4 @@ function createRegionMap(townIndex = 1) {
   return regionMap;
 }
 
-module.exports = createTown;
-
 export default createTown

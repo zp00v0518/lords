@@ -1,5 +1,6 @@
-import path from 'node:path';
 import { schema } from '../workWithMongoDB/index.js';
+import path from 'node:path';
+const __dirname = path.parse(import.meta.url).dir
 
 const config = {
   server: {

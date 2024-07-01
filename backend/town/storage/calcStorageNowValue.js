@@ -1,4 +1,4 @@
-const gameVariables = require('../../variables/game_variables');
+import gameVariables from '../../variables/game_variables.js';
 
 function calcStorageNowValue(storage, timeEnd = new Date().getTime()) {
   const sources = storage.sources;
@@ -15,4 +15,4 @@ function calcStorageNowValue(storage, timeEnd = new Date().getTime()) {
   });
 }
 
-module.exports = calcStorageNowValue;
+export default calcStorageNowValue

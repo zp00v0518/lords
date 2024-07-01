@@ -1,4 +1,4 @@
-import { insertDB } from '../../workWithMongoDB/index.js';
+import insertDB from '../../workWithMongoDB/insertDB.js';
 const insert = new insertDB();
 
 function addEventToDB(data, serverName, callback = function () { }) {

@@ -1,6 +1,4 @@
-import template from 'template_func';
-const console = new template.Log(__filename);
-const { calcStorageNowValue } = require('../town/storage');
+import calcStorageNowValue from '../town/storage/calcStorageNowValue.js';
 const { getOneTownFromDB, updateStateTown } = require('../town');
 const fixingResultUpgradeMine = require('../region/mine/fixingResultUpgradeMine.js');
 const fixingResultUpgrade_building = require('../town/buildings/fixingResultUpgrade_building');

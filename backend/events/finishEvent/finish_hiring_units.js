@@ -1,6 +1,6 @@
 const { Race } = require('../../race');
 const { Army, createStackItemTemplate } = require('../../army');
-const { updateDB } = require('../../workWithMongoDB');
+import updateDB from '../../workWithMongoDB/updateDB.js';
 const { getControlWeightFromArmy } = require('../../zoneControl/methods');
 const { setValueInSectorById } = require('../../zoneControl/db');
 const update = new updateDB();

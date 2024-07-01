@@ -1,5 +1,6 @@
-const ObjectId = require('mongodb').ObjectID;
-const { updateDB } = require('../../workWithMongoDB');
+import mongodb from 'mongodb';
+const { ObjectId } = mongodb
+import updateDB from '../../workWithMongoDB/updateDB.js';
 const update = new updateDB();
 const getLastValueControl = require('./getLastValueControl');
 

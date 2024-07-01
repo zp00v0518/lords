@@ -1,4 +1,4 @@
-const { findInDB } = require('../../workWithMongoDB');
+import findInDB from '../../workWithMongoDB/findInDB.js';
 const find = new findInDB();
 
 async function getAllTownsFromDB(serverName) {
@@ -12,4 +12,4 @@ async function getAllTownsFromDB(serverName) {
   return result.result;
 }
 
-module.exports = getAllTownsFromDB;
+export default getAllTownsFromDB;

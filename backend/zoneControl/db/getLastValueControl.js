@@ -1,7 +1,8 @@
 const template = require('template_func');
 const console = new template.Log(__filename);
-const ObjectId = require('mongodb').ObjectID;
-const { findInDB } = require('../../workWithMongoDB');
+import mongodb from 'mongodb';
+const { ObjectId } = mongodb
+import findInDB from '../../workWithMongoDB/findInDB.js';
 const find = new findInDB();
 
 async function getLastValueControl(serverName, sectorId) {
