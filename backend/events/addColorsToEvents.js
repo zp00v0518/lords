@@ -1,5 +1,6 @@
-const ObjectId = require('mongodb').ObjectID;
-const { getUsersById } = require('../user/db');
+import mongodb from 'mongodb';
+const { ObjectId } = mongodb;
+import { getUsersById } from '../user/db/index.js';
 
 async function addColorsToEvents(serverName, arr) {
   const arrUserId = arr.map(item => new ObjectId(item.init.user.id));
@@ -20,4 +21,4 @@ async function addColorsToEvents(serverName, arr) {
   return arr;
 }
 
-module.exports = addColorsToEvents;
+export default addColorsToEvents;

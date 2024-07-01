@@ -1,8 +1,8 @@
-const config = require('../../config');
-const { updateDB } = require('../../workWithMongoDB');
+import config from '../../config/index.js';
+import { updateDB } from '../../workWithMongoDB/index.js';
 const update = new updateDB();
 
-function updateUser(userId, doc, callback = function() {}) {
+function updateUser(userId, doc, callback = function () { }) {
   return new Promise((resolve, reject) => {
     const cookie = doc.userCookies;
     const optionsForUpdateBD = {
@@ -22,4 +22,4 @@ function updateUser(userId, doc, callback = function() {}) {
   });
 }
 
-module.exports = updateUser;
+export default updateUser;

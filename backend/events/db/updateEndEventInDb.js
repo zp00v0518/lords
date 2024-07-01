@@ -1,5 +1,7 @@
-const ObjectId = require('mongodb').ObjectID;
-const UpdateDB = require('../../workWithMongoDB').updateDB;
+import mongodb from 'mongodb';
+const { ObjectId } = mongodb;
+import { updateDB } from '../../workWithMongoDB/index.js';
+const UpdateDB = updateDB
 const update = new UpdateDB();
 
 async function updateEndEventInDb(serverName, eventId, newTime) {
@@ -12,4 +14,4 @@ async function updateEndEventInDb(serverName, eventId, newTime) {
   return result;
 }
 
-module.exports = updateEndEventInDb;
+export default updateEndEventInDb;

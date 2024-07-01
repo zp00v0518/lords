@@ -1,6 +1,6 @@
-const resources = require("../../resources/Resources");
-const schema = require("../../workWithMongoDB/schema");
-const config = require("../../config");
+import resources from "../../resources/Resources.js";
+import { schema } from "../../workWithMongoDB/index.js";
+import config from "../../config/index.js";
 
 const Mine = {
   classInstance: schema.document.class.mine,
@@ -17,7 +17,7 @@ const Mine = {
   typeList: resources.typeList,
   parent: "region",
   // возвращает время в течении которого будет проводиться улучшение, в милисекундах
-  getTimeUpgrade: function(lvl, persent) {
+  getTimeUpgrade: function (lvl, persent) {
     lvl += 1;
     // увеличиваю время на множитель, если процент <  100
     persent = persent < 100 ? 100 + (persent - 100) * 1.5 : persent;
@@ -53,4 +53,4 @@ const Mine = {
   }
 };
 
-module.exports = Mine;
+export default Mine;

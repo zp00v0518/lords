@@ -1,5 +1,5 @@
-const Ev = require('../Event');
-const Caravan = require('../../caravan/Caravan');
+import Ev from '../Event.js';
+import Caravan from '../../caravan/Caravan.js';
 
 function createCaravanEvent(initSector, targetSector, payload) {
   const init = {
@@ -29,4 +29,4 @@ function createCaravanEvent(initSector, targetSector, payload) {
   };
 }
 
-module.exports = createCaravanEvent;
+export default createCaravanEvent;

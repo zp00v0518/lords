@@ -1,3 +1,3 @@
-const types = require('./types');
+import types from './types.js';
 
-module.exports = types;
+export default types;

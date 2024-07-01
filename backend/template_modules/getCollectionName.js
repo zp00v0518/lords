@@ -1,4 +1,4 @@
-const config = require("../config");
+import config from "../config/index.js";
 const serversList = config.db.collections.servers;
 
 function getCollectionName(name) {
@@ -12,4 +12,4 @@ function getCollectionName(name) {
   return collection;
 }
 
-module.exports = getCollectionName;
+export default getCollectionName;

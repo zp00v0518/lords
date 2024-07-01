@@ -1,23 +1,23 @@
-require('dotenv').config();
+import 'dotenv/config';
 // require('./backend/config/srcRequire.js');
-require('./backend/variables/global_variables.js');
-require('./backend/wsServer/wsServer.js');
-require('./get_files.js');
-require('./backend/tube.js');
+import './backend/variables/global_variables.js';
+import './backend/wsServer/wsServer.js';
+import './get_files.js';
+// require('./backend/tube.js');
 
-const http = require('node:http');
+import http from 'node:http';
 
 // если подключить эти модули не через tube, то идет двойное подключение к БД, двойной запуск constractGlobalMap. 
 // прям беда какая-то
-const {
+import {
   config,
   getMethod,
   postMethod,
   controlStateGlobal,
   controlZoneControle
-} = require('./backend/tube.js');
+} from './backend/tube.js';
 
-const template = require('template_func');
+import template from 'template_func';
 const log = new template.Log(__filename);
 
 class Server {

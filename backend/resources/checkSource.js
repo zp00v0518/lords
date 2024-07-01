@@ -19,4 +19,4 @@ function checkSource(sourceArr, storage) {
   }
 }
 
-module.exports = checkSource;
+export default checkSource;

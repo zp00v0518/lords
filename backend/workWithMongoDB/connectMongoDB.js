@@ -1,5 +1,6 @@
-const mongoClient = require('mongodb').MongoClient;
-const config = require('../config/config.js');
+import mongodb from 'mongodb';
+const mongoClient = mongodb.MongoClient;
+import config from '../config/config.js';
 
 function Mongo() {
   this.open = function (collectionName) {
@@ -49,4 +50,4 @@ function Mongo() {
   };
 }
 
-module.exports = Mongo;
+export default Mongo;

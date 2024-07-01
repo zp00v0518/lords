@@ -21,4 +21,4 @@ const Event = {
   }
 };
 
-module.exports = Event;
+export default Event;

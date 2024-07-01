@@ -1,4 +1,4 @@
-function recursiveLoop(index, arr = [], executeFn, callback = () => {}) {
+function recursiveLoop(index, arr = [], executeFn, callback = () => { }) {
   if (index === arr.length) {
     callback(null, arr);
     return;
@@ -10,4 +10,4 @@ function recursiveLoop(index, arr = [], executeFn, callback = () => {}) {
   });
 }
 
-module.exports = recursiveLoop;
+export default recursiveLoop;

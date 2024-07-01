@@ -1,6 +1,6 @@
-const Army = require("./Army");
-const createArmy = require("./createArmy");
-const createStackItemTemplate = require("./createStackItemTemplate");
-const getArmyRange = require("./getArmyRange");
+import Army from "./Army.js";
+import createArmy from "./createArmy.js";
+import createStackItemTemplate from "./createStackItemTemplate.js";
+import getArmyRange from "./getArmyRange.js";
 
-module.exports = { Army, createArmy, createStackItemTemplate, getArmyRange };
+export { Army, createArmy, createStackItemTemplate, getArmyRange };

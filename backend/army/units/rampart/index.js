@@ -1,11 +1,11 @@
-const createKentavr = require("./kentavr");
-const createGnom = require("./gnom");
-const createElf = require("./elf");
-const createPegas = require("./pegas");
-const createDendroid = require("./dendroid");
-const createUnicorn = require("./unicorn");
-const createGreenDragon = require("./green_dragon");
-const listArmy = require("./list");
+import createKentavr from "./kentavr.js";
+import createGnom from "./gnom.js";
+import createElf from "./elf.js";
+import createPegas from "./pegas.js";
+import createDendroid from "./dendroid.js";
+import createUnicorn from "./unicorn.js";
+import createGreenDragon from "./green_dragon.js";
+import listArmy from "./list.js";
 
 const units = {
   [listArmy.kentavr.name]: createKentavr(listArmy.kentavr, 0),
@@ -24,4 +24,4 @@ const units = {
   [listArmy.green_dragon_2.name]: createGreenDragon(listArmy.green_dragon_2, 1)
 };
 
-module.exports = units;
+export default units;

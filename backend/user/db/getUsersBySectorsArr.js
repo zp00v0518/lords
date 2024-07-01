@@ -1,4 +1,4 @@
-const getUsersById = require('./getUsersById');
+import getUsersById from './getUsersById.js';
 
 async function getUsersBySectorsArr(sectors) {
   let userList = {};
@@ -13,4 +13,4 @@ async function getUsersBySectorsArr(sectors) {
   return userList;
 }
 
-module.exports = getUsersBySectorsArr;
+export default getUsersBySectorsArr;

@@ -1,7 +1,7 @@
-const { updateDB } = require('../../workWithMongoDB');
+import { updateDB } from '../../workWithMongoDB/index.js';
 const updated = new updateDB();
 
-function addTownToHero(serverName, townId, heroId, callback = function() {}) {
+function addTownToHero(serverName, townId, heroId, callback = function () { }) {
   return new Promise((resolve, reject) => {
     const filtr = {
       _id: heroId
@@ -25,3 +25,5 @@ function addTownToHero(serverName, townId, heroId, callback = function() {}) {
 }
 
 module.exports = addTownToHero;
+
+export default addTownToHero

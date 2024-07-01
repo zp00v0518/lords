@@ -1,7 +1,7 @@
-const { insertDB } = require('../../workWithMongoDB');
+import { insertDB } from '../../workWithMongoDB/index.js';
 const insert = new insertDB();
 
-function addEventToDB(data, serverName, callback = function() {}) {
+function addEventToDB(data, serverName, callback = function () { }) {
   return new Promise((resolve, reject) => {
     const doc = {
       class: 'event',
@@ -28,7 +28,7 @@ function addEventToDB(data, serverName, callback = function() {}) {
   });
 }
 
-module.exports = addEventToDB;
+export default addEventToDB;
 
 // const schema = {
 //   type: String,

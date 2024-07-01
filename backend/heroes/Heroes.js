@@ -1,7 +1,7 @@
-const types = require('./types');
-const rampart = require('./rampart');
-const gameVariables = require('../variables/game_variables.js');
-const { getLengthBeetweenTwoPoint } = require('../template_modules/phisicFunc');
+import types from './types/index.js';
+import rampart from './rampart/index.js';
+import gameVariables from '../variables/game_variables.js';
+import { getLengthBeetweenTwoPoint } from '../template_modules/phisicFunc/index.js';
 
 const Heroes = {
   types,
@@ -76,4 +76,4 @@ const Heroes = {
     }
   }
 };
-module.exports = Heroes;
+export default Heroes;

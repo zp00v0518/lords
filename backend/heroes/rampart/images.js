@@ -1,4 +1,4 @@
-const { getParsePathToImg } = require('../../template_modules');
+import { getParsePathToImg } from '../../template_modules/index.js';
 const basePath = 'frontEnd/img/for_canvas/heroes/rampart/';
 
 const images = {
@@ -16,4 +16,4 @@ const images = {
   }
 };
 
-module.exports = images;
+export default images;

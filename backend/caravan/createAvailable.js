@@ -1,4 +1,4 @@
-const Resources = require('../resources/Resources');
+import Resources from '../resources/Resources.js';
 
 function createAvailable() {
   const template = {};
@@ -20,4 +20,4 @@ function createAvailable() {
   return template;
 }
 
-module.exports = createAvailable;
+export default createAvailable;

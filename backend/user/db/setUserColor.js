@@ -1,4 +1,4 @@
-const updateUser = require('./updateUser');
+import updateUser from './updateUser.js';
 
 async function setUserColor(serverName, userId, color) {
   const doc = {
@@ -8,4 +8,4 @@ async function setUserColor(serverName, userId, color) {
   return result;
 }
 
-module.exports = setUserColor;
+export default setUserColor;

@@ -1,9 +1,10 @@
-const ObjectId = require("mongodb").ObjectID;
-const { document } = require("../../workWithMongoDB/schema");
-const { findInDB } = require("../../workWithMongoDB");
+import mongodb from 'mongodb';
+const { ObjectId } = mongodb;
+import { document } from "../../workWithMongoDB/schema.js";
+import { findInDB } from "../../workWithMongoDB/index.js";
 const find = new findInDB();
 
-function getHeroesFromDB(server, { userId, heroId }, callback = () => {}) {
+function getHeroesFromDB(server, { userId, heroId }, callback = () => { }) {
   return new Promise((resolve, reject) => {
     if (userId) {
       const query = {
@@ -48,3 +49,5 @@ function getHeroesFromDB(server, { userId, heroId }, callback = () => {}) {
 }
 
 module.exports = getHeroesFromDB;
+
+export default getHeroesFromDB

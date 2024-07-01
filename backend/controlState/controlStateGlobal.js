@@ -1,8 +1,8 @@
 const serverList = global.gameVariables ? global.gameVariables.serverList : [];
-const { formEventsList, controlStateEventsList } = require('../events');
-const { globalControlStateInTown, getUsersTownFromDB } = require('../town');
-const { sendWSMessage } = require('../wsServer');
-const { getHeroesFromDB } = require('../heroes/db');
+import { formEventsList, controlStateEventsList } from '../events/index.js';
+import { globalControlStateInTown, getUsersTownFromDB } from '../town/index.js';
+import { sendWSMessage } from '../wsServer/index.js';
+import { getHeroesFromDB } from '../heroes/db/index.js';
 
 function controlStateGlobal(param) {
   if (param.target === 'all') {
@@ -42,4 +42,4 @@ function controlStateGlobal(param) {
   }
 }
 
-module.exports = controlStateGlobal;
+export default controlStateGlobal 

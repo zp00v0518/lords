@@ -6,4 +6,4 @@ function getShortDistanceOnMap(x1, y1, x2, y2, size) {
   return distance;
 }
 
-module.exports = getShortDistanceOnMap;
+export default getShortDistanceOnMap;

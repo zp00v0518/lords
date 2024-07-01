@@ -26,4 +26,5 @@ async function controlZoneControle() {
     });
   });
 }
-module.exports = controlZoneControle;
+
+export default controlZoneControle;

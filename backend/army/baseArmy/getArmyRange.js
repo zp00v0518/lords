@@ -10,3 +10,5 @@ function getArmyRange(townIndex) {
 }
 
 module.exports = getArmyRange;
+
+export default getArmyRange

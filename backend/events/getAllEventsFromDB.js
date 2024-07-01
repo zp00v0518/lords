@@ -1,9 +1,10 @@
-const { findInDB } = require("../workWithMongoDB");
-const { document } = require("../workWithMongoDB/schema");
+import { findInDB } from "../workWithMongoDB/index.js";
+import { schema } from "../workWithMongoDB/index.js";
+const { document } = schema
 // eslint-disable-next-line
 const find = new findInDB();
 
-function getAllEventsFromDB({ serverName }, callback = () => {}) {
+function getAllEventsFromDB({ serverName }, callback = () => { }) {
   return new Promise((resolve, reject) => {
     const findOptions = {
       collectionName: serverName,
@@ -27,4 +28,4 @@ function getAllEventsFromDB({ serverName }, callback = () => {}) {
   });
 }
 
-module.exports = getAllEventsFromDB;
+export default getAllEventsFromDB;

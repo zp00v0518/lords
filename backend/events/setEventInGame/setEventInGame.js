@@ -1,4 +1,4 @@
-const { addEventToDB } = require('../db');
+import { addEventToDB } from '../db/index.js';
 
 function setEventInGame(event, serverName) {
   return new Promise((resolve, reject) => {
@@ -12,4 +12,4 @@ function setEventInGame(event, serverName) {
   });
 }
 
-module.exports = setEventInGame;
+export default setEventInGame;

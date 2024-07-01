@@ -13,4 +13,4 @@ function sendResponse(
 
 }
 
-module.exports = sendResponse;
+export default sendResponse;

@@ -3,4 +3,4 @@ const types_races = {
   // elf: 'elf'
 };
 
-module.exports = types_races;
+export default types_races;

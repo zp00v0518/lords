@@ -1,4 +1,4 @@
-const template = require('template_func');
+import template from 'template_func';
 const console = new template.Log(__filename);
 const { calcStorageNowValue } = require('../town/storage');
 const { getOneTownFromDB, updateStateTown } = require('../town');
@@ -14,7 +14,7 @@ const { getControlWeightFromBuilding } = require('../zoneControl/methods');
 const { setValueInSectorById } = require('../zoneControl/db');
 const update = new updateDB();
 
-function controlStateEventsLoop(eventsList = [], callback = () => {}) {
+function controlStateEventsLoop(eventsList = [], callback = () => { }) {
   return new Promise((resolve, reject) => {
     if (eventsList.length === 0) {
       callback();
@@ -31,11 +31,11 @@ function controlStateEventsLoop(eventsList = [], callback = () => {}) {
   });
 }
 
-module.exports = controlStateEventsLoop;
+export default controlStateEventsLoop;
 
 // есть ошибка в имплементации - не все обработчики вызывают resolve;
-function iterationImplenetation(event, callback = () => {}) {
-  return new Promise(async function(resolve, reject) {
+function iterationImplenetation(event, callback = () => { }) {
+  return new Promise(async function (resolve, reject) {
     const now = new Date();
     const end = new Date(event.end);
     if (end > now) return resolve();

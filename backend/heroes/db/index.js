@@ -1,15 +1,15 @@
-const addHeroToDB = require('./addHeroToDB');
-const addHeroToTown = require('./addHeroToTown');
-const addTownToHero = require('./addTownToHero');
-const getHeroesFromDB = require('./getHeroesFromDB');
-const updateHeroInDB = require('./updateHeroInDB');
-const removeHeroFromTown = require('./removeHeroFromTown');
-const transferHeroBetweenTown = require('./transferHeroBetweenTown');
-const heroActivate = require('./heroActivate');
-const heroInActivate = require('./heroInActivate');
-const addCrossTownAndHero = require('./addCrossTownAndHero');
+import addHeroToDB from './addHeroToDB.js';
+import addHeroToTown from './addHeroToTown.js';
+import addTownToHero from './addTownToHero.js';
+import getHeroesFromDB from './getHeroesFromDB.js';
+import updateHeroInDB from './updateHeroInDB.js';
+import removeHeroFromTown from './removeHeroFromTown.js';
+import transferHeroBetweenTown from './transferHeroBetweenTown.js';
+import heroActivate from './heroActivate.js';
+import heroInActivate from './heroInActivate.js';
+import addCrossTownAndHero from './addCrossTownAndHero.js';
 
-module.exports = {
+export {
   addHeroToDB,
   addHeroToTown,
   addTownToHero,

@@ -1,8 +1,8 @@
-const { getUserEvents } = require('../user/db');
-const { getGlobalModeEvents } = require('./db');
-const addColorsToEvents = require('../events/addColorsToEvents');
+import { getUserEvents } from '../user/db/index.js';
+import { getGlobalModeEvents } from './db/index.js';
+import addColorsToEvents from '../events/addColorsToEvents.js';
 
-async function formEventsList(userId, serverName, callback = () => {}) {
+async function formEventsList(userId, serverName, callback = () => { }) {
   const userEvents = await getUserEvents(serverName, userId);
   const globalEvents = await getGlobalModeEvents(serverName, userId);
   await addColorsToEvents(serverName, globalEvents);
@@ -15,4 +15,4 @@ async function formEventsList(userId, serverName, callback = () => {}) {
   return result;
 }
 
-module.exports = formEventsList;
+export default formEventsList;

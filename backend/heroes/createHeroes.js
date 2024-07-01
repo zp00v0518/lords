@@ -1,4 +1,4 @@
-const types = require('./types');
+import types from './types/index.js';
 
 function createHeroes({ type, img, name, race }) {
   const heroes = {
@@ -11,4 +11,4 @@ function createHeroes({ type, img, name, race }) {
   return heroes;
 }
 
-module.exports = createHeroes;
+export default createHeroes;

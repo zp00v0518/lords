@@ -1,7 +1,7 @@
-const inActiveteEvent = require('./inActiveteEvent');
-const addEventToDB = require('./addEventToDB');
-const getGlobalModeEvents = require('./getGlobalModeEvents');
-const getOneEventFromDb = require('./getOneEventFromDb');
-const updateEndEventInDb = require('./updateEndEventInDb');
+import inActiveteEvent from './inActiveteEvent.js';
+import addEventToDB from './addEventToDB.js';
+import getGlobalModeEvents from './getGlobalModeEvents.js';
+import getOneEventFromDb from './getOneEventFromDb.js';
+import updateEndEventInDb from './updateEndEventInDb.js';
 
-module.exports = { inActiveteEvent, addEventToDB, getGlobalModeEvents, getOneEventFromDb, updateEndEventInDb };
+export { inActiveteEvent, addEventToDB, getGlobalModeEvents, getOneEventFromDb, updateEndEventInDb };

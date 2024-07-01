@@ -1,6 +1,6 @@
-const template = require('template_func');
+import template from 'template_func';
 const console = new template.Log(__filename);
-const { findInDB, schema } = require('../../workWithMongoDB');
+import { findInDB, schema } from '../../workWithMongoDB/index.js';
 const find = new findInDB();
 
 // TODO: метод не протестирован
@@ -18,4 +18,4 @@ async function getOneSectorByCoords(collectionName, x, y, options = {}) {
   return result;
 }
 
-module.exports = getOneSectorByCoords;
+export default getOneSectorByCoords;

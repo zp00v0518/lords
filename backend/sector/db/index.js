@@ -1,5 +1,5 @@
-const updateStateSector = require('./updateStateSector');
-const findSectorsByCoords = require('./findSectorsByCoords');
-const getOneSectorByCoords = require('./getOneSectorByCoords');
+import updateStateSector from './updateStateSector.js';
+import findSectorsByCoords from './findSectorsByCoords.js';
+import getOneSectorByCoords from './getOneSectorByCoords.js';
 
-module.exports = { updateStateSector, findSectorsByCoords, getOneSectorByCoords };
+export { updateStateSector, findSectorsByCoords, getOneSectorByCoords };

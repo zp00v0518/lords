@@ -1,4 +1,4 @@
-const { checkType } = require("template_func");
+import { checkType } from "template_func";
 
 function checkSchema(obj, schema) {
   const typeData = checkType(obj);
@@ -96,4 +96,4 @@ function checkItem(item, shema) {
 //   return flag;
 // }
 
-module.exports = checkSchema;
+export default checkSchema;

@@ -8,4 +8,4 @@ const type_resources = {
   gem: 'gem'
 };
 
-module.exports = type_resources;
+export default type_resources;

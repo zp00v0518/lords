@@ -1,4 +1,4 @@
-const { findInDB } = require('../../workWithMongoDB');
+import { findInDB } from '../../workWithMongoDB/index.js';
 const find = new findInDB();
 
 async function getUserEvents(serverName, userId, status = true) {
@@ -15,4 +15,4 @@ async function getUserEvents(serverName, userId, status = true) {
   return userEvents.result;
 }
 
-module.exports = getUserEvents;
+export default getUserEvents;

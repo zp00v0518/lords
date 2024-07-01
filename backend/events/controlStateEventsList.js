@@ -1,7 +1,7 @@
-const getAllEventsFromDB = require("./getAllEventsFromDB");
-const controlStateEventsLoop = require("./controlStateEventsLoop");
+import getAllEventsFromDB from "./getAllEventsFromDB.js";
+import controlStateEventsLoop from "./controlStateEventsLoop.js";
 
-function controlStateEventsList(serverName, callback = () => {}) {
+function controlStateEventsList(serverName, callback = () => { }) {
   return new Promise((resolve, reject) => {
     getAllEventsFromDB({ serverName })
       .then(result => {
@@ -17,4 +17,4 @@ function controlStateEventsList(serverName, callback = () => {}) {
   });
 }
 
-module.exports = controlStateEventsList;
+export default controlStateEventsList;

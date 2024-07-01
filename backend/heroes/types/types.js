@@ -1,4 +1,4 @@
-const setProgress = require('./setProgress');
+import setProgress from './setProgress.js';
 
 class TypesHeroes {
   constructor(type, stat, progress) {
@@ -34,4 +34,4 @@ const types = {
   });
 })();
 
-module.exports = types;
+export default types;

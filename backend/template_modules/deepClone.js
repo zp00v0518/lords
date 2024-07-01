@@ -39,4 +39,4 @@ function deepClone(elem) {
   return result;
 }
 
-module.exports = deepClone;
+export default deepClone;

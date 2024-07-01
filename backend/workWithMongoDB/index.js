@@ -1,11 +1,11 @@
-const connectMongoDB = require('./connectMongoDB.js');
-const findInDB = require('./findInDB.js');
-const updateDB = require('./updateDB.js');
-const insertDB = require('./insertDB.js');
-const bulkWrite = require('./bulkWrite.js');
-const schema = require('./schema');
+import connectMongoDB from './connectMongoDB.js';
+import findInDB from './findInDB.js';
+import updateDB from './updateDB.js';
+import insertDB from './insertDB.js';
+import bulkWrite from './bulkWrite.js';
+import schema from './schema.js';
 
-module.exports = {
+export {
   connectMongoDB,
   findInDB,
   updateDB,

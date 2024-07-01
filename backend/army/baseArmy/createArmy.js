@@ -59,3 +59,5 @@ function getUnits({ stack_count = 1, units = [] }) {
 }
 
 module.exports = createArmy;
+
+export default createArmy

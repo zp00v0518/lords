@@ -1,5 +1,5 @@
-const connectMongoDB = require('./connectMongoDB.js');
-const config = require('../config/config.js');
+import connectMongoDB from './connectMongoDB.js';
+import config from '../config/config.js';
 const mongo = new connectMongoDB();
 mongo.connect({ dbName: config.db.name });
 
@@ -58,4 +58,4 @@ function findInDB() {
   };
 }
 
-module.exports = findInDB;
+export default findInDB;

@@ -1,11 +1,11 @@
-const { Heroes } = require('../../heroes');
-const { document } = require('../../workWithMongoDB/schema');
-const { insertDB } = require('../../workWithMongoDB');
-const { Army, createArmy } = require('../../army/baseArmy');
+import { Heroes } from '../../heroes/index.js';
+import { schema, insertDB } from '../../workWithMongoDB/index.js';
+const { document } = schema;
+import { Army, createArmy } from '../../army/baseArmy/index.js';
 
 const insert = new insertDB();
 
-function addHeroToDB({ server, race, type, userId, callback = function() {} }) {
+function addHeroToDB({ server, race, type, userId, callback = function () { } }) {
   return new Promise((resolve, reject) => {
     const template = createTemplateHero(race, type);
     template.userId = userId;
@@ -21,7 +21,6 @@ function addHeroToDB({ server, race, type, userId, callback = function() {} }) {
   });
 }
 
-module.exports = addHeroToDB;
 
 function createTemplateHero(race, type) {
   const hero = Heroes.getOneHero(race, type);
@@ -43,5 +42,7 @@ function createTemplateHero(race, type) {
   };
   return template;
 }
+
+export default addHeroToDB;
 
 // createTemplateHero('rampart', 'warrior');

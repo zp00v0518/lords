@@ -1,6 +1,6 @@
-const template = require('template_func');
+import template from 'template_func';
 const console = new template.Log(__filename);
-const ev = require('../Event');
+import ev from '../Event.js';
 const eventsTypes = ev.types;
 
 function createStopMineEvent(serverName, timeEnd, target = {}, coords) {
@@ -19,4 +19,4 @@ function createStopMineEvent(serverName, timeEnd, target = {}, coords) {
   return template;
 }
 
-module.exports = createStopMineEvent;
+export default createStopMineEvent;

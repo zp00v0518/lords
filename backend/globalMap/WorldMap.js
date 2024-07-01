@@ -1,4 +1,4 @@
-const game_variables = require('../variables/game_variables');
+import game_variables from '../variables/game_variables.js';
 
 const types = {
   empty: {
@@ -41,4 +41,4 @@ class WorldMap {
   }
 }
 
-module.exports = new WorldMap(types, game_variables);
+export default new WorldMap(types, game_variables);

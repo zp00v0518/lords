@@ -1,3 +1,3 @@
-const setEventInGame = require("./setEventInGame");
+import setEventInGame from "./setEventInGame.js";
 
-module.exports = { setEventInGame };
+export { setEventInGame };

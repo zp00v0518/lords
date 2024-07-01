@@ -1,5 +1,5 @@
-const path = require('path');
-const schema = require('../workWithMongoDB/schema');
+import path from 'node:path';
+import { schema } from '../workWithMongoDB/index.js';
 
 const config = {
   server: {
@@ -57,4 +57,4 @@ const config = {
   schema
 };
 
-module.exports = config;
+export default config

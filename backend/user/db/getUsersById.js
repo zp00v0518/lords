@@ -1,6 +1,8 @@
-const ObjectId = require('mongodb').ObjectID;
-const config = require('../../config');
-const { findInDB } = require('../../workWithMongoDB');
+import mongodb from 'mongodb';
+
+const { ObjectId } = mongodb;
+import config from '../../config/index.js';
+import { findInDB } from '../../workWithMongoDB/index.js';
 const find = new findInDB();
 
 async function getUsersById(arr = []) {
@@ -18,4 +20,4 @@ async function getUsersById(arr = []) {
   return users.result;
 }
 
-module.exports = getUsersById;
+export default getUsersById;

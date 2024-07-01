@@ -1,4 +1,4 @@
-function reqOn(req, callback = function() {}) {
+function reqOn(req, callback = function () { }) {
   return new Promise((resolve, reject) => {
     let data = "";
     req.on("data", chunk => {
@@ -10,4 +10,4 @@ function reqOn(req, callback = function() {}) {
     });
   });
 }
-module.exports = reqOn;
+export default reqOn;

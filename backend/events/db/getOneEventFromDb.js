@@ -1,5 +1,7 @@
-const ObjectId = require('mongodb').ObjectID;
-const { findInDB } = require('../../workWithMongoDB');
+import mongodb from 'mongodb';
+const { ObjectId } = mongodb;
+
+import { findInDB } from '../../workWithMongoDB/index.js';
 const find = new findInDB();
 
 async function getOneEventFromDb(serverName, eventId) {
@@ -13,4 +15,4 @@ async function getOneEventFromDb(serverName, eventId) {
   return result;
 }
 
-module.exports = getOneEventFromDb;
+export default getOneEventFromDb;

@@ -1,9 +1,9 @@
-const template = require('template_func');
+import template from 'template_func';
 const console = new template.Log(__filename);
-const ev = require('../Event');
+import ev from '../Event.js';
 const eventsTypes = ev.types;
-const { Heroes } = require('../../heroes');
-const WorldMap = require('../../globalMap/WorldMap');
+import { Heroes } from '../../heroes/index.js';
+import WorldMap from '../../globalMap/WorldMap.js';
 
 function createBackToTownEvent(prevEvent, result = {}, initUser = true) {
   const { data } = prevEvent;
@@ -39,4 +39,4 @@ function createBackToTownEvent(prevEvent, result = {}, initUser = true) {
   return template;
 }
 
-module.exports = createBackToTownEvent;
+export default createBackToTownEvent;

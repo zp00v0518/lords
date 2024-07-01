@@ -1,8 +1,8 @@
-const config = require('../config/config.js');
-const Mine = require('../region/mine/Mine.js');
-const Town = require('../town/Town.js');
-const resources = require('../resources/Resources.js');
-const schema = require('../workWithMongoDB/schema.js');
+import config from '../config/config.js';
+import Mine from '../region/mine/Mine.js';
+import Town from '../town/Town.js';
+import resources from '../resources/Resources.js';
+import { schema } from '../workWithMongoDB/index.js';
 const time = config.time;
 // используется ТАКЖЕ!!!! на фронте при улучшении строений в регионе!!!!!!!!
 
@@ -10,7 +10,7 @@ const gameVariables = {
   numSectionGlobalMap: process.env.SIZE_MAP || 100, // количество ячеек на ГЛОБАЛЬНОЙ карте, по одной оси
   // при изменении кол-ва ячеек, нужно поменять кол-во отображаемых ячеек на 1-й оси
   // как здесь, так и на клиенте
-  getMaxIndexMap: function() {
+  getMaxIndexMap: function () {
     return gameVariables.numSectionGlobalMap - 1;
   }, // максимальный индекс для массива карты
   numSectionRegionMap: 5, // количество ячеек на карте РЕГИОНА, по одной оси
@@ -37,4 +37,4 @@ const gameVariables = {
   classInstance: schema.document.class
 };
 
-module.exports = gameVariables;
+export default gameVariables;

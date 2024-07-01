@@ -1,6 +1,7 @@
-const path = require('path');
-const pathParse = require('path-parse');
-const frontFolder = require('../config').frontEnd.folder + '/';
+import path from 'node:path';
+import pathParse from 'path-parse';
+import config from '../config/index.js'
+const frontFolder = config.frontEnd.folder + '/';
 
 function getParsePathToImg(pathToImg = '') {
   const newStr = pathToImg.replace(frontFolder, '');
@@ -10,4 +11,4 @@ function getParsePathToImg(pathToImg = '') {
   return pathParse(newStr);
 }
 
-module.exports = getParsePathToImg;
+export default getParsePathToImg;

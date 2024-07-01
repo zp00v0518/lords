@@ -1,3 +1,3 @@
-const Heroes = require('./Heroes');
+import Heroes from './Heroes.js';
 
-module.exports = { Heroes };
+export { Heroes };

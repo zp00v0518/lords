@@ -1,7 +1,7 @@
-const controlStateGlobal = require('./controlStateGlobal');
-const controlZoneControle = require('./controlZoneControle');
+import controlStateGlobal from './controlStateGlobal.js';
+import controlZoneControle from './controlZoneControle.js';
 
-module.exports = {
+export {
   controlStateGlobal,
   controlZoneControle
 };

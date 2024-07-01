@@ -1,6 +1,7 @@
-const typeList = require('../types').list;
-const createHeroes = require('../createHeroes');
-const images = require('./images');
+import types from '../types/index.js';
+const typeList = types.list;
+import createHeroes from '../createHeroes.js';
+import images from './images.js';
 const types_race = require('../../race/types_races');
 
 const rampart = {
@@ -24,4 +25,4 @@ const rampart = {
   })
 };
 
-module.exports = rampart;
+export default rampart;

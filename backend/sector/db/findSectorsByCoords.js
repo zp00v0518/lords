@@ -1,6 +1,6 @@
-const template = require('template_func');
+import template from 'template_func';
 const console = new template.Log(__filename);
-const { findInDB, schema } = require('../../workWithMongoDB');
+import { findInDB, schema } from '../../workWithMongoDB/index.js';
 const find = new findInDB();
 
 async function findSectorsByCoords(collectionName, arr, options = {}) {
@@ -31,4 +31,4 @@ function getQuery(arr) {
   return { $or };
 }
 
-module.exports = findSectorsByCoords;
+export default findSectorsByCoords;

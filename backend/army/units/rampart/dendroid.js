@@ -1,7 +1,7 @@
-const createUnit = require("../createUnit");
-const army_types = require("../../baseArmy/army_types");
-const type_resources = require("../../../resources/type_resources");
-const types_races = require("../../../race/types_races");
+import createUnit from "../createUnit.js";
+import army_types from "../../baseArmy/army_types.js";
+import type_resources from "../../../resources/type_resources.js";
+import types_races from "../../../race/types_races.js";
 const race = types_races.rampart;
 
 function createDendroid(unitInfo, up = 0) {
@@ -25,4 +25,4 @@ function createDendroid(unitInfo, up = 0) {
     up
   });
 }
-module.exports = createDendroid;
+export default createDendroid;

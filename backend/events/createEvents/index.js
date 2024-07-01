@@ -1,5 +1,5 @@
-const createBackToTownEvent = require('./createBackToTownEvent');
-const createCaravanEvent = require('./createCaravanEvent');
-const createStopMineEvent = require('./createStopMineEvent');
+import createBackToTownEvent from './createBackToTownEvent.js';
+import createCaravanEvent from './createCaravanEvent.js';
+import createStopMineEvent from './createStopMineEvent.js';
 
-module.exports = {createBackToTownEvent, createCaravanEvent, createStopMineEvent};
+export { createBackToTownEvent, createCaravanEvent, createStopMineEvent };

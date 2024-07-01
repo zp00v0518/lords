@@ -1,4 +1,4 @@
-const fs = require("node:fs");
+import fs from "node:fs";
 
 function fileReader(pathName, callback) {
   fs.readFile(pathName, (err, data) => {
@@ -11,4 +11,4 @@ function fileReader(pathName, callback) {
   });
 }
 
-module.exports = fileReader;
+export default fileReader;

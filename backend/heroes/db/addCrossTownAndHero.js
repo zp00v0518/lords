@@ -1,5 +1,5 @@
-const addHeroToTown = require('./addHeroToTown');
-const addTownToHero = require('./addTownToHero');
+import addHeroToTown from './addHeroToTown.js';
+import addTownToHero from './addTownToHero.js';
 
 async function addCrossTownAndHero(serverName, townId, heroId) {
   const z = await addTownToHero(serverName, townId, heroId);
@@ -7,4 +7,4 @@ async function addCrossTownAndHero(serverName, townId, heroId) {
   return { addHeroResult: x, addTownResult: z };
 }
 
-module.exports = addCrossTownAndHero;
+export default addCrossTownAndHero;

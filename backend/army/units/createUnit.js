@@ -12,4 +12,4 @@ function createUnit({ unitInfo, cost, type, hp, race, up = 0, lvl }) {
   };
 }
 
-module.exports = createUnit;
+export default createUnit;

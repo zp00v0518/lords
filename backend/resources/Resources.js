@@ -1,5 +1,5 @@
-const checkSource = require('./checkSource');
-const types = require('./type_resources');
+import checkSource from './checkSource.js';
+import types from './type_resources.js';
 
 const Resources = {
   types,
@@ -21,7 +21,7 @@ const Resources = {
     baseResource: 18,
     unicResource: 10
   },
-  formPrice: function(values) {
+  formPrice: function (values) {
     const result = [];
     Object.keys(values).forEach(key => {
       if (Resources.typeList.includes(key)) {
@@ -57,4 +57,4 @@ const Resources = {
   checkSource
 };
 
-module.exports = Resources;
+export default Resources;

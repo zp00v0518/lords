@@ -1,7 +1,10 @@
-const template = require('template_func');
+import template from 'template_func';
 const console = new template.Log(__filename);
-const ObjectId = require('mongodb').ObjectID;
-const { updateDB } = require('../../workWithMongoDB');
+import mongodb from 'mongodb';
+
+const { ObjectId } = mongodb;
+
+import { updateDB } from '../../workWithMongoDB/index.js';
 const update = new updateDB();
 
 // обновляет состояние города в БД (не Региона или его-то другого. ТОлько города)
@@ -20,4 +23,4 @@ async function updateStateSector(sector, docs, ops = { upsert: false }) {
   return resultUpdate.result;
 }
 
-module.exports = updateStateSector;
+export default updateStateSector;

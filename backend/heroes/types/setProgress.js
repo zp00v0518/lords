@@ -7,4 +7,4 @@ function setProgress(arr) {
   return progress;
 }
 
-module.exports = setProgress;
+export default setProgress;

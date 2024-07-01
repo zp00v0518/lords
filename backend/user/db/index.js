@@ -1,12 +1,12 @@
-const updateUser = require('./updateUser');
-const getOneUserFromDB = require('./getOneUserFromDB');
-const getUserEvents = require('./getUserEvents');
-const setUserColor = require('./setUserColor');
-const getUsersById = require('./getUsersById');
-const getUserBySectorCoords = require('./getUserBySectorCoords');
-const getUsersBySectorsArr = require('./getUsersBySectorsArr');
+import updateUser from './updateUser.js';
+import getOneUserFromDB from './getOneUserFromDB.js';
+import getUserEvents from './getUserEvents.js';
+import setUserColor from './setUserColor.js';
+import getUsersById from './getUsersById.js';
+import getUserBySectorCoords from './getUserBySectorCoords.js';
+import getUsersBySectorsArr from './getUsersBySectorsArr.js';
 
-module.exports = {
+export {
   updateUser,
   getOneUserFromDB,
   getUserEvents,

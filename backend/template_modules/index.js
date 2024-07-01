@@ -1,15 +1,15 @@
-const fileReader = require("./fileReader.js");
-const mimeType = require("./mimeType.js");
-const sendResponse = require("./sendResponse.js");
-const reqOn = require("./reqOn.js");
-const getCollectionName = require("./getCollectionName.js");
-const checkSchema = require("./checkSchema.js");
-const getParsePathToImg = require("./getParsePathToImg.js");
-const deepClone = require("./deepClone");
-const formatIdToCoords = require("./formatIdToCoords");
-const recursiveLoop = require("./recursiveLoop");
+import fileReader from "./fileReader.js";
+import mimeType from "./mimeType.js";
+import sendResponse from "./sendResponse.js";
+import reqOn from "./reqOn.js";
+import getCollectionName from "./getCollectionName.js";
+import checkSchema from "./checkSchema.js";
+import getParsePathToImg from "./getParsePathToImg.js";
+import deepClone from "./deepClone.js";
+import formatIdToCoords from "./formatIdToCoords.js";
+import recursiveLoop from "./recursiveLoop.js";
 
-module.exports = {
+export {
   fileReader,
   mimeType,
   sendResponse,

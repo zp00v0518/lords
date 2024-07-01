@@ -1,4 +1,6 @@
-const ObjectID = require('mongodb').ObjectID;
+import mongodb from 'mongodb';
+
+const { ObjectId } = mongodb;
 
 function getTemplateEvent() {
   return {
@@ -21,4 +23,4 @@ function getTemplateEvent() {
   };
 }
 
-module.exports = getTemplateEvent;
+export default getTemplateEvent;

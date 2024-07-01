@@ -1,3 +1,3 @@
-const getLengthBeetweenTwoPoint = require('./getLengthBeetweenTwoPoint');
+import getLengthBeetweenTwoPoint from './getLengthBeetweenTwoPoint.js';
 
-module.exports = {getLengthBeetweenTwoPoint}
+export { getLengthBeetweenTwoPoint }

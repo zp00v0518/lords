@@ -1,7 +1,7 @@
-const createAvailable = require('./createAvailable');
-const config = require('../config/config.js');
-const game_variables = require('../variables/game_variables');
-const getShortDistanceOnMap = require('../globalMap/getShortDistanceOnMap');
+import createAvailable from './createAvailable.js';
+import config from '../config/config.js';
+import game_variables from '../variables/game_variables.js';
+import getShortDistanceOnMap from '../globalMap/getShortDistanceOnMap.js';
 
 const Caravan = {
   available: createAvailable(),
@@ -29,4 +29,4 @@ const Caravan = {
   getShortDistanceOnMap
 };
 
-module.exports = Caravan;
+export default Caravan;

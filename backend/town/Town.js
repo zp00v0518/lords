@@ -1,6 +1,6 @@
-const schema = require('../workWithMongoDB/schema');
+import { schema } from '../workWithMongoDB/index.js';
 const type = schema.document.class;
-const typeSource = require('../resources/type_resources');
+import typeSource from '../resources/type_resources.js';
 
 const Town = {
   classInstance: schema.document.class.town,
@@ -23,7 +23,7 @@ const Town = {
     barraks_6: { name: type.barraks + '_6', maxLvl: 2 },
     barraks_7: { name: type.barraks + '_7', maxLvl: 2 }
   },
-  form_IfBuilding: function(values) {
+  form_IfBuilding: function (values) {
     const result = [];
     Object.keys(values).forEach(key => {
       const flag = Object.keys(Town.listBuildings).some(build => {
@@ -76,4 +76,4 @@ const Town = {
   }
 };
 
-module.exports = Town;
+export default Town;

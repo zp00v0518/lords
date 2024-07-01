@@ -135,7 +135,7 @@ const mine = {
   work: Object
 };
 
-module.exports = {
+export default {
   document,
   map,
   town,

@@ -4,4 +4,4 @@ function formatIdToCoords(id, length) {
   return { x, y };
 }
 
-module.exports = formatIdToCoords;
+export default formatIdToCoords;

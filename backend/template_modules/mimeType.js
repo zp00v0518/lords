@@ -10,4 +10,4 @@ var mimeType = {
   ".manifest": "text/cache-manifest"
 };
 
-module.exports = mimeType;
+export default mimeType;

@@ -1,6 +1,6 @@
-const army_types = require('./army_types');
-const race_types = require('../../race/types_races');
-const rampart_units = require('../units/rampart');
+import army_types from './army_types.js';
+import race_types from '../../race/types_races.js';
+import rampart_units from '../units/rampart/index.js';
 const schema = require('../../workWithMongoDB/schema');
 const type = schema.document.class;
 const createStackItemTemplate = require('./createStackItemTemplate');
@@ -136,4 +136,4 @@ const Army = {
   }
 };
 
-module.exports = Army;
+export default Army;
