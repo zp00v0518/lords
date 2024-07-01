@@ -1,4 +1,4 @@
-const handlerBuildNewTown = require('./handlerBuildNewTown');
-const handlerHeroTransferEvent = require('./handlerHeroTransferEvent');
+import handlerBuildNewTown from './handlerBuildNewTown.js';
+import handlerHeroTransferEvent from './handlerHeroTransferEvent.js';
 
-module.exports = { handlerBuildNewTown, handlerHeroTransferEvent };
+export { handlerBuildNewTown, handlerHeroTransferEvent };

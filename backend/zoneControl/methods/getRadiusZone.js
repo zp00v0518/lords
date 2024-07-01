@@ -1,7 +1,7 @@
-const ZoneControl = require("../ZoneControl");
+import ZoneControl from "../ZoneControl.js";
 
 function getRadiusZone(value) {
   return Math.ceil(value / ZoneControl.stepArea);
 }
 
-module.exports = getRadiusZone;
+export default getRadiusZone;

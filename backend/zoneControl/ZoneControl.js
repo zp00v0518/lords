@@ -1,4 +1,4 @@
-const config = require('../config');
+import config from '../config/config.js';
 const { time } = config;
 
 const ZoneControl = {
@@ -6,4 +6,4 @@ const ZoneControl = {
   stepArea: 50000
 };
 
-module.exports = ZoneControl;
+export default ZoneControl;

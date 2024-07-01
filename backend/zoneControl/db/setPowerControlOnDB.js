@@ -1,9 +1,7 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-const changePowerControlInGlobalMap = require('./changePowerControlInGlobalMap');
-const { needFields } = require('../../globalMap/db');
-const { findSectorsByCoords } = require('../../sector/db');
-const { bulkWrite } = require('../../workWithMongoDB');
+import changePowerControlInGlobalMap from './changePowerControlInGlobalMap.js';
+import { needFields } from '../../globalMap/db/index.js';
+import { findSectorsByCoords } from '../../sector/db/index.js';
+import { bulkWrite } from '../../workWithMongoDB/bulkWrite.js';
 const bulk = new bulkWrite();
 
 const powerKey = 'control.power';
@@ -63,4 +61,4 @@ function getTemplateBulkCell() {
   return template;
 }
 
-module.exports = setPowerControlOnDB;
+export default setPowerControlOnDB;

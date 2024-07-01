@@ -1,7 +1,7 @@
-const { findInDB } = require("../../workWithMongoDB");
+import findInDB from "../../workWithMongoDB/findInDB.js";
 const find = new findInDB();
 
-function getUsersTownFromDB(userId, serverName, callback = () => {}) {
+function getUsersTownFromDB(userId, serverName, callback = () => { }) {
   return new Promise((resolve, reject) => {
     const findOptions = {
       collectionName: serverName,
@@ -23,4 +23,4 @@ function getUsersTownFromDB(userId, serverName, callback = () => {}) {
   });
 }
 
-module.exports = getUsersTownFromDB;
+export default getUsersTownFromDB;

@@ -1,5 +1,6 @@
 import findInDB from '../../workWithMongoDB/findInDB.js';
-const document = require('../../workWithMongoDB/schema').document;
+import { schema } from "../workWithMongoDB/index.js";
+const { document } = schema
 const find = new findInDB();
 
 async function getTownByCoords(serverName, x, y) {
@@ -15,4 +16,4 @@ async function getTownByCoords(serverName, x, y) {
   return sector;
 }
 
-module.exports = getTownByCoords;
+export default getTownByCoords;

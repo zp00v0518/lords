@@ -1,10 +1,10 @@
-const getRadiusZone = require('./getRadiusZone');
-const getSectorOnMatrix = require('../../globalMap/getSectorOnMatrix');
-const setPowerControlOnDB = require('../db/setPowerControlOnDB');
-const setWeightForCell = require('./setWeightForCell');
+import getRadiusZone from './getRadiusZone.js';
+import getSectorOnMatrix from '../../globalMap/getSectorOnMatrix.js';
+import setPowerControlOnDB from '../db/setPowerControlOnDB.js';
+import setWeightForCell from './setWeightForCell.js';
 
 async function setZoneControl(serverName, power = 0, center, user) {
-  const GlobalMap = require('../../globalMap/constractGlobalMap');
+  const GlobalMap = import('../../globalMap/constractGlobalMap.js');
   const length = GlobalMap[serverName].length;
   const centerX = center.x;
   const centerY = center.y;
@@ -15,4 +15,4 @@ async function setZoneControl(serverName, power = 0, center, user) {
   await setPowerControlOnDB(serverName, arr, user);
 }
 
-module.exports = setZoneControl;
+export default setZoneControl;

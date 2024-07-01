@@ -1,6 +1,4 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-const ZoneControl = require('../ZoneControl');
+import ZoneControl from '../ZoneControl.js';
 
 function calculateMediumWeight(values) {
   const arr = Object.entries(values);
@@ -46,4 +44,4 @@ function getWeightOnIndex(targetIndex, arr) {
   });
   return acc;
 }
-module.exports = calculateMediumWeight;
+export default calculateMediumWeight;

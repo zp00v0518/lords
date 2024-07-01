@@ -1,6 +1,5 @@
-const { getRandomNumber, Log } = require('template_func');
-const console = new Log(__filename);
-const createTown = require('../town/createTown');
+import { getRandomNumber } from 'template_func';
+import createTown from '../town/createTown.js';
 const { getFirstWeightControl, setZoneControl } = require('../zoneControl/methods');
 const { setValueInSectorById } = require('../zoneControl/db');
 const config = require('../config');
@@ -12,7 +11,7 @@ const update = new updateDB();
 // TODO: переделать на async/await
 function addNewUserToGlobalMap(user, serverName) {
   return new Promise((resolve, reject) => {
-    checkUserPosition(serverName, async(x, y, sectorId) => {
+    checkUserPosition(serverName, async (x, y, sectorId) => {
       const race = user.collections[serverName].race;
       const newTown = createTown({
         status: 'first',
@@ -22,7 +21,7 @@ function addNewUserToGlobalMap(user, serverName) {
       });
       const weightControl = getFirstWeightControl(newTown);
       await setValueInSectorById(serverName, sectorId, weightControl);
-      await setZoneControl(serverName, weightControl, {x, y}, user)
+      await setZoneControl(serverName, weightControl, { x, y }, user)
       const { regionMap } = newTown;
       // удаляю т.к в базе получается дублирование карты региона
       delete newTown.regionMap;
@@ -67,4 +66,4 @@ function checkUserPosition(serverName, callback) {
     return callback(x, y, region._id);
   }
 }
-module.exports = addNewUserToGlobalMap;
+export default addNewUserToGlobalMap;

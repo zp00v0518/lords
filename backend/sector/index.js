@@ -1,3 +1,3 @@
-const db = require('./db');
+import { updateStateSector, findSectorsByCoords, getOneSectorByCoords } from './db/index.js';
 
-module.exports = { ...db };
+export { updateStateSector, findSectorsByCoords, getOneSectorByCoords };

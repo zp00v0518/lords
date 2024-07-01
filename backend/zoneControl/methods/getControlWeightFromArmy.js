@@ -1,6 +1,4 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-const { Army } = require('../../army');
+import { Army } from '../../army/index.js';
 
 function getControlWeightFromArmy(army) {
   let result = 0;
@@ -13,4 +11,4 @@ function getControlWeightFromArmy(army) {
   return result;
 }
 
-module.exports = getControlWeightFromArmy;
+export default getControlWeightFromArmy;

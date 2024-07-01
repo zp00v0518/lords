@@ -1,4 +1,4 @@
-const ZoneControl = require('../ZoneControl');
+import ZoneControl from '../ZoneControl.js';
 const step = ZoneControl.stepArea;
 
 function setWeightForCell(value, arr) {
@@ -20,4 +20,4 @@ function setWeightForCell(value, arr) {
   }
 }
 
-module.exports = setWeightForCell;
+export default setWeightForCell;

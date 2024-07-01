@@ -1,4 +1,4 @@
-const getOneSectorForGlobalMap = require('./getOneSectorForGlobalMap');
-const needFields = require('./needFields');
+import getOneSectorForGlobalMap from './getOneSectorForGlobalMap.js';
+import needFields from './needFields.js';
 
-module.exports = { getOneSectorForGlobalMap, needFields };
+export { getOneSectorForGlobalMap, needFields };

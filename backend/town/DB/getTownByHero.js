@@ -1,7 +1,8 @@
 import mongodb from 'mongodb';
 const { ObjectId } = mongodb
 import findInDB from '../../workWithMongoDB/findInDB.js';
-const document = require('../../workWithMongoDB/schema').document;
+import { schema } from "../workWithMongoDB/index.js";
+const { document } = schema
 const find = new findInDB();
 
 async function getTownByHero(serverName, heroId) {
@@ -17,4 +18,4 @@ async function getTownByHero(serverName, heroId) {
   return sector;
 }
 
-module.exports = getTownByHero;
+export default getTownByHero;

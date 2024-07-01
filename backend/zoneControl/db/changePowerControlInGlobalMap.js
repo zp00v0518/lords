@@ -1,8 +1,5 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-
 function changePowerControlInGlobalMap(collectionName, arr) {
-  const GlobalMap = require('../../globalMap/constractGlobalMap');
+  const GlobalMap = import('../../globalMap/constractGlobalMap.js');
   const map = GlobalMap[collectionName];
   for (let i = 0; i < arr.length; i++) {
     const elem = arr[i];
@@ -10,4 +7,4 @@ function changePowerControlInGlobalMap(collectionName, arr) {
   }
 }
 
-module.exports = changePowerControlInGlobalMap;
+export default changePowerControlInGlobalMap;

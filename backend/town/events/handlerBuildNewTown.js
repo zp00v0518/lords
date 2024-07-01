@@ -1,10 +1,10 @@
-const { getOneTownFromDB } = require('../DB');
-const { inActiveteEvent } = require('../../events/db');
-const createTown = require('../createTown');
-const WorldMap = require('../../globalMap/WorldMap');
-const { getArmyRange, changeArmyOnRegion } = require('../../army');
-const { updateStateSector } = require('../../sector');
-const { getUsersTownFromDB } = require('../../town/DB');
+import { getOneTownFromDB } from '../DB/index.js';
+import { inActiveteEvent } from '../../events/db/index.js';
+import createTown from '../createTown.js';
+import WorldMap from '../../globalMap/WorldMap.js';
+import { getArmyRange, changeArmyOnRegion } from '../../army/index.js';
+import { updateStateSector } from '../../sector/index.js';
+import { getUsersTownFromDB } from '../../town/DB/index.js';
 const { getOneUserFromDB } = require('../../user');
 const { transferHeroBetweenTown, getHeroesFromDB, heroActivate } = require('../../heroes/db');
 const { getOneSectorForGlobalMap } = require('../../globalMap/db');
@@ -56,4 +56,4 @@ async function handlerBuildNewTown(event) {
   inActiveteEvent(event);
 }
 
-module.exports = handlerBuildNewTown;
+export default handlerBuildNewTown;

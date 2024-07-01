@@ -1,7 +1,5 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-const getControlWeightFromBuilding = require('./getControlWeightFromBuilding');
-const Town = require('../../town/Town');
+import getControlWeightFromBuilding from './getControlWeightFromBuilding.js';
+import Town from '../../town/Town.js';
 const listBuilding = Town.listBuildings;
 
 function getFirstWeightControl(townElem) {
@@ -15,4 +13,4 @@ function getFirstWeightControl(townElem) {
   });
   return result;
 }
-module.exports = getFirstWeightControl;
+export default getFirstWeightControl;

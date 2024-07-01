@@ -1,7 +1,5 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-const Race = require('../../race/Race');
-const typeResources = require('../../resources/type_resources');
+import Race from '../../race/Race.js';
+import typeResources from '../../resources/type_resources.js';
 
 function getControlWeightFromBuilding(building, raceIndex) {
   const raceName = Race.typeList[raceIndex];
@@ -12,4 +10,4 @@ function getControlWeightFromBuilding(building, raceIndex) {
   return gold.value;
 }
 
-module.exports = getControlWeightFromBuilding;
+export default getControlWeightFromBuilding;

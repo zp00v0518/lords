@@ -1,10 +1,10 @@
 // const { findInDB, config } = require('../tube.js');
-const config = require('../config');
-const { findInDB } = require('../workWithMongoDB');
+import config from '../config/config.js';
+import findInDB from "../workWithMongoDB/findInDB.js";
 
 const find = new findInDB();
 
-function findUserInGlobalMap(userId, serverName, callback = function() {}) {
+function findUserInGlobalMap(userId, serverName, callback = function () { }) {
   return new Promise((resolve, reject) => {
     const options = {
       collectionName: serverName,
@@ -23,7 +23,7 @@ function findUserInGlobalMap(userId, serverName, callback = function() {}) {
   });
 }
 
-function findUserInDB(userCookies, callback = function() {}) {
+function findUserInDB(userCookies, callback = function () { }) {
   return new Promise((resolve, reject) => {
     const options = {
       collectionName: config.db.collections.users,
@@ -42,4 +42,4 @@ function findUserInDB(userCookies, callback = function() {}) {
   });
 }
 
-module.exports = { findUserInGlobalMap, findUserInDB };
+export { findUserInGlobalMap, findUserInDB };

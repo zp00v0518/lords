@@ -1,8 +1,9 @@
-const ObjectId = require("mongodb").ObjectID;
-const { findInDB } = require("../../workWithMongoDB");
+import mongodb from 'mongodb';
+const { ObjectId } = mongodb
+import findInDB from "../../workWithMongoDB/findInDB.js";
 const find = new findInDB();
 
-function getOneTownFromDB(serverName, sectorId, callback = () => {}) {
+function getOneTownFromDB(serverName, sectorId, callback = () => { }) {
   return new Promise((resolve, reject) => {
     const findOptions = {
       collectionName: serverName,
@@ -23,4 +24,4 @@ function getOneTownFromDB(serverName, sectorId, callback = () => {}) {
   });
 }
 
-module.exports = getOneTownFromDB;
+export default getOneTownFromDB;

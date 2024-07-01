@@ -5,7 +5,7 @@ import getOneTownFromDB from './getOneTownFromDB.js';
 import getTownByHero from './getTownByHero.js';
 import getTownByCoords from './getTownByCoords.js';
 
-export default {
+export {
   getAllTownsFromDB,
   updateStateTown,
   getUsersTownFromDB,

@@ -9,4 +9,4 @@ function createZoneControlToDB() {
   };
 }
 
-module.exports = createZoneControlToDB;
+export default createZoneControlToDB;

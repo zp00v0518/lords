@@ -1,8 +1,8 @@
-const { findUserInGlobalMap } = require('./findUser.js');
-const { getHeroesFromDB } = require('../heroes/db');
-const formEventsList = require('../events/formEventsList');
+import { findUserInGlobalMap } from './findUser.js';
+import { getHeroesFromDB } from '../heroes/db/index.js';
+import formEventsList from '../events/formEventsList.js';
 
-function getInfoForStartGame(user, server, callback = function() {}) {
+function getInfoForStartGame(user, server, callback = function () { }) {
   return new Promise((resolve, reject) => {
     findUserInGlobalMap(user._id, server)
       .then(findResult => {
@@ -43,4 +43,4 @@ function getInfoForStartGame(user, server, callback = function() {}) {
   });
 }
 
-module.exports = getInfoForStartGame;
+export default getInfoForStartGame;

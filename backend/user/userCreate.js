@@ -15,4 +15,4 @@ function userCreate(userData) {
   return user;
 }
 
-module.exports = userCreate;
+export default userCreate;

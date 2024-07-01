@@ -1,15 +1,28 @@
-import createTown from './createTown.js';
-import upgradeSection from './upgradeSection.js';
-import globalControlStateInTown from './globalControlStateInTown.js';
-const DB = require('./DB');
-const Town = require('./Town');
-const events = require('./events');
+import createTown from './createTown.js'
+import upgradeSection from './upgradeSection.js'
+import globalControlStateInTown from './globalControlStateInTown.js'
+import {
+  getAllTownsFromDB,
+  updateStateTown,
+  getUsersTownFromDB,
+  getOneTownFromDB,
+  getTownByHero,
+  getTownByCoords
+} from './DB/index.js'
+import Town from './Town.js'
+import { handlerBuildNewTown, handlerHeroTransferEvent } from './events/index.js'
 
-module.exports = {
-  ...DB,
-  ...events,
+export {
+  getAllTownsFromDB,
+  updateStateTown,
+  getUsersTownFromDB,
+  getOneTownFromDB,
+  getTownByHero,
+  getTownByCoords,
+  handlerBuildNewTown,
+  handlerHeroTransferEvent,
   createTown,
   upgradeSection,
   globalControlStateInTown,
   Town
-};
+}
