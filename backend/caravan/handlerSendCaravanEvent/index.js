@@ -1,3 +1,3 @@
-const handlerSendCaravanEvent = require('./handlerSendCaravanEvent');
+import handlerSendCaravanEvent from './handlerSendCaravanEvent.js';
 
-module.exports = handlerSendCaravanEvent;
+export { handlerSendCaravanEvent };

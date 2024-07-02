@@ -1,7 +1,7 @@
 import inActiveteEvent from '../events/db/inActiveteEvent.js';
 import { finishAttackEnemyRegion } from '../events/finishEvent/index.js';
 import { updateHeroInDB } from '../heroes/db/index.js';
-const { Battle } = require('../battle');
+import { Battle } from '../battle/index.js';
 
 async function handlerBackToTown(event) {
   const { serverName, data } = event;
@@ -14,4 +14,4 @@ async function handlerBackToTown(event) {
   await inActiveteEvent(event);
 }
 
-module.exports = handlerBackToTown;
+export default handlerBackToTown;

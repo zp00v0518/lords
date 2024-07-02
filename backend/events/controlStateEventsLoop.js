@@ -6,11 +6,11 @@ import finishEvent from './finishEvent.js';
 import updateDB from '../workWithMongoDB/updateDB.js';
 import gameEvent from './Event.js';
 const eventType = gameEvent.types;
-const eventsHandler = require('./eventsHandler');
-const { recursiveLoop } = require('../template_modules');
-const inActiveteEvent = require('./db/inActiveteEvent');
-const { getControlWeightFromBuilding } = require('../zoneControl/methods');
-const { setValueInSectorById } = require('../zoneControl/db');
+import eventsHandler from './eventsHandler.js';
+import { recursiveLoop } from '../template_modules/index.js';
+import inActiveteEvent from './db/inActiveteEvent.js';
+import { getControlWeightFromBuilding } from '../zoneControl/methods/index.js';
+import { setValueInSectorById } from '../zoneControl/db/index.js';
 const update = new updateDB();
 
 function controlStateEventsLoop(eventsList = [], callback = () => { }) {
@@ -30,7 +30,6 @@ function controlStateEventsLoop(eventsList = [], callback = () => { }) {
   });
 }
 
-export default controlStateEventsLoop;
 
 // есть ошибка в имплементации - не все обработчики вызывают resolve;
 function iterationImplenetation(event, callback = () => { }) {
@@ -117,3 +116,5 @@ function iterationImplenetation(event, callback = () => { }) {
     }
   });
 }
+
+export default controlStateEventsLoop;

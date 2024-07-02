@@ -1,3 +1,3 @@
-const handlerCaravanBackToTownEvent = require('./handlerCaravanBackToTownEvent');
+import handlerCaravanBackToTownEvent from './handlerCaravanBackToTownEvent.js';
 
-module.exports = handlerCaravanBackToTownEvent;
+export { handlerCaravanBackToTownEvent };

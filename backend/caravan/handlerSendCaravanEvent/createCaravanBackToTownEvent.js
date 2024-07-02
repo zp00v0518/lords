@@ -1,4 +1,4 @@
-const Ev = require('../../events/Event');
+import Ev from '../../events/Event.js';
 
 function createCaravanBackToTownEvent(prevEvent) {
   const { init, data } = prevEvent;
@@ -18,4 +18,4 @@ function createCaravanBackToTownEvent(prevEvent) {
 }
 
 
-module.exports = createCaravanBackToTownEvent;
+export default createCaravanBackToTownEvent;

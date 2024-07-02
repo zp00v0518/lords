@@ -1,7 +1,5 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-const { createStopMineEvent } = require('../../events/createEvents');
-const { addEventToDB } = require('../../events/db');
+import { createStopMineEvent } from '../../events/createEvents/index.js';
+import { addEventToDB } from '../../events/db/index.js';
 
 async function createAndAddEventStopMine(baseEvent, mine, targetForEvent) {
   const { serverName } = baseEvent;
@@ -15,4 +13,4 @@ async function createAndAddEventStopMine(baseEvent, mine, targetForEvent) {
   mine.events.push(eventInDb.ops[0]._id.toString());
 }
 
-module.exports = createAndAddEventStopMine;
+export default createAndAddEventStopMine;

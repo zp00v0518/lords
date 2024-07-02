@@ -1,4 +1,4 @@
-const { addValueToStorage } = require('../town/storage');
+import { addValueToStorage } from '../town/storage/index.js';
 
 function addResourceToStorageFromCaravan(payload, storage) {
   Object.keys(payload).forEach(type => {
@@ -7,4 +7,4 @@ function addResourceToStorageFromCaravan(payload, storage) {
   });
 }
 
-module.exports = addResourceToStorageFromCaravan;
+export default addResourceToStorageFromCaravan;

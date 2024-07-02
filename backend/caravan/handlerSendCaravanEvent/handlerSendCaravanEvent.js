@@ -1,7 +1,7 @@
-const { getOneTownFromDB, updateStateTown } = require('../../town/DB');
-const addResourceToStorageFromCaravan = require('../addResourceToStorageFromCaravan');
-const createCaravanBackToTownEvent = require('./createCaravanBackToTownEvent');
-const { inActiveteEvent, addEventToDB } = require('../../events/db');
+import { getOneTownFromDB, updateStateTown } from '../../town/DB/index.js';
+import addResourceToStorageFromCaravan from '../addResourceToStorageFromCaravan.js';
+import createCaravanBackToTownEvent from './createCaravanBackToTownEvent.js';
+import { inActiveteEvent, addEventToDB } from '../../events/db/index.js';
 
 async function handlerSendCaravanEvent(event) {
   const { serverName, init, target, data } = event;
@@ -19,4 +19,4 @@ async function handlerSendCaravanEvent(event) {
   await addEventToDB(newEvent, serverName);
 }
 
-module.exports = handlerSendCaravanEvent;
+export default handlerSendCaravanEvent;

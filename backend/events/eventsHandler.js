@@ -2,10 +2,10 @@ import gameEvent from './Event.js';
 const eventType = gameEvent.types
 import handlerEventBattle from '../battle/handlerEventBattle.js';
 import handlerBackToTown from '../heroes/handlerBackToTown.js';
-const { handlerBuildNewTown, handlerHeroTransferEvent } = require('../town');
-const handlerSendCaravanEvent = require('../caravan/handlerSendCaravanEvent');
-const handlerCaravanBackToTownEvent = require('../caravan/handlerCaravanBackToTownEvent');
-const handlerStopMineEvent = require('../region/mine/handlerStopMineEvent');
+import { handlerBuildNewTown, handlerHeroTransferEvent } from '../town/index.js';
+import { handlerSendCaravanEvent } from '../caravan/handlerSendCaravanEvent/index.js';
+import handlerCaravanBackToTownEvent from '../caravan/handlerCaravanBackToTownEvent/index.js';
+import handlerStopMineEvent from '../region/mine/handlerStopMineEvent.js';
 
 const eventsHandler = {
   [eventType.battle]: handlerEventBattle,
@@ -17,4 +17,4 @@ const eventsHandler = {
   [eventType.stopMine]: handlerStopMineEvent
 };
 
-module.exports = eventsHandler;
+export default eventsHandler;

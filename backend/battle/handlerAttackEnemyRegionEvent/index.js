@@ -1,3 +1,3 @@
-const handlerAttackEnemyRegionEvent = require('./handlerAttackEnemyRegionEvent');
+import handlerAttackEnemyRegionEvent from './handlerAttackEnemyRegionEvent.js';
 
-module.exports = handlerAttackEnemyRegionEvent;
+export { handlerAttackEnemyRegionEvent }

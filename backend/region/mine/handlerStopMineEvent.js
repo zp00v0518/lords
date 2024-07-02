@@ -18,6 +18,4 @@ async function handlerStopMineEvent(event, sector) {
   await inActiveteEvent(event);
 }
 
-module.exports = handlerStopMineEvent;
-
 export default handlerStopMineEvent

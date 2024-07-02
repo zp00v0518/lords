@@ -1,6 +1,6 @@
-const { getOneTownFromDB, updateStateTown } = require('../../town/DB');
-const { inActiveteEvent } = require('../../events/db');
-const removeBusyCaravan = require('../removeBusyCaravan');
+import { getOneTownFromDB, updateStateTown } from '../../town/DB/index.js';
+import { inActiveteEvent } from '../../events/db/index.js';
+import removeBusyCaravan from '../removeBusyCaravan.js';
 
 async function handlerCaravanBackToTownEvent(event) {
   const { serverName, init, data } = event;
@@ -15,4 +15,4 @@ async function handlerCaravanBackToTownEvent(event) {
   await updateStateTown(initSector);
 }
 
-module.exports = handlerCaravanBackToTownEvent;
+export default handlerCaravanBackToTownEvent;

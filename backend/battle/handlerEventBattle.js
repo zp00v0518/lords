@@ -6,11 +6,11 @@ import { getHeroesFromDB, updateHeroInDB } from '../heroes/db.js';
 import Battle from './Battle.js';
 import calculateBattle from './calculateBattle.js';
 import setUnitsAfterBattle from './setUnitsAfterBattle.js';
-const { Region, updateStateRegion } = require('../region');
-const handlerAttackEnemyRegionEvent = require('./handlerAttackEnemyRegionEvent');
-const { getLostArmyAfterBattle } = require('../army/methods');
-const { getControlWeightFromArmy } = require('../zoneControl/methods');
-const { setValueInSectorById } = require('../zoneControl/db');
+import { Region, updateStateRegion } from '../region/index.js';
+import { handlerAttackEnemyRegionEvent } from './handlerAttackEnemyRegionEvent/index.js';
+import { getLostArmyAfterBattle } from '../army/methods/index.js';
+import { getControlWeightFromArmy } from '../zoneControl/methods/index.js';
+import { setValueInSectorById } from '../zoneControl/db/index.js';
 
 async function handlerEventBattle(event, targetSector) {
   const { data, serverName } = event;
@@ -46,4 +46,4 @@ async function handlerEventBattle(event, targetSector) {
   }
 }
 
-module.exports = handlerEventBattle;
+export default handlerEventBattle;

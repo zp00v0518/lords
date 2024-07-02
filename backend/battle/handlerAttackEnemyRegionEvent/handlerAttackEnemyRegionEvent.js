@@ -1,13 +1,11 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-const { getUsersTownFromDB, updateStateTown } = require('../../town');
-const { getSectorsForAttack, Region, updateStateRegion } = require('../../region');
-const { getLootResources } = require('../../region/mine');
-const { calcStorageNowValue, reduceGrowthResources } = require('../../town/storage');
-const { createBackToTownEvent } = require('../../events/createEvents');
-const { addEventToDB, inActiveteEvent, getOneEventFromDb, updateEndEventInDb } = require('../../events/db');
-const Event = require('../../events/Event');
-const createAndAddEventStopMine = require('./createAndAddEventStopMine');
+import { getUsersTownFromDB, updateStateTown } from '../../town/index.js';
+import { getSectorsForAttack, Region, updateStateRegion } from '../../region/index.js';
+import { getLootResources } from '../../region/mine/index.js';
+import { calcStorageNowValue, reduceGrowthResources } from '../../town/storage/index.js';
+import { createBackToTownEvent } from '../../events/createEvents/index.js';
+import { addEventToDB, inActiveteEvent, getOneEventFromDb, updateEndEventInDb } from '../../events/db/index.js';
+import Event from '../../events/Event.js';
+import createAndAddEventStopMine from './createAndAddEventStopMine.js';
 
 async function handlerAttackEnemyRegionEvent(event, defTown) {
   const { serverName, init, data } = event;
@@ -61,4 +59,4 @@ async function handlerAttackEnemyRegionEvent(event, defTown) {
   await inActiveteEvent(event);
 }
 
-module.exports = handlerAttackEnemyRegionEvent;
+export default handlerAttackEnemyRegionEvent;

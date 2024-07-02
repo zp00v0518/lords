@@ -9,4 +9,4 @@ function removeBusyCaravan(caravan, payload) {
   return caravan;
 }
 
-module.exports = removeBusyCaravan;
+export default removeBusyCaravan;
