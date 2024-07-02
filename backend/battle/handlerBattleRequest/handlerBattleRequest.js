@@ -1,13 +1,13 @@
-const { checkSchema, formatIdToCoords } = require('../../template_modules');
-const { redirectMessage, sendWSMessage } = require('../../wsServer');
-const verification = require('../../wsServer/baseVerificationHandler');
-const { Region } = require('../../region');
-const createEventBattle = require('./createEventBattle');
-const { setEventInGame } = require('../../events');
-const { getOneTownFromDB } = require('../../town');
-const { updateHeroInDB } = require('../../heroes/db');
+import { checkSchema, formatIdToCoords } from '../../template_modules/index.js';
+import { redirectMessage, sendWSMessage } from '../../wsServer/index.js';
+import verification from '../../wsServer/baseVerificationHandler.js';
+import { Region } from '../../region/index.js';
+import createEventBattle from './createEventBattle.js';
+import { setEventInGame } from '../../events/index.js';
+import { getOneTownFromDB } from '../../town/index.js';
+import { updateHeroInDB } from '../../heroes/db/index.js';
 const { gameVariables } = global;
-const { createArmyForBattle } = require('../../army');
+import { createArmyForBattle } from '../../army/index.js';
 
 function handlerBattleRequest(message, info) {
   const data = message.data;
@@ -84,7 +84,6 @@ function handlerBattleRequest(message, info) {
     });
 }
 
-module.exports = handlerBattleRequest;
 
 const schema = {
   attackHeroId: { type: 'string', regExp: /^.{13,}\b/g },
@@ -108,6 +107,9 @@ const schema = {
     }
   }
 };
+
+export default handlerBattleRequest;
+
 
 // function createArmyForBattle(attackArmy, heroArmy) {
 //   const result = [];

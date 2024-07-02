@@ -2,7 +2,7 @@ import calcStorageNowValue from '../town/storage/calcStorageNowValue.js';
 import { getOneTownFromDB, updateStateTown } from '../town/index.js';
 import fixingResultUpgradeMine from '../region/mine/fixingResultUpgradeMine.js';
 import fixingResultUpgrade_building from '../town/buildings/fixingResultUpgrade_building.js';
-import finishEvent from './finishEvent.js';
+import finishEvent from './finishEvent/index.js';
 import updateDB from '../workWithMongoDB/updateDB.js';
 import gameEvent from './Event.js';
 const eventType = gameEvent.types;

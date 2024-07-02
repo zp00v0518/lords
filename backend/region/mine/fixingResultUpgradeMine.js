@@ -1,5 +1,5 @@
 // const Mine = gameVariables.mine;
-import Mine from '../mine/Mine/js';
+import Mine from '../mine/Mine.js';
 import updateDB from '../../workWithMongoDB/updateDB.js';
 const update = new updateDB();
 import { upValueInStorage } from '../../town/storage/index.js';

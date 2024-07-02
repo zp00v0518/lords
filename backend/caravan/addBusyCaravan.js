@@ -8,4 +8,4 @@ function addBusyCaravan(caravan, payload) {
   return caravan;
 }
 
-module.exports = addBusyCaravan;
+export default addBusyCaravan;

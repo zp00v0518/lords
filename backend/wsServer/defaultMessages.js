@@ -1,4 +1,4 @@
-const sendWSMessage = require('./sendWSMessage');
+import sendWSMessage from './sendWSMessage.js';
 
 function reloadMessage(ws) {
   const reload = {
@@ -19,4 +19,4 @@ function redirectMessage(ws, url = "/") {
   // ws.send(JSON.stringify(redirect));
 }
 
-module.exports = { reloadMessage, redirectMessage };
+export { reloadMessage, redirectMessage };

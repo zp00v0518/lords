@@ -1,4 +1,4 @@
-const { getHeroesFromDB } = require('../heroes/db');
+import { getHeroesFromDB } from '../heroes/db/index.js';
 
 // проверка принадлежности героя к целевому городу
 function hero(id, sector, info) {
@@ -27,4 +27,4 @@ function hero(id, sector, info) {
   });
 }
 
-module.exports = { hero };
+export default hero

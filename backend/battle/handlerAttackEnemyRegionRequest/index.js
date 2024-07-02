@@ -1,3 +1,3 @@
-const handlerAttackEnemyRegionRequest = require('./handlerAttackEnemyRegionRequest');
+import handlerAttackEnemyRegionRequest from './handlerAttackEnemyRegionRequest.js';
 
-module.exports = handlerAttackEnemyRegionRequest;
+export default handlerAttackEnemyRegionRequest;

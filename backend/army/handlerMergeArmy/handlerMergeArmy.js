@@ -1,12 +1,12 @@
 import mongodb from 'mongodb';
-const { ObjectId } = mongodb
-const { checkSchema } = require('../../template_modules');
-const { redirectMessage } = require('../../wsServer');
-const { Army } = require('../baseArmy');
+import { checkSchema } from '../../template_modules/index.js';
 import updateDB from '../../workWithMongoDB/updateDB.js';
+import { redirectMessage } from '../../wsServer/index.js';
+import { Army } from '../baseArmy/index.js';
+const { ObjectId } = mongodb
 const update = new updateDB();
-const { getTownByHero } = require('../../town');
-const { getHeroesFromDB } = require('../../heroes/db');
+import { getTownByHero } from '../../town/index.js';
+import { getHeroesFromDB } from '../../heroes/db/index.js';
 
 // const { getHeroesFromDB } = require("../../heroes/db");
 
@@ -89,4 +89,4 @@ const schema = {
   way: { type: 'string', regExp: /^in$|^out$/g }
 };
 
-module.exports = handlerMergeArmy;
+export default handlerMergeArmy;

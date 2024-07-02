@@ -1,12 +1,12 @@
-const { addEventToDB } = require("../../events");
-const { updateStateTown } = require("../DB");
+import { addEventToDB } from "../../events/index.js";
+import { updateStateTown } from "../DB/index.js";
 
 function setUpUpgradeChange_building({
   building = {},
   time_for_upgrade = 0,
   sector = {},
   info = {},
-  callback = function() {}
+  callback = function () { }
 }) {
   return new Promise((resolve, reject) => {
     building.upgrade.is = true;
@@ -46,4 +46,4 @@ function setUpUpgradeChange_building({
   });
 }
 
-module.exports = setUpUpgradeChange_building;
+export default setUpUpgradeChange_building;

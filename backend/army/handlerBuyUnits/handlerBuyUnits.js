@@ -1,14 +1,14 @@
 // const { checkSchema, redirectMessage, gloss } = require('../../tube');
-const { checkSchema } = require('../../template_modules');
-const { redirectMessage, sendWSMessage } = require('../../wsServer');
-const { Race } = require('../../race');
-const Army = require('../baseArmy/Army');
-const { checkSource } = require('../../resources');
-const checkUnitInBarraks = require('./../checkUnitInBarraks');
-const { deleteSource } = require('../../resources');
-const setEventForHiringUnit = require('./setEventForHiringUnit');
-const { formEventsList } = require('../../events');
-const { getOneTownFromDB, updateStateTown } = require('../../town');
+import { checkSchema } from '../../template_modules/index.js';
+import { redirectMessage, sendWSMessage } from '../../wsServer/index.js';
+import { Race } from '../../race/index.js';
+import Army from '../baseArmy/Army.js';
+import { checkSource } from '../../resources/index.js';
+import checkUnitInBarraks from './../checkUnitInBarraks.js';
+import { deleteSource } from '../../resources/index.js';
+import setEventForHiringUnit from './setEventForHiringUnit.js';
+import { formEventsList } from '../../events/index.js';
+import { getOneTownFromDB, updateStateTown } from '../../town/index.js';
 
 function handlerBuyUnits(message, info) {
   const data = message.data;
@@ -81,10 +81,12 @@ function handlerBuyUnits(message, info) {
     });
 }
 
-module.exports = handlerBuyUnits;
 
 const schema = {
   hiring: { type: 'number', min: 1, max: 9999999 },
   unitName: { type: 'string', regExp: /^[a-z0-9_]{1,30}\b/g },
   sectorIndex: { type: 'number', min: 0 }
 };
+
+
+export default handlerBuyUnits;

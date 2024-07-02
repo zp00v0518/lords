@@ -1,8 +1,8 @@
-const { redirectMessage, sendWSMessage } = require('../../wsServer');
-const { checkSchema } = require('../../template_modules');
-const { getHeroesFromDB, heroInActivate } = require('../../heroes/db');
-const { getOneTownFromDB, getTownByHero } = require('../../town');
-const setEventHeroTransfer = require('./setEventHeroTransfer');
+import { redirectMessage, sendWSMessage } from '../../wsServer/index.js';
+import { checkSchema } from '../../template_modules/index.js';
+import { getHeroesFromDB, heroInActivate } from '../../heroes/db/index.js';
+import { getOneTownFromDB, getTownByHero } from '../../town/index.js';
+import setEventHeroTransfer from './setEventHeroTransfer.js';
 
 async function handlerHeroTransferRequest(message, info) {
   const data = message.data;
@@ -48,4 +48,4 @@ const schema = {
   heroId: { type: 'string', regExp: /^.{13,}\b/g },
   targetSector: { type: 'string', regExp: /^.{13,}\b/g }
 };
-module.exports = handlerHeroTransferRequest;
+export default handlerHeroTransferRequest;

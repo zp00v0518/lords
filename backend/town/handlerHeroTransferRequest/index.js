@@ -1,3 +1,3 @@
-const handlerHeroTransferRequest = require('./handlerHeroTransferRequest');
+import handlerHeroTransferRequest from './handlerHeroTransferRequest.js';
 
-module.exports = handlerHeroTransferRequest;
+export default handlerHeroTransferRequest;

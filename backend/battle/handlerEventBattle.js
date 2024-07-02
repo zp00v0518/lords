@@ -1,8 +1,8 @@
 import updateDB from '../workWithMongoDB/updateDB.js';
 const update = new updateDB();
-import { createBackToTownEvent } from '../events/createEvents.js';
-import { addEventToDB } from '../events/db.js';
-import { getHeroesFromDB, updateHeroInDB } from '../heroes/db.js';
+import { createBackToTownEvent } from '../events/createEvents/index.js';
+import { addEventToDB } from '../events/db/index.js';
+import { getHeroesFromDB, updateHeroInDB } from '../heroes/db/index.js';
 import Battle from './Battle.js';
 import calculateBattle from './calculateBattle.js';
 import setUnitsAfterBattle from './setUnitsAfterBattle.js';

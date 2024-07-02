@@ -1,11 +1,11 @@
-const { checkSchema } = require('../../template_modules');
-const { redirectMessage, sendWSMessage } = require('../../wsServer');
-const { getOneTownFromDB } = require('../../town');
-const Race = require('../../race/Race');
-const regionTypes = require('../../region/Region').types;
-const { updateStateRegion } = require('../../region');
-const { createArmy } = require('../baseArmy');
-const changeArmyOnRegion = require('../changeArmyOnRegion');
+import { checkSchema } from '../../template_modules/index.js';
+import { redirectMessage, sendWSMessage } from '../../wsServer/index.js';
+import { getOneTownFromDB } from '../../town/index.js';
+// const Race = require('../../race/Race');
+// const regionTypes = require('../../region/Region').types;
+import { updateStateRegion } from '../../region/index.js';
+// const { createArmy } = require('../baseArmy');
+import changeArmyOnRegion from '../changeArmyOnRegion.js';
 
 function handlerUpdateArmyOnRegion(message, info) {
   const data = message.data;
@@ -45,4 +45,5 @@ const schema = {
   sectorIndex: { type: 'number', min: 0 },
   armySize: { type: 'number', min: 500, max: 999999 }
 };
-module.exports = handlerUpdateArmyOnRegion;
+
+export default handlerUpdateArmyOnRegion;

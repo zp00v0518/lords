@@ -1,4 +1,4 @@
-const {
+import {
   findUserInDB,
   findUserInGlobalMap,
   addNewUserToGlobalMap,
@@ -6,12 +6,12 @@ const {
   setUserOnline,
   updateUser,
   getUserRandomColor
-} = require('../user');
-const { redirectMessage } = require('../wsServer/defaultMessages');
-const { getCollectionName, checkSchema } = require('../template_modules');
-const { Heroes } = require('../heroes');
-const Race = require('./Race');
-const { addHeroToDB, addHeroToTown, addTownToHero } = require('../heroes/db');
+} from '../user/index.js';
+import { redirectMessage } from '../wsServer/defaultMessages.js';
+import { getCollectionName, checkSchema } from '../template_modules/index.js';
+import { Heroes } from '../heroes/index.js';
+import Race from './Race.js';
+import { addHeroToDB, addHeroToTown, addTownToHero } from '../heroes/db/index.js';
 
 async function choicesRace(message, { userCookies, ws }) {
   if (!checkSchema(message, schema)) {
@@ -59,10 +59,11 @@ async function choicesRace(message, { userCookies, ws }) {
   }
 }
 
-module.exports = choicesRace;
 
 const schema = {
   race: { type: 'string' },
   url: { type: 'string', regExp: /^\/{1}[^\/]/gi },
   heroes: { type: 'string' }
 };
+
+export default choicesRace;

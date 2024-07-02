@@ -1,3 +1,3 @@
-const handlerUpdateArmyOnRegion = require('./handlerUpdateArmyOnRegion');
+import handlerUpdateArmyOnRegion from './handlerUpdateArmyOnRegion.js';
 
-module.exports = handlerUpdateArmyOnRegion;
+export default handlerUpdateArmyOnRegion;

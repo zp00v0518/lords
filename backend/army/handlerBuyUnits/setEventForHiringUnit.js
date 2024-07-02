@@ -1,4 +1,4 @@
-const { addEventToDB } = require("../../events");
+import { addEventToDB } from "../../events/index.js";
 
 function setEventForHiringUnit({
   sector,
@@ -6,7 +6,7 @@ function setEventForHiringUnit({
   unitName,
   count,
   timeHiring = 0,
-  callback = () => {}
+  callback = () => { }
 }) {
   return new Promise((resolve, reject) => {
     const dataForDB = {
@@ -45,4 +45,4 @@ function setEventForHiringUnit({
   });
 }
 
-module.exports = setEventForHiringUnit;
+export default setEventForHiringUnit;

@@ -1,5 +1,5 @@
-const createHeroTransferEvent = require('./createHeroTransferEvent');
-const { addEventToDB } = require('../../events');
+import createHeroTransferEvent from './createHeroTransferEvent.js';
+import { addEventToDB } from '../../events/index.js';
 
 async function setEventHeroTransfer(initSector, targetSector, hero) {
   const ev = createHeroTransferEvent(initSector, targetSector, hero);
@@ -7,4 +7,4 @@ async function setEventHeroTransfer(initSector, targetSector, hero) {
   return result;
 }
 
-module.exports = setEventHeroTransfer;
+export default setEventHeroTransfer;

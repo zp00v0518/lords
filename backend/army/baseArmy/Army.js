@@ -1,11 +1,12 @@
 import army_types from './army_types.js';
 import race_types from '../../race/types_races.js';
 import rampart_units from '../units/rampart/index.js';
-const schema = require('../../workWithMongoDB/schema');
+import schema from '../../workWithMongoDB/schema.js';
 const type = schema.document.class;
-const createStackItemTemplate = require('./createStackItemTemplate');
-const time = require('../../config/config').time;
-const { Heroes } = require('../../heroes');
+import createStackItemTemplate from './createStackItemTemplate.js';
+import config from '../../config/config.js';
+const time = config.time;
+import { Heroes } from '../../heroes/index.js';
 
 const Army = {
   army_length: 7,

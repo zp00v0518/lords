@@ -1,13 +1,13 @@
-require('../variables/global_variables.js');
-const allHandler = require('./allHandler.js');
-const chat = require('../chat/chat.js');
-const { config, findUserInDB, getInfoForStartGame } = require('../tube.js');
-const WS = require('ws');
-const watcher = require('../liveReload/watchFs.js');
-const Cookies = require('cookies');
-const { tryJsonParse } = require('template_func');
-const { setUserOnline } = require('../user');
-const { getCollectionName } = require('../template_modules');
+import '../variables/global_variables.js';
+import allHandler from './allHandler.js';
+import chat from '../chat/chat.js';
+import { config, findUserInDB, getInfoForStartGame } from '../tube.js';
+import WS from 'ws';
+import watcher from '../liveReload/watchFs.js';
+import Cookies from 'cookies';
+import { tryJsonParse } from 'template_func';
+import { setUserOnline } from '../user/index.js';
+import { getCollectionName } from '../template_modules/index.js';
 const { UserOnline } = global;
 
 class WsServer {

@@ -1,10 +1,10 @@
-const { checkSource, checkSchema, redirectMessage, gloss, deleteSource, setUpgradeChange } = require('../tube.js');
+import { checkSource, checkSchema, redirectMessage, gloss, deleteSource, setUpgradeChange } from '../tube.js';
 const regionLength = global.gameVariables.numSectionRegionMap;
-const mine = require('./mine/Mine');
-const { sendWSMessage } = require('../wsServer');
-const { formEventsList } = require('../events');
-const { updateStateRegion } = require('../region');
-const { getOneTownFromDB, updateStateTown } = require('../town');
+import mine from './mine/Mine.js';
+import { sendWSMessage } from '../wsServer/index.js';
+import { formEventsList } from '../events/index.js';
+import { updateStateRegion } from '../region/index.js';
+import { getOneTownFromDB, updateStateTown } from '../town/index.js';
 
 function handlerResponseUpgradeRegion(message, info) {
   const data = message.data;
@@ -72,7 +72,6 @@ function handlerResponseUpgradeRegion(message, info) {
   });
 }
 
-module.exports = handlerResponseUpgradeRegion;
 
 const schema = {
   building: {
@@ -86,3 +85,6 @@ const schema = {
   persent: { type: 'number', min: 70, max: 130 },
   sectorIndex: { type: 'number', min: 0 }
 };
+
+export default handlerResponseUpgradeRegion;
+

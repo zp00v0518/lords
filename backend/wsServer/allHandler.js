@@ -1,18 +1,19 @@
-const evTypes = require('../events/Event').types;
+import gameEvent from '../events/Event.js'
+const evTypes = gameEvent.types;
 
-module.exports = {
-  chatMessage: require('../chat/handlerChatMessage.js'),
-  moveGlobalMap: require('../globalMap/moveGlobalMap.js'),
-  upgradeRegion: require('../region/handlerResponseUpgradeRegion.js'),
-  upgradeBuilding: require('../town/buildings/handlerResponseUpgradeBuilding'),
-  choicesRace: require('../race/choicesRace'),
-  buyUnits: require('../army/handlerBuyUnits'),
-  mergeArmy: require('../army/handlerMergeArmy'),
-  updateArmyOnRegion: require('../army/handlerUpdateArmyOnRegion'),
-  battleRequest: require('../battle/handlerBattleRequest'),
-  [evTypes.buildNewTown]: require('../town/handlerBuildNewTownRequest'),
-  [evTypes.heroTransfer]: require('../town/handlerHeroTransferRequest'),
-  [evTypes.sendCaravan]: require('../caravan/handlerSendCaravanRequest'),
-  [evTypes.goToCoords]: require('../globalMap/handlerGoToCoordsRequest'),
-  [evTypes.attackEnemyRegion]: require('../battle/handlerAttackEnemyRegionRequest')
+export default {
+  chatMessage: import('../chat/handlerChatMessage.js'),
+  moveGlobalMap: import('../globalMap/moveGlobalMap.js'),
+  upgradeRegion: import('../region/handlerResponseUpgradeRegion.js'),
+  upgradeBuilding: import('../town/buildings/handlerResponseUpgradeBuilding'),
+  choicesRace: import('../race/choicesRace'),
+  buyUnits: import('../army/handlerBuyUnits'),
+  mergeArmy: import('../army/handlerMergeArmy'),
+  updateArmyOnRegion: import('../army/handlerUpdateArmyOnRegion'),
+  battleRequest: import('../battle/handlerBattleRequest'),
+  [evTypes.buildNewTown]: import('../town/handlerBuildNewTownRequest'),
+  [evTypes.heroTransfer]: import('../town/handlerHeroTransferRequest'),
+  [evTypes.sendCaravan]: import('../caravan/handlerSendCaravanRequest'),
+  [evTypes.goToCoords]: import('../globalMap/handlerGoToCoordsRequest'),
+  [evTypes.attackEnemyRegion]: import('../battle/handlerAttackEnemyRegionRequest')
 };

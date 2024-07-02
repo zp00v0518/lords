@@ -1,4 +1,4 @@
-const defaultMessages = require("./defaultMessages.js");
-const sendWSMessage = require("./sendWSMessage");
+import { reloadMessage, redirectMessage } from "./defaultMessages.js";
+import sendWSMessage from "./sendWSMessage.js";
 
-module.exports = { ...defaultMessages, sendWSMessage };
+export { reloadMessage, redirectMessage, sendWSMessage };

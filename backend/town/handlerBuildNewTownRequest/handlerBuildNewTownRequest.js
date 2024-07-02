@@ -1,11 +1,9 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-const { checkSchema } = require('../../template_modules');
-const { redirectMessage, sendWSMessage } = require('../../wsServer');
-const { getHeroesFromDB, heroInActivate } = require('../../heroes/db');
-const { Resources, deleteSource } = require('../../resources');
-const { Town, updateStateTown, getOneTownFromDB } = require('../../town');
-const setEventForBuildNewTown = require('./setEventForBuildNewTown');
+import { checkSchema } from '../../template_modules/index.js';
+import { redirectMessage, sendWSMessage } from '../../wsServer/index.js';
+import { getHeroesFromDB, heroInActivate } from '../../heroes/db/index.js';
+import { Resources, deleteSource } from '../../resources/index.js';
+import { Town, updateStateTown, getOneTownFromDB } from '../../town/index.js';
+import setEventForBuildNewTown from './setEventForBuildNewTown.js';
 
 async function handlerBuildNewTownRequest(message, info) {
   const data = message.data;
@@ -84,4 +82,5 @@ const schema = {
   targetSector: { type: 'string', regExp: /^.{13,}\b/g },
   sectorIndex: { type: 'number', min: 0 }
 };
-module.exports = handlerBuildNewTownRequest;
+
+export default handlerBuildNewTownRequest;

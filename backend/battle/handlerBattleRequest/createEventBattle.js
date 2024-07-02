@@ -1,9 +1,7 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-const { Heroes } = require('../../heroes');
-const { Event } = require('../../events');
-const Battle = require('../Battle');
-const { WorldMap } = require('../../globalMap');
+import { Heroes } from '../../heroes/index.js';
+import { Event } from '../../events/index.js';
+import Battle from '../Battle.js';
+import { WorldMap } from '../../globalMap/index.js';
 
 function createEventBattle({ startCoords, endCoords, army, initSector, targetSector, initHero, map = 'region' }) {
   // TODOЖ при атаке на другой регион, для высиления скорости, необходимо использовать другой метод getTimeMoveOnMap
@@ -48,4 +46,4 @@ function createEventBattle({ startCoords, endCoords, army, initSector, targetSec
   };
 }
 
-module.exports = createEventBattle;
+export default createEventBattle;

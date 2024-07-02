@@ -1,11 +1,11 @@
 const { gameVariables } = global;
-const { redirectMessage, sendWSMessage } = require('../../wsServer');
-const { checkSchema, formatIdToCoords } = require('../../template_modules');
-const { getUsersTownFromDB, getOneTownFromDB } = require('../../town');
-const { createArmyForBattle } = require('../../army');
-const { getHeroesFromDB, updateHeroInDB } = require('../../heroes/db');
-const createEventBattle = require('../handlerBattleRequest/createEventBattle');
-const { Event, setEventInGame } = require('../../events');
+import { redirectMessage, sendWSMessage } from '../../wsServer/index.js';
+import { checkSchema, formatIdToCoords } from '../../template_modules/index.js';
+import { getUsersTownFromDB, getOneTownFromDB } from '../../town/index.js';
+import { createArmyForBattle } from '../../army/index.js';
+import { getHeroesFromDB, updateHeroInDB } from '../../heroes/db/index.js';
+import createEventBattle from '../handlerBattleRequest/createEventBattle.js';
+import { Event, setEventInGame } from '../../events/index.js';
 
 async function handlerAttackEnemyRegionRequest(message, info) {
   const { ws } = info.player;
@@ -74,7 +74,6 @@ async function handlerAttackEnemyRegionRequest(message, info) {
   sendWSMessage(ws, event);
 }
 
-module.exports = handlerAttackEnemyRegionRequest;
 
 const schema = {
   attackHeroId: { type: 'string', regExp: /^.{13,}\b/g },
@@ -98,3 +97,5 @@ const schema = {
     }
   }
 };
+
+export default handlerAttackEnemyRegionRequest;

@@ -1,7 +1,8 @@
-const { checkSchema } = require('../template_modules');
-const { redirectMessage, sendWSMessage } = require('../wsServer');
-const mapLength = require('../variables/game_variables').numSectionGlobalMap;
-const getGlobalMapSector = require('../globalMap/getGlobalMapSector');
+import { checkSchema } from '../template_modules/index.js';
+import { redirectMessage, sendWSMessage } from '../wsServer/index.js';
+import game_variables from '../variables/game_variables';
+const mapLength = game_variables.numSectionGlobalMap;
+import getGlobalMapSector from '../globalMap/getGlobalMapSector.js';
 
 async function handlerGoToCoordsRequest(message, info) {
   const data = message.data;
@@ -28,4 +29,4 @@ const schema = {
   y: { type: 'number', min: 0, max: mapLength }
 };
 
-module.exports = handlerGoToCoordsRequest;
+export default handlerGoToCoordsRequest;

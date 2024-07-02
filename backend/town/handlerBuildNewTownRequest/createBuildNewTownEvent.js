@@ -1,5 +1,5 @@
-const { getTemplateEvent, Event } = require('../../events');
-const { WorldMap } = require('../../globalMap');
+import { getTemplateEvent, Event } from '../../events/index.js';
+import { WorldMap } from '../../globalMap/index.js';
 
 function createBuildNewTownEvent(sector, targetSector, hero, race) {
   const template = getTemplateEvent();
@@ -37,4 +37,4 @@ function createBuildNewTownEvent(sector, targetSector, hero, race) {
   return template;
 }
 
-module.exports = createBuildNewTownEvent;
+export default createBuildNewTownEvent;

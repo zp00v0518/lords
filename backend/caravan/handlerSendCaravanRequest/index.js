@@ -1,3 +1,3 @@
-const handlerSendCaravanRequest = require('./handlerSendCaravanRequest');
+import handlerSendCaravanRequest from './handlerSendCaravanRequest.js';
 
-module.exports = handlerSendCaravanRequest;
+export default handlerSendCaravanRequest;

@@ -1,3 +1,3 @@
-const handlerMergeArmy = require("./handlerMergeArmy");
+import handlerMergeArmy from "./handlerMergeArmy.js";
 
-module.exports = handlerMergeArmy;
+export default handlerMergeArmy;

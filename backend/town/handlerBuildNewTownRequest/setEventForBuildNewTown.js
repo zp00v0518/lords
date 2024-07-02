@@ -1,5 +1,5 @@
-const createBuildNewTownEvent = require('./createBuildNewTownEvent');
-const {addEventToDB} = require('../../events');
+import createBuildNewTownEvent from './createBuildNewTownEvent.js';
+import { addEventToDB } from '../../events/index.js';
 
 async function setEventForBuildNewTown(sector, targetSector, hero, race) {
   const ev = createBuildNewTownEvent(sector, targetSector, hero, race);
@@ -7,4 +7,4 @@ async function setEventForBuildNewTown(sector, targetSector, hero, race) {
   return result;
 }
 
-module.exports = setEventForBuildNewTown;
+export default setEventForBuildNewTown;

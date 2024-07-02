@@ -1,3 +1,3 @@
-const handlerBuildNewTownRequest = require('./handlerBuildNewTownRequest');
+import handlerBuildNewTownRequest from './handlerBuildNewTownRequest.js';
 
-module.exports = handlerBuildNewTownRequest;
+export default handlerBuildNewTownRequest;

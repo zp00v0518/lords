@@ -1,8 +1,8 @@
 /* формируется список путей всех картинок, который расположены в папке frontend/img, 
 потом этот список загружается через sourceLoader, для использования на canvas
 */
-const fs = require('fs');
-const path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
 const startPath = 'img/for_canvas';
 let arrPath = [];
 

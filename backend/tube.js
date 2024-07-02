@@ -1,5 +1,4 @@
-import config from './config/config.js';
-
+import config from './config/config.js'
 
 // const templateFunc = require('template_func');
 // module.exports.templateFunc = templateFunc;
@@ -13,7 +12,7 @@ import config from './config/config.js';
 // module.exports.updateDB = updateDB;
 // module.exports.insertDB = insertDB;
 
-// const { fileReader, mimeType, sendResponse, reqOn, checkSchema } = require('./template_modules');
+import { fileReader, mimeType, sendResponse, reqOn, checkSchema } from './template_modules/index.js'
 // module.exports.fileReader = fileReader;
 // module.exports.mimeType = mimeType;
 // module.exports.sendResponse = sendResponse;
@@ -25,18 +24,18 @@ import config from './config/config.js';
 // module.exports.setCookieUser = setCookieUser;
 // module.exports.sessionCreate = sessionCreate;
 
-// const { returnGlobalMap, getGlobalMapSector } = require('./globalMap');
+import { returnGlobalMap, getGlobalMapSector } from './globalMap/index.js'
 // module.exports.GlobalMap = returnGlobalMap;
 // module.exports.getGlobalMapSector = getGlobalMapSector;
 
-// const {
-//   userCreate,
-//   getInfoForUserPage,
-//   findUserInGlobalMap,
-//   findUserInDB,
-//   getInfoForStartGame,
-//   addNewUserToGlobalMap
-// } = require('./user');
+import {
+    userCreate,
+    getInfoForUserPage,
+    findUserInGlobalMap,
+    findUserInDB,
+    getInfoForStartGame,
+    addNewUserToGlobalMap
+} from './user/index.js';
 // module.exports.userCreate = userCreate;
 // module.exports.getInfoForUserPage = getInfoForUserPage;
 // module.exports.findUserInGlobalMap = findUserInGlobalMap;
@@ -51,7 +50,7 @@ import config from './config/config.js';
 // const { calcStorageNowValue } = require('./town/storage');
 // module.exports.calcStorageNowValue = calcStorageNowValue;
 
-// const { setUpgradeChange } = require('./region');
+import { setUpgradeChange } from './region/index.js';
 // module.exports.setUpgradeChange = setUpgradeChange;
 
 // const { Mine, createMine } = require('./region/mine');
@@ -61,30 +60,52 @@ import config from './config/config.js';
 // const { addEventToDB } = require('./events');
 // module.exports.addEventToDB = addEventToDB;
 
-// const { checkSource, deleteSource } = require('./resources');
+import { checkSource, deleteSource } from './resources/index.js';
 // module.exports.checkSource = checkSource;
 // module.exports.deleteSource = deleteSource;
 
 // const login = require('./login/login.js');
 // module.exports.login = login;
 
-import getMethod from './getMethod.js';
+import getMethod from './getMethod.js'
 // module.exports.getMethod = getMethod;
 
-import postMethod from './postMethod.js';
+import postMethod from './postMethod.js'
 // module.exports.postMethod = postMethod;
 
-// const { reloadMessage, redirectMessage } = require('./wsServer');
+import { reloadMessage, redirectMessage } from './wsServer/index.js'
 // module.exports.reloadMessage = reloadMessage;
 // module.exports.redirectMessage = redirectMessage;
 
-// const gloss = require('./dictionary');
+import gloss from './dictionary/index.js';
 // module.exports.gloss = gloss;
 
 // import { controlStateGlobal, controlZoneControle } from './controlState';
-import { controlStateGlobal, controlZoneControle } from './controlState/index.js';
+import { controlStateGlobal, controlZoneControle } from './controlState/index.js'
 // module.exports.controlStateGlobal = controlStateGlobal;
 // module.exports.controlZoneControle = controlZoneControle;
 
 // export { config, };
-export { config, controlStateGlobal, controlZoneControle, getMethod, postMethod };
+export {
+    config,
+    controlStateGlobal,
+    controlZoneControle,
+    getMethod,
+    postMethod,
+    reloadMessage,
+    redirectMessage,
+    fileReader,
+    mimeType,
+    sendResponse,
+    reqOn,
+    checkSchema,
+    returnGlobalMap,
+    getGlobalMapSector,
+    checkSource, deleteSource, gloss, setUpgradeChange,
+    userCreate,
+    getInfoForUserPage,
+    findUserInGlobalMap,
+    findUserInDB,
+    getInfoForStartGame,
+    addNewUserToGlobalMap,
+}

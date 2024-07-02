@@ -1,3 +1,3 @@
-const handlerBuyUnits = require("./handlerBuyUnits");
+import handlerBuyUnits from "./handlerBuyUnits.js";
 
-module.exports = handlerBuyUnits;
+export default handlerBuyUnits;

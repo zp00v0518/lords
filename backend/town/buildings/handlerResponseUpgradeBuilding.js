@@ -1,11 +1,11 @@
-const { checkSchema, redirectMessage, gloss } = require('../../tube');
-const { Race } = require('../../race');
-const { deleteSource, Resources } = require('../../resources');
-const Town = require('../Town');
-const setUpUpgradeChange_building = require('./setUpUpgradeChange_building');
-const { sendWSMessage } = require('../../wsServer');
-const { formEventsList } = require('../../events');
-const { getOneTownFromDB, updateStateTown } = require('../../town');
+import { checkSchema, redirectMessage, gloss } from '../../tube.js';
+import { Race } from '../../race/index.js';
+import { deleteSource, Resources } from '../../resources/index.js';
+import Town from '../Town.js';
+import setUpUpgradeChange_building from './setUpUpgradeChange_building.js';
+import { sendWSMessage } from '../../wsServer/index.js';
+import { formEventsList } from '../../events/index.js';
+import { getOneTownFromDB, updateStateTown } from '../../town/index.js';
 
 function handlerResponseUpgradeBuilding(message, info) {
   const data = message.data;
@@ -78,7 +78,6 @@ function handlerResponseUpgradeBuilding(message, info) {
   });
 }
 
-module.exports = handlerResponseUpgradeBuilding;
 
 const schema = {
   building: {
@@ -90,3 +89,6 @@ const schema = {
   persent: { type: 'number', min: 70, max: 130 },
   sectorIndex: { type: 'number', min: 0 }
 };
+
+export default handlerResponseUpgradeBuilding;
+

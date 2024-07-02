@@ -1,6 +1,6 @@
-const { getGlobalMapSector } = require('../tube.js');
+import { getGlobalMapSector } from '../tube.js';
 
-function moveGlobalMap(message, info, callback = function() {}) {
+function moveGlobalMap(message, info, callback = function () { }) {
   const { player, server } = info;
   const { way, zoom } = message;
   const { user, ws } = player;
@@ -58,4 +58,4 @@ function moveGlobalMap(message, info, callback = function() {}) {
   return;
 }
 
-module.exports = moveGlobalMap;
+export default moveGlobalMap;

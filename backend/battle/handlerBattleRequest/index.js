@@ -1,3 +1,3 @@
-const handlerBattleRequest = require("./handlerBattleRequest");
+import handlerBattleRequest from "./handlerBattleRequest.js";
 
-module.exports = handlerBattleRequest;
+export default handlerBattleRequest;

@@ -1,14 +1,15 @@
-const { checkSchema } = require('../../template_modules');
-const { redirectMessage, sendWSMessage } = require('../../wsServer');
-const mapLength = require('../../variables/game_variables').numSectionGlobalMap;
-const resourcesTypes = require('../../resources/type_resources');
-const { getTownByCoords, getOneTownFromDB, updateStateTown } = require('../../town/DB');
-const { Caravan } = require('../../caravan');
+import { checkSchema } from '../../template_modules/index.js';
+import { redirectMessage, sendWSMessage } from '../../wsServer/index.js';
+import game_variables from '../../variables/game_variables.js';
+const mapLength = game_variables.numSectionGlobalMap;
+import resourcesTypes from '../../resources/type_resources.js';
+import { getTownByCoords, getOneTownFromDB, updateStateTown } from '../../town/DB/index.js';
+import { Caravan } from '../../caravan/index.js';
 // const {createCaravanEvent} = require('../../events/createEvents');
-const { setEventInGame, createCaravanEvent } = require('../../events');
-const { deleteSource } = require('../../resources');
-const addBusyCaravan = require('../addBusyCaravan');
-const getInfoForStartGame = require('../../user/getInfoForStartGame');
+import { setEventInGame, createCaravanEvent } from '../../events/index.js';
+import { deleteSource } from '../../resources/index.js';
+import addBusyCaravan from '../addBusyCaravan.js';
+import getInfoForStartGame from '../../user/getInfoForStartGame.js';
 
 async function handlerSendCaravanRequest(message, info) {
   const data = message.data;
@@ -74,4 +75,4 @@ const schema = {
     }
   }
 };
-module.exports = handlerSendCaravanRequest;
+export default handlerSendCaravanRequest;

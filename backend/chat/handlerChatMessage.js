@@ -1,5 +1,5 @@
-const globalChat = require('./chat.js');
-const { checkSchema, redirectMessage } = require('../tube.js');
+import globalChat from './chat.js';
+import { checkSchema, redirectMessage } from '../tube.js';
 
 function handlerChatMessage(message, info) {
   const ws = info.player.ws;
@@ -20,7 +20,6 @@ function handlerChatMessage(message, info) {
     }
   }
 }
-module.exports = handlerChatMessage;
 
 const schema = {
   text: { type: 'string' },
@@ -28,3 +27,5 @@ const schema = {
   type: { type: 'string' },
   privat: { type: 'string' }
 };
+
+export default handlerChatMessage;
