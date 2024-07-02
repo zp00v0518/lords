@@ -1,5 +1,5 @@
-const ZoneControl = require('./ZoneControl');
-const methods = require('./methods');
-const db = require('./db');
+import ZoneControl from './ZoneControl.js';
+import methods from './methods/index.js';
+import db from './db/index.js';
 
-module.exports = { ZoneControl, ...methods, ...db };
+export default { ZoneControl, ...methods, ...db };

@@ -1,3 +1,3 @@
-const Market = require('./Market');
+import Market from './Market.js';
 
-module.exports = { Market };
+export { Market };

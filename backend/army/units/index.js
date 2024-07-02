@@ -1,5 +1,5 @@
-const rampart_units = require('./rampart');
+import rampart_units from './rampart.js';
 
-module.exports = {
+export default {
   ...rampart_units
 }

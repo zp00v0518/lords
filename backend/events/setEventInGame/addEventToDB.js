@@ -1,4 +1,4 @@
-const { insertDB } = require("../../workWithMongoDB");
+import insertDB from "../../workWithMongoDB/insertDB.js";
 const insert = new insertDB();
 
 //  НЕ ИСПОЛЬЗОВАТЬ!!! Использование этого метода переехало в папку DB

@@ -1,4 +1,4 @@
-const ev = require('../../events/Event');
+import ev from '../../events/Event.js';
 const evTypes = ev.types;
 
 const eventLang = {

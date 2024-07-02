@@ -1,4 +1,4 @@
-const Army = require('./Army');
+import Army from './Army.js';
 
 function getArmyRange(townIndex) {
   const basRange = Army.army_range.base;

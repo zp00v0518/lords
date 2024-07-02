@@ -1,8 +1,7 @@
-const { getRandomString, Log } = require("template_func");
-const { insertDB, config } = require("../tube.js");
-const userSessionUpdate = require("./userSessionUpdate.js");
+import { getRandomString } from "template_func";
+import { insertDB, config } from "../tube.js";
+import userSessionUpdate from "./userSessionUpdate.js";
 
-const log = new Log(__filename);
 const insert = new insertDB();
 
 function sessionCreate(headers, callback = function () { }) {
@@ -31,7 +30,7 @@ function sessionCreate(headers, callback = function () { }) {
         return callback(resultInsertSession);
       })
       .catch(err => {
-        log.log(err);
+        console.log(err);
       });
   });
 }

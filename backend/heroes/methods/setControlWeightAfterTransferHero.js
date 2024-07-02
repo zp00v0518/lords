@@ -1,7 +1,5 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-const { getControlWeightFromArmy } = require('../../zoneControl/methods');
-const { setValueInSectorById } = require('../../zoneControl/db');
+import { getControlWeightFromArmy } from '../../zoneControl/methods/index.js';
+import { setValueInSectorById } from '../../zoneControl/db/index.js';
 
 async function setControlWeightAfterTransferHero(server, hero, initId, targetId) {
   const army = hero.army;

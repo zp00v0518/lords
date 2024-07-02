@@ -1,4 +1,4 @@
-const Army = require('./Army');
+import Army from './Army.js';
 
 function getArmyRange(townIndex) {
   const basRange = Army.army_range.base;
@@ -9,4 +9,4 @@ function getArmyRange(townIndex) {
   // return basRange.map(i => i * coeff + i);
 }
 
-module.exports = getArmyRange;
+export default getArmyRange;

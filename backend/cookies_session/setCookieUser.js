@@ -1,5 +1,5 @@
-const { updateDB, config } = require('../tube.js');
-const { getRandomString } = require('template_func');
+import { updateDB, config } from '../tube.js';
+import { getRandomString } from 'template_func';
 const update = new updateDB();
 
 function setCookieUser(userId, cookie = getRandomString(config.cookieSize)) {

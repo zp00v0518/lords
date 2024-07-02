@@ -2,7 +2,7 @@ import types from '../types/index.js';
 const typeList = types.list;
 import createHeroes from '../createHeroes.js';
 import images from './images.js';
-const types_race = require('../../race/types_races');
+import types_race from '../../race/types_races.js';
 
 const rampart = {
   0: createHeroes({

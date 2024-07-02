@@ -1,10 +1,8 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
 const serverList = global.gameVariables ? global.gameVariables.serverList : [];
-const { clearAllBusySectors, removeOldContolValuesFromDB } = require('../zoneControl/db');
-const { calculateMediumWeight, setZoneControl } = require('../zoneControl/methods');
-const { getAllTownsFromDB } = require('../town/DB');
-const { getUsersBySectorsArr } = require('../user/db');
+import { clearAllBusySectors, removeOldContolValuesFromDB } from '../zoneControl/db/index.js';
+import { calculateMediumWeight, setZoneControl } from '../zoneControl/methods/index.js';
+import { getAllTownsFromDB } from '../town/DB/index.js';
+import { getUsersBySectorsArr } from '../user/db/index.js';
 
 async function controlZoneControle() {
   serverList.forEach(async item => {

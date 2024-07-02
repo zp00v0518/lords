@@ -1,3 +1,3 @@
-const setControlWeightAfterTransferHero = require('./setControlWeightAfterTransferHero');
+import setControlWeightAfterTransferHero from './setControlWeightAfterTransferHero.js';
 
-module.exports = { setControlWeightAfterTransferHero };
+export { setControlWeightAfterTransferHero };

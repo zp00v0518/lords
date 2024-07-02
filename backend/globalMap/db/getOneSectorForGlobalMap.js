@@ -1,6 +1,6 @@
 import mongodb from 'mongodb';
 const { ObjectId } = mongodb
-const needFields = require('./needFields');
+import needFields from './needFields.js';
 import findInDB from '../../workWithMongoDB/findInDB.js';
 const find = new findInDB();
 
