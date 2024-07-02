@@ -1,8 +1,6 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-const inActiveteEvent = require('../events/db/inActiveteEvent');
-const { finishAttackEnemyRegion } = require('../events/finishEvent');
-const { updateHeroInDB } = require('../heroes/db');
+import inActiveteEvent from '../events/db/inActiveteEvent.js';
+import { finishAttackEnemyRegion } from '../events/finishEvent/index.js';
+import { updateHeroInDB } from '../heroes/db/index.js';
 const { Battle } = require('../battle');
 
 async function handlerBackToTown(event) {

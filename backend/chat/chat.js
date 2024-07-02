@@ -1,4 +1,4 @@
-const config = require('../config');
+import config from '../config/config.js';
 
 const chat = {
   template: {
@@ -17,4 +17,4 @@ config.db.collections.servers.forEach(item => {
   chat[item.collectionName] = [];
 });
 
-module.exports = chat;
+export default chat;

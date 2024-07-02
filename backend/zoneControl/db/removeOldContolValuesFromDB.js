@@ -1,6 +1,4 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-const ZoneControl = require('../ZoneControl');
+import ZoneControl from '../ZoneControl.js';
 import mongodb from 'mongodb';
 const { ObjectId } = mongodb
 import updateDB from '../../workWithMongoDB/updateDB.js';
@@ -26,4 +24,4 @@ async function removeOldContolValuesFromDB(serverName, sectorId, values) {
   return result.result;
 }
 
-module.exports = removeOldContolValuesFromDB;
+export default removeOldContolValuesFromDB;

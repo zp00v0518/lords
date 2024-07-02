@@ -1,10 +1,10 @@
 import { getRandomNumber } from 'template_func';
 import createTown from '../town/createTown.js';
-const { getFirstWeightControl, setZoneControl } = require('../zoneControl/methods');
-const { setValueInSectorById } = require('../zoneControl/db');
-const config = require('../config');
-const { updateDB } = require('../workWithMongoDB');
-const WorldMap = require('../globalMap/WorldMap');
+import { getFirstWeightControl, setZoneControl } from '../zoneControl/methods/index.js';
+import { setValueInSectorById } from '../zoneControl/db/index.js';
+import config from '../config/config.js';
+import updateDB from '../workWithMongoDB/updateDB.js';
+import WorldMap from '../globalMap/WorldMap.js';
 const update = new updateDB();
 
 // добавляю нового Игрока на глобальную карту

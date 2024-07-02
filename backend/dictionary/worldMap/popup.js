@@ -19,4 +19,4 @@ const popup = {
   }
 };
 
-module.exports = popup;
+export default popup;

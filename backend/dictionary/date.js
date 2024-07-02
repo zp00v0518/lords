@@ -16,4 +16,4 @@ const date = {
   }
 };
 
-module.exports = date;
+export default date;

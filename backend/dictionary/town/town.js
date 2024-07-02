@@ -1,7 +1,7 @@
-const Race = require('../../race/Race');
+import Race from '../../race/Race.js';
 const race_list = Race.typeList;
-const rampart = require('./rampat');
-const elf = require('./elf');
+import rampart from './rampat.js';
+import elf from './elf.js';
 
 const town = {
   race: {
@@ -10,4 +10,4 @@ const town = {
   }
 };
 
-module.exports = town;
+export default town;

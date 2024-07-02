@@ -1,3 +1,3 @@
-const popup = require('./popup');
+import popup from './popup.js';
 
-module.exports = { popup };
+export { popup };

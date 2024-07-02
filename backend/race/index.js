@@ -1,3 +1,3 @@
-const Race = require('./Race');
+import Race from './Race.js';
 
-module.exports = { Race };
+export { Race };

@@ -1,10 +1,10 @@
 // const { updateDB, config } = srcRequire('tube');
-const { updateDB } = require('../workWithMongoDB');
-const config = require('../config');
+import updateDB from '../workWithMongoDB/updateDB.js';
+import config from '../config/config.js';
 const update = new updateDB();
 
 //добавляет коллекцию в массив коллекций
-function addCollectionsToUser(user, serverName, callback = function() {}) {
+function addCollectionsToUser(user, serverName, callback = function () { }) {
   return new Promise((resolve, reject) => {
     const obj = createStatUserGame({ name: serverName });
     const key = `collections.${serverName}`;
@@ -39,4 +39,4 @@ function createStatUserGame(ops) {
   };
 }
 
-module.exports = addCollectionsToUser;
+export default addCollectionsToUser;

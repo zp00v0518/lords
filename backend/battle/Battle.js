@@ -12,4 +12,4 @@ const Battle = {
   }
 };
 
-module.exports = Battle;
+export default Battle;

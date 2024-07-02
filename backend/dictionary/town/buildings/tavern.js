@@ -6,4 +6,4 @@ const tavern = {
   }
 };
 
-module.exports = tavern;
+export default tavern;

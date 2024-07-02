@@ -1,3 +1,3 @@
-const eventLang = require('./eventLang');
+import eventLang from './eventLang.js';
 
-module.exports = { eventLang };
+export { eventLang };

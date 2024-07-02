@@ -3,10 +3,18 @@ import getInfoForUserPage from './getInfoForUserPage.js';
 import { findUserInGlobalMap, findUserInDB } from './findUser.js';
 import getInfoForStartGame from './getInfoForStartGame.js';
 import addNewUserToGlobalMap from './addNewUserToGlobalMap.js';
-const addCollectionsToUser = require('./addCollectionsToUser.js');
-const setUserOnline = require('./setUserOnline');
-const getUserRandomColor = require('./getUserRandomColor');
-const db = require('./db');
+import addCollectionsToUser from './addCollectionsToUser.js';
+import setUserOnline from './setUserOnline.js';
+import getUserRandomColor from './getUserRandomColor.js';
+import {
+  updateUser,
+  getOneUserFromDB,
+  getUserEvents,
+  setUserColor,
+  getUsersById,
+  getUserBySectorCoords,
+  getUsersBySectorsArr
+} from './db/index.js';
 // const User = require("./User");
 
 export {
@@ -19,6 +27,12 @@ export {
   addCollectionsToUser,
   setUserOnline,
   getUserRandomColor,
-  ...db
+  updateUser,
+  getOneUserFromDB,
+  getUserEvents,
+  setUserColor,
+  getUsersById,
+  getUserBySectorCoords,
+  getUsersBySectorsArr
   // User
 };

@@ -20,7 +20,7 @@ async function clearAllBusySectors(serverName) {
   return result.result;
 }
 function clearInGlobalMap(serverName) {
-  const GlobalMap = require('../../globalMap/constractGlobalMap');
+  const GlobalMap = import('../../globalMap/constractGlobalMap.js');
   const arr = GlobalMap[serverName];
   arr.forEach(row => {
     row.forEach(sector => {
@@ -31,4 +31,4 @@ function clearInGlobalMap(serverName) {
   });
 }
 
-module.exports = clearAllBusySectors;
+export default clearAllBusySectors;

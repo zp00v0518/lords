@@ -1,7 +1,7 @@
-const gameVariables = require('../variables/game_variables');
-const { addEventToDB } = require('../events/db');
+import gameVariables from '../variables/game_variables.js';
+import { addEventToDB } from '../events/db/index.js';
 
-function setUpgradeChange(cell, persent = 100, sector, info, callback = function() {}) {
+function setUpgradeChange(cell, persent = 100, sector, info, callback = function () { }) {
   return new Promise((resolve, reject) => {
     const building = cell.sector;
     const lvl = building.lvl;
@@ -41,4 +41,4 @@ function setUpgradeChange(cell, persent = 100, sector, info, callback = function
   });
 }
 
-module.exports = setUpgradeChange;
+export default setUpgradeChange;

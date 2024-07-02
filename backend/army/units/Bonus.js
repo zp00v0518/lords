@@ -1,4 +1,4 @@
-const army_types = require('../baseArmy/army_types');
+import army_types from '../baseArmy/army_types';
 const baseBonus = 25;
 
 const Bonus = {
@@ -14,4 +14,4 @@ const Bonus = {
   }
 };
 
-module.exports = Bonus;
+export default Bonus;

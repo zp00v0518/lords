@@ -4,4 +4,4 @@ const general = {
   }
 };
 
-module.exports = general;
+export default general;

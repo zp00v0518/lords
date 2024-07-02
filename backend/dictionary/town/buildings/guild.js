@@ -18,4 +18,4 @@ const guild = {
   }
 };
 
-module.exports = guild;
+export default guild;

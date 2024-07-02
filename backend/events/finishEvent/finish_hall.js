@@ -1,6 +1,6 @@
-const getParamsForFinish = require('./getParamsForFinish');
-const calcStorageNowValue = require('../../town/storage/calcStorageNowValue');
-const upValueInStorage = require('../../town/storage/upValueInStorage');
+import getParamsForFinish from './getParamsForFinish.js';
+import calcStorageNowValue from '../../town/storage/calcStorageNowValue.js';
+import upValueInStorage from '../../town/storage/upValueInStorage.js';
 
 function finishHall(hall, eventData, sector) {
   const { buildingInfo, nextLvl } = getParamsForFinish(eventData);
@@ -20,4 +20,4 @@ function finishHall(hall, eventData, sector) {
   return hall;
 }
 
-module.exports = finishHall;
+export default finishHall;

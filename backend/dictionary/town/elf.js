@@ -1,6 +1,6 @@
-const Town = require('../../town/Town');
+import Town from '../../town/Town.js';
 const town_list = Town.listBuildings;
-const { hall, market, guild, storage, tavern, fort } = require('./buildings');
+import { hall, market, guild, storage, tavern, fort } from './buildings/index.js';
 
 const elf = {
   [town_list.hall.name]: hall,
@@ -11,4 +11,4 @@ const elf = {
   [town_list.fort.name]: fort
 };
 
-module.exports = elf;
+export default elf;

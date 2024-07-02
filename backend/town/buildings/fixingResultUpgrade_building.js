@@ -1,6 +1,6 @@
 // const { updateDB } = require("../../tube.js");
-const { inActiveteEvent } = require('../../events/db');
-const { updateStateTown } = require('../DB');
+import { inActiveteEvent } from '../../events/db/index.js';
+import { updateStateTown } from '../DB/index.js';
 
 async function fixingResultUpgrade_building(eventItem, sector) {
   let typeBuilding = eventItem.data.type;
@@ -15,9 +15,9 @@ async function fixingResultUpgrade_building(eventItem, sector) {
     }
     await updateStateTown(sector);
   } catch (err) {
-    console.log(__filename, err);
+    console.log('fixingResultUpgrade_building  ', err);
   }
   return building;
 }
 
-module.exports = fixingResultUpgrade_building;
+export default fixingResultUpgrade_building;

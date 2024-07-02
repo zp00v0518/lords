@@ -37,4 +37,4 @@ const mine = {
     }
   }
 };
-module.exports = mine;
+export default mine;

@@ -1,11 +1,11 @@
 // const Mine = gameVariables.mine;
-const Mine = require('../mine/Mine');
-const { updateDB } = require('../../tube.js');
+import Mine from '../mine/Mine/js';
+import updateDB from '../../workWithMongoDB/updateDB.js';
 const update = new updateDB();
-const { upValueInStorage } = require('../../town/storage');
+import { upValueInStorage } from '../../town/storage/index.js';
 
 // TODO: здесь может быть баг, когда шахта не работает после атаки, но в это время закончится улучшение
-function fixingResultUpgradeMine(mine, eventItem, sector, callback = () => {}) {
+function fixingResultUpgradeMine(mine, eventItem, sector, callback = () => { }) {
   return new Promise((resolve, reject) => {
     // важно зафиксировать предыдущее число до всех вычеслений
     const workSection = mine.work;
@@ -44,4 +44,4 @@ function fixingResultUpgradeMine(mine, eventItem, sector, callback = () => {}) {
   });
 }
 
-module.exports = fixingResultUpgradeMine;
+export default fixingResultUpgradeMine;

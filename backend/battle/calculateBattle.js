@@ -1,5 +1,5 @@
-const { Army } = require('../army');
-const getBonusUnitsInAttack = require('../army/units/getBonusUnitsInAttack');
+import { Army } from '../army/index.js';
+import getBonusUnitsInAttack from '../army/units/getBonusUnitsInAttack.js';
 
 // уточнить за defHero
 function calculateBattle(atackHero, aArmy, dArmy, defHero) {
@@ -15,7 +15,7 @@ function calculateBattle(atackHero, aArmy, dArmy, defHero) {
   }
 
   atackArmy.forEach(atackStack => {
-    for (; atackStack.count > 0; ) {
+    for (; atackStack.count > 0;) {
       atackStack.force = Army.getForceStack(atackStack, { atackHero });
       const defStack = defArmy[defArmyCount];
       if (!defStack) break;
@@ -25,7 +25,7 @@ function calculateBattle(atackHero, aArmy, dArmy, defHero) {
       if (defStack.count <= 0) defArmyCount++;
     }
   });
-  battleResult.atackWin = atackArmy[atackArmy.length -1].count > 0;
+  battleResult.atackWin = atackArmy[atackArmy.length - 1].count > 0;
   return battleResult;
 }
 function calculateRound(atackStack, defStack, atackHero, defHero) {
@@ -67,4 +67,4 @@ function setNewStackCount(stack, ops = {}) {
   return lostCount;
 }
 
-module.exports = calculateBattle;
+export default calculateBattle;

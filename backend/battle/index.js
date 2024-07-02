@@ -1,4 +1,4 @@
-const Battle = require('./Battle');
-const handlerEventBattle = require('./handlerEventBattle');
+import Battle from './Battle.js';
+import handlerEventBattle from './handlerEventBattle.js';
 
-module.exports = { Battle, handlerEventBattle };
+export { Battle, handlerEventBattle };

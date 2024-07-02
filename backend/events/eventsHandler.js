@@ -1,6 +1,7 @@
-const eventType = require('./Event').types;
-const handlerEventBattle = require('../battle/handlerEventBattle');
-const handlerBackToTown = require('../heroes/handlerBackToTown');
+import gameEvent from './Event.js';
+const eventType = gameEvent.types
+import handlerEventBattle from '../battle/handlerEventBattle.js';
+import handlerBackToTown from '../heroes/handlerBackToTown.js';
 const { handlerBuildNewTown, handlerHeroTransferEvent } = require('../town');
 const handlerSendCaravanEvent = require('../caravan/handlerSendCaravanEvent');
 const handlerCaravanBackToTownEvent = require('../caravan/handlerCaravanBackToTownEvent');

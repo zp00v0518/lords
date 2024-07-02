@@ -2,7 +2,7 @@ import mongodb from 'mongodb';
 const { ObjectId } = mongodb
 import updateDB from '../../workWithMongoDB/updateDB.js';
 const update = new updateDB();
-const getLastValueControl = require('./getLastValueControl');
+import getLastValueControl from './getLastValueControl.js';
 
 async function setValueInSectorById(serverName, sectorId, value) {
   const lastValue = await getLastValueControl(serverName, sectorId);
@@ -24,4 +24,4 @@ async function setValueInSectorById(serverName, sectorId, value) {
   return result;
 }
 
-module.exports = setValueInSectorById;
+export default setValueInSectorById;

@@ -1,5 +1,5 @@
-const getParamsForFinish = require("./getParamsForFinish");
-const { calcValueUnitInBarraks } = require("../../army");
+import getParamsForFinish from "./getParamsForFinish.js";
+import { calcValueUnitInBarraks } from "../../army/index.js";
 
 function finishBarraks(barraks, eventData) {
   const { buildingInfo, nextLvl } = getParamsForFinish(eventData);
@@ -13,4 +13,4 @@ function finishBarraks(barraks, eventData) {
   return barraks;
 }
 
-module.exports = finishBarraks;
+export default finishBarraks;

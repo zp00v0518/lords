@@ -5,13 +5,13 @@ import WorldMap from '../../globalMap/WorldMap.js';
 import { getArmyRange, changeArmyOnRegion } from '../../army/index.js';
 import { updateStateSector } from '../../sector/index.js';
 import { getUsersTownFromDB } from '../../town/DB/index.js';
-const { getOneUserFromDB } = require('../../user');
-const { transferHeroBetweenTown, getHeroesFromDB, heroActivate } = require('../../heroes/db');
-const { getOneSectorForGlobalMap } = require('../../globalMap/db');
-const { createBackToTownEvent } = require('../../events/createEvents');
-const { addEventToDB } = require('../../events/db');
-const { getFirstWeightControl, getControlWeightFromArmy, setZoneControl } = require('../../zoneControl/methods');
-const { setValueInSectorById } = require('../../zoneControl/db');
+import { getOneUserFromDB } from '../../user/index.js';
+import { transferHeroBetweenTown, getHeroesFromDB, heroActivate } from '../../heroes/db/index.js';
+import { getOneSectorForGlobalMap } from '../../globalMap/db/index.js';
+import { createBackToTownEvent } from '../../events/createEvents/index.js';
+import { addEventToDB } from '../../events/db/index.js';
+import { getFirstWeightControl, getControlWeightFromArmy, setZoneControl } from '../../zoneControl/methods/index.js';
+import { setValueInSectorById } from '../../zoneControl/db/index.js';
 
 async function handlerBuildNewTown(event) {
   const { serverName, target, init, data } = event;

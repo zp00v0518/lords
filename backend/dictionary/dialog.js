@@ -44,4 +44,4 @@ const dialog = {
   }
 };
 
-module.exports = dialog;
+export default dialog;

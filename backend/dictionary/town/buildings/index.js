@@ -1,11 +1,11 @@
-const hall = require('./hall');
-const market = require('./market');
-const guild = require('./guild');
-const storage = require('./storage');
-const tavern = require('./tavern');
-const fort = require('./fort');
+import hall from './hall.js';
+import market from './market.js';
+import guild from './guild.js';
+import storage from './storage.js';
+import tavern from './tavern.js';
+import fort from './fort.js';
 
-module.exports = {
+export {
   hall,
   market,
   guild,

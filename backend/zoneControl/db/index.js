@@ -1,6 +1,6 @@
-const setValueInSectorById = require('./setValueInSectorById');
-const clearAllBusySectors = require('./clearAllBusySectors');
-const getLastValueControl = require('./getLastValueControl');
-const removeOldContolValuesFromDB = require('./removeOldContolValuesFromDB');
+import setValueInSectorById from './setValueInSectorById.js';
+import clearAllBusySectors from './clearAllBusySectors.js';
+import getLastValueControl from './getLastValueControl.js';
+import removeOldContolValuesFromDB from './removeOldContolValuesFromDB.js';
 
-module.exports = { setValueInSectorById, clearAllBusySectors, getLastValueControl, removeOldContolValuesFromDB };
+export { setValueInSectorById, clearAllBusySectors, getLastValueControl, removeOldContolValuesFromDB };

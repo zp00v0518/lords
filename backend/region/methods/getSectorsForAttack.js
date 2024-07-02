@@ -1,4 +1,4 @@
-const WorldMap = require('../../globalMap/WorldMap');
+import WorldMap from '../../globalMap/WorldMap.js';
 
 function getSectorsForAttack(start, map) {
   const result = [];
@@ -17,4 +17,4 @@ function getSectorsForAttack(start, map) {
   return result;
 }
 
-module.exports = getSectorsForAttack;
+export default getSectorsForAttack;

@@ -6,4 +6,4 @@ const region = {
     ru: "Сила армии"
   }
 };
-module.exports = region;
+export default region;

@@ -1,4 +1,4 @@
-const Bonus = require('./Bonus');
+import Bonus from './Bonus.js';
 
 // бонус не может быть больше, чем сила противоположной армии
 function getBonusUnitsInAttack(aForce, aType, dForce, dType) {
@@ -16,4 +16,4 @@ function getBonusUnitsInAttack(aForce, aType, dForce, dType) {
   return result;
 }
 
-module.exports = getBonusUnitsInAttack;
+export default getBonusUnitsInAttack;

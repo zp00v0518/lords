@@ -1,10 +1,11 @@
 import calcStorageNowValue from '../town/storage/calcStorageNowValue.js';
-const { getOneTownFromDB, updateStateTown } = require('../town');
-const fixingResultUpgradeMine = require('../region/mine/fixingResultUpgradeMine.js');
-const fixingResultUpgrade_building = require('../town/buildings/fixingResultUpgrade_building');
-const finishEvent = require('./finishEvent');
-const { updateDB } = require('../workWithMongoDB');
-const eventType = require('./Event').types;
+import { getOneTownFromDB, updateStateTown } from '../town/index.js';
+import fixingResultUpgradeMine from '../region/mine/fixingResultUpgradeMine.js';
+import fixingResultUpgrade_building from '../town/buildings/fixingResultUpgrade_building.js';
+import finishEvent from './finishEvent.js';
+import updateDB from '../workWithMongoDB/updateDB.js';
+import gameEvent from './Event.js';
+const eventType = gameEvent.types;
 const eventsHandler = require('./eventsHandler');
 const { recursiveLoop } = require('../template_modules');
 const inActiveteEvent = require('./db/inActiveteEvent');

@@ -1,4 +1,4 @@
-const dictionary = require('./index.js');
+import dictionary from './index.js';
 
 function getLangDictionary(lang) {
   const newObj = {};
@@ -18,4 +18,4 @@ function getLangDictionary(lang) {
 }
 
 
-module.exports = getLangDictionary
+export default getLangDictionary

@@ -12,4 +12,4 @@ const fort = {
   }
 };
 
-module.exports = fort;
+export default fort;

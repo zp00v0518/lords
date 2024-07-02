@@ -1,5 +1,5 @@
-const Resources = require('../../resources/Resources');
-const getParamsForFinish = require('./getParamsForFinish');
+import Resources from '../../resources/Resources.js';
+import getParamsForFinish from './getParamsForFinish.js';
 
 function finishStorage(storage, eventData) {
   const { buildingInfo, nextLvl } = getParamsForFinish(eventData);
@@ -23,4 +23,4 @@ function finishStorage(storage, eventData) {
   return storage;
 }
 
-module.exports = finishStorage;
+export default finishStorage;

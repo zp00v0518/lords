@@ -1,4 +1,4 @@
-const Battle = require('./Battle');
+import Battle from './Battle.js';
 
 function setUnitsAfterBattle(battleResult, atArmy, defArmy) {
   const atackResult = battleResult.atackArmy;
@@ -16,4 +16,4 @@ function setUnitsAfterBattle(battleResult, atArmy, defArmy) {
   return { atackArmy };
 }
 
-module.exports = setUnitsAfterBattle;
+export default setUnitsAfterBattle;

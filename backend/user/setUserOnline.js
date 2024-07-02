@@ -1,7 +1,7 @@
-const { calcStorageNowValue } = require('../town/storage');
-const getGlobalMapSector = require('../globalMap/getGlobalMapSector');
-const getLangDictionary = require('../dictionary/getLangDictionary');
-const chat = require('../chat/chat');
+import { calcStorageNowValue } from '../town/storage/index.js';
+import getGlobalMapSector from '../globalMap/getGlobalMapSector.js';
+import getLangDictionary from '../dictionary/getLangDictionary.js';
+import chat from '../chat/chat.js';
 
 function setUserOnline(user, server, info_for_game, ws) {
   const startMessage = {
@@ -38,4 +38,4 @@ function setUserOnline(user, server, info_for_game, ws) {
   ws.send(JSON.stringify(startMessage));
 }
 
-module.exports = setUserOnline;
+export default setUserOnline;

@@ -1,6 +1,6 @@
-const setUpgradeChange = require('./setUpgradeChange');
-const Region = require('./Region');
-const DB = require('./DB');
-const methods = require('./methods');
+import setUpgradeChange from './setUpgradeChange.js';
+import Region from './Region.js';
+import { updateStateRegion } from './db/index.js';
+import { getSectorsForAttack } from './methods/index.js';
 
-module.exports = { ...DB, ...methods, setUpgradeChange, Region };
+export { updateStateRegion, getSectorsForAttack, setUpgradeChange, Region };

@@ -17,4 +17,4 @@ const storage = {
     }
   }
 };
-module.exports = storage;
+export default storage;

@@ -9,4 +9,4 @@ const timeLine = {
     ru: 'найм'
   }
 };
-module.exports = timeLine;
+export default timeLine;

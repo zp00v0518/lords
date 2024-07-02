@@ -1,8 +1,8 @@
-const { Race } = require('../../race');
-const { Army, createStackItemTemplate } = require('../../army');
+import { Race } from '../../race/index.js';
+import { Army, createStackItemTemplate } from '../../army/index.js';
 import updateDB from '../../workWithMongoDB/updateDB.js';
-const { getControlWeightFromArmy } = require('../../zoneControl/methods');
-const { setValueInSectorById } = require('../../zoneControl/db');
+import { getControlWeightFromArmy } from '../../zoneControl/methods/index.js';
+import { setValueInSectorById } from '../../zoneControl/db/index.js';
 const update = new updateDB();
 
 async function finish_hiring_units(eventData, sector) {
@@ -25,4 +25,4 @@ async function finish_hiring_units(eventData, sector) {
   return result;
 }
 
-module.exports = finish_hiring_units;
+export default finish_hiring_units;

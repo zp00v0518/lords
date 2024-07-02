@@ -15,4 +15,4 @@ const hall = {
   }
 };
 
-module.exports = hall;
+export default hall;

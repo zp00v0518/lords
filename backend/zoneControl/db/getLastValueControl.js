@@ -1,5 +1,3 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
 import mongodb from 'mongodb';
 const { ObjectId } = mongodb
 import findInDB from '../../workWithMongoDB/findInDB.js';
@@ -20,4 +18,4 @@ async function getLastValueControl(serverName, sectorId) {
   return value && value.control && value.control.lastValue ? value.control.lastValue : 0;
 }
 
-module.exports = getLastValueControl;
+export default getLastValueControl;

@@ -1,4 +1,5 @@
-const race = require('../../race').Race;
+import { Race } from '../../race/index.js'
+const race = Race;
 
 function getParamsForFinish(eventData) {
   const indexRace = eventData.init.race;
@@ -11,4 +12,4 @@ function getParamsForFinish(eventData) {
     buildingInfo
   };
 }
-module.exports = getParamsForFinish;
+export default getParamsForFinish;

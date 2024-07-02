@@ -1,13 +1,15 @@
-const eventType = require('../Event').types;
-const buildings = require('../../town/Town').listBuildings;
-const finishStorage = require('./finish_storage');
-const finishHall = require('./finish_hall');
-const finishBarraks = require('./finish_barraks');
-const finish_hiring_units = require('./finish_hiring_units');
-const { inActiveteEvent } = require('../db');
-const finishAttackEnemyRegion = require('./finishAttackEnemyRegion');
+import gameEvent from '../Event.js';
+const eventType = gameEvent.types;
+import Town from '../../town/Town.js';
+const buildings = Town.listBuildings;
+import finishStorage from './finish_storage.js';
+import finishHall from './finish_hall.js';
+import finishBarraks from './finish_barraks.js';
+import finish_hiring_units from './finish_hiring_units.js';
+import { inActiveteEvent } from '../db/index.js';
+import finishAttackEnemyRegion from './finishAttackEnemyRegion.js';
 
-module.exports = {
+export default {
   [buildings.storage.name]: finishStorage,
   [buildings.hall.name]: finishHall,
   [buildings.barraks_1.name]: finishBarraks,

@@ -1,3 +1,3 @@
-const getSectorsForAttack = require('./getSectorsForAttack');
+import getSectorsForAttack from './getSectorsForAttack.js';
 
-module.exports = { getSectorsForAttack };
+export { getSectorsForAttack };

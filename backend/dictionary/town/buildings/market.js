@@ -5,4 +5,4 @@ const market = {
     }
   }
 };
-module.exports = market;
+export default market;

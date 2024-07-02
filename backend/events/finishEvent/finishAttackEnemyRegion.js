@@ -1,9 +1,7 @@
-const template = require('template_func');
-const console = new template.Log(__filename);
-const { getOneTownFromDB, updateStateTown } = require('../../town/db');
-const { addLootResourcesToStorage } = require('../../town/storage/methods');
-const { inActiveteEvent } = require('../../events/db');
-const { updateHeroInDB } = require('../../heroes/db');
+import { getOneTownFromDB, updateStateTown } from '../../town/DB/index.js';
+import { addLootResourcesToStorage } from '../../town/storage/methods/index.js';
+import { inActiveteEvent } from '../../events/db/index.js';
+import { updateHeroInDB } from '../../heroes/db/index.js';
 
 async function finishAttackEnemyRegion(event) {
   const { target, serverName } = event;
@@ -26,4 +24,4 @@ async function finishAttackEnemyRegion(event) {
   await inActiveteEvent(event);
 }
 
-module.exports = finishAttackEnemyRegion;
+export default finishAttackEnemyRegion;
