@@ -26,6 +26,4 @@ function createPegas(unitInfo, up = 0) {
     up
   });
 }
-module.exports = createPegas;
-
 export default createPegas

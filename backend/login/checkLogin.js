@@ -1,12 +1,10 @@
-const { config, findInDB, userCreate, insertDB, setCookieUser, sessionCreate } = require('../tube.js');
-const { Log } = require('template_func');
-const log = new Log(__filename);
+import { config, findInDB, userCreate, insertDB, setCookieUser, sessionCreate } from '../tube.js';
 
 const find = new findInDB();
 const insert = new insertDB();
 
 async function checkLogin(req, requestData, callback = function () { }) {
-  // log.log('Start Work')
+  // console.log('Start Work')
   const userData = requestData.data;
   return new Promise((resolve, reject) => {
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
@@ -58,11 +56,11 @@ async function checkLogin(req, requestData, callback = function () { }) {
                       return callback(checkLoginResult);
                     })
                     .catch(err => {
-                      log.log(err);
+                      console.log(err);
                     });
                 })
                 .catch(err => {
-                  log.log(err);
+                  console.log(err);
                 });
             });
           } else {
@@ -74,7 +72,7 @@ async function checkLogin(req, requestData, callback = function () { }) {
           }
         })
         .catch(err => {
-          log.log(err);
+          console.log(err);
         });
     } else if (requestData.form === 'authForm') {
       const findOptions = {
@@ -82,7 +80,7 @@ async function checkLogin(req, requestData, callback = function () { }) {
         query: { email: emailUser, pass: passUser }
       };
       find.one(findOptions).then(findResult => {
-        // log.log(findResult)
+        // console.log(findResult)
         if (findResult === null) {
           checkLoginResult.status = 'authErr';
           checkLoginResult.answer = 'authErr';
@@ -100,12 +98,12 @@ async function checkLogin(req, requestData, callback = function () { }) {
               checkLoginResult.sessionCookies = resultSessionCreate.cookie;
               checkLoginResult.userId = headers.user_id;
               checkLoginResult.status = 'authOk';
-              // log.log(resultSessionCreate)
+              // console.log(resultSessionCreate)
               resolve(checkLoginResult);
               return callback(checkLoginResult);
             })
             .catch(err => {
-              log.log(err);
+              console.log(err);
             });
         }
       });
@@ -113,4 +111,4 @@ async function checkLogin(req, requestData, callback = function () { }) {
   });
 }
 
-module.exports = checkLogin;
+export default checkLogin;

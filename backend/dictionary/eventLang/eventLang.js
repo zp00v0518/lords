@@ -22,4 +22,4 @@ const eventLang = {
   }
 };
 
-module.exports = eventLang;
+export default eventLang;

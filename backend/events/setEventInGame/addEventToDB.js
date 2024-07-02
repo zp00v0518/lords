@@ -2,7 +2,7 @@ const { insertDB } = require("../../workWithMongoDB");
 const insert = new insertDB();
 
 //  НЕ ИСПОЛЬЗОВАТЬ!!! Использование этого метода переехало в папку DB
-function addEventToDB(data, serverName, callback = function() {}) {
+function addEventToDB(data, serverName, callback = function () { }) {
   return new Promise((resolve, reject) => {
     const doc = {
       class: "event",
@@ -28,7 +28,7 @@ function addEventToDB(data, serverName, callback = function() {}) {
   });
 }
 
-module.exports = addEventToDB;
+export default addEventToDB;
 
 // const schema = {
 //   type: String,

@@ -31,6 +31,4 @@ function createMine(x, y, type) {
   return mine;
 }
 
-module.exports = createMine;
-
 export default createMine

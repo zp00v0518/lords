@@ -5,6 +5,4 @@ async function heroActivate(serverName, heroId) {
   return result;
 }
 
-module.exports = heroActivate;
-
 export default heroActivate

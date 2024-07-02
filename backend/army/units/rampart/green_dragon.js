@@ -27,6 +27,4 @@ function createGreenDragon(unitInfo, up = 0) {
     up
   });
 }
-module.exports = createGreenDragon;
-
 export default createGreenDragon

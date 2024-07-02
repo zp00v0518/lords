@@ -11,6 +11,4 @@ function createBasicBuilding(classBuilding, lvl = 0, parent = 'town') {
   return basic;
 }
 
-module.exports = createBasicBuilding;
-
 export default createBasicBuilding

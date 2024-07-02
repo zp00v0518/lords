@@ -24,6 +24,4 @@ function addTownToHero(serverName, townId, heroId, callback = function () { }) {
   });
 }
 
-module.exports = addTownToHero;
-
 export default addTownToHero

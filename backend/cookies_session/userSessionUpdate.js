@@ -1,4 +1,4 @@
-const { updateDB, config } = require("../tube.js");
+import { updateDB, config } from "../tube.js";
 const update = new updateDB();
 
 //добавляет кукис сессии в массив сессий Пользователя
@@ -16,4 +16,4 @@ function userSessionUpdate(user_id, session_id) {
   update.one(options);
 }
 
-module.exports = userSessionUpdate;
+export default userSessionUpdate;

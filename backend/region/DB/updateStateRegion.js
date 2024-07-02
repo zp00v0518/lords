@@ -28,6 +28,4 @@ function updateStateRegion(sector, ops = { upsert: false }, callback = function 
   })
 }
 
-module.exports = updateStateRegion
-
 export default updateStateRegion

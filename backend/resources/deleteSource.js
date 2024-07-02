@@ -13,4 +13,4 @@ function deleteSource(delSources, storage) {
   return storage;
 }
 
-module.exports = deleteSource;
+export default deleteSource;

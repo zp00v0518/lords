@@ -14,4 +14,4 @@ function getVariable(str) {
   }
   return f;
 }
-module.exports = getVariable;
+export default getVariable;

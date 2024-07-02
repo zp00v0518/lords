@@ -8,4 +8,4 @@ function createTavern({ lvl = 0, addValue = 0 }) {
   return basic;
 }
 
-module.exports = createTavern;
+export default createTavern;

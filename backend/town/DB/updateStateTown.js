@@ -25,4 +25,4 @@ function updateStateTown(sector, ops = { upsert: false }, callback = function ()
   });
 }
 
-module.exports = updateStateTown;
+export default updateStateTown;

@@ -9,6 +9,4 @@ function createBarraks({ lvl = 0, addValue = 0 }) {
   return basic;
 }
 
-module.exports = createBarraks;
-
 export default createBarraks

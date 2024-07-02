@@ -9,6 +9,4 @@ async function transferHeroBetweenTown(serverName, heroId, initId, targetId) {
   return flag;
 }
 
-module.exports = transferHeroBetweenTown;
-
 export default transferHeroBetweenTown

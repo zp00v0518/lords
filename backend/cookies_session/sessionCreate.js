@@ -36,4 +36,4 @@ function sessionCreate(headers, callback = function () { }) {
   });
 }
 
-module.exports = sessionCreate;
+export default sessionCreate;

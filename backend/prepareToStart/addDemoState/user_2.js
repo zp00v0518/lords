@@ -93,4 +93,4 @@ const town = {
   }
 };
 
-module.exports = { user_2, collections, town };
+export default { user_2, collections, town };

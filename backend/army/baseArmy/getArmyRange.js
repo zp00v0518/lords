@@ -9,6 +9,4 @@ function getArmyRange(townIndex) {
   // return basRange.map(i => i * coeff + i);
 }
 
-module.exports = getArmyRange;
-
 export default getArmyRange

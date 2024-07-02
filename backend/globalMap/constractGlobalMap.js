@@ -59,5 +59,4 @@ function startConstractMap() {
 }
 startConstractMap();
 
-module.exports = returnGlobalMap();
 export default returnGlobalMap()

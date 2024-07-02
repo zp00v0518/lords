@@ -16,4 +16,4 @@ async function getOneSectorForGlobalMap(serverName, sectorId) {
   return result;
 }
 
-module.exports = getOneSectorForGlobalMap;
+export default getOneSectorForGlobalMap;

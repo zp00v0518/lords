@@ -1,14 +1,13 @@
-const url = require("url");
-const {
+import url from "node:url";
+import {
   reqOn,
   sendResponse,
   getVariable,
   login,
   getInfoForUserPage
-} = require("./tube.js");
-const Cookies = require("cookies");
-const template = require("template_func");
-const log = new template.Log(__filename);
+} from "./tube.js";
+import Cookies from "cookies";
+import template from "template_func";
 
 function postMethod(req, res, startPath) {
   let urlParse = url.parse(req.url);
@@ -42,7 +41,7 @@ function postMethod(req, res, startPath) {
           console.log(data)
         }
       } else {
-        log.log("Информацию полученную от клиента распарсить не удалось");
+        console.log("Информацию полученную от клиента распарсить не удалось");
         requestData = {
           status: "err",
           message: "Информацию полученную от клиента распарсить не удалось",
@@ -52,8 +51,8 @@ function postMethod(req, res, startPath) {
       }
     })
     .catch(err => {
-      log.log(err);
+      console.log(err);
     });
 }
 
-module.exports = postMethod;
+export default postMethod;

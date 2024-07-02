@@ -14,6 +14,4 @@ async function addHeroToTown(serverName, townId, heroId, callback = function () 
   return result;
 }
 
-module.exports = addHeroToTown;
-
 export default addHeroToTown

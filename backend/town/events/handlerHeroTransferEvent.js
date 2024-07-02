@@ -24,4 +24,4 @@ async function handlerHeroTransferEvent(event) {
   inActiveteEvent(event);
 }
 
-module.exports = handlerHeroTransferEvent;
+export default handlerHeroTransferEvent;

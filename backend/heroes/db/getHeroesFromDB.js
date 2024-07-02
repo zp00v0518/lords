@@ -49,6 +49,4 @@ function getHeroesFromDB(server, { userId, heroId }, callback = () => { }) {
   });
 }
 
-module.exports = getHeroesFromDB;
-
 export default getHeroesFromDB

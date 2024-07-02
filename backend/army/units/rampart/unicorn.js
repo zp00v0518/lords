@@ -26,6 +26,4 @@ function createUnicorn(unitInfo, up = 0) {
     up
   });
 }
-module.exports = createUnicorn;
-
 export default createUnicorn

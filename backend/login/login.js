@@ -1,7 +1,5 @@
-const checkLogin = require("./checkLogin.js");
-const { Log } = require("template_func");
-const { config, sendResponse } = require("../tube.js");
-const log = new Log(__filename);
+import checkLogin from "./checkLogin.js";
+import { config, sendResponse } from "../tube.js";
 const twoWeek = config.time.week * 2;
 
 function login(req, res, loginData, Cookies) {
@@ -41,4 +39,4 @@ function login(req, res, loginData, Cookies) {
     });
 }
 
-module.exports = login;
+export default login;

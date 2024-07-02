@@ -92,4 +92,4 @@ const town = {
     nextLvl: 1
   }
 };
-module.exports = { user_1, collections, town };
+export default { user_1, collections, town };

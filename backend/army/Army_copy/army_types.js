@@ -4,4 +4,4 @@ const army_types = {
   pex: 'pex'
 };
 
-module.exports = army_types;
+export default army_types;

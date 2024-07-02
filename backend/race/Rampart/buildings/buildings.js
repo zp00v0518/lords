@@ -383,4 +383,4 @@ const buildings = {
   }
 };
 
-module.exports = buildings;
+export default buildings;

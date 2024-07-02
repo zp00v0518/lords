@@ -21,6 +21,4 @@ function getLootResources(mines, coords) {
   return result;
 }
 
-module.exports = getLootResources;
-
 export default getLootResources

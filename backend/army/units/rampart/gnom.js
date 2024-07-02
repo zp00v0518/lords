@@ -25,6 +25,4 @@ function createGnom(unitInfo, up = 0) {
     up
   });
 }
-module.exports = createGnom;
-
 export default createGnom

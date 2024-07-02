@@ -1,3 +1,3 @@
 const Market = {};
 
-module.exports = Market;
+export default Market;

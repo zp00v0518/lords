@@ -25,6 +25,4 @@ function createElf(unitInfo, up = 0) {
     up
   });
 }
-module.exports = createElf;
-
 export default createElf

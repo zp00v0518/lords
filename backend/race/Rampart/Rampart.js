@@ -25,7 +25,7 @@ const Rampart = {
   units: rampart_units
 };
 
-module.exports = Rampart;
+export default Rampart;
 
 // const coords = {
 // guild_5: { x: 380, y: 100, zoom: 10 },

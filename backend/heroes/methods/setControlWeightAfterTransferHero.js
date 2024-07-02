@@ -10,4 +10,4 @@ async function setControlWeightAfterTransferHero(server, hero, initId, targetId)
   await setValueInSectorById(server, initId, -weight);
 }
 
-module.exports = setControlWeightAfterTransferHero;
+export default setControlWeightAfterTransferHero;

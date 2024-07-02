@@ -1,5 +1,5 @@
-const { getRandomNumber } = require("template_func");
-const createStackItemTemplate = require("./createStackItemTemplate");
+import { getRandomNumber } from "template_func";
+import createStackItemTemplate from "./createStackItemTemplate.js";
 
 function createArmy({
   range_power_army = [2000, 3000],
@@ -57,7 +57,5 @@ function getUnits({ stack_count = 1, units = [] }) {
   }
   return result;
 }
-
-module.exports = createArmy;
 
 export default createArmy

@@ -10,4 +10,4 @@ function setDemoTownState(demoUser) {
   return newTown;
 }
 
-module.exports = setDemoTownState;
+export default setDemoTownState;

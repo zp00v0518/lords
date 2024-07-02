@@ -8,4 +8,4 @@ function createHall() {
   return basic;
 }
 
-module.exports = createHall;
+export default createHall;

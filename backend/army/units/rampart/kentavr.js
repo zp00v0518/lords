@@ -26,6 +26,4 @@ function createKentavr(unitInfo, up = 0) {
     up
   });
 }
-module.exports = createKentavr;
-
 export default createKentavr

@@ -5,14 +5,6 @@ import createMarket from './market/createMarket.js';
 import createTavern from './tavern/createTavern.js';
 import createHall from './hall/createHall.js';
 
-module.exports = {
-  createBarraks,
-  createFort,
-  createGuild,
-  createMarket,
-  createTavern,
-  createHall
-}
 export {
   createBarraks,
   createFort,

@@ -1,8 +1,8 @@
-const userSessionUpdate = require("./userSessionUpdate.js");
-const setCookieUser = require("./setCookieUser.js");
-const sessionCreate = require("./sessionCreate.js");
+import userSessionUpdate from "./userSessionUpdate.js";
+import setCookieUser from "./setCookieUser.js";
+import sessionCreate from "./sessionCreate.js";
 
-module.exports = {
+export {
   userSessionUpdate,
   setCookieUser,
   sessionCreate

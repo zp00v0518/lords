@@ -4,4 +4,4 @@ function calcValueInBuild({ build, timeEnd = new Date().getTime() }) {
   work.date = new Date();
 }
 
-module.exports = calcValueInBuild;
+export default calcValueInBuild;

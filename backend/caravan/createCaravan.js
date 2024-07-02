@@ -12,6 +12,4 @@ function createCaravan() {
   return template;
 }
 
-module.exports = createCaravan;
-
 export default createCaravan

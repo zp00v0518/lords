@@ -13,8 +13,8 @@ function setCookieUser(userId, cookie = getRandomString(config.cookieSize)) {
       $set: { cookie: cookie, 'date.addCookie': new Date() }
     }
   };
-  update.one(optionsForUpdate).then(resultUpdate => {});
+  update.one(optionsForUpdate).then(resultUpdate => { });
   return cookie;
 }
 
-module.exports = setCookieUser;
+export default setCookieUser;

@@ -6,7 +6,10 @@ import config from './config/config.js'
 // const getVariable = require('./developScript/getVariable.js');
 // module.exports.getVariable = getVariable;
 
-// const { connectMongoDB, findInDB, updateDB, insertDB } = require('./workWithMongoDB');
+import { connectMongoDB } from './workWithMongoDB/index.js';
+import findInDB from './workWithMongoDB/findInDB.js';
+import updateDB from './workWithMongoDB/updateDB.js';
+import insertDB from './workWithMongoDB/insertDB.js';
 // module.exports.connectMongoDB = connectMongoDB;
 // module.exports.findInDB = findInDB;
 // module.exports.updateDB = updateDB;
@@ -19,7 +22,7 @@ import { fileReader, mimeType, sendResponse, reqOn, checkSchema } from './templa
 // module.exports.reqOn = reqOn;
 // module.exports.checkSchema = checkSchema;
 
-// const { setCookieUser, sessionCreate, userSessionUpdate } = require('./cookies_session');
+import { setCookieUser, sessionCreate, userSessionUpdate } from './cookies_session/index.js';
 // module.exports.userSessionUpdate = userSessionUpdate;
 // module.exports.setCookieUser = setCookieUser;
 // module.exports.sessionCreate = sessionCreate;
@@ -64,7 +67,7 @@ import { checkSource, deleteSource } from './resources/index.js';
 // module.exports.checkSource = checkSource;
 // module.exports.deleteSource = deleteSource;
 
-// const login = require('./login/login.js');
+import login from './login/login.js';
 // module.exports.login = login;
 
 import getMethod from './getMethod.js'
@@ -108,4 +111,7 @@ export {
     findUserInDB,
     getInfoForStartGame,
     addNewUserToGlobalMap,
+    login,
+    setCookieUser, sessionCreate, userSessionUpdate,
+    connectMongoDB, findInDB, updateDB, insertDB
 }

@@ -19,6 +19,4 @@ const needFields = {
   'control.userId': 1
 };
 
-module.exports = needFields;
-
 export default needFields

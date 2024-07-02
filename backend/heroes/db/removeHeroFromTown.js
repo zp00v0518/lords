@@ -14,6 +14,4 @@ async function removeHeroFromTown(serverName, sectorId, heroId) {
   return z;
 }
 
-module.exports = removeHeroFromTown;
-
 export default removeHeroFromTown
