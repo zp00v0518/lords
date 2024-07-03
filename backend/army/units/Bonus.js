@@ -1,4 +1,4 @@
-import army_types from '../baseArmy/army_types';
+import army_types from '../baseArmy/army_types.js';
 const baseBonus = 25;
 
 const Bonus = {

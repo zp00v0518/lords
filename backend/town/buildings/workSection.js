@@ -1,5 +1,5 @@
-function workSection({ addValue = 0, static = true }) {
-  if (static) {
+function workSection({ addValue = 0, flagStatic = true }) {
+  if (flagStatic) {
     return {
       is: false,
       date: new Date(),

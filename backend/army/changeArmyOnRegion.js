@@ -1,7 +1,7 @@
 import Race from '../race/Race.js';
 import Region from '../region/Region.js';
 const regionTypes = Region.types;
-import { createArmy } from './baseArmy.js';
+import { createArmy } from './baseArmy/index.js';
 
 function changeArmyOnRegion(region, range) {
   region.forEach(sectorRow => {

@@ -1,4 +1,3 @@
-// const tube = require('../tube.js');
 import Region from '../region/Region.js';
 import { createMine } from '../region/mine/index.js';
 import Race from '../race/Race.js';

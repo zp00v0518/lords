@@ -1,4 +1,4 @@
-import gameVariables from '../../../variables/game_variables,js';
+import gameVariables from '../../../variables/game_variables.js';
 
 function getLootResources(mines, coords) {
   const result = {};

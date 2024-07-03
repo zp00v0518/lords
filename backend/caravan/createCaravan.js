@@ -1,4 +1,4 @@
-import schema from "../../workWithMongoDB/schema.js";
+import schema from "../workWithMongoDB/schema.js";
 import Caravan from './Caravan.js';
 
 function createCaravan() {

@@ -1,5 +1,5 @@
 import mongodb from 'mongodb'
-import { updateDB } from '../../workWithMongoDB/index.js'
+import updateDB from '../../workWithMongoDB/updateDB.js'
 const { ObjectId } = mongodb
 const updated = new updateDB();
 

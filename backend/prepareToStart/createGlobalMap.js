@@ -1,13 +1,13 @@
 // создает коллекцию globalMap в БД
 import 'dotenv/config';
 import { getRandomNumber } from 'template_func';
-import Insert from '../workWithMongoDB/insertDB.js');
-import schema from '../workWithMongoDB/schema.js');
-import gameVariable from '../variables/game_variables.js');
-import createMine from '../region/mine/createMine.js');
-import config from '../config/config.js');
-import WorldMap from '../globalMap/WorldMap');
-import createZoneControlToDB from '../zoneControl/methods/createZoneControlToDB.js')
+import Insert from '../workWithMongoDB/insertDB.js';
+import schema from '../workWithMongoDB/schema.js';
+import gameVariable from '../variables/game_variables.js';
+import createMine from '../region/mine/createMine.js';
+import config from '../config/config.js';
+import WorldMap from '../globalMap/WorldMap';
+import createZoneControlToDB from '../zoneControl/methods/createZoneControlToDB.js'
 const serverList = config.db.collections.servers;
 const insertDB = new Insert();
 

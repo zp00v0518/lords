@@ -1,5 +1,6 @@
 import createBasicBuilding from '../../createBasicBuilding.js';
-import { document } from '../../../workWithMongoDB/schema.js';
+import schema from '../../../workWithMongoDB/schema.js';
+const document = schema.document;
 import workSection from '../workSection.js';
 
 function createFort({ lvl = 0, addValue = 0 }) {

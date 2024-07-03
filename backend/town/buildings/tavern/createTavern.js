@@ -1,5 +1,6 @@
 import createBasicBuilding from '../../createBasicBuilding.js';
-import { document } from '../../../workWithMongoDB/schema.js';
+import schema from '../../../workWithMongoDB/schema.js';
+const { document } = schema;
 import workSection from '../workSection.js';
 
 function createTavern({ lvl = 0, addValue = 0 }) {

@@ -1,5 +1,3 @@
 import getLootResources from './getLootResources.js';
 
-export {
-    getLootResources
-}
+export default getLootResources

@@ -1,4 +1,3 @@
-// const { updateDB } = require("../../tube.js");
 import { inActiveteEvent } from '../../events/db/index.js';
 import { updateStateTown } from '../DB/index.js';
 
