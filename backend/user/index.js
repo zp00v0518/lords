@@ -15,7 +15,6 @@ import {
   getUserBySectorCoords,
   getUsersBySectorsArr
 } from './db/index.js';
-// const User = require("./User");
 
 export {
   userCreate,

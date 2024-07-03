@@ -8,8 +8,6 @@ const update = new updateDB();
 import { getTownByHero } from '../../town/index.js';
 import { getHeroesFromDB } from '../../heroes/db/index.js';
 
-// const { getHeroesFromDB } = require("../../heroes/db");
-
 async function handlerMergeArmy(message, info) {
   const data = message.data;
   const { ws } = info.player;

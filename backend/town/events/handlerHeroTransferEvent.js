@@ -1,8 +1,8 @@
-const { inActiveteEvent } = require('../../events/db');
-const { getOneTownFromDB } = require('../DB');
-const { transferHeroBetweenTown, getHeroesFromDB, heroActivate } = require('../../heroes/db');
-const { setControlWeightAfterTransferHero } = require('../../heroes/methods');
-const { getOneSectorForGlobalMap } = require('../../globalMap/db');
+import { inActiveteEvent } from '../../events/db/index.js';
+import { getOneTownFromDB } from '../DB/index.js';
+import { transferHeroBetweenTown, getHeroesFromDB, heroActivate } from '../../heroes/db/index.js';
+import { setControlWeightAfterTransferHero } from '../../heroes/methods/index.js';
+import { getOneSectorForGlobalMap } from '../../globalMap/db/index.js';
 
 async function handlerHeroTransferEvent(event) {
   const { serverName, target, init, data } = event;

@@ -1,4 +1,3 @@
-// const tube = require('../../tube.js');
 import gameVariables from '../../variables/game_variables.js';
 import Town from '../Town.js';
 import upgradeSection from '../upgradeSection.js';

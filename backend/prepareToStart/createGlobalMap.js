@@ -1,13 +1,13 @@
 // создает коллекцию globalMap в БД
-require('dotenv').config(); // парсит ENV файл
-const { getRandomNumber } = require('template_func');
-const Insert = require('../workWithMongoDB/insertDB.js');
-const schema = require('../workWithMongoDB/schema.js');
-const gameVariable = require('../variables/game_variables.js');
-const createMine = require('../region/mine/createMine.js');
-const config = require('../config/config.js');
-const WorldMap = require('../globalMap/WorldMap');
-const createZoneControlToDB = require('../zoneControl/methods/createZoneControlToDB')
+import 'dotenv/config';
+import { getRandomNumber } from 'template_func';
+import Insert from '../workWithMongoDB/insertDB.js');
+import schema from '../workWithMongoDB/schema.js');
+import gameVariable from '../variables/game_variables.js');
+import createMine from '../region/mine/createMine.js');
+import config from '../config/config.js');
+import WorldMap from '../globalMap/WorldMap');
+import createZoneControlToDB from '../zoneControl/methods/createZoneControlToDB.js')
 const serverList = config.db.collections.servers;
 const insertDB = new Insert();
 
@@ -15,7 +15,7 @@ const numSectionGlobalMap = gameVariable.numSectionGlobalMap;
 const numSectionRegionMap = gameVariable.numSectionRegionMap;
 const GlobalMap = [];
 const coordsMine = []; // возможные координаты шахт на regionMap
-const Region = require('../region/Region');
+import Region from '../region/Region.js';
 
 getPositionMine();
 // создает перечень возможных координат шахт для regionMap

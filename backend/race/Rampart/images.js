@@ -1,4 +1,4 @@
-const { getParsePathToImg } = require('../../template_modules');
+import { getParsePathToImg } from '../../template_modules/index.js';
 
 const images = {
   bg: getParsePathToImg('frontEnd/img/for_canvas/towns/rampart/rampart.jpg'),

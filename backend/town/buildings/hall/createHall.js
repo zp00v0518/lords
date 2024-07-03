@@ -1,6 +1,6 @@
-const createBasicBuilding = require('../../createBasicBuilding');
-const { document } = require('../../../workWithMongoDB/schema');
-const workSection = require('../workSection');
+import createBasicBuilding from '../../createBasicBuilding.js';
+import { document } from '../../../workWithMongoDB/schema.js';
+import workSection from '../workSection.js';
 
 function createHall() {
   const basic = createBasicBuilding(document.class.hall, 1);

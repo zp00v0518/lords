@@ -1,4 +1,3 @@
-// const { checkSchema, redirectMessage, gloss } = require('../../tube');
 import { checkSchema } from '../../template_modules/index.js';
 import { redirectMessage, sendWSMessage } from '../../wsServer/index.js';
 import { Race } from '../../race/index.js';

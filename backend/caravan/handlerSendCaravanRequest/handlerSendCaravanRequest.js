@@ -5,7 +5,6 @@ const mapLength = game_variables.numSectionGlobalMap;
 import resourcesTypes from '../../resources/type_resources.js';
 import { getTownByCoords, getOneTownFromDB, updateStateTown } from '../../town/DB/index.js';
 import { Caravan } from '../../caravan/index.js';
-// const {createCaravanEvent} = require('../../events/createEvents');
 import { setEventInGame, createCaravanEvent } from '../../events/index.js';
 import { deleteSource } from '../../resources/index.js';
 import addBusyCaravan from '../addBusyCaravan.js';

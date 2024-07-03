@@ -1,4 +1,4 @@
-const createTown = require('../../town/createTown');
+import createTown from '../../town/createTown.js';
 
 function setDemoTownState(demoUser) {
   const newTown = createTown({ status: 'first' });

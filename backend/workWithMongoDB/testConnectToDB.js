@@ -1,5 +1,4 @@
-// const connectMongoDB = require("./connectMongoDB.js");
-const bulkDB = require('./bulkWrite.js');
+import bulkDB from './bulkWrite.js';
 // const insertInDB = new find();
 const bulkWrite = new bulkDB();
 

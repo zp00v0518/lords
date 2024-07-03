@@ -1,9 +1,10 @@
-const mineTypeList = require('../../region/mine/Mine.js').typeList;
-const buildings = require('./buildings');
-const rampart_units = require('../../army/units/rampart');
-const { Heroes } = require('../../heroes');
-const types_races = require('../types_races');
-const images = require('./images.js');
+import Mine from '../../region/mine/Mine.js';
+const mineTypeList = Mine.typeList;
+import buildings from './buildings/index.js';
+import rampart_units from '../../army/units/rampart/index.js';
+import { Heroes } from '../../heroes/index.js';
+import types_races from '../types_races.js';
+import images from './images.js';
 
 const Rampart = {
   images,

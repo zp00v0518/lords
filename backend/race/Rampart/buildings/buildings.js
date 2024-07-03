@@ -1,9 +1,9 @@
-const Resources = require('../../../resources/Resources');
+import Resources from '../../../resources/Resources.js';
 const formPrice = Resources.formPrice;
-const Town = require('../../../town/Town');
+import Town from '../../../town/Town.js';
 const t = Town.listBuildings;
 const form_IfBuilding = Town.form_IfBuilding;
-const army_list = require('../../../army/units/rampart/list');
+import army_list from '../../../army/units/rampart/list.js';
 
 const buildings = {
   listBuildings: t,

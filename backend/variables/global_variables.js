@@ -1,8 +1,6 @@
 import gameVariables from './game_variables.js';
 global.gameVariables = gameVariables;
 import config from '../config/config.js';
-// const GlobalMap = require('../globalMap/constractGlobalMap');
-// const { GlobalMap } = require('../tube');
 import { returnGlobalMap } from '../globalMap/index.js'
 const GlobalMap = returnGlobalMap;
 const UserOnline = {};

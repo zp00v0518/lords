@@ -1,4 +1,3 @@
-// const { findInDB, config } = require('../tube.js');
 import config from '../config/config.js';
 import findInDB from "../workWithMongoDB/findInDB.js";
 

@@ -1,7 +1,6 @@
 // составляю массив карты из данных хранящихся в БД
 // чтобы не обращаться постоянно в БД
 
-// const { findInDB } = require("../tube.js");
 import config from '../config/config.js';
 import schema from '../workWithMongoDB/schema.js';
 import findInDB from "../workWithMongoDB/findInDB.js";

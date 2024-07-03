@@ -1,3 +1,3 @@
-const buildings = require('./buildings.js');
+import buildings from './buildings.js';
 
 export default buildings;

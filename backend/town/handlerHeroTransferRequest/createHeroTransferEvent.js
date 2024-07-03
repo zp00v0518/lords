@@ -1,5 +1,5 @@
-const { getTemplateEvent, Event } = require('../../events');
-const { WorldMap } = require('../../globalMap');
+import { getTemplateEvent, Event } from '../../events/index.js';
+import { WorldMap } from '../../globalMap/index.js';
 
 function createHeroTransferEvent(initSector, targetSector, hero) {
   const template = getTemplateEvent();
