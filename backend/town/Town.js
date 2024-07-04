@@ -1,4 +1,4 @@
-import { schema } from '../workWithMongoDB/index.js';
+import schema from '../workWithMongoDB/schema.js';
 const type = schema.document.class;
 import typeSource from '../resources/type_resources.js';
 

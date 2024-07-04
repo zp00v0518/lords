@@ -1,5 +1,5 @@
 import resources from "../../resources/Resources.js";
-import { schema } from "../../workWithMongoDB/index.js";
+import schema from "../../workWithMongoDB/schema.js";
 import config from "../../config/index.js";
 
 const Mine = {

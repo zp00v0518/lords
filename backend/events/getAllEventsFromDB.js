@@ -1,5 +1,5 @@
 import findInDB from "../workWithMongoDB/findInDB.js";
-import { schema } from "../workWithMongoDB/index.js";
+import schema from "../workWithMongoDB/schema.js";
 const { document } = schema
 // eslint-disable-next-line
 const find = new findInDB();

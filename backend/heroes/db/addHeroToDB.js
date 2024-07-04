@@ -1,5 +1,5 @@
 import { Heroes } from '../../heroes/index.js';
-import { schema } from '../../workWithMongoDB/index.js';
+import schema from '../../workWithMongoDB/schema.js';
 const { document } = schema;
 import insertDB from '../../workWithMongoDB/insertDB.js';
 import { Army, createArmy } from '../../army/baseArmy/index.js';

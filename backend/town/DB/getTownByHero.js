@@ -1,7 +1,7 @@
 import mongodb from 'mongodb';
 const { ObjectId } = mongodb
 import findInDB from '../../workWithMongoDB/findInDB.js';
-import { schema } from "../../workWithMongoDB/index.js";
+import schema from "../../workWithMongoDB/schema.js";
 const { document } = schema
 const find = new findInDB();
 

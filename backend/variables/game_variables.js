@@ -2,7 +2,7 @@ import config from '../config/config.js';
 import Mine from '../region/mine/Mine.js';
 import Town from '../town/Town.js';
 import resources from '../resources/Resources.js';
-import { schema } from '../workWithMongoDB/index.js';
+import schema from '../workWithMongoDB/schema.js';
 const time = config.time;
 // используется ТАКЖЕ!!!! на фронте при улучшении строений в регионе!!!!!!!!
 

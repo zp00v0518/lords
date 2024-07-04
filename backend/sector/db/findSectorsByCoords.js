@@ -1,4 +1,4 @@
-import { schema } from '../../workWithMongoDB/index.js';
+import schema from '../../workWithMongoDB/schema.js';
 import findInDB from '../../workWithMongoDB/findInDB.js';
 const find = new findInDB();
 
