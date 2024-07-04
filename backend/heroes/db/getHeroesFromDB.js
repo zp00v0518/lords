@@ -2,7 +2,7 @@ import mongodb from 'mongodb';
 const { ObjectId } = mongodb;
 import schema from "../../workWithMongoDB/schema.js";
 const { document } = schema
-import { findInDB } from "../../workWithMongoDB/index.js";
+import findInDB from "../../workWithMongoDB/findInDB.js";
 const find = new findInDB();
 
 function getHeroesFromDB(server, { userId, heroId }, callback = () => { }) {

@@ -2,7 +2,7 @@ import config from './config/config.js'
 
 // const templateFunc = require('template_func');
 
-// const getVariable = require('./developScript/getVariable.js');
+import getVariable from './developScript/getVariable.js';
 
 import { connectMongoDB } from './workWithMongoDB/index.js';
 import findInDB from './workWithMongoDB/findInDB.js';
@@ -82,5 +82,6 @@ export {
     addNewUserToGlobalMap,
     login,
     setCookieUser, sessionCreate, userSessionUpdate,
-    connectMongoDB, findInDB, updateDB, insertDB
+    connectMongoDB, findInDB, updateDB, insertDB,
+    getVariable
 }

@@ -1,6 +1,6 @@
 import { checkSchema } from '../template_modules/index.js';
 import { redirectMessage, sendWSMessage } from '../wsServer/index.js';
-import game_variables from '../variables/game_variables';
+import game_variables from '../variables/game_variables.js';
 const mapLength = game_variables.numSectionGlobalMap;
 import getGlobalMapSector from '../globalMap/getGlobalMapSector.js';
 

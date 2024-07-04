@@ -2,7 +2,7 @@ import '../variables/global_variables.js';
 import allHandler from './allHandler.js';
 import chat from '../chat/chat.js';
 import { config, findUserInDB, getInfoForStartGame } from '../tube.js';
-import WS from 'ws';
+import { WebSocketServer } from 'ws';
 import watcher from '../liveReload/watchFs.js';
 import Cookies from 'cookies';
 import { tryJsonParse } from 'template_func';
@@ -12,7 +12,7 @@ const { UserOnline } = global;
 
 class WsServer {
   init(port) {
-    this.server = new WS.Server({ port: port }, () => {
+    this.server = new WebSocketServer({ port: port }, () => {
       console.log(`WS-Сервер запущен по адресу http://loclahost:${port}`);
     });
   }

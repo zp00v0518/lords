@@ -1,5 +1,3 @@
-import template from 'template_func';
-const console = new template.Log(__filename);
 import ev from '../Event.js';
 const eventsTypes = ev.types;
 

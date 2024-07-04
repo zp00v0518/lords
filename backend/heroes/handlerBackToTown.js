@@ -1,5 +1,6 @@
 import inActiveteEvent from '../events/db/inActiveteEvent.js';
-import { finishAttackEnemyRegion } from '../events/finishEvent/index.js';
+import finishEvent from '../events/finishEvent/index.js';
+const { finishAttackEnemyRegion } = finishEvent;
 import { updateHeroInDB } from '../heroes/db/index.js';
 import { Battle } from '../battle/index.js';
 

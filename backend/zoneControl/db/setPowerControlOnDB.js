@@ -1,7 +1,7 @@
 import changePowerControlInGlobalMap from './changePowerControlInGlobalMap.js';
 import { needFields } from '../../globalMap/db/index.js';
 import { findSectorsByCoords } from '../../sector/db/index.js';
-import { bulkWrite } from '../../workWithMongoDB/bulkWrite.js';
+import bulkWrite from '../../workWithMongoDB/bulkWrite.js';
 const bulk = new bulkWrite();
 
 const powerKey = 'control.power';
