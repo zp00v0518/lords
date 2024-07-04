@@ -23,12 +23,13 @@ export default {
   },
   computed: {
     Resources() {
+      console.log(this.$store.state)
       return this.$store.state.globalConfig.all.Resources
     }
   },
   methods: {
     getAsTimeString,
-    checkSource: this.Resources.checkSource,
+    checkSource: this.Resources?.checkSource,
     closeDialogWindow() {
       this.$store.commit('DIALOG_CLOSE')
     }

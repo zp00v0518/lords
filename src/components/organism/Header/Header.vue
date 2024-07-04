@@ -22,11 +22,12 @@ export default {
   data() {
     return {
       armySize: 2500,
-      NODE_ENV: ''
+      NODE_ENV: 'development'
     }
   },
   created() {
-    this.NODE_ENV = process.env.NODE_ENV
+    console.log(this)
+    // this.NODE_ENV = process.env.NODE_ENV
   },
   computed: {
     showChat() {

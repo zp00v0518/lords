@@ -1,7 +1,7 @@
 // const mineTypeList = require("../region/mine/Mine.js").typeList;
-import { Rampart } from "./Rampart/index.js";
+import { Rampart } from "./Rampart/index.js"; // [process] 
 import types_races from "./types_races.js";
-import { Heroes } from "../heroes/index.js";
+import { Heroes } from "../heroes/index.js"; // [process] 
 import template_func from 'template_func'
 const { getRandomNumber } = template_func;
 

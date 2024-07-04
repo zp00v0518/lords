@@ -1,12 +1,15 @@
 import url from 'node:url';
 import path from 'node:path';
+// import process from 'node:process';
 
 
 import Cookies from 'cookies';
 import { fileReader, mimeType, sendResponse, config, findUserInDB } from './tube.js';
 import { addCollectionsToUser } from './user/index.js';
 import { getCollectionName } from './template_modules/index.js';
-const MODE = process.env.MODE;
+console.log(777)
+const MODE = 'DEV'
+// const MODE = process.env.MODE;
 const listFile = config.listFile[MODE] || config.listFile.html;
 
 async function getMethod(req, res, startPath) {

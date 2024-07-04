@@ -1,4 +1,3 @@
-import Vue from "vue";
 import { deepClone } from "../../utils";
 
 const userSectors = {

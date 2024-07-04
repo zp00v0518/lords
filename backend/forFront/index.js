@@ -1,7 +1,7 @@
 // import checkSource from '../resources/checkSource.js';
-import Race from '../race/Race';
+import Race from '../race/Race'; // [process] 
 import Town from '../town/Town';
-import { Army } from '../army/baseArmy';
+import { Army } from '../army/baseArmy'; // [process] 
 import Event from '../events/Event';
 import Battle from '../battle/Battle';
 import Region from '../region/Region';

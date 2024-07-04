@@ -3,11 +3,14 @@ import Mine from '../region/mine/Mine.js';
 import Town from '../town/Town.js';
 import resources from '../resources/Resources.js';
 import schema from '../workWithMongoDB/schema.js';
+// import process from 'node:process';
+console.log(123)
 const time = config.time;
 // используется ТАКЖЕ!!!! на фронте при улучшении строений в регионе!!!!!!!!
 
 const gameVariables = {
-  numSectionGlobalMap: process.env.SIZE_MAP || 100, // количество ячеек на ГЛОБАЛЬНОЙ карте, по одной оси
+  numSectionGlobalMap: 100, // количество ячеек на ГЛОБАЛЬНОЙ карте, по одной оси
+  // numSectionGlobalMap: process.env.SIZE_MAP || 100, // количество ячеек на ГЛОБАЛЬНОЙ карте, по одной оси
   // при изменении кол-ва ячеек, нужно поменять кол-во отображаемых ячеек на 1-й оси
   // как здесь, так и на клиенте
   getMaxIndexMap: function () {

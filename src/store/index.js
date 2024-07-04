@@ -1,6 +1,6 @@
 // import Vue from 'vue';
 // import Vuex from 'vuex';
-import modules from './modules';
+import modules from './modules/index.js';
 
 // Vue.use(Vuex);
 
@@ -11,7 +11,7 @@ import modules from './modules';
 // console.log("Store", store.state);
 
 import { createStore } from 'vuex'
-
+console.log(modules)
 const store = createStore({
   modules
 })

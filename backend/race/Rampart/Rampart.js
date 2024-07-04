@@ -2,9 +2,9 @@ import Mine from '../../region/mine/Mine.js';
 const mineTypeList = Mine.typeList;
 import buildings from './buildings/index.js';
 import rampart_units from '../../army/units/rampart/index.js';
-import { Heroes } from '../../heroes/index.js';
+import { Heroes } from '../../heroes/index.js';// [process] 
 import types_races from '../types_races.js';
-import images from './images.js';
+import images from './images.js'; // [process] 
 
 const Rampart = {
   images,

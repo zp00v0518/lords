@@ -1,13 +1,11 @@
-import Vuex from 'vuex'
 import { createApp } from 'vue'
-import store from './store'
+import store from './store/index.js'
 
 import App from './App.vue'
 import router from './router'
 
 const app = createApp(App)
 
-app.use(Vuex)
 app.use(router)
 app.use(store)
 

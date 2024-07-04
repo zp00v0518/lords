@@ -1,17 +1,20 @@
 import schema from '../workWithMongoDB/schema.js';
-import path from 'node:path';
-const __dirname = path.parse(import.meta.url).dir
+// import path from 'node:path';
+// const __dirname = path.parse(import.meta.url).dir
 
 const config = {
   server: {
     port: {
-      http: process.env.PORT || 4000,
-      ws: +process.env.PORT + 1 || 4001
+      http: 4000,
+      ws: 4001
+      // http: process?.env?.PORT || 4000,
+      // ws: process?.env?.PORT + 1 || 4001
     },
     ready_to_work: false
   },
   frontEnd: {
-    watchFolder: path.resolve(__dirname, '../../frontEnd/dist'),
+    watchFolder: 'C:/Users/zp00v/Desktop/Projects/lords/dist',
+    // watchFolder: path.resolve(__dirname, '../../frontEnd/dist'),
     folder: 'frontEnd'
   },
   db: {
@@ -37,7 +40,8 @@ const config = {
     day: 1000 * 60 * 60 * 24,
     week: 1000 * 60 * 60 * 24 * 7,
     month: 1000 * 60 * 60 * 24 * 31,
-    speedGame: +process.env.SPEED || 1, // делитель. Влияет на время улучшения строений. Чем больше, тем быстрее. Не может быть 0
+    speedGame: 1, // делитель. Влияет на время улучшения строений. Чем больше, тем быстрее. Не может быть 0
+    // speedGame: +this?.process?.env?.SPEED || 1, // делитель. Влияет на время улучшения строений. Чем больше, тем быстрее. Не может быть 0
     hiring: 500
   },
   listFile: {

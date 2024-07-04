@@ -5,7 +5,7 @@ import local from './local';
 import userSectors from './userSectors';
 import dialog from './dialog';
 import timeline from './timeline';
-import globalConfig from './globalConfig/globalConfig';
+import globalConfig from './globalConfig/globalConfig'; // в дереві імпорта присутній  process. через який валиться весь код на фронті
 import heroes from './heroes';
 import gameSources from './gameSources';
 import stat from './stat';
@@ -13,7 +13,6 @@ import settings from './settings';
 import user from './user';
 
 export default {
-  settings,
   chat,
   globalMap,
   regionMap,
@@ -25,5 +24,6 @@ export default {
   heroes,
   gameSources,
   stat,
+  settings,
   user
 };
