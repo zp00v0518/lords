@@ -19,9 +19,9 @@ async function clearAllBusySectors(serverName) {
   const result = await update.updateMany(updateOptions);
   return result.result;
 }
-function clearInGlobalMap(serverName) {
-  const GlobalMap = import('../../globalMap/constractGlobalMap.js');
-  const arr = GlobalMap[serverName];
+async function clearInGlobalMap(serverName) {
+  const GlobalMap = await import('../../globalMap/constractGlobalMap.js');
+  const arr = GlobalMap.default[serverName];
   arr.forEach(row => {
     row.forEach(sector => {
       if (sector.control) {

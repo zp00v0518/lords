@@ -42,8 +42,10 @@ const config = {
   },
   listFile: {
     DEV: {
-      login: 'login_dev',
-      cabinet: 'user_dev',
+      login: 'login',
+      cabinet: 'user',
+      // login: 'login_dev',
+      // cabinet: 'user_dev',
       err: '404',
       // game: 'game_dev',
       game: '../dist/index'

@@ -53,7 +53,7 @@ function startConstractMap() {
   if (flag) {
     constractGlobalMap();
   } else {
-    setTimeout(startConstractMap, 300);
+    setTimeout(startConstractMap, 50);
   }
 }
 startConstractMap();

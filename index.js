@@ -9,7 +9,8 @@ import './get_files.js';
 
 import config from './backend/config/config.js';
 
-const __dirname = path.parse(import.meta.url).dir
+let __dirname = path.parse(import.meta.url).dir
+__dirname = __dirname.replace('file:///', '')
 
 // если подключить эти модули не через tube, то идет двойное подключение к БД, двойной запуск constractGlobalMap. 
 // прям беда какая-то

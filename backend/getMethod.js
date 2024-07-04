@@ -40,7 +40,7 @@ async function getMethod(req, res, startPath) {
         // console.log(req.headers)
         // console.log(urlParse)
         // console.log(`pathName: ${pathName} startPath:${startPath}`)
-        console.log(123)
+        // console.log(123)
       }
       sendResponse(res, data, mimeType[ext]);
     });

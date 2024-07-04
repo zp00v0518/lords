@@ -4,8 +4,8 @@ import setPowerControlOnDB from '../db/setPowerControlOnDB.js';
 import setWeightForCell from './setWeightForCell.js';
 
 async function setZoneControl(serverName, power = 0, center, user) {
-  const GlobalMap = import('../../globalMap/constractGlobalMap.js');
-  const length = GlobalMap[serverName].length;
+  const GlobalMap = await import('../../globalMap/constractGlobalMap.js');
+  const length = GlobalMap.default[serverName].length;
   const centerX = center.x;
   const centerY = center.y;
   let radius = getRadiusZone(power);
