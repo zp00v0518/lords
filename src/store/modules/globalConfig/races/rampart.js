@@ -1,21 +1,8 @@
+// import app_global_config from '../../../../../app_global_config/index.js';
+// const listBuildings = app_global_config.Town.listBuildings;
+// console.log(listBuildings)
 import fromBackend from '../../../../fromBackend';
 const listBuildings = fromBackend.Town.listBuildings;
-// const listBuildings = {
-//   market: { name: '1' },
-//   storage: { name: '2' },
-//   guild: { name: '3' },
-//   fort: { name: '4' },
-//   hall: { name: '5' },
-//   tavern: { name: '6' },
-//   barraks_1: { name: '7' },
-//   barraks_2: { name: '8' },
-//   barraks_3: { name: '9' },
-//   barraks_4: { name: '10' },
-//   barraks_5: { name: '11' },
-//   barraks_6: { name: '12' },
-//   barraks_7: { name: '13' },
-// };
-console.log(listBuildings)
 
 const default_img = [
   {

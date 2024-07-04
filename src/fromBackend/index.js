@@ -1,3 +1,3 @@
-import forFront from "../../backend/forFront";
+import forFront from "../../backend/forFront/index.js";
 
 export default forFront;

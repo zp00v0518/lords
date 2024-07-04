@@ -26,7 +26,6 @@ export default {
     handlerAllLoad() {
       this.allLoad = true
       // eslint-disable-next-line
-      console.log(this)
       this.$store.commit('SET_GAME_SOURCES', window.sourceLoader.sources)
       document.removeEventListener('allLoad', this.handlerAllLoad)
     }

@@ -4,7 +4,6 @@ import Town from '../town/Town.js';
 import resources from '../resources/Resources.js';
 import schema from '../workWithMongoDB/schema.js';
 // import process from 'node:process';
-console.log(123)
 const time = config.time;
 // используется ТАКЖЕ!!!! на фронте при улучшении строений в регионе!!!!!!!!
 

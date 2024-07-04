@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     getAsTimeString,
-    checkSource: this.Resources?.checkSource,
+    checkSource: this?.Resources?.checkSource,
     closeDialogWindow() {
       this.$store.commit('DIALOG_CLOSE')
     }

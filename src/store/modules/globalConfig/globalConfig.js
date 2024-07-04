@@ -1,15 +1,16 @@
+// import app_global_config from '../../../../app_global_config/index.js';
+// const listBuildings = app_global_config.Town.listBuildings;
+// console.log(app_global_config)
+
 // к данным с бэка подмешиваются фронтовые данные в папке "./races"
-import fromBackend from '../../../fromBackend';
 import races from './races';
 import { mergeRcursive } from '../../../utils';
-// import Race from '../../../../backend/race/Race';
-// import Town from '../../../../backend/town/Town';
+import fromBackend from '../../../fromBackend';
+const listBuildings = fromBackend.Town.listBuildings;
+
+
 // к данным с бэка подмешиваю данные с фронта
 
-// const fromBackend = {
-//   Race: {},
-//   Town: {}
-// }
 fromBackend?.Race?.typeList.forEach(key => {
   if (races[key]) {
     mergeRcursive(fromBackend.Race[key], races[key]);
@@ -19,7 +20,7 @@ fromBackend?.Race?.typeList.forEach(key => {
 const globalConfig = {
   state: {
     races: fromBackend?.Race,
-    listBuildings: fromBackend?.Town?.listBuildings,
+    listBuildings: listBuildings,
     all: fromBackend,
     choicesRace: false
   },

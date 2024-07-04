@@ -4,7 +4,7 @@ import buildings from './buildings/index.js';
 import rampart_units from '../../army/units/rampart/index.js';
 import { Heroes } from '../../heroes/index.js';// [process] 
 import types_races from '../types_races.js';
-import images from './images.js'; // [process] 
+import images from './images.js'; // [process]
 
 const Rampart = {
   images,
@@ -25,7 +25,6 @@ const Rampart = {
   heroes: Heroes.races.rampart,
   units: rampart_units
 };
-
 export default Rampart;
 
 // const coords = {
