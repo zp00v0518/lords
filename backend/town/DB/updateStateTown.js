@@ -12,7 +12,7 @@ async function updateStateTown(sector, ops = { upsert: false }, callback) {
     ops: ops
   };
   const result = await update.one(optionsForUpdate)
-  return callback ? callback(result.result) : result.result;
+  return callback ? callback(result) : result;
   // return new Promise((resolve, reject) => {
   //   const optionsForUpdate = {
   //     collectionName: sector.serverName,

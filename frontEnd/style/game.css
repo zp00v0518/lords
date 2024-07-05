@@ -3,9 +3,9 @@ body {
   width: 100vw;
   /* overflow-y: hidden; */
 }
-#app {
+/* #app {
   display: none;
-}
+} */
 #gameLoadingWrap {
   margin: 0;
   padding: 0;
