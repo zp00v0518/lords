@@ -11,7 +11,6 @@ import modules from './modules/index.js';
 // console.log("Store", store.state);
 
 import { createStore } from 'vuex'
-console.log(modules)
 const store = createStore({
   modules
 })
