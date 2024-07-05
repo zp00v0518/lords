@@ -1,4 +1,3 @@
-<script>
 export default {
   computed: {
     gloss() {
@@ -6,4 +5,3 @@ export default {
     }
   }
 };
-</script>

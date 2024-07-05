@@ -1,4 +1,3 @@
-<script>
 export default {
   methods: {
     upperFirstSymbol(str) {
@@ -7,4 +6,3 @@ export default {
     }
   }
 };
-</script>

@@ -1,4 +1,3 @@
-<script>
 import { deepClone } from "../../utils";
 export default {
   computed: {
@@ -19,4 +18,3 @@ export default {
     deepClone
   }
 };
-</script>

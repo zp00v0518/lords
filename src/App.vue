@@ -1,5 +1,12 @@
-<script lang="ts">
-import ChoicesRace from './components/organism/ChoicesRace'
+<template>
+  <div id="app">
+    <ChoicesRace v-if="choicesHeroes" />
+    <router-view v-if="!choicesHeroes && allLoad && isReady" />
+  </div>
+</template>
+
+<script>
+import ChoicesRace from './components/organism/ChoicesRace/ChoicesRace.vue'
 
 export default {
   name: 'App',
@@ -32,17 +39,6 @@ export default {
   }
 }
 </script>
-
-<template>
-  <div id="app">
-    <template v-if="choicesHeroes">
-      <ChoicesRace />
-    </template>
-    <template v-if="!choicesHeroes && allLoad && isReady">
-      <router-view />
-    </template>
-  </div>
-</template>
 
 <style lang="sass">
 @import 'app.scss'

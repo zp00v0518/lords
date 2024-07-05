@@ -1,12 +1,12 @@
 import { createApp } from 'vue'
 import store from './store/index.js'
 import Ws from './api/ws'
+import EventBus from './api/EventBus.js'
 
 // import './components/atoms'
-import './assets/main.scss'
-import upperFirstSymbol from './components/mixins/upperFirstSymbol.vue'
-import globalConfig from './components/mixins/globalConfig.vue'
-import gloss from './components/mixins/glossary.vue'
+import upperFirstSymbol from './components/mixins/upperFirstSymbol.js'
+import globalConfig from './components/mixins/globalConfig.js'
+import gloss from './components/mixins/glossary.js'
 
 import variables from '../backend/variables/game_variables.js'
 
@@ -21,7 +21,7 @@ app.use(store)
 // Vue.config.productionTip = false
 app.config.globalProperties.$ws = new Ws()
 app.config.globalProperties.$ws.init(`ws://${location.hostname}:${4001}${location.pathname}`, store)
-// Vue.prototype.$bus = bus
+app.config.globalProperties.$bus = new EventBus()
 app.config.globalProperties.$lang = store.state.local.lang
 app.config.globalProperties.$var = variables
 
