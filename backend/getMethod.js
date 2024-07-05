@@ -20,7 +20,7 @@ async function getMethod(req, res, startPath) {
   let pathName = urlParse.path;
   let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   // блок проверяющий статические файлы
-  let regPath = /.*js.*|.*img.*|.*style.*|.*ico.*|.*css.*/gi;
+  let regPath = /.*js.*|.*img.*|.*style.*|.*ico.*|.*css.*|.jpg.* |.*png.*/gi;
   let check = regPath.test(pathName);
   if (check) {
     // жесткий костиль, на час переходу на нову ноду. 
