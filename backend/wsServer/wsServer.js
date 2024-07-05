@@ -1,3 +1,4 @@
+import process from 'node:process'
 import '../variables/global_variables.js';
 import allHandler from './allHandler.js';
 import chat from '../chat/chat.js';
@@ -112,6 +113,6 @@ function callbackForWatcher() {
     }
   });
 }
-// if (process.env.MODE === 'DEV') {
-//   watcher(config.frontEnd.watchFolder, callbackForWatcher);
-// }
+if (process.env.MODE === 'DEV') {
+  watcher(config.frontEnd.watchFolder, callbackForWatcher);
+}
