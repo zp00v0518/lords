@@ -33,11 +33,10 @@ function setUpUpgradeChange_building({
     };
     dataForDB.data.nextLvl = dataForDB.data.lvl + 1;
     addEventToDB(dataForDB, info.server)
-      .then(result => {
-        updateStateTown(sector).then(() => {
-          callback(null);
-          return resolve();
-        });
+      .then(async () => {
+        await updateStateTown(sector)
+        callback(null);
+        return resolve();
       })
       .catch(err => {
         callback(err);

@@ -52,15 +52,14 @@ function handlerResponseUpgradeRegion(message, info) {
           const userId = info.player.user._id;
           const serverName = info.server;
           response.storage = deleteSource(needResources, storage);
-          updateStateRegion(sector).then(() => {
-            updateStateTown(sector).then(() => {
-              formEventsList(userId, serverName).then(listEvents => {
-                response.upgrade = true;
-                response.message = gloss.dialog.upgradeDone[lang];
-                response.sectorIndex = data.sectorIndex;
-                response.eventsList = listEvents;
-                sendWSMessage(ws, response);
-              });
+          updateStateRegion(sector).then(async () => {
+            await updateStateTown(sector)
+            formEventsList(userId, serverName).then(listEvents => {
+              response.upgrade = true;
+              response.message = gloss.dialog.upgradeDone[lang];
+              response.sectorIndex = data.sectorIndex;
+              response.eventsList = listEvents;
+              sendWSMessage(ws, response);
             });
           });
         })

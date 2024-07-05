@@ -56,18 +56,17 @@ function handlerResponseUpgradeBuilding(message, info) {
       const seconds = sec / global.gameVariables.time.speedGame;
       const time_for_upgrade = Town.getTimeForUpgrade(time_in_gold * seconds, persent);
       setUpUpgradeChange_building({ building, time_for_upgrade, sector, info })
-        .then(() => {
+        .then(async () => {
           response.storage = deleteSource(price_for_upgrade, storage);
           const userId = info.player.user._id;
           const serverName = info.server;
-          updateStateTown(sector).then(() => {
-            formEventsList(userId, serverName).then(listEvents => {
-              response.upgrade = true;
-              response.message = gloss.dialog.upgradeDone[lang];
-              response.sectorIndex = data.sectorIndex;
-              response.eventsList = listEvents;
-              sendWSMessage(ws, response);
-            });
+          await updateStateTown(sector)
+          formEventsList(userId, serverName).then(listEvents => {
+            response.upgrade = true;
+            response.message = gloss.dialog.upgradeDone[lang];
+            response.sectorIndex = data.sectorIndex;
+            response.eventsList = listEvents;
+            sendWSMessage(ws, response);
           });
         })
         .catch(err => console.log(err));

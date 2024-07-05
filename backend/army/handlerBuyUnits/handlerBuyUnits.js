@@ -61,16 +61,15 @@ function handlerBuyUnits(message, info) {
         return;
       }
       const timeHiring = Army.getBaseHiringTime(unitInfo.hp, hiring);
-      setEventForHiringUnit({ sector, info, unitName, count: hiring, timeHiring }).then(() => {
+      setEventForHiringUnit({ sector, info, unitName, count: hiring, timeHiring }).then(async () => {
         storage = deleteSource(totalCost, storage);
         const userId = info.player.user._id;
         const serverName = info.server;
         barrak.work.nowValue -= hiring;
-        updateStateTown(sector).then(() => {
-          formEventsList(userId, serverName).then(listEvents => {
-            response.eventsList = listEvents;
-            sendWSMessage(ws, response);
-          });
+        await updateStateTown(sector)
+        formEventsList(userId, serverName).then(listEvents => {
+          response.eventsList = listEvents;
+          sendWSMessage(ws, response);
         });
       });
     })
