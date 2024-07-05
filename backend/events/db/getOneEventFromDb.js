@@ -8,7 +8,7 @@ async function getOneEventFromDb(serverName, eventId) {
   const findOptions = {
     collectionName: serverName,
     query: {
-      _id: ObjectId(eventId)
+      _id: new ObjectId(eventId)
     }
   };
   const result = await find.one(findOptions);

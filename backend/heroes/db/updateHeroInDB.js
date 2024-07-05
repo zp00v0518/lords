@@ -14,7 +14,7 @@ function updateHeroInDB(serverName, heroId, newDoc, ops = {}, callback = () => {
   return new Promise((resolve, reject) => {
     const optionsForUpdate = {
       collectionName: serverName,
-      filtr: { _id: ObjectId(heroId) },
+      filtr: { _id: new ObjectId(heroId) },
       updateDoc: { $set: newDoc },
       ops: ops
     }

@@ -1,19 +1,34 @@
 import gameEvent from '../events/Event.js'
 const evTypes = gameEvent.types;
 
+import chatMessage from '../chat/handlerChatMessage.js';
+import moveGlobalMap from '../globalMap/moveGlobalMap.js';
+import upgradeRegion from '../region/handlerResponseUpgradeRegion.js';
+import upgradeBuilding from '../town/buildings/handlerResponseUpgradeBuilding.js';
+import choicesRace from '../race/choicesRace.js';
+import buyUnits from '../army/handlerBuyUnits/index.js';
+import mergeArmy from '../army/handlerMergeArmy/index.js';
+import updateArmyOnRegion from '../army/handlerUpdateArmyOnRegion/index.js';
+import battleRequest from '../battle/handlerBattleRequest/index.js';
+import handlerBuildNewTownRequest from '../town/handlerBuildNewTownRequest/index.js';
+import handlerHeroTransferRequest from '../town/handlerHeroTransferRequest/index.js';
+import handlerSendCaravanRequest from '../caravan/handlerSendCaravanRequest/index.js';
+import handlerGoToCoordsRequest from '../globalMap/handlerGoToCoordsRequest.js';
+import handlerAttackEnemyRegionRequest from '../battle/handlerAttackEnemyRegionRequest/index.js';
+
 export default {
-  chatMessage: import('../chat/handlerChatMessage.js'),
-  moveGlobalMap: import('../globalMap/moveGlobalMap.js'),
-  upgradeRegion: import('../region/handlerResponseUpgradeRegion.js'),
-  upgradeBuilding: import('../town/buildings/handlerResponseUpgradeBuilding.js'),
-  choicesRace: import('../race/choicesRace.js'),
-  buyUnits: import('../army/handlerBuyUnits/index.js'),
-  mergeArmy: import('../army/handlerMergeArmy/index.js'),
-  updateArmyOnRegion: import('../army/handlerUpdateArmyOnRegion/index.js'),
-  battleRequest: import('../battle/handlerBattleRequest/index.js'),
-  [evTypes.buildNewTown]: import('../town/handlerBuildNewTownRequest/index.js'),
-  [evTypes.heroTransfer]: import('../town/handlerHeroTransferRequest/index.js'),
-  [evTypes.sendCaravan]: import('../caravan/handlerSendCaravanRequest/index.js'),
-  [evTypes.goToCoords]: import('../globalMap/handlerGoToCoordsRequest.js'),
-  [evTypes.attackEnemyRegion]: import('../battle/handlerAttackEnemyRegionRequest/index.js')
+  chatMessage,
+  moveGlobalMap,
+  upgradeRegion,
+  upgradeBuilding,
+  choicesRace,
+  buyUnits,
+  mergeArmy,
+  updateArmyOnRegion,
+  battleRequest,
+  [evTypes.buildNewTown]: handlerBuildNewTownRequest,
+  [evTypes.heroTransfer]: handlerHeroTransferRequest,
+  [evTypes.sendCaravan]: handlerSendCaravanRequest,
+  [evTypes.goToCoords]: handlerGoToCoordsRequest,
+  [evTypes.attackEnemyRegion]: handlerAttackEnemyRegionRequest
 };

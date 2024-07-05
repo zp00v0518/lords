@@ -8,7 +8,7 @@ async function getOneSectorForGlobalMap(serverName, sectorId) {
   const findOptions = {
     collectionName: serverName,
     query: {
-      _id: ObjectId(sectorId)
+      _id: new ObjectId(sectorId)
     },
     needFields
   };

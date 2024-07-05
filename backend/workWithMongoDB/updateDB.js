@@ -10,22 +10,30 @@ function updateDB() {
   // updateDoc = Object;
   // ops = Object;
 
-  this.one = function (options, callback = function () { }) {
-    return new Promise((resolve, reject) => {
-      if (!options.collectionName || !options.filtr || !options.updateDoc) {
-        console.log('Обновить БД не представляется возможным, т.к. не переданы все необходимые параметры');
-      }
-      let collection = mongo.open(options.collectionName);
-      let ops = options.ops || null;
-      collection.updateOne(options.filtr, options.updateDoc, ops, (err, result) => {
-        if (err) {
-          reject(err);
-          return callback(err);
-        }
-        resolve(result);
-        return callback(null, result);
-      });
-    });
+  this.one = async function (options, callback = function () { }) {
+    if (!options.collectionName || !options.filtr || !options.updateDoc) {
+      console.log('Обновить БД не представляется возможным, т.к. не переданы все необходимые параметры');
+    }
+    let collection = await mongo.open(options.collectionName);
+    let ops = options.ops || null;
+    const result = await collection.updateOne(options.filtr, options.updateDoc, ops)
+    return callback ? callback(result) : result;
+
+    // return new Promise(async (resolve, reject) => {
+    //   if (!options.collectionName || !options.filtr || !options.updateDoc) {
+    //     console.log('Обновить БД не представляется возможным, т.к. не переданы все необходимые параметры');
+    //   }
+    //   let collection = await mongo.open(options.collectionName);
+    //   let ops = options.ops || null;
+    //   collection.updateOne(options.filtr, options.updateDoc, ops, (err, result) => {
+    //     if (err) {
+    //       reject(err);
+    //       return callback(err);
+    //     }
+    //     resolve(result);
+    //     return callback(null, result);
+    //   });
+    // });
   };
   this.replaceOne = function (options, callback = function () { }) {
     return new Promise((resolve, reject) => {

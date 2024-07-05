@@ -8,7 +8,7 @@ function getOneTownFromDB(serverName, sectorId, callback = () => { }) {
     const findOptions = {
       collectionName: serverName,
       query: {
-        _id: ObjectId(sectorId)
+        _id: new ObjectId(sectorId)
       }
     };
     find

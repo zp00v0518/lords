@@ -11,7 +11,7 @@ async function getTownByHero(serverName, heroId) {
     query: {
       class: document.class.map,
       town: { $exists: true },
-      heroes: ObjectId(heroId)
+      heroes: new ObjectId(heroId)
     }
   };
   const sector = await find.one(findOptions);

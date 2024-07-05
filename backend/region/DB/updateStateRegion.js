@@ -10,7 +10,7 @@ function updateStateRegion(sector, ops = { upsert: false }, callback = function 
     // console.log(count++);
     const optionsForUpdate = {
       collectionName: sector.serverName,
-      filtr: { _id: ObjectId(sector._id) },
+      filtr: { _id: new ObjectId(sector._id) },
       // updateDoc: sector,
       updateDoc: { $set: { region: sector.region } },
       ops: ops

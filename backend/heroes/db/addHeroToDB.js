@@ -15,7 +15,7 @@ function addHeroToDB({ server, race, type, userId, callback = function () { } })
         callback(true);
         return reject();
       }
-      const insertedHero = result.ops[0];
+      const insertedHero = result.insertedId;
       callback(null, insertedHero);
       return resolve(insertedHero);
     });

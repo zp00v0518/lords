@@ -17,7 +17,7 @@ async function removeOldContolValuesFromDB(serverName, sectorId, values) {
   });
   const optionsForUpdate = {
     collectionName: serverName,
-    filtr: { _id: ObjectId(sectorId) },
+    filtr: { _id: new ObjectId(sectorId) },
     updateDoc: { $unset: removeList }
   };
   const result = await update.one(optionsForUpdate);

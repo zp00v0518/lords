@@ -7,7 +7,7 @@ async function getLastValueControl(serverName, sectorId) {
   const findOptions = {
     collectionName: serverName,
     query: {
-      _id: ObjectId(sectorId)
+      _id: new ObjectId(sectorId)
     },
     needFields: {
       'control.lastValue': 1,

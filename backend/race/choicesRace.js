@@ -39,7 +39,7 @@ async function choicesRace(message, { userCookies, ws }) {
     }
     const raceIndex = Race.typeList.indexOf(race);
     user.collections[serverName].race = raceIndex;
-    const insertHero = await addHeroToDB({ server: serverName, race, type: heroes, userId: user._id });
+    const insertHeroID = await addHeroToDB({ server: serverName, race, type: heroes, userId: user._id });
     const color = getUserRandomColor();
     user.collections[serverName].color = color;
     const updUser = {
@@ -48,8 +48,8 @@ async function choicesRace(message, { userCookies, ws }) {
     };
     await updateUser(user._id, updUser);
     const insertTown = await addNewUserToGlobalMap(user, serverName);
-    await addHeroToTown(serverName, insertTown._id, insertHero._id);
-    await addTownToHero(serverName, insertTown._id, insertHero._id);
+    await addHeroToTown(serverName, insertTown._id, insertHeroID);
+    await addTownToHero(serverName, insertTown._id, insertHeroID);
     const info_for_start_game = await getInfoForStartGame(user, serverName);
     setUserOnline(user, serverName, info_for_start_game, ws);
     ws.send(JSON.stringify({ user, message }));

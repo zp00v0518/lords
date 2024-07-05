@@ -8,7 +8,7 @@ async function getOneUserFromDB(userId) {
   const findOptions = {
     collectionName: config.db.collections.users,
     query: {
-      _id: ObjectId(userId)
+      _id: new ObjectId(userId)
     }
   };
   const result = await find.one(findOptions);

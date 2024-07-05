@@ -66,9 +66,9 @@ async function addDemoHero(user, sectorId) {
   const userId = user._id;
   const race = Race.typeList[server.race];
   const heroType = typeListHero[0];
-  const hero = await addHeroToDB({ server: serverName, race, type: heroType, userId });
-  await addCrossTownAndHero(serverName, sectorId, hero._id);
-  return hero;
+  const heroID = await addHeroToDB({ server: serverName, race, type: heroType, userId });
+  await addCrossTownAndHero(serverName, sectorId, heroID);
+  return heroID;
 }
 
 function startCreate() {

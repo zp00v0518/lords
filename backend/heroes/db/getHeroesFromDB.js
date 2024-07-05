@@ -29,7 +29,7 @@ function getHeroesFromDB(server, { userId, heroId }, callback = () => { }) {
     } else if (heroId) {
       const query = {
         class: document.class.hero,
-        _id: ObjectId(heroId)
+        _id: new ObjectId(heroId)
       };
       const ops = {
         collectionName: server,

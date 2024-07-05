@@ -8,7 +8,7 @@ function updateStateTown(sector, ops = { upsert: false }, callback = function ()
   return new Promise((resolve, reject) => {
     const optionsForUpdate = {
       collectionName: sector.serverName,
-      filtr: { _id: ObjectId(sector._id) },
+      filtr: { _id: new ObjectId(sector._id) },
       updateDoc: { $set: { town: sector.town } },
       ops: ops
     };

@@ -51,7 +51,7 @@ async function handlerMergeArmy(message, info) {
     const updateOps = {
       collectionName: serverName,
       filtr: {
-        _id: ObjectId(hero._id)
+        _id: new ObjectId(hero._id)
       },
       updateDoc: {
         $set: { army: army_hero }
