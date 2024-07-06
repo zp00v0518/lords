@@ -1,40 +1,40 @@
-import connectMongoDB from './connectMongoDB.js';
-import config from '../config/config.js';
-const mongo = new connectMongoDB();
-mongo.connect({ dbName: config.db.name });
+import connectMongoDB from './connectMongoDB.js'
+import config from '../config/config.js'
+const mongo = new connectMongoDB()
+mongo.connect({ dbName: config.db.name })
 
 function insertDB() {
   // options  - объект с полями:
   // collectionName = String;
   // doc = Object;
-  this.mongo = mongo;
-  this.one = async function (options) {
-    let collection = mongo.open(options.collectionName);
-    const insertResult = await collection.insertOne(options.doc);
+  this.mongo = mongo
+  this.one = async function (options, callback) {
+    let collection = mongo.open(options.collectionName)
+    const insertResult = await collection.insertOne(options.doc)
     if (insertResult.acknowledged) {
-      return insertResult;
+      return callback ? callback(insertResult) : insertResult
     } else {
       console.log('Вставка документа пройшла невдало')
-      return insertResult
+      return callback ? callback(insertResult) : insertResult
     }
-  };
-  this.many = function (options, callback = function () { }) {
+  }
+  this.many = function (options, callback = function () {}) {
     return new Promise((resolve, reject) => {
-      let collection = mongo.open(options.collectionName);
-      let ops = options.options || null;
+      let collection = mongo.open(options.collectionName)
+      let ops = options.options || null
       collection.insertMany(options.doc, ops, (err, result) => {
         if (err) {
-          reject(err);
-          throw err;
+          reject(err)
+          throw err
         }
-        resolve(result);
-        return callback(result);
-      });
-    });
-  };
+        resolve(result)
+        return callback(result)
+      })
+    })
+  }
   this.close = function () {
-    mongo.close();
-  };
+    mongo.close()
+  }
 }
 
-export default insertDB;
+export default insertDB

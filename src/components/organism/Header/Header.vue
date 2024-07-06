@@ -26,7 +26,6 @@ export default {
     }
   },
   created() {
-    console.log(this)
     // this.NODE_ENV = process.env.NODE_ENV
   },
   computed: {

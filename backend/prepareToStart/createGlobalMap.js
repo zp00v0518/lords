@@ -1,23 +1,23 @@
 // создает коллекцию globalMap в БД
-import 'dotenv/config';
-import { getRandomNumber } from 'template_func';
-import Insert from '../workWithMongoDB/insertDB.js';
-import schema from '../workWithMongoDB/schema.js';
-import gameVariable from '../variables/game_variables.js';
-import createMine from '../region/mine/createMine.js';
-import config from '../config/config.js';
-import WorldMap from '../globalMap/WorldMap';
+import 'dotenv/config'
+import { getRandomNumber } from 'template_func'
+import Insert from '../workWithMongoDB/insertDB.js'
+import schema from '../workWithMongoDB/schema.js'
+import gameVariable from '../variables/game_variables.js'
+import createMine from '../region/mine/createMine.js'
+import config from '../config/config.js'
+import WorldMap from '../globalMap/WorldMap.js'
 import createZoneControlToDB from '../zoneControl/methods/createZoneControlToDB.js'
-const serverList = config.db.collections.servers;
-const insertDB = new Insert();
+const serverList = config.db.collections.servers
+const insertDB = new Insert()
 
-const numSectionGlobalMap = gameVariable.numSectionGlobalMap;
-const numSectionRegionMap = gameVariable.numSectionRegionMap;
-const GlobalMap = [];
-const coordsMine = []; // возможные координаты шахт на regionMap
-import Region from '../region/Region.js';
+const numSectionGlobalMap = gameVariable.numSectionGlobalMap
+const numSectionRegionMap = gameVariable.numSectionRegionMap
+const GlobalMap = []
+const coordsMine = [] // возможные координаты шахт на regionMap
+import Region from '../region/Region.js'
 
-getPositionMine();
+getPositionMine()
 // создает перечень возможных координат шахт для regionMap
 function getPositionMine() {
   for (let i = 1; i < 4; i++) {
@@ -25,152 +25,152 @@ function getPositionMine() {
       var f = {
         x: i,
         y: h
-      };
-      if (i === 2 && h === 2) {
-        break;
       }
-      coordsMine.push(f);
+      if (i === 2 && h === 2) {
+        break
+      }
+      coordsMine.push(f)
     }
   }
 }
 
 // возвращает массив координат, где будут находится шахты
 function getArrPosition() {
-  let positionArr = [];
+  let positionArr = []
   while (positionArr.length < 4) {
-    let position = Math.floor(Math.random() * coordsMine.length);
-    let h = positionArr.includes(position);
+    let position = Math.floor(Math.random() * coordsMine.length)
+    let h = positionArr.includes(position)
     if (!h) {
-      positionArr.push(position);
+      positionArr.push(position)
     }
   }
-  return positionArr;
+  return positionArr
 }
 
 function createRegionMap() {
-  var regionMap = [];
-  var countSection = 0;
+  var regionMap = []
+  var countSection = 0
   // создаю сетку региона
   for (let i = 0; i < numSectionRegionMap; i++) {
-    let row = [];
-    regionMap.push(row);
+    let row = []
+    regionMap.push(row)
     for (let h = 0; h < numSectionRegionMap; h++) {
-      let section = {};
-      section.id = countSection++;
-      section.x = i;
-      section.y = h;
-      section.type = Region.types.forest.id; // индекс леса
-      section.sector = {};
+      let section = {}
+      section.id = countSection++
+      section.x = i
+      section.y = h
+      section.type = Region.types.forest.id // индекс леса
+      section.sector = {}
       // центр всегда является замком
       if (i == 2 && h == 2) {
-        section.type = Region.types.town.id; // индекс замка
+        section.type = Region.types.town.id // индекс замка
       }
-      regionMap[i][h] = section;
+      regionMap[i][h] = section
     }
   }
   // определаю положение шахт на карте
-  var d = getArrPosition();
+  var d = getArrPosition()
   for (let k = 0; k < d.length; k++) {
-    let index = d[k];
-    let x = coordsMine[index].x;
-    let y = coordsMine[index].y;
-    regionMap[x][y].type = Region.types.mine.id; // индекс шахты
-    const mine = createMine(x, y);
-    mine.is_default = true;
-    regionMap[x][y].sector = mine;
+    let index = d[k]
+    let x = coordsMine[index].x
+    let y = coordsMine[index].y
+    regionMap[x][y].type = Region.types.mine.id // индекс шахты
+    const mine = createMine(x, y)
+    mine.is_default = true
+    regionMap[x][y].sector = mine
   }
-  return regionMap;
+  return regionMap
 }
 
 // конструктор региона
 function createRegion() {
-  var Region = {};
-  Region = createRegionMap();
+  var Region = {}
+  Region = createRegionMap()
 
-  return Region;
+  return Region
 }
 
 function createGlobalMap() {
-  serverList.forEach(server => {
-    let countRegion = 0;
-    const serverName = server.collectionName;
-    GlobalMap[serverName] = [];
+  serverList.forEach((server) => {
+    let countRegion = 0
+    const serverName = server.collectionName
+    GlobalMap[serverName] = []
     for (let i = 0; i < numSectionGlobalMap; i++) {
-      let row = [];
-      GlobalMap[serverName].push(row);
+      let row = []
+      GlobalMap[serverName].push(row)
       for (let h = 0; h < numSectionGlobalMap; h++) {
-        let sector = {};
-        sector.class = schema.document.class.map;
-        sector.serverName = serverName;
-        sector.id = countRegion++;
-        sector.type = WorldMap.types.empty.id;
-        sector.x = i;
-        sector.y = h;
-        sector.region = createRegion();
-        sector.control = createZoneControlToDB();
+        let sector = {}
+        sector.class = schema.document.class.map
+        sector.serverName = serverName
+        sector.id = countRegion++
+        sector.type = WorldMap.types.empty.id
+        sector.x = i
+        sector.y = h
+        sector.region = createRegion()
+        sector.control = createZoneControlToDB()
         // sector.listUpgrade = [];
-        let persent = getRandomNumber(100);
+        let persent = getRandomNumber(100)
         if (persent <= 2) {
-          sector.type = WorldMap.types.nishtyak.id;
+          sector.type = WorldMap.types.nishtyak.id
         }
-        row.push(sector);
+        row.push(sector)
       }
     }
-  });
-  startInsertToDB();
+  })
+  startInsertToDB()
 }
 
 function recursiveOne(i, arr, serverName, callback) {
   if (i < arr.length) {
-    insertDB.one({ collectionName: serverName, doc: arr[i] }, result => {
-      console.log(result.insertedId);
-      i++;
-      recursiveOne(i, arr, serverName, callback);
-    });
+    insertDB.one({ collectionName: serverName, doc: arr[i] }, (result) => {
+      console.log(`Доданий сектор - id: ${arr[i].id}`)
+      i++
+      recursiveOne(i, arr, serverName, callback)
+    })
   } else {
-    callback();
+    callback()
   }
 }
 
 function recursiveTwo(h, i, arr, serverName, callback) {
   if (h < arr.length) {
-    let nextArr = arr[h];
+    let nextArr = arr[h]
     recursiveOne(i, nextArr, serverName, () => {
-      h++;
-      recursiveTwo(h, i, arr, serverName, callback);
-    });
+      h++
+      recursiveTwo(h, i, arr, serverName, callback)
+    })
   } else {
-    callback();
+    callback()
   }
 }
 
 function recursiveTree(a, h, i, serverList, callback) {
   if (a < serverList.length) {
-    const serverName = serverList[a].collectionName;
-    let nextArr = GlobalMap[serverName];
+    const serverName = serverList[a].collectionName
+    let nextArr = GlobalMap[serverName]
     recursiveTwo(h, i, nextArr, serverName, () => {
-      a++;
-      recursiveTree(a, h, i, serverList, callback);
-    });
+      a++
+      recursiveTree(a, h, i, serverList, callback)
+    })
   } else {
-    callback();
+    callback()
   }
 }
-createGlobalMap();
+createGlobalMap()
 
 function startInsertToDB() {
   setTimeout(async () => {
     const dropResult = await insertDB.mongo.db.dropDatabase()
     if (dropResult) {
-      console.log('База данных удалена');
-      console.log('Создание новой...');
+      console.log('База данных удалена')
+      console.log('Создание новой...')
       recursiveTree(0, 0, 0, serverList, () => {
-        console.log('done');
-        insertDB.close();
-      });
+        console.log('done')
+        insertDB.close()
+      })
     } else {
-      console.log('База данных не удалена');
-      insertDB.close();
+      console.log('База данных не удалена')
+      insertDB.close()
     }
-  }, 4000);
+  }, 4000)
 }

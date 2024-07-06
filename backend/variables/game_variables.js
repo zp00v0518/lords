@@ -1,19 +1,20 @@
-import config from '../config/config.js';
-import Mine from '../region/mine/Mine.js';
-import Town from '../town/Town.js';
-import resources from '../resources/Resources.js';
-import schema from '../workWithMongoDB/schema.js';
+import config from '../config/config.js'
+import Mine from '../region/mine/Mine.js'
+import Town from '../town/Town.js'
+import resources from '../resources/Resources.js'
+import schema from '../workWithMongoDB/schema.js'
 // import process from 'node:process';
-const time = config.time;
+const time = config.time
 // используется ТАКЖЕ!!!! на фронте при улучшении строений в регионе!!!!!!!!
 
 const gameVariables = {
-  numSectionGlobalMap: 100, // количество ячеек на ГЛОБАЛЬНОЙ карте, по одной оси
+  numSectionGlobalMap: 50, // количество ячеек на ГЛОБАЛЬНОЙ карте, по одной оси
+  // numSectionGlobalMap: 100, // количество ячеек на ГЛОБАЛЬНОЙ карте, по одной оси
   // numSectionGlobalMap: process.env.SIZE_MAP || 100, // количество ячеек на ГЛОБАЛЬНОЙ карте, по одной оси
   // при изменении кол-ва ячеек, нужно поменять кол-во отображаемых ячеек на 1-й оси
   // как здесь, так и на клиенте
   getMaxIndexMap: function () {
-    return gameVariables.numSectionGlobalMap - 1;
+    return gameVariables.numSectionGlobalMap - 1
   }, // максимальный индекс для массива карты
   numSectionRegionMap: 5, // количество ячеек на карте РЕГИОНА, по одной оси
   viewSectionGlobalMapNow: 15, // количество ячеек на Глобальной карте, по одной оси
@@ -37,6 +38,6 @@ const gameVariables = {
   town: Town, // используется на фронте при улучшении зданий
   resources, // используется на фронте при улучшении зданий
   classInstance: schema.document.class
-};
+}
 
-export default gameVariables;
+export default gameVariables
