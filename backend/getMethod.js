@@ -1,30 +1,29 @@
-import url from 'node:url';
-import path from 'node:path';
+import url from 'node:url'
+import path from 'node:path'
 // import process from 'node:process';
 
-
-import Cookies from 'cookies';
-import { fileReader, mimeType, sendResponse, config, findUserInDB } from './tube.js';
-import { addCollectionsToUser } from './user/index.js';
-import { getCollectionName } from './template_modules/index.js';
+import Cookies from 'cookies'
+import { fileReader, mimeType, sendResponse, config, findUserInDB } from './tube.js'
+import { addCollectionsToUser } from './user/index.js'
+import { getCollectionName } from './template_modules/index.js'
 console.log(777)
 const MODE = 'DEV'
 // const MODE = process.env.MODE;
-const listFile = config.listFile[MODE] || config.listFile.html;
+const listFile = config.listFile[MODE] || config.listFile.html
 
 async function getMethod(req, res, startPath) {
-  let urlParse = url.parse(req.url, true);
-  let cookies = new Cookies(req, res);
-  let userCookies = cookies.get('user');
-  let sessionCookies = cookies.get('session');
-  let pathName = urlParse.path;
-  let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  let urlParse = url.parse(req.url, true)
+  let cookies = new Cookies(req, res)
+  let userCookies = cookies.get('user')
+  let sessionCookies = cookies.get('session')
+  let pathName = urlParse.path
+  let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
   // блок проверяющий статические файлы
-  let regPath = /.*js.*|.*img.*|.*style.*|.*ico.*|.*css.*|.jpg.* |.*png.*/gi;
-  let check = regPath.test(pathName);
+  let regPath = /.*js.*|.*img.*|.*style.*|.*ico.*|.*css.*|.jpg.*|.*png.*/gi
+  let check = regPath.test(pathName)
   if (check) {
-    // жесткий костиль, на час переходу на нову ноду. 
-    // Стара логіка виддічі файлів, поки не працює. 
+    // жесткий костиль, на час переходу на нову ноду.
+    // Стара логіка виддічі файлів, поки не працює.
     // Треба, попрацювати над логікою, або усі початкові сторінки по типу реєстрації вибору сервера та інші - перенести до глобального Vue
     // const { servers } = config.db.collections
     // const pathReferer = path.parse(req.headers?.referer || '/').base
@@ -32,12 +31,12 @@ async function getMethod(req, res, startPath) {
     if (pathName.includes('assets/')) {
       itogPath = './dist'
     }
-    const ext = path.parse(pathName).ext;
-    const pathJoin = path.join(startPath, itogPath, pathName);
+    const ext = path.parse(pathName).ext
+    const pathJoin = path.join(startPath, itogPath, pathName)
     fileReader(pathJoin, (err, data) => {
       if (err) {
-        console.log(err);
-        return;
+        console.log(err)
+        return
       }
       if (res._closed) {
         // console.log(req.headers)
@@ -45,50 +44,50 @@ async function getMethod(req, res, startPath) {
         // console.log(`pathName: ${pathName} startPath:${startPath}`)
         // console.log(123)
       }
-      sendResponse(res, data, mimeType[ext]);
-    });
-    return;
+      sendResponse(res, data, mimeType[ext])
+    })
+    return
   }
   // если userCookies, то переходим на страницу авторизации
   if (!userCookies) {
-    pathName = listFile.login + '.html';
-    var pathJoin = path.join(startPath, config.basePathToFiles, pathName);
-    var ext = path.parse(pathName).ext;
+    pathName = listFile.login + '.html'
+    var pathJoin = path.join(startPath, config.basePathToFiles, pathName)
+    var ext = path.parse(pathName).ext
     fileReader(pathJoin, (err, data) => {
       if (err) {
-        console.log(err);
-        return;
+        console.log(err)
+        return
       }
-      sendResponse(res, data, mimeType[ext]);
-    });
+      sendResponse(res, data, mimeType[ext])
+    })
     // если userCookies есть, ищем совпадение в БД
   } else if (userCookies) {
-    const resultFinUser = await findUserInDB(userCookies);
+    const resultFinUser = await findUserInDB(userCookies)
     if (resultFinUser) {
-      const serverName = getCollectionName(pathName.split('/')[1]);
+      const serverName = getCollectionName(pathName.split('/')[1])
       if (!serverName) {
         // отправляем пользователя в личный кабинет
-        pathName = listFile.cabinet + '.html';
-      } else if (!Object.values(resultFinUser.collections).find(i => i.name === serverName)) {
-        addCollectionsToUser(resultFinUser, serverName);
-        pathName = listFile.game + '.html';
+        pathName = listFile.cabinet + '.html'
+      } else if (!Object.values(resultFinUser.collections).find((i) => i.name === serverName)) {
+        addCollectionsToUser(resultFinUser, serverName)
+        pathName = listFile.game + '.html'
       } else {
-        pathName = listFile.game + '.html';
+        pathName = listFile.game + '.html'
       }
     } else {
-      pathName = listFile.login + '.html';
+      pathName = listFile.login + '.html'
     }
 
     // pathName = config.listFile.html.cabinet + ".html";
-    const pathJoin = path.join(startPath, config.basePathToFiles, pathName);
-    const ext = path.parse(pathName).ext;
+    const pathJoin = path.join(startPath, config.basePathToFiles, pathName)
+    const ext = path.parse(pathName).ext
     fileReader(pathJoin, (err, data) => {
       if (err) {
-        console.log(err);
-        return;
+        console.log(err)
+        return
       }
-      sendResponse(res, data, mimeType[ext]);
-    });
+      sendResponse(res, data, mimeType[ext])
+    })
   }
 }
 
