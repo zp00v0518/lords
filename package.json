@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite build --watch ./",
+    "set-env": "npm run env AAAA=123",
+    "dev": "set NODE_ENV=development && vite build --mode development --outDir ./dist --watch ./ ",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
