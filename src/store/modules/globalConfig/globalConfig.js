@@ -1,30 +1,28 @@
 // к данным с бэка подмешиваются фронтовые данные в папке "./races"
-import races from './races'
-import heroes from './heroes/index.js'
-import { mergeRcursive } from '../../../utils'
-import fromBackend from '../../../fromBackend'
-const listBuildings = fromBackend.Town.listBuildings
+import races from './races';
+import { mergeRcursive } from '../../../utils';
+import fromBackend from '../../../fromBackend';
+const listBuildings = fromBackend.Town.listBuildings;
+import heroes from './heroes/index.js';
 
 // к данным с бэка подмешиваю данные с фронта
 fromBackend?.Race?.typeList.forEach((key) => {
   if (races[key]) {
-    mergeRcursive(fromBackend.Race[key], races[key])
+    mergeRcursive(fromBackend.Race[key], races[key]);
   }
-})
-
-mergeRcursive(fromBackend.Race.heroes, heroes)
-
+});
+mergeRcursive(fromBackend.Race.heroes, heroes);
 const globalConfig = {
   state: {
     races: fromBackend?.Race,
     listBuildings: listBuildings,
     all: fromBackend,
-    choicesRace: false
+    choicesRace: false,
   },
   mutations: {
     CHOICE_RASE(state, payload) {
-      state.choicesRace = payload.status
-    }
-  }
-}
-export default globalConfig
+      state.choicesRace = payload.status;
+    },
+  },
+};
+export default globalConfig;

@@ -6,38 +6,40 @@
 </template>
 
 <script>
-import ChoicesRace from './components/organism/ChoicesRace/ChoicesRace.vue'
+import ChoicesRace from './components/organism/ChoicesRace/ChoicesRace.vue';
 
 export default {
   name: 'App',
   components: {
-    ChoicesRace
+    ChoicesRace,
   },
   created() {
-    document.addEventListener('allLoad', this.handlerAllLoad)
+    document.addEventListener('allLoad', this.handlerAllLoad);
   },
   data() {
     return {
-      allLoad: false
-    }
+      allLoad: false,
+    };
   },
   computed: {
     choicesHeroes() {
-      return this.globalConfig?.choicesRace
+      return this.globalConfig?.choicesRace;
     },
     isReady() {
-      return this.$store?.state.settings.isReady
-    }
+      return this.$store?.state.settings.isReady;
+    },
   },
   methods: {
     handlerAllLoad() {
-      this.allLoad = true
+      this.allLoad = true;
       // eslint-disable-next-line
-      this.$store.commit('SET_GAME_SOURCES', window.sourceLoader.sources)
-      document.removeEventListener('allLoad', this.handlerAllLoad)
-    }
-  }
-}
+      this.$store.commit('SET_GAME_SOURCES', window.sourceLoader.sources);
+      document.removeEventListener('allLoad', this.handlerAllLoad);
+      console.log(this.$store.state.globalConfig);
+      // console.log(this.$store.state.gameSources);
+    },
+  },
+};
 </script>
 
 <style lang="sass">

@@ -10,44 +10,42 @@
         :code="'heroes'"
       />
     </div>
-    <button
-      class="choices-race__btn"
-      type="button"
-      @click="sendChoiceToServer"
-    >Я сделал выбор. Давай уже, не томи</button>
+    <button class="choices-race__btn" type="button" @click="sendChoiceToServer">
+      Я сделал выбор. Давай уже, не томи
+    </button>
   </div>
 </template>
 
 <script>
-import Carousel from "../../moleculs/Carousel";
+import Carousel from '../../moleculs/Carousel';
 
 export default {
-  name: "ChoicesRace",
+  name: 'ChoicesRace',
   components: {
-    Carousel
+    Carousel,
   },
   data() {
     return {
       listRaces: [],
       listHeroes: [],
       itogMessage: {
-        type: "choicesRace",
-        url: location.pathname
-      }
+        type: 'choicesRace',
+        url: location.pathname,
+      },
     };
   },
   created() {
     this.createListRaces();
-    this.createListHeroes("rampart");
+    this.createListHeroes('rampart');
   },
   methods: {
     createListRaces() {
       const races = this.globalConfig.races;
-      const result = races.getRace().map(item => {
+      const result = races.getRace().map((item) => {
         const template = {
           type: item.type,
           url: `${item.images.ico.dir}/${item.images.ico.base}`,
-          title: item.type
+          title: item.type,
         };
         return template;
       });
@@ -57,7 +55,7 @@ export default {
     createListHeroes(type_race) {
       const races = this.globalConfig.races;
       const heroes = races.heroes.getHeroes(type_race);
-      const result = heroes.map(item => {
+      const result = heroes.map((item) => {
         item.url = `${item.img.ava.dir}/${item.img.ava.base}`;
         item.title = item.name;
         return item;
@@ -66,14 +64,15 @@ export default {
       this.itogMessage.heroes = this.listHeroes[0].type;
     },
     handlerChangeItem(event) {
+      console.log(event);
       const { itogMessage } = this;
       const { code, value } = event;
       itogMessage[code] = value.type;
     },
     sendChoiceToServer() {
       this.$ws.sendMessage(this.itogMessage);
-    }
-  }
+    },
+  },
 };
 </script>
 

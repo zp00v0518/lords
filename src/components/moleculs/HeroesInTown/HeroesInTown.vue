@@ -38,26 +38,28 @@
 <script>
 import { ArmyLine } from '../ArmyLine';
 
+import { getHeroImg } from '@utils/heroes';
+
 export default {
   name: 'HeroesInTown',
   components: { ArmyLine },
   props: {
     heroesList: { type: Array, default: () => [] },
-    sector: { type: Object, default: () => ({}) }
+    sector: { type: Object, default: () => ({}) },
   },
   data() {
     return {
       list: this.heroesList,
-      allDisabled: false
+      allDisabled: false,
     };
   },
   computed: {
     disabled_in() {
-      return this.sector.town.army.units.length === 0
+      return this.sector.town.army.units.length === 0;
     },
     activeHeroId() {
       return this.$store.state.heroes.activeHeroId;
-    }
+    },
   },
   watch: {
     heroesList: {
@@ -65,19 +67,21 @@ export default {
       handler(e) {
         const { deepClone } = this;
         this.list = deepClone(e);
-      }
-    }
+      },
+    },
   },
   methods: {
+    getHeroImg,
     setActiveHero(hero) {
       const id = hero._id;
       if (this.activeHeroId === id) return;
       this.$store.commit('SET_ACTIVE_HERO_ID', id);
     },
     getHeroesAvatar(hero) {
+      console.log(hero);
       if (!hero) return;
-      const { races } = this.globalConfig;
-      return races.heroes.getHeroImg(hero.race, hero.type);
+      return this.getHeroImg(hero.race, hero.type);
+      // return races.heroes.getHeroImg(hero.race, hero.type);
     },
     mergeArmy(index, way) {
       const hero = this.list[index];
@@ -85,13 +89,13 @@ export default {
         type: 'mergeArmy',
         data: {
           id: hero._id,
-          way
-        }
+          way,
+        },
       };
       this.allDisabled = true;
       this.$ws
         .get(message)
-        .then(res => {
+        .then((res) => {
           this.allDisabled = false;
           const { data } = res;
           const payload = {};
@@ -108,12 +112,12 @@ export default {
             this.$store.commit('FORCE_UPDATE_SECTORS_LIST');
           }
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
           this.allDisabled = false;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

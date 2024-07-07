@@ -5,7 +5,7 @@ import {
   getInfoForStartGame,
   setUserOnline,
   updateUser,
-  getUserRandomColor
+  getUserRandomColor,
 } from '../user/index.js';
 import { redirectMessage } from '../wsServer/defaultMessages.js';
 import { getCollectionName, checkSchema } from '../template_modules/index.js';
@@ -39,12 +39,17 @@ async function choicesRace(message, { userCookies, ws }) {
     }
     const raceIndex = Race.typeList.indexOf(race);
     user.collections[serverName].race = raceIndex;
-    const insertHeroID = await addHeroToDB({ server: serverName, race, type: heroes, userId: user._id });
+    const insertHeroID = await addHeroToDB({
+      server: serverName,
+      race,
+      type: heroes,
+      userId: user._id,
+    });
     const color = getUserRandomColor();
     user.collections[serverName].color = color;
     const updUser = {
       [`collections.${serverName}.race`]: raceIndex,
-      [`collections.${serverName}.color`]: color
+      [`collections.${serverName}.color`]: color,
     };
     await updateUser(user._id, updUser);
     const insertTown = await addNewUserToGlobalMap(user, serverName);
@@ -59,11 +64,10 @@ async function choicesRace(message, { userCookies, ws }) {
   }
 }
 
-
 const schema = {
   race: { type: 'string' },
   url: { type: 'string', regExp: /^\/{1}[^\/]/gi },
-  heroes: { type: 'string' }
+  heroes: { type: 'string' },
 };
 
 export default choicesRace;
