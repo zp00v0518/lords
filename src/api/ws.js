@@ -61,7 +61,7 @@ class WS {
     this.store.commit('SET_CURRENTMAP', eventData);
   }
   startMessages(eventData) {
-    // console.log('startMessages',eventData);
+    console.log('startMessages', eventData);
     this.store.commit('SET_IS_READY_APP');
     this.store.commit('CHOICE_RASE', { status: false });
     this.store.commit('START_MESSAGES', eventData);
