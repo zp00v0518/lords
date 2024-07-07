@@ -1,8 +1,8 @@
 import dictionary from './dictionary';
 import region from './region';
-import mergeRcursive from './mergeRcursive';
+import mergeRecursive from './mergeRecursive';
 import deepClone from './deepClone.js';
 import algebra from './algebra';
 import getAsTimeString from './getAsTimeString';
 
-export { dictionary, region, mergeRcursive, deepClone, algebra, getAsTimeString };
+export { dictionary, region, mergeRecursive, deepClone, algebra, getAsTimeString };

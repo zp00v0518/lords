@@ -1,13 +1,13 @@
 // к данным с бэка подмешиваются фронтовые данные в папке "./races"
 import races from './races';
-import { mergeRcursive } from '../../../utils';
+import { mergeRecursive } from '../../../utils';
 import fromBackend from '../../../fromBackend';
 const listBuildings = fromBackend.Town.listBuildings;
 
 // к данным с бэка подмешиваю данные с фронта
 fromBackend?.Race?.typeList.forEach((key) => {
   if (races[key]) {
-    mergeRcursive(fromBackend.Race[key], races[key]);
+    mergeRecursive(fromBackend.Race[key], races[key]);
   }
 });
 

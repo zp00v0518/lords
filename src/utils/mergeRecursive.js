@@ -1,8 +1,8 @@
-function mergeRcursive(target, donor) {
+function mergeRecursive(target, donor) {
   for (const p in donor) {
     try {
       if (donor[p].constructor === Object) {
-        target[p] = mergeRcursive(target[p], donor[p]);
+        target[p] = mergeRecursive(target[p], donor[p]);
       } else {
         target[p] = donor[p];
       }
@@ -13,4 +13,4 @@ function mergeRcursive(target, donor) {
   return target;
 }
 
-export default mergeRcursive;
+export default mergeRecursive;
