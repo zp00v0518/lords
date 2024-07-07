@@ -78,8 +78,8 @@ export default {
       this.$store.commit('SET_ACTIVE_HERO_ID', id);
     },
     getHeroesAvatar(hero) {
-      console.log(hero);
       if (!hero) return;
+      console.log(this.getHeroImg(hero.race, hero.type));
       return this.getHeroImg(hero.race, hero.type);
       // return races.heroes.getHeroImg(hero.race, hero.type);
     },

@@ -6,20 +6,20 @@ function getTemplateEvent() {
   return {
     data: Object,
     target: {
-      sector: ObjectID,
-      user: ObjectID,
+      sector: ObjectId,
+      user: ObjectId,
       x: Number,
-      y: Number
+      y: Number,
     },
     init: {
-      sector: ObjectID,
-      user: ObjectID,
+      sector: ObjectId,
+      user: ObjectId,
       x: Number,
-      y: Number
+      y: Number,
     },
     start: new Date().getTime(),
     end: Date,
-    type: String
+    type: String,
   };
 }
 

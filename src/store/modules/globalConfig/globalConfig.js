@@ -3,7 +3,6 @@ import races from './races';
 import { mergeRcursive } from '../../../utils';
 import fromBackend from '../../../fromBackend';
 const listBuildings = fromBackend.Town.listBuildings;
-import heroes from './heroes/index.js';
 
 // к данным с бэка подмешиваю данные с фронта
 fromBackend?.Race?.typeList.forEach((key) => {
@@ -11,7 +10,7 @@ fromBackend?.Race?.typeList.forEach((key) => {
     mergeRcursive(fromBackend.Race[key], races[key]);
   }
 });
-mergeRcursive(fromBackend.Race.heroes, heroes);
+
 const globalConfig = {
   state: {
     races: fromBackend?.Race,

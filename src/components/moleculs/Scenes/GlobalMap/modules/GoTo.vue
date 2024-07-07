@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       x: 0,
-      y: 0
+      y: 0,
     };
   },
   methods: {
@@ -48,12 +48,12 @@ export default {
       const Ev = globalConfig.all.Event;
       const message = {
         type: Ev.types.goToCoords,
-        data: { x, y }
+        data: { x, y },
       };
       const response = await this.$ws.get(message);
       this.$store.commit('SET_CURRENTMAP', response);
-    }
-  }
+    },
+  },
 };
 </script>
 

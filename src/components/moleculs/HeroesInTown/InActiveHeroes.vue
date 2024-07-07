@@ -3,21 +3,23 @@
     <div v-for="hero in heroesList" :key="hero._id" class="hero-inactive__item">
       <div class="hero-inactive__item__ava">
         <img :src="getHeroesAvatar(hero)" />
-        <div class="hero-inactive__item__tooltip">{{hero.event && hero.event.type}}</div>
+        <div class="hero-inactive__item__tooltip">{{ hero.event && hero.event.type }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { getHeroImg } from '@utils/heroes';
+
 export default {
   name: 'InActiveHeroes',
   props: {
-    heroesList: { type: Array, default: () => [] }
+    heroesList: { type: Array, default: () => [] },
   },
   data() {
     return {
-      eventsList: []
+      eventsList: [],
     };
   },
   watch: {
@@ -26,29 +28,29 @@ export default {
       handler(list) {
         const { deepClone, globalConfig } = this;
         const mode = globalConfig.all.Event.mode;
-        const arr = list.filter(i => i.mode !== mode.global && i.data.initHero);
+        const arr = list.filter((i) => i.mode !== mode.global && i.data.initHero);
         this.eventsList = deepClone(arr);
         this.addEventOnHero();
-      }
-    }
+      },
+    },
   },
   methods: {
+    getHeroImg,
     getHeroesAvatar(hero) {
       if (!hero) return;
-      const { races } = this.globalConfig;
-      return races.heroes.getHeroImg(hero.race, hero.type);
+      return this.getHeroImg(hero.race, hero.type);
     },
     addEventOnHero() {
       const { eventsList, heroesList } = this;
-      heroesList.forEach(hero => {
+      heroesList.forEach((hero) => {
         const { _id } = hero;
-        const event = eventsList.find(ev => ev.data.initHero === _id);
+        const event = eventsList.find((ev) => ev.data.initHero === _id);
         if (event) {
           hero.event = event;
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
