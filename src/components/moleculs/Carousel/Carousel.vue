@@ -2,55 +2,59 @@
   <div class="carousel">
     <div class="carousel__content">
       <div
-        :class="['carousel__item', {'carousel__item--active': active === index}]"
+        :class="['carousel__item', { 'carousel__item--active': active === index }]"
         v-for="(item, index) in data"
         :key="index"
       >
-        <h3 class="carousel__item__title" v-if="item.title ">{{item.title }}</h3>
+        <h3 class="carousel__item__title" v-if="item.title">{{ item.title }}</h3>
         <img :src="item.url" :alt="item.title || 'img'" />
       </div>
       <div
         v-if="data.length > 1"
         class="carousel__control carousel__control--left"
         @click="changeItem('left')"
-      >></div>
+      >
+        >
+      </div>
       <div
         v-if="data.length > 1"
         class="carousel__control carousel__control--right"
         @click="changeItem('right')"
-      >></div>
+      >
+        >
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Carousel",
+  name: 'Carousel',
   props: {
     data: { type: Array, default: () => [] },
-    code: { type: String, default: "carousel" }
+    code: { type: String, default: 'carousel' },
   },
   data() {
     return {
-      active: 0
+      active: 0,
     };
   },
   methods: {
     changeItem(way) {
       const { data } = this;
       let { active } = this;
-      if (way === "right") {
+      if (way === 'right') {
         this.active = active === data.length - 1 ? 0 : ++active;
       }
-      if (way === "left") {
+      if (way === 'left') {
         this.active = active === 0 ? data.length - 1 : --active;
       }
-      this.$emit("carousel-change-item", {
+      this.$emit('carousel-change-item', {
         value: data[this.active],
-        code: this.code
+        code: this.code,
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

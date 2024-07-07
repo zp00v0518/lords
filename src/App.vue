@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
-    <ChoicesRace v-if="choicesHeroes" />
-    <router-view v-if="!choicesHeroes && allLoad && isReady" />
-  </div>
+  <!-- <div class="app"> -->
+  <ChoicesRace v-if="allLoad && choicesHeroes" />
+  <router-view v-if="!choicesHeroes && allLoad && isReady" />
+  <!-- </div> -->
 </template>
 
 <script>

@@ -18,6 +18,7 @@
 
 <script>
 import Carousel from '../../moleculs/Carousel';
+import { getHeroImg } from '@utils/heroes';
 
 export default {
   name: 'ChoicesRace',
@@ -39,12 +40,16 @@ export default {
     this.createListHeroes('rampart');
   },
   methods: {
+    getHeroImg,
     createListRaces() {
-      const races = this.globalConfig.races;
+      const { globalConfig, gameSources } = this;
+      const races = globalConfig.races;
       const result = races.getRace().map((item) => {
+        const { type } = item;
         const template = {
-          type: item.type,
-          url: `${item.images.ico.dir}/${item.images.ico.base}`,
+          type,
+          url: gameSources.towns[type].ico[type].src,
+          // url: `${item.images.ico.dir}/${item.images.ico.base}`,
           title: item.type,
         };
         return template;
@@ -56,7 +61,8 @@ export default {
       const races = this.globalConfig.races;
       const heroes = races.heroes.getHeroes(type_race);
       const result = heroes.map((item) => {
-        item.url = `${item.img.ava.dir}/${item.img.ava.base}`;
+        item.url = this.getHeroImg(item.race, item.type);
+        // item.url = `${item.img.ava.dir}/${item.img.ava.base}`;
         item.title = item.name;
         return item;
       });

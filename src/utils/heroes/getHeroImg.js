@@ -1,4 +1,4 @@
-export default function (race_name, type, type_img = 'ava') {
+export default function (race_name, type) {
   const { globalConfig, gameSources } = this;
   const { races } = globalConfig;
   const hero = races.heroes.getOneHero(race_name, type);
