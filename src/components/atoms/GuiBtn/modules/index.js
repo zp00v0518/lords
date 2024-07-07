@@ -1,7 +1,7 @@
-import BuyBtn from "./BuyBtn";
-import CancelBtn from "./CancelBtn";
-import OkBtn from "./OkBtn";
-import DownBtn from "./DownBtn";
-import UpBtn from "./UpBtn";
+import BuyBtn from './BuyBtn.vue'
+import CancelBtn from './CancelBtn.vue'
+import OkBtn from './OkBtn.vue'
+import DownBtn from './DownBtn.vue'
+import UpBtn from './UpBtn.vue'
 
-export default { BuyBtn, CancelBtn, OkBtn, DownBtn, UpBtn };
+export default { BuyBtn, CancelBtn, OkBtn, DownBtn, UpBtn }

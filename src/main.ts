@@ -12,8 +12,13 @@ import variables from '../backend/variables/game_variables.js'
 
 import App from './App.vue'
 import router from './router'
+import GlobalComponents from './components/atoms/index.js'
+console.log(GlobalComponents)
 
 const app = createApp(App)
+Object.entries(GlobalComponents).forEach((item) => {
+  app.component(item[0], item[1])
+})
 
 app.use(router)
 app.use(store)

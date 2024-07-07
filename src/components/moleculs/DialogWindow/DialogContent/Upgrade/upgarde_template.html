@@ -32,17 +32,9 @@
         </div>
       </div>
       <div class="upgrade__range">
-        <h5 class="upgrade__range--txt">
-          Изменить стоимость и время улучшения
-        </h5>
+        <h5 class="upgrade__range--txt">Изменить стоимость и время улучшения</h5>
         <div class="upgrade__range--item">
-          <input
-            type="range"
-            min="70"
-            max="130"
-            v-model="rangeValue"
-            step="1"
-          />
+          <input type="range" min="70" max="130" v-model="rangeValue" step="1" />
         </div>
       </div>
     </div>
@@ -62,6 +54,6 @@
       {{ gloss.dialog.answer.no.txt }}
     </div> -->
     <GuiBtn type="ok" class="upgrade__answer--btn" @click="upgradeBuilding" />
-      <GuiBtn type="cancel" class="upgrade__answer--btn" @click="closeDialogWindow" />
+    <GuiBtn type="cancel" class="upgrade__answer--btn" @click="closeDialogWindow" />
   </div>
 </div>

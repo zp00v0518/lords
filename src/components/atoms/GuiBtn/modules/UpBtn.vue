@@ -8,20 +8,20 @@
 </template>
 
 <script>
-import disabledImg from "../../../../../frontEnd/img/buttons/up/16/disabled.gif";
-import upImg from "../../../../../frontEnd/img/buttons/up/16/up.gif";
-import overImg from "../../../../../frontEnd/img/buttons/up/16/over.gif";
-import mixin from "./mixin";
+import disabledImg from '../../../../../frontEnd/img/buttons/up/16/disabled.gif'
+import upImg from '../../../../../frontEnd/img/buttons/up/16/up.gif'
+import overImg from '../../../../../frontEnd/img/buttons/up/16/over.gif'
+import mixin from './mixin.vue'
 
 export default {
-  name: "UpBtn",
+  name: 'UpBtn',
   mixins: [mixin],
   data() {
     return {
       upImg,
       disabledImg,
       overImg
-    };
+    }
   }
-};
+}
 </script>

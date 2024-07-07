@@ -10,11 +10,11 @@
 </template>
 
 <script>
-import upImg from '../../../../../frontEnd/img/buttons/ok/up.gif';
-import disabledImg from '../../../../../frontEnd/img/buttons/ok/disabled.gif';
-import overImg from '../../../../../frontEnd/img/buttons/ok/over.gif';
-import downImg from '../../../../../frontEnd/img/buttons/ok/down.gif';
-import mixin from './mixin';
+import upImg from '../../../../../frontEnd/img/buttons/ok/up.gif'
+import disabledImg from '../../../../../frontEnd/img/buttons/ok/disabled.gif'
+import overImg from '../../../../../frontEnd/img/buttons/ok/over.gif'
+import downImg from '../../../../../frontEnd/img/buttons/ok/down.gif'
+import mixin from './mixin.vue'
 
 export default {
   name: 'OkBtn',
@@ -28,7 +28,7 @@ export default {
       disabledImg,
       overImg,
       downImg
-    };
+    }
   }
-};
+}
 </script>
