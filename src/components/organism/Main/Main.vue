@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue';
+// import { defineAsyncComponent } from 'vue';
 
 import Chat from '../Chat';
 import Vheader from '../Header';

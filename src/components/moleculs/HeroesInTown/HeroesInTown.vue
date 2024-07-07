@@ -36,13 +36,14 @@
 </template>
 
 <script>
-import { ArmyLine } from '../ArmyLine';
+import { defineAsyncComponent } from 'vue';
+// import { ArmyLine } from '../ArmyLine';
 
 import { getHeroImg } from '@utils/heroes';
 
 export default {
   name: 'HeroesInTown',
-  components: { ArmyLine },
+  components: { ArmyLine: defineAsyncComponent(() => import('../ArmyLine/ArmyLine.vue')) },
   props: {
     heroesList: { type: Array, default: () => [] },
     sector: { type: Object, default: () => ({}) },
