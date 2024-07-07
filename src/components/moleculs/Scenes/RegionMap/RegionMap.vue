@@ -30,6 +30,7 @@ import { algebra } from '../../../../utils';
 export default {
   name: 'RegionMap',
   mixins: [currentSector, drawHeroMixin, baseMixins],
+  emits: ['click'],
   components: {
     TooltipRegion,
   },

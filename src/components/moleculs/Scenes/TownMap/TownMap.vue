@@ -21,7 +21,7 @@
 
 <script>
 import { defineAsyncComponent } from 'vue';
-// import Tooltip from '../../Tooltip';
+import Tooltip from '../../Tooltip';
 import { getCursorPositionOnScene } from '../utils';
 import { formCurrentImageList, drawTown, checkElemUnderMouse } from './utils_town';
 // import Building from './Building.vue';
@@ -32,7 +32,7 @@ export default {
   mixins: [currentSector],
   components: {
     Building: defineAsyncComponent(() => import('./Building.vue')),
-    // Tooltip,
+    Tooltip,
   },
   props: ['widthScene', 'heightScene'],
   data() {
