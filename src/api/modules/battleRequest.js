@@ -1,3 +1,3 @@
 export default function battleRequest(data) {
-  console.log(data);
+  // console.log('battleRequest', data);
 }

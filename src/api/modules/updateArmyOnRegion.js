@@ -1,3 +1,3 @@
 export default function updateArmyOnRegion(data) {
-  console.log(data);
+  // console.log('updateArmyOnRegion', data);
 }
