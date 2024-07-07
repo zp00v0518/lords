@@ -17,13 +17,15 @@
 </template>
 
 <script>
-import Carousel from '../../moleculs/Carousel';
+import { defineAsyncComponent } from 'vue';
+
+// import Carousel from '../../moleculs/Carousel';
 import { getHeroImg } from '@utils/heroes';
 
 export default {
   name: 'ChoicesRace',
   components: {
-    Carousel,
+    Carousel: defineAsyncComponent(() => import('../../moleculs/Carousel')),
   },
   data() {
     return {

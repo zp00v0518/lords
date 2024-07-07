@@ -51,53 +51,57 @@
 </template>
 
 <script>
-import Scenes from '../../moleculs/Scenes'
-import DialogWindow from '../../moleculs/DialogWindow'
+import { defineAsyncComponent } from 'vue';
+
+// import Scenes from '../../moleculs/Scenes';
+import DialogWindow from '../../moleculs/DialogWindow';
 
 export default {
   name: 'Scene',
   components: {
-    DialogWindow,
-    ...Scenes
+    DialogWindow: defineAsyncComponent(() => import('../../moleculs/DialogWindow')),
+    GlobalMap: defineAsyncComponent(() => import('../../moleculs/Scenes/GlobalMap/GlobalMap.vue')),
+    RegionMap: defineAsyncComponent(() => import('../../moleculs/Scenes/RegionMap/RegionMap.vue')),
+    TownMap: defineAsyncComponent(() => import('../../moleculs/Scenes/TownMap/TownMap.vue')),
   },
   data() {
     return {
       scenes: {
         globalMap: false,
         region: false,
-        town: false
-      }
-    }
+        town: false,
+      },
+    };
   },
   created() {},
   computed: {
     widthScene() {
-      const styles = this.$el.getBoundingClientRect()
-      return styles.width + 'px'
+      const styles = this.$el.getBoundingClientRect();
+      return styles.width + 'px';
     },
     heightScene() {
-      const styles = this.$el.getBoundingClientRect()
-      return styles.height + 'px'
+      const styles = this.$el.getBoundingClientRect();
+      return styles.height + 'px';
     },
     readyToDraw() {
-      return this.$store.state.userSectors.currentSector !== null
-    }
+      return this.$store.state.userSectors.currentSector !== null;
+    },
   },
   methods: {
     changeScene(event) {
-      const target = event.target
-      const flag = target.dataset.flag
+      const target = event.target;
+      const flag = target.dataset.flag;
       Object.keys(this.scenes).forEach((key) => {
-        this.scenes[key] = key === flag
-      })
-    }
+        this.scenes[key] = key === flag;
+      });
+    },
   },
   mounted() {
     // this.scenes.region = true;
-    this.scenes.globalMap = true
+    this.scenes.globalMap = true;
     // this.scenes.town = true;
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">

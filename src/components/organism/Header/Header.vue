@@ -10,13 +10,15 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
+
 import { currentSector } from '../../mixins';
-import ChatSmall from '../Chat/ChatSmall.vue';
+// import ChatSmall from '../Chat/ChatSmall.vue';
 
 export default {
   name: 'Header',
   mixins: [currentSector],
-  components: { ChatSmall },
+  components: { ChatSmall: defineAsyncComponent(() => import('../Chat/ChatSmall.vue')) },
   data() {
     return {
       armySize: 2500,

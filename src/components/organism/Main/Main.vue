@@ -1,7 +1,12 @@
 <template>
   <main
     class="main"
-    :style="{width: mainSize.width, height: mainSize.height, maxWidth:mainSize.width, minWidth:mainSize.width }"
+    :style="{
+      width: mainSize.width,
+      height: mainSize.height,
+      maxWidth: mainSize.width,
+      minWidth: mainSize.width,
+    }"
   >
     <Vheader></Vheader>
     <div class="main__content">
@@ -17,11 +22,13 @@
       </div>
       <Sidebar></Sidebar>
     </div>
-    <chat ref="chat" :isFullpage="isFullpage"></chat>
+    <Chat ref="chat" :isFullpage="isFullpage" />
   </main>
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
+
 import Chat from '../Chat';
 import Vheader from '../Header';
 import Sidebar from '../Sidebar';
@@ -35,7 +42,15 @@ export default {
     Vheader,
     Sidebar,
     Scene,
-    TimeLine
+    TimeLine,
+    // Chat: defineAsyncComponent(() => import(/* webpackChunkName: "Chat-we" */ '../Chat')),
+    // Vheader: defineAsyncComponent(() => import(/* webpackChunkName: "Header" */ '../Header')),
+    // Sidebar: defineAsyncComponent(() => import(/* webpackChunkName: "Sidebar" */ '../Sidebar')),
+    // Scene: defineAsyncComponent(() => import(/* webpackChunkName: "Scene" */ '../Scene')),
+    // TimeLine: defineAsyncComponent(
+    //   () =>
+    //     import(/* webpackChunkName: "TimeLine" */ '../../moleculs/Scenes/TimeLine/TimeLine.vue'),
+    // ),
   },
   data() {
     return {
@@ -44,13 +59,13 @@ export default {
       ratio: 0.6,
       timeLineSize: {
         width: '',
-        height: ''
+        height: '',
       },
       isFullpage: false,
       mainSize: {
         width: '',
-        height: ''
-      }
+        height: '',
+      },
     };
   },
   created() {
@@ -80,14 +95,14 @@ export default {
     },
     isChat() {
       return this.$store.state.chat.is;
-    }
+    },
   },
   watch: {
     isChat: {
       handler(ev) {
         this.setRightMargin();
-      }
-    }
+      },
+    },
   },
   methods: {
     getPersent(width) {
@@ -145,16 +160,16 @@ export default {
       width = height / ratio;
       this.mainSize.width = width + 'px';
       this.mainSize.height = height + 'px';
-    }
+    },
   },
   mounted() {
     this.setTimelineSize();
     this.setRightMargin();
-  }
+  },
 };
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 .main {
   position: relative;
   min-height: 200px;

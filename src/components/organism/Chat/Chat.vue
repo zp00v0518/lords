@@ -32,12 +32,16 @@
 </template>
 
 <script>
-import ChatSmall from './ChatSmall.vue'
+// import ChatSmall from './ChatSmall.vue';
+import { defineAsyncComponent } from 'vue';
+
 export default {
   name: 'Chat',
-  components: { ChatSmall },
+  components: {
+    ChatSmall: defineAsyncComponent(() => import('./ChatSmall.vue')),
+  },
   props: {
-    isFullpage: { type: Boolean, default: false }
+    isFullpage: { type: Boolean, default: false },
   },
   data() {
     return {
@@ -45,49 +49,49 @@ export default {
       messageForSend: {
         text: '',
         chanel: '',
-        privat: ''
-      }
-    }
+        privat: '',
+      },
+    };
   },
   created() {},
   computed: {
     messages() {
-      return this.$store.state.chat.messages
+      return this.$store.state.chat.messages;
     },
     chatStyles() {
-      const { isFullpage } = this
+      const { isFullpage } = this;
       if (isFullpage) {
         return {
-          transform: 'translateX(-100%)'
-        }
+          transform: 'translateX(-100%)',
+        };
       }
-    }
+    },
   },
   watch: {
     '$store.state.chat.is': function () {
-      this.showChat = !this.showChat
-    }
+      this.showChat = !this.showChat;
+    },
   },
   methods: {
     timeFormatic(time) {
-      const date = new Date(time)
-      let minutes = date.getMinutes()
-      let hours = date.getHours()
+      const date = new Date(time);
+      let minutes = date.getMinutes();
+      let hours = date.getHours();
       // let seconds = date.getSeconds();
-      minutes = minutes <= 9 ? '0' + minutes : minutes
-      hours = hours <= 9 ? '0' + hours : hours
+      minutes = minutes <= 9 ? '0' + minutes : minutes;
+      hours = hours <= 9 ? '0' + hours : hours;
       // seconds = seconds <= 9 ? "0" + seconds : seconds;
-      return hours + ':' + minutes
+      return hours + ':' + minutes;
     },
     closeChat() {
-      this.$store.commit('CHANGE_CHAT')
+      this.$store.commit('CHANGE_CHAT');
     },
     sendMessage(event) {
-      this.$ws.sendChatMessage(this.messageForSend)
-      this.messageForSend.text = ''
-    }
-  }
-}
+      this.$ws.sendChatMessage(this.messageForSend);
+      this.messageForSend.text = '';
+    },
+  },
+};
 </script>
 
 <style lang="scss">

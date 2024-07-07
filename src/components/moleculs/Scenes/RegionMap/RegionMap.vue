@@ -48,6 +48,7 @@ export default {
     };
   },
   created() {
+    console.log(this);
     if (!this.regionMap) {
       this.currentMap = this.currentSector.region;
     } else {
