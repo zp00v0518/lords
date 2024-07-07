@@ -1,6 +1,6 @@
 <template>
   <div class="small" @click="showChat" :style="styles">
-    <div>{{messages}}</div>
+    <div>{{ messages }}</div>
   </div>
 </template>
 
@@ -8,11 +8,11 @@
 export default {
   name: 'ChatSmall',
   props: {
-    isFullpage: { type: Boolean, default: false }
+    isFullpage: { type: Boolean, default: false },
   },
   data() {
     return {
-      fixLength: 0
+      fixLength: 0,
     };
   },
   created() {
@@ -27,19 +27,20 @@ export default {
       if (isFullpage) {
         return {
           right: 0,
-          transform: 'unset'
+          transform: 'unset',
         };
       }
-    }
+      return {};
+    },
   },
   methods: {
     showChat() {
       this.$store.commit('CHANGE_CHAT');
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 @import 'chat.scss';
 </style>

@@ -35,7 +35,7 @@ export default {
       // eslint-disable-next-line
       this.$store.commit('SET_GAME_SOURCES', window.sourceLoader.sources);
       document.removeEventListener('allLoad', this.handlerAllLoad);
-      console.log(this.$store.state.globalConfig);
+      // console.log(this.$store.state.globalConfig);
       // console.log(this.$store.state.gameSources);
     },
   },

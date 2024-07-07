@@ -9,7 +9,7 @@
   right: 0;
   display: flex;
   z-index: -1;
-  &.chat__wrap--visible{
+  &.chat__wrap--visible {
     z-index: 1;
   }
 }
@@ -23,7 +23,7 @@
   font-size: 12px;
   background-color: $main-bg;
 
-    &__header {
+  &__header {
     display: flex;
     justify-content: flex-end;
     height: 5%;
@@ -47,17 +47,17 @@
       color: white;
     }
   }
-//   &__closed {
-//     position: relative;
-//     transform: translateX(-100%);
-//     z-index: 0;
-//   }
-//   &__show {
-//     position: absolute;
-//     right: 0;
-//     transform: translateX(110%);
-//     cursor: pointer;
-//   }
+  //   &__closed {
+  //     position: relative;
+  //     transform: translateX(-100%);
+  //     z-index: 0;
+  //   }
+  //   &__show {
+  //     position: absolute;
+  //     right: 0;
+  //     transform: translateX(110%);
+  //     cursor: pointer;
+  //   }
 
   &__form {
     display: flex;
@@ -120,7 +120,7 @@
         width: 50%;
         font-weight: 600;
       }
-      
+
       &__text {
         min-width: calc(100% - 20px);
         max-width: 100%;
@@ -136,6 +136,7 @@
   cursor: pointer;
   width: 20px;
   height: 20px;
+  margin-left: auto;
   @include border(black);
   @include center;
   // transition: none;

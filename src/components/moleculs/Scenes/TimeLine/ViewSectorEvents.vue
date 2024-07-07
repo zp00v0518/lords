@@ -12,40 +12,40 @@
 </template>
 
 <script>
-import EventTooltip from './EventTooltip.vue'
+import EventTooltip from './EventTooltip.vue';
 export default {
   name: 'ViewSectorEvents',
   components: { EventTooltip },
   props: {
     data: Object,
-    styles: null
+    styles: null,
   },
   data() {
     return {
       showTooltip: false,
       dataEvent: {},
       position: 0,
-      topEl: null
-    }
+      topEl: null,
+    };
   },
   methods: {
     handlerMouseEnter($event, data) {
       if (!data) {
-        this.showTooltip = false
-        this.dataEvent = {}
-        return
+        this.showTooltip = false;
+        this.dataEvent = {};
+        return;
       }
-      const target = $event.target
-      const style = target.getBoundingClientRect()
-      this.position = style.top - this.topEl
-      this.showTooltip = true
-      this.dataEvent = data
-    }
+      const target = $event.target;
+      const style = target.getBoundingClientRect();
+      this.position = style.top - this.topEl;
+      this.showTooltip = true;
+      this.dataEvent = data;
+    },
   },
   mounted() {
-    this.topEl = this.$el.getBoundingClientRect().top
-  }
-}
+    this.topEl = this.$el.getBoundingClientRect().top;
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -61,5 +61,6 @@ export default {
   height: 15px;
   cursor: pointer;
   border-top: none;
+  box-sizing: border-box;
 }
 </style>
