@@ -1,8 +1,5 @@
-// import app_global_config from '../../../../../app_global_config/index.js';
-// const listBuildings = app_global_config.Town.listBuildings;
-// console.log(listBuildings)
-import fromBackend from '../../../../fromBackend';
-const listBuildings = fromBackend.Town.listBuildings;
+import fromBackend from '../../../../fromBackend'
+const listBuildings = fromBackend.Town.listBuildings
 
 const default_img = [
   {
@@ -49,7 +46,7 @@ const default_img = [
       is_default: true
     }
   }
-];
+]
 
 const rampart = {
   buildings: {
@@ -313,6 +310,6 @@ const rampart = {
       }
     }
   }
-};
+}
 
-export default rampart;
+export default rampart
