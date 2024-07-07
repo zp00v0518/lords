@@ -6,16 +6,16 @@ const config = {
   server: {
     port: {
       http: 4000,
-      ws: 4001
+      ws: 4001,
       // http: process?.env?.PORT || 4000,
       // ws: process?.env?.PORT + 1 || 4001
     },
-    ready_to_work: false
+    ready_to_work: false,
   },
   frontEnd: {
     watchFolder: 'C:/Users/zp00v/Desktop/Projects/lords/dist',
     // watchFolder: path.resolve(__dirname, '../../frontEnd/dist'),
-    folder: 'frontEnd'
+    folder: 'frontEnd',
   },
   db: {
     check: false,
@@ -24,12 +24,12 @@ const config = {
       users: 'users',
       session: 'session',
       servers: [
-        { name: 'First', collectionName: 'server_1' }
+        { name: 'First', collectionName: 'server_1' },
         // { name: 'Second', collectionName: 'server_2' }
       ],
       map: 'globalMap',
-      chat: 'chat'
-    }
+      chat: 'chat',
+    },
   },
   cookieSize: 100,
   basePathToFiles: 'frontEnd', // папка, в которой находятся файлы для клиента
@@ -40,9 +40,10 @@ const config = {
     day: 1000 * 60 * 60 * 24,
     week: 1000 * 60 * 60 * 24 * 7,
     month: 1000 * 60 * 60 * 24 * 31,
-    speedGame: 1, // делитель. Влияет на время улучшения строений. Чем больше, тем быстрее. Не может быть 0
+    speedGame: 10, // делитель. Влияет на время улучшения строений. Чем больше, тем быстрее. Не может быть 0
+    // speedGame: 1, // делитель. Влияет на время улучшения строений. Чем больше, тем быстрее. Не может быть 0
     // speedGame: +this?.process?.env?.SPEED || 1, // делитель. Влияет на время улучшения строений. Чем больше, тем быстрее. Не может быть 0
-    hiring: 500
+    hiring: 500,
   },
   listFile: {
     DEV: {
@@ -52,16 +53,16 @@ const config = {
       // cabinet: 'user_dev',
       err: '404',
       // game: 'game_dev',
-      game: '../dist/index'
+      game: '../dist/index',
     },
     html: {
       login: 'login',
       cabinet: 'user',
       err: '404',
-      game: 'game'
-    }
+      game: 'game',
+    },
   },
-  schema
+  schema,
 };
 
-export default config
+export default config;
