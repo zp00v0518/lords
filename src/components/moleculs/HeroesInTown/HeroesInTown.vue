@@ -79,7 +79,6 @@ export default {
     },
     getHeroesAvatar(hero) {
       if (!hero) return;
-      console.log(this.getHeroImg(hero.race, hero.type));
       return this.getHeroImg(hero.race, hero.type);
       // return races.heroes.getHeroImg(hero.race, hero.type);
     },

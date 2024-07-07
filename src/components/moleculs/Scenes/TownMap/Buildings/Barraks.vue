@@ -48,7 +48,8 @@
             <span
               class="barraks__cost--value"
               :class="{ isNotCost: getIsNotCost(value, resource) }"
-            >{{ value }}</span>
+              >{{ value }}</span
+            >
           </div>
         </div>
       </div>
@@ -68,7 +69,7 @@ export default {
   mixins: [currentSector],
   props: {
     townRaceName: String,
-    buildingData: null
+    buildingData: null,
     // currentSector: { type: Object, default: () => ({}) }
   },
   data() {
@@ -76,12 +77,11 @@ export default {
       baseUrl: 'img/units/',
       hiring: '0',
       hoverItem: 1,
-      maxRange: 3000
+      maxRange: 3000,
     };
   },
   created() {
     this.maxRange = this.available;
-    console.log(this.currentSector);
   },
   computed: {
     available() {
@@ -96,7 +96,7 @@ export default {
     },
     isNotCost() {
       const { totalCost, storage } = this;
-      const flag = Object.keys(totalCost).some(sourceName => {
+      const flag = Object.keys(totalCost).some((sourceName) => {
         const num = totalCost[sourceName];
         const realNum = storage.sources[sourceName].nowValue;
         return num > Math.floor(realNum);
@@ -106,7 +106,7 @@ export default {
     totalCost() {
       const newCost = Object.assign({}, this.cost);
       const { hiring } = this;
-      Object.keys(newCost).forEach(key => {
+      Object.keys(newCost).forEach((key) => {
         const value = newCost[key];
         newCost[key] = value * hiring;
       });
@@ -141,27 +141,29 @@ export default {
     },
     sumUnits() {
       return this.buildingData.work.nowValue;
-    }
+    },
   },
   methods: {
     buyUnits() {
       const { hiring, unit, army, globalConfig } = this;
       const base_army_length = globalConfig.all.Army.army_length;
       const army_length = Object.values(army).length;
-      const unit_in_town = Object.values(army).some(i => i.name === unit.name);
+      const unit_in_town = Object.values(army).some((i) => i.name === unit.name);
       if (army_length >= base_army_length && !unit_in_town) {
         alert('В городе нет места для юнита');
         return;
       }
       const { $store, currentSector } = this;
-      const sectorIndex = $store.state.userSectors.sectors.findIndex(i => i._id === currentSector._id);
+      const sectorIndex = $store.state.userSectors.sectors.findIndex(
+        (i) => i._id === currentSector._id,
+      );
       const message = {
         type: 'buyUnits',
         data: {
           hiring: +hiring,
           unitName: unit.name,
-          sectorIndex
-        }
+          sectorIndex,
+        },
       };
       this.$ws.sendMessage(message);
       this.$emit('close');
@@ -179,8 +181,8 @@ export default {
       const { storage } = this;
       const realNum = storage.sources[resourceName].nowValue;
       return value > Math.floor(realNum);
-    }
-  }
+    },
+  },
 };
 </script>
 

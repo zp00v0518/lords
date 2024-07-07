@@ -64,7 +64,6 @@ export default {
       this.itogMessage.heroes = this.listHeroes[0].type;
     },
     handlerChangeItem(event) {
-      console.log(event);
       const { itogMessage } = this;
       const { code, value } = event;
       itogMessage[code] = value.type;

@@ -17,7 +17,7 @@
             :value="sendSources[name]"
             @input="handlerInput($event, name)"
           />
-          <div class="caravan__available__item--txt">/{{available - busy[name]}}</div>
+          <div class="caravan__available__item--txt">/{{ available - busy[name] }}</div>
         </div>
       </div>
       <div class="caravan__available--notice">Max load</div>
@@ -25,7 +25,7 @@
     <div class="caravan__target">
       <div class="caravan__target__info">
         <img :src="gameSources.other.wait.src" class="caravan__target__info--ico" />
-        <div>{{timeMove}}</div>
+        <div>{{ timeMove }}</div>
       </div>
       <div class="caravan__target__choices">
         <div class="caravan__target__choices__coords">
@@ -43,7 +43,9 @@
           <span>или выберите свой город</span>
           <select v-model="selectedTown">
             <option selected disabled value="-1">Выберите город</option>
-            <option v-for="item in choices" :value="item.value" :key="item.value">{{item.label}}</option>
+            <option v-for="item in choices" :value="item.value" :key="item.value">
+              {{ item.label }}
+            </option>
           </select>
         </div>
       </div>
@@ -63,7 +65,7 @@ export default {
   name: 'Caravan',
   mixins: [currentSector],
   props: {
-    targetSector: { type: Object, default: () => ({}) }
+    targetSector: { type: Object, default: () => ({}) },
   },
   data() {
     return {
@@ -72,15 +74,16 @@ export default {
       selectedTown: '-1',
       coords: {
         x: '',
-        y: ''
-      }
+        y: '',
+      },
     };
   },
   created() {
     this.createChoices();
     this.checkFirstValue();
-    Object.keys(this.Caravan.available).forEach(key => {
-      this.$set(this.sendSources, key, 0);
+    Object.keys(this.Caravan.available).forEach((key) => {
+      this.sendSources[key] = 0;
+      // this.$set(this.sendSources, key, 0);
     });
   },
   computed: {
@@ -102,33 +105,33 @@ export default {
     disabledOk() {
       const { coords, sendSources } = this;
       const checkCoords = coords.x === '' || coords.y === '';
-      const res = Object.keys(sendSources).some(key => {
+      const res = Object.keys(sendSources).some((key) => {
         const item = sendSources[key];
         return item > 0;
       });
       return checkCoords || !res;
-    }
+    },
   },
   watch: {
     coords: {
       deep: true,
       handler(ev) {
         const { choices } = this;
-        const val = choices.find(i => i.x === ev.x && i.y === ev.y);
+        const val = choices.find((i) => i.x === ev.x && i.y === ev.y);
         if (val) {
           this.selectedTown = val.value;
         } else {
           this.selectedTown = '-1';
         }
-      }
+      },
     },
-    selectedTown: function(ev) {
-      const val = this.choices.find(i => i.value === ev);
+    selectedTown: function (ev) {
+      const val = this.choices.find((i) => i.value === ev);
       if (val) {
         this.coords.x = val.x;
         this.coords.y = val.y;
       }
-    }
+    },
   },
   methods: {
     getAsTimeString,
@@ -151,7 +154,7 @@ export default {
       if (!targetSector._id) return;
       this.coords.x = targetSector.x;
       this.coords.y = targetSector.y;
-      const id = choices.find(i => i.value === targetSector._id);
+      const id = choices.find((i) => i.value === targetSector._id);
       this.selectedTown = id ? id.value : '-1';
     },
     createChoices() {
@@ -163,7 +166,7 @@ export default {
           value: sector._id,
           label: sector.town.name,
           x: sector.x,
-          y: sector.y
+          y: sector.y,
         };
         choices.push(template);
       });
@@ -185,14 +188,13 @@ export default {
         data: {
           initSector: currentSector._id,
           targetSector: coords,
-          payload: sendSources
-        }
+          payload: sendSources,
+        },
       };
       const response = await this.$ws.get(message);
-      console.log(response);
       this.$emit('close');
-    }
-  }
+    },
+  },
 };
 </script>
 
