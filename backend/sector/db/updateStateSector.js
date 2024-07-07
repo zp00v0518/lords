@@ -6,7 +6,7 @@ import updateDB from '../../workWithMongoDB/updateDB.js';
 const update = new updateDB();
 
 import path from 'node:path';
-const __dirname = path.parse(import.meta.url).dir
+const __dirname = path.parse(import.meta.url).dir;
 
 // обновляет состояние города в БД (не Региона или его-то другого. ТОлько города)
 async function updateStateSector(sector, docs, ops = { upsert: false }) {
@@ -18,10 +18,10 @@ async function updateStateSector(sector, docs, ops = { upsert: false }) {
     collectionName: sector.serverName,
     filtr: { _id: new ObjectId(sector._id) },
     updateDoc: { $set: { ...docs } },
-    ops: ops
+    ops: ops,
   };
   const resultUpdate = await update.one(optionsForUpdate);
-  return resultUpdate.result;
+  return resultUpdate;
 }
 
 export default updateStateSector;
