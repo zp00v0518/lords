@@ -7,15 +7,15 @@ const Heroes = {
   types,
   heroMoveOnRegion: gameVariables.timer.heroMoveOnRegion,
   races: {
-    rampart
+    rampart,
   },
   role: {
     atack: 'atack',
-    def: 'def'
+    def: 'def',
   },
   coeff: {
     atack: 0.05,
-    def: 0.05
+    def: 0.05,
   },
   getHeroes(race_name) {
     const { races } = this;
@@ -35,19 +35,20 @@ const Heroes = {
   },
   getOneHero(race_name, type) {
     const allHeroes = this.getHeroes(race_name);
-    return allHeroes.find(item => item.type === type);
+    return allHeroes.find((item) => item.type === type);
   },
-  getHeroImg(race_name, type, type_img = 'ava') {
-    if (!window) {
-      console.log(`${this.getHeroImg.name}: this method for only frontend`);
-      return;
-    }
-    const hero = this.getOneHero(race_name, type);
-    const imgInfo = hero.img;
-    const dir = imgInfo[type_img].dir;
-    const base = imgInfo[type_img].base;
-    return `./${dir}/${base}`;
-  },
+  // підчас рефакторінга перенесено на фронт
+  // getHeroImg(race_name, type, type_img = 'ava') {
+  //   if (!window) {
+  //     console.log(`${this.getHeroImg.name}: this method for only frontend`)
+  //     return
+  //   }
+  //   const hero = this.getOneHero(race_name, type)
+  //   const imgInfo = hero.img
+  //   const dir = imgInfo[type_img].dir
+  //   const base = imgInfo[type_img].base
+  //   return `./${dir}/${base}`
+  // },
   checkHeroesInRace(race_name, type) {
     if (race_name === undefined || type === undefined) {
       console.log('checkHeroesInRace: inncorrect arguments');
@@ -56,7 +57,7 @@ const Heroes = {
     const { races } = this;
     const heroes_in_race = races[race_name];
     if (!heroes_in_race) return false;
-    const result = Object.keys(heroes_in_race).some(key => {
+    const result = Object.keys(heroes_in_race).some((key) => {
       const item = heroes_in_race[key];
       return item.type === type;
     });
@@ -74,6 +75,6 @@ const Heroes = {
     } else if (role === this.role.def) {
       return hero.stat.def * this.coeff.def;
     }
-  }
+  },
 };
 export default Heroes;

@@ -20,6 +20,7 @@ class WS {
     }
     this.outgoing = {}
     this.timerId = null
+    this.timerReload = null
   }
   connectionToWs(wsAddr) {
     if (this.timerId) {
@@ -89,8 +90,11 @@ class WS {
   }
 
   reload() {
-    console.log('reload')
-    location.reload()
+    clearTimeout(this.timerReload)
+    this.timerReload = setTimeout(() => {
+      console.log('reload')
+      location.reload()
+    }, 1000)
   }
   controlState(eventData) {
     window.stateCount++
