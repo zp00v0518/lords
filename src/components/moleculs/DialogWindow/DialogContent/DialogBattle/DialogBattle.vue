@@ -3,9 +3,9 @@
     <div class="dialog-battle__header">
       <div class="dialog-battle__header__item dialog-battle__header__item--attack">
         <div class="dialog-battle__header__item__info">
-          <div
-            class="dialog-battle__header__item__info--name"
-          >{{ activeHero ? activeHero.name : "" }}</div>
+          <div class="dialog-battle__header__item__info--name">
+            {{ activeHero ? activeHero.name : '' }}
+          </div>
         </div>
         <div class="dialog-battle__header__item__ava">
           <img :src="getHeroesAvatar(activeHero)" alt />
@@ -15,9 +15,9 @@
       <div class="dialog-battle__header__item dialog-battle__header__item--defense">
         <div>
           <div class="dialog-battle__header__item__info">
-            <div
-              class="dialog-battle__header__item__info--name"
-            >{{ target === "region" && defArmy[0] ? defArmy[0].name : "" }}</div>
+            <div class="dialog-battle__header__item__info--name">
+              {{ target === 'region' && defArmy[0] ? defArmy[0].name : '' }}
+            </div>
           </div>
         </div>
         <div class="dialog-battle__header__item__ava">
@@ -37,7 +37,12 @@
     </div>
     <slot></slot>
     <div class="dialog-battle__confirm">
-      <GuiBtn type="ok" class="dialog-battle__confirm--btn" @click="goBattle" :disabled="disabled"/>
+      <GuiBtn
+        type="ok"
+        class="dialog-battle__confirm--btn"
+        @click="goBattle"
+        :disabled="disabled"
+      />
       <GuiBtn type="cancel" class="dialog-battle__confirm--btn" @click="$emit('close')" />
     </div>
   </div>
@@ -47,6 +52,7 @@
 import { deepClone } from '../../../../../utils';
 import { ArmyBattleLine } from '../../../ArmyLine';
 import { currentSector } from '../../../../mixins';
+import { getHeroImg } from '@utils/heroes';
 
 export default {
   name: 'DialogBattle',
@@ -55,14 +61,14 @@ export default {
   props: {
     data: { type: Object, default: () => ({}) },
     self_mode: { type: Boolean, default: false },
-    disabled: { type: Boolean, default: false }
+    disabled: { type: Boolean, default: false },
   },
   data() {
     return {
       defArmy: [],
       target: this.data.target,
       atackArmy: [],
-      dragResult: null
+      dragResult: null,
     };
   },
   created() {
@@ -71,18 +77,19 @@ export default {
   computed: {
     activeHero() {
       const { activeHeroId, heroesList } = this.$store.state.heroes;
-      return heroesList.find(i => i._id === activeHeroId);
-    }
+      return heroesList.find((i) => i._id === activeHeroId);
+    },
   },
   watch: {
     activeHero: {
       immediate: true,
       handler(e) {
         this.atackArmy = e && e.army ? deepClone(e.army) : [];
-      }
-    }
+      },
+    },
   },
   methods: {
+    getHeroImg,
     goBattle() {
       const result = this.dragResult ? this.dragResult : deepClone(this.atackArmy);
       const { $store, currentSector, activeHero, target, data } = this;
@@ -91,7 +98,7 @@ export default {
         this.$emit('close');
         return;
       }
-      const army = result.map(i => {
+      const army = result.map((i) => {
         const { race, name, count } = i;
         return { race, name, count };
       });
@@ -99,7 +106,9 @@ export default {
         this.$emit('go-battle', { army });
         return;
       }
-      const sectorIndex = $store.state.userSectors.sectors.findIndex(i => i._id === currentSector._id);
+      const sectorIndex = $store.state.userSectors.sectors.findIndex(
+        (i) => i._id === currentSector._id,
+      );
       const message = {
         type: data.typeMessage || 'battleRequest',
         data: {
@@ -107,8 +116,8 @@ export default {
           attackHeroId: activeHero._id,
           target,
           tileId: this.data.tile.id,
-          army
-        }
+          army,
+        },
       };
       this.$ws.sendMessage(message);
       this.$emit('close');
@@ -123,8 +132,7 @@ export default {
     },
     getHeroesAvatar(hero) {
       if (!hero) return;
-      const { races } = this.globalConfig;
-      return races.heroes.getHeroImg(hero.race, hero.type);
+      return this.getHeroImg(hero.race, hero.type);
     },
     getDefenderAvatar() {
       const { Army } = this.globalConfig.all;
@@ -133,8 +141,8 @@ export default {
         if (defArmy.length === 0) return '';
         return Army.getIconUnit({ unit: defArmy[0] });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
