@@ -5,6 +5,7 @@ import setWeightForCell from './setWeightForCell.js';
 
 async function setZoneControl(serverName, power = 0, center, user) {
   const GlobalMap = await import('../../globalMap/constractGlobalMap.js');
+  // [TODO] думаю, що це можна замінити на global.gameVariables.numSectionGlobalMap
   const length = GlobalMap.default[serverName].length;
   const centerX = center.x;
   const centerY = center.y;
