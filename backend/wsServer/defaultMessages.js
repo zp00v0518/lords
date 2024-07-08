@@ -2,18 +2,18 @@ import sendWSMessage from './sendWSMessage.js';
 
 function reloadMessage(ws) {
   const reload = {
-    type: "console",
+    type: 'console',
     // type: "reload",
-    status: true
+    status: true,
   };
   sendWSMessage(ws, reload);
   // ws.send(JSON.stringify(reload));
 }
 
-function redirectMessage(ws, url = "/") {
+function redirectMessage(ws, url = '/') {
   const redirect = {
     redirectUrl: url,
-    status: false
+    status: false,
   };
   sendWSMessage(ws, redirect);
   // ws.send(JSON.stringify(redirect));
