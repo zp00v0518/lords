@@ -18,9 +18,14 @@ body {
   width: 100dvw;
   box-sizing: border-box;
   overflow: hidden;
+  padding: 0 36px;
   // background-image: url('../frontEnd/img/main/background/fon.jpg');
   background-image: url('../frontEnd/img/main/background/panelbg.jpg');
   // background-image: url('../frontEnd/img/main/background/mainmenubg.jpg')1
+
+  @media (max-width: 968px) {
+    padding: 0;
+  }
 }
 
 ::-webkit-scrollbar {

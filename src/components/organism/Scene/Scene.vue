@@ -74,7 +74,6 @@ export default {
   computed: {
     widthScene() {
       const styles = this.$el.getBoundingClientRect();
-      console.log(styles);
       return styles.width + 'px';
     },
     heightScene() {
