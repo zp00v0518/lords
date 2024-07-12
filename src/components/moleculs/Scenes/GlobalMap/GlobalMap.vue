@@ -56,7 +56,7 @@
     </div>
     <PopupTown
       v-if="popupTown.show"
-      @close-popup="popupTown.show = !popupTown.show"
+      @close-popup="togglePopup"
       :tileWidth="tileWidth"
       :targetSector="popupTown.targetSector"
       :isSelf="popupTown.isSelf"
@@ -151,6 +151,9 @@ export default {
     },
   },
   methods: {
+    togglePopup() {
+      this.popupTown.show = !this.popupTown.show;
+    },
     drawAnotherObjects() {
       this.drawMoveHero();
     },
