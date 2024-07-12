@@ -72,13 +72,14 @@ import GoTo from './modules/GoTo.vue';
 import { currentSector } from '../../../mixins';
 import drawHeroMixin from '../mixins/drawHeroMixin.vue';
 import baseMixins from '../mixins/baseMixins.vue';
+import tileWidthMixin from '../mixins/tileWidth.js';
 import { algebra } from '../../../../utils';
 import { iso } from '../utils';
 
 export default {
   name: 'GlobalMap',
   components: { Tooltip, PopupTown, GoTo },
-  mixins: [currentSector, drawHeroMixin, baseMixins],
+  mixins: [currentSector, drawHeroMixin, baseMixins, tileWidthMixin],
   props: ['widthScene', 'heightScene'],
   data() {
     return {
@@ -124,18 +125,6 @@ export default {
     },
     zoom() {
       return this.$store.state.globalMap.zoom;
-    },
-    tileWidth() {
-      const widthParse = parseInt(this.widthScene) / 2;
-      const intermediate = widthParse / (this.currentMap.length / 2);
-      return intermediate * 0.95;
-      // return intermediate * 0.9;
-      // return intermediate / (this.currentMap.length / 2) + intermediate;
-    },
-    isoCoords() {
-      const x = parseInt(this.widthScene) / 2;
-      const y = (parseInt(this.heightScene) / 100) * 10;
-      return { x, y };
     },
     eventList() {
       const list = this.$store.state.timeline.eventsList;

@@ -7,14 +7,15 @@ function drawMap() {
   const { currentSector, $store, sectorInfo } = this;
   let mapArr = this.currentMap;
   let ctx = this.ctx;
-  const { canvas } = ctx;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
   const tileWidth = this.tileWidth;
   const tileHeight = tileWidth / 2;
   const halfHeight = tileHeight / 2;
   // сдвиг начала оси Х влево
   const startX = this.isoCoords.x;
   const startY = this.isoCoords.y + halfHeight;
+
+  const { canvas } = ctx;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   for (let x = 0; x < mapArr.length; x++) {
     const row = mapArr[x];
     for (let y = 0; y < row.length; y++) {

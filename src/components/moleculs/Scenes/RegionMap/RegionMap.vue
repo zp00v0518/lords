@@ -25,11 +25,13 @@ import TooltipRegion from '../../TooltipRegion';
 import { currentSector } from '../../../mixins';
 import drawHeroMixin from '../mixins/drawHeroMixin.vue';
 import baseMixins from '../mixins/baseMixins.vue';
+import tileWidthMixin from '../mixins/tileWidth.js';
+
 import { algebra } from '../../../../utils';
 
 export default {
   name: 'RegionMap',
-  mixins: [currentSector, drawHeroMixin, baseMixins],
+  mixins: [currentSector, drawHeroMixin, baseMixins, tileWidthMixin],
   emits: ['click'],
   components: {
     TooltipRegion,
@@ -42,14 +44,7 @@ export default {
     sectorInfo: { default: null },
     customHoverFunc: { type: Function, default: null },
   },
-  data() {
-    return {
-      sceneWidth: this.widthScene,
-      sceneHeight: this.heightScene,
-    };
-  },
   created() {
-    // console.log(this);
     if (!this.regionMap) {
       this.currentMap = this.currentSector.region;
     } else {
@@ -87,23 +82,6 @@ export default {
         }
       });
       return deepClone(d);
-    },
-    tileWidth() {
-      const { ctx, mode, currentMap } = this;
-      if (!ctx) return 0;
-      const widthParse = parseInt(this.sceneWidth) / 2;
-      const intermediate = currentMap.length === 0 ? 0 : widthParse / (currentMap.length / 2);
-      if (mode !== 'global') {
-        return intermediate * 0.63;
-        // return intermediate * 0.6;
-      }
-      return intermediate * 0.95;
-      // return intermediate * 0.9;
-    },
-    isoCoords() {
-      const x = parseInt(this.sceneWidth) / 2;
-      const y = (parseInt(this.sceneHeight) / 100) * 10;
-      return { x, y };
     },
   },
   methods: {
