@@ -53,9 +53,6 @@
 <script>
 import { defineAsyncComponent } from 'vue';
 
-// import Scenes from '../../moleculs/Scenes';
-import DialogWindow from '../../moleculs/DialogWindow';
-
 export default {
   name: 'Scene',
   components: {
@@ -77,6 +74,7 @@ export default {
   computed: {
     widthScene() {
       const styles = this.$el.getBoundingClientRect();
+      console.log(styles);
       return styles.width + 'px';
     },
     heightScene() {

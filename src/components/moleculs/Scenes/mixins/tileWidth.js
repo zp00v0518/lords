@@ -6,19 +6,26 @@ export default {
     };
   },
   computed: {
-    tileWidth() {
-      const { ctx, currentMap, settingsCanvas } = this;
-      if (!ctx) return 0;
-      const marginScale =
-        1 - (settingsCanvas.map.marginTop + settingsCanvas.map.marginBottom) / 100;
+    isHeightTaller() {
       const height = parseInt(this.sceneHeight);
-      const width = parseInt(this.widthScene);
-      let basicValue = height * 2 <= width ? height * marginScale : width / 2;
-      //   console.log(
-      //     `height: ${height}   width:${width}  basicValue:${basicValue} aspectRatio:${aspectRatio}`,
-      //   );
+      const width = parseInt(this.sceneWidth);
+      return height * this.marginScale * 2 <= width; // 2 - це різниця у висоті та ширині tile на  ізометричній мапі
+    },
+    marginScale() {
+      return 1 - (this.settingsCanvas.map.marginTop + this.settingsCanvas.map.marginBottom) / 100;
+    },
+    tileHeight() {
+      return this.tileWidth / 2;
+    },
+    tileWidth() {
+      const { ctx, currentMap, marginScale } = this;
+      if (!ctx) return 0;
+      const height = parseInt(this.sceneHeight);
+      const width = parseInt(this.sceneWidth);
+      let basicValue = this.isHeightTaller ? height * marginScale : width / 2;
       const widthParse = parseInt(basicValue);
       const intermediate = currentMap.length === 0 ? 0 : widthParse / (currentMap.length / 2);
+      //   console.log(this.isHeightTaller);
       return intermediate;
     },
     settingsCanvas() {
@@ -26,7 +33,13 @@ export default {
     },
     isoCoords() {
       const x = parseInt(this.sceneWidth) / 2;
-      const y = (parseInt(this.sceneHeight) / 100) * this.settingsCanvas.map.marginTop;
+      const height = parseInt(this.sceneHeight);
+      const tileHeight = this.tileWidth / 2;
+      const mapHeight = this.currentMap.length * tileHeight;
+      //   console.log(height, mapHeight);
+      const marginTopInPx = (height / 100) * this.settingsCanvas.map.marginTop;
+      const y = !this.isHeightTaller ? height / 2 - mapHeight / 2 - marginTopInPx : marginTopInPx;
+      console.log('y', y);
       return { x, y };
     },
   },
