@@ -27,8 +27,6 @@
 </template>
 
 <script>
-// import { defineAsyncComponent } from 'vue';
-
 import Chat from '../Chat';
 import Vheader from '../Header';
 import Sidebar from '../Sidebar';
@@ -173,7 +171,8 @@ export default {
 .main {
   position: relative;
   width: 100%;
-  max-height: 100%;
+  max-width: 1800px;
+  max-height: 80%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -182,6 +181,10 @@ export default {
   align-self: center;
   // background-image: url('../../../../frontEnd/img/main/background/panelcoloredbg.jpg');
 
+  @media (max-width: 968px) and (orientation: landscape) {
+    max-height: 100%;
+  }
+
   &__content {
     width: 100%;
     height: 90%;
@@ -189,7 +192,6 @@ export default {
     display: flex;
     justify-content: space-between;
     &__footer {
-      // border-top: 1px solid;
       height: 60px;
     }
   }

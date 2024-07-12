@@ -11,6 +11,6 @@ sourceLoader.allOnLoad(function () {
     const myEvent = new Event('allLoad');
     document.dispatchEvent(myEvent);
     gameLoadingWrap.style.display = 'none';
-    gameWindow.style.display = 'block';
+    gameWindow.style.display = 'flex';
   }, 100);
 });
