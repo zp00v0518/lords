@@ -105,7 +105,7 @@ export default {
 <style lang="scss">
 $widthScene: 500px;
 .scene {
-  flex-grow: 5;
+  flex-grow: 1;
   position: relative;
   &__canvas {
     border-bottom: 1px solid;

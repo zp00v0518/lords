@@ -69,8 +69,8 @@ export default {
     };
   },
   created() {
-    this.setMainSize();
-    window.addEventListener('resize', this.setMainSize);
+    // this.setMainSize();
+    // window.addEventListener('resize', this.setMainSize);
   },
   computed: {
     // mainSize() {
@@ -100,16 +100,16 @@ export default {
   watch: {
     isChat: {
       handler(ev) {
-        this.setRightMargin();
+        // this.setRightMargin();
       },
     },
   },
   methods: {
     getPersent(width) {
-      if (width < 800) return 98;
-      if (width < 1024) return 90;
-      if (width < 1280) return 85;
-      return 75;
+      if (width < 800) return 100;
+      if (width < 1024) return 100;
+      if (width < 1280) return 100;
+      return 85;
     },
     setTimelineSize() {
       const { $refs } = this;
@@ -164,7 +164,7 @@ export default {
   },
   mounted() {
     this.setTimelineSize();
-    this.setRightMargin();
+    // this.setRightMargin();
   },
 };
 </script>
@@ -172,23 +172,20 @@ export default {
 <style lang="scss">
 .main {
   position: relative;
-  min-height: 200px;
-  min-width: 320px;
+  width: 100%;
+  max-height: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   background-color: $main-bg;
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-left: auto;
-  // margin-right: auto;
+  margin: auto;
   align-self: center;
   // background-image: url('../../../../frontEnd/img/main/background/panelcoloredbg.jpg');
 
   &__content {
     width: 100%;
-    height: 85%;
-    flex-grow: 5;
+    height: 90%;
+
     display: flex;
     justify-content: space-between;
     &__footer {
@@ -197,11 +194,9 @@ export default {
     }
   }
   &__scenes {
-    // border: 1px solid blue;
     width: 100%;
     display: flex;
     flex-direction: column;
-    // justify-content: space-between;
   }
 }
 </style>

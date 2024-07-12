@@ -25,7 +25,6 @@ export default {
       let basicValue = this.isHeightTaller ? height * marginScale : width / 2;
       const widthParse = parseInt(basicValue);
       const intermediate = currentMap.length === 0 ? 0 : widthParse / (currentMap.length / 2);
-      //   console.log(this.isHeightTaller);
       return intermediate;
     },
     settingsCanvas() {
@@ -36,10 +35,8 @@ export default {
       const height = parseInt(this.sceneHeight);
       const tileHeight = this.tileWidth / 2;
       const mapHeight = this.currentMap.length * tileHeight;
-      //   console.log(height, mapHeight);
       const marginTopInPx = (height / 100) * this.settingsCanvas.map.marginTop;
       const y = !this.isHeightTaller ? height / 2 - mapHeight / 2 - marginTopInPx : marginTopInPx;
-      console.log('y', y);
       return { x, y };
     },
   },
