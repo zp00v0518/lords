@@ -1,6 +1,6 @@
 import { checkSchema, formatIdToCoords } from '../../template_modules/index.js';
 import { redirectMessage, sendWSMessage } from '../../wsServer/index.js';
-import verification from '../../wsServer/baseVerificationHandler.js';
+import verificationHero from '../../wsServer/baseVerificationHandler.js';
 import { Region } from '../../region/index.js';
 import createEventBattle from './createEventBattle.js';
 import { setEventInGame } from '../../events/index.js';
@@ -23,10 +23,10 @@ function handlerBattleRequest(message, info) {
   }
   const { serverName } = curSector;
   getOneTownFromDB(serverName, curSector._id)
-    .then(res => {
+    .then((res) => {
       const sector = res;
       const { attackHeroId } = data;
-      verification.hero(attackHeroId, sector, info).then(heroVerif => {
+      verificationHero(attackHeroId, sector, info).then((heroVerif) => {
         if (!heroVerif.is) {
           redirectMessage(ws);
           return;
@@ -55,7 +55,7 @@ function handlerBattleRequest(message, info) {
         let townSector = {};
         for (let i = 0; i < region.length; i++) {
           const row = region[i];
-          const f = row.find(item => item.type === Region.types.town.id);
+          const f = row.find((item) => item.type === Region.types.town.id);
           if (f) {
             townSector = f;
             break;
@@ -67,11 +67,11 @@ function handlerBattleRequest(message, info) {
           endCoords: coords,
           army: attackArmyForBattle,
           initSector: sector,
-          initHero: hero
+          initHero: hero,
         });
         setEventInGame(event, info.server).then(() => {
           const docUpdateHero = {
-            active: false
+            active: false,
           };
           updateHeroInDB(serverName, attackHeroId, docUpdateHero).then(() => {
             sendWSMessage(ws, event);
@@ -84,7 +84,6 @@ function handlerBattleRequest(message, info) {
     });
 }
 
-
 const schema = {
   attackHeroId: { type: 'string', regExp: /^.{13,}\b/g },
   target: { type: 'string', regExp: /^.{3,25}\b/g },
@@ -93,7 +92,7 @@ const schema = {
     type: 'number',
     min: 0,
     // eslint-disable-next-line
-    max: Math.pow(gameVariables.numSectionRegionMap, 2) - 1
+    max: Math.pow(gameVariables.numSectionRegionMap, 2) - 1,
   },
   army: {
     type: 'array',
@@ -102,14 +101,13 @@ const schema = {
       fields: {
         race: { type: 'string', regExp: /^.{3,25}\b/g },
         name: { type: 'string', regExp: /^.{3,25}\b/g },
-        count: { type: 'number', min: 1 }
-      }
-    }
-  }
+        count: { type: 'number', min: 1 },
+      },
+    },
+  },
 };
 
 export default handlerBattleRequest;
-
 
 // function createArmyForBattle(attackArmy, heroArmy) {
 //   const result = [];
