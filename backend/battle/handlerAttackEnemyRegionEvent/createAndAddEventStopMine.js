@@ -6,11 +6,11 @@ async function createAndAddEventStopMine(baseEvent, mine, targetForEvent) {
   const workSection = mine.sector.work;
   const stopMineEvent = createStopMineEvent(serverName, workSection.date, targetForEvent, {
     x: mine.x,
-    y: mine.y
+    y: mine.y,
   });
   const eventInDb = await addEventToDB(stopMineEvent, serverName);
   mine.events = [];
-  mine.events.push(eventInDb.ops[0]._id.toString());
+  mine.events.push(eventInDb.insertedId.toString());
 }
 
 export default createAndAddEventStopMine;
