@@ -1,18 +1,12 @@
 .chat__wrap {
-  position: absolute;
-  top: 0;
-  width: 20%;
-  min-width: 270px;
-  max-width: 300px;
-  height: 100%;
-  left: 100%;
-  right: 0;
+  width: 100%;
   display: flex;
-  z-index: -1;
-  &.chat__wrap--visible {
-    z-index: 1;
-  }
+  // z-index: -1;
+  // &.chat__wrap--visible {
+  //   z-index: 1;
+  // }
 }
+
 .chat {
   @include border(black);
 
@@ -99,7 +93,7 @@
     }
   }
   &__messages {
-    max-height: 80%;
+    // max-height: 80%;
     overflow-y: auto;
 
     &__item {

@@ -8,8 +8,8 @@
       minWidth: mainSize.width,
     }"
   >
-    <Vheader></Vheader>
     <div class="main__content">
+      <Vheader></Vheader>
       <div class="main__scenes" ref="scenes">
         <TimeLine
           v-if="timeLineHeight"
@@ -20,9 +20,9 @@
         <Scene ref="scene"></Scene>
         <div class="main__content__footer"></div>
       </div>
-      <Sidebar></Sidebar>
     </div>
-    <Chat ref="chat" :isFullpage="isFullpage" />
+    <Sidebar></Sidebar>
+    <!-- <Chat :isFullpage="isFullpage" /> -->
   </main>
 </template>
 
@@ -175,10 +175,12 @@ export default {
   max-height: 80%;
   height: 100%;
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   background-color: $main-bg;
   margin: auto;
   align-self: center;
+  border-radius: 10px;
+  overflow: hidden;
   // background-image: url('../../../../frontEnd/img/main/background/panelcoloredbg.jpg');
 
   @media (max-width: 968px) and (orientation: landscape) {
@@ -187,16 +189,19 @@ export default {
 
   &__content {
     width: 100%;
-    height: 90%;
+    height: 100%;
 
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+
+    // justify-content: space-between;
     &__footer {
       height: 60px;
     }
   }
   &__scenes {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
   }

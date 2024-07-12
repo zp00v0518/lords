@@ -1,9 +1,9 @@
 <template>
-  <section class="chat__wrap" :style="chatStyles" :class="{ 'chat__wrap--visible': showChat }">
+  <section class="chat__wrap" :class="{ 'chat__wrap--visible': showChat }">
     <div v-show="showChat" class="chat" :class="{ chat__closed: !showChat }">
-      <div class="chat__header">
+      <!-- <div class="chat__header">
         <div @click="closeChat" class="chat__close">x</div>
-      </div>
+      </div> -->
       <form class="chat__form">
         <div class="chat__form__channel-wrap">
           <input type="text" class="chat__form__input" />
@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      showChat: false,
+      showChat: true,
       messageForSend: {
         text: '',
         chanel: '',
@@ -65,13 +65,14 @@ export default {
           transform: 'translateX(-100%)',
         };
       }
+      return null;
     },
   },
-  watch: {
-    '$store.state.chat.is': function () {
-      this.showChat = !this.showChat;
-    },
-  },
+  // watch: {
+  //   '$store.state.chat.is': function () {
+  //     this.showChat = !this.showChat;
+  //   },
+  // },
   methods: {
     timeFormatic(time) {
       const date = new Date(time);
