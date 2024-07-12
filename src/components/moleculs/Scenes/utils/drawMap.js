@@ -8,7 +8,8 @@ function drawMap() {
   let mapArr = this.currentMap;
   let ctx = this.ctx;
   const tileWidth = this.tileWidth;
-  const tileHeight = tileWidth / 2;
+  const tileHeight = this.tileHeight;
+  // const tileHeight = tileWidth / 2;
   const halfHeight = tileHeight / 2;
   // сдвиг начала оси Х влево
   const startX = this.isoCoords.x;
