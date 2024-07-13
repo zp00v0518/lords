@@ -1,6 +1,6 @@
 <template>
   <div class="castle_item_wrap">
-    <div class="castle_interface" :class="{'active_castle': activeTown}">
+    <div class="castle_interface" :class="{ active_castle: activeTown }">
       <div class="castle_icon" @click="handlerClickIcon"></div>
       <div class="castle_other">
         <div class="castle_name">{{ name }}</div>
@@ -48,12 +48,12 @@ export default {
   components: { ...modules, ArmyLine, HeroesInTown, InActiveHeroes },
   props: {
     sector: null,
-    indexTown: null
+    indexTown: null,
   },
   data() {
     return {
       name: 'Default Name',
-      sectorId: this.sector._id
+      sectorId: this.sector._id,
     };
   },
   created() {
@@ -91,18 +91,18 @@ export default {
       return this.$store.getters.getHeroesFromTown(this.sectorId);
     },
     activeHeroes() {
-      return this.heroesList.filter(i => i.active);
+      return this.heroesList.filter((i) => i.active);
     },
     notActiveHeroes() {
-      return this.heroesList.filter(i => !i.active);
-    }
+      return this.heroesList.filter((i) => !i.active);
+    },
   },
   methods: {
     handlerClickIcon() {
       this.$store.commit('SET_CURRENT_SECTOR', this.indexTown);
       this.$bus.$emit('rerender_global_map');
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -115,5 +115,9 @@ export default {
   &--insert {
     padding-left: 10px;
   }
+}
+
+.hero_in_castle_wrap {
+  padding: 0px 5px;
 }
 </style>
